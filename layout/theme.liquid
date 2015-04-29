@@ -89,8 +89,8 @@
   {% comment %}
     Twitter user name of the site, based on theme settings
   {% endcomment %}
-  {% if settings.twittercard_handle != blank %}
-    <meta name="twitter:site" content="{{ settings.twittercard_handle }}">
+  {% if settings.social_twitter_link != blank %}
+    <meta name="twitter:site" content="@{{ settings.social_twitter_link | split: 'twitter.com/' | last }}">
   {% endif %}
   {% if template contains 'product' %}
     <meta name="twitter:card" content="product">
@@ -99,15 +99,15 @@
     <meta name="twitter:image" content="https:{{ product.featured_image.src | img_url: 'medium' }}">
     <meta name="twitter:image:width" content="240">
     <meta name="twitter:image:height" content="240">
-    <meta name="twitter:label1" content="Price">
+    <meta name="twitter:label1" content="{{ 'products.product.price_label' | t }}">
     {% assign price = product.price | money_with_currency | strip_html | escape %}
     <meta name="twitter:data1" content="{% if product.price_varies %}{{ 'products.general.from_text_html' | t: price: price }}{% else %}{{ price }}{% endif %}">
     {% if product.vendor != blank %}
-    <meta name="twitter:label2" content="Brand">
+    <meta name="twitter:label2" content="{{ 'products.product.brand_label' | t }}Brand">
     <meta name="twitter:data2" content="{{ product.vendor | escape }}">
     {% else %}
-    <meta name="twitter:label2" content="Availability">
-    <meta name="twitter:data2" content="In stock">
+    <meta name="twitter:label2" content="{{ 'products.product.availability_label' | t }}Availability">
+    <meta name="twitter:data2" content="{% if product.available %}{{ 'products.product.available' | t }}In stock{% else %}{{ 'products.product.unavailable_html' | t }}{% endif %}">
     {% endif %}
   {% elsif template contains 'article' %}
     <meta name="twitter:card" content="summary">
