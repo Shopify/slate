@@ -1,71 +1,10 @@
-[
-  {
-    "name": "theme_info",
-    "logo": "https:\/\/cdn.shopify.com\/s\/files\/1\/0070\/7032\/files\/2010_6_23_Shopify-Green_256x256.jpg",
-    "settings": [
-      {
-        "type": "header",
-        "content": "Canvas"
-      },
-      {
-        "type": "paragraph",
-        "content": "v0.0.0"
-      },
-      {
-        "type": "paragraph",
-        "content": "Theme settings allow designers to provide an easy way for any user to customize the look and feel of their shop without having to delve into HTML or CSS code. Please see our [help page on theme settings](http:\/\/docs.shopify.com\/themes\/theme-templates\/settings) to learn more about how you can make the theme customizable."
-      }
-    ]
-  },
-  {
-    "name": "Colors",
-    "settings": [
-      {
-        "type": "paragraph",
-        "content": "Use class=\"color\" on a an input tag to bring up the color picker. Only a few colors have been included here as an example."
-      },
-      {
-        "type": "header",
-        "content": "General Colors"
-      },
-      {
-        "type": "color",
-        "id": "color_primary",
-        "label": "Primary Color",
-        "default": "#204a80",
-        "info": "Used for text links, and primary buttons"
-      }
-    ]
-  },
-  {
-    "name": "Header",
-    "settings": [
-      {
-        "type": "header",
-        "content": "Favicon"
-      },
-      {
-        "type": "checkbox",
-        "id": "favicon_enable",
-        "label": "Use custom icon?"
-      },
-      {
-        "type": "image",
-        "id": "favicon.png",
-        "label": "16px x 16px png",
-        "max-width": 16,
-        "max-height": 16
-      }
-    ]
-  },
-  {
-    "name": "Social",
-    "settings": [
-      {
-        "type": "text",
-        "id": "social_twitter_link",
-        "label": "Twitter Link"
-      }
-    ]
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "favicon_enable": true,
+      "logo_use_image": true,
+      "social_twitter_link": ""
+    }
   }
-]
+}
