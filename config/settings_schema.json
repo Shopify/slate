@@ -47,7 +47,7 @@
       {
         "type": "checkbox",
         "id": "favicon_enable",
-        "label": "Use custom icon?"
+        "label": "Use custom icon"
       },
       {
         "type": "image",
