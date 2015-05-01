@@ -1,0 +1,15 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Mots clés \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    },
+    "search": {
+      "no_results_html": "Votre recherche pour \"{{ terms }}\" n'a pas généré de résultats.",
+      "results_for_html": "Votre recherche pour \"{{ terms }}\" a généré les résultats suivants:",
+      "title": "Effectuez une recherche",
+      "placeholder": "Rechercher dans la boutique",
+      "submit": "Recherche"
+    }
+  }
+}
