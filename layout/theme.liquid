@@ -14,6 +14,10 @@
     <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png" />
   {% endif %}
 
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_primary }}">
+
   <!-- Title and description ================================================== -->
   <title>
   {{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
@@ -89,8 +93,8 @@
   {% comment %}
     Twitter user name of the site, based on theme settings
   {% endcomment %}
-  {% if settings.twittercard_handle != blank %}
-    <meta name="twitter:site" content="{{ settings.twittercard_handle }}">
+  {% if settings.social_twitter_link != blank %}
+    <meta name="twitter:site" content="@{{ settings.social_twitter_link | split: 'twitter.com/' | last }}">
   {% endif %}
   {% if template contains 'product' %}
     <meta name="twitter:card" content="product">
@@ -99,15 +103,15 @@
     <meta name="twitter:image" content="https:{{ product.featured_image.src | img_url: 'medium' }}">
     <meta name="twitter:image:width" content="240">
     <meta name="twitter:image:height" content="240">
-    <meta name="twitter:label1" content="Price">
+    <meta name="twitter:label1" content="{{ 'products.product.price_label' | t }}">
     {% assign price = product.price | money_with_currency | strip_html | escape %}
     <meta name="twitter:data1" content="{% if product.price_varies %}{{ 'products.general.from_text_html' | t: price: price }}{% else %}{{ price }}{% endif %}">
     {% if product.vendor != blank %}
-    <meta name="twitter:label2" content="Brand">
+    <meta name="twitter:label2" content="{{ 'products.product.brand_label' | t }}Brand">
     <meta name="twitter:data2" content="{{ product.vendor | escape }}">
     {% else %}
-    <meta name="twitter:label2" content="Availability">
-    <meta name="twitter:data2" content="In stock">
+    <meta name="twitter:label2" content="{{ 'products.product.availability_label' | t }}Availability">
+    <meta name="twitter:data2" content="{% if product.available %}{{ 'products.product.available' | t }}In stock{% else %}{{ 'products.product.unavailable_html' | t }}{% endif %}">
     {% endif %}
   {% elsif template contains 'article' %}
     <meta name="twitter:card" content="summary">
@@ -125,11 +129,6 @@
       {% endif %}
     {% endif %}
   {% endif %}
-
-  <!-- Helpers ================================================== -->
-  <link rel="canonical" href="{{ canonical_url }}">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="{{ settings.color_primary }}">
 
   <!-- CSS ================================================== -->
   {{ 'canvas.scss.css' | asset_url | stylesheet_tag }}
@@ -165,9 +164,6 @@
 
 </head>
 
-{% comment %}
-  Add the page template as a class for easy page or template specific styling.
-{% endcomment %}
 <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
   <div id="NavDrawer" class="drawer drawer--left">
     <div class="drawer__header">
