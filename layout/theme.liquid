@@ -273,6 +273,184 @@
     </ul>
     <!-- //mobile-nav -->
   </div>
+  <div id="PageContainer" class="is-moved-by-drawer">
+    <header class="site-header" role="banner">
+      <div class="wrapper">
+
+        <div class="grid--full grid--table">
+          <div class="grid__item large--one-half">
+            {% comment %}
+              Use the uploaded logo from theme settings if enabled.
+              Site name gets precedence with H1 tag on homepage, div on other pages.
+            {% endcomment %}
+            {% if template == 'index' %}
+              <h1 class="site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
+            {% else %}
+              <div class="h1 site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
+            {% endif %}
+              {% if settings.logo_use_image %}
+                <a href="/" itemprop="url" class="site-header__logo-link">
+                  <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
+                </a>
+              {% else %}
+                <a href="/" itemprop="url">{{ shop.name }}</a>
+              {% endif %}
+            {% if template == 'index' %}
+              </h1>
+            {% else %}
+              </div>
+            {% endif %}
+          </div>
+          <div class="grid__item large--one-half large--text-right medium-down--hide">
+            {% comment %}
+              Show number of items in the cart and total cost in the /cart link
+
+              Ajax Cart Notes:
+                - #cartCount updates the total number of items in the cart
+                - #cartCost updates the total cost of the cart
+                - Documentation:  http://shopify.com/timber#ajax-cart
+            {% endcomment %}
+            <div>
+              <a href="/cart" class="site-header__cart-toggle js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">
+                <span class="icon-fallback-text">
+                  <span class="icon icon-cart" aria-hidden="true"></span>
+                </span>
+                {{ 'layout.cart.title' | t }}
+                (<span id="CartCount">{{ cart.item_count }}</span>
+                {{ 'layout.cart.items_count' | t: count: cart.item_count }}
+                <span id="CartCost">{{ cart.total_price | money }}</span>)
+              </a>
+            </div>
+
+            {% comment %}
+              If customer accounts are enabled, provide login and create account links
+            {% endcomment %}
+            {% if shop.customer_accounts_enabled %}
+              <div>
+                {% if customer %}
+                  {% if customer.first_name != blank %}
+                    {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
+                    {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
+                  {% else %}
+                    <a href="/account">{{ 'layout.customer.account' | t }}</a>
+                  {% endif %}
+                  | {{ 'layout.customer.log_out' | t | customer_logout_link }}
+                {% else %}
+                  {{ 'layout.customer.log_in' | t | customer_login_link }}
+                  {% if shop.customer_accounts_optional %}
+                  | {{ 'layout.customer.create_account' | t | customer_register_link }}
+                  {% endif %}
+                {% endif %}
+              </div>
+            {% endif %}
+
+            <div class="site-header__search">
+              {% comment %}
+
+                A snippet to include a search bar anywhere in your theme.
+                Note we are using 'input-group' for the layout. Look under Forms > Input Groups for some demos.
+
+                More information:
+                 - http://docs.shopify.com/themes/liquid-variables/search
+
+                To return only products in results:
+                  - http://docs.shopify.com/manual/configuration/store-customization/return-only-product-in-storefront-search-results
+                  - Or manually add type=product to the search URL as a query parameter
+                  - Uncomment hidden input with value="product" below
+
+              {% endcomment %}
+
+              <form action="/search" method="get" class="input-group search-bar" role="search">
+                {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
+                <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" class="input-group-field" aria-label="{{ 'general.search.placeholder' | t }}">
+                <span class="input-group-btn">
+                  <button type="submit" class="btn icon-fallback-text">
+                    <span class="icon icon-search" aria-hidden="true"></span>
+                    <span class="fallback-text">{{ 'general.search.submit' | t }}</span>
+                  </button>
+                </span>
+              </form>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <nav class="nav-bar" role="navigation">
+      <div class="wrapper">
+        <div class="medium-down--hide">
+          {% comment %}
+            List out your main-menu linklist (default)
+
+            More info on linklists:
+              - http://docs.shopify.com/themes/liquid-variables/linklists
+          {% endcomment %}
+          <!-- begin site-nav -->
+          <ul class="site-nav" id="AccessibleNav">
+            {% for link in linklists.main-menu.links %}
+              {% comment %}
+                Create a dropdown menu by naming a linklist the same as a link in the parent nav
+
+                More info on dropdowns:
+                  - http://docs.shopify.com/manual/your-website/navigation/create-drop-down-menu
+              {% endcomment %}
+              {% assign child_list_handle = link.title | handleize %}
+              {% if linklists[child_list_handle].links != blank %}
+                <li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}" aria-haspopup="true">
+                  <a href="{{ link.url }}" class="site-nav__link">
+                    {{ link.title }}
+                    <span class="icon icon-arrow-down" aria-hidden="true"></span>
+                  </a>
+                  <ul class="site-nav__dropdown">
+                    {% for childlink in linklists[child_list_handle].links %}
+                      <li{% if childlink.active %} class="site-nav--active"{% endif %}>
+                        <a href="{{ childlink.url }}" class="site-nav__link">{{ childlink.title | escape }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </li>
+              {% else %}
+                <li {% if link.active %}class="site-nav--active"{% endif %}>
+                  <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+          <!-- //site-nav -->
+        </div>
+        <div class="large--hide medium-down--show">
+          <div class="grid">
+            <div class="grid__item one-half">
+              <div class="site-nav--mobile">
+                <button type="button" class="icon-fallback-text site-nav__link js-drawer-open-left" aria-controls="NavDrawer" aria-expanded="false">
+                  <span class="icon icon-hamburger" aria-hidden="true"></span>
+                  <span class="fallback-text">{{ 'layout.navigation.menu' | t }}</span>
+                </button>
+              </div>
+            </div>
+            <div class="grid__item one-half text-right">
+              <div class="site-nav--mobile">
+                <a href="/cart" class="js-drawer-open-right site-nav__link" aria-controls="CartDrawer" aria-expanded="false">
+                  <span class="icon-fallback-text">
+                    <span class="icon icon-cart" aria-hidden="true"></span>
+                    <span class="fallback-text">{{ 'layout.cart.title' | t }}</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="wrapper main-content" role="main">
+
+      {{ content_for_layout }}
+
+    </main>
+  </div>
 
 </body>
 </html>

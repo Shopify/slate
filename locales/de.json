@@ -1,0 +1,15 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Getaggt \"{{ tags }}\"",
+      "page": "Seite {{ page }}"
+    },
+    "search": {
+      "no_results_html": "Ihre Suche nach \"{{ terms }}\" hat keine Ergebnisse hervorgebracht.",
+      "results_for_html": "Ihre Suche nach \"{{ terms }}\" hat folgende Ergebnisse hervorgebracht:",
+      "title": "Suchen Sie auf unserer Seite nach Produkten",
+      "placeholder": "Durchsuchen Sie unseren Shop",
+      "submit": "Suchen"
+    }
+  }
+}
