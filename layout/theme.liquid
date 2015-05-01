@@ -451,6 +451,39 @@
       {{ content_for_layout }}
 
     </main>
+
+    <!-- begin site-footer -->
+    <footer class="site-footer small--text-center" role="contentinfo">
+      <div class="wrapper">
+        <div class="grid">
+          <div class="grid__item text-center">
+
+          </div>
+          <div class="grid__item text-center">
+            <hr>
+            {% comment %}
+              Loop through available payment methods and show their icons.
+            {% endcomment %}
+            {% unless shop.enabled_payment_types == empty %}
+              <h4 class="text-center">{{ 'layout.footer.accepted_payments' | t }}</h4>
+              <ul class="inline-list payment-icons">
+                {% for type in shop.enabled_payment_types %}
+                  <li>
+                    <span class="icon-fallback-text">
+                      <span class="icon icon-{{type}}" aria-hidden="true"></span>
+                      <span class="fallback-text">{{ type | replace: '_',' '}}</span>
+                    </span>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endunless %}
+            <a href="http://shopify.com/timber">Timber Theme Framework</a> by <a href="http://www.shopify.com?ref=Timber" title="Shopify.com">Shopify</a><br>
+            <small>{{ powered_by_link }}</small>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- //site-footer -->
   </div>
 </body>
 </html>
