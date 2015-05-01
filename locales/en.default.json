@@ -11,5 +11,28 @@
       "placeholder": "Search our store",
       "submit": "Search"
     }
+  },
+  "layout": {
+    "navigation": {
+      "menu": "Menu"
+    },
+    "drawers": {
+      "browse": "Browse",
+      "close_menu": "Close menu"
+    },
+    "cart": {
+      "title": "Cart",
+      "items_count": {
+        "one": "item",
+        "other": "items"
+      }
+    },
+    "customer": {
+      "account": "Account",
+      "logged_in_as_html": "Logged in as {{ first_name }}",
+      "log_out": "Log out",
+      "log_in": "Log in",
+      "create_account": "Create account"
+    }
   }
 }

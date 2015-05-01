@@ -11,5 +11,28 @@
       "placeholder": "Pesquisar a nossa loja",
       "submit": "Pesquisar"
     }
+  },
+  "layout": {
+    "navigation": {
+      "menu": "Menu"
+    },
+    "drawers": {
+      "browse": "Navegar",
+      "close_menu": "Fechar menu"
+    },
+    "cart": {
+      "title": "Carrinho de Compras",
+      "items_count": {
+        "one": "item",
+        "other": "itens"
+      }
+    },
+    "customer": {
+      "account": "Conta",
+      "logged_in_as_html": "Sessão iniciada como {{ first_name }}",
+      "log_out": "Terminar sessão",
+      "log_in": "Iniciar sessão",
+      "create_account": "Criar conta"
+    }
   }
 }
