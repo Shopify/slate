@@ -273,20 +273,18 @@
     </ul>
     <!-- //mobile-nav -->
   </div>
-  <div id="PageContainer" class="is-moved-by-drawer">
+  <div id="PageContainer" class="">
     <header class="site-header" role="banner">
-      <div class="wrapper">
-
-        <div class="grid--full grid--table">
-          <div class="grid__item large--one-half">
+        <div class="grid">
+          <div class="grid__item">
             {% comment %}
               Use the uploaded logo from theme settings if enabled.
               Site name gets precedence with H1 tag on homepage, div on other pages.
             {% endcomment %}
             {% if template == 'index' %}
-              <h1 class="site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
+              <h1 class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
             {% else %}
-              <div class="h1 site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
+              <div class="h1 site-header__logo" itemscope itemtype="http://schema.org/Organization">
             {% endif %}
               {% if settings.logo_use_image %}
                 <a href="/" itemprop="url" class="site-header__logo-link">
@@ -301,7 +299,7 @@
               </div>
             {% endif %}
           </div>
-          <div class="grid__item large--one-half large--text-right medium-down--hide">
+          <div class="grid__item">
             {% comment %}
               Show number of items in the cart and total cost in the /cart link
 
@@ -311,7 +309,7 @@
                 - Documentation:  http://shopify.com/timber#ajax-cart
             {% endcomment %}
             <div>
-              <a href="/cart" class="site-header__cart-toggle js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">
+              <a href="/cart" class="site-header__cart" aria-controls="CartDrawer" aria-expanded="false">
                 <span class="icon-fallback-text">
                   <span class="icon icon-cart" aria-hidden="true"></span>
                 </span>
@@ -374,14 +372,11 @@
 
             </div>
           </div>
-        </div>
 
       </div>
     </header>
 
     <nav class="nav-bar" role="navigation">
-      <div class="wrapper">
-        <div class="medium-down--hide">
           {% comment %}
             List out your main-menu linklist (default)
 
@@ -420,28 +415,6 @@
             {% endfor %}
           </ul>
           <!-- //site-nav -->
-        </div>
-        <div class="large--hide medium-down--show">
-          <div class="grid">
-            <div class="grid__item one-half">
-              <div class="site-nav--mobile">
-                <button type="button" class="icon-fallback-text site-nav__link js-drawer-open-left" aria-controls="NavDrawer" aria-expanded="false">
-                  <span class="icon icon-hamburger" aria-hidden="true"></span>
-                  <span class="fallback-text">{{ 'layout.navigation.menu' | t }}</span>
-                </button>
-              </div>
-            </div>
-            <div class="grid__item one-half text-right">
-              <div class="site-nav--mobile">
-                <a href="/cart" class="js-drawer-open-right site-nav__link" aria-controls="CartDrawer" aria-expanded="false">
-                  <span class="icon-fallback-text">
-                    <span class="icon icon-cart" aria-hidden="true"></span>
-                    <span class="fallback-text">{{ 'layout.cart.title' | t }}</span>
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </nav>
