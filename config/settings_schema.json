@@ -63,7 +63,7 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "You can turn this section on and off in the Home section"
+        "content": "Select which page content is shown on the home page"
       },
       {
         "type": "page",
