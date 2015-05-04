@@ -1,1 +1,84 @@
 <!-- /templates/index.liquid -->
+<div class="grid">
+  <div class="grid__item featured-collections">
+
+    <h2>{{ 'homepage.sections.featured_title' | t }}</h2>
+
+    <div class="grid">
+
+      {% comment %}
+        Show five collections, unless it's 'frontpage'.
+
+        Use an index variable in combination to the limit filter
+        to account for the frontpage collection being in top six returned.
+
+        Use variable isEmpty to check if no collections will be shown.
+        For empty store demo only.
+      {% endcomment %}
+      {% assign index = 1 %}
+      {% assign isEmpty = true %}
+
+      {% for collection in collections limit:6 %}
+        {% unless index > 5 %}
+          {% unless collection.handle == 'frontpage' %}
+            {% assign isEmpty = false %}
+            <div class="grid__item">
+              {% comment %}
+                Use capture to put the collection title in a variable that is used in liquid filters
+              {% endcomment %}
+              {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+
+              <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" class="grid__image">
+                {% if collection.image %}
+                  {{ collection.image.src | img_url: 'large' | img_tag: collection_title }}
+                {% else %}
+                  {{ collection.products.first.featured_image | img_url: 'large' | img_tag: collection_title }}
+                {% endif %}
+              </a>
+
+              <p>
+                <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ collection.title }}</a><br>
+                {{ 'collections.general.items_with_count' | t: count: collection.all_products_count }}
+              </p>
+            </div>
+            {% assign index = index | plus: 1 %}
+          {% endunless %}
+
+        {% endunless %}
+      {% endfor %}
+
+      {% comment %}
+        For onboarding new users to your theme, we add some default collections and onboarding tutorials to help populate their store
+      {% endcomment %}
+
+      {% if isEmpty %}
+        <div class="grid__item">
+          <div class="helper-section">
+            <div class="helper-note">
+              <span class="helper-icon"></span>
+              <h3>{{ 'homepage.onboarding.modal_title' | t }}</h3>
+              <p>{{ 'homepage.onboarding.no_collections_html' | t }}</p>
+              <p><a class="admin-btn-primary" href="/admin/custom_collections">{{ 'homepage.onboarding.add_collection' | t }}</a></p>
+            </div>
+
+            <div class="grid-uniform text-center helper-content">
+              {% for i in (1..5) %}
+                <div class="grid__item large--one-fifth medium--one-half">
+                  <a href="#" class="grid__image">
+                    {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ i }}.png{% endcapture %}
+                    {{ imageUrl | img_tag }}
+                  </a>
+                  <p>
+                    <a href="#">{{ 'homepage.onboarding.collection_title' | t }}</a><br>
+                    {{ 'collections.general.items_with_count' | t: count: i }}
+                  </p>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
