@@ -165,18 +165,9 @@
 </head>
 
 <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
-  <div id="NavDrawer" class="drawer drawer--left">
-    <div class="drawer__header">
-      <div class="drawer__title h3">{{ 'layout.drawers.browse' | t }}</div>
-      <div class="drawer__close js-drawer-close">
-        <button type="button" class="icon-fallback-text">
-          <span class="icon icon-x" aria-hidden="true"></span>
-          <span class="fallback-text">{{ 'layout.drawers.close_menu' | t }}</span>
-        </button>
-      </div>
-    </div>
+  <div class="mobile-nav">
     <!-- begin mobile-nav -->
-    <ul class="mobile-nav">
+    <ul class="mobile-nav__items">
       <li class="mobile-nav__item mobile-nav__search">
         {% comment %}
 
@@ -197,12 +188,10 @@
         <form action="/search" method="get" class="input-group search-bar" role="search">
           {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
           <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" class="input-group-field" aria-label="{{ 'general.search.placeholder' | t }}">
-          <span class="input-group-btn">
-            <button type="submit" class="btn icon-fallback-text">
-              <span class="icon icon-search" aria-hidden="true"></span>
-              <span class="fallback-text">{{ 'general.search.submit' | t }}</span>
-            </button>
-          </span>
+          <button type="submit" class="btn icon-fallback-text">
+            <span class="icon icon-search" aria-hidden="true"></span>
+            <span class="fallback-text">{{ 'general.search.submit' | t }}</span>
+          </button>
         </form>
       </li>
       {% for link in linklists.main-menu.links %}
@@ -215,19 +204,7 @@
         {% assign child_list_handle = link.title | handleize %}
         {% if linklists[child_list_handle].links != blank %}
           <li class="mobile-nav__item{% if link.active %} mobile-nav__item--active{% endif %}" aria-haspopup="true">
-            <div class="mobile-nav__has-sublist">
-              <a href="{{ link.url }}" class="mobile-nav__link">{{ link.title }}</a>
-              <div class="mobile-nav__toggle">
-                <button type="button" class="icon-fallback-text mobile-nav__toggle-open">
-                  <span class="icon icon-plus" aria-hidden="true"></span>
-                  <span class="fallback-text">See More</span>
-                </button>
-                <button type="button" class="icon-fallback-text mobile-nav__toggle-close">
-                  <span class="icon icon-minus" aria-hidden="true"></span>
-                  <span class="fallback-text">{{ 'cart.general.close_cart' | t | json }}</span>
-                </button>
-              </div>
-            </div>
+            <a href="{{ link.url }}" class="mobile-nav__link">{{ link.title }}</a>
             <ul class="mobile-nav__sublist">
               {% for childlink in linklists[child_list_handle].links %}
                 <li class="mobile-nav__item {% if childlink.active %} mobile-nav__item--active{% endif %}">
