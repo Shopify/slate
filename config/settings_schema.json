@@ -59,6 +59,20 @@
     ]
   },
   {
+    "name": "Home - Page Content",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "You can turn this section on and off in the Home section"
+      },
+      {
+        "type": "page",
+        "id": "home_page_content",
+        "label": "Choose page"
+      }
+    ]
+  },
+  {
     "name": "Social",
     "settings": [
       {
