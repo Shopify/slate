@@ -33,10 +33,10 @@
         <ul class="product-single__thumbnails grid-uniform" id="ProductThumbs">
 
           {% for image in product.images %}
-            <li class="grid__item one-quarter">
-              <button type="button" data-zoom-url="{{ image.src | img_url: 'large' }}" class="product-single__thumbnail">
+            <li class="grid__item">
+              <a href="{{ image.src | img_url: 'large' }}" class="product-single__thumbnail">
                 <img src="{{ image.src | img_url: 'compact' }}" alt="{{ image.alt | escape }}">
-              </button>
+              </a>
             </li>
           {% endfor %}
 
@@ -44,5 +44,4 @@
       {% endif %}
     </div>
   </div>
-
 </div>
