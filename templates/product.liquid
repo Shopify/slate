@@ -71,7 +71,7 @@
               For more information on products with multiple options, visit:
                 - http://docs.shopify.com/support/your-website/themes/can-i-make-my-theme-use-products-with-multiple-options#update-product-liquid
             {% endcomment %}
-            <select name="id" id="ProductSelect" class="product-single__variants">
+            <select name="id" id="ProductSelect" class="product-form__variants">
               {% for variant in product.variants %}
                 {% if variant.available %}
 
@@ -88,20 +88,20 @@
               {% endfor %}
             </select>
 
-            <span id="ProductPrice" class="product-single__price" itemprop="price">
+            <span id="ProductPrice" class="product-form__price" itemprop="price">
               {{ current_variant.price | money }}
             </span>
 
             {% if product.compare_at_price_max > product.price %}
-              <p class="product-single__price--compare">
+              <p class="product-form__price--compare">
                 {{ 'products.product.compare_at' | t }} {{ current_variant.compare_at_price | money }}
               </p>
             {% endif %}
 
             <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
-            <input type="number" id="Quantity" name="quantity" value="1" min="1" class="product-single__quantity">
+            <input type="number" id="Quantity" name="quantity" value="1" min="1" class="product-form__quantity">
 
-            <button type="submit" name="add" id="AddToCart" class="product-single__cart-submit">
+            <button type="submit" name="add" id="AddToCart" class="product-form__cart-submit">
               <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
             </button>
           </form>
