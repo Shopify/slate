@@ -43,5 +43,74 @@
         </ul>
       {% endif %}
     </div>
+
+    <div class="grid__item">
+
+      <h1 itemprop="name">{{ product.title }}</h1>
+
+      <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+        <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+
+        <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+
+        {% comment %}
+          ID addToCartForm is a selector for the ajax cart plugin
+        {% endcomment %}
+        <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm" class="product-single__cart-form">
+
+          {% comment %}
+            Add product variants as a dropdown.
+              - By default, each variant (or combination of variants) will display as its own <option>
+              - To separate these into multiple steps, which we suggest, use option_selection.js (see below)
+
+            You can leverage jQuery to add a callback on page load and each time the select element changes:
+              - Include option_selection.js (as seen at the bottom of this file)
+              - This allows you to use JavaScript anytime the variant dropdown changes
+              - This also separates out your variant options (ie. size, color, etc.) to separate select elements
+
+            For more information on products with multiple options, visit:
+              - http://docs.shopify.com/support/your-website/themes/can-i-make-my-theme-use-products-with-multiple-options#update-product-liquid
+          {% endcomment %}
+          <select name="id" id="productSelect" class="product-single__variants">
+            {% for variant in product.variants %}
+              {% if variant.available %}
+
+                {% comment %}
+                  Note: if you use option_selection.js, your <select> tag will be overwritten, meaning what you have inside <option> will not reflect what you coded below.
+                {% endcomment %}
+                <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+
+              {% else %}
+                <option disabled="disabled">
+                  {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                </option>
+              {% endif %}
+            {% endfor %}
+          </select>
+
+          <span id="ProductPrice" class="product-single__price" itemprop="price">
+            {{ current_variant.price | money }}
+          </span>
+
+          {% if product.compare_at_price_max > product.price %}
+            <p id="ComparePrice" class="product-single__price--compare">
+              {{ 'products.product.compare_at' | t }} {{ current_variant.compare_at_price | money }}
+            </p>
+          {% endif %}
+
+          <label for="Quantity" class="product-single__quantity">{{ 'products.product.quantity' | t }}</label>
+          <input type="number" id="Quantity" name="quantity" value="1" min="1" class="product-single__quantity">
+
+          <button type="submit" name="add" id="AddToCart" class="product-single__cart-submit">
+            <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
+          </button>
+        </form>
+
+      </div>
+
+      <div class="product-single__description" itemprop="description">
+        {{ product.description }}
+      </div>
+    </div>
   </div>
 </div>
