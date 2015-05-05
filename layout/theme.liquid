@@ -453,33 +453,81 @@
     </main>
 
     <!-- begin site-footer -->
-    <footer class="site-footer small--text-center" role="contentinfo">
-      <div class="wrapper">
-        <div class="grid">
-          <div class="grid__item text-center">
+    <footer class="site-footer" role="contentinfo">
+      <div class="grid">
+        {% comment %}
+          Determine whether there are social links.
+          Add an `or` statement for each social link defined in the
+          theme settings.
+        {% endcomment %}
+        {% assign footer_social_enable = false %}
+        {% if
+          settings.social_twitter_link != blank
+          or settings.social_facebook_link != blank
+        %}
+          {% assign footer_social_enable = true %}
+        {% endif %}
 
-          </div>
-          <div class="grid__item text-center">
-            <hr>
-            {% comment %}
-              Loop through available payment methods and show their icons.
-            {% endcomment %}
-            {% unless shop.enabled_payment_types == empty %}
-              <h4 class="text-center">{{ 'layout.footer.accepted_payments' | t }}</h4>
-              <ul class="inline-list payment-icons">
-                {% for type in shop.enabled_payment_types %}
+        {% comment %}
+          Show Social Links if they are enabled and filled out
+        {% endcomment %}
+        {% if footer_social_enable %}
+          <div class="grid__item">
+              <ul class="site-footer__social-icons">
+                {% if settings.social_twitter_link != blank %}
                   <li>
-                    <span class="icon-fallback-text">
-                      <span class="icon icon-{{type}}" aria-hidden="true"></span>
-                      <span class="fallback-text">{{ type | replace: '_',' '}}</span>
-                    </span>
+                    <a href="{{ settings.social_twitter_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}">
+                      <span class="icon icon-twitter" aria-hidden="true"></span>
+                      Twitter
+                    </a>
                   </li>
-                {% endfor %}
+                {% endif %}
+                {% if settings.social_facebook_link != blank %}
+                  <li>
+                    <a href="{{ settings.social_facebook_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Facebook' }}">
+                      <span class="icon icon-facebook" aria-hidden="true"></span>
+                      Facebook
+                    </a>
+                  </li>
+                {% endif %}
               </ul>
-            {% endunless %}
-            <a href="http://shopify.com/timber">Timber Theme Framework</a> by <a href="http://www.shopify.com?ref=Timber" title="Shopify.com">Shopify</a><br>
-            <small>{{ powered_by_link }}</small>
           </div>
+        {% endif %}
+
+        {% comment %}
+          Show Shop Links from footer linklist if it
+          has any links
+        {% endcomment %}
+        {% if linklists.footer.links.size > 0 %}
+          <div class="grid__item">
+            <ul class="site-footer__linklist">
+              {% for link in linklists.footer.links %}
+
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+        <div class="grid__item">
+          {% comment %}
+            Loop through available payment methods and show their icons.
+          {% endcomment %}
+          {% unless shop.enabled_payment_types == empty %}
+            <h4>{{ 'layout.footer.accepted_payments' | t }}</h4>
+            <ul class="site-footer__payment-icons">
+              {% for type in shop.enabled_payment_types %}
+                <li>
+                  <span class="icon-fallback-text">
+                    <span class="icon icon-{{type}}" aria-hidden="true"></span>
+                    <span class="fallback-text">{{ type | replace: '_',' '}}</span>
+                  </span>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endunless %}
+          <a href="http://shopify.com/timber">Timber Theme Framework</a> by <a href="http://www.shopify.com?ref=Timber" title="Shopify.com">Shopify</a><br>
+          <small>{{ powered_by_link }}</small>
         </div>
       </div>
     </footer>
