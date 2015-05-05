@@ -59,8 +59,6 @@
     ]
   },
   {
-<<<<<<< HEAD
-=======
     "name": "Home - Page Content",
     "settings": [
       {
@@ -75,14 +73,12 @@
     ]
   },
   {
->>>>>>> layout-index
     "name": "Social",
     "settings": [
       {
         "type": "text",
         "id": "social_twitter_link",
         "label": "Twitter Link"
-<<<<<<< HEAD
       },
       {
         "type": "text",
@@ -92,9 +88,3 @@
     ]
   }
 ]
-=======
-      }
-    ]
-  }
-]
->>>>>>> layout-index
