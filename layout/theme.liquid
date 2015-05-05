@@ -165,114 +165,6 @@
 </head>
 
 <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
-  <div id="NavDrawer" class="drawer drawer--left">
-    <div class="drawer__header">
-      <div class="drawer__title h3">{{ 'layout.drawers.browse' | t }}</div>
-      <div class="drawer__close js-drawer-close">
-        <button type="button" class="icon-fallback-text">
-          <span class="icon icon-x" aria-hidden="true"></span>
-          <span class="fallback-text">{{ 'layout.drawers.close_menu' | t }}</span>
-        </button>
-      </div>
-    </div>
-    <!-- begin mobile-nav -->
-    <ul class="mobile-nav">
-      <li class="mobile-nav__item mobile-nav__search">
-        {% comment %}
-
-          Search Bar
-
-          Note we are using 'input-group' for the layout. Look under Forms > Input Groups for some demos.
-
-          More information:
-           - http://docs.shopify.com/themes/liquid-variables/search
-
-          To return only products in results:
-            - http://docs.shopify.com/manual/configuration/store-customization/return-only-product-in-storefront-search-results
-            - Or manually add type=product to the search URL as a query parameter
-            - Uncomment hidden input with value="product" below
-
-        {% endcomment %}
-
-        <form action="/search" method="get" class="input-group search-bar" role="search">
-          {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
-          <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" class="input-group-field" aria-label="{{ 'general.search.placeholder' | t }}">
-          <span class="input-group-btn">
-            <button type="submit" class="btn icon-fallback-text">
-              <span class="icon icon-search" aria-hidden="true"></span>
-              <span class="fallback-text">{{ 'general.search.submit' | t }}</span>
-            </button>
-          </span>
-        </form>
-      </li>
-      {% for link in linklists.main-menu.links %}
-        {% comment %}
-          Create a dropdown menu by naming a linklist the same as a link in the parent nav
-
-          More info on dropdowns:
-            - http://docs.shopify.com/manual/your-website/navigation/create-drop-down-menu
-        {% endcomment %}
-        {% assign child_list_handle = link.title | handleize %}
-        {% if linklists[child_list_handle].links != blank %}
-          <li class="mobile-nav__item{% if link.active %} mobile-nav__item--active{% endif %}" aria-haspopup="true">
-            <div class="mobile-nav__has-sublist">
-              <a href="{{ link.url }}" class="mobile-nav__link">{{ link.title }}</a>
-              <div class="mobile-nav__toggle">
-                <button type="button" class="icon-fallback-text mobile-nav__toggle-open">
-                  <span class="icon icon-plus" aria-hidden="true"></span>
-                  <span class="fallback-text">See More</span>
-                </button>
-                <button type="button" class="icon-fallback-text mobile-nav__toggle-close">
-                  <span class="icon icon-minus" aria-hidden="true"></span>
-                  <span class="fallback-text">{{ 'cart.general.close_cart' | t | json }}</span>
-                </button>
-              </div>
-            </div>
-            <ul class="mobile-nav__sublist">
-              {% for childlink in linklists[child_list_handle].links %}
-                <li class="mobile-nav__item {% if childlink.active %} mobile-nav__item--active{% endif %}">
-                  <a href="{{ childlink.url }}" class="mobile-nav__link">{{ childlink.title | escape }}</a>
-                </li>
-              {% endfor %}
-            </ul>
-          </li>
-        {% else %}
-          <li class="mobile-nav__item{% if link.active %} mobile-nav__item--active{% endif %}">
-            <a href="{{ link.url }}" class="mobile-nav__link">{{ link.title }}</a>
-          </li>
-        {% endif %}
-      {% endfor %}
-
-      {% comment %}
-        If customer accounts are enabled, provide login and create account links
-      {% endcomment %}
-      {% if shop.customer_accounts_enabled %}
-        {% if customer %}
-          <li class="mobile-nav__item">
-            {% if customer.first_name != blank %}
-              {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
-              {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
-            {% else %}
-              <a href="/account">{{ 'layout.customer.account' | t }}</a>
-            {% endif %}
-          </li>
-          <li class="mobile-nav__item">
-            {{ 'layout.customer.log_out' | t | customer_logout_link }}
-          </li>
-        {% else %}
-          <li class="mobile-nav__item">
-            {{ 'layout.customer.log_in' | t | customer_login_link }}
-          </li>
-          {% if shop.customer_accounts_optional %}
-          <li class="mobile-nav__item">
-            {{ 'layout.customer.create_account' | t | customer_register_link }}
-          </li>
-          {% endif %}
-        {% endif %}
-      {% endif %}
-    </ul>
-    <!-- //mobile-nav -->
-  </div>
   <div id="PageContainer" class="">
     <header class="site-header" role="banner">
         <div class="grid">
@@ -284,7 +176,7 @@
             {% if template == 'index' %}
               <h1 class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
             {% else %}
-              <div class="h1 site-header__logo" itemscope itemtype="http://schema.org/Organization">
+              <div class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
             {% endif %}
               {% if settings.logo_use_image %}
                 <a href="/" itemprop="url" class="site-header__logo-link">
@@ -362,12 +254,10 @@
               <form action="/search" method="get" class="input-group search-bar" role="search">
                 {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
                 <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" class="input-group-field" aria-label="{{ 'general.search.placeholder' | t }}">
-                <span class="input-group-btn">
-                  <button type="submit" class="btn icon-fallback-text">
-                    <span class="icon icon-search" aria-hidden="true"></span>
-                    <span class="fallback-text">{{ 'general.search.submit' | t }}</span>
-                  </button>
-                </span>
+                <button type="submit" class="icon-fallback-text">
+                  <span class="icon icon-search" aria-hidden="true"></span>
+                  <span class="fallback-text">{{ 'general.search.submit' | t }}</span>
+                </button>
               </form>
 
             </div>
