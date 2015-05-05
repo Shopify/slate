@@ -3,9 +3,6 @@
   <div class="grid__item featured-collections">
 
     <h2>{{ 'homepage.sections.featured_title' | t }}</h2>
-
-    <div class="grid">
-
       {% comment %}
         Show five collections, unless it's 'frontpage'.
 
@@ -18,66 +15,177 @@
       {% assign index = 1 %}
       {% assign isEmpty = true %}
 
-      {% for collection in collections limit:6 %}
-        {% unless index > 5 %}
-          {% unless collection.handle == 'frontpage' %}
-            {% assign isEmpty = false %}
-            <div class="grid__item">
-              {% comment %}
-                Use capture to put the collection title in a variable that is used in liquid filters
-              {% endcomment %}
-              {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+      <div class="grid">
 
-              <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" class="grid__image">
-                {% if collection.image %}
-                  {{ collection.image.src | img_url: 'large' | img_tag: collection_title }}
-                {% else %}
-                  {{ collection.products.first.featured_image | img_url: 'large' | img_tag: collection_title }}
-                {% endif %}
-              </a>
+        {% for collection in collections limit:6 %}
+          {% unless index > 5 %}
+            {% unless collection.handle == 'frontpage' %}
+              {% assign isEmpty = false %}
+              <div class="grid__item">
+                {% comment %}
+                  Use capture to put the collection title in a variable that is used in liquid filters
+                {% endcomment %}
+                {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
 
-              <p>
-                <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ collection.title }}</a><br>
-                {{ 'collections.general.items_with_count' | t: count: collection.all_products_count }}
-              </p>
-            </div>
-            {% assign index = index | plus: 1 %}
+                <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" class="grid__image">
+                  {% if collection.image %}
+                    {{ collection.image.src | img_url: 'large' | img_tag: collection_title }}
+                  {% else %}
+                    {{ collection.products.first.featured_image | img_url: 'large' | img_tag: collection_title }}
+                  {% endif %}
+                </a>
+
+                <p>
+                  <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ collection.title }}</a><br>
+                  {{ 'collections.general.items_with_count' | t: count: collection.all_products_count }}
+                </p>
+              </div>
+              {% assign index = index | plus: 1 %}
+            {% endunless %}
+
           {% endunless %}
+        {% endfor %}
 
-        {% endunless %}
-      {% endfor %}
+        {% comment %}
+          For onboarding new users to your theme, we add some default collections and onboarding tutorials to help populate their store
+        {% endcomment %}
 
-      {% comment %}
-        For onboarding new users to your theme, we add some default collections and onboarding tutorials to help populate their store
-      {% endcomment %}
+        {% if isEmpty %}
+          <div class="grid__item">
+            <div class="helper-section">
+              <div class="helper-note">
+                <span class="helper-icon"></span>
+                <h3>{{ 'homepage.onboarding.modal_title' | t }}</h3>
+                <p>{{ 'homepage.onboarding.no_collections_html' | t }}</p>
+                <p><a class="admin-btn-primary" href="/admin/custom_collections">{{ 'homepage.onboarding.add_collection' | t }}</a></p>
+              </div>
 
-      {% if isEmpty %}
-        <div class="grid__item">
-          <div class="helper-section">
-            <div class="helper-note">
-              <span class="helper-icon"></span>
-              <h3>{{ 'homepage.onboarding.modal_title' | t }}</h3>
-              <p>{{ 'homepage.onboarding.no_collections_html' | t }}</p>
-              <p><a class="admin-btn-primary" href="/admin/custom_collections">{{ 'homepage.onboarding.add_collection' | t }}</a></p>
-            </div>
-
-            <div class="grid-uniform text-center helper-content">
-              {% for i in (1..5) %}
-                <div class="grid__item large--one-fifth medium--one-half">
-                  <a href="#" class="grid__image">
-                    {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ i }}.png{% endcapture %}
-                    {{ imageUrl | img_tag }}
-                  </a>
-                  <p>
-                    <a href="#">{{ 'homepage.onboarding.collection_title' | t }}</a><br>
-                    {{ 'collections.general.items_with_count' | t: count: i }}
-                  </p>
-                </div>
-              {% endfor %}
+              <div class="grid helper-content">
+                {% for i in (1..5) %}
+                  <div class="grid__item large--one-fifth medium--one-half">
+                    <a href="#" class="grid__image">
+                      {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ i }}.png{% endcapture %}
+                      {{ imageUrl | img_tag }}
+                    </a>
+                    <p>
+                      <a href="#">{{ 'homepage.onboarding.collection_title' | t }}</a><br>
+                      {{ 'collections.general.items_with_count' | t: count: i }}
+                    </p>
+                  </div>
+                {% endfor %}
+              </div>
             </div>
           </div>
+        {% endif %}
+
+      </div>
+  </div>
+  <div class="grid__item featured-products">
+
+    <h2>{{ 'homepage.sections.frontpage_title' | t }}</h2>
+
+    <div class="grid">
+
+      {% comment %}
+        Loop through products in your Frontpage collection.
+        This collection is created by default, but you must add products to it.
+      {% endcomment %}
+      {% for product in collections.frontpage.products limit:4 %}
+
+        {% comment %}
+          Check if the product is on sale and set a variable to be used below.
+        {% endcomment %}
+        {% assign on_sale = false %}
+        {% if product.compare_at_price > product.price %}
+          {% assign on_sale = true %}
+        {% endif %}
+
+        {% comment %}
+          Check if the product is sold out and set a variable to be used below.
+        {% endcomment %}
+        {% assign sold_out = true %}
+        {% if product.available %}
+          {% assign sold_out = false %}
+        {% endif %}
+
+        <div class="grid__item">
+
+          {% comment %}
+            Link to your product with the 'within: collection' filter for the link to be aware of the collection.
+            This allows you to create collection-based navigation on the product page.
+
+            Results of using 'within: collection':
+            - Instead of a URL with /products/product-handle
+              you would get /collections/collection-handle/products/product-handle
+
+            For more info on navigation within a collection
+              - http://docs.shopify.com/support/your-store/collections/how-to-navigate-within-a-collection
+
+          {% endcomment %}
+          <a href="{{ product.url | within: collection }}">
+            <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
+          </a>
+
+          <p>
+            <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+          </p>
+          <p>
+            {% comment %}
+              You can show a leading 'from' or 'up to' by checking 'product.price_varies'
+              if your variants have different prices.
+            {% endcomment %}
+            {% if on_sale %}
+              {% if product.price_varies %}
+                {% assign sale_price = product.price | money %}
+                {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+              {% else %}
+                <strong>{{ 'products.product.on_sale' | t }}</strong>
+                {{ product.price | money }}
+              {% endif %}
+            {% else %}
+              {% if product.price_varies %}
+                {% assign price = product.price | money %}
+                {{ 'products.general.from_text_html' | t: price: price }}
+              {% else %}
+                {{ product.price | money }}
+              {% endif %}
+            {% endif %}
+            {% if sold_out %}
+              <br><strong>{{ 'products.product.sold_out' | t }}</strong>
+            {% endif %}
+            {% if on_sale %}
+              <br><s>{{ product.compare_at_price | money }}</s>
+            {% endif %}
+          </p>
         </div>
-      {% endif %}
+      {% else %}
+        {% comment %}
+          For onboarding new users to your theme, we add some default products and onboarding tutorials to help populate their store
+        {% endcomment %}
+          <div class="grid__item">
+            <div class="helper-section">
+              <div class="helper-note">
+                <span class="helper-icon"></span>
+                <h3>{{ 'homepage.onboarding.modal_title' | t }}</h3>
+                <p>{{ 'homepage.onboarding.no_products_html' | t }}</p>
+                <p><a class="admin-btn-primary" href="/admin/collections?tutorial=Frontpage">{{ 'homepage.onboarding.add_product' | t }}</a></p>
+              </div>
+
+              <div class="grid-uniform helper-content">
+                {% for i in (1..4) %}
+                  <div class="grid__item one-half large--one-quarter">
+                    <a href="/admin/products" class="grid__image">
+                      {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ i }}.png{% endcapture %}
+                      {{ imageUrl | img_tag }}
+                    </a>
+                    <p class="h6"><a href="/admin/products">{{ 'homepage.onboarding.product_title' | t }}</a></p>
+                    <p>$19.99</p>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+      {% endfor %}
 
     </div>
   </div>
