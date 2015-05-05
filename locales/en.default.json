@@ -13,13 +13,6 @@
     }
   },
   "layout": {
-    "navigation": {
-      "menu": "Menu"
-    },
-    "drawers": {
-      "browse": "Browse",
-      "close_menu": "Close menu"
-    },
     "cart": {
       "title": "Cart",
       "items_count": {
@@ -33,11 +26,11 @@
       "log_out": "Log out",
       "log_in": "Log in",
       "create_account": "Create account"
+    },
+    "footer": {
+      "social_title": "Get Connected",
+      "newsletter_title": "Newsletter",
+      "accepted_payments": "Accepted Payments"
     }
-  },
-  "footer": {
-    "social_title": "Get Connected",
-    "newsletter_title": "Newsletter",
-    "accepted_payments": "Accepted Payments"
   }
 }

@@ -59,12 +59,30 @@
     ]
   },
   {
+<<<<<<< HEAD
+=======
+    "name": "Home - Page Content",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Select which page content is shown on the home page"
+      },
+      {
+        "type": "page",
+        "id": "home_page_content",
+        "label": "Choose page"
+      }
+    ]
+  },
+  {
+>>>>>>> layout-index
     "name": "Social",
     "settings": [
       {
         "type": "text",
         "id": "social_twitter_link",
         "label": "Twitter Link"
+<<<<<<< HEAD
       },
       {
         "type": "text",
@@ -74,3 +92,9 @@
     ]
   }
 ]
+=======
+      }
+    ]
+  }
+]
+>>>>>>> layout-index

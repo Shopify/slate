@@ -13,13 +13,6 @@
     }
   },
   "layout": {
-    "navigation": {
-      "menu": "Menu"
-    },
-    "drawers": {
-      "browse": "Explorer",
-      "close_menu": "Fermer le menu"
-    },
     "cart": {
       "title": "Panier",
       "items_count": {

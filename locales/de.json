@@ -13,13 +13,6 @@
     }
   },
   "layout": {
-    "navigation": {
-      "menu": "Menü"
-    },
-    "drawers": {
-      "browse": "Durchsuchen",
-      "close_menu": "Menü schließen"
-    },
     "cart": {
       "title": "Einkaufswagen",
       "items_count": {
