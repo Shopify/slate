@@ -59,6 +59,20 @@
     ]
   },
   {
+    "name": "Home - Page Content",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Select which page content is shown on the home page"
+      },
+      {
+        "type": "page",
+        "id": "home_page_content",
+        "label": "Choose page"
+      }
+    ]
+  },
+  {
     "name": "Social",
     "settings": [
       {
