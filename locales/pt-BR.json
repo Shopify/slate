@@ -13,13 +13,6 @@
     }
   },
   "layout": {
-    "navigation": {
-      "menu": "Menu"
-    },
-    "drawers": {
-      "browse": "Navegar",
-      "close_menu": "Fechar menu"
-    },
     "cart": {
       "title": "Carrinho",
       "items_count": {
