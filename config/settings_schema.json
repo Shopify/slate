@@ -65,6 +65,11 @@
         "type": "text",
         "id": "social_twitter_link",
         "label": "Twitter Link"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook Link"
       }
     ]
   }
