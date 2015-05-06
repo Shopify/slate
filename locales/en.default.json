@@ -26,6 +26,11 @@
       "log_out": "Log out",
       "log_in": "Log in",
       "create_account": "Create account"
+    },
+    "footer": {
+      "social_title": "Get Connected",
+      "newsletter_title": "Newsletter",
+      "accepted_payments": "Accepted Payments"
     }
   }
 }

@@ -174,6 +174,7 @@
               Site name gets precedence with H1 tag on homepage, div on other pages.
             {% endcomment %}
             {% if template == 'index' %}
+
               <h1 class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
             {% else %}
               <div class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
@@ -262,7 +263,7 @@
 
             </div>
           </div>
-
+        </div>
       </div>
     </header>
 
@@ -314,6 +315,72 @@
       {{ content_for_layout }}
 
     </main>
+
+    <!-- begin site-footer -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="grid">
+        {% comment %}
+          Determine whether there are social links.
+          Add an `or` statement for each social link defined in the
+          theme settings.
+        {% endcomment %}
+        {% assign footer_social_enable = false %}
+        {% if
+          settings.social_twitter_link != blank
+          or settings.social_facebook_link != blank
+        %}
+          {% assign footer_social_enable = true %}
+        {% endif %}
+
+        {% comment %}
+          Show any social links that are defined in the settings
+          and have a url associated with them.
+        {% endcomment %}
+        {% if footer_social_enable %}
+          <div class="grid__item">
+              <ul class="site-footer__social-icons">
+                {% if settings.social_twitter_link != blank %}
+                  <li>
+                    <a href="{{ settings.social_twitter_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}">
+                      <span class="icon icon-twitter" aria-hidden="true"></span>
+                      Twitter
+                    </a>
+                  </li>
+                {% endif %}
+                {% if settings.social_facebook_link != blank %}
+                  <li>
+                    <a href="{{ settings.social_facebook_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Facebook' }}">
+                      <span class="icon icon-facebook" aria-hidden="true"></span>
+                      Facebook
+                    </a>
+                  </li>
+                {% endif %}
+              </ul>
+          </div>
+        {% endif %}
+
+        {% comment %}
+          Show Shop Links from footer linklist if it
+          has any links
+        {% endcomment %}
+        {% if linklists.footer.links.size > 0 %}
+          <div class="grid__item">
+            <ul class="site-footer__linklist">
+              {% for link in linklists.footer.links %}
+
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        <div class="grid__item">
+          <small>{{ powered_by_link }}</small>
+        </div>
+      </div>
+    </footer>
+    <!-- //site-footer -->
   </div>
 </body>
 </html>

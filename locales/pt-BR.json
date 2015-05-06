@@ -26,6 +26,11 @@
       "log_out": "Sair",
       "log_in": "Entrar",
       "create_account": "Criar conta"
+    },
+    "footer": {
+      "social_title": "Conecte-se",
+      "newsletter_title": "Informativo",
+      "accepted_payments": "Formas de pagamento"
     }
   }
 }

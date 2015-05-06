@@ -26,6 +26,11 @@
       "log_out": "Terminar sessão",
       "log_in": "Iniciar sessão",
       "create_account": "Criar conta"
+    },
+    "footer": {
+      "social_title": "Fique Ligado",
+      "newsletter_title": "Newsletter",
+      "accepted_payments": "Formas de Pagamento Aceites"
     }
   }
 }
