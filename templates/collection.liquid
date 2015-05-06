@@ -27,58 +27,25 @@
       {% comment %}
         Collection Sorting Dropdowns
       {% endcomment %}
-      <div class="section-header">
-        <div class="section-header__sorting">
-          <label for="SortBy">{{ 'collections.sorting.title' | t }}</label>
-          <select name="SortBy" id="SortBy">
-            <option value="manual">{{ 'collections.sorting.featured' | t }}</option>
-            <option value="best-selling">{{ 'collections.sorting.best_selling' | t }}</option>
-            <option value="title-ascending">{{ 'collections.sorting.az' | t }}</option>
-            <option value="title-descending">{{ 'collections.sorting.za' | t }}</option>
-            <option value="price-ascending">{{ 'collections.sorting.price_ascending' | t }}</option>
-            <option value="price-descending">{{ 'collections.sorting.price_descending' | t }}</option>
-            <option value="created-descending">{{ 'collections.sorting.date_descending' | t }}</option>
-            <option value="created-ascending">{{ 'collections.sorting.date_ascending' | t }}</option>
-          </select>
-        </div>
+      <div class="section-header__sorting">
+        <label for="SortBy">{{ 'collections.sorting.title' | t }}</label>
+        <select name="SortBy" id="SortBy">
+          <option value="manual">{{ 'collections.sorting.featured' | t }}</option>
+          <option value="best-selling">{{ 'collections.sorting.best_selling' | t }}</option>
+          <option value="title-ascending">{{ 'collections.sorting.az' | t }}</option>
+          <option value="title-descending">{{ 'collections.sorting.za' | t }}</option>
+          <option value="price-ascending">{{ 'collections.sorting.price_ascending' | t }}</option>
+          <option value="price-descending">{{ 'collections.sorting.price_descending' | t }}</option>
+          <option value="created-descending">{{ 'collections.sorting.date_descending' | t }}</option>
+          <option value="created-ascending">{{ 'collections.sorting.date_ascending' | t }}</option>
+        </select>
       </div>
 
       {% comment %}
         Collection Tags
       {% endcomment %}
       {% if collection.all_tags.size > 0 %}
-        {% comment %}
-          To provide a 'catch-all' link at the top of the list,
-          check against the collection.handle, product type, and vendor.
-        {% endcomment %}
-        <ul class="tags tags--collection">
-          <li{% unless current_tags %} class="tag--active"{% endunless %}>
-            {% comment %}
-              Good for /collections/all collection and regular collections
-            {% endcomment %}
-            {% if collection.handle %}
-              <a href="/collections/{{ collection.handle }}">
-                {{ 'collections.general.all_of_collection' | t }}
-              </a>
-
-            {% comment %}
-              Good for automatic type collections
-            {% endcomment %}
-            {% elsif collection.current_type %}
-              <a href="{{ collection.current_type | url_for_type }}">
-                {{ 'collections.general.all_of_collection' | t }}
-              </a>
-
-            {% comment %}
-              Good for automatic vendor collections
-            {% endcomment %}
-            {% elsif collection.current_vendor %}
-              <a href="{{ collection.current_vendor | url_for_vendor }}">
-                {{ 'collections.general.all_of_collection' | t }}
-              </a>
-            {% endif %}
-          </li>
-
+        <ul class="tags section-header__tags">
           {% for tag in collection.all_tags %}
             {% if current_tags contains tag %}
               <li class="tag--active">
