@@ -17,14 +17,19 @@
     {% comment %}
       Different markup if a collection description exists
     {% endcomment %}
-    {% if collection.description != blank %}
-      <header class="section-header">
+    <header class="section-header">
+      {% if collection.description != blank %}
         <h1 class="section-header__title">{{ collection.title }}</h1>
         <div class="rte">
           {{ collection.description }}
         </div>
-      </header>
-      <hr>
+      {% else %}
+          <h1 class="section-header__title">{{ collection.title }}</h1>
+      {% endif %}
+
+      {% comment %}
+        Collection Sorting Dropdowns
+      {% endcomment %}
       <div class="section-header">
         <div class="section-header__sorting">
           <label for="SortBy">{{ 'collections.sorting.title' | t }}</label>
@@ -40,145 +45,62 @@
           </select>
         </div>
       </div>
-    {% else %}
-      <header class="section-header">
-        <h1 class="section-header__title">{{ collection.title }}</h1>
-        <div class="section-header__sorting">
-          <label for="SortBy">{{ 'collections.sorting.title' | t }}</label>
-          <select name="SortBy" id="SortBy">
-            <option value="manual">{{ 'collections.sorting.featured' | t }}</option>
-            <option value="best-selling">{{ 'collections.sorting.best_selling' | t }}</option>
-            <option value="title-ascending">{{ 'collections.sorting.az' | t }}</option>
-            <option value="title-descending">{{ 'collections.sorting.za' | t }}</option>
-            <option value="price-ascending">{{ 'collections.sorting.price_ascending' | t }}</option>
-            <option value="price-descending">{{ 'collections.sorting.price_descending' | t }}</option>
-            <option value="created-descending">{{ 'collections.sorting.date_descending' | t }}</option>
-            <option value="created-ascending">{{ 'collections.sorting.date_ascending' | t }}</option>
-          </select>
-        </div>
-      </header>
-    {% endif %}
-
-    {% comment %}
-      Use class grid-uniform to have evenly sized columns clear
-      each other properly at each breakpoint.
-    {% endcomment %}
-    <div class="grid">
 
       {% comment %}
-        Loop through our products in the current collection.
-        See the snippet 'product-grid-item' for the layout.
+        Collection Tags
       {% endcomment %}
-      {% for product in collection.products %}
 
+      {% if collection.all_tags.size > 0 %}
         {% comment %}
-  Check if the product is on sale and set a variable to be used below.
-{% endcomment %}
-{% assign on_sale = false %}
-{% if product.compare_at_price > product.price %}
-  {% assign on_sale = true %}
-{% endif %}
+          To provide a 'catch-all' link at the top of the list,
+          check against the collection.handle, product type, and vendor.
+        {% endcomment %}
+        <ul class="tags tags--collection">
+          <li{% unless current_tags %} class="tag--active"{% endunless %}>
+            {% comment %}
+              Good for /collections/all collection and regular collections
+            {% endcomment %}
+            {% if collection.handle %}
+              <a href="/collections/{{ collection.handle }}">
+                {{ 'collections.general.all_of_collection' | t }}
+              </a>
 
-{% comment %}
-  Check if the product is sold out and set a variable to be used below.
-{% endcomment %}
-{% assign sold_out = true %}
-{% if product.available %}
-  {% assign sold_out = false %}
-{% endif %}
+            {% comment %}
+              Good for automatic type collections
+            {% endcomment %}
+            {% elsif collection.current_type %}
+              <a href="{{ collection.current_type | url_for_type }}">
+                {{ 'collections.general.all_of_collection' | t }}
+              </a>
 
-<div class="grid__item {{ grid_item_width }}">
+            {% comment %}
+              Good for automatic vendor collections
+            {% endcomment %}
+            {% elsif collection.current_vendor %}
+              <a href="{{ collection.current_vendor | url_for_vendor }}">
+                {{ 'collections.general.all_of_collection' | t }}
+              </a>
+            {% endif %}
+          </li>
 
-  {% comment %}
-    Link to your product with the 'within: collection' filter for the link to be aware of the collection.
-    This allows you to create collection-based navigation on the product page.
-
-    Results of using 'within: collection':
-    - Instead of a URL with /products/product-handle
-      you would get /collections/collection-handle/products/product-handle
-
-    For more info on navigation within a collection
-      - http://docs.shopify.com/support/your-store/collections/how-to-navigate-within-a-collection
-
-  {% endcomment %}
-  <a href="{{ product.url | within: collection }}" class="grid__image">
-    <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
-  </a>
-
-  <p>
-    <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
-  </p>
-  <p>
-    {% comment %}
-      You can show a leading 'from' or 'up to' by checking 'product.price_varies'
-      if your variants have different prices.
-    {% endcomment %}
-    {% if on_sale %}
-      {% if product.price_varies %}
-        {% assign sale_price = product.price | money %}
-        {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
-      {% else %}
-        <strong>{{ 'products.product.on_sale' | t }}</strong>
-        {{ product.price | money }}
+          {% for tag in collection.all_tags %}
+            {% if current_tags contains tag %}
+              <li class="tag--active">
+                {{ tag | link_to_remove_tag: tag }}
+              </li>
+            {% else %}
+              <li>
+                {% comment %}
+                  Use link_to_add_tag if you want to allow filtering
+                  by multiple tags
+                {% endcomment %}
+                {{ tag | link_to_tag: tag }}
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
       {% endif %}
-    {% else %}
-      {% if product.price_varies %}
-        {% assign price = product.price | money %}
-        {{ 'products.general.from_text_html' | t: price: price }}
-      {% else %}
-        {{ product.price | money }}
-      {% endif %}
-    {% endif %}
-    {% if sold_out %}
-      <br><strong>{{ 'products.product.sold_out' | t }}</strong>
-    {% endif %}
-    {% if on_sale %}
-      <br><s>{{ product.compare_at_price | money }}</s>
-    {% endif %}
-  </p>
-
-</div>
-
-
-      {% else %}
-
-        {% if collection.handle == 'all' %}
-
-          {% comment %}
-            Add default products to help with onboarding for collections/all only
-          {% endcomment %}
-          {% unless emptyState %}
-            {{ 'theme-onboarding.css' | global_asset_url | stylesheet_tag }}
-            {% assign emptyState = true %}
-          {% endunless %}
-          {% include 'onboarding-empty-collection' %}
-
-        {% else %}
-
-          {% comment %}
-            If collection exists but is empty, display message
-          {% endcomment %}
-          <div class="grid-item">
-            <p>{{ 'collections.general.no_matches' | t }}</p>
-          </div>
-
-        {% endif %}
-
-      {% endfor %}
-
-    </div>
-
-    {% if paginate.pages > 1 %}
-      <hr>
-      <div class="pagination">
-        {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
-      </div>
-    {% endif %}
-
-  </div>
-
-  <div class="grid__item large--one-quarter">
-    {% include 'collection-sidebar' %}
+    </header>
   </div>
 </div>
 
