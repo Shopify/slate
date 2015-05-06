@@ -8,9 +8,6 @@
 
 {% paginate collection.products by 12 %}
 
-{% comment %}
-  Use .grid--rev so that the collection tags appear below the products on mobile
-{% endcomment %}
 <div class="grid">
   <div class="grid__item">
 
@@ -49,7 +46,6 @@
       {% comment %}
         Collection Tags
       {% endcomment %}
-
       {% if collection.all_tags.size > 0 %}
         {% comment %}
           To provide a 'catch-all' link at the top of the list,
