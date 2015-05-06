@@ -1,0 +1,386 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+
+  <!-- Basic page needs ================================================== -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  {% if settings.favicon_enable %}
+    <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png" />
+  {% endif %}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_primary }}">
+
+  <!-- Title and description ================================================== -->
+  <title>
+  {{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  </title>
+
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  <!-- Social Meta Tags ================================================== -->
+
+  {% comment %}
+    Add Facebook and Pinterest Open Graph meta tags to product pages
+    for friendly Facebook sharing and Pinterest pinning.
+
+    More info Open Graph meta tags
+      - https://developers.facebook.com/docs/opengraph/using-objects/
+      - https://developers.pinterest.com/rich_pins/
+
+    Use the Facebook Open Graph Debugger for validation (and cache clearing)
+      - http://developers.facebook.com/tools/debug
+
+    Validate your Pinterest rich pins
+      - https://developers.pinterest.com/rich_pins/validator/
+  {% endcomment %}
+  {% if template contains 'product' %}
+    <meta property="og:type" content="product">
+    <meta property="og:title" content="{{ product.title | strip_html | escape }}">
+    {% for image in product.images limit:3 %}
+    <meta property="og:image" content="http:{{ image.src | img_url: 'grande' }}">
+    <meta property="og:image:secure_url" content="https:{{ image.src | img_url: 'grande' }}">
+    {% endfor %}
+    <meta property="og:price:amount" content="{{ product.price | money_without_currency | strip_html | escape }}">
+    <meta property="og:price:currency" content="{{ shop.currency }}">
+  {% elsif template contains 'article' %}
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{{ article.title | strip_html | escape }}">
+    {% assign img_tag = '<' | append: 'img' %}
+    {% if article.content contains img_tag %}
+      {% assign src = article.content | split: 'src="' %}
+      {% assign src = src[1] | split: '"' | first | remove: 'https:' | remove: 'http:' %}
+      {% if src %}
+    <meta property="og:image" content="http:{{ src }}">
+    <meta property="og:image:secure_url" content="https:{{ src }}">
+      {% endif %}
+    {% endif %}
+  {% else %}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ page_title | escape }}">
+    {% if settings.logo_use_image %}
+    <meta property="og:image" content="http:{{ 'logo.png' | asset_url }}">
+    <meta property="og:image:secure_url" content="https:{{ 'logo.png' | asset_url }}">
+    {% endif %}
+  {% endif %}
+  {% if page_description %}
+    <meta property="og:description" content="{{ page_description | escape }}">
+  {% endif %}
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:site_name" content="{{ shop.name }}">
+
+  {% comment %}
+    This renders meta data needed to create a Twitter card
+    for products and articles.
+
+    Your cards must be approved by Twitter to be activated
+      - https://dev.twitter.com/docs/cards/validation/validator
+
+    More information:
+     - https://dev.twitter.com/docs/cards/types/product-card
+     - https://dev.twitter.com/docs/cards/types/summary-card
+  {% endcomment %}
+
+  {% comment %}
+    Twitter user name of the site, based on theme settings
+  {% endcomment %}
+  {% if settings.social_twitter_link != blank %}
+    <meta name="twitter:site" content="@{{ settings.social_twitter_link | split: 'twitter.com/' | last }}">
+  {% endif %}
+  {% if template contains 'product' %}
+    <meta name="twitter:card" content="product">
+    <meta name="twitter:title" content="{{ product.title }}">
+    <meta name="twitter:description" content="{{ product.description | strip_html | truncatewords: 140, '' | escape }}">
+    <meta name="twitter:image" content="https:{{ product.featured_image.src | img_url: 'medium' }}">
+    <meta name="twitter:image:width" content="240">
+    <meta name="twitter:image:height" content="240">
+    <meta name="twitter:label1" content="{{ 'products.product.price_label' | t }}">
+    {% assign price = product.price | money_with_currency | strip_html | escape %}
+    <meta name="twitter:data1" content="{% if product.price_varies %}{{ 'products.general.from_text_html' | t: price: price }}{% else %}{{ price }}{% endif %}">
+    {% if product.vendor != blank %}
+    <meta name="twitter:label2" content="{{ 'products.product.brand_label' | t }}Brand">
+    <meta name="twitter:data2" content="{{ product.vendor | escape }}">
+    {% else %}
+    <meta name="twitter:label2" content="{{ 'products.product.availability_label' | t }}Availability">
+    <meta name="twitter:data2" content="{% if product.available %}{{ 'products.product.available' | t }}In stock{% else %}{{ 'products.product.unavailable_html' | t }}{% endif %}">
+    {% endif %}
+  {% elsif template contains 'article' %}
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ article.title }}">
+    <meta name="twitter:description" content="{{ article.excerpt_or_content | strip_html | truncatewords: 140, '' | escape }}">
+    {% comment %}
+      Check if content contains an image to add to the card
+        - Source: http://blog.viralica.com/2013/09/twitter-product-cards-on-shopify/
+    {% endcomment %}
+    {% if article.content contains "<img" %}
+      {% assign src = article.content | split: 'src="' %}
+      {% assign src = src[1] | split: '"' | first | replace: '//cdn', 'http://cdn' | replace: 'http:http://', 'http://' | remove: 'https:' %}
+      {% if src %}
+      <meta property="twitter:image" content="{{ src }}">
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+  <!-- CSS ================================================== -->
+  {{ 'canvas.scss.css' | asset_url | stylesheet_tag }}
+
+  <!-- Header hook for plugins ================================================== -->
+  {{ content_for_header }}
+
+  <!-- Fixes for Older Versions of IE ================================================== -->
+  {% comment %}
+    oldIE fixes/shivs
+    HTML5 shiv, Selectivizer
+    - respond.js Gavin Ballard
+    - http://gavinballard.com/using-respond.js-with-shopify-redux/
+  {% endcomment %}
+  {% assign respond_js_secret_key = shop.domain | md5 %}
+  <!--[if lt IE 9]>
+  {{ '//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js' | script_tag }}
+  {{ 'respond.min.js' | asset_url | script_tag }}
+  <link href="{{ 'respond-proxy.html' | asset_url | split: '?' | first }}" id="respond-proxy" rel="respond-proxy" />
+  <link href="//{{ shop.domain }}/search?q={{ respond_js_secret_key }}" id="respond-redirect" rel="respond-redirect" />
+  <script src="//{{ shop.domain }}/search?q={{ respond_js_secret_key }}" type="text/javascript"></script>
+  <![endif]-->
+
+  {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
+  {{ 'modernizr.min.js' | asset_url | script_tag }}
+
+  {% comment %}
+    If you store has customer accounts disabled, you can remove the following JS file
+  {% endcomment %}
+  {% if template contains 'customers' %}
+    {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+  {% endif %}
+
+</head>
+
+<body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
+  <div id="PageContainer" class="">
+    <header class="site-header" role="banner">
+        <div class="grid">
+          <div class="grid__item">
+            {% comment %}
+              Use the uploaded logo from theme settings if enabled.
+              Site name gets precedence with H1 tag on homepage, div on other pages.
+            {% endcomment %}
+            {% if template == 'index' %}
+
+              <h1 class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
+            {% else %}
+              <div class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
+            {% endif %}
+              {% if settings.logo_use_image %}
+                <a href="/" itemprop="url" class="site-header__logo-link">
+                  <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
+                </a>
+              {% else %}
+                <a href="/" itemprop="url">{{ shop.name }}</a>
+              {% endif %}
+            {% if template == 'index' %}
+              </h1>
+            {% else %}
+              </div>
+            {% endif %}
+          </div>
+          <div class="grid__item">
+            {% comment %}
+              Show number of items in the cart and total cost in the /cart link
+
+              Ajax Cart Notes:
+                - #cartCount updates the total number of items in the cart
+                - #cartCost updates the total cost of the cart
+                - Documentation:  http://shopify.com/timber#ajax-cart
+            {% endcomment %}
+            <div>
+              <a href="/cart" class="site-header__cart" aria-controls="CartDrawer" aria-expanded="false">
+                <span class="icon-fallback-text">
+                  <span class="icon icon-cart" aria-hidden="true"></span>
+                </span>
+                {{ 'layout.cart.title' | t }}
+                (<span id="CartCount">{{ cart.item_count }}</span>
+                {{ 'layout.cart.items_count' | t: count: cart.item_count }}
+                <span id="CartCost">{{ cart.total_price | money }}</span>)
+              </a>
+            </div>
+
+            {% comment %}
+              If customer accounts are enabled, provide login and create account links
+            {% endcomment %}
+            {% if shop.customer_accounts_enabled %}
+              <div>
+                {% if customer %}
+                  {% if customer.first_name != blank %}
+                    {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
+                    {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
+                  {% else %}
+                    <a href="/account">{{ 'layout.customer.account' | t }}</a>
+                  {% endif %}
+                  | {{ 'layout.customer.log_out' | t | customer_logout_link }}
+                {% else %}
+                  {{ 'layout.customer.log_in' | t | customer_login_link }}
+                  {% if shop.customer_accounts_optional %}
+                  | {{ 'layout.customer.create_account' | t | customer_register_link }}
+                  {% endif %}
+                {% endif %}
+              </div>
+            {% endif %}
+
+            <div class="site-header__search">
+              {% comment %}
+
+                Desktop Search Bar
+
+                Note we are using 'input-group' for the layout. Look under Forms > Input Groups for some demos.
+
+                More information:
+                 - http://docs.shopify.com/themes/liquid-variables/search
+
+                To return only products in results:
+                  - http://docs.shopify.com/manual/configuration/store-customization/return-only-product-in-storefront-search-results
+                  - Or manually add type=product to the search URL as a query parameter
+                  - Uncomment hidden input with value="product" below
+
+              {% endcomment %}
+
+              <form action="/search" method="get" class="input-group search-bar" role="search">
+                {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
+                <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" class="input-group-field" aria-label="{{ 'general.search.placeholder' | t }}">
+                <button type="submit" class="icon-fallback-text">
+                  <span class="icon icon-search" aria-hidden="true"></span>
+                  <span class="fallback-text">{{ 'general.search.submit' | t }}</span>
+                </button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="nav-bar" role="navigation">
+          {% comment %}
+            List out your main-menu linklist (default)
+
+            More info on linklists:
+              - http://docs.shopify.com/themes/liquid-variables/linklists
+          {% endcomment %}
+          <!-- begin site-nav -->
+          <ul class="site-nav" id="AccessibleNav">
+            {% for link in linklists.main-menu.links %}
+              {% comment %}
+                Create a dropdown menu by naming a linklist the same as a link in the parent nav
+
+                More info on dropdowns:
+                  - http://docs.shopify.com/manual/your-website/navigation/create-drop-down-menu
+              {% endcomment %}
+              {% assign child_list_handle = link.title | handleize %}
+              {% if linklists[child_list_handle].links != blank %}
+                <li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}" aria-haspopup="true">
+                  <a href="{{ link.url }}" class="site-nav__link">
+                    {{ link.title }}
+                    <span class="icon icon-arrow-down" aria-hidden="true"></span>
+                  </a>
+                  <ul class="site-nav__dropdown">
+                    {% for childlink in linklists[child_list_handle].links %}
+                      <li{% if childlink.active %} class="site-nav--active"{% endif %}>
+                        <a href="{{ childlink.url }}" class="site-nav__link">{{ childlink.title | escape }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </li>
+              {% else %}
+                <li {% if link.active %}class="site-nav--active"{% endif %}>
+                  <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+          <!-- //site-nav -->
+        </div>
+      </div>
+    </nav>
+
+    <main class="wrapper main-content" role="main">
+
+      {{ content_for_layout }}
+
+    </main>
+
+    <!-- begin site-footer -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="grid">
+        {% comment %}
+          Determine whether there are social links.
+          Add an `or` statement for each social link defined in the
+          theme settings.
+        {% endcomment %}
+        {% assign footer_social_enable = false %}
+        {% if
+          settings.social_twitter_link != blank
+          or settings.social_facebook_link != blank
+        %}
+          {% assign footer_social_enable = true %}
+        {% endif %}
+
+        {% comment %}
+          Show any social links that are defined in the settings
+          and have a url associated with them.
+        {% endcomment %}
+        {% if footer_social_enable %}
+          <div class="grid__item">
+              <ul class="site-footer__social-icons">
+                {% if settings.social_twitter_link != blank %}
+                  <li>
+                    <a href="{{ settings.social_twitter_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}">
+                      <span class="icon icon-twitter" aria-hidden="true"></span>
+                      Twitter
+                    </a>
+                  </li>
+                {% endif %}
+                {% if settings.social_facebook_link != blank %}
+                  <li>
+                    <a href="{{ settings.social_facebook_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Facebook' }}">
+                      <span class="icon icon-facebook" aria-hidden="true"></span>
+                      Facebook
+                    </a>
+                  </li>
+                {% endif %}
+              </ul>
+          </div>
+        {% endif %}
+
+        {% comment %}
+          Show Shop Links from footer linklist if it
+          has any links
+        {% endcomment %}
+        {% if linklists.footer.links.size > 0 %}
+          <div class="grid__item">
+            <ul class="site-footer__linklist">
+              {% for link in linklists.footer.links %}
+
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        <div class="grid__item">
+          <small>{{ powered_by_link }}</small>
+        </div>
+      </div>
+    </footer>
+    <!-- //site-footer -->
+  </div>
+</body>
+</html>

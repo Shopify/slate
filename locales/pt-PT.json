@@ -1,0 +1,36 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Etiquetado como \"{{ tags }}\"",
+      "page": "Página {{ page }}"
+    },
+    "search": {
+      "no_results_html": "A sua pesquisa por \"{{ terms }}\" não produziu resultados.",
+      "results_for_html": "A sua pesquisa por \"{{ terms }}\" revelou o seguinte:",
+      "title": "Pesquisar produtos no nosso site",
+      "placeholder": "Pesquisar a nossa loja",
+      "submit": "Pesquisar"
+    }
+  },
+  "layout": {
+    "cart": {
+      "title": "Carrinho de Compras",
+      "items_count": {
+        "one": "item",
+        "other": "itens"
+      }
+    },
+    "customer": {
+      "account": "Conta",
+      "logged_in_as_html": "Sessão iniciada como {{ first_name }}",
+      "log_out": "Terminar sessão",
+      "log_in": "Iniciar sessão",
+      "create_account": "Criar conta"
+    },
+    "footer": {
+      "social_title": "Fique Ligado",
+      "newsletter_title": "Newsletter",
+      "accepted_payments": "Formas de Pagamento Aceites"
+    }
+  }
+}

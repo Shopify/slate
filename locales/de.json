@@ -1,0 +1,36 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Getaggt \"{{ tags }}\"",
+      "page": "Seite {{ page }}"
+    },
+    "search": {
+      "no_results_html": "Ihre Suche nach \"{{ terms }}\" hat keine Ergebnisse hervorgebracht.",
+      "results_for_html": "Ihre Suche nach \"{{ terms }}\" hat folgende Ergebnisse hervorgebracht:",
+      "title": "Suchen Sie auf unserer Seite nach Produkten",
+      "placeholder": "Durchsuchen Sie unseren Shop",
+      "submit": "Suchen"
+    }
+  },
+  "layout": {
+    "cart": {
+      "title": "Einkaufswagen",
+      "items_count": {
+        "one": "Produkt",
+        "other": "Produkte"
+      }
+    },
+    "customer": {
+      "account": "Account",
+      "logged_in_as_html": "Eingeloggt als {{ first_name }}",
+      "log_out": "Ausloggen",
+      "log_in": "Einloggen",
+      "create_account": "Account erstellen"
+    },
+    "footer": {
+      "social_title": "Bleiben Sie auf dem Laufenden",
+      "newsletter_title": "Newsletter",
+      "accepted_payments": "Akzeptierte Zahlungen"
+    }
+  }
+}

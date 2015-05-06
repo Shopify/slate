@@ -1,0 +1,36 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Marcado \"{{ tags }}\"",
+      "page": "Página {{ page }}"
+    },
+    "search": {
+      "no_results_html": "Sua busca por \"{{ terms }}\" não gerou resultados.",
+      "results_for_html": "Sua busca por \"{{ terms }}\" encontrou os itens a seguir:",
+      "title": "Buscar produtos em nosso site",
+      "placeholder": "Busque em nossa loja",
+      "submit": "Buscar"
+    }
+  },
+  "layout": {
+    "cart": {
+      "title": "Carrinho",
+      "items_count": {
+        "one": "item",
+        "other": "itens"
+      }
+    },
+    "customer": {
+      "account": "Conta",
+      "logged_in_as_html": "Conectado(a) como {{ first_name }}",
+      "log_out": "Sair",
+      "log_in": "Entrar",
+      "create_account": "Criar conta"
+    },
+    "footer": {
+      "social_title": "Conecte-se",
+      "newsletter_title": "Informativo",
+      "accepted_payments": "Formas de pagamento"
+    }
+  }
+}
