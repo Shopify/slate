@@ -1,0 +1,70 @@
+<!-- /templates/collection.liquid -->
+{% comment %}
+
+  For more information on collection tags:
+    - http://docs.shopify.com/themes/liquid-variables/collection
+
+{% endcomment %}
+
+{% paginate collection.products by 12 %}
+
+<div class="grid">
+  <div class="grid__item">
+
+    {% comment %}
+      Different markup if a collection description exists
+    {% endcomment %}
+    <header class="section-header">
+      {% if collection.description != blank %}
+        <h1 class="section-header__title">{{ collection.title }}</h1>
+        <div class="rte">
+          {{ collection.description }}
+        </div>
+      {% else %}
+          <h1 class="section-header__title">{{ collection.title }}</h1>
+      {% endif %}
+
+      {% comment %}
+        Collection Sorting Dropdowns
+      {% endcomment %}
+      <div class="section-header__sorting">
+        <label for="SortBy">{{ 'collections.sorting.title' | t }}</label>
+        <select name="SortBy" id="SortBy">
+          <option value="manual">{{ 'collections.sorting.featured' | t }}</option>
+          <option value="best-selling">{{ 'collections.sorting.best_selling' | t }}</option>
+          <option value="title-ascending">{{ 'collections.sorting.az' | t }}</option>
+          <option value="title-descending">{{ 'collections.sorting.za' | t }}</option>
+          <option value="price-ascending">{{ 'collections.sorting.price_ascending' | t }}</option>
+          <option value="price-descending">{{ 'collections.sorting.price_descending' | t }}</option>
+          <option value="created-descending">{{ 'collections.sorting.date_descending' | t }}</option>
+          <option value="created-ascending">{{ 'collections.sorting.date_ascending' | t }}</option>
+        </select>
+      </div>
+
+      {% comment %}
+        Collection Tags
+      {% endcomment %}
+      {% if collection.all_tags.size > 0 %}
+        <ul class="tags section-header__tags">
+          {% for tag in collection.all_tags %}
+            {% if current_tags contains tag %}
+              <li class="tag--active">
+                {{ tag | link_to_remove_tag: tag }}
+              </li>
+            {% else %}
+              <li>
+                {% comment %}
+                  Use link_to_add_tag if you want to allow filtering
+                  by multiple tags
+                {% endcomment %}
+                {{ tag | link_to_tag: tag }}
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </header>
+  </div>
+</div>
+
+{% endpaginate %}
