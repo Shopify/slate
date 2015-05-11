@@ -8,12 +8,6 @@
 {% endcomment %}
 
 {% comment %}
-  Set grid_results to true and set search results as a grid instead of a list.
-  This works well when your search is only for products.
-{% endcomment %}
-{% assign grid_results = false %}
-
-{% comment %}
   Check to enforce respond.js
 {% endcomment %}
 {% assign respond_js_secret_key = shop.domain | md5 %}
@@ -80,109 +74,46 @@
               {% assign sold_out = false %}
             {% endif %}
 
-            {% if grid_results == false %}
-              <!-- begin list search results-->
-              <div class="grid__item">
-                <div class="grid">
-                  {% if item.featured_image %}
-                    {% comment %}
-                      We have a featured_image, so it's likely a product
-                    {% endcomment %}
-                    <div class="grid__item">
-                      <a href="{{ item.url }}" title="{{ item.title | escape }}">
-                        {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
-                      </a>
-                    </div>
-                  {% endif %}
+            <!-- begin grid search results-->
+            <div class="grid__item search-result">
+              {% if item.featured_image %}
+                <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+                  {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
+                </a>
+              {% endif %}
 
-                  {% comment %}
-                    If we don't have a featured_image, add a push-- class to keep the alignment the same
-                  {% endcomment %}
-                  <div class="grid__item">
-                    <h3>{{ item.title | link_to: item.url }}</h3>
+              <h5>{{ item.title | link_to: item.url }}</h5>
 
-                    {% if item.price %}
-                      <p>
-                        {% comment %}
-                          You can show a leading 'from' or 'up to' by checking 'product.price_varies'
-                          if your variants have different prices.
-                        {% endcomment %}
-                        {% if on_sale %}
-                          {% if item.price_varies %}
-                            {% assign sale_price = item.price | money %}
-                            {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
-                          {% else %}
-                            <strong>{{ 'products.product.on_sale' | t }}</strong>
-                            <span itemprop="price">{{ item.price | money }}</span>
-                          {% endif %}
-                        {% else %}
-                          {% if item.price_varies %}
-                            {% assign price = item.price | money %}
-                            <span itemprop="price">{{ 'products.general.from_text_html' | t: price: price }}</span>
-                          {% else %}
-                            <span itemprop="price">{{ item.price | money }}</span>
-                          {% endif %}
-                        {% endif %}
-                        {% if sold_out %}
-                          <br><strong>{{ 'products.product.sold_out' | t }}</strong>
-                        {% endif %}
-                        {% if on_sale %}
-                          <br><s>{{ item.compare_at_price | money }}</s>
-                        {% endif %}
-                      </p>
-                    {% endif %}
-
-                    {% comment %}
-                      Get a brief excerpt of raw text from the page/product
-                    {% endcomment %}
-                    <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
-                  </div>
-                </div>
-                {% unless forloop.last %}<hr>{% endunless %}
-              </div>
-              <!-- //list search results-->
-            {% else %}
-              <!-- begin grid search results-->
-              <div class="grid__item search-result">
-                {% if item.featured_image %}
-                  <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-                    {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
-                  </a>
-                {% endif %}
-
-                <h5>{{ item.title | link_to: item.url }}</h5>
-
-                {% if item.price %}
-                  <p>
-                    {% if on_sale %}
-                      {% if item.price_varies %}
-                        {% assign sale_price = item.price | money %}
-                        {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
-                      {% else %}
-                        <strong>{{ 'products.product.on_sale' | t }}</strong>
-                        <span itemprop="price">{{ item.price | money }}</span>
-                      {% endif %}
+              {% if item.price %}
+                <p>
+                  {% if on_sale %}
+                    {% if item.price_varies %}
+                      {% assign sale_price = item.price | money %}
+                      {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
                     {% else %}
-                      {% if item.price_varies %}
-                        {% assign price = item.price | money %}
-                        <span itemprop="price">{{ 'products.general.from_text_html' | t: price: price }}</span>
-                      {% else %}
-                        <span itemprop="price">{{ item.price | money }}</span>
-                      {% endif %}
+                      <strong>{{ 'products.product.on_sale' | t }}</strong>
+                      <span itemprop="price">{{ item.price | money }}</span>
                     {% endif %}
-                    {% if sold_out %}
-                      <br><strong>{{ 'products.product.sold_out' | t }}</strong>
+                  {% else %}
+                    {% if item.price_varies %}
+                      {% assign price = item.price | money %}
+                      <span itemprop="price">{{ 'products.general.from_text_html' | t: price: price }}</span>
+                    {% else %}
+                      <span itemprop="price">{{ item.price | money }}</span>
                     {% endif %}
-                    {% if on_sale %}
-                      <br><s>{{ item.compare_at_price | money }}</s>
-                    {% endif %}
-                  </p>
-                {% else %}
-                  <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
-                {% endif %}
-              </div>
-              <!-- //grid search results-->
-            {% endif %}
+                  {% endif %}
+                  {% if sold_out %}
+                    <br><strong>{{ 'products.product.sold_out' | t }}</strong>
+                  {% endif %}
+                  {% if on_sale %}
+                    <br><s>{{ item.compare_at_price | money }}</s>
+                  {% endif %}
+                </p>
+              {% else %}
+                <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+              {% endif %}
+            </div>
+            <!-- //grid search results-->
 
           {% endfor %}
         </div>
