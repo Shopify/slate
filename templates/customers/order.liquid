@@ -1,10 +1,11 @@
 <!-- /templates/customers/order.liquid -->
 
-<h1>{{ 'customer.account.title' | t }}</h1>
-
-<p><a href="/account">{{ 'customer.account.return' | t }}</a></p>
-
 <div class="grid">
+
+  <div class="grid__item">
+    <h1>{{ 'customer.account.title' | t }}</h1>
+    <p><a href="/account">{{ 'customer.account.return' | t }}</a></p>
+  </div>
 
   <div class="grid__item">
     <h4>{{ 'customer.order.title' | t: name: order.name }}</h4>
@@ -20,7 +21,7 @@
     {% endif %}
 
     <div class="table-wrap">
-      <table class="full">
+      <table class="table--responsive">
         <thead>
           <tr>
             <th>{{ 'customer.order.product' | t }}</th>
@@ -32,8 +33,8 @@
         </thead>
         <tbody>
           {% for line_item in order.line_items %}
-          <tr id="{{ line_item.id }}">
-            <td>
+          <tr id="{{ line_item.id }}" class="table__section" >
+            <td data-label="{{ 'customer.order.product' | t }}">
               {{ line_item.title | link_to: line_item.product.url }}
               {% if line_item.fulfillment %}
                 <div class="note">
@@ -45,43 +46,43 @@
                 </div>
               {% endif %}
             </td>
-            <td>{{ line_item.sku }}</td>
-            <td>{{ line_item.price | money }}</td>
-            <td>{{ line_item.quantity }}</td>
-            <td>{{ line_item.quantity | times: line_item.price | money }}</td>
+            <td data-label="{{ 'customer.order.sku' | t }}">{{ line_item.sku }}</td>
+            <td data-label="{{ 'customer.order.price' | t }}">{{ line_item.price | money }}</td>
+            <td data-label="{{ 'customer.order.quantity' | t }}">{{ line_item.quantity }}</td>
+            <td >{{ line_item.quantity | times: line_item.price | money }}</td>
           </tr>
           {% endfor %}
         </tbody>
         <tfoot>
           <tr>
             <td colspan="4">{{ 'customer.order.subtotal' | t }}</td>
-            <td>{{ order.subtotal_price | money }}</td>
+            <td data-label="{{ 'customer.order.subtotal' | t }}">{{ order.subtotal_price | money }}</td>
           </tr>
 
           {% for discount in order.discounts %}
             <tr class="order_summary discount">
               <td colspan="4">{{ discount.code }} {{ 'customer.order.discount' | t }}</td>
-              <td>{{ discount.savings | money }}</td>
+              <td data-label="{{ 'customer.order.discount' | t }}">{{ discount.savings | money }}</td>
             </tr>
           {% endfor %}
 
           {% for shipping_method in order.shipping_methods %}
-          <tr>
-            <td colspan="4">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</td>
-            <td>{{ shipping_method.price | money }}</td>
-          </tr>
+            <tr>
+              <td colspan="4">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</td>
+              <td data-label="{{ 'customer.order.shipping' | t }}">{{ shipping_method.price | money }}</td>
+            </tr>
           {% endfor %}
 
           {% for tax_line in order.tax_lines %}
             <tr>
               <td colspan="4">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</td>
-              <td>{{ tax_line.price | money }}</td>
+              <td data-label="{{ 'customer.order.tax' | t }}">{{ tax_line.price | money }}</td>
             </tr>
           {% endfor %}
 
           <tr>
             <td colspan="4"><strong>{{ 'customer.order.total' | t }}</strong></td>
-            <td><strong>{{ order.total_price | money }} {{ order.currency }}</strong></td>
+            <td data-label="{{ 'customer.order.total' | t }}"><strong>{{ order.total_price | money }} {{ order.currency }}</strong></td>
           </tr>
         </tfoot>
       </table>
