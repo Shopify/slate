@@ -1,0 +1,36 @@
+<!-- /templates/customers/register.liquid -->
+
+<div class="grid">
+
+  <div class="grid__item">
+
+    <h1>{{ 'customer.register.title' | t }}</h1>
+
+    <div class="form-vertical">
+      {% form 'create_customer' %}
+
+        {{ form.errors | default_errors }}
+
+        <label for="FirstName" class="hidden-label">{{ 'customer.register.first_name' | t }}</label>
+        <input type="text" name="customer[first_name]" id="FirstName" placeholder="{{ 'customer.register.first_name' | t }}" {% if form.first_name %}value="{{ form.first_name }}"{% endif %} autocapitalize="words" autofocus>
+
+        <label for="LastName" class="hidden-label">{{ 'customer.register.last_name' | t }}</label>
+        <input type="text" name="customer[last_name]" id="LastName" placeholder="{{ 'customer.register.last_name' | t }}" {% if form.last_name %}value="{{ form.last_name }}"{% endif %} autocapitalize="words">
+
+        <label for="Email" class="hidden-label">{{ 'customer.register.email' | t }}</label>
+        <input type="email" name="customer[email]" id="Email" class="{% if form.errors contains 'email' %} error{% endif %}" placeholder="{{ 'customer.register.email' | t }}" {% if form.email %} value="{{ form.email }}"{% endif %} autocorrect="off" autocapitalize="off">
+
+        <label for="CreatePassword" class="hidden-label">{{ 'customer.register.password' | t }}</label>
+        <input type="password" name="customer[password]" id="CreatePassword" class="{% if form.errors contains 'password' %} error{% endif %}" placeholder="{{ 'customer.register.password' | t }}">
+
+        <p>
+          <input type="submit" value="{{ 'customer.register.submit' | t }}" class="btn">
+        </p>
+        <a href="{{ shop.url }}">{{ 'customer.register.cancel' | t }}</a>
+
+      {% endform %}
+    </div>
+
+  </div>
+
+</div>
