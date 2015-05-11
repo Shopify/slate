@@ -14,7 +14,7 @@
 
   <div class="grid__item">
     <header class="section-header">
-      <h1 class="section-header__title">{{ 'customer.account.title' | t }}</h1>
+      <h1>{{ 'customer.account.title' | t }}</h1>
       <a href="#" class="btn" onclick="Shopify.CustomerAddress.toggleNewForm(); return false;">{{ 'customer.addresses.add_new' | t }}</a>
     </header>
   </div>
@@ -80,12 +80,12 @@
             <select id="AddressProvinceNew" name="address[province]" data-default="{{ form.province }}"></select>
           </div>
 
-          <div class="grid__item large--one-half">
+          <div class="grid__item">
             <label for="AddressZipNew">{{ 'customer.addresses.zip' | t }}</label>
             <input type="text" id="AddressZipNew" name="address[zip]" value="{{ form.zip }}" autocapitalize="characters">
           </div>
 
-          <div class="grid__item large--one-half">
+          <div class="grid__item">
             <label for="AddressPhoneNew">{{ 'customer.addresses.phone' | t }}</label>
             <input type="tel" id="AddressPhoneNew" name="address[phone]" value="{{ form.phone }}">
           </div>
@@ -141,12 +141,12 @@
               <h4>{{ 'customer.addresses.edit_address' | t }}</h4>
 
               <div class="grid">
-                <div class="grid__item one-half small--one-whole">
+                <div class="grid__item">
                   <label for="AddressFirstName_{{ form.id }}">{{ 'customer.addresses.first_name' | t }}</label>
                   <input type="text" id="AddressFirstName_{{ form.id }}" name="address[first_name]" value="{{ form.first_name }}" autocapitalize="words">
                 </div>
 
-                <div class="grid__item one-half small--one-whole">
+                <div class="grid__item">
                   <label for="AddressLastName_{{ form.id }}">{{ 'customer.addresses.last_name' | t }}</label>
                   <input type="text" id="AddressLastName_{{ form.id }}" name="address[last_name]" value="{{ form.last_name }}" autocapitalize="words">
                 </div>
