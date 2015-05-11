@@ -1,14 +1,11 @@
 <!-- /templates/customers/activate_account.liquid -->
 
 <div class="grid">
-  <div class="grid__item">
-
-    <h1>{{ 'customer.activate_account.title' | t }}</h1>
+  <div class="section-header">
+    <h1 class="section-header__title">{{ 'customer.activate_account.title' | t }}</h1>
     <p>{{ 'customer.activate_account.subtext' | t }}</p>
-
-    {% comment %}
-      This form must use 'activate_customer_password'
-    {% endcomment %}
+  </div>
+  <div class="grid__item">
     <div class="form-vertical">
       {% form 'activate_customer_password' %}
 
@@ -20,10 +17,9 @@
         <label for="CustomerPasswordConfirmation" class="hidden-label">{{ 'customer.activate_account.password_confirm' | t }}</label>
         <input type="password" value="" name="customer[password_confirmation]" id="CustomerPasswordConfirmation" placeholder="{{ 'customer.activate_account.password_confirm' | t }}">
 
-        <input type="submit" class="btn btn--full" value="{{ 'customer.activate_account.submit' | t }}">
+        <input type="submit" class="btn" value="{{ 'customer.activate_account.submit' | t }}">
         <input type="submit" class="btn" name="decline" value="{{ 'customer.activate_account.cancel' | t }}">
       {% endform %}
     </div>
-
   </div>
 </div>
