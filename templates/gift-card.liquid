@@ -27,11 +27,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="format-detection" content="telephone=no">
 
-  {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
-  {{ 'gift-card.scss.css' | asset_url | stylesheet_tag }}
   {{ 'modernizr.gift-card.js' | shopify_asset_url | script_tag }}
-  {{ 'vendor/qrcode.js' | shopify_asset_url | script_tag }}
-
 </head>
 
 <body>
@@ -56,7 +52,7 @@
         <div class="giftcard__content">
 
           <div class="giftcard__header">
-            <h2 class="giftcard__title">{{ 'gift_cards.issued.subtext' | t }}</h2>
+            <h1 class="giftcard__title">{{ 'gift_cards.issued.subtext' | t }}</h1>
             {% unless gift_card.enabled %}
               <span class="giftcard__tag">{{ 'gift_cards.issued.disabled' | t }}</span>
             {% endunless %}
@@ -73,7 +69,7 @@
             <img src="{{ 'gift-card/card.jpg' | shopify_asset_url }}" alt="Gift card illustration">
 
             {% assign initial_value_size = formatted_initial_value | size %}
-            <div class="h1 giftcard__amount">
+            <div class="giftcard__amount">
               {% if gift_card.balance != gift_card.initial_value %}
                 <span class="tooltip">
                   <span class="tooltip__label">{{ gift_card.balance | money }}<small>{{ 'gift_cards.balance' | t }}</small></span>
@@ -83,7 +79,7 @@
             </div>
 
             {% assign code_size = gift_card.code | format_code | size %}
-            <div class="giftcard__code" onclick="selectText('GiftCardDigits');">
+            <div class="giftcard__code">
               <div class="giftcard__code__inner">
                 <strong class="giftcard__code__text" id="GiftCardDigits">{{ gift_card.code | format_code }}</strong>
               </div>
@@ -96,11 +92,6 @@
 
           <div id="QrCode"></div>
           <script>
-            new QRCode(document.getElementById('QrCode'), {
-              text: "{{ gift_card.qr_identifier }}",
-              width: 100,
-              height: 100
-            });
           </script>
 
           <div class="giftcard__actions">
@@ -120,27 +111,14 @@
 
   </div>
 
-  <script type="text/javascript">
-    /*============================================================================
-      Auto-select gift card code on click, based on ID passed to the function
-        - Use a different method depending on IE or others
-    ==============================================================================*/
-    function selectText(element) {
-      var doc = document,
-          text = doc.getElementById(element);
+  {{ 'vendor/qrcode.js' | shopify_asset_url | script_tag }}
 
-      if (doc.body.createTextRange) { // ms
-        var range = doc.body.createTextRange();
-        range.moveToElementText(text);
-        range.select();
-      } else if (window.getSelection) { // moz, opera, webkit
-        var selection = window.getSelection(),
-            range = doc.createRange();
-        range.selectNodeContents(text);
-        selection.removeAllRanges();
-        selection.addRange(range);
-      }
-    }
+  <script type="text/javascript">
+    new QRCode(document.getElementById('QrCode'), {
+      text: "{{ gift_card.qr_identifier }}",
+      width: 100,
+      height: 100
+    });
   </script>
 
 </body>
