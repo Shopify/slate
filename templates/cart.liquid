@@ -90,7 +90,8 @@
           </tr>
         {% endfor %}
       </tbody>
-      <div class="grid cart__row">
+    </table>
+    <div class="grid cart__row">
       {% if settings.cart_notes_enable %}
         <div class="grid__item">
           <label for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>
@@ -107,7 +108,6 @@
         <input type="submit" name="checkout" class="btn" value="{{ 'cart.general.checkout' | t }}">
       </div>
     </div>
-    </table>
   </form>
 {% else %}
   {% comment %}
