@@ -105,10 +105,6 @@
           <p><em>{{ 'cart.general.shipping_at_checkout' | t }}</em></p>
           <input type="submit" name="update" class="btn update-cart" value="{{ 'cart.general.update' | t }}">
           <input type="submit" name="checkout" class="btn" value="{{ 'cart.general.checkout' | t }}">
-
-          {% if additional_checkout_buttons %}
-            <div>{{ content_for_additional_checkout_buttons }}</div>
-          {% endif %}
         </td>
       </tfoot>
     </table>
