@@ -35,7 +35,6 @@
                 {{ item.product.title }}
               </a>
               {% unless item.variant.title contains 'Default' %}
-                <br>
                 <small>{{ item.variant.title }}</small>
               {% endunless %}
 
@@ -67,7 +66,6 @@
                       {{ p.last }}
                     {% endif %}
 
-                    <br>
                   {% endunless %}
                 {% endfor %}
               {% endif %}
