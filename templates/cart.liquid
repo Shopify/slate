@@ -90,23 +90,23 @@
           </tr>
         {% endfor %}
       </tbody>
-      <tfoot class="cart__row">
-        {% if settings.cart_notes_enable %}
-          <td colspan="2">
-            <label for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>
-            <textarea name="note" id="CartSpecialInstructions">{{ cart.note }}</textarea>
-          </td>
-        {% endif %}
-        <td colspan="{% if settings.cart_notes_enable %}3{% else %}5{% endif %}">
-          <p>
-            <span class="cart__subtotal-title">{{ 'cart.general.subtotal' | t }}</span>
-            <span class="cart__subtotal">{{ cart.total_price | money }}</span>
-          </p>
-          <p><em>{{ 'cart.general.shipping_at_checkout' | t }}</em></p>
-          <input type="submit" name="update" class="btn update-cart" value="{{ 'cart.general.update' | t }}">
-          <input type="submit" name="checkout" class="btn" value="{{ 'cart.general.checkout' | t }}">
-        </td>
-      </tfoot>
+      <div class="grid cart__row">
+      {% if settings.cart_notes_enable %}
+        <div class="grid__item">
+          <label for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>
+          <textarea name="note" class="input-full" id="CartSpecialInstructions">{{ cart.note }}</textarea>
+        </div>
+      {% endif %}
+      <div class="grid__item">
+        <p>
+          <span class="cart__subtotal-title">{{ 'cart.general.subtotal' | t }}</span>
+          <span class="h3 cart__subtotal">{{ cart.total_price | money }}</span>
+        </p>
+        <p><em>{{ 'cart.general.shipping_at_checkout' | t }}</em></p>
+        <input type="submit" name="update" class="btn--secondary update-cart" value="{{ 'cart.general.update' | t }}">
+        <input type="submit" name="checkout" class="btn" value="{{ 'cart.general.checkout' | t }}">
+      </div>
+    </div>
     </table>
   </form>
 {% else %}
