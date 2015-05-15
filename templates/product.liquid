@@ -150,9 +150,7 @@
           <a target="_blank" href="http://pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media={{ product.featured_image | product_img_url: '1024x1024' }}&amp;description={{ shareTitle }}" class="share-pinterest">
             <span class="icon icon-pinterest" aria-hidden="true"></span>
             <span class="share-title">{{ 'general.social.share_on_pinterest' | t }}</span>
-            {% if settings.social_sharing_count %}
-              <span class="share-count">0</span>
-            {% endif %}
+            <span class="share-count">0</span>
           </a>
         {% endif %}
 
