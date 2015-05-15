@@ -49,6 +49,47 @@
       </ul>
     {% endif %}
 
+    {% comment %}
+
+      Use with theme settings:
+      {% if settings.social_sharing_blog or settings.social_sharing_products %}
+        {% include 'social-sharing' %}
+      {% endif %}
+
+    {% endcomment %}
+    {% capture permalinkURL %}{{ shop.url }}{{ product.url }}{% endcapture %}
+    {% capture shareTitle %}{{ article.title | url_param_escape }}{% endcapture %}
+
+
+    <div class="social-sharing" data-permalink="{{ permalinkURL }}">
+
+      {% if settings.share_facebook %}
+        <a target="_blank" href="//www.facebook.com/sharer.php?u={{ permalinkURL }}" class="share-facebook">
+          <span class="icon icon-facebook" aria-hidden="true"></span>
+          <span class="share-title">{{ 'general.social.share_on_facebook' | t }}</span>
+          <span class="share-count">0</span>
+        </a>
+      {% endif %}
+
+      {% if settings.share_twitter %}
+        <a target="_blank" href="//twitter.com/share?url={{ permalinkURL }}&amp;text={{ shareTitle }}" class="share-twitter">
+          <span class="icon icon-twitter" aria-hidden="true"></span>
+          <span class="share-title">{{ 'general.social.share_on_twitter' | t }}</span>
+          <span class="share-count">0</span>
+        </a>
+      {% endif %}
+
+      {% if settings.share_google %}
+        <a target="_blank" href="//plus.google.com/share?url={{ permalinkURL }}" class="share-google">
+          <!-- Cannot get Google+ share count with JS yet -->
+          <span class="icon icon-google" aria-hidden="true"></span>
+          <span class="share-count">+1</span>
+        </a>
+      {% endif %}
+
+    </div>
+
+
 
     {% if blog.comments_enabled? %}
       <h3>{{ 'blogs.comments.comments_with_count' | t: count: number_of_comments }}</h3>
