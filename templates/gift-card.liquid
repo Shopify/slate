@@ -66,7 +66,7 @@
           </div>
 
           <div class="giftcard__wrap">
-            <img src="{{ 'gift-card/card.jpg' | shopify_asset_url }}" alt="Gift card illustration">
+            <img src="{{ 'gift-card/card.jpg' | shopify_asset_url }}" alt="{{ 'gift_cards.card_image' | t }}">
 
             {% assign initial_value_size = formatted_initial_value | size %}
             <div class="giftcard__amount">
@@ -91,8 +91,6 @@
           </p>
 
           <div id="QrCode"></div>
-          <script>
-          </script>
 
           <div class="giftcard__actions">
             <a href="{{ shop.url }}" class="btn" target="_blank">{{ 'gift_cards.issued.shop_link' | t }}</a>
