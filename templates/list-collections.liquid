@@ -1,0 +1,45 @@
+<!-- /templates/list-collections.liquid -->
+{% comment %}
+
+  This page represents the /collections and /products pages.
+
+  More info:
+    - http://docs.shopify.com/manual/configuration/store-customization/taking-control-of-collections-listing
+
+{% endcomment %}
+
+
+{% comment %}
+  Loop through each collection, except 'frontpage'
+{% endcomment %}
+
+<div class="grid">
+  <div class="grid__item">
+    <div class="section-header">
+      <h1 class="section-header__title">{{ collection.title | escape }}</h1>
+      <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">More {{ collection.title | escape }} &rsaquo;</a>
+    </div>
+  </div>
+  <div class="grid__item">
+    <div class="grid">
+      {% for collection in collections %}
+        {% unless collection.handle == 'frontpage' %}
+
+          <div class="grid__item collection-item">
+            <div class="collection-item__image">
+              {% if collection.image %}
+                {{ collection.image | img_url: medium | img_tag: collection.title }}
+              {% else %}
+                {{ collection.products.first.featured_image | img_url: medium | img_tag: collection.title }}
+              {% endif %}
+            </div>
+            <div class="collection-item__title">
+              <h2>{{ collection.title }}</h2>
+            </div>
+          </div>
+
+        {% endunless %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
