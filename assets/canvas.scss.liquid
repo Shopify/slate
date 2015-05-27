@@ -18,7 +18,9 @@
   Table of Contents
 
   #Normalize
-  #General Variables
+  #Color Variables
+  #Sizing Variables
+  #Z-Index
   #Basic Styles
   #Typography
   #Rich Text Editor
@@ -167,3 +169,72 @@ textarea {
 [tabindex='-1']:focus {
   outline: none;
 }
+
+/*============================================================================
+  #Color Variables
+==============================================================================*/
+
+// Colors
+$colorPrimary: {{ settings.color_primary }};
+$colorSecondary: {{ settings.color_secondary }};
+
+// Button colors
+$colorBtnPrimary: $colorPrimary;
+$colorBtnPrimaryHover: darken($colorBtnPrimary, 10%);
+$colorBtnPrimaryActive: darken($colorBtnPrimaryHover, 10%);
+$colorBtnPrimaryText: #fff;
+
+$colorBtnSecondary: $colorSecondary;
+$colorBtnSecondaryHover: darken($colorBtnSecondary, 10%);
+$colorBtnSecondaryActive: darken($colorBtnSecondaryHover, 10%);
+$colorBtnSecondaryText: #fff;
+
+// Text link colors
+$colorLink: $colorPrimary;
+$colorLinkHover: lighten($colorPrimary, 15%);
+
+// Text colors
+$colorTextBody: {{ settings.color_body_text }};
+
+// Backgrounds
+$colorBody: {{ settings.color_body_bg }};
+
+// Border colors
+$colorBorder: {{ settings.color_borders }};
+
+
+// Helper colors
+$disabledGrey: #f6f6f6;
+$disabledBorder: darken($disabledGrey, 25%);
+$errorRed: #d02e2e;
+$errorRedBg: #fff6f6;
+$successGreen: #56ad6a;
+$successGreenBg: #ecfef0;
+
+/*============================================================================
+  #Sizing Variables
+==============================================================================*/
+
+// Sizing variables
+$siteWidth: 1180px;
+$gutter: 30px;
+$gridGutter: 30px; // can be a %, but nested grids will have smaller margins because of it
+$radius: 3px;
+
+
+/*============================================================================
+  #Z-Index
+==============================================================================*/
+$zindex1 : 1;
+$zindex2 : 2;
+$zindex3 : 3;
+$zindex4 : 4;
+$zindex5 : 5;
+$zindex6 : 6;
+$zindex7 : 7;
+$zindex8 : 8;
+$zindex9 : 9;
+$zindex10 : 10;
+
+
+
