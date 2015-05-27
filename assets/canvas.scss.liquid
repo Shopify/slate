@@ -18,7 +18,9 @@
   Table of Contents
 
   #Normalize
-  #General Variables
+  #Color Variables
+  #Sizing Variables
+  #Z-Index
   #Mixins and Functions
   #Helper Classes
   #Basic Styles
@@ -163,6 +165,62 @@ textarea {
 [tabindex='-1']:focus {
   outline: none;
 }
+
+/*============================================================================
+  #Color Variables
+==============================================================================*/
+
+// Colors
+$color-primary: {{ settings.color_primary }};
+$color-secondary: {{ settings.color_secondary }};
+
+// Button colors
+$color-btn-primary: $color-primary;
+$color-btn-primary-hover: darken($colorBtnPrimary, 10%);
+$color-btn-primary-active: darken($color-btn-primary-hover, 10%);
+$color-btn-primary-text: #fff;
+
+$color-btn-secondary: $color-secondary;
+$color-btn-secondary-hover: darken($color-btn-secondary, 10%);
+$color-btn-secondary-active: darken($color-btn-secondary-hover, 10%);
+$color-btn-secondary-text: #fff;
+
+// Text link colors
+$color-link: $color-primary;
+$color-link-hover: lighten($color-primary, 15%);
+
+// Text colors
+$color-text-body: {{ settings.color_body_text }};
+
+// Backgrounds
+$color-body: {{ settings.color_body_bg }};
+
+// Border colors
+$color-border: {{ settings.color_borders }};
+
+
+// Helper colors for form error states
+// $disabled-grey: ;
+// $disabled-border: ;
+// $error-red: ;
+// $error-red-bg: ;
+// $success-green: ;
+// $success-green-bg: ;
+
+/*============================================================================
+  #Sizing Variables
+==============================================================================*/
+
+// Sizing variables
+$site-width: 1180px;
+$grid-gutter: 30px;
+
+
+/*============================================================================
+  #Z-Index
+==============================================================================*/
+$z-index-dropdown : 2;
+
 
 /*============================================================================
   #Mixins and Functions
