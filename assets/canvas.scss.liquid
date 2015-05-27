@@ -119,6 +119,8 @@ textarea {
   color: inherit; // 1
   font: inherit; // 2
   margin: 0; // 3
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
 }
 
 // Re-set default cursor for disabled elements.
@@ -158,4 +160,10 @@ th {
 // Remove default vertical scrollbar in IE 8/9/10/11.
 textarea {
   overflow: auto;
+}
+
+// hide outline on focus for elements which are given
+// focus by javascript
+[tabindex='-1']:focus {
+  outline: none;
 }
