@@ -8,7 +8,7 @@
   </div>
 
   <div class="grid__item">
-    <h4>{{ 'customer.order.title' | t: name: order.name }}</h4>
+    <h2>{{ 'customer.order.title' | t: name: order.name }}</h2>
 
     <p>{{ 'customer.order.date' | t: date: order.created_at | date: "%B %d, %Y %I:%M%p" }}</p>
 
@@ -92,11 +92,11 @@
 
   <div class="grid__item">
 
-    <h4>{{ 'customer.order.billing_address' | t }}</h4>
+    <h3>{{ 'customer.order.billing_address' | t }}</h3>
 
     <p><strong>{{ 'customer.order.payment_status' | t }}:</strong> {{ order.financial_status_label }}</p>
 
-    <h5>{{ order.billing_address.name }}</h5>
+    <h4>{{ order.billing_address.name }}</h4>
     <p>
       {% if order.billing_address.company != '' %}
         {{ order.billing_address.company }}<br>
@@ -111,11 +111,11 @@
       {{ order.billing_address.phone }}
     </p>
 
-    <h4>{{ 'customer.order.shipping_address' | t }}</h4>
+    <h3>{{ 'customer.order.shipping_address' | t }}</h3>
 
     <p><strong>{{ 'customer.order.fulfillment_status' | t }}:</strong> {{ order.fulfillment_status_label }}</p>
 
-    <h5>{{ order.shipping_address.name }}</h5>
+    <h4>{{ order.shipping_address.name }}</h4>
     <p>
       {% if order.shipping_address.company != '' %}
         {{ order.shipping_address.company }}<br>

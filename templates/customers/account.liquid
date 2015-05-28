@@ -10,7 +10,7 @@
 
 <div class="grid">
   <div class="grid__item">
-    <h4>{{ 'customer.orders.title' | t }}</h4>
+    <h2>{{ 'customer.orders.title' | t }}</h2>
 
     {% comment %}
       If we have past orders, loop through each one
@@ -52,7 +52,6 @@
 
       {% endif %}
       {% if paginate.pages > 1 %}
-        <hr>
         <div class="pagination">
           {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
         </div>
@@ -61,9 +60,9 @@
   </div>
 
   <div class="grid__item">
-    <h4>{{ 'customer.account.details' | t }}</h4>
+    <h3>{{ 'customer.account.details' | t }}</h3>
 
-    <h5>{{ customer.name }}</h5>
+    <h4>{{ customer.name }}</h4>
 
     {% if customer.default_address != nil %}
       <p>
