@@ -103,10 +103,10 @@
                     {% endif %}
                   {% endif %}
                   {% if sold_out %}
-                    <br><strong>{{ 'products.product.sold_out' | t }}</strong>
+                    <strong>{{ 'products.product.sold_out' | t }}</strong>
                   {% endif %}
                   {% if on_sale %}
-                    <br><s>{{ item.compare_at_price | money }}</s>
+                    <s>{{ item.compare_at_price | money }}</s>
                   {% endif %}
                 </p>
               {% else %}

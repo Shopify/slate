@@ -36,7 +36,7 @@
                 </a>
 
                 <p>
-                  <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ collection.title }}</a><br>
+                  <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ collection.title }}</a>
                   {{ 'collections.general.items_with_count' | t: count: collection.all_products_count }}
                 </p>
               </div>
@@ -75,7 +75,7 @@
                       {{ imageUrl | img_tag }}
                     </a>
                     <p>
-                      <a href="#">{{ 'homepage.onboarding.collection_title' | t }}</a><br>
+                      <a href="#">{{ 'homepage.onboarding.collection_title' | t }}</a>
                       {{ 'collections.general.items_with_count' | t: count: i }}
                     </p>
                   </div>
@@ -158,10 +158,10 @@
               {% endif %}
             {% endif %}
             {% if sold_out %}
-              <br><strong>{{ 'products.product.sold_out' | t }}</strong>
+              <strong>{{ 'products.product.sold_out' | t }}</strong>
             {% endif %}
             {% if on_sale %}
-              <br><s>{{ product.compare_at_price | money }}</s>
+              <s>{{ product.compare_at_price | money }}</s>
             {% endif %}
           </p>
         </div>

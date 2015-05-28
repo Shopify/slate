@@ -99,36 +99,36 @@
     <p>{{ order.billing_address.name }}</p>
     <p>
       {% if order.billing_address.company != '' %}
-        {{ order.billing_address.company }}<br>
+        <p>{{ order.billing_address.company }}</p>
       {% endif %}
-      {{ order.billing_address.street }}<br>
-      {{ order.billing_address.city }}<br>
+      <p>{{ order.billing_address.street }}</p>
+      <p>{{ order.billing_address.city }}</p>
       {% if order.billing_address.province != '' %}
-        {{ order.billing_address.province }}<br>
+        <p>{{ order.billing_address.province }}</p>
       {% endif %}
-      {{ order.billing_address.zip | upcase }}<br>
-      {{ order.billing_address.country }}<br>
-      {{ order.billing_address.phone }}
-    </p>
+      <p>{{ order.billing_address.zip | upcase }}</p>
+      <p>{{ order.billing_address.country }}</p>
+      <p>{{ order.billing_address.phone }}</p>
+    </div>
 
     <h3>{{ 'customer.order.shipping_address' | t }}</h3>
 
     <p><strong>{{ 'customer.order.fulfillment_status' | t }}:</strong> {{ order.fulfillment_status_label }}</p>
 
-    <p>{{ order.shipping_address.name }}</h4>
-    <p>
+    <p>{{ order.shipping_address.name }}</p>
+    <div>
       {% if order.shipping_address.company != '' %}
-        {{ order.shipping_address.company }}<br>
+        <p>{{ order.shipping_address.company }}</p>
       {% endif %}
-      {{ order.shipping_address.street }}<br>
-      {{ order.shipping_address.city }}<br>
+      <p>{{ order.shipping_address.street }}</p>
+      <p>{{ order.shipping_address.city }}</p>
       {% if order.shipping_address.province != '' %}
-        {{ order.shipping_address.province }}<br>
+        <p>{{ order.shipping_address.province }}</p>
       {% endif %}
-      {{ order.shipping_address.zip | upcase }}<br>
-      {{ order.shipping_address.country }}<br>
-      {{ order.shipping_address.phone }}
-    </p>
+      <p>{{ order.shipping_address.zip | upcase }}</p>
+      <p>{{ order.shipping_address.country }}</p>
+      <p>{{ order.shipping_address.phone }}</p>
+    </div>
 
   </div>
 

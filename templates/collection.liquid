@@ -11,10 +11,10 @@
 <div class="grid">
   <div class="grid__item">
 
-    {% comment %}
-      Different markup if a collection description exists
-    {% endcomment %}
     <header class="section-header">
+      {% comment %}
+        Different markup if a collection description exists
+      {% endcomment %}
       {% if collection.description != blank %}
         <h1 class="section-header__title">{{ collection.title }}</h1>
         <div class="rte">
@@ -68,6 +68,8 @@
 
   <div class="grid__item">
     {% comment %}
+      TODO: update '.grid-uniform' comment once grid is in place
+
       Use class grid-uniform to have evenly sized columns clear
       each other properly at each breakpoint.
     {% endcomment %}
@@ -80,7 +82,7 @@
       {% for product in collection.products %}
 
         {% comment %}
-          Check if the product is on sale and set a variable to be used below.
+          Check if the product is on sale.
         {% endcomment %}
         {% assign on_sale = false %}
         {% if product.compare_at_price > product.price %}
@@ -88,7 +90,7 @@
         {% endif %}
 
         {% comment %}
-          Check if the product is sold out and set a variable to be used below.
+          Check if the product is sold out.
         {% endcomment %}
         {% assign sold_out = true %}
         {% if product.available %}
@@ -137,10 +139,10 @@
               {% endif %}
             {% endif %}
             {% if sold_out %}
-              <br><strong>{{ 'products.product.sold_out' | t }}</strong>
+              <strong>{{ 'products.product.sold_out' | t }}</strong>
             {% endif %}
             {% if on_sale %}
-              <br><s>{{ product.compare_at_price | money }}</s>
+              <s>{{ product.compare_at_price | money }}</s>
             {% endif %}
           </p>
         </div>
