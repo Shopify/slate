@@ -125,6 +125,11 @@ textarea {
   -webkit-text-size-adjust: 100%;
 }
 
+//allow text to overflow on buttons
+button {
+  overflow: visible;
+}
+
 // Re-set default cursor for disabled elements.
 button[disabled],
 html input[disabled] {
@@ -180,18 +185,18 @@ $color-secondary: {{ settings.color_secondary }};
 
 // Button colors
 $color-btn-primary: $color-primary;
-$color-btn-primary-hover: darken($colorBtnPrimary, 10%);
+$color-btn-primary-hover: darken($color-btn-primary, 10%);
 $color-btn-primary-active: darken($color-btn-primary-hover, 10%);
 $color-btn-primary-text: #fff;
 
 $color-btn-secondary: $color-secondary;
-$color-btn-secondary-hover: darken($color-btn-secondary, 10%);
-$color-btn-secondary-active: darken($color-btn-secondary-hover, 10%);
-$color-btn-secondary-text: #fff;
+$color-hover-btn-secondary: darken($color-btn-secondary, 10%);
+$color-active-btn-secondary: darken($color-hover-btn-secondary, 10%);
+$color-text-btn-secondary: #fff;
 
 // Text link colors
 $color-link: $color-primary;
-$color-link-hover: lighten($color-primary, 15%);
+$color-hover-link: lighten($color-primary, 15%);
 
 // Text colors
 $color-text-body: {{ settings.color_body_text }};
@@ -204,12 +209,12 @@ $color-border: {{ settings.color_borders }};
 
 
 // Helper colors for form error states
-// $disabled-grey: ;
-// $disabled-border: ;
-// $error-red: ;
-// $error-red-bg: ;
-// $success-green: ;
-// $success-green-bg: ;
+// $color-disabled: ;
+// $color-border-disabled: ;
+// $color-error: ;
+// $color-bg-error: ;
+// $color-success: ;
+// $color-bg-success: ;
 
 
 /*============================================================================
@@ -355,6 +360,7 @@ $z-index-dropdown : 2;
 }
 
 /*============================================================================
+<<<<<<< HEAD
   #Lists
 ==============================================================================*/
 
@@ -528,6 +534,95 @@ hr {
   //
   // You must target elements and not
   // `.classes` or `#IDs` since the HTML is automatically generated without
+=======
+  #Links and Buttons
+==============================================================================*/
+a {
+  color: $color-link;
+}
+
+
+a:hover,
+a:focus {
+  color: $color-hover-link;
+}
+
+/*================ Force an input/button to look like a text link ================*/
+.text-link {
+  @extend a;
+
+  display: inline;
+  border: 0 none;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+.btn,
+.rte .btn,
+.btn-link {
+  display: inline-block;
+  width: auto;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid transparent;
+  @include prefix('user-select', 'none', 'webkit moz ms');
+  @include prefix('appearance', 'none', 'webkit moz');
+
+  // Set primary button colors - can override later
+  background-color: $color-btn-primary;
+  color: $color-text-btn-primary;
+
+  &:hover {
+    background-color: $color-hover-btn-primary;
+    color: $color-text-btn-primary;
+  }
+
+  &:active,
+  &:focus {
+   background-color: $color-active-btn-primary;
+   color: $color-text-btn-primary;
+  }
+
+  &[disabled],
+  &.disabled {
+    cursor: default;
+    color: $color-border-disabled;
+    background-color: $color-disabled;
+  }
+}
+
+.btn--secondary,
+.rte .btn--secondary {
+  @extend .btn;
+  background-color: $color-btn-secondary;
+
+  &:hover {
+    background-color: $color-hover-btn-secondary;
+    color: $color-text-btn-secondary;
+  }
+
+  &:active,
+  &:focus {
+   background-color: $color-active-btn-secondary;
+   color: $color-text-btn-secondary;
+  }
+}
+
+.btn--small {
+  font-size: em(12px);
+}
+
+.btn--large {
+  font-size: em(16px);
+}
+
+.btn--full {
+  width: 100%;
+>>>>>>> added buttons
 }
 
 // allow table to scroll for tables in the RTE since we don't know
