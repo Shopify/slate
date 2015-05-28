@@ -20,6 +20,7 @@
   #Normalize
   #Color Variables
   #Sizing Variables
+  #Typography Variables
   #Z-Index
   #Mixins and Functions
   #Helper Classes
@@ -207,14 +208,37 @@ $color-border: {{ settings.color_borders }};
 // $success-green: ;
 // $success-green-bg: ;
 
+
 /*============================================================================
   #Sizing Variables
 ==============================================================================*/
 
 // Sizing variables
-$site-width: 1180px;
-$grid-gutter: 30px;
+$width-site: 1180px;
+$gutter-site: 30px;
+$gutter-grid: 30px;
 
+/*============================================================================
+  #Typography Variables
+==============================================================================*/
+
+$font-stack-header: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-weight-header: 700;
+
+$font-stack-body: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-size-base: 14px; // Henseforth known as 1em
+
+@font-face {
+  font-family: 'icons';
+  src: url('{{ "icons.eot" | asset_url }}');
+  src: url('{{ "icons.eot" | asset_url }}#iefix') format("embedded-opentype"),
+       url('{{ "icons.woff" | asset_url }}') format("woff"),
+       url('{{ "icons.ttf" | asset_url }}') format("truetype"),
+       url('{{ "icons.svg" | asset_url }}#timber-icons') format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+$font-stack-social-icons: 'icons';
 
 /*============================================================================
   #Z-Index
@@ -357,4 +381,163 @@ ol {
   li {
     display: inline-block;
   }
+
+/*============================================================================
+  #Basic Styles
+==============================================================================*/
+
+body,
+html {
+  background-color: $color-body;
+}
+
+/*============================================================================
+  #Typography
+==============================================================================*/
+body,
+input,
+textarea,
+button,
+select {
+  font-size: $font-size-base;
+  font-family: $font-stack-body;
+  color: $color-text-body;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  display: block;
+  font-family: $font-stack-header;
+  font-weight: $font-weight-header;
+}
+
+/*================ Use em() Sass function to declare font-size ================*/
+h1 {
+
+}
+
+h2 {
+
+}
+
+h3 {
+
+}
+
+h4 {
+
+}
+
+h5 {
+
+}
+
+h6 {
+
+}
+
+
+.h1 {
+  @extend h1;
+}
+
+.h2 {
+  @extend h2;
+}
+
+.h3 {
+  @extend h3;
+}
+
+.h4 {
+  @extend h4;
+}
+
+.h5 {
+  @extend h5;
+}
+
+.h6 {
+  @extend h6;
+}
+
+em {
+  font-style: italic;
+}
+
+b, strong {
+  font-weight: bold;
+}
+
+small {
+  font-size: 0.9em;
+}
+
+sup, sub {
+  position: relative;
+  font-size: 0.7em;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.5em;
+}
+
+/*================ Blockquotes ================*/
+blockquote {
+
+  p {
+
+    & + cite {
+      margin-top: $gutter-site / 2;
+    }
+  }
+
+  cite {
+    display: block;
+
+    &:before {
+      content: '\2014 \0020';
+    }
+  }
+}
+
+/*================ Code ================*/
+code, pre {
+  font-family: Consolas,monospace;
+  font-size: 1em;
+}
+
+pre {
+  overflow: auto;
+}
+
+/*================ Horizontal Rules ================*/
+hr {
+  clear: both;
+  border-top: solid $color-border;
+  border-width: 1px 0 0;
+  margin: $gutter-site 0;
+  height: 0;
+
+  &.hr--small {
+    margin: ($gutter-site / 2) 0;
+  }
+
+  &.hr--clear {
+    border-top-color: transparent;
+  }
+}
+
+/*================ Section Headers ================*/
+.section-header {
+  margin-bottom: $gutter-site / 1.5;
 }
