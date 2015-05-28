@@ -123,6 +123,7 @@
               if your variants have different prices.
             {% endcomment %}
             {% if on_sale %}
+
               {% if product.price_varies %}
                 {% assign sale_price = product.price | money %}
                 {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
@@ -130,28 +131,40 @@
                 <strong>{{ 'products.product.on_sale' | t }}</strong>
                 {{ product.price | money }}
               {% endif %}
+
             {% else %}
+
               {% if product.price_varies %}
                 {% assign price = product.price | money %}
                 {{ 'products.general.from_text_html' | t: price: price }}
               {% else %}
                 {{ product.price | money }}
               {% endif %}
+
             {% endif %}
+
             {% if sold_out %}
               <strong>{{ 'products.product.sold_out' | t }}</strong>
             {% endif %}
+
             {% if on_sale %}
               <s>{{ product.compare_at_price | money }}</s>
             {% endif %}
           </p>
         </div>
       {% else %}
+        {% comment %}
+          Add default products to help with onboarding for collections/all only.
+
+          The onboarding styles and products are only loaded if the
+          store has no products.
+        {% endcomment %}
         {% if collection.handle == 'all' %}
-          {% comment %}
-            Add default products to help with onboarding for collections/all only
-          {% endcomment %}
           {% unless emptyState %}
+            {% comment %}
+              Load onboarding CSS if it has not already been loaded
+              elsewhere on the page
+            {% endcomment %}
             {{ 'theme-onboarding.css' | global_asset_url | stylesheet_tag }}
             {% assign emptyState = true %}
           {% endunless %}
