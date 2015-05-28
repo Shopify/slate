@@ -99,17 +99,17 @@
     <p>{{ order.billing_address.name }}</p>
     <p>
       {% if order.billing_address.company != '' %}
-        <p>{{ order.billing_address.company }}</p>
+        {{ order.billing_address.company }}<br>
       {% endif %}
-      <p>{{ order.billing_address.street }}</p>
-      <p>{{ order.billing_address.city }}</p>
+      {{ order.billing_address.street }}<br>
+      {{ order.billing_address.city }}<br>
       {% if order.billing_address.province != '' %}
-        <p>{{ order.billing_address.province }}</p>
+        {{ order.billing_address.province }}<br>
       {% endif %}
-      <p>{{ order.billing_address.zip | upcase }}</p>
-      <p>{{ order.billing_address.country }}</p>
-      <p>{{ order.billing_address.phone }}</p>
-    </div>
+      {{ order.billing_address.zip | upcase }}<br>
+      {{ order.billing_address.country }}<br>
+      {{ order.billing_address.phone }}
+    </p>
 
     <h3>{{ 'customer.order.shipping_address' | t }}</h3>
 

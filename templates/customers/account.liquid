@@ -65,33 +65,33 @@
     <p>{{ customer.name }}</p>
 
     {% if customer.default_address != nil %}
-      <div>
-        <p>{{ customer.default_address.address1 }}</p>
+      <p>
+        {{ customer.default_address.address1 }}<br>
 
         {% if customer.default_address.address2 != "" %}
-          <p>{{ customer.default_address.address2 }}</p>
+          {{ customer.default_address.address2 }}<br>
         {% endif %}
 
         {% if customer.default_address.city != "" %}
-          <p>{{ customer.default_address.city }}</p>
+          {{ customer.default_address.city }}<br>
         {% endif %}
 
         {% if customer.default_address.province_code != "" %}
-          <p>{{ customer.default_address.province_code | upcase }}</p>
+          {{ customer.default_address.province_code | upcase }}<br>
         {% endif %}
 
         {% if customer.default_address.zip != "" %}
-          <p>{{ customer.default_address.zip | upcase }}</p>
+          {{ customer.default_address.zip | upcase }}<br>
         {% endif %}
 
         {% if customer.default_address.country != "" %}
-          <p>{{ customer.default_address.country }}</p>
+          {{ customer.default_address.country }}<br>
         {% endif %}
 
         {% if customer.default_address.phone != "" %}
-          <p>{{ customer.default_address.phone }}</p>
+          {{ customer.default_address.phone }}
         {% endif %}
-      </div>
+      </p>
     {% endif %}
 
     <p><a href="/account/addresses">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a></p>

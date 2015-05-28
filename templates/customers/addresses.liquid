@@ -120,17 +120,17 @@
             {% if address == customer.default_address %}({{ 'customer.addresses.default' | t }}){% endif %}
           </h3>
 
-          <div>
-            <p>{{ address.company }}</p>
-            <p>{{ address.street }}</p>
-            <p>{{ address.city | capitalize }}</p>
+          <p>
+            {{ address.company }}<br>
+            {{ address.street }}<br>
+            {{ address.city | capitalize }}<br>
             {% if address.province_code %}
-              <p>{{ address.province_code | upcase }}</p>
+              {{ address.province_code | upcase }}<br>
             {% endif %}
-            <p>{{ address.zip | upcase }}</p>
-            <p>{{ address.country }}</p>
-            <p>{{ address.phone }}</p>
-          </div>
+            {{ address.zip | upcase }}<br>
+            {{ address.country }}<br>
+            {{ address.phone }}
+          </p>
           <p>
             {{ 'customer.addresses.edit' | t | edit_customer_address_link: address.id }} |
             {{ 'customer.addresses.delete' | t | delete_customer_address_link: address.id }}
