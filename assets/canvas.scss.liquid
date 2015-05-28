@@ -207,7 +207,6 @@ $color-body: {{ settings.color_body_bg }};
 // Border colors
 $color-border: {{ settings.color_borders }};
 
-
 // Helper colors for form error states
 // $color-disabled: ;
 // $color-border-disabled: ;
@@ -539,12 +538,11 @@ hr {
 ==============================================================================*/
 a {
   color: $color-link;
-}
 
-
-a:hover,
-a:focus {
-  color: $color-hover-link;
+  &:hover,
+  &:focus {
+    color: $color-hover-link;
+  }
 }
 
 /*================ Force an input/button to look like a text link ================*/
