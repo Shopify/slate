@@ -96,7 +96,7 @@
 
     <p><strong>{{ 'customer.order.payment_status' | t }}:</strong> {{ order.financial_status_label }}</p>
 
-    <h4>{{ order.billing_address.name }}</h4>
+    <p>{{ order.billing_address.name }}</p>
     <p>
       {% if order.billing_address.company != '' %}
         {{ order.billing_address.company }}<br>
@@ -115,7 +115,7 @@
 
     <p><strong>{{ 'customer.order.fulfillment_status' | t }}:</strong> {{ order.fulfillment_status_label }}</p>
 
-    <h4>{{ order.shipping_address.name }}</h4>
+    <p>{{ order.shipping_address.name }}</h4>
     <p>
       {% if order.shipping_address.company != '' %}
         {{ order.shipping_address.company }}<br>
