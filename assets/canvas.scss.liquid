@@ -180,7 +180,7 @@ $color-secondary: {{ settings.color_secondary }};
 
 // Button colors
 $color-btn-primary: $color-primary;
-$color-btn-primary-hover: darken($colorBtnPrimary, 10%);
+$color-btn-primary-hover: darken($color-btn-primary, 10%);
 $color-btn-primary-active: darken($color-btn-primary-hover, 10%);
 $color-btn-primary-text: #fff;
 
@@ -194,7 +194,7 @@ $color-link: $color-primary;
 $color-link-hover: lighten($color-primary, 15%);
 
 // Text colors
-$color-text-body: {{ settings.color_body_text }};
+$color-body-text: {{ settings.color_body_text }};
 
 // Backgrounds
 $color-body: {{ settings.color_body_bg }};
@@ -202,14 +202,13 @@ $color-body: {{ settings.color_body_bg }};
 // Border colors
 $color-border: {{ settings.color_borders }};
 
-
 // Helper colors for form error states
-// $disabled-grey: ;
-// $disabled-border: ;
-// $error-red: ;
-// $error-red-bg: ;
-// $success-green: ;
-// $success-green-bg: ;
+$color-disabled: #000;
+$color-border-disabled: #000;
+$color-error: #000;
+$color-error-bg: #000;
+$color-success: #000;
+$color-success-bg: #000;
 
 
 /*============================================================================
@@ -404,7 +403,7 @@ button,
 select {
   font-size: $font-size-base;
   font-family: $font-stack-body;
-  color: $color-text-body;
+  color: $color-body-text;
 }
 
 h1,
@@ -536,6 +535,84 @@ hr {
   max-width: 100%;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+
+/*============================================================================
+  #Links and Buttons
+==============================================================================*/
+a {
+  color: $color-link;
+
+  &:hover,
+  &:focus {
+    color: $color-link-hover;
+  }
+}
+
+/*================ Force an input/button to look like a text link ================*/
+.text-link {
+  @extend a;
+
+  display: inline;
+  border: 0 none;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+.btn,
+.rte .btn,
+.link--btn {
+  display: inline-block;
+  width: auto;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid transparent;
+  @include prefix('user-select', 'none', 'webkit moz ms');
+  @include prefix('appearance', 'none', 'webkit moz');
+
+  // Set primary button colors - can override later
+  background-color: $color-btn-primary;
+  color: $color-btn-primary-text;
+
+  &:hover {
+    background-color: $color-btn-primary-hover;
+    color: $color-btn-primary-text;
+  }
+
+  &:active,
+  &:focus {
+   background-color: $color-btn-primary-active;
+   color: $color-btn-primary-text;
+  }
+
+  &[disabled],
+  &.btn--disabled {
+    cursor: default;
+    color: $color-border-disabled;
+    background-color: $color-disabled;
+  }
+}
+
+.btn--secondary,
+.rte .btn--secondary {
+  @extend .btn;
+  background-color: $color-btn-secondary;
+
+  &:hover {
+    background-color: $color-btn-secondary-hover;
+    color: $color-btn-secondary-text;
+  }
+
+  &:active,
+  &:focus {
+   background-color: $color-btn-secondary-active;
+   color: $color-btn-secondary-text;
+  }
 }
 
 /*============================================================================
