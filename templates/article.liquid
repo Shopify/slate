@@ -120,7 +120,7 @@
                 If a comment was just submitted with no blank field, show it.
               {% endcomment %}
               {% if comment and comment.created_at %}
-                <li id="{{ comment.id }}" class="comment comment--first{% if article.comments_count == 0 %} last{% endif %}">
+                <li id="{{ comment.id }}" class="comment">
                   {% include 'comment' %}
                 </li>
               {% endif %}
@@ -129,7 +129,7 @@
                 Showing the rest of the comments.
               {% endcomment %}
               {% for comment in article.comments %}
-                <li id="{{ comment.id }}" class="comment{% unless number_of_comments > article.comments_count %}{% if forloop.first %} comment--first{% endif %}{% endunless %}{% if forloop.last %} comment--last {% endif %}">
+                <li id="{{ comment.id }}" class="comment">
                   {% include 'comment' %}
                 </li>
               {% endfor %}
