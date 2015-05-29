@@ -518,7 +518,7 @@ th, td {
 
 //TODO: Update with new MQ with grid
 @include at-query($max, $small) {
-  .table--responsive {
+  .table{
       thead {
         display: none;
       }
@@ -551,6 +551,7 @@ th, td {
       }
   }
 
+  //TODO: update to use `desktop--hide` or whatever once our grid is built
   .table--small-hide {
     display: none !important;
   }

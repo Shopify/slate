@@ -10,8 +10,8 @@
 {% if cart.item_count > 0 %}
 
   <h1>{{ 'cart.general.title' | t }}</h1>
-  <form action="/cart" method="post" novalidate class="cart table-wrap">
-    <table class="cart-table full table--responsive">
+  <form action="/cart" method="post" novalidate class="cart">
+    <table class="table">
       <thead class="cart__row cart__header-labels">
         <th colspan="2">{{ 'cart.label.product' | t }}</th>
         <th>{{ 'cart.label.price' | t }}</th>
