@@ -125,11 +125,6 @@ textarea {
   -webkit-text-size-adjust: 100%;
 }
 
-//allow text to overflow on buttons
-button {
-  overflow: visible;
-}
-
 // Re-set default cursor for disabled elements.
 button[disabled],
 html input[disabled] {
@@ -359,7 +354,6 @@ $z-index-dropdown : 2;
 }
 
 /*============================================================================
-<<<<<<< HEAD
   #Lists
 ==============================================================================*/
 
@@ -533,7 +527,18 @@ hr {
   //
   // You must target elements and not
   // `.classes` or `#IDs` since the HTML is automatically generated without
-=======
+}
+
+// allow table to scroll for tables in the RTE since we don't know
+// how many columns they will contain
+.rte__table-wrapper {
+  max-width: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+/*============================================================================
   #Links and Buttons
 ==============================================================================*/
 a {
@@ -586,7 +591,7 @@ a {
   }
 
   &[disabled],
-  &.disabled {
+  &.btn--disabled {
     cursor: default;
     color: $color-border-disabled;
     background-color: $color-disabled;
@@ -608,27 +613,6 @@ a {
    background-color: $color-active-btn-secondary;
    color: $color-text-btn-secondary;
   }
-}
-
-.btn--small {
-  font-size: em(12px);
-}
-
-.btn--large {
-  font-size: em(16px);
-}
-
-.btn--full {
-  width: 100%;
->>>>>>> added buttons
-}
-
-// allow table to scroll for tables in the RTE since we don't know
-// how many columns they will contain
-.rte__table-wrapper {
-  max-width: 100%;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 /*============================================================================
