@@ -147,6 +147,15 @@ input[type="search"] {
   box-sizing: content-box;
 }
 
+// Prevent zoom on touch devices in active inputs
+// TODO: Update query syntax
+@include at-query($max, $medium) {
+  input,
+  textarea {
+    font-size: 16px;
+  }
+}
+
 
 // Remove most spacing between table cells.
 table {
@@ -645,3 +654,60 @@ svg:not(:root) {
     height: 100%;
   }
 }
+
+/*============================================================================
+  #Forms
+==============================================================================*/
+fieldset {
+  border: 1px solid $color-border;
+  padding: $gutter / 2;
+}
+
+legend {
+  border: 0;
+  padding: 0;
+}
+
+button,
+input[type="submit"] {
+  cursor: pointer;
+}
+
+input,
+textarea,
+select {
+  border: 1px solid $color-border;
+  max-width: 100%;
+  padding: 8px 10px;
+
+  &:focus {
+    border: 1px solid darken($color-border, 10%);
+  }
+
+  &[disabled],
+  &.disabled {
+    cursor: default;
+    background-color: $color-disabled;
+    border-color: $color-disabled-border;
+  }
+}
+
+textarea {
+  min-height: 100px;
+}
+
+/*================ Error styles ================*/
+input,
+select,
+textarea {
+  &.error {
+    border-color: $color-error;
+    background-color: $color-error-bg;
+    color: $color-error;
+  }
+}
+
+label.error {
+  color: $color-error;
+}
+
