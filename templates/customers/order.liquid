@@ -118,16 +118,16 @@
     <p>{{ order.shipping_address.name }}</p>
     <div>
       {% if order.shipping_address.company != '' %}
-        <p>{{ order.shipping_address.company }}</p>
+        {{ order.shipping_address.company }}<br>
       {% endif %}
-      <p>{{ order.shipping_address.street }}</p>
-      <p>{{ order.shipping_address.city }}</p>
+      {{ order.shipping_address.street }}<br>
+      {{ order.shipping_address.city }}<br>
       {% if order.shipping_address.province != '' %}
-        <p>{{ order.shipping_address.province }}</p>
+        {{ order.shipping_address.province }}<br>
       {% endif %}
-      <p>{{ order.shipping_address.zip | upcase }}</p>
-      <p>{{ order.shipping_address.country }}</p>
-      <p>{{ order.shipping_address.phone }}</p>
+      {{ order.shipping_address.zip | upcase }}<br>
+      {{ order.shipping_address.country }}<br>
+      {{ order.shipping_address.phone }}
     </div>
 
   </div>
