@@ -514,7 +514,6 @@ th, td {
 
 /*============================================================================
   Responsive tables, defined with .table--responsive on table element.
-  Only defined for IE9+
 ==============================================================================*/
 
 //TODO: Update with new MQ with grid
@@ -540,7 +539,7 @@ th, td {
       td {
         display: block;
         text-align: right;
-        padding: 15px;
+        padding: $grid-gutter / 2;
       }
 
       td:before {
@@ -556,18 +555,18 @@ th, td {
     display: none !important;
   }
 
-  .table__section + .table__section {
+  .table__row + .table__row {
     position: relative;
     margin-top: 10px;
-    padding-top: 15px;
+    padding-top: $grid-gutter / 2;
 
     &:after {
       content: '';
       display: block;
       position: absolute;
       top: 0;
-      left: 15px;
-      right: 15px;
+      left: $grid-gutter / 2;
+      right: $grid-gutter / 2;
       border-bottom: 1px solid $color-border;
     }
   }

@@ -20,7 +20,7 @@
       </thead>
       <tbody>
         {% for item in cart.items %}
-          <tr class="cart__row table__section">
+          <tr class="cart__row table__row">
             <td data-label="{{ 'customer.order.product' | t }}">
               <a href="{{ item.url | within: collections.all }}" class="cart__image">
                 {% comment %}
