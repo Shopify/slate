@@ -79,6 +79,11 @@ strong {
   font-weight: bold;
 }
 
+em {
+  font-style: italic;
+}
+
+
 // Address inconsistent and variable font size in all browsers.
 small {
   font-size: 80%;
@@ -410,7 +415,6 @@ h3,
 h4,
 h5,
 h6 {
-  display: block;
   font-family: $font-stack-header;
   font-weight: $font-weight-header;
 }
@@ -465,31 +469,6 @@ h6 {
   @extend h6;
 }
 
-em {
-  font-style: italic;
-}
-
-b, strong {
-  font-weight: bold;
-}
-
-small {
-  font-size: 0.9em;
-}
-
-sup, sub {
-  position: relative;
-  font-size: 0.7em;
-  vertical-align: baseline;
-}
-
-sup {
-  top: -0.5em;
-}
-
-sub {
-  bottom: -0.5em;
-}
 
 /*================ Blockquotes ================*/
 blockquote {
@@ -527,14 +506,6 @@ hr {
   border-width: 1px 0 0;
   margin: $gutter-site 0;
   height: 0;
-
-  &.hr--small {
-    margin: ($gutter-site / 2) 0;
-  }
-
-  &.hr--clear {
-    border-top-color: transparent;
-  }
 }
 
 /*================ Section Headers ================*/
