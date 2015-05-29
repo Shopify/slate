@@ -530,6 +530,14 @@ hr {
   // `.classes` or `#IDs` since the HTML is automatically generated without
 }
 
+// allow table to scroll for tables in the RTE since we don't know
+// how many columns they will contain
+.rte__table-wrapper {
+  max-width: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 /*============================================================================
   #Tables
 ==============================================================================*/
@@ -537,13 +545,6 @@ table {
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
-}
-
-//allow table to scroll for non-responsive tables and older browsers
-.table-wrap {
-  max-width: 100%;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 th {
