@@ -180,21 +180,21 @@ $color-secondary: {{ settings.color_secondary }};
 
 // Button colors
 $color-btn-primary: $color-primary;
-$color-hover-btn-primary: darken($color-btn-primary, 10%);
-$color-active-btn-primary: darken($color-btn-primary-hover, 10%);
-$color-text-btn-primary: #fff;
+$color-btn-primary-hover: darken($color-btn-primary, 10%);
+$color-btn-primary-active: darken($color-btn-primary-hover, 10%);
+$color-btn-primary-text: #fff;
 
 $color-btn-secondary: $color-secondary;
-$color-hover-btn-secondary: darken($color-btn-secondary, 10%);
-$color-active-btn-secondary: darken($color-hover-btn-secondary, 10%);
-$color-text-btn-secondary: #fff;
+$color-btn-secondary-hover: darken($color-btn-secondary, 10%);
+$color-btn-secondary-active: darken($color-btn-secondary-hover, 10%);
+$color-btn-secondary-text: #fff;
 
 // Text link colors
 $color-link: $color-primary;
-$color-hover-link: lighten($color-primary, 15%);
+$color-link-hover: lighten($color-primary, 15%);
 
 // Text colors
-$color-text-body: {{ settings.color_body_text }};
+$color-body-text: {{ settings.color_body_text }};
 
 // Backgrounds
 $color-body: {{ settings.color_body_bg }};
@@ -203,12 +203,12 @@ $color-body: {{ settings.color_body_bg }};
 $color-border: {{ settings.color_borders }};
 
 // Helper colors for form error states
-// $color-disabled: ;
-// $color-border-disabled: ;
-// $color-error: ;
-// $color-bg-error: ;
-// $color-success: ;
-// $color-bg-success: ;
+$color-disabled: #000;
+$color-border-disabled: #000;
+$color-error: #000;
+$color-error-bg: #000;
+$color-success: #000;
+$color-success-bg: #000;
 
 
 /*============================================================================
@@ -403,7 +403,7 @@ button,
 select {
   font-size: $font-size-base;
   font-family: $font-stack-body;
-  color: $color-text-body;
+  color: $color-body-text;
 }
 
 h1,
@@ -546,7 +546,7 @@ a {
 
   &:hover,
   &:focus {
-    color: $color-hover-link;
+    color: $color-link-hover;
   }
 }
 
@@ -577,17 +577,17 @@ a {
 
   // Set primary button colors - can override later
   background-color: $color-btn-primary;
-  color: $color-text-btn-primary;
+  color: $color-btn-primary-text;
 
   &:hover {
-    background-color: $color-hover-btn-primary;
-    color: $color-text-btn-primary;
+    background-color: $color-btn-primary-hover;
+    color: $color-btn-primary-text;
   }
 
   &:active,
   &:focus {
-   background-color: $color-active-btn-primary;
-   color: $color-text-btn-primary;
+   background-color: $color-btn-primary-active;
+   color: $color-btn-primary-text;
   }
 
   &[disabled],
@@ -604,14 +604,14 @@ a {
   background-color: $color-btn-secondary;
 
   &:hover {
-    background-color: $color-hover-btn-secondary;
-    color: $color-text-btn-secondary;
+    background-color: $color-btn-secondary-hover;
+    color: $color-btn-secondary-text;
   }
 
   &:active,
   &:focus {
-   background-color: $color-active-btn-secondary;
-   color: $color-text-btn-secondary;
+   background-color: $color-btn-secondary-active;
+   color: $color-btn-secondary-text;
   }
 }
 
