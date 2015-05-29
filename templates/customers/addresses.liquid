@@ -1,5 +1,7 @@
 <!-- /templates/customers/addressess.liquid -->
 {% comment %}
+  TODO: Update this once JS is complete. Try to remove inline onClicks or update
+  comment so it makes sense
 
   Template note:
     - There are instances of inline JS below. Best practices advise separating this
@@ -99,7 +101,6 @@
         <p><input type="submit" class="btn" value="{{ 'customer.addresses.add' | t }}"></p>
         <p><a href="#" onclick="Shopify.CustomerAddress.toggleNewForm(); return false;">{{ 'customer.addresses.cancel' | t }}</a></p>
 
-        <hr>
       {% endform %}
     </div>
 
@@ -192,7 +193,6 @@
               <p><input type="submit" class="btn" value="{{ 'customer.addresses.update' | t }}"></p>
               <p><a href="#" onclick="Shopify.CustomerAddress.toggleForm({{ form.id }}); return false;">{{ 'customer.addresses.cancel' | t }}</a></p>
 
-              <hr>
             {% endform %}
           </div>
         {% endfor %}
