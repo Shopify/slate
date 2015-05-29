@@ -66,8 +66,6 @@ summary {
   display: block;
 }
 
-
-
 // Remove the gray background color from active links in IE 10.
 a {
   background-color: transparent;
@@ -530,4 +528,91 @@ hr {
   //
   // You must target elements and not
   // `.classes` or `#IDs` since the HTML is automatically generated without
+}
+
+// allow table to scroll for tables in the RTE since we don't know
+// how many columns they will contain
+.rte__table-wrapper {
+  max-width: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/*============================================================================
+  #Tables
+==============================================================================*/
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th {
+  font-weight: bold;
+}
+
+th, td {
+  text-align: left;
+  border: 1px solid $color-border;
+}
+
+/*============================================================================
+  Responsive tables, defined with .table on table element.
+==============================================================================*/
+
+//TODO: Update with new MQ with grid
+@include at-query($max, $small) {
+  .table{
+      thead {
+        display: none;
+      }
+
+      tr {
+        display: block;
+      }
+
+      // IE9 table layout fixes
+      tr,
+      td {
+        float: left;
+        clear: both;
+        width: 100%;
+      }
+
+      th,
+      td {
+        display: block;
+        text-align: right;
+        padding: $grid-gutter / 2;
+      }
+
+      td:before {
+        content: attr(data-label);
+        float: left;
+        text-align: center;
+        font-size: 12px;
+        padding-right: 10px;
+      }
+  }
+
+  //TODO: update to use `desktop--hide` or whatever once our grid is built
+  .table--small-hide {
+    display: none !important;
+  }
+
+  .table__row + .table__row {
+    position: relative;
+    margin-top: 10px;
+    padding-top: $grid-gutter / 2;
+
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: $grid-gutter / 2;
+      right: $grid-gutter / 2;
+      border-bottom: 1px solid $color-border;
+    }
+  }
 }
