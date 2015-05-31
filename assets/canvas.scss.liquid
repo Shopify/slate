@@ -342,7 +342,7 @@ $z-index-dropdown : 2;
 }
 
 @mixin backface($visibility: hidden) {
-  @include prefixer(backface-visiblity, $visibility, webkit spec);
+  @include prefix(backface-visiblity, $visibility, webkit spec);
 }
 
 /*============================================================================
@@ -709,6 +709,42 @@ textarea {
 
 label.error {
   color: $color-error;
+}
+
+select {
+  @include prefix(appearance, none, webkit, moz, spec)
+  background-position: right center;
+  background: {
+    image: url('{{ "ico-select.svg" | asset_url }}');
+    repeat: no-repeat;
+    position: right 10px center;
+    color: transparent;
+  }
+  padding-right: 28px;
+  text-indent: 0.01px;
+  text-overflow: '';
+  cursor: pointer;
+
+  /*================ Hide the svg arrow in IE9 and below ================*/
+  .ie9 &,
+  .lt-ie9 & {
+    padding-right: 10px;
+    background-image: none;
+  }
+}
+
+optgroup {
+  font-weight: bold;
+}
+
+// Force option color (affects IE only)
+option {
+  color: #000;
+  background-color: #fff;
+}
+
+select::-ms-expand {
+  display: none;
 }
 
 /*================ Form labels ================*/
