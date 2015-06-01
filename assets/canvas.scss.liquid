@@ -235,9 +235,9 @@ $gutter-grid: 30px;
   #Breakpoint Variables
 ==============================================================================*/
 
-$small: 480px;
-$medium: 768px;
-$large: 769px;
+$tablet: 750px;
+$desktop: 990px;
+$widescreen: 1400px;
 
 /*============================================================================
   #Typography Variables
@@ -377,67 +377,38 @@ $z-index-dropdown : 2;
 /*============================================================================
   #Grid Variables
 ==============================================================================*/
-$viewportIncrement: 1px;
-
-$postSmall: $small + $viewportIncrement;
-$preMedium: $medium - $viewportIncrement;
-$preLarge: $large - $viewportIncrement;
 
 /*================ The following are dependencies of csswizardry grid ================*/
 $breakpoints: (
-  'small' '(max-width: #{$small})',
-  'medium' '(min-width: #{$postSmall}) and (max-width: #{$medium})',
-  'medium-down' '(max-width: #{$medium})',
-  'medium-up' '(min-width: #{$postSmall})',
-  'large' '(min-width: #{$large})'
+  'mobile' '(max-width: #{$tablet - 1})',
+  'tablet' '(min-width: #{$tablet}) and (max-width: #{$desktop - 1})',
+  'tablet-down' '(max-width: #{$tablet - 1})',
+  'tablet-up' '(min-width: #{$tablet})',
+  'desktop' '(min-width: #{$desktop})',
+  'widescreen' '(min-width: #{$widescreen})'
 );
 
-$breakpoint-has-widths: ('small', 'medium', 'medium-down', 'medium-up', 'large');
-$breakpoint-has-push:  ('medium', 'medium-down', 'medium-up', 'large');
-$breakpoint-has-pull:  ('medium', 'medium-down', 'medium-up', 'large');
+@each $breakpoint in $breakpoints {
+  $name: nth($breakpoint, 1);
+  $query: nth($breakpoint, 2);
 
-/*============================================================================
-  Dependency-free breakpoint mixin
-    - Based on http://blog.grayghostvisuals.com/sass/sass-media-query-mixin/
-    - Usage docs: http://shopify.github.io/Timber/#sass-mixins
-==============================================================================*/
-$min: min-width;
-$max: max-width;
-@mixin at-query ($constraint_, $viewport1_, $viewport2_:null) {
- $constraint: $constraint_; $viewport1: $viewport1_; $viewport2: $viewport2_;
-  @if type-of($constraint_) == number {
-    $viewport1 : $constraint_; $viewport2 : $viewport1_; $constraint : null;
-  }
-  @if $constraint == $min {
-    @media screen and ($min: $viewport1) {
-      @content;
-    }
-  } @else if $constraint == $max {
-    @media screen and ($max: $viewport1) {
-      @content;
-    }
-  } @else {
-    @media screen and ($min: $viewport1) and ($max: $viewport2) {
-      @content;
-    }
-  }
+  $name: $query;
 }
+
+$breakpoint-has-widths: ('mobile', 'tablet', 'tablet-down', 'tablet-up', 'desktop', 'widescreen');
+$breakpoint-has-push:  ('tablet', 'tablet-down', 'tablet-up', 'desktop', 'widescreen');
+$breakpoint-has-pull:  ('tablet', 'tablet-down', 'tablet-up', 'desktop', 'widescreen');
 
 /*============================================================================
   #Grid Setup
     - Based on csswizardry grid, but with floated columns, a fixed gutter size, and BEM classes
     - Breakpoints defined above, under #Breakpoint and Grid Variables
-    - Note the inclusion of .grid-uniform to take care of clearfixes on evenly sized grid items
+    - Note the inclusion of .grid--uniform to take care of clearfixes on evenly sized grid items
 ==============================================================================*/
-$responsive:         true;
-$mobile-first:       true;
-$use-silent-classes: false;
-$push:               true;
-$pull:               false;
 
 /* Force clearfix on grids */
 .grid,
-.grid-uniform {
+.grid--uniform {
   @include clearfix;
 }
 
@@ -448,11 +419,7 @@ $pull:               false;
 
 $class-type: unquote(".");
 
-@if $use-silent-classes == true {
-  $class-type: unquote("%");
-}
-
-@mixin grid-media-query($media-query) {
+@mixin media-query($media-query) {
   $breakpoint-found: false;
 
   @each $breakpoint in $breakpoints {
@@ -473,17 +440,6 @@ $class-type: unquote(".");
   }
 }
 
-
-/*============================================================================
-  Drop relative positioning into silent classes which can't take advantage of
-  the `[class*="push--"]` and `[class*="pull--"]` selectors.
-==============================================================================*/
-@mixin silent-relative() {
-  @if $use-silent-classes == true {
-    position:relative;
-  }
-}
-
 /*============================================================================
   Grid Setup
     1. Allow the grid system to be used on lists.
@@ -491,7 +447,7 @@ $class-type: unquote(".");
     3. Apply a negative `margin-left` to negate the columns' gutters.
 ==============================================================================*/
 #{$class-type}grid,
-#{$class-type}grid-uniform {
+#{$class-type}grid--uniform {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -503,9 +459,7 @@ $class-type: unquote(".");
   min-height: 1px;
   padding-left: $gutter-grid;
   vertical-align: top;
-  @if $mobile-first == true {
-    width: 100%;
-  }
+  width: 100%;
   @include prefix(box-sizing, border-box, webkit moz);
 }
 
@@ -593,7 +547,7 @@ $class-type: unquote(".");
 
 /*================ Clearfix helper on uniform grids ================*/
 @mixin clearfix-helper($namespace:"") {
-  .grid-uniform {
+  .grid--uniform {
     #{$class-type}#{$namespace}col-1:nth-child(12n+1),
     #{$class-type}#{$namespace}col-2:nth-child(6n+1),
     #{$class-type}#{$namespace}col-3:nth-child(4n+1),
@@ -641,13 +595,11 @@ $class-type: unquote(".");
 @include device-helper();
 
 /*================ Our responsive classes, if we have enabled them ================*/
-@if $responsive == true {
-  @each $name in $breakpoint-has-widths {
-    @include grid-media-query($name) {
-      @include device-type('#{$name}--');
-      @include device-helper('#{$name}--');
-      @include clearfix-helper('#{$name}--');
-    }
+@each $name in $breakpoint-has-widths {
+  @include media-query($name) {
+    @include device-type('#{$name}--');
+    @include device-helper('#{$name}--');
+    @include clearfix-helper('#{$name}--');
   }
 }
 
@@ -658,66 +610,64 @@ $class-type: unquote(".");
 @mixin push-setup($namespace: "") {
 
   #{$class-type}push--#{$namespace}col-1  {
-    left: 8.333%; @include silent-relative();
+    left: 8.333%;
   }
 
   #{$class-type}push--#{$namespace}col-2  {
-    left: 16.666%; @include silent-relative();
+    left: 16.666%;
   }
 
   #{$class-type}push--#{$namespace}col-3  {
-    left: 25%; @include silent-relative();
+    left: 25%;
   }
 
   #{$class-type}push--#{$namespace}col-4  {
-    left: 33.333%; @include silent-relative();
+    left: 33.333%;
   }
 
   #{$class-type}push--#{$namespace}col-5  {
-    left: 41.666%; @include silent-relative();
+    left: 41.666%;
   }
 
   #{$class-type}push--#{$namespace}col-6  {
-    left: 50%; @include silent-relative();
+    left: 50%;
   }
 
   #{$class-type}push--#{$namespace}col-7  {
-    left: 58.333%; @include silent-relative();
+    left: 58.333%;
   }
 
   #{$class-type}push--#{$namespace}col-8  {
-    left: 66.666%; @include silent-relative();
+    left: 66.666%;
   }
 
   #{$class-type}push--#{$namespace}col-9  {
-    left: 75%; @include silent-relative();
+    left: 75%;
   }
 
   #{$class-type}push--#{$namespace}col-10 {
-    left: 83.333%; @include silent-relative();
+    left: 83.333%;
   }
 
   #{$class-type}push--#{$namespace}col-11 {
-    left: 91.666%; @include silent-relative();
+    left: 91.666%;
   }
 
   #{$class-type}push--#{$namespace}col-12 {
-    left: 100%; @include silent-relative();
+    left: 100%;
   }
 
 }
 
-@if $push == true {
-  [class*="push--"]{ position:relative; }
+[class*="push--"] {
+  position:relative;
+}
 
-  @include push-setup();
+@include push-setup();
 
-  @if $responsive == true {
-    @each $name in $breakpoint-has-push {
-      @include grid-media-query($name) {
-        @include push-setup('#{$name}--');
-      }
-    }
+@each $name in $breakpoint-has-push {
+  @include media-query($name) {
+    @include push-setup('#{$name}--');
   }
 }
 
@@ -728,66 +678,64 @@ $class-type: unquote(".");
 @mixin pull-setup($namespace: "") {
 
   #{$class-type}pull--#{$namespace}col-1  {
-    right: 8.333%; @include silent-relative();
+    right: 8.333%;
   }
 
   #{$class-type}pull--#{$namespace}col-2  {
-    right: 16.666%; @include silent-relative();
+    right: 16.666%;
   }
 
   #{$class-type}pull--#{$namespace}col-3  {
-    right: 25%; @include silent-relative();
+    right: 25%;
   }
 
   #{$class-type}pull--#{$namespace}col-4  {
-    right: 33.333%; @include silent-relative();
+    right: 33.333%;
   }
 
   #{$class-type}pull--#{$namespace}col-5  {
-    right: 41.666%; @include silent-relative();
+    right: 41.666%;
   }
 
   #{$class-type}pull--#{$namespace}col-6  {
-    right: 50%; @include silent-relative();
+    right: 50%;
   }
 
   #{$class-type}pull--#{$namespace}col-7  {
-    right: 58.333%; @include silent-relative();
+    right: 58.333%;
   }
 
   #{$class-type}pull--#{$namespace}col-8  {
-    right: 66.666%; @include silent-relative();
+    right: 66.666%;
   }
 
   #{$class-type}pull--#{$namespace}col-9  {
-    right: 75%; @include silent-relative();
+    right: 75%;
   }
 
   #{$class-type}pull--#{$namespace}col-10 {
-    right: 83.333%; @include silent-relative();
+    right: 83.333%;
   }
 
   #{$class-type}pull--#{$namespace}col-11 {
-    right: 91.666%; @include silent-relative();
+    right: 91.666%;
   }
 
   #{$class-type}pull--#{$namespace}col-12 {
-    right: 100%; @include silent-relative();
+    right: 100%;
   }
 
 }
 
-@if $pull == true {
-  [class*="pull--"]{ position:relative; }
+[class*="pull--"] {
+  position:relative;
+}
 
-  @include pull-setup();
+@include pull-setup();
 
-  @if $responsive == true {
-    @each $name in $breakpoint-has-pull {
-      @include grid-media-query($name) {
-        @include pull-setup('#{$name}--');
-      }
-    }
+@each $name in $breakpoint-has-pull {
+  @include media-query($name) {
+    @include pull-setup('#{$name}--');
   }
 }
 
@@ -1076,7 +1024,7 @@ th, td {
 ==============================================================================*/
 
 //TODO: Update with new MQ with grid
-@include at-query($max, $small) {
+@include media-query('mobile') {
   .table{
     thead {
       display: none;
