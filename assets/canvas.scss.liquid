@@ -388,13 +388,6 @@ $breakpoints: (
   'widescreen' '(min-width: #{$widescreen})'
 );
 
-@each $breakpoint in $breakpoints {
-  $name: nth($breakpoint, 1);
-  $query: nth($breakpoint, 2);
-
-  $name: $query;
-}
-
 $breakpoint-has-widths: ('mobile', 'tablet', 'tablet-down', 'tablet-up', 'desktop', 'widescreen');
 $breakpoint-has-push:  ('tablet', 'tablet-down', 'tablet-up', 'desktop', 'widescreen');
 $breakpoint-has-pull:  ('tablet', 'tablet-down', 'tablet-up', 'desktop', 'widescreen');
