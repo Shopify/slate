@@ -158,15 +158,15 @@
 
                 <div class="grid__item">
                   <label for="CommentAuthor" class="hidden-label">{{ 'blogs.comments.name' | t }}</label>
-                  <input type="text" name="comment[author]" id="CommentAuthor" class="input-full{% if form.errors contains 'author' %} error{% endif %}" placeholder="{{ 'blogs.comments.name' | t }}" value="{{ form.author }}" autocapitalize="words">
+                  <input type="text" name="comment[author]" id="CommentAuthor" class="{% if form.errors contains 'author' %} error{% endif %}" placeholder="{{ 'blogs.comments.name' | t }}" value="{{ form.author }}" autocapitalize="words">
 
                   <label for="CommentEmail" class="hidden-label">{{ 'blogs.comments.email' | t }}</label>
-                  <input type="email" name="comment[email]" id="CommentEmail" class="input-full{% if form.errors contains 'email' %} error{% endif %}" placeholder="{{ 'blogs.comments.email' | t }}" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
+                  <input type="email" name="comment[email]" id="CommentEmail" class="{% if form.errors contains 'email' %} error{% endif %}" placeholder="{{ 'blogs.comments.email' | t }}" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
                 </div>
 
                 <div class="grid__item">
                   <label for="CommentBody" class="hidden-label">{{ 'blogs.comments.message' | t }}</label>
-                  <textarea name="comment[body]" id="CommentBody" class="input-full{% if form.errors contains 'body' %} error{% endif %}" placeholder="{{ 'blogs.comments.message' | t }}">{{ form.body }}</textarea>
+                  <textarea name="comment[body]" id="CommentBody" class="{% if form.errors contains 'body' %} error{% endif %}" placeholder="{{ 'blogs.comments.message' | t }}">{{ form.body }}</textarea>
                 </div>
 
               </div>

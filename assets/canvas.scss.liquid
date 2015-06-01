@@ -147,6 +147,15 @@ input[type="search"] {
   box-sizing: content-box;
 }
 
+// Prevent zoom on touch devices in active inputs
+// TODO: Update query syntax
+@include at-query($max, $medium) {
+  input,
+  textarea {
+    font-size: 16px;
+  }
+}
+
 
 // Remove most spacing between table cells.
 table {
@@ -332,7 +341,7 @@ $z-index-dropdown : 2;
 }
 
 @mixin backface($visibility: hidden) {
-  @include prefixer(backface-visiblity, $visibility, webkit spec);
+  @include prefix(backface-visiblity, $visibility, webkit spec);
 }
 
 /*============================================================================
@@ -722,3 +731,120 @@ svg:not(:root) {
     height: 100%;
   }
 }
+
+/*============================================================================
+  #Forms
+==============================================================================*/
+fieldset {
+  border: 1px solid $color-border;
+  padding: $gutter / 2;
+}
+
+legend {
+  border: 0;
+  padding: 0;
+}
+
+button,
+input[type="submit"] {
+  cursor: pointer;
+}
+
+input,
+textarea,
+select {
+  border: 1px solid $color-border;
+  max-width: 100%;
+
+  &:focus {
+    border: 1px solid darken($color-border, 10%);
+  }
+
+  &[disabled],
+  &.disabled {
+    cursor: default;
+    background-color: $color-disabled;
+    border-color: $color-disabled-border;
+  }
+}
+
+textarea {
+  min-height: 100px;
+}
+
+/*================ Error styles ================*/
+input,
+select,
+textarea {
+  &.error {
+    border-color: $color-error;
+    background-color: $color-error-bg;
+    color: $color-error;
+  }
+}
+
+label.error {
+  color: $color-error;
+}
+
+select {
+  @include prefix(appearance, none, webkit, moz, spec)
+  background-position: right center;
+  background: {
+    image: url('{{ "ico-select.svg" | asset_url }}');
+    repeat: no-repeat;
+    position: right 10px center;
+    color: transparent;
+  }
+  padding-right: 28px;
+  text-indent: 0.01px;
+  text-overflow: '';
+  cursor: pointer;
+
+  /*================ Hide the svg arrow in IE9 and below ================*/
+  .ie9 &,
+  .lt-ie9 & {
+    padding-right: 10px;
+    background-image: none;
+  }
+}
+
+optgroup {
+  font-weight: bold;
+}
+
+// Force option color (affects IE only)
+option {
+  color: #000;
+  background-color: #fff;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+/*================ Form labels ================*/
+.hidden-label {
+  position: absolute;
+  height: 0;
+  width: 0;
+  margin-bottom: 0;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+
+  // No placeholders, so force show labels
+  .ie9 &,
+  .lt-ie9 & {
+    position: static;
+    height: auto;
+    width: auto;
+    margin-bottom: 2px;
+    overflow: visible;
+    clip: initial;
+  }
+}
+
+label[for] {
+  cursor: pointer;
+}
+
