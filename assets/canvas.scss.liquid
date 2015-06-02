@@ -240,7 +240,9 @@ $font-size-base: 14px; // Henseforth known as 1em
   font-style: normal;
 }
 
-$font-stack-social-icons: 'icons';
+$font-stack-icons: 'icons';
+$font-size-icons-social: 30px;
+$font-size-icons-payment: 30px;
 
 /*============================================================================
   #Z-Index
@@ -1102,7 +1104,7 @@ label[for] {
 
 .supports-fontface .icon:before {
   display: inline;
-  font-family: $font-stack-social-icons;
+  font-family: $font-stack-icons;
   text-decoration: none;
   speak: none; // future fallback, limited in effect currently
   font-style: normal;
@@ -1154,24 +1156,16 @@ label[for] {
   cursor: default;
 
   li {
-    margin: 0 ($gutter / 4) ($gutter / 4);
-    color: $colo-primary;
+    color: $color-primary;
     cursor: default;
   }
 
   .icon {
-    font-size: 30px;
-    line-height: 30px;
-  }
-
-  .fallback-text {
-    text-transform: capitalize;
+    font-size: $font-size-icons-payment;
   }
 }
 
 .social-icons li {
-  margin: 0 ($gutter / 2) ($gutter / 2);
-  vertical-align: middle;
 
   //TODO: update query
   @include at-query ($min, $postSmall) {
@@ -1179,8 +1173,7 @@ label[for] {
   }
 
   .icon {
-    font-size: 30px;
-    line-height: 26px;
+    font-size: $font-size-icons-social;
   }
 
   a {
