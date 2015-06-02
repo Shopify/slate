@@ -232,14 +232,6 @@ $gutter-site: 30px;
 $gutter-grid: 30px;
 
 /*============================================================================
-  #Breakpoint Variables
-==============================================================================*/
-
-$tablet: 750px;
-$desktop: 990px;
-$widescreen: 1400px;
-
-/*============================================================================
   #Typography Variables
 ==============================================================================*/
 
@@ -375,6 +367,14 @@ $z-index-dropdown : 2;
 }
 
 /*============================================================================
+  #Breakpoint Variables
+==============================================================================*/
+
+$tablet: 750px;
+$desktop: 990px;
+$widescreen: 1400px;
+
+/*============================================================================
   #Grid Variables
 ==============================================================================*/
 
@@ -383,17 +383,16 @@ $z-index-dropdown : 2;
 // target specific breakpoint.  i.e. `.tablet-down--col-6` will target screen
 // widths below the value set by `$tablet`
 $breakpoints: (
-  'mobile' '(max-width: #{$tablet - 1})',
-  'tablet' '(min-width: #{$tablet}) and (max-width: #{$desktop - 1})',
+  'mobile-only' '(max-width: #{$tablet - 1})',
+  'tablet-only' '(min-width: #{$tablet}) and (max-width: #{$desktop - 1})',
   'tablet-down' '(max-width: #{$tablet - 1})',
   'tablet-up' '(min-width: #{$tablet})',
-  'desktop' '(min-width: #{$desktop})',
-  'widescreen' '(min-width: #{$widescreen})'
+  'desktop-up' '(min-width: #{$desktop})',
+  'widescreen-only' '(min-width: #{$widescreen})'
 );
 
-$breakpoint-has-widths: ('mobile', 'tablet', 'tablet-down', 'tablet-up', 'desktop', 'widescreen');
-$breakpoint-has-push:  ('tablet', 'tablet-down', 'tablet-up', 'desktop', 'widescreen');
-
+$breakpoint-has-widths: ('mobile-only', 'tablet-only', 'tablet-down', 'tablet-up', 'desktop-up', 'widescreen-only');
+$breakpoint-has-push:  ('tablet-only', 'tablet-down', 'tablet-up', 'desktop-up', 'widescreen-only');
 
 /*============================================================================
   #Grid Setup
@@ -951,7 +950,7 @@ th, td {
 ==============================================================================*/
 
 //TODO: Update with new MQ with grid
-@include media-query('mobile') {
+@include media-query('mobile-only') {
   .table{
     thead {
       display: none;
