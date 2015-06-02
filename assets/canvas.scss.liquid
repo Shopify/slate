@@ -1178,3 +1178,73 @@ label[for] {
   }
 
 }
+
+/*============================================================================
+  #Site Nav and Dropdowns
+==============================================================================*/
+.nav-bar {
+}
+
+.site-nav {
+  font-size: em(16px);
+  cursor: default;
+  margin: 0 0 0 (-$gutter / 2);
+
+  li {
+    margin: 0;
+    display: block;
+  }
+
+  > li {
+    position: relative;
+    display: inline-block;
+  }
+}
+
+/*================ Site Nav Links ================*/
+.site-nav__link {
+  display: block;
+  text-decoration: none;
+  white-space: nowrap;
+  color: $color-link;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: darken($color-link, 15%);
+  }
+
+  .icon-arrow-down {
+    position: relative;
+    top: -2px;
+    font-size: em(10);
+  }
+
+  .site-nav--active > & {
+    font-weight: bold;
+  }
+}
+
+/*================ Dropdowns ================*/
+.site-nav__dropdown {
+  display: none;
+  position: absolute;
+  left: 0;
+  z-index: $z-index-dropdown;
+
+  .supports-no-touch .site-nav--has-dropdown:hover &,
+  .site-nav--has-dropdown.nav-hover &,
+  .nav-focus + & {
+    display: block;
+  }
+
+  a {
+    color: $color-link;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: darken($color-link, 10%);
+    }
+  }
+}
