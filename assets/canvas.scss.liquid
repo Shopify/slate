@@ -378,7 +378,10 @@ $z-index-dropdown : 2;
   #Grid Variables
 ==============================================================================*/
 
-/*================ The following are dependencies of csswizardry grid ================*/
+// The `$breakpoints` list is used to build our media queries.  You can use
+// these in the media-queries mixin or as modifiers to your grid classes to
+// target specific breakpoint.  i.e. `.tablet-down--col-6` will target screen
+// widths below the value set by `$tablet`
 $breakpoints: (
   'mobile' '(max-width: #{$tablet - 1})',
   'tablet' '(min-width: #{$tablet}) and (max-width: #{$desktop - 1})',
@@ -390,13 +393,14 @@ $breakpoints: (
 
 $breakpoint-has-widths: ('mobile', 'tablet', 'tablet-down', 'tablet-up', 'desktop', 'widescreen');
 $breakpoint-has-push:  ('tablet', 'tablet-down', 'tablet-up', 'desktop', 'widescreen');
-$breakpoint-has-pull:  ('tablet', 'tablet-down', 'tablet-up', 'desktop', 'widescreen');
+
 
 /*============================================================================
   #Grid Setup
     - Based on csswizardry grid, but with floated columns, a fixed gutter size, and BEM classes
-    - Breakpoints defined above, under #Breakpoint and Grid Variables
-    - Note the inclusion of .grid--uniform to take care of clearfixes on evenly sized grid items
+    - Breakpoints defined above, under #Grid Variables
+    - `.grid--uniform` is used to take care of clearfixes on evenly sized
+    `.grid__items`
 ==============================================================================*/
 
 /* Force clearfix on grids */
@@ -439,33 +443,31 @@ $class-type: unquote(".");
     2. Remove any margins and paddings that might affect the grid system.
     3. Apply a negative `margin-left` to negate the columns' gutters.
 ==============================================================================*/
-#{$class-type}grid,
-#{$class-type}grid--uniform {
+.grid,
+.grid--uniform {
   list-style: none;
   margin: 0;
   padding: 0;
   margin-left: -$gutter-grid;
 }
 
-#{$class-type}grid__item {
+.grid__item {
   float: left;
   min-height: 1px;
   padding-left: $gutter-grid;
-  vertical-align: top;
   width: 100%;
-  @include prefix(box-sizing, border-box, webkit moz);
 }
 
 /*============================================================================
   Reversed grids allow you to structure your source in the opposite
   order to how your rendered layout will appear.
 ==============================================================================*/
-#{$class-type}grid--rev {
-  @extend #{$class-type}grid;
+.grid--rev {
+  @extend .grid;
   direction: rtl;
   text-align: left;
 
-  > #{$class-type}grid__item {
+  > .grid__item {
     direction: ltr;
     text-align: left;
     float: right;
@@ -473,11 +475,11 @@ $class-type: unquote(".");
 }
 
 /* Gutterless grids have all the properties of regular grids, minus any spacing. */
-#{$class-type}grid--full {
-  @extend #{$class-type}grid;
+.grid--no-gutter {
+  @extend .grid;
   margin-left: 0;
 
-  > #{$class-type}grid__item {
+  > .grid__item {
     padding-left: 0;
   }
 }
@@ -486,113 +488,113 @@ $class-type: unquote(".");
   WIDTHS
     - Create width classes, prefixed by the specified namespace.
 ==============================================================================*/
-@mixin device-type($namespace:"") {
+@mixin grid-device-type($namespace:"") {
 
-  #{$class-type}#{$namespace}col-1  {
+  .#{$namespace}col-1  {
     width: 8.333%;
   }
 
-  #{$class-type}#{$namespace}col-2  {
+  .#{$namespace}col-2  {
     width: 16.666%;
   }
 
-  #{$class-type}#{$namespace}col-3  {
+  .#{$namespace}col-3  {
     width: 25%;
   }
 
-  #{$class-type}#{$namespace}col-4  {
+  .#{$namespace}col-4  {
     width: 33.333%;
   }
 
-  #{$class-type}#{$namespace}col-5  {
+  .#{$namespace}col-5  {
     width: 41.666%
   }
 
-  #{$class-type}#{$namespace}col-6  {
+  .#{$namespace}col-6  {
     width: 50%;
   }
 
-  #{$class-type}#{$namespace}col-7  {
+  .#{$namespace}col-7  {
     width: 58.333%;
   }
 
-  #{$class-type}#{$namespace}col-8  {
+  .#{$namespace}col-8  {
     width: 66.666%;
   }
 
-  #{$class-type}#{$namespace}col-9  {
+  .#{$namespace}col-9  {
     width: 75%;
   }
 
-  #{$class-type}#{$namespace}col-10 {
+  .#{$namespace}col-10 {
     width: 83.333%;
   }
 
-  #{$class-type}#{$namespace}col-11 {
+  .#{$namespace}col-11 {
     width: 91.666%;
   }
 
-  #{$class-type}#{$namespace}col-12 {
+  .#{$namespace}col-12 {
     width: 100%;
   }
 
 }
 
 /*================ Clearfix helper on uniform grids ================*/
-@mixin clearfix-helper($namespace:"") {
+@mixin grid-clearfix-helper($namespace:"") {
   .grid--uniform {
-    #{$class-type}#{$namespace}col-1:nth-child(12n+1),
-    #{$class-type}#{$namespace}col-2:nth-child(6n+1),
-    #{$class-type}#{$namespace}col-3:nth-child(4n+1),
-    #{$class-type}#{$namespace}col-4:nth-child(3n+1),
-    #{$class-type}#{$namespace}col-6:nth-child(2n+1)    { clear: both; }
+    .#{$namespace}col-1:nth-child(12n+1),
+    .#{$namespace}col-2:nth-child(6n+1),
+    .#{$namespace}col-3:nth-child(4n+1),
+    .#{$namespace}col-4:nth-child(3n+1),
+    .#{$namespace}col-6:nth-child(2n+1)    { clear: both; }
   }
 }
 
 /*================ Helper show/hide classes around our breakpoints ================*/
-@mixin device-helper($namespace:"") {
-  #{$class-type}#{$namespace}show {
+@mixin grid-device-helper($namespace:"") {
+  .#{$namespace}show {
     display: block!important;
   }
 
-  #{$class-type}#{$namespace}hide {
+  .#{$namespace}hide {
     display: none!important;
   }
 
 
-  #{$class-type}#{$namespace}text-left {
+  .#{$namespace}text-left {
     text-align: left!important;
   }
 
-  #{$class-type}#{$namespace}text-right {
+  .#{$namespace}text-right {
     text-align: right!important;
   }
 
-  #{$class-type}#{$namespace}text-center {
+  .#{$namespace}text-center {
     text-align: center!important;
   }
 
 
-  #{$class-type}#{$namespace}left {
+  .#{$namespace}float-left {
     float: left!important;
   }
 
-  #{$class-type}#{$namespace}right {
+  .#{$namespace}float-right {
     float: right!important;
   }
 
 }
 
 /*================ Our regular, non-responsive width and helper classes ================*/
-@include device-type();
-@include device-helper();
+@include grid-device-type();
+@include grid-device-helper();
 
-/*================ Our responsive classes, if we have enabled them ================*/
-@each $name in $breakpoint-has-widths {
-  @include media-query($name) {
-    @include device-type('#{$name}--');
-    @include device-helper('#{$name}--');
-    @include clearfix-helper('#{$name}--');
+/*================ Our responsive classes ================*/
+@each $breakpoint in $breakpoint-has-widths {
+  @include media-query($breakpoint) {
+    @include grid-device-type('#{$breakpoint}--');
+    @include grid-device-helper('#{$breakpoint}--');
+    @include grid-clearfix-helper('#{$breakpoint}--');
   }
 }
 
@@ -600,53 +602,53 @@ $class-type: unquote(".");
   PUSH
     - Push classes, to move grid items over to the right by certain amounts
 ==============================================================================*/
-@mixin push-setup($namespace: "") {
+@mixin grid-push-setup($namespace: "") {
 
-  #{$class-type}push--#{$namespace}col-1 {
+  .push--#{$namespace}col-1 {
     left: 8.333%;
   }
 
-  #{$class-type}push--#{$namespace}col-2 {
+  .push--#{$namespace}col-2 {
     left: 16.666%;
   }
 
-  #{$class-type}push--#{$namespace}col-3 {
+  .push--#{$namespace}col-3 {
     left: 25%;
   }
 
-  #{$class-type}push--#{$namespace}col-4 {
+  .push--#{$namespace}col-4 {
     left: 33.333%;
   }
 
-  #{$class-type}push--#{$namespace}col-5 {
+  .push--#{$namespace}col-5 {
     left: 41.666%;
   }
 
-  #{$class-type}push--#{$namespace}col-6 {
+  .push--#{$namespace}col-6 {
     left: 50%;
   }
 
-  #{$class-type}push--#{$namespace}col-7 {
+  .push--#{$namespace}col-7 {
     left: 58.333%;
   }
 
-  #{$class-type}push--#{$namespace}col-8 {
+  .push--#{$namespace}col-8 {
     left: 66.666%;
   }
 
-  #{$class-type}push--#{$namespace}col-9 {
+  .push--#{$namespace}col-9 {
     left: 75%;
   }
 
-  #{$class-type}push--#{$namespace}col-10 {
+  .push--#{$namespace}col-10 {
     left: 83.333%;
   }
 
-  #{$class-type}push--#{$namespace}col-11 {
+  .push--#{$namespace}col-11 {
     left: 91.666%;
   }
 
-  #{$class-type}push--#{$namespace}col-12 {
+  .push--#{$namespace}col-12 {
     left: 100%;
   }
 
@@ -656,79 +658,11 @@ $class-type: unquote(".");
   position:relative;
 }
 
-@include push-setup();
+@include grid-push-setup();
 
 @each $name in $breakpoint-has-push {
   @include media-query($name) {
-    @include push-setup('#{$name}--');
-  }
-}
-
-/*============================================================================
-  PULL
-    - Pull classes, to move grid items back to the left by certain amounts
-==============================================================================*/
-@mixin pull-setup($namespace: "") {
-
-  #{$class-type}pull--#{$namespace}col-1 {
-    right: 8.333%;
-  }
-
-  #{$class-type}pull--#{$namespace}col-2 {
-    right: 16.666%;
-  }
-
-  #{$class-type}pull--#{$namespace}col-3 {
-    right: 25%;
-  }
-
-  #{$class-type}pull--#{$namespace}col-4 {
-    right: 33.333%;
-  }
-
-  #{$class-type}pull--#{$namespace}col-5 {
-    right: 41.666%;
-  }
-
-  #{$class-type}pull--#{$namespace}col-6 {
-    right: 50%;
-  }
-
-  #{$class-type}pull--#{$namespace}col-7 {
-    right: 58.333%;
-  }
-
-  #{$class-type}pull--#{$namespace}col-8 {
-    right: 66.666%;
-  }
-
-  #{$class-type}pull--#{$namespace}col-9 {
-    right: 75%;
-  }
-
-  #{$class-type}pull--#{$namespace}col-10 {
-    right: 83.333%;
-  }
-
-  #{$class-type}pull--#{$namespace}col-11 {
-    right: 91.666%;
-  }
-
-  #{$class-type}pull--#{$namespace}col-12 {
-    right: 100%;
-  }
-
-}
-
-[class*="pull--"] {
-  position:relative;
-}
-
-@include pull-setup();
-
-@each $name in $breakpoint-has-pull {
-  @include media-query($name) {
-    @include pull-setup('#{$name}--');
+    @include grid-push-setup('#{$name}--');
   }
 }
 
