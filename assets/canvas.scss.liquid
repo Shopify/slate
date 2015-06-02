@@ -221,7 +221,6 @@ $color-error-bg: #000;
 $color-success: #000;
 $color-success-bg: #000;
 
-
 /*============================================================================
   #Sizing Variables
 ==============================================================================*/
@@ -229,7 +228,7 @@ $color-success-bg: #000;
 // Sizing variables
 $width-site: 1180px;
 $gutter-site: 30px;
-$gutter-grid: 30px;
+$gutter-heading: 30px;
 
 /*============================================================================
   #Typography Variables
@@ -309,7 +308,6 @@ $z-index-dropdown : 2;
   }
 }
 
-
 /*============================================================================
   Convert pixels to ems
 
@@ -370,29 +368,31 @@ $z-index-dropdown : 2;
   #Breakpoint Variables
 ==============================================================================*/
 
-$tablet: 750px;
-$desktop: 990px;
-$widescreen: 1400px;
+$grid-tablet: 750px;
+$grid-desktop: 990px;
+$grid-widescreen: 1400px;
 
 /*============================================================================
   #Grid Variables
 ==============================================================================*/
 
-// The `$breakpoints` list is used to build our media queries.  You can use
+$grid-gutter: 30px;
+
+// The `$grid-breakpoints` list is used to build our media queries.  You can use
 // these in the media-queries mixin or as modifiers to your grid classes to
 // target specific breakpoint.  i.e. `.tablet-down--grid-6` will target screen
-// widths below the value set by `$tablet`
-$breakpoints: (
-  'mobile-only' '(max-width: #{$tablet - 1})',
-  'tablet-only' '(min-width: #{$tablet}) and (max-width: #{$desktop - 1})',
-  'tablet-down' '(max-width: #{$tablet - 1})',
-  'tablet-up' '(min-width: #{$tablet})',
-  'desktop-up' '(min-width: #{$desktop})',
-  'widescreen-only' '(min-width: #{$widescreen})'
+// widths below the value set by `$grid-tablet`
+$grid-breakpoints: (
+  'mobile-only' '(max-width: #{$grid-tablet - 1})',
+  'tablet-only' '(min-width: #{$grid-tablet}) and (max-width: #{$grid-desktop - 1})',
+  'tablet-down' '(max-width: #{$grid-tablet - 1})',
+  'tablet-up' '(min-width: #{$grid-tablet})',
+  'desktop-up' '(min-width: #{$grid-desktop})',
+  'widescreen-only' '(min-width: #{$grid-widescreen})'
 );
 
-$breakpoint-has-widths: ('mobile-only', 'tablet-only', 'tablet-down', 'tablet-up', 'desktop-up', 'widescreen-only');
-$breakpoint-has-push:  ('tablet-only', 'tablet-down', 'tablet-up', 'desktop-up', 'widescreen-only');
+$grid-breakpoint-has-widths: ('mobile-only', 'tablet-only', 'tablet-down', 'tablet-up', 'desktop-up', 'widescreen-only');
+$grid-breakpoint-has-push:  ('tablet-only', 'tablet-down', 'tablet-up', 'desktop-up', 'widescreen-only');
 
 /*============================================================================
   #Grid Setup
@@ -413,7 +413,7 @@ $class-type: unquote(".");
 @mixin media-query($media-query) {
   $breakpoint-found: false;
 
-  @each $breakpoint in $breakpoints {
+  @each $breakpoint in $grid-breakpoints {
     $name: nth($breakpoint, 1);
     $declaration: nth($breakpoint, 2);
 
@@ -442,13 +442,13 @@ $class-type: unquote(".");
   list-style: none;
   margin: 0;
   padding: 0;
-  margin-left: -$gutter-grid;
+  margin-left: -$grid-gutter;
 }
 
 .grid__item {
   float: left;
   min-height: 1px;
-  padding-left: $gutter-grid;
+  padding-left: $grid-gutter;
   width: 100%;
 }
 
@@ -584,7 +584,7 @@ $class-type: unquote(".");
 @include grid-device-helper();
 
 /*================ Our responsive classes ================*/
-@each $breakpoint in $breakpoint-has-widths {
+@each $breakpoint in $grid-breakpoint-has-widths {
   @include media-query($breakpoint) {
     @include grid-device-type('#{$breakpoint}--');
     @include grid-device-helper('#{$breakpoint}--');
@@ -654,7 +654,7 @@ $class-type: unquote(".");
 
 @include grid-push-setup();
 
-@each $breakpoint in $breakpoint-has-push {
+@each $breakpoint in $grid-breakpoint-has-push {
   @include media-query($breakpoint) {
     @include grid-push-setup('#{$breakpoint}--');
   }
@@ -814,7 +814,7 @@ hr {
 
 /*================ Section Headers ================*/
 .section-header {
-  margin-bottom: $gutter-site / 1.5;
+  margin-bottom: $gutter-heading;
 }
 
 /*============================================================================
@@ -967,7 +967,7 @@ th, td {
     td {
       display: block;
       text-align: right;
-      padding: $gutter-grid / 2;
+      padding: $gutter-site / 2;
     }
 
     td:before {
@@ -987,15 +987,15 @@ th, td {
   .table__row + .table__row {
     position: relative;
     margin-top: 10px;
-    padding-top: $gutter-grid / 2;
+    padding-top: $gutter-site / 2;
 
     &:after {
       content: '';
       display: block;
       position: absolute;
       top: 0;
-      left: $gutter-grid / 2;
-      right: $gutter-grid / 2;
+      left: $gutter-site / 2;
+      right: $gutter-site / 2;
       border-bottom: 1px solid $color-border;
     }
   }
