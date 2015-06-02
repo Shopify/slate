@@ -380,7 +380,7 @@ $widescreen: 1400px;
 
 // The `$breakpoints` list is used to build our media queries.  You can use
 // these in the media-queries mixin or as modifiers to your grid classes to
-// target specific breakpoint.  i.e. `.tablet-down--col-6` will target screen
+// target specific breakpoint.  i.e. `.tablet-down--grid-6` will target screen
 // widths below the value set by `$tablet`
 $breakpoints: (
   'mobile-only' '(max-width: #{$tablet - 1})',
@@ -482,98 +482,98 @@ $class-type: unquote(".");
   WIDTHS
     - Create width classes, prefixed by the specified namespace.
 ==============================================================================*/
-@mixin grid-device-type($namespace:"") {
+@mixin grid-device-type($grid-namespace:"") {
 
-  .#{$namespace}col-1  {
+  .#{$grid-namespace}grid-1  {
     width: 8.333%;
   }
 
-  .#{$namespace}col-2  {
+  .#{$grid-namespace}grid-2  {
     width: 16.666%;
   }
 
-  .#{$namespace}col-3  {
+  .#{$grid-namespace}grid-3  {
     width: 25%;
   }
 
-  .#{$namespace}col-4  {
+  .#{$grid-namespace}grid-4  {
     width: 33.333%;
   }
 
-  .#{$namespace}col-5  {
+  .#{$grid-namespace}grid-5  {
     width: 41.666%
   }
 
-  .#{$namespace}col-6  {
+  .#{$grid-namespace}grid-6  {
     width: 50%;
   }
 
-  .#{$namespace}col-7  {
+  .#{$grid-namespace}grid-7  {
     width: 58.333%;
   }
 
-  .#{$namespace}col-8  {
+  .#{$grid-namespace}grid-8  {
     width: 66.666%;
   }
 
-  .#{$namespace}col-9  {
+  .#{$grid-namespace}grid-9  {
     width: 75%;
   }
 
-  .#{$namespace}col-10 {
+  .#{$grid-namespace}grid-10 {
     width: 83.333%;
   }
 
-  .#{$namespace}col-11 {
+  .#{$grid-namespace}grid-11 {
     width: 91.666%;
   }
 
-  .#{$namespace}col-12 {
+  .#{$grid-namespace}grid-12 {
     width: 100%;
   }
 
 }
 
 /*================ Clearfix helper on uniform grids ================*/
-@mixin grid-clearfix-helper($namespace:"") {
+@mixin grid-clearfix-helper($grid-namespace:"") {
   .grid--uniform {
-    .#{$namespace}col-1:nth-child(12n+1),
-    .#{$namespace}col-2:nth-child(6n+1),
-    .#{$namespace}col-3:nth-child(4n+1),
-    .#{$namespace}col-4:nth-child(3n+1),
-    .#{$namespace}col-6:nth-child(2n+1)    { clear: both; }
+    .#{$grid-namespace}grid-1:nth-child(12n+1),
+    .#{$grid-namespace}grid-2:nth-child(6n+1),
+    .#{$grid-namespace}grid-3:nth-child(4n+1),
+    .#{$grid-namespace}grid-4:nth-child(3n+1),
+    .#{$grid-namespace}grid-6:nth-child(2n+1)    { clear: both; }
   }
 }
 
 /*================ Helper show/hide classes around our breakpoints ================*/
-@mixin grid-device-helper($namespace:"") {
-  .#{$namespace}show {
+@mixin grid-device-helper($grid-namespace:"") {
+  .#{$grid-namespace}show {
     display: block!important;
   }
 
-  .#{$namespace}hide {
+  .#{$grid-namespace}hide {
     display: none!important;
   }
 
 
-  .#{$namespace}text-left {
+  .#{$grid-namespace}text-left {
     text-align: left!important;
   }
 
-  .#{$namespace}text-right {
+  .#{$grid-namespace}text-right {
     text-align: right!important;
   }
 
-  .#{$namespace}text-center {
+  .#{$grid-namespace}text-center {
     text-align: center!important;
   }
 
 
-  .#{$namespace}float-left {
+  .#{$grid-namespace}float-left {
     float: left!important;
   }
 
-  .#{$namespace}float-right {
+  .#{$grid-namespace}float-right {
     float: right!important;
   }
 
@@ -596,53 +596,53 @@ $class-type: unquote(".");
   PUSH
     - Push classes, to move grid items over to the right by certain amounts
 ==============================================================================*/
-@mixin grid-push-setup($namespace: "") {
+@mixin grid-push-setup($grid-namespace: "") {
 
-  .push--#{$namespace}col-1 {
+  .push--#{$grid-namespace}grid-1 {
     left: 8.333%;
   }
 
-  .push--#{$namespace}col-2 {
+  .push--#{$grid-namespace}grid-2 {
     left: 16.666%;
   }
 
-  .push--#{$namespace}col-3 {
+  .push--#{$grid-namespace}grid-3 {
     left: 25%;
   }
 
-  .push--#{$namespace}col-4 {
+  .push--#{$grid-namespace}grid-4 {
     left: 33.333%;
   }
 
-  .push--#{$namespace}col-5 {
+  .push--#{$grid-namespace}grid-5 {
     left: 41.666%;
   }
 
-  .push--#{$namespace}col-6 {
+  .push--#{$grid-namespace}grid-6 {
     left: 50%;
   }
 
-  .push--#{$namespace}col-7 {
+  .push--#{$grid-namespace}grid-7 {
     left: 58.333%;
   }
 
-  .push--#{$namespace}col-8 {
+  .push--#{$grid-namespace}grid-8 {
     left: 66.666%;
   }
 
-  .push--#{$namespace}col-9 {
+  .push--#{$grid-namespace}grid-9 {
     left: 75%;
   }
 
-  .push--#{$namespace}col-10 {
+  .push--#{$grid-namespace}grid-10 {
     left: 83.333%;
   }
 
-  .push--#{$namespace}col-11 {
+  .push--#{$grid-namespace}grid-11 {
     left: 91.666%;
   }
 
-  .push--#{$namespace}col-12 {
+  .push--#{$grid-namespace}grid-12 {
     left: 100%;
   }
 
@@ -654,9 +654,9 @@ $class-type: unquote(".");
 
 @include grid-push-setup();
 
-@each $name in $breakpoint-has-push {
-  @include media-query($name) {
-    @include grid-push-setup('#{$name}--');
+@each $breakpoint in $breakpoint-has-push {
+  @include media-query($breakpoint) {
+    @include grid-push-setup('#{$breakpoint}--');
   }
 }
 
