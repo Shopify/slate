@@ -362,6 +362,13 @@ $grid-tablet: 750px;
 $grid-desktop: 990px;
 $grid-widescreen: 1400px;
 
+$mobile-up: 'mobile-up';
+$tablet-only: 'tablet-only';
+$tabled-down: 'tablet-down';
+$tablet-up: 'tablet-up';
+$desktop-up: 'desktop-up';
+$widescreen-only: 'widescreen-only';
+
 /*============================================================================
   #Grid Variables
 ==============================================================================*/
@@ -375,17 +382,20 @@ $grid-gutter: 30px;
 $grid-breakpoints: (
   'mobile-only' '(max-width: #{$grid-tablet - 1})',
   'tablet-only' '(min-width: #{$grid-tablet}) and (max-width: #{$grid-desktop - 1})',
+  'tablet-down' '(max-width: #{$grid-desktop - 1})',
   'tablet-up' '(min-width: #{$grid-tablet})',
   'desktop-up' '(min-width: #{$grid-desktop})',
   'widescreen-only' '(min-width: #{$grid-widescreen})'
 );
 
-$grid-breakpoint-has-widths: ('mobile-only', 'tablet-only', 'tablet-up', 'desktop-up', 'widescreen-only');
+$grid-breakpoint-names: ('mobile-only', 'tablet-only', 'tablet-up', 'desktop-up', 'widescreen-only');
 $grid-breakpoint-has-push:  ('tablet-only', 'tablet-up', 'desktop-up', 'widescreen-only');
 
 /*============================================================================
-  #Grid Setup
-    - Based on csswizardry grid, but with floated columns, a fixed gutter size, and BEM classes
+  #Grid
+    - Creates a 12 column responsive grid.
+    - Based on csswizardry grid, but with floated columns, a fixed gutter size,
+    and BEM classes
     - Breakpoints defined above, under #Grid Variables
     - `.grid--uniform` is used to take care of clearfixes on evenly sized
     `.grid__items`
@@ -397,6 +407,9 @@ $grid-breakpoint-has-push:  ('tablet-only', 'tablet-up', 'desktop-up', 'widescre
   @include clearfix;
 }
 
+
+// You can create your own custom media queries by passing in a string with the
+// min and max values to this mixin or by creating a new breakpoint below.
 @mixin media-query($media-query) {
   $breakpoint-found: false;
 
@@ -437,7 +450,6 @@ $grid-breakpoint-has-push:  ('tablet-only', 'tablet-up', 'desktop-up', 'widescre
 
 .grid__item {
   float: left;
-  min-height: 1px;
   padding-left: $grid-gutter;
   width: 100%;
 }
@@ -470,55 +482,54 @@ $grid-breakpoint-has-push:  ('tablet-only', 'tablet-up', 'desktop-up', 'widescre
 
 /*============================================================================
   WIDTHS
-    - Create width classes, prefixed by the specified namespace.
+    - Create width classes with the modifiers for each breakpoint.
 ==============================================================================*/
-@mixin grid-device-type($grid-namespace:"") {
-
-  .#{$grid-namespace}grid-1  {
+@mixin grid-breakpoint-helper($grid-namespace:"") {
+  .grid-1#{$grid-namespace} {
     width: 8.333%;
   }
 
-  .#{$grid-namespace}grid-2  {
+  .grid-2#{$grid-namespace} {
     width: 16.666%;
   }
 
-  .#{$grid-namespace}grid-3  {
+  .grid-3#{$grid-namespace} {
     width: 25%;
   }
 
-  .#{$grid-namespace}grid-4  {
+  .grid-4#{$grid-namespace} {
     width: 33.333%;
   }
 
-  .#{$grid-namespace}grid-5  {
+  .grid-5#{$grid-namespace} {
     width: 41.666%
   }
 
-  .#{$grid-namespace}grid-6  {
+  .grid-6#{$grid-namespace} {
     width: 50%;
   }
 
-  .#{$grid-namespace}grid-7  {
+  .grid-7#{$grid-namespace} {
     width: 58.333%;
   }
 
-  .#{$grid-namespace}grid-8  {
+  .grid-8#{$grid-namespace} {
     width: 66.666%;
   }
 
-  .#{$grid-namespace}grid-9  {
+  .grid-9#{$grid-namespace} {
     width: 75%;
   }
 
-  .#{$grid-namespace}grid-10 {
+  .grid-10#{$grid-namespace} {
     width: 83.333%;
   }
 
-  .#{$grid-namespace}grid-11 {
+  .grid-11#{$grid-namespace} {
     width: 91.666%;
   }
 
-  .#{$grid-namespace}grid-12 {
+  .grid-12#{$grid-namespace} {
     width: 100%;
   }
 
@@ -527,58 +538,63 @@ $grid-breakpoint-has-push:  ('tablet-only', 'tablet-up', 'desktop-up', 'widescre
 /*================ Clearfix helper on uniform grids ================*/
 @mixin grid-clearfix-helper($grid-namespace:"") {
   .grid--uniform {
-    .#{$grid-namespace}grid-1:nth-child(12n+1),
-    .#{$grid-namespace}grid-2:nth-child(6n+1),
-    .#{$grid-namespace}grid-3:nth-child(4n+1),
-    .#{$grid-namespace}grid-4:nth-child(3n+1),
-    .#{$grid-namespace}grid-6:nth-child(2n+1)    { clear: both; }
+    .grid-1#{$grid-namespace}:nth-child(12n+1),
+    .grid-2#{$grid-namespace}:nth-child(6n+1),
+    .grid-3#{$grid-namespace}:nth-child(4n+1),
+    .grid-4#{$grid-namespace}:nth-child(3n+1),
+    .grid-6#{$grid-namespace}:nth-child(2n+1)    { clear: both; }
   }
 }
 
 /*================ Helper show/hide classes around our breakpoints ================*/
-@mixin grid-device-helper($grid-namespace:"") {
-  .#{$grid-namespace}show {
-    display: block!important;
+@mixin grid-display-helper($grid-namespace:"") {
+  .show#{$grid-namespace} {
+    display: block !important;
   }
 
-  .#{$grid-namespace}hide {
-    display: none!important;
+  .hide#{$grid-namespace} {
+    display: none !important;
   }
-
-
-  .#{$grid-namespace}text-left {
-    text-align: left!important;
-  }
-
-  .#{$grid-namespace}text-right {
-    text-align: right!important;
-  }
-
-  .#{$grid-namespace}text-center {
-    text-align: center!important;
-  }
-
-
-  .#{$grid-namespace}float-left {
-    float: left!important;
-  }
-
-  .#{$grid-namespace}float-right {
-    float: right!important;
-  }
-
 }
 
-/*================ Our regular, non-responsive width and helper classes ================*/
-@include grid-device-type();
-@include grid-device-helper();
+@mixin grid-text-align-helper($grid-namespace:"") {
+  .text-left#{$grid-namespace} {
+    text-align: left !important;
+  }
 
-/*================ Our responsive classes ================*/
-@each $breakpoint in $grid-breakpoint-has-widths {
+  .text-right#{$grid-namespace} {
+    text-align: right !important;
+  }
+
+  .text-center#{$grid-namespace} {
+    text-align: center !important;
+  }
+}
+
+@mixin grid-float-helper($grid-namespace:"") {
+  .float-left#{$grid-namespace} {
+    float: left !important;
+  }
+
+  .float-right#{$grid-namespace} {
+    float: right !important;
+  }
+}
+
+/*================ Base width and helper classes ================*/
+@include grid-breakpoint-helper();
+@include grid-display-helper();
+@include grid-float-helper();
+@include grid-text-align-helper();
+
+/*================ Responsive classes ================*/
+@each $breakpoint in $grid-breakpoint-names {
   @include media-query($breakpoint) {
-    @include grid-device-type('#{$breakpoint}--');
-    @include grid-device-helper('#{$breakpoint}--');
-    @include grid-clearfix-helper('#{$breakpoint}--');
+    @include grid-breakpoint-helper('--#{$breakpoint}');
+    // @include grid-display-helper('--#{$breakpoint}');
+    // @include grid-float-helper('--#{$breakpoint}');
+    // @include grid-text-align-helper('--#{$breakpoint}');
+    @include grid-clearfix-helper('--#{$breakpoint}');
   }
 }
 
@@ -587,58 +603,56 @@ $grid-breakpoint-has-push:  ('tablet-only', 'tablet-up', 'desktop-up', 'widescre
     - Push classes, to move grid items over to the right by certain amounts
 ==============================================================================*/
 @mixin grid-push-setup($grid-namespace: "") {
-
-  .push--#{$grid-namespace}grid-1 {
+  .grid-1#{$grid-namespace}--push-grid {
     left: 8.333%;
   }
 
-  .push--#{$grid-namespace}grid-2 {
+  .grid-2#{$grid-namespace}--push-grid {
     left: 16.666%;
   }
 
-  .push--#{$grid-namespace}grid-3 {
+  .grid-3#{$grid-namespace}--push-grid {
     left: 25%;
   }
 
-  .push--#{$grid-namespace}grid-4 {
+  .grid-4#{$grid-namespace}--push-grid {
     left: 33.333%;
   }
 
-  .push--#{$grid-namespace}grid-5 {
+  .grid-5#{$grid-namespace}--push-grid {
     left: 41.666%;
   }
 
-  .push--#{$grid-namespace}grid-6 {
+  .grid-6#{$grid-namespace}--push-grid {
     left: 50%;
   }
 
-  .push--#{$grid-namespace}grid-7 {
+  .grid-7#{$grid-namespace}--push-grid {
     left: 58.333%;
   }
 
-  .push--#{$grid-namespace}grid-8 {
+  .grid-8#{$grid-namespace}--push-grid {
     left: 66.666%;
   }
 
-  .push--#{$grid-namespace}grid-9 {
+  .grid-9#{$grid-namespace}--push-grid {
     left: 75%;
   }
 
-  .push--#{$grid-namespace}grid-10 {
+  .grid-10#{$grid-namespace}--push-grid {
     left: 83.333%;
   }
 
-  .push--#{$grid-namespace}grid-11 {
+  .grid-11#{$grid-namespace}--push-grid {
     left: 91.666%;
   }
 
-  .push--#{$grid-namespace}grid-12 {
+  .grid-12#{$grid-namespace}--push-grid {
     left: 100%;
   }
-
 }
 
-[class*="push--"] {
+[class$="--push-grid"] {
   position:relative;
 }
 
@@ -646,7 +660,7 @@ $grid-breakpoint-has-push:  ('tablet-only', 'tablet-up', 'desktop-up', 'widescre
 
 @each $breakpoint in $grid-breakpoint-has-push {
   @include media-query($breakpoint) {
-    @include grid-push-setup('#{$breakpoint}--');
+    @include grid-push-setup('--#{$breakpoint}');
   }
 }
 
@@ -657,7 +671,7 @@ $grid-breakpoint-has-push:  ('tablet-only', 'tablet-up', 'desktop-up', 'widescre
 ==============================================================================*/
 
 // Prevent zoom on touch devices in active inputs
-@include media-query('tablet-down') {
+@include media-query($tablet-down) {
   input,
   textarea {
     font-size: 16px;
