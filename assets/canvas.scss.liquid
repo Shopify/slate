@@ -337,6 +337,10 @@ $z-index-dropdown : 2;
   @include prefix(backface-visiblity, $visibility, webkit spec);
 }
 
+@mixin user-select($value: none) {
+  @include prefix('user-select', #{$value}, moz ms webkit spec);
+}
+
 /*============================================================================
   #Helper Classes
 ==============================================================================*/
@@ -1082,11 +1086,11 @@ label[for] {
 /*============================================================================
   #Icons
 ==============================================================================*/
-.icon-fallback-text .icon {
-  display: none;
+.icon {
+  display: inline-block;
 
-  .supports-fontface & {
-    display: inline-block;
+  .supports-no-fontface & {
+    display: none;
   }
 }
 
@@ -1094,15 +1098,11 @@ label[for] {
   A generic way to visually hide content while
   remaining accessible to screen readers (h5bp.com)
 ==============================================================================*/
-.supports-fontface .icon-fallback-text .fallback-text {
+.supports-fontface .icon--has-fallback-text .icon__fallback-text {
   @extend .visually-hidden;
 }
 
 .icon:before {
-  display: none;
-}
-
-.supports-fontface .icon:before {
   display: inline;
   font-family: $font-stack-icons;
   text-decoration: none;
@@ -1114,6 +1114,10 @@ label[for] {
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.supports-no-fontface .icon:before {
+  display: none;
 }
 
 /*================ Icon mapping ================*/
@@ -1152,7 +1156,7 @@ label[for] {
 .icon-youtube:before { content: "\79"; }
 
 .payment-icons {
-  @include prefix('user-select', 'none', moz ms webkit);
+  @include user-select();
   cursor: default;
 
   li {
@@ -1167,8 +1171,7 @@ label[for] {
 
 .social-icons li {
 
-  //TODO: update query
-  @include at-query ($min, $postSmall) {
+  @include media-query($tablet-up) {
     margin-left: 0;
   }
 
@@ -1176,11 +1179,4 @@ label[for] {
     font-size: $font-size-icons-social;
   }
 
-  a {
-    color: $color-primary;
-
-    &:hover {
-      color: darken($color-primary, 10%);
-    }
-  }
 }
