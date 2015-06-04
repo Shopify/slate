@@ -1182,21 +1182,12 @@ label[for] {
 /*============================================================================
   #Site Nav and Dropdowns
 ==============================================================================*/
-.nav-bar {
-}
 
 .site-nav {
-  font-size: em(16);
-  cursor: default;
   margin: 0 0 0 (-$gutter / 2);
 
   li {
     margin: 0;
-    display: block;
-  }
-
-  > li {
-    position: relative;
     display: inline-block;
   }
 }
@@ -1204,20 +1195,12 @@ label[for] {
 /*================ Site Nav Links ================*/
 .site-nav__link {
   display: block;
-  text-decoration: none;
   white-space: nowrap;
   color: $color-link;
-
-  &:hover,
-  &:active,
-  &:focus {
-    color: darken($color-link, 15%);
-  }
 
   .icon-arrow-down {
     position: relative;
     top: -2px;
-    font-size: em(10);
   }
 
   .site-nav--active > & {
@@ -1238,13 +1221,7 @@ label[for] {
     display: block;
   }
 
-  a {
-    color: $color-link;
-
-    &:hover,
-    &:active,
-    &:focus {
-      color: darken($color-link, 10%);
-    }
+  li {
+    display: block;
   }
 }
