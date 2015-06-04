@@ -71,7 +71,7 @@
       Use class grid-uniform to have evenly sized columns clear
       each other properly at each breakpoint.
     {% endcomment %}
-    <div class="grid collection-grid">
+    <div class="grid--uniform collection-grid">
 
       {% comment %}
         Loop through our products in the current collection.
@@ -95,7 +95,7 @@
           {% assign sold_out = false %}
         {% endif %}
 
-        <div class="grid__item">
+        <div class="grid__item grid-3 grid-2--mobile-only">
           {% comment %}
             Link to your product with the 'within: collection' filter for the link to be aware of the collection.
             This allows you to create collection-based navigation on the product page.
@@ -153,7 +153,7 @@
             {{ 'theme-onboarding.css' | global_asset_url | stylesheet_tag }}
             {% assign emptyState = true %}
           {% endunless %}
-          <div class="grid__item">
+          <div class="grid__item grid-3 grid-2--mobile-only">
             <div class="helper-section">
               <div class="helper-note">
                 <span class="helper-icon"></span>
@@ -171,7 +171,7 @@
                     {% when 8 %}
                       {% assign index = 2 %}
                   {% endcase %}
-                  <div class="grid__item">
+                  <div class="grid__item grid-3 grid-2--mobile-only">
                     <a href="/admin/products" class="grid__image">
                       {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ index }}.png{% endcapture %}
                       {{ imageUrl | img_tag }}
@@ -188,7 +188,7 @@
           {% comment %}
             If collection exists but is empty, display message
           {% endcomment %}
-          <div class="grid__item">
+          <div class="grid__item grid-3 grid-2--mobile-only">
             <p>{{ 'collections.general.no_matches' | t }}</p>
           </div>
         {% endif %}
@@ -196,7 +196,7 @@
     </div>
 
     {% if paginate.pages > 1 %}
-      <div class="grid__item pagination">
+      <div class="grid__item grid-3 grid-2--mobile-only pagination">
         {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
       </div>
     {% endif %}

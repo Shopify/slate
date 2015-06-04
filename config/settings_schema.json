@@ -32,7 +32,7 @@
         "type": "color",
         "id": "color_primary",
         "label": "Primary Color",
-        "default": "#204a80",
+        "default": "#000",
         "info": "Used for text links, and primary buttons"
       },
       {
@@ -46,21 +46,21 @@
         "type": "color",
         "id": "color_body_bg",
         "label": "Background Color",
-        "default": "#204a80",
+        "default": "#fff",
         "info": "Background color for your theme"
       },
       {
         "type": "color",
         "id": "color_body_text",
         "label": "Text Color",
-        "default": "#204a80",
+        "default": "#000",
         "info": "Color used for content and paragraph text"
       },
       {
         "type": "color",
         "id": "color_borders",
         "label": "Border Color",
-        "default": "#204a80",
+        "default": "#000",
         "info": "Border and separator color"
       }
     ]

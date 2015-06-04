@@ -45,6 +45,12 @@
   Based on normalize.css v3.0.2 | MIT License | git.io/normalize
 ==============================================================================*/
 
+*, input, :before, :after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 // Remove default margin.
 body {
   margin: 0;
@@ -336,6 +342,10 @@ $z-index-dropdown : 2;
   @include prefix(backface-visiblity, $visibility, webkit spec);
 }
 
+@mixin box-sizing($box-sizing: border-box) {
+  @include prefix(box-sizing, #{$box-sizing}, moz webkit spec)
+}
+
 /*============================================================================
   #Helper Classes
 ==============================================================================*/
@@ -362,12 +372,13 @@ $grid-tablet: 750px;
 $grid-desktop: 990px;
 $grid-widescreen: 1400px;
 
-$mobile-up: 'mobile-up';
+// Used by the `media-query` mixin
+$mobile: 'mobile';
 $tablet-only: 'tablet-only';
-$tabled-down: 'tablet-down';
+$tablet-down: 'tablet-down';
 $tablet-up: 'tablet-up';
 $desktop-up: 'desktop-up';
-$widescreen-only: 'widescreen-only';
+$widescreen: 'widescreen';
 
 /*============================================================================
   #Grid Variables
@@ -375,21 +386,22 @@ $widescreen-only: 'widescreen-only';
 
 $grid-gutter: 30px;
 
+$grid-columns: 12;
+
 // The `$grid-breakpoints` list is used to build our media queries.  You can use
 // these in the media-queries mixin or as modifiers to your grid classes to
-// target specific breakpoint.  i.e. `.tablet-down--grid-6` will target screen
-// widths below the value set by `$grid-tablet`
+// target specific breakpoint.  i.e. `.grid-6--tablet-down` will target screen
+// widths below the value set by `$grid-desktop`
 $grid-breakpoints: (
-  'mobile-only' '(max-width: #{$grid-tablet - 1})',
+  'mobile' '(max-width: #{$grid-tablet - 1})',
   'tablet-only' '(min-width: #{$grid-tablet}) and (max-width: #{$grid-desktop - 1})',
   'tablet-down' '(max-width: #{$grid-desktop - 1})',
   'tablet-up' '(min-width: #{$grid-tablet})',
   'desktop-up' '(min-width: #{$grid-desktop})',
-  'widescreen-only' '(min-width: #{$grid-widescreen})'
+  'widescreen' '(min-width: #{$grid-widescreen})'
 );
 
-$grid-breakpoint-names: ('mobile-only', 'tablet-only', 'tablet-up', 'desktop-up', 'widescreen-only');
-$grid-breakpoint-has-push:  ('tablet-only', 'tablet-up', 'desktop-up', 'widescreen-only');
+$grid-breakpoint-types: ('mobile', 'tablet-only', 'tablet-down', 'tablet-up', 'desktop-up', 'widescreen');
 
 /*============================================================================
   #Grid
@@ -404,7 +416,7 @@ $grid-breakpoint-has-push:  ('tablet-only', 'tablet-up', 'desktop-up', 'widescre
 /* Force clearfix on grids */
 .grid,
 .grid--uniform {
-  @include clearfix;
+  @include clearfix();
 }
 
 
@@ -431,6 +443,29 @@ $grid-breakpoint-has-push:  ('tablet-only', 'tablet-up', 'desktop-up', 'widescre
     @media only screen and #{$media-query} {
         @content;
       }
+  }
+}
+
+$min: min-width;
+$max: max-width;
+
+@mixin custom-query ($constraint_, $viewport1_, $viewport2_:null) {
+ $constraint: $constraint_; $viewport1: $viewport1_; $viewport2: $viewport2_;
+  @if type-of($constraint_) == number {
+    $viewport1 : $constraint_; $viewport2 : $viewport1_; $constraint : null;
+  }
+  @if $constraint == $min {
+    @media screen and ($min: $viewport1) {
+      @content;
+    }
+  } @else if $constraint == $max {
+    @media screen and ($max: $viewport1) {
+      @content;
+    }
+  } @else {
+    @media screen and ($min: $viewport1) and ($max: $viewport2) {
+      @content;
+    }
   }
 }
 
@@ -484,116 +519,68 @@ $grid-breakpoint-has-push:  ('tablet-only', 'tablet-up', 'desktop-up', 'widescre
   WIDTHS
     - Create width classes with the modifiers for each breakpoint.
 ==============================================================================*/
-@mixin grid-breakpoint-helper($grid-namespace:"") {
-  .grid-1#{$grid-namespace} {
-    width: 8.333%;
+@mixin grid-breakpoint-helper($grid-columns, $grid-breakpoint-type:"") {
+  @for $i from 1 through $grid-columns {
+    .grid-#{$i}#{$grid-breakpoint-type} {
+      width: #{percentage($i / $grid-columns)};
+    }
   }
-
-  .grid-2#{$grid-namespace} {
-    width: 16.666%;
-  }
-
-  .grid-3#{$grid-namespace} {
-    width: 25%;
-  }
-
-  .grid-4#{$grid-namespace} {
-    width: 33.333%;
-  }
-
-  .grid-5#{$grid-namespace} {
-    width: 41.666%
-  }
-
-  .grid-6#{$grid-namespace} {
-    width: 50%;
-  }
-
-  .grid-7#{$grid-namespace} {
-    width: 58.333%;
-  }
-
-  .grid-8#{$grid-namespace} {
-    width: 66.666%;
-  }
-
-  .grid-9#{$grid-namespace} {
-    width: 75%;
-  }
-
-  .grid-10#{$grid-namespace} {
-    width: 83.333%;
-  }
-
-  .grid-11#{$grid-namespace} {
-    width: 91.666%;
-  }
-
-  .grid-12#{$grid-namespace} {
-    width: 100%;
-  }
-
 }
 
 /*================ Clearfix helper on uniform grids ================*/
-@mixin grid-clearfix-helper($grid-namespace:"") {
+@mixin grid-clearfix-helper($grid-breakpoint-type:"") {
   .grid--uniform {
-    .grid-1#{$grid-namespace}:nth-child(12n+1),
-    .grid-2#{$grid-namespace}:nth-child(6n+1),
-    .grid-3#{$grid-namespace}:nth-child(4n+1),
-    .grid-4#{$grid-namespace}:nth-child(3n+1),
-    .grid-6#{$grid-namespace}:nth-child(2n+1)    { clear: both; }
+    .grid-1#{$grid-breakpoint-type}:nth-child(12n+1),
+    .grid-2#{$grid-breakpoint-type}:nth-child(6n+1),
+    .grid-3#{$grid-breakpoint-type}:nth-child(4n+1),
+    .grid-4#{$grid-breakpoint-type}:nth-child(3n+1),
+    .grid-6#{$grid-breakpoint-type}:nth-child(2n+1)    { clear: both; }
   }
 }
 
 /*================ Helper show/hide classes around our breakpoints ================*/
-@mixin grid-display-helper($grid-namespace:"") {
-  .show#{$grid-namespace} {
+@mixin grid-display-helper($grid-breakpoint-type:"") {
+  .show#{$grid-breakpoint-type} {
     display: block !important;
   }
 
-  .hide#{$grid-namespace} {
+  .hide#{$grid-breakpoint-type} {
     display: none !important;
   }
 }
 
-@mixin grid-text-align-helper($grid-namespace:"") {
-  .text-left#{$grid-namespace} {
+@mixin grid-text-align-helper($grid-breakpoint-type:"") {
+  .text-left#{$grid-breakpoint-type} {
     text-align: left !important;
   }
 
-  .text-right#{$grid-namespace} {
+  .text-right#{$grid-breakpoint-type} {
     text-align: right !important;
   }
 
-  .text-center#{$grid-namespace} {
+  .text-center#{$grid-breakpoint-type} {
     text-align: center !important;
   }
 }
 
-@mixin grid-float-helper($grid-namespace:"") {
-  .float-left#{$grid-namespace} {
+@mixin grid-float-helper($grid-breakpoint-type:"") {
+  .float-left#{$grid-breakpoint-type} {
     float: left !important;
   }
 
-  .float-right#{$grid-namespace} {
+  .float-right#{$grid-breakpoint-type} {
     float: right !important;
   }
 }
 
-/*================ Base width and helper classes ================*/
-@include grid-breakpoint-helper();
+/*================ Base Grid Classes ================*/
+@include grid-breakpoint-helper($grid-columns);
 @include grid-display-helper();
-@include grid-float-helper();
-@include grid-text-align-helper();
 
-/*================ Responsive classes ================*/
-@each $breakpoint in $grid-breakpoint-names {
+/*================ Responsive Grid classes ================*/
+@each $breakpoint in $grid-breakpoint-types {
   @include media-query($breakpoint) {
-    @include grid-breakpoint-helper('--#{$breakpoint}');
-    // @include grid-display-helper('--#{$breakpoint}');
-    // @include grid-float-helper('--#{$breakpoint}');
-    // @include grid-text-align-helper('--#{$breakpoint}');
+    @include grid-breakpoint-helper($grid-columns, '--#{$breakpoint}');
     @include grid-clearfix-helper('--#{$breakpoint}');
   }
 }
@@ -602,67 +589,24 @@ $grid-breakpoint-has-push:  ('tablet-only', 'tablet-up', 'desktop-up', 'widescre
   PUSH
     - Push classes, to move grid items over to the right by certain amounts
 ==============================================================================*/
-@mixin grid-push-setup($grid-namespace: "") {
-  .grid-1#{$grid-namespace}--push-grid {
-    left: 8.333%;
-  }
-
-  .grid-2#{$grid-namespace}--push-grid {
-    left: 16.666%;
-  }
-
-  .grid-3#{$grid-namespace}--push-grid {
-    left: 25%;
-  }
-
-  .grid-4#{$grid-namespace}--push-grid {
-    left: 33.333%;
-  }
-
-  .grid-5#{$grid-namespace}--push-grid {
-    left: 41.666%;
-  }
-
-  .grid-6#{$grid-namespace}--push-grid {
-    left: 50%;
-  }
-
-  .grid-7#{$grid-namespace}--push-grid {
-    left: 58.333%;
-  }
-
-  .grid-8#{$grid-namespace}--push-grid {
-    left: 66.666%;
-  }
-
-  .grid-9#{$grid-namespace}--push-grid {
-    left: 75%;
-  }
-
-  .grid-10#{$grid-namespace}--push-grid {
-    left: 83.333%;
-  }
-
-  .grid-11#{$grid-namespace}--push-grid {
-    left: 91.666%;
-  }
-
-  .grid-12#{$grid-namespace}--push-grid {
-    left: 100%;
+@mixin grid-push-setup($grid-columns, $grid-breakpoint-type: "") {
+  @for $i from 1 through $grid-columns {
+    .push-grid-#{$i}#{$grid-breakpoint-type} {
+      width: #{percentage($i / $grid-columns)};
+    }
   }
 }
 
-[class$="--push-grid"] {
+[class*="push-grid"] {
   position:relative;
 }
 
-@include grid-push-setup();
+// @include grid-push-setup($grid-columns);
 
-@each $breakpoint in $grid-breakpoint-has-push {
-  @include media-query($breakpoint) {
-    @include grid-push-setup('--#{$breakpoint}');
-  }
-}
+// To add responsive push classes, call the `grid-push-setup()` and pass in
+// a breakpoint string prefixed with '--' ('--desktop-up', '--tablet-down')
+
+// @include grid-push-setup($grid-columns, '--desktop-up');
 
 /*============================================================================
   #Responsive Normalize
@@ -709,6 +653,7 @@ ol {
   li {
     display: inline-block;
   }
+}
 
 /*============================================================================
   #Basic Styles
@@ -717,6 +662,23 @@ ol {
 body,
 html {
   background-color: $color-body;
+}
+
+.wrapper {
+  @include clearfix();
+  max-width: $width-site;
+  margin: 0 auto;
+  padding: 0 ($gutter-site / 2);
+
+  @include media-query($mobile-only) {
+    padding: 0 $gutter-site;
+  }
+}
+
+.main-content {
+  display: block;
+  margin-top: $gutter-site;
+  padding-bottom: $gutter-site * 2;
 }
 
 /*============================================================================
