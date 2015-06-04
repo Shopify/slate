@@ -20,6 +20,7 @@
   #Normalize
   #Color Variables
   #Sizing Variables
+  #Breakpoint Variables
   #Typography Variables
   #Z-Index
   #Mixins and Functions
@@ -43,6 +44,10 @@
 
   Based on normalize.css v3.0.2 | MIT License | git.io/normalize
 ==============================================================================*/
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
 
 // Remove default margin.
 body {
@@ -106,6 +111,7 @@ sub {
 
 // Remove border when inside `a` element in IE 8/9/10.
 img {
+  max-width: 100%;
   border: 0;
 }
 
@@ -138,24 +144,9 @@ input::-moz-focus-inner {
 }
 
 // 1. Address `appearance` set to `searchfield` in Safari and Chrome.
-// 2. Address `box-sizing` set to `border-box` in Safari and Chrome
-//    (include `-moz` to future-proof).
 input[type="search"] {
   -webkit-appearance: textfield; // 1
-  -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box; // 2
-  box-sizing: content-box;
 }
-
-// Prevent zoom on touch devices in active inputs
-// TODO: Update query syntax
-@include at-query($max, $medium) {
-  input,
-  textarea {
-    font-size: 16px;
-  }
-}
-
 
 // Remove most spacing between table cells.
 table {
@@ -219,7 +210,6 @@ $color-error-bg: #000;
 $color-success: #000;
 $color-success-bg: #000;
 
-
 /*============================================================================
   #Sizing Variables
 ==============================================================================*/
@@ -227,7 +217,7 @@ $color-success-bg: #000;
 // Sizing variables
 $width-site: 1180px;
 $gutter-site: 30px;
-$gutter-grid: 30px;
+$gutter-heading: 30px;
 
 /*============================================================================
   #Typography Variables
@@ -249,13 +239,13 @@ $font-size-base: 14px; // Henseforth known as 1em
   font-weight: normal;
   font-style: normal;
 }
+
 $font-stack-social-icons: 'icons';
 
 /*============================================================================
   #Z-Index
 ==============================================================================*/
 $z-index-dropdown : 2;
-
 
 /*============================================================================
   #Mixins and Functions
@@ -265,7 +255,9 @@ $z-index-dropdown : 2;
   &:after {
     content: '';
     display: table;
-    clear: both; }
+    clear: both;
+  }
+
   *zoom: 1;
 }
 
@@ -304,7 +296,6 @@ $z-index-dropdown : 2;
     }
   }
 }
-
 
 /*============================================================================
   Convert pixels to ems
@@ -349,7 +340,7 @@ $z-index-dropdown : 2;
 ==============================================================================*/
 
 .clearfix {
-  @include clearfix;
+  @include clearfix();
 }
 
 .visually-hidden {
@@ -360,6 +351,231 @@ $z-index-dropdown : 2;
   width: 1px;
   margin: -1px;
   padding: 0; border: 0;
+}
+
+/*============================================================================
+  #Breakpoint Variables
+==============================================================================*/
+
+// Used by the `media-query` mixin
+$mobile: 'mobile';
+$tablet-only: 'tablet-only';
+$tablet-down: 'tablet-down';
+$tablet-up: 'tablet-up';
+$desktop-up: 'desktop-up';
+$widescreen: 'widescreen';
+
+/*============================================================================
+  #Media Query Mixin
+==============================================================================*/
+
+@mixin media-query($media-query) {
+  $breakpoint-found: false;
+
+  @each $breakpoint in $grid-breakpoints {
+    $name: nth($breakpoint, 1);
+    $declaration: nth($breakpoint, 2);
+
+    @if $media-query == $name and $declaration {
+      $breakpoint-found: true;
+
+      @media only screen and #{$declaration} {
+        @content;
+      }
+    }
+  }
+
+  @if $breakpoint-found == false {
+    @warn "Breakpoint '#{$media-query}' does not exist";
+  }
+}
+
+/*============================================================================
+  #Responsive Helper Mixins
+==============================================================================*/
+
+/*================ Helper show/hide classes around our breakpoints ================*/
+@mixin responsive-display-helper($grid-breakpoint-type:"") {
+  .show#{$grid-breakpoint-type} {
+    display: block !important;
+  }
+
+  .hide#{$grid-breakpoint-type} {
+    display: none !important;
+  }
+}
+
+@mixin responsive-text-align-helper($grid-breakpoint-type:"") {
+  .text-left#{$grid-breakpoint-type} {
+    text-align: left !important;
+  }
+
+  .text-right#{$grid-breakpoint-type} {
+    text-align: right !important;
+  }
+
+  .text-center#{$grid-breakpoint-type} {
+    text-align: center !important;
+  }
+}
+
+@mixin responsive-float-helper($grid-breakpoint-type:"") {
+  .float-left#{$grid-breakpoint-type} {
+    float: left !important;
+  }
+
+  .float-right#{$grid-breakpoint-type} {
+    float: right !important;
+  }
+}
+
+/*============================================================================
+  #Grid
+    - Creates a 12 column responsive grid based on the `$grid-columns` variable.
+    If you want to change the number of columns, be sure to also update the
+    `grid-uniform-clearfix` mixin.
+    - Based on csswizardry grid, but with floated columns, a fixed gutter size,
+    and BEM classes
+    - Breakpoints defined above, under #Grid Variables
+    - `.grid--uniform` is used to take care of clearfixes on evenly sized
+    `.grid__items`
+==============================================================================*/
+
+$grid-tablet: 750px;
+$grid-desktop: 990px;
+$grid-widescreen: 1400px;
+
+$grid-gutter: 30px;
+
+$grid-columns: 12;
+
+// The `$grid-breakpoints` list is used to build our media queries.  You can use
+// these in the media-queries mixin or as modifiers to your grid classes to
+// target specific breakpoint.  i.e. `.grid-6--tablet-down` will target screen
+// widths below the value set by `$grid-desktop`
+$grid-breakpoints: (
+  'mobile' '(max-width: #{$grid-tablet - 1})',
+  'tablet-only' '(min-width: #{$grid-tablet}) and (max-width: #{$grid-desktop - 1})',
+  'tablet-down' '(max-width: #{$grid-desktop - 1})',
+  'tablet-up' '(min-width: #{$grid-tablet})',
+  'desktop-up' '(min-width: #{$grid-desktop})',
+  'widescreen' '(min-width: #{$grid-widescreen})'
+);
+
+$grid-breakpoint-types: ('mobile', 'tablet-only', 'tablet-down', 'tablet-up', 'desktop-up', 'widescreen');
+
+/*============================================================================
+  Grid Setup
+    1. Allow the grid system to be used on lists.
+    2. Remove any margins and paddings that might affect the grid system.
+    3. Apply a negative `margin-left` to negate the columns' gutters.
+==============================================================================*/
+
+.grid,
+.grid--uniform {
+  @include clearfix();
+}
+
+.grid,
+.grid--uniform {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-left: -$grid-gutter;
+}
+
+.grid__item {
+  float: left;
+  padding-left: $grid-gutter;
+  width: 100%;
+}
+
+/*============================================================================
+  Reversed grids allow you to structure your source in the opposite
+  order to how your rendered layout will appear.
+==============================================================================*/
+.grid--rev {
+  @extend .grid;
+  direction: rtl;
+  text-align: left;
+
+  > .grid__item {
+    direction: ltr;
+    text-align: left;
+    float: right;
+  }
+}
+
+/* Gutterless grids have all the properties of regular grids, minus any spacing. */
+.grid--no-gutter {
+  @extend .grid;
+  margin-left: 0;
+
+  > .grid__item {
+    padding-left: 0;
+  }
+}
+
+/*============================================================================
+  #GRID COLUMNS
+    - Create width classes with the modifiers for each breakpoint.
+
+    - Breakpoint specific columns are generated for each breakpoint based
+    on the values in `$grid-breakpoints` e.g. `.grid-3` `.grid-3--tablet-up`
+==============================================================================*/
+@mixin grid-column-generator($grid-columns, $grid-breakpoint-type:"") {
+  @for $i from 1 through $grid-columns {
+    .grid-#{$i}#{$grid-breakpoint-type} {
+      width: #{percentage($i / $grid-columns)};
+    }
+  }
+}
+
+/*============================================================================
+  #GRID HELPER MIXINS
+==============================================================================*/
+
+/*================ Clearfix helper on uniform grids ================*/
+@mixin grid-uniform-clearfix($grid-breakpoint-type:"") {
+  .grid--uniform {
+    .grid-1#{$grid-breakpoint-type}:nth-child(12n+1),
+    .grid-2#{$grid-breakpoint-type}:nth-child(6n+1),
+    .grid-3#{$grid-breakpoint-type}:nth-child(4n+1),
+    .grid-4#{$grid-breakpoint-type}:nth-child(3n+1),
+    .grid-6#{$grid-breakpoint-type}:nth-child(2n+1)    { clear: both; }
+  }
+}
+
+
+/*============================================================================
+  #BUILD THE GRID
+==============================================================================*/
+
+/*================ Base Grid Classes ================*/
+@include grid-column-generator($grid-columns);
+@include responsive-display-helper();
+
+/*================ Responsive Grid classes ================*/
+@each $breakpoint in $grid-breakpoint-types {
+  @include media-query($breakpoint) {
+    @include grid-column-generator($grid-columns, '--#{$breakpoint}');
+    @include grid-uniform-clearfix('--#{$breakpoint}');
+  }
+}
+
+/*============================================================================
+  #Responsive Normalize
+
+  - Add any rules here that normalize elements but are dependent on media-queries
+==============================================================================*/
+
+// Prevent zoom on touch devices in active inputs
+// TODO: move to forms section if no other normalizations are necessary
+@include media-query($tablet-down) {
+  input,
+  textarea {
+    font-size: 16px;
+  }
 }
 
 /*============================================================================
@@ -392,6 +608,7 @@ ol {
   li {
     display: inline-block;
   }
+}
 
 /*============================================================================
   #Basic Styles
@@ -400,6 +617,23 @@ ol {
 body,
 html {
   background-color: $color-body;
+}
+
+.wrapper {
+  @include clearfix();
+  max-width: $width-site;
+  margin: 0 auto;
+  padding: 0 ($gutter-site / 2);
+
+  @include media-query($mobile) {
+    padding: 0 $gutter-site;
+  }
+}
+
+.main-content {
+  display: block;
+  margin-top: $gutter-site;
+  padding-bottom: $gutter-site * 2;
 }
 
 /*============================================================================
@@ -516,7 +750,7 @@ hr {
 
 /*================ Section Headers ================*/
 .section-header {
-  margin-bottom: $gutter-site / 1.5;
+  margin-bottom: $gutter-heading;
 }
 
 /*============================================================================
@@ -646,39 +880,38 @@ th, td {
   Responsive tables, defined with .table on table element.
 ==============================================================================*/
 
-//TODO: Update with new MQ with grid
-@include at-query($max, $small) {
+@include media-query($mobile) {
   .table{
-      thead {
-        display: none;
-      }
+    thead {
+      display: none;
+    }
 
-      tr {
-        display: block;
-      }
+    tr {
+      display: block;
+    }
 
-      // IE9 table layout fixes
-      tr,
-      td {
-        float: left;
-        clear: both;
-        width: 100%;
-      }
+    // IE9 table layout fixes
+    tr,
+    td {
+      float: left;
+      clear: both;
+      width: 100%;
+    }
 
-      th,
-      td {
-        display: block;
-        text-align: right;
-        padding: $grid-gutter / 2;
-      }
+    th,
+    td {
+      display: block;
+      text-align: right;
+      padding: $gutter-site / 2;
+    }
 
-      td:before {
-        content: attr(data-label);
-        float: left;
-        text-align: center;
-        font-size: 12px;
-        padding-right: 10px;
-      }
+    td:before {
+      content: attr(data-label);
+      float: left;
+      text-align: center;
+      font-size: 12px;
+      padding-right: 10px;
+    }
   }
 
   //TODO: update to use `desktop--hide` or whatever once our grid is built
@@ -689,15 +922,15 @@ th, td {
   .table__row + .table__row {
     position: relative;
     margin-top: 10px;
-    padding-top: $grid-gutter / 2;
+    padding-top: $gutter-site / 2;
 
     &:after {
       content: '';
       display: block;
       position: absolute;
       top: 0;
-      left: $grid-gutter / 2;
-      right: $grid-gutter / 2;
+      left: $gutter-site / 2;
+      right: $gutter-site / 2;
       border-bottom: 1px solid $color-border;
     }
   }
@@ -706,10 +939,6 @@ th, td {
 /*============================================================================
   #Images and Iframes
 ==============================================================================*/
-img {
-  max-width: 100%;
-  border: 0 none;
-}
 
 svg:not(:root) {
   overflow: hidden;
@@ -737,7 +966,7 @@ svg:not(:root) {
 ==============================================================================*/
 fieldset {
   border: 1px solid $color-border;
-  padding: $gutter / 2;
+  padding: $gutter-site / 2;
 }
 
 legend {
@@ -764,7 +993,7 @@ select {
   &.disabled {
     cursor: default;
     background-color: $color-disabled;
-    border-color: $color-disabled-border;
+    border-color: $color-border-disabled;
   }
 }
 
@@ -788,7 +1017,7 @@ label.error {
 }
 
 select {
-  @include prefix(appearance, none, webkit, moz, spec)
+  @include prefix(appearance, none, webkit moz spec);
   background-position: right center;
   background: {
     image: url('{{ "ico-select.svg" | asset_url }}');

@@ -174,18 +174,19 @@
               Site name gets precedence with H1 tag on homepage, div on other pages.
             {% endcomment %}
             {% if template == 'index' %}
-
               <h1 class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
             {% else %}
               <div class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
             {% endif %}
-              {% if settings.logo_use_image %}
-                <a href="/" itemprop="url" class="site-header__logo-link">
-                  <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
-                </a>
-              {% else %}
-                <a href="/" itemprop="url">{{ shop.name }}</a>
-              {% endif %}
+
+            {% if settings.logo_use_image %}
+              <a href="/" itemprop="url" class="site-header__logo-link">
+                <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
+              </a>
+            {% else %}
+              <a href="/" itemprop="url">{{ shop.name }}</a>
+            {% endif %}
+
             {% if template == 'index' %}
               </h1>
             {% else %}
@@ -237,7 +238,6 @@
 
             <div class="site-header__search">
               {% comment %}
-
                 Desktop Search Bar
 
                 Note we are using 'input-group' for the layout. Look under Forms > Input Groups for some demos.
@@ -249,7 +249,6 @@
                   - http://docs.shopify.com/manual/configuration/store-customization/return-only-product-in-storefront-search-results
                   - Or manually add type=product to the search URL as a query parameter
                   - Uncomment hidden input with value="product" below
-
               {% endcomment %}
 
               <form action="/search" method="get" class="search-bar" role="search">
@@ -260,10 +259,8 @@
                   <span class="fallback-text">{{ 'general.search.submit' | t }}</span>
                 </button>
               </form>
-
             </div>
           </div>
-        </div>
       </div>
     </header>
 
@@ -306,8 +303,6 @@
             {% endfor %}
           </ul>
           <!-- //site-nav -->
-        </div>
-      </div>
     </nav>
 
     <main class="wrapper main-content" role="main">
