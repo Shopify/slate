@@ -148,6 +148,7 @@ input[type="search"] {
   -webkit-appearance: textfield; // 1
 }
 
+
 // Remove most spacing between table cells.
 table {
   border-collapse: collapse;
@@ -821,8 +822,8 @@ a {
   white-space: nowrap;
   cursor: pointer;
   border: 1px solid transparent;
-  @include prefix('user-select', 'none', 'webkit moz ms');
-  @include prefix('appearance', 'none', 'webkit moz');
+  @include prefix(user-select, none, webkit moz ms);
+  @include prefix(appearance, none, webkit moz);
 
   // Set primary button colors - can override later
   background-color: $color-btn-primary;
@@ -1184,7 +1185,7 @@ label[for] {
 ==============================================================================*/
 
 .site-nav {
-  margin: 0 0 0 (-$gutter / 2);
+  margin: 0 0 0 (-$gutter-site / 2);
 
   li {
     margin: 0;
