@@ -446,29 +446,6 @@ $grid-breakpoint-types: ('mobile', 'tablet-only', 'tablet-down', 'tablet-up', 'd
   }
 }
 
-$min: min-width;
-$max: max-width;
-
-@mixin custom-query ($constraint_, $viewport1_, $viewport2_:null) {
- $constraint: $constraint_; $viewport1: $viewport1_; $viewport2: $viewport2_;
-  @if type-of($constraint_) == number {
-    $viewport1 : $constraint_; $viewport2 : $viewport1_; $constraint : null;
-  }
-  @if $constraint == $min {
-    @media screen and ($min: $viewport1) {
-      @content;
-    }
-  } @else if $constraint == $max {
-    @media screen and ($max: $viewport1) {
-      @content;
-    }
-  } @else {
-    @media screen and ($min: $viewport1) and ($max: $viewport2) {
-      @content;
-    }
-  }
-}
-
 /*============================================================================
   Grid Setup
     1. Allow the grid system to be used on lists.
