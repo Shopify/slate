@@ -351,7 +351,7 @@ $z-index-dropdown : 2;
 ==============================================================================*/
 
 .clearfix {
-  @include clearfix;
+  @include clearfix();
 }
 
 .visually-hidden {
@@ -405,7 +405,9 @@ $grid-breakpoint-types: ('mobile', 'tablet-only', 'tablet-down', 'tablet-up', 'd
 
 /*============================================================================
   #Grid
-    - Creates a 12 column responsive grid.
+    - Creates a 12 column responsive grid based on the `$grid-columns` variable.
+    If you want to change the number of columns, be sure to also update the
+    `grid-clearfix-helper` mixin.
     - Based on csswizardry grid, but with floated columns, a fixed gutter size,
     and BEM classes
     - Breakpoints defined above, under #Grid Variables
