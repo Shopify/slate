@@ -10,15 +10,15 @@
 {% endcomment %}
 
 <div class="grid">
-
   <div class="grid__item">
 
     <h1>{{ page.title }}</h1>
 
-    {% comment %}
-      Regular page content goes here.
-    {% endcomment %}
     <div class="rte">
+      {% comment %}
+        Regular page content will appear here.
+      {% endcomment %}
+
       {{ page.content }}
     </div>
 
@@ -31,6 +31,7 @@
         {% comment %}
           Successful message
         {% endcomment %}
+
         {% if form.posted_successfully? %}
           <p class="note form-success">
             {{ 'contact.form.post_success' | t }}
