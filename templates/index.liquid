@@ -1,103 +1,92 @@
 <!-- /templates/index.liquid -->
-<div class="grid">
-  <div class="grid__item featured-collections">
+<div class="featured-collections">
+  <h2>{{ 'homepage.sections.featured_title' | t }}</h2>
 
-    <h2>{{ 'homepage.sections.featured_title' | t }}</h2>
-      {% comment %}
-        Show five collections, unless it's 'frontpage'.
+  {% comment %}
+    Show five collections, unless it's 'frontpage'.
 
-        Use an index variable in combination to the limit filter
-        to account for the frontpage collection being in top six returned.
+    Use an index variable in combination to the limit filter
+    to account for the frontpage collection being in top six returned.
+  {% endcomment %}
 
-        Use variable isEmpty to check if no collections will be shown.
-        For empty store demo only.
-      {% endcomment %}
-      {% assign index = 1 %}
-      {% assign isEmpty = true %}
+  {% comment %}
+    Test if store has content
+  {% endcomment %}
+  {% assign isEmpty = true %}
 
-      <div class="grid">
-
-        {% for collection in collections limit:6 %}
-          {% unless index > 5 %}
-            {% unless collection.handle == 'frontpage' %}
-              {% assign isEmpty = false %}
-              <div class="grid__item">
-                {% comment %}
-                  Use capture to put the collection title in a variable that is used in liquid filters
-                {% endcomment %}
-                {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
-
-                <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" class="grid__image">
-                  {% if collection.image %}
-                    {{ collection.image.src | img_url: 'large' | img_tag: collection_title }}
-                  {% else %}
-                    {{ collection.products.first.featured_image | img_url: 'large' | img_tag: collection_title }}
-                  {% endif %}
-                </a>
-
-                <p>
-                  <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ collection.title }}</a>
-                  {{ 'collections.general.items_with_count' | t: count: collection.all_products_count }}
-                </p>
-              </div>
-              {% assign index = index | plus: 1 %}
-            {% endunless %}
-          {% endunless %}
-        {% endfor %}
-
-        {% comment %}
-          For onboarding new users to your theme, we add some default collections and onboarding tutorials to help populate their store
-        {% endcomment %}
-
-        {% if isEmpty %}
-          {% comment %}
-            For onboarding new users to your theme, we add some default collections and onboarding tutorials to help populate their store
-          {% endcomment %}
-          {% unless emptyState %}
-            {{ 'theme-onboarding.css' | global_asset_url | stylesheet_tag }}
-            {% assign emptyState = true %}
-          {% endunless %}
-
+  {% assign index = 1 %}
+  <div class="grid">
+    {% for collection in collections limit:6 %}
+      {% unless index > 5 %}
+        {% unless collection.handle == 'frontpage' %}
+          {% assign isEmpty = true %}
           <div class="grid__item">
-            <div class="helper-section">
-              <div class="helper-note">
-                <span class="helper-icon"></span>
-                <h3>{{ 'homepage.onboarding.modal_title' | t }}</h3>
-                <p>{{ 'homepage.onboarding.no_collections_html' | t }}</p>
-                <p><a class="admin-btn-primary" href="/admin/custom_collections">{{ 'homepage.onboarding.add_collection' | t }}</a></p>
-              </div>
+            {% comment %}
+              Use capture to put the collection title in a variable that is used in liquid filters
+            {% endcomment %}
+            {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
 
-              <div class="grid helper-content">
-                {% for i in (1..5) %}
-                  <div class="grid__item grid-6 grid-3--desktop-up">
-                    <a href="#" class="grid__image">
-                      {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ i }}.png{% endcapture %}
-                      {{ imageUrl | img_tag }}
-                    </a>
-                    <p>
-                      <a href="#">{{ 'homepage.onboarding.collection_title' | t }}</a>
-                      {{ 'collections.general.items_with_count' | t: count: i }}
-                    </p>
-                  </div>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-        {% endif %}
+            <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" class="grid__image">
+              {% if collection.image %}
+                {{ collection.image.src | img_url: 'large' | img_tag: collection_title }}
+              {% else %}
+                {{ collection.products.first.featured_image | img_url: 'large' | img_tag: collection_title }}
+              {% endif %}
+            </a>
 
-      </div>
+            <p>
+              <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ collection.title }}</a>
+              {{ 'collections.general.items_with_count' | t: count: collection.all_products_count }}
+            </p>
+          </div> <!-- //grid-item ->
+          {% assign index = index | plus: 1 %}
+        {% endunless %}
+      {% endunless %}
+    {% endfor %}
+
+    {% comment %}
+      For onboarding new users to your theme, we add some default collections and onboarding tutorials to help populate their store
+    {% endcomment %}
   </div>
-  <div class="grid__item featured-products">
 
-    <h2>{{ 'homepage.sections.frontpage_title' | t }}</h2>
+{% if isEmpty %}
+  <div class="helper-section">
+    <div class="helper-note">
+      <span class="helper-icon"></span>
+      <h3>{{ 'homepage.onboarding.modal_title' | t }}</h3>
+      <p>{{ 'homepage.onboarding.no_collections_html' | t }}</p>
+      <p><a class="admin-btn-primary" href="/admin/custom_collections">{{ 'homepage.onboarding.add_collection' | t }}</a></p>
+    </div>
 
-    <div class="grid">
+    <div class="grid helper-content">
+      {% for i in (1..5) %}
+        <div class="grid__item large--one-fifth medium--one-half">
+          <a href="#" class="grid__image">
+            {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ i }}.png{% endcapture %}
+            {{ imageUrl | img_tag }}
+          </a>
+          <p>
+            <a href="#">{{ 'homepage.onboarding.collection_title' | t }}</a>
+            {{ 'collections.general.items_with_count' | t: count: i }}
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
 
-      {% comment %}
-        Loop through products in your Frontpage collection.
-        This collection is created by default, but you must add products to it.
-      {% endcomment %}
-      {% for product in collections.frontpage.products limit:4 %}
+<div class="featured-products">
+
+  <h2>{{ 'homepage.sections.frontpage_title' | t }}</h2>
+
+  {% comment %}
+    By default, featured products come from your Frontpage collection.
+    This collection is empty by default and must have products added to it
+  {% endcomment %}
+
+  <div class="grid">
+
+    {% for product in collections.frontpage.products limit:4 %}
 
         {% comment %}
           Check if the product is on sale and set a variable to be used below.
@@ -164,49 +153,43 @@
               <s>{{ product.compare_at_price | money }}</s>
             {% endif %}
           </p>
-        </div>
+        </div> <!-- //grid item -->
+
       {% else %}
         {% comment %}
+          If collection is empty, show onboarding state
           For onboarding new users to your theme, we add some default products and onboarding tutorials to help populate their store
         {% endcomment %}
 
-          {% if isEmpty %}
-            {% unless emptyState %}
-              {{ 'theme-onboarding.css' | global_asset_url | stylesheet_tag }}
-              {% assign emptyState = true %}
-            {% endunless %}
-          {% endif %}
+        <div class="grid__item">
+          <div class="helper-section">
+            <div class="helper-note">
+              <span class="helper-icon"></span>
+              <h3>{{ 'homepage.onboarding.modal_title' | t }}</h3>
+              <p>{{ 'homepage.onboarding.no_products_html' | t }}</p>
+              <p><a class="admin-btn-primary" href="/admin/collections?tutorial=Frontpage">{{ 'homepage.onboarding.add_product' | t }}</a></p>
+            </div>
 
-          <div class="grid__item">
-            <div class="helper-section">
-              <div class="helper-note">
-                <span class="helper-icon"></span>
-                <h3>{{ 'homepage.onboarding.modal_title' | t }}</h3>
-                <p>{{ 'homepage.onboarding.no_products_html' | t }}</p>
-                <p><a class="admin-btn-primary" href="/admin/collections?tutorial=Frontpage">{{ 'homepage.onboarding.add_product' | t }}</a></p>
-              </div>
-
-              <div class="grid-uniform helper-content">
-                {% for i in (1..4) %}
-                  <div class="grid__item grid-6 grid-3--tablet-up">
-                    <a href="/admin/products" class="grid__image">
-                      {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ i }}.png{% endcapture %}
-                      {{ imageUrl | img_tag }}
-                    </a>
-                    <p class="h6"><a href="/admin/products">{{ 'homepage.onboarding.product_title' | t }}</a></p>
-                    <p>$19.99</p>
-                  </div>
-                {% endfor %}
-              </div>
+            <div class="grid-uniform helper-content">
+              {% for i in (1..4) %}
+                <div class="grid__item one-half large--one-quarter">
+                  <a href="/admin/products" class="grid__image">
+                    {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ i }}.png{% endcapture %}
+                    {{ imageUrl | img_tag }}
+                  </a>
+                  <p class="h6"><a href="/admin/products">{{ 'homepage.onboarding.product_title' | t }}</a></p>
+                  <p>$19.99</p>
+                </div>
+              {% endfor %}
             </div>
           </div>
-      {% endfor %}
+        </div> <!-- //grid-item ->
+    {% endfor %}
+  </div> <!-- // grid ->
+</div> <!-- //featured product ->
 
-    </div>
+<div class="featured-page-content">
+  <div class="rte">
+    {{ pages[settings.home_page_content].content }}
   </div>
-  <div class="grid__item featured-page-content">
-    <div class="rte">
-      {{ pages[settings.home_page_content].content }}
-    </div>
-   </div>
 </div>
