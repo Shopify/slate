@@ -15,13 +15,11 @@
       {% comment %}
         Different markup if a collection description exists
       {% endcomment %}
+      <h1 class="section-header__title">{{ collection.title }}</h1>
       {% if collection.description != blank %}
-        <h1 class="section-header__title">{{ collection.title }}</h1>
         <div class="rte">
           {{ collection.description }}
         </div>
-      {% else %}
-          <h1 class="section-header__title">{{ collection.title }}</h1>
       {% endif %}
 
       {% comment %}
@@ -68,9 +66,7 @@
 
   <div class="grid__item">
     {% comment %}
-      TODO: update '.grid-uniform' comment once grid is in place
-
-      Use class grid-uniform to have evenly sized columns clear
+      Use class grid--uniform to have evenly sized columns clear
       each other properly at each breakpoint.
     {% endcomment %}
     <div class="grid--uniform collection-grid">
@@ -131,16 +127,16 @@
 
             {% endif %}
 
+            {% if product.compare_at_price > product.price %}
+              <s>{{ product.compare_at_price | money }}</s>
+            {% endif %}
+
             {% comment %}
               Check if the product is sold out.
             {% endcomment %}
             {% unless product.available %}
               <strong>{{ 'products.product.sold_out' | t }}</strong>
             {% endunless %}
-
-            {% if product.compare_at_price > product.price %}
-              <s>{{ product.compare_at_price | money }}</s>
-            {% endif %}
           </p>
         </div>
       {% else %}
@@ -151,13 +147,12 @@
           store has no products.
         {% endcomment %}
         {% if collection.handle == 'all' %}
-          {% unless emptyState %}
+          {% unless onboardingLoaded %}
             {% comment %}
-              Load onboarding CSS if it has not already been loaded
-              elsewhere on the page
+              Only load onboarding styles if they have not already been loaded.
             {% endcomment %}
             {{ 'theme-onboarding.css' | global_asset_url | stylesheet_tag }}
-            {% assign emptyState = true %}
+            {% assign onboardingLoaded = true %}
           {% endunless %}
           <div class="grid__item grid-3 grid-2--mobile-only">
             <div class="helper-section">
