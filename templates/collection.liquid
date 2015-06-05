@@ -12,9 +12,6 @@
   <div class="grid__item">
 
     <header class="section-header">
-      {% comment %}
-        Different markup if a collection description exists
-      {% endcomment %}
       <h1 class="section-header__title">{{ collection.title }}</h1>
       {% if collection.description != blank %}
         <div class="rte">
