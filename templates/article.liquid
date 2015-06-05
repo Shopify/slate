@@ -50,16 +50,14 @@
     {% endif %}
 
     {% comment %}
-
       Use with theme settings:
       {% if settings.social_sharing_blog or settings.social_sharing_products %}
         {% include 'social-sharing' %}
       {% endif %}
-
     {% endcomment %}
+
     {% capture permalinkURL %}{{ shop.url }}{{ product.url }}{% endcapture %}
     {% capture shareTitle %}{{ article.title | url_param_escape }}{% endcapture %}
-
 
     <div class="social-sharing" data-permalink="{{ permalinkURL }}">
 
@@ -88,8 +86,6 @@
       {% endif %}
 
     </div>
-
-
 
     {% if blog.comments_enabled? %}
       <h3>{{ 'blogs.comments.comments_with_count' | t: count: number_of_comments }}</h3>
@@ -177,18 +173,6 @@
               {% endif %}
 
               <input type="submit" class="btn" value="{{ 'blogs.comments.post' | t }}">
-
-              {% comment %}
-                Assign variable to be used after timber.init() is run in theme.liquid
-              {% endcomment %}
-              {% if form.errors %}
-                {% assign newHash = 'AddCommentTitle' %}
-              {% endif %}
-
-              {% if form.posted_successfully? %}
-                {% assign newHash = 'Comments' %}
-              {% endif %}
-
             {% endform %}
           </div>
 
