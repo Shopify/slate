@@ -275,24 +275,25 @@
               - http://docs.shopify.com/themes/liquid-variables/linklists
           {% endcomment %}
           <!-- begin site-nav -->
-          <ul class="site-nav" id="AccessibleNav">
+          <ul class="site-nav" id="SiteNav">
             {% for link in linklists.main-menu.links %}
               {% comment %}
                 Create a dropdown menu by naming a linklist the same as a link in the parent nav
-
-                More info on dropdowns:
                   - http://docs.shopify.com/manual/your-website/navigation/create-drop-down-menu
               {% endcomment %}
+
               {% assign child_list_handle = link.title | handleize %}
+
               {% if linklists[child_list_handle].links != blank %}
-                <li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}" aria-haspopup="true">
+                <li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}">
                   <a href="{{ link.url }}" class="site-nav__link">
                     {{ link.title }}
                     <span class="icon icon-arrow-down" aria-hidden="true"></span>
                   </a>
+
                   <ul class="site-nav__dropdown">
                     {% for childlink in linklists[child_list_handle].links %}
-                      <li{% if childlink.active %} class="site-nav--active"{% endif %}>
+                      <li {% if childlink.active %}class="site-nav--active"{% endif %}>
                         <a href="{{ childlink.url }}" class="site-nav__link">{{ childlink.title | escape }}</a>
                       </li>
                     {% endfor %}
