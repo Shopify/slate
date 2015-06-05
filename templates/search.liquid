@@ -33,11 +33,7 @@
       {% endif %}
 
       {% comment %}
-
-        Search Bar
-
-        More information:
-         - http://docs.shopify.com/themes/liquid-variables/search
+        Search - more info: http://docs.shopify.com/themes/liquid-variables/search
 
         To return only products in results:
           - http://docs.shopify.com/manual/configuration/store-customization/return-only-product-in-storefront-search-results
@@ -47,9 +43,12 @@
       {% endcomment %}
 
       <form action="/search" method="get" class="search-bar" role="search">
+
         {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
+
         <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
-        <button type="submit" class="btn icon--has-fallback-text">
+
+        <button type="submit" class="btn icon-fallback-text">
           <span class="icon icon-search" aria-hidden="true"></span>
           <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
         </button>
