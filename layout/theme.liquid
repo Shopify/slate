@@ -229,24 +229,25 @@
                   {% else %}
                     <a href="/account">{{ 'layout.customer.account' | t }}</a>
                   {% endif %}
+
                   | {{ 'layout.customer.log_out' | t | customer_logout_link }}
+
                 {% else %}
                   {{ 'layout.customer.log_in' | t | customer_login_link }}
                   {% if shop.customer_accounts_optional %}
                   | {{ 'layout.customer.create_account' | t | customer_register_link }}
                   {% endif %}
                 {% endif %}
+
               </div>
             {% endif %}
 
             <div class="site-header__search">
               {% comment %}
-                Desktop Search Bar
+                Search - more info: http://docs.shopify.com/themes/liquid-variables/search
 
+                #TODO - MP - what's 'Forms > Input Groups' ?
                 Note we are using 'input-group' for the layout. Look under Forms > Input Groups for some demos.
-
-                More information:
-                 - http://docs.shopify.com/themes/liquid-variables/search
 
                 To return only products in results:
                   - http://docs.shopify.com/manual/configuration/store-customization/return-only-product-in-storefront-search-results
@@ -254,10 +255,13 @@
                   - Uncomment hidden input with value="product" below
               {% endcomment %}
 
-              <form action="/search" method="get" class="search-bar" role="search">
+              <form action="/search" method="get" class="input-group search-bar" role="search">
+
                 {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
-                <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
-                <button type="submit" class="icon--has-fallback-text">
+
+                <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" class="input-group-field" aria-label="{{ 'general.search.placeholder' | t }}">
+
+                <button type="submit" class="icon-fallback-text">
                   <span class="icon icon-search" aria-hidden="true"></span>
                   <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
                 </button>
@@ -350,16 +354,14 @@
         {% endif %}
 
         {% comment %}
-          Show Shop Links from footer linklist if it
-          has any links
+          Show Shop Links from footer linklist if it has any links
         {% endcomment %}
+
         {% if linklists.footer.links.size > 0 %}
           <div class="grid__item">
             <ul class="site-footer__linklist">
               {% for link in linklists.footer.links %}
-
                 <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-
               {% endfor %}
             </ul>
           </div>
