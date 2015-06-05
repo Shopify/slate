@@ -1,15 +1,17 @@
 <!-- /templates/gift_card.liquid -->
+
 {% layout none %}
 {% assign formatted_initial_value = gift_card.initial_value | money_without_trailing_zeros: gift_card.currency %}
 {% assign formatted_initial_value_stripped = formatted_initial_value | strip_html %}
+
 <!doctype html>
 <!--[if lt IE 7]><html class="template-giftcard no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]><html class="template-giftcard no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]><html class="template-giftcard no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if IE 9 ]><html class="ie9 template-giftcard no-js"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html class="template-giftcard no-js"> <!--<![endif]-->
-<head>
 
+<head>
   <!-- Basic page needs ================================================== -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
