@@ -220,7 +220,8 @@
               If customer accounts are enabled, provide login and create account links
             {% endcomment %}
             {% if shop.customer_accounts_enabled %}
-              <div>
+              <div class="customer-login-links">
+
                 {% if customer %}
                   {% if customer.first_name != blank %}
                     {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
