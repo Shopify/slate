@@ -204,9 +204,7 @@
             {% endcomment %}
             <div>
               <a href="/cart" class="site-header__cart" aria-controls="CartDrawer" aria-expanded="false">
-                <span class="icon-fallback-text">
-                  <span class="icon icon-cart" aria-hidden="true"></span>
-                </span>
+                <span class="icon icon-cart" aria-hidden="true"></span>
                 {{ 'layout.cart.title' | t }}
                 (<span id="CartCount">{{ cart.item_count }}</span>
                 {{ 'layout.cart.items_count' | t: count: cart.item_count }}
@@ -254,9 +252,9 @@
               <form action="/search" method="get" class="search-bar" role="search">
                 {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
                 <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
-                <button type="submit" class="icon-fallback-text">
+                <button type="submit" class="icon--has-fallback-text">
                   <span class="icon icon-search" aria-hidden="true"></span>
-                  <span class="fallback-text">{{ 'general.search.submit' | t }}</span>
+                  <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
                 </button>
               </form>
             </div>
