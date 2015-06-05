@@ -148,6 +148,7 @@ input[type="search"] {
   -webkit-appearance: textfield; // 1
 }
 
+
 // Remove most spacing between table cells.
 table {
   border-collapse: collapse;
@@ -821,8 +822,8 @@ a {
   white-space: nowrap;
   cursor: pointer;
   border: 1px solid transparent;
-  @include prefix('user-select', 'none', 'webkit moz ms');
-  @include prefix('appearance', 'none', 'webkit moz');
+  @include prefix(user-select, none, webkit moz ms);
+  @include prefix(appearance, none, webkit moz);
 
   // Set primary button colors - can override later
   background-color: $color-btn-primary;
@@ -1177,4 +1178,46 @@ label[for] {
     font-size: $font-size-icons-social;
   }
 
+}
+
+/*============================================================================
+  #Site Nav and Dropdowns
+==============================================================================*/
+
+.site-nav {
+
+  li {
+    display: inline-block;
+  }
+}
+
+/*================ Site Nav Links ================*/
+.site-nav__link {
+  display: block;
+  white-space: nowrap;
+
+  .icon-arrow-down {
+    position: relative;
+  }
+
+  .site-nav--active > & {
+  }
+}
+
+/*================ Dropdowns ================*/
+.site-nav__dropdown {
+  display: none;
+  position: absolute;
+  left: 0;
+  z-index: $z-index-dropdown;
+
+  .supports-no-touch .site-nav--has-dropdown:hover &,
+  .site-nav--has-dropdown.nav-hover &,
+  .nav-focus + & {
+    display: block;
+  }
+
+  li {
+    display: block;
+  }
 }
