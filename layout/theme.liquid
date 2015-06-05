@@ -169,10 +169,12 @@
     <header class="site-header" role="banner">
         <div class="grid">
           <div class="grid__item">
+
             {% comment %}
               Use the uploaded logo from theme settings if enabled.
               Site name gets precedence with H1 tag on homepage, div on other pages.
             {% endcomment %}
+
             {% if template == 'index' %}
               <h1 class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
             {% else %}
@@ -192,7 +194,9 @@
             {% else %}
               </div>
             {% endif %}
-          </div>
+
+          </div><!-- //logo/site name container -->
+
           <div class="grid__item">
             {% comment %}
               Show number of items in the cart and total cost in the /cart link
