@@ -1,0 +1,73 @@
+/**
+ *  Vendor
+ *
+ *  Small minified vendor scripts can be placed at the top of this file to
+ *  reduce network requests.
+ */
+
+
+/**
+ *  Canvas JS
+ *
+ *  Base Canvas functions and utilities.
+ */
+
+window.canvas = window.canvas || {};
+
+/**
+ *  Initialize function for all canvas JS.
+ *  - call any functions required on page load here.
+ *
+ *  @method  init
+ */
+canvas.init = function () {
+  canvas.cacheSelectors();
+  canvas.initEvents();
+  canvas.initBreakpoints();
+};
+
+/**
+ *  Cache any jQuery objects.
+ *
+ *  @method cacheSelectors
+ */
+canvas.cacheSelectors = function () {
+  canvas.cache = {
+    $html : $('html'),
+    $body : $('body'),
+
+    $navigation : $('#AccessibleNav')
+  }
+};
+
+/**
+ *  Cache any globally required variables.
+ *  - i.e. breakpoint variables, booleans, class names
+ *
+ *  @method cacheVariables
+ */
+
+canvas.cacheVariables = function () {
+
+}
+
+/**
+ *  Add any event listeners and callbacks you need here.
+ *
+ *  @method initEvents
+ */
+canvas.initEvents = function () {
+
+};
+
+/**
+ *  Add any breakpoint specific JS
+ *
+ *  @method  initBreakpoints
+ */
+canvas.initBreakpoints = function () {
+
+};
+
+// Initialize Canvas's JS on docready
+$(canvas.init);
