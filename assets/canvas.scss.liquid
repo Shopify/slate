@@ -18,25 +18,52 @@
   Table of Contents
 
   #Normalize
-  #Color Variables
-  #Sizing Variables
-  #Breakpoint Variables
-  #Typography Variables
-  #Z-Index
+  #Variables
+    *Color Variables
+    *Sizing Variables
+    *Breakpoint Variables
+    *Typography Variables
+    *Z-Index
   #Mixins and Functions
+    *Clear Fix
+    *Prefix
+    *Em
+    *Strip-units
+    *Backface
+    *User-select
   #Helper Classes
+  #Breakpoint Variables
+  #Media Query
+  #Responsive Helper Mixins
+    *Show/Hide Helper
+    *Text Align Helper
+    *Float Helper
+  #Grid
+    *Grid Setup
+    *Reverse Grid
+    *Gutterless Grid
+    *Grid Columns
+    *Uniform Grid
   #Basic Styles
   #Typography
+    *Headings
+    *Blockquotes
+    *Code
+    *Horizontal Rules
+  #Icons
+    *Fallback Text
+    *Icon Mapping
+  #Lists
   #Rich Text Editor
   #Links and Buttons
-  #Lists
   #Tables
   #Reponsive Tables
-  #OOCSS Media Object
   #Images and Iframes
   #Forms
-  #Icons
+    *Error States
+    *Labels
   #Site Nav and Dropdowns
+  #Section Headers
 ==============================================================================*/
 
 /*============================================================================
@@ -148,7 +175,6 @@ input[type="search"] {
   -webkit-appearance: textfield; // 1
 }
 
-
 // Remove most spacing between table cells.
 table {
   border-collapse: collapse;
@@ -172,10 +198,11 @@ textarea {
 }
 
 /*============================================================================
-  #Color Variables
+  #Variables
 ==============================================================================*/
 
-// Colors
+/*================ #Color Variables ================*/
+
 $color-primary: {{ settings.color_primary }};
 $color-secondary: {{ settings.color_secondary }};
 
@@ -211,18 +238,13 @@ $color-error-bg: #000;
 $color-success: #000;
 $color-success-bg: #000;
 
-/*============================================================================
-  #Sizing Variables
-==============================================================================*/
+/*================ #Sizing Variables ================*/
 
-// Sizing variables
 $width-site: 1180px;
 $gutter-site: 30px;
 $gutter-heading: 30px;
 
-/*============================================================================
-  #Typography Variables
-==============================================================================*/
+/*================ #Typography Variables ================*/
 
 $font-stack-header: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $font-weight-header: 700;
@@ -245,14 +267,15 @@ $font-stack-icons: 'icons';
 $font-size-icons-social: 30px;
 $font-size-icons-payment: 30px;
 
-/*============================================================================
-  #Z-Index
-==============================================================================*/
+/*================ #Z-Index ================*/
+
 $z-index-dropdown : 2;
 
 /*============================================================================
   #Mixins and Functions
 ==============================================================================*/
+
+/*================ #Clear Fix ================*/
 
 @mixin clearfix() {
   &:after {
@@ -401,7 +424,7 @@ $widescreen: 'widescreen';
   #Responsive Helper Mixins
 ==============================================================================*/
 
-/*================ Helper show/hide classes around our breakpoints ================*/
+/*================ Show/Hide Helper ================*/
 @mixin responsive-display-helper($grid-breakpoint-type:"") {
   .show#{$grid-breakpoint-type} {
     display: block !important;
@@ -412,6 +435,7 @@ $widescreen: 'widescreen';
   }
 }
 
+/*================ Text Alignment Helper ================*/
 @mixin responsive-text-align-helper($grid-breakpoint-type:"") {
   .text-left#{$grid-breakpoint-type} {
     text-align: left !important;
@@ -426,6 +450,7 @@ $widescreen: 'widescreen';
   }
 }
 
+/*================ Float Helper ================*/
 @mixin responsive-float-helper($grid-breakpoint-type:"") {
   .float-left#{$grid-breakpoint-type} {
     float: left !important;
@@ -586,38 +611,6 @@ $grid-breakpoint-types: ('mobile', 'tablet-only', 'tablet-down', 'tablet-up', 'd
 }
 
 /*============================================================================
-  #Lists
-==============================================================================*/
-
-ol {
-  list-style: decimal;
-}
-
-.list--square {
-  list-style: square outside;
-}
-
-.list--disc {
-  list-style: disc outside;
-}
-
-//for ordered lists
-.list--alpha {
-  list-style: lower-alpha outside;
-}
-
-.list--no-bullets {
-  list-style: none outside;
-  margin-left: 0;
-}
-
-.list--inline {
-  li {
-    display: inline-block;
-  }
-}
-
-/*============================================================================
   #Basic Styles
 ==============================================================================*/
 
@@ -666,7 +659,8 @@ h6 {
   font-weight: $font-weight-header;
 }
 
-/*================ Use em() Sass function to declare font-size ================*/
+/*================ Headings ================*/
+//Use em() Sass function to declare font-size
 h1 {
 
 }
@@ -755,9 +749,134 @@ hr {
   height: 0;
 }
 
-/*================ Section Headers ================*/
-.section-header {
-  margin-bottom: $gutter-heading;
+/*============================================================================
+  #Icons
+==============================================================================*/
+.icon {
+  display: inline-block;
+
+  .supports-no-fontface & {
+    display: none;
+  }
+}
+
+/*============================================================================
+  A generic way to visually hide content while
+  remaining accessible to screen readers (h5bp.com)
+==============================================================================*/
+.supports-fontface .icon__fallback-text {
+  @extend .visually-hidden;
+}
+
+.icon:before {
+  display: inline;
+  font-family: $font-stack-icons;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.supports-no-fontface .icon:before {
+  display: none;
+}
+
+/*================ Icon mapping ================*/
+.icon-american_express:before { content: "\41"; }
+.icon-arrow-down:before { content: "\e607"; }
+.icon-bitcoin:before { content: "\42"; }
+.icon-cart:before { content: "\e600"; }
+.icon-cirrus:before { content: "\43"; }
+.icon-dankort:before { content: "\64"; }
+.icon-diners_club:before { content: "\63"; }
+.icon-discover:before { content: "\44"; }
+.icon-facebook:before { content: "\66"; }
+.icon-fancy:before { content: "\46"; }
+.icon-google:before { content: "\67"; }
+.icon-google_wallet:before { content: "\47"; }
+.icon-grid-view:before { content: "\e603"; }
+.icon-hamburger:before { content: "\e601"; }
+.icon-instagram:before { content: "\69"; }
+.icon-interac:before { content: "\49"; }
+.icon-jcb:before { content: "\4a"; }
+.icon-list-view:before { content: "\e604"; }
+.icon-maestro:before { content: "\6d"; }
+.icon-master:before { content: "\4d"; }
+.icon-minus:before { content: "\e602"; }
+.icon-paypal:before { content: "\50"; }
+.icon-pinterest:before { content: "\70"; }
+.icon-plus:before { content: "\e605"; }
+.icon-rss:before { content: "\72"; }
+.icon-search:before { content: "\73"; }
+.icon-stripe:before { content: "\53"; }
+.icon-tumblr:before { content: "\74"; }
+.icon-twitter:before { content: "\54"; }
+.icon-vimeo:before { content: "\76"; }
+.icon-visa:before { content: "\56"; }
+.icon-x:before { content: "\e606"; }
+.icon-youtube:before { content: "\79"; }
+
+/*================ Payment Icons ================*/
+.payment-icons {
+  @include user-select();
+  cursor: default;
+
+  li {
+    color: $color-primary;
+    cursor: default;
+  }
+
+  .icon {
+    font-size: $font-size-icons-payment;
+  }
+}
+
+/*================ Social Icons ================*/
+.social-icons li {
+  @include media-query($tablet-up) {
+    margin-left: 0;
+  }
+
+  .icon {
+    font-size: $font-size-icons-social;
+  }
+
+}
+
+/*============================================================================
+  #Lists
+==============================================================================*/
+
+ol {
+  list-style: decimal;
+}
+
+.list--square {
+  list-style: square outside;
+}
+
+.list--disc {
+  list-style: disc outside;
+}
+
+//for ordered lists
+.list--alpha {
+  list-style: lower-alpha outside;
+}
+
+.list--no-bullets {
+  list-style: none outside;
+  margin-left: 0;
+}
+
+.list--inline {
+  li {
+    display: inline-block;
+  }
 }
 
 /*============================================================================
@@ -822,8 +941,8 @@ a {
   white-space: nowrap;
   cursor: pointer;
   border: 1px solid transparent;
-  @include prefix(user-select, none, webkit moz ms);
-  @include prefix(appearance, none, webkit moz);
+  @include user-select();
+  @include prefix(appearance, none, webkit moz spec);
 
   // Set primary button colors - can override later
   background-color: $color-btn-primary;
@@ -1085,102 +1204,6 @@ label[for] {
 }
 
 /*============================================================================
-  #Icons
-==============================================================================*/
-.icon {
-  display: inline-block;
-
-  .supports-no-fontface & {
-    display: none;
-  }
-}
-
-/*============================================================================
-  A generic way to visually hide content while
-  remaining accessible to screen readers (h5bp.com)
-==============================================================================*/
-.supports-fontface .icon__fallback-text {
-  @extend .visually-hidden;
-}
-
-.icon:before {
-  display: inline;
-  font-family: $font-stack-icons;
-  text-decoration: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.supports-no-fontface .icon:before {
-  display: none;
-}
-
-/*================ Icon mapping ================*/
-.icon-american_express:before { content: "\41"; }
-.icon-arrow-down:before { content: "\e607"; }
-.icon-bitcoin:before { content: "\42"; }
-.icon-cart:before { content: "\e600"; }
-.icon-cirrus:before { content: "\43"; }
-.icon-dankort:before { content: "\64"; }
-.icon-diners_club:before { content: "\63"; }
-.icon-discover:before { content: "\44"; }
-.icon-facebook:before { content: "\66"; }
-.icon-fancy:before { content: "\46"; }
-.icon-google:before { content: "\67"; }
-.icon-google_wallet:before { content: "\47"; }
-.icon-grid-view:before { content: "\e603"; }
-.icon-hamburger:before { content: "\e601"; }
-.icon-instagram:before { content: "\69"; }
-.icon-interac:before { content: "\49"; }
-.icon-jcb:before { content: "\4a"; }
-.icon-list-view:before { content: "\e604"; }
-.icon-maestro:before { content: "\6d"; }
-.icon-master:before { content: "\4d"; }
-.icon-minus:before { content: "\e602"; }
-.icon-paypal:before { content: "\50"; }
-.icon-pinterest:before { content: "\70"; }
-.icon-plus:before { content: "\e605"; }
-.icon-rss:before { content: "\72"; }
-.icon-search:before { content: "\73"; }
-.icon-stripe:before { content: "\53"; }
-.icon-tumblr:before { content: "\74"; }
-.icon-twitter:before { content: "\54"; }
-.icon-vimeo:before { content: "\76"; }
-.icon-visa:before { content: "\56"; }
-.icon-x:before { content: "\e606"; }
-.icon-youtube:before { content: "\79"; }
-
-.payment-icons {
-  @include user-select();
-  cursor: default;
-
-  li {
-    color: $color-primary;
-    cursor: default;
-  }
-
-  .icon {
-    font-size: $font-size-icons-payment;
-  }
-}
-
-.social-icons li {
-  @include media-query($tablet-up) {
-    margin-left: 0;
-  }
-
-  .icon {
-    font-size: $font-size-icons-social;
-  }
-
-}
-
-/*============================================================================
   #Site Nav and Dropdowns
 ==============================================================================*/
 
@@ -1220,4 +1243,11 @@ label[for] {
   li {
     display: block;
   }
+}
+
+/*============================================================================
+  #Section Headers
+==============================================================================*/
+.section-header {
+  margin-bottom: $gutter-heading;
 }
