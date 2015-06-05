@@ -312,24 +312,15 @@
     <!-- begin site-footer -->
     <footer class="site-footer" role="contentinfo">
       <div class="grid">
+
         {% comment %}
-          Determine whether there are social links.
-          Add an `or` statement for each social link defined in the
-          theme settings.
+          Show social links defined in the settings with an accompanying url
         {% endcomment %}
-        {% assign footer_social_enable = false %}
+
         {% if
           settings.social_twitter_link != blank
           or settings.social_facebook_link != blank
         %}
-          {% assign footer_social_enable = true %}
-        {% endif %}
-
-        {% comment %}
-          Show any social links that are defined in the settings
-          and have a url associated with them.
-        {% endcomment %}
-        {% if footer_social_enable %}
           <div class="grid__item">
               <ul class="site-footer__social-icons">
                 {% if settings.social_twitter_link != blank %}
