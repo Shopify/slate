@@ -1098,7 +1098,7 @@ label[for] {
   A generic way to visually hide content while
   remaining accessible to screen readers (h5bp.com)
 ==============================================================================*/
-.supports-fontface .icon--has-fallback-text .icon__fallback-text {
+.supports-fontface .icon__fallback-text {
   @extend .visually-hidden;
 }
 
@@ -1106,7 +1106,6 @@ label[for] {
   display: inline;
   font-family: $font-stack-icons;
   text-decoration: none;
-  speak: none; // future fallback, limited in effect currently
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -1170,7 +1169,6 @@ label[for] {
 }
 
 .social-icons li {
-
   @include media-query($tablet-up) {
     margin-left: 0;
   }
