@@ -60,7 +60,7 @@
 
     <div class="grid helper-content">
       {% for i in (1..5) %}
-        <div class="grid__item large--one-fifth medium--one-half">
+        <div class="grid__item grid-2--desktop-up grid-6--tablet-down">
           <a href="#" class="grid__image">
             {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ i }}.png{% endcapture %}
             {{ imageUrl | img_tag }}
@@ -172,7 +172,7 @@
 
             <div class="grid-uniform helper-content">
               {% for i in (1..4) %}
-                <div class="grid__item one-half large--one-quarter">
+                <div class="grid__item grid-2--desktop-up grid-6--tablet-down">
                   <a href="/admin/products" class="grid__image">
                     {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ i }}.png{% endcapture %}
                     {{ imageUrl | img_tag }}
