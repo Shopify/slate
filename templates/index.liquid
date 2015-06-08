@@ -38,7 +38,7 @@
               <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ collection.title }}</a>
               {{ 'collections.general.items_with_count' | t: count: collection.all_products_count }}
             </p>
-          </div> <!-- //grid-item ->
+          </div> <!-- //grid-item -->
           {% assign index = index | plus: 1 %}
         {% endunless %}
       {% endunless %}
@@ -49,31 +49,32 @@
     {% endcomment %}
   </div>
 
-{% if isEmpty %}
-  <div class="helper-section">
-    <div class="helper-note">
-      <span class="helper-icon"></span>
-      <h3>{{ 'homepage.onboarding.modal_title' | t }}</h3>
-      <p>{{ 'homepage.onboarding.no_collections_html' | t }}</p>
-      <p><a class="admin-btn-primary" href="/admin/custom_collections">{{ 'homepage.onboarding.add_collection' | t }}</a></p>
-    </div>
+  {% if isEmpty %}
+    <div class="helper-section">
+      <div class="helper-note">
+        <span class="helper-icon"></span>
+        <h3>{{ 'homepage.onboarding.modal_title' | t }}</h3>
+        <p>{{ 'homepage.onboarding.no_collections_html' | t }}</p>
+        <p><a class="admin-btn-primary" href="/admin/custom_collections">{{ 'homepage.onboarding.add_collection' | t }}</a></p>
+      </div>
 
-    <div class="grid helper-content">
-      {% for i in (1..5) %}
-        <div class="grid__item grid-2--desktop-up grid-6--tablet-down">
-          <a href="#" class="grid__image">
-            {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ i }}.png{% endcapture %}
-            {{ imageUrl | img_tag }}
-          </a>
-          <p>
-            <a href="#">{{ 'homepage.onboarding.collection_title' | t }}</a>
-            {{ 'collections.general.items_with_count' | t: count: i }}
-          </p>
-        </div>
-      {% endfor %}
+      <div class="grid helper-content">
+        {% for i in (1..5) %}
+          <div class="grid__item grid-2--desktop-up grid-6--tablet-down">
+            <a href="#" class="grid__image">
+              {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ i }}.png{% endcapture %}
+              {{ imageUrl | img_tag }}
+            </a>
+            <p>
+              <a href="#">{{ 'homepage.onboarding.collection_title' | t }}</a>
+              {{ 'collections.general.items_with_count' | t: count: i }}
+            </p>
+          </div>
+        {% endfor %}
+      </div>
     </div>
-  </div>
-{% endif %}
+  {% endif %}
+</div>
 
 <div class="featured-products">
 
@@ -183,10 +184,10 @@
               {% endfor %}
             </div>
           </div>
-        </div> <!-- //grid-item ->
+        </div> <!-- //grid-item -->
     {% endfor %}
-  </div> <!-- // grid ->
-</div> <!-- //featured product ->
+  </div> <!-- // grid -->
+</div> <!-- //featured product -->
 
 <div class="featured-page-content">
   <div class="rte">

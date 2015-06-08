@@ -2,7 +2,8 @@
   "general": {
     "meta": {
       "tags": "Etiquetado \"{{ tags }}\"",
-      "page": "Página {{ page }}"
+      "page": "Página {{ page }}",
+      "lang": "es"
     },
     "404": {
       "title": "404 Página no encontrada",
