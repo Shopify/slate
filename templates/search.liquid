@@ -57,21 +57,6 @@
       {% if search.performed %}
         <div class="grid">
           {% for item in search.results %}
-            {% comment %}
-              Check if the product is on sale and set a variable to be used below.
-            {% endcomment %}
-            {% assign on_sale = false %}
-            {% if item.compare_at_price > item.price %}
-              {% assign on_sale = true %}
-            {% endif %}
-
-            {% comment %}
-              Check if the product is sold out and set a variable to be used below.
-            {% endcomment %}
-            {% assign sold_out = true %}
-            {% if item.available %}
-              {% assign sold_out = false %}
-            {% endif %}
 
             <!-- begin grid search results-->
             <div class="grid__item search-result">
@@ -85,7 +70,10 @@
 
               {% if item.price %}
                 <p>
-                  {% if on_sale %}
+                  {% comment %}
+                    Check if the product is on sale.
+                  {% endcomment %}
+                  {% if item.compare_at_price > item.price %}
                     {% if item.price_varies %}
                       {% assign sale_price = item.price | money %}
                       {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
@@ -93,6 +81,7 @@
                       <strong>{{ 'products.product.on_sale' | t }}</strong>
                       <span itemprop="price">{{ item.price | money }}</span>
                     {% endif %}
+                    <s>{{ item.compare_at_price | money }}</s>
                   {% else %}
                     {% if item.price_varies %}
                       {% assign price = item.price | money %}
@@ -101,12 +90,12 @@
                       <span itemprop="price">{{ item.price | money }}</span>
                     {% endif %}
                   {% endif %}
-                  {% if sold_out %}
+                  {% comment %}
+                    Check if the product is sold out.
+                  {% endcomment %}
+                  {% unless item.available %}
                     <strong>{{ 'products.product.sold_out' | t }}</strong>
-                  {% endif %}
-                  {% if on_sale %}
-                    <s>{{ item.compare_at_price | money }}</s>
-                  {% endif %}
+                  {% endunless %}
                 </p>
               {% else %}
                 <p>{{ item.content | strip_html | truncatewords: 50 }}</p>

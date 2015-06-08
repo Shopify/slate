@@ -9,17 +9,11 @@
     to account for the frontpage collection being in top six returned.
   {% endcomment %}
 
-  {% comment %}
-    Test if store has content
-  {% endcomment %}
-  {% assign isEmpty = true %}
-
   {% assign index = 1 %}
   <div class="grid">
     {% for collection in collections limit:6 %}
       {% unless index > 5 %}
         {% unless collection.handle == 'frontpage' %}
-          {% assign isEmpty = true %}
           <div class="grid__item">
             {% comment %}
               Use capture to put the collection title in a variable that is used in liquid filters
@@ -49,7 +43,7 @@
     {% endcomment %}
   </div>
 
-  {% if isEmpty %}
+  {% if shop.collections_count <= 1 %}
     <div class="helper-section">
       <div class="helper-note">
         <span class="helper-icon"></span>
@@ -89,22 +83,6 @@
 
     {% for product in collections.frontpage.products limit:4 %}
 
-        {% comment %}
-          Check if the product is on sale and set a variable to be used below.
-        {% endcomment %}
-        {% assign on_sale = false %}
-        {% if product.compare_at_price > product.price %}
-          {% assign on_sale = true %}
-        {% endif %}
-
-        {% comment %}
-          Check if the product is sold out and set a variable to be used below.
-        {% endcomment %}
-        {% assign sold_out = true %}
-        {% if product.available %}
-          {% assign sold_out = false %}
-        {% endif %}
-
         <div class="grid__item">
 
           {% comment %}
@@ -131,7 +109,7 @@
               You can show a leading 'from' or 'up to' by checking 'product.price_varies'
               if your variants have different prices.
             {% endcomment %}
-            {% if on_sale %}
+            {% if product.compare_at_price > product.price %}
               {% if product.price_varies %}
                 {% assign sale_price = product.price | money %}
                 {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
@@ -139,6 +117,7 @@
                 <strong>{{ 'products.product.on_sale' | t }}</strong>
                 {{ product.price | money }}
               {% endif %}
+              <s>{{ product.compare_at_price | money }}</s>
             {% else %}
               {% if product.price_varies %}
                 {% assign price = product.price | money %}
@@ -147,12 +126,13 @@
                 {{ product.price | money }}
               {% endif %}
             {% endif %}
-            {% if sold_out %}
+
+            {% comment %}
+              Check if the product is sold out.
+            {% endcomment %}
+            {% unless product.available %}
               <strong>{{ 'products.product.sold_out' | t }}</strong>
-            {% endif %}
-            {% if on_sale %}
-              <s>{{ product.compare_at_price | money }}</s>
-            {% endif %}
+            {% endunless %}
           </p>
         </div> <!-- //grid item -->
 
