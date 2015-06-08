@@ -1,0 +1,40 @@
+/**
+ *  Vendor
+ *
+ *  Small minified vendor scripts can be placed at the top of this file to
+ *  reduce network requests.
+ */
+
+
+/**
+ *  ShopifyCanvas JS
+ *
+ *  Base Canvas functions and utilities.
+ */
+
+window.ShopifyCanvas = window.ShopifyCanvas || {};
+
+/**
+ *  Initialize function for all ShopifyCanvas JS.
+ *  - call any functions required on page load here.
+ *
+ *  @method  init
+ */
+ShopifyCanvas.init = function () {
+  ShopifyCanvas.cacheSelectors();
+};
+
+/**
+ *  Cache any jQuery objects.
+ *
+ *  @method cacheSelectors
+ */
+ShopifyCanvas.cacheSelectors = function () {
+  ShopifyCanvas.cache = {
+    $html : $('html'),
+    $body : $('body')
+  }
+};
+
+// Initialize ShopifyCanvas's JS on docready
+$(ShopifyCanvas.init);
