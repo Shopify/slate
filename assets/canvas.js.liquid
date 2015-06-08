@@ -7,23 +7,21 @@
 
 
 /**
- *  Canvas JS
+ *  ShopifyCanvas JS
  *
  *  Base Canvas functions and utilities.
  */
 
-window.canvas = window.canvas || {};
+window.ShopifyCanvas = window.ShopifyCanvas || {};
 
 /**
- *  Initialize function for all canvas JS.
+ *  Initialize function for all ShopifyCanvas JS.
  *  - call any functions required on page load here.
  *
  *  @method  init
  */
-canvas.init = function () {
-  canvas.cacheSelectors();
-  canvas.initEvents();
-  canvas.initBreakpoints();
+ShopifyCanvas.init = function () {
+  ShopifyCanvas.cacheSelectors();
 };
 
 /**
@@ -31,43 +29,12 @@ canvas.init = function () {
  *
  *  @method cacheSelectors
  */
-canvas.cacheSelectors = function () {
-  canvas.cache = {
+ShopifyCanvas.cacheSelectors = function () {
+  ShopifyCanvas.cache = {
     $html : $('html'),
-    $body : $('body'),
-
-    $navigation : $('#AccessibleNav')
+    $body : $('body')
   }
 };
 
-/**
- *  Cache any globally required variables.
- *  - i.e. breakpoint variables, booleans, class names
- *
- *  @method cacheVariables
- */
-
-canvas.cacheVariables = function () {
-
-}
-
-/**
- *  Add any event listeners and callbacks you need here.
- *
- *  @method initEvents
- */
-canvas.initEvents = function () {
-
-};
-
-/**
- *  Add any breakpoint specific JS
- *
- *  @method  initBreakpoints
- */
-canvas.initBreakpoints = function () {
-
-};
-
-// Initialize Canvas's JS on docready
-$(canvas.init);
+// Initialize ShopifyCanvas's JS on docready
+$(ShopifyCanvas.init);
