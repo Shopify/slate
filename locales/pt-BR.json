@@ -2,8 +2,7 @@
   "general": {
     "meta": {
       "tags": "Marcado \"{{ tags }}\"",
-      "page": "Página {{ page }}",
-      "lang": "pt-br"
+      "page": "Página {{ page }}"
     },
     "404": {
       "title": "404 Página não encontrada",
