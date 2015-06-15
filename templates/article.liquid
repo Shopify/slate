@@ -50,16 +50,14 @@
     {% endif %}
 
     {% comment %}
-
       Use with theme settings:
       {% if settings.social_sharing_blog or settings.social_sharing_products %}
         {% include 'social-sharing' %}
       {% endif %}
-
     {% endcomment %}
+
     {% capture permalinkURL %}{{ shop.url }}{{ product.url }}{% endcapture %}
     {% capture shareTitle %}{{ article.title | url_param_escape }}{% endcapture %}
-
 
     <div class="social-sharing" data-permalink="{{ permalinkURL }}">
 
@@ -88,8 +86,6 @@
       {% endif %}
 
     </div>
-
-
 
     {% if blog.comments_enabled? %}
       <h3>{{ 'blogs.comments.comments_with_count' | t: count: number_of_comments }}</h3>
@@ -120,7 +116,7 @@
                 If a comment was just submitted with no blank field, show it.
               {% endcomment %}
               {% if comment and comment.created_at %}
-                <li id="{{ comment.id }}" class="comment first{% if article.comments_count == 0 %} last{% endif %}">
+                <li id="{{ comment.id }}" class="comment">
                   {% include 'comment' %}
                 </li>
               {% endif %}
@@ -129,7 +125,7 @@
                 Showing the rest of the comments.
               {% endcomment %}
               {% for comment in article.comments %}
-                <li id="{{ comment.id }}" class="comment{% unless number_of_comments > article.comments_count %}{% if forloop.first %} first{% endif %}{% endunless %}{% if forloop.last %} last {% endif %}">
+                <li id="{{ comment.id }}" class="comment">
                   {% include 'comment' %}
                 </li>
               {% endfor %}
@@ -158,16 +154,16 @@
               <div class="grid">
 
                 <div class="grid__item">
-                  <label for="CommentAuthor" class="hidden-label">{{ 'blogs.comments.name' | t }}</label>
-                  <input type="text" name="comment[author]" id="CommentAuthor" class="{% if form.errors contains 'author' %} error{% endif %}" placeholder="{{ 'blogs.comments.name' | t }}" value="{{ form.author }}" autocapitalize="words">
+                  <label for="CommentAuthor" class="label--hidden">{{ 'blogs.comments.name' | t }}</label>
+                  <input type="text" name="comment[author]" id="CommentAuthor" class="input-full{% if form.errors contains 'author' %} form--error{% endif %}" placeholder="{{ 'blogs.comments.name' | t }}" value="{{ form.author }}" autocapitalize="words">
 
-                  <label for="CommentEmail" class="hidden-label">{{ 'blogs.comments.email' | t }}</label>
-                  <input type="email" name="comment[email]" id="CommentEmail" class="{% if form.errors contains 'email' %} error{% endif %}" placeholder="{{ 'blogs.comments.email' | t }}" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
+                  <label for="CommentEmail" class="label--hidden">{{ 'blogs.comments.email' | t }}</label>
+                  <input type="email" name="comment[email]" id="CommentEmail" class="input-full{% if form.errors contains 'email' %} form--error{% endif %}" placeholder="{{ 'blogs.comments.email' | t }}" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
                 </div>
 
                 <div class="grid__item">
-                  <label for="CommentBody" class="hidden-label">{{ 'blogs.comments.message' | t }}</label>
-                  <textarea name="comment[body]" id="CommentBody" class="{% if form.errors contains 'body' %} error{% endif %}" placeholder="{{ 'blogs.comments.message' | t }}">{{ form.body }}</textarea>
+                  <label for="CommentBody" class="label--hidden">{{ 'blogs.comments.message' | t }}</label>
+                  <textarea name="comment[body]" id="CommentBody" class="input-full{% if form.errors contains 'body' %} form--error{% endif %}" placeholder="{{ 'blogs.comments.message' | t }}">{{ form.body }}</textarea>
                 </div>
 
               </div>
@@ -177,18 +173,6 @@
               {% endif %}
 
               <input type="submit" class="btn" value="{{ 'blogs.comments.post' | t }}">
-
-              {% comment %}
-                Assign variable to be used after timber.init() is run in theme.liquid
-              {% endcomment %}
-              {% if form.errors %}
-                {% assign newHash = 'AddCommentTitle' %}
-              {% endif %}
-
-              {% if form.posted_successfully? %}
-                {% assign newHash = 'Comments' %}
-              {% endif %}
-
             {% endform %}
           </div>
 

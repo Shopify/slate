@@ -1,9 +1,7 @@
 <!-- /templates/blog.liquid -->
 {% comment %}
-
   Loop through a defined number of articles with the 'paginate' tag.
   Don't forget to close the tag after your loop.
-
 {% endcomment %}
 
 {% paginate blog.articles by 5 %}
@@ -12,9 +10,10 @@
   This template is also used for listing out articles of a specific tag.
   You can change layouts or styles by checking if current_tags is true.
 {% endcomment %}
-<div class="grid">
 
+<div class="grid">
   <div class="grid__item">
+
     {% if current_tags %}
       <h1>{{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}</h1>
     {% else %}
@@ -36,8 +35,10 @@
         {% endfor %}
       </ul>
     {% endif %}
+
   </div>
   <div class="grid__item">
+
     {% comment %}
       Loop through each article in your blog. This is limited to what you set for pagination above.
 
@@ -76,10 +77,9 @@
           {% endif %}
 
           {% comment %}
-            Rendera a list item with all tags listed out.
+            Render a list item with all tags listed out.
 
             More information:
-             - index#article-tags
              - http://docs.shopify.com/themes/liquid-variables/article
           {% endcomment %}
           {% if article.tags.size > 0 %}
@@ -97,7 +97,7 @@
 
         Use with theme settings:
         {% if settings.social_sharing_blog or settings.social_sharing_products %}
-          {% include 'social-sharing' %}
+          <div class="social-sharing" data-permalink="{{ permalinkURL }}">...</div>
         {% endif %}
 
       {% endcomment %}
@@ -134,8 +134,6 @@
       </div>
 
       <p><a href="{{ article.url }}">{{ 'blogs.article.read_more' | t }} &rarr;</a></p>
-
-      {% unless forloop.last %}<hr>{% endunless %}
 
     {% endfor %}
 

@@ -10,7 +10,7 @@
 
 <div class="grid">
   <div class="grid__item">
-    <h4>{{ 'customer.orders.title' | t }}</h4>
+    <h2>{{ 'customer.orders.title' | t }}</h2>
 
     {% comment %}
       If we have past orders, loop through each one
@@ -52,7 +52,6 @@
 
       {% endif %}
       {% if paginate.pages > 1 %}
-        <hr>
         <div class="pagination">
           {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
         </div>
@@ -61,39 +60,38 @@
   </div>
 
   <div class="grid__item">
-    <h4>{{ 'customer.account.details' | t }}</h4>
+    <h3>{{ 'customer.account.details' | t }}</h3>
 
-    <h5>{{ customer.name }}</h5>
+    <p>{{ customer.name }}</p>
 
     {% if customer.default_address != nil %}
       <p>
-      {{ customer.default_address.address1 }}<br>
+        {{ customer.default_address.address1 }}<br>
 
-      {% if customer.default_address.address2 != "" %}
-        {{ customer.default_address.address2 }}<br>
-      {% endif %}
+        {% if customer.default_address.address2 != "" %}
+          {{ customer.default_address.address2 }}<br>
+        {% endif %}
 
-      {% if customer.default_address.city != "" %}
-        {{ customer.default_address.city }}<br>
-      {% endif %}
+        {% if customer.default_address.city != "" %}
+          {{ customer.default_address.city }}<br>
+        {% endif %}
 
-      {% if customer.default_address.province_code != "" %}
-        {{ customer.default_address.province_code | upcase }}<br>
-      {% endif %}
+        {% if customer.default_address.province_code != "" %}
+          {{ customer.default_address.province_code | upcase }}<br>
+        {% endif %}
 
-      {% if customer.default_address.zip != "" %}
-        {{ customer.default_address.zip | upcase }}<br>
-      {% endif %}
+        {% if customer.default_address.zip != "" %}
+          {{ customer.default_address.zip | upcase }}<br>
+        {% endif %}
 
-      {% if customer.default_address.country != "" %}
-        {{ customer.default_address.country }}<br>
-      {% endif %}
+        {% if customer.default_address.country != "" %}
+          {{ customer.default_address.country }}<br>
+        {% endif %}
 
-      {% if customer.default_address.phone != "" %}
-        {{ customer.default_address.phone }}
-      {% endif %}
+        {% if customer.default_address.phone != "" %}
+          {{ customer.default_address.phone }}
+        {% endif %}
       </p>
-
     {% endif %}
 
     <p><a href="/account/addresses">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a></p>
