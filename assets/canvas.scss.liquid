@@ -587,21 +587,7 @@ $grid-breakpoint-types: ('mobile', 'tablet-only', 'tablet-down', 'tablet-up', 'd
   @include media-query($breakpoint) {
     @include grid-column-generator($grid-columns, '--#{$breakpoint}');
     @include grid-uniform-clearfix('--#{$breakpoint}');
-  }
-}
-
-/*============================================================================
-  #Responsive Normalize
-
-  - Add any rules here that normalize elements but are dependent on media-queries
-==============================================================================*/
-
-// Prevent zoom on touch devices in active inputs
-// TODO: move to forms section if no other normalizations are necessary
-@include media-query($tablet-down) {
-  input,
-  textarea {
-    font-size: 16px;
+    @include responsive-display-helper('--#{$breakpoint}');
   }
 }
 
@@ -926,8 +912,7 @@ a {
 }
 
 .btn,
-.rte .btn,
-.link--btn {
+.rte .btn {
   display: inline-block;
   width: auto;
   text-decoration: none;
@@ -1035,11 +1020,6 @@ th, td {
     }
   }
 
-  //TODO: update to use `desktop--hide` or whatever once our grid is built
-  .table--small-hide {
-    display: none !important;
-  }
-
   .table__row + .table__row {
     position: relative;
     margin-top: 10px;
@@ -1085,6 +1065,15 @@ svg:not(:root) {
 /*============================================================================
   #Forms
 ==============================================================================*/
+
+// Prevent zoom on touch devices in active inputs
+@include media-query($tablet-down) {
+  input,
+  textarea {
+    font-size: 16px;
+  }
+}
+
 fieldset {
   border: 1px solid $color-border;
   padding: $gutter-site / 2;
@@ -1110,8 +1099,7 @@ select {
     border: 1px solid darken($color-border, 10%);
   }
 
-  &[disabled],
-  &.disabled {
+  &[disabled] {
     cursor: default;
     background-color: $color-disabled;
     border-color: $color-border-disabled;

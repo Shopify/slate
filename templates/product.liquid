@@ -114,9 +114,13 @@
     <div class="grid__item">
 
       {% comment %}
-        Use with theme settings:
-        {% if settings.social_sharing_blog or settings.social_sharing_products %}
-          {% include 'social-sharing' %}
+        To control when social sharing buttons are shown using a theme setting,
+        wrap the buttons in a conditional and add a setting to your
+        settings_schema.json
+        {% if settings.social_sharing_products %}
+          <div class="social-sharing" data-permalink="{{ permalinkURL }}">
+            ...
+          </div>
         {% endif %}
       {% endcomment %}
 

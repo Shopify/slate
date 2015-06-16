@@ -14,6 +14,10 @@
     {{ comment.content }}
   </div>
   <div class="comment__meta">
+    {% comment %}
+      Capture comment author in a liquid variable so it can be used in
+      the translation with <strong> markup surrounding it for formatting.
+    {% endcomment %}
     {% capture author %}<strong>{{ comment.author }}</strong>{% endcapture %}
     {% capture date %}<strong><time datetime="{{ comment.created_at | date: '%Y-%m-%d' }}">{{ comment.created_at | date: format: 'month_day_year' }}</time></strong>{% endcapture %}
     {{ 'blogs.article.comment_meta_html' | t: author: author, date: date }}
