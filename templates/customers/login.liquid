@@ -6,10 +6,9 @@
 
     {% comment %}
       If a user has successfully requested a new password, the form.posted_successfully? variable
-      is set to true within the 'recover_customer_password' form only. Within that form you'll see
-      the variable 'resetPassword' set to true, which is used to initialize timber.resetPasswordSuccess().
+      is set to true within the 'recover_customer_password' form only. Within that form you'll see a hidden <span>, which is used to initialize ShopifyCanvas.resetPasswordSuccess().
     {% endcomment %}
-    <div class="note form-success" id="ResetSuccess" style="display:none;">
+    <div class="note form-success hide" id="ResetSuccess">
       {{ 'customer.recover_password.success' | t }}
     </div>
 
@@ -42,7 +41,7 @@
     {% comment %}
       JS shows/hides this form in ShopifyCanvas.loginForms()
     {% endcomment %}
-    <div id="RecoverPasswordForm" style="display: none;">
+    <div id="RecoverPasswordForm" class="hide">
 
       <h2>{{ 'customer.recover_password.title' | t }}</h2>
       <p>{{ 'customer.recover_password.subtext' | t }}</p>
@@ -53,10 +52,10 @@
           {{ form.errors | default_errors }}
 
           {% comment %}
-            Assign variable to be used after ShopifyCanvas.init() is run in theme.liquid
+            Add a hidden span to indicate the form was submitted succesfully.
           {% endcomment %}
           {% if form.posted_successfully? %}
-            {% assign resetPassword = true %}
+            <span class="hide reset-password-success"></span>
           {% endif %}
 
           <label for="RecoverEmail" class="label--hidden">{{ 'customer.recover_password.email' | t }}</label>

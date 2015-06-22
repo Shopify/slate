@@ -3,37 +3,106 @@
  *
  *  Small minified vendor scripts can be placed at the top of this file to
  *  reduce network requests.
+ *
  */
 
 
 /**
- *  ShopifyCanvas JS
  *
- *  Base Canvas functions and utilities.
+ *  ShopifyCanvas JS
+ *  - Base Canvas functions and utilities.
+ *
  */
 
 window.ShopifyCanvas = window.ShopifyCanvas || {};
 
 /**
+ *
  *  Initialize function for all ShopifyCanvas JS.
  *  - call any functions required on page load here.
  *
- *  @method  init
  */
 ShopifyCanvas.init = function () {
   ShopifyCanvas.cacheSelectors();
+  ShopifyCanvas.checkUrlHash();
+  ShopifyCanvas.initEventListeners();
+  ShopifyCanvas.resetPasswordSuccess();
 };
 
 /**
+ *
  *  Cache any jQuery objects.
  *
- *  @method cacheSelectors
  */
 ShopifyCanvas.cacheSelectors = function () {
   ShopifyCanvas.cache = {
     $html : $('html'),
     $body : $('body')
   }
+};
+
+ShopifyCanvas.initEvents = function () {
+  //Show reset password form
+  $('#RecoverPassword').on('click', function(evt) {
+    evt.preventDefault();
+    ShopifyCanvas.toggleRecoverPasswordForm();
+  });
+
+  //Hide reset password form
+  $('#HideRecoverPasswordLink').on('click', function(evt) {
+    evt.preventDefault();
+    ShopifyCanvas.toggleRecoverPasswordForm();
+  });
+};
+
+/**
+ *
+ *  Show/Hide recover password form
+ *
+ */
+ShopifyCanvas.toggleRecoverPasswordForm = function () {
+  $('#RecoverPasswordForm').toggleClass('hide');
+  $('#CustomerLoginForm').toggleClass('hide');
+};
+
+/**
+ *
+ *  Show reset password success message
+ *
+ */
+ShopifyCanvas.resetPasswordSuccess = function() {
+  var $formState = $('.reset-password-success');
+
+  //check if reset password form was successfully submited.
+  if (!$formState.length) {
+    return;
+  }
+
+  // show success message
+  $('#ResetSuccess').removeClass('hide');
+};
+
+/**
+ *
+ *  Check URL for reset password hash
+ *
+ */
+ShopifyCanvas.checkUrlHash = function () {
+  var hash = ShopifyCanvas.getHash();
+
+  // Allow deep linking to recover password form
+  if (hash == '#recover') {
+    ShopifyCanvas.toggleRecoverPasswordForm();
+  }
+};
+
+/**
+ *
+ *  Get the hash from the URL
+ *
+ */
+ShopifyCanvas.getHash = function () {
+  return window.location.hash;
 };
 
 // Initialize ShopifyCanvas's JS on docready
