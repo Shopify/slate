@@ -40,7 +40,7 @@
     </div>
 
     {% comment %}
-      JS shows/hides this form in timber.loginForms()
+      JS shows/hides this form in ShopifyCanvas.loginForms()
     {% endcomment %}
     <div id="RecoverPasswordForm" style="display: none;">
 
@@ -53,7 +53,7 @@
           {{ form.errors | default_errors }}
 
           {% comment %}
-            Assign variable to be used after timber.init() is run in theme.liquid
+            Assign variable to be used after ShopifyCanvas.init() is run in theme.liquid
           {% endcomment %}
           {% if form.posted_successfully? %}
             {% assign resetPassword = true %}
