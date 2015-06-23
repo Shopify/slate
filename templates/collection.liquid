@@ -19,26 +19,6 @@
         </div>
       {% endif %}
 
-      {% comment %}
-        Collection Sorting Dropdowns
-      {% endcomment %}
-      <div class="section-header__sorting">
-        <label for="SortBy">{{ 'collections.sorting.title' | t }}</label>
-        <select name="SortBy" id="SortBy">
-          <option value="manual">{{ 'collections.sorting.featured' | t }}</option>
-          <option value="best-selling">{{ 'collections.sorting.best_selling' | t }}</option>
-          <option value="title-ascending">{{ 'collections.sorting.az' | t }}</option>
-          <option value="title-descending">{{ 'collections.sorting.za' | t }}</option>
-          <option value="price-ascending">{{ 'collections.sorting.price_ascending' | t }}</option>
-          <option value="price-descending">{{ 'collections.sorting.price_descending' | t }}</option>
-          <option value="created-descending">{{ 'collections.sorting.date_descending' | t }}</option>
-          <option value="created-ascending">{{ 'collections.sorting.date_ascending' | t }}</option>
-        </select>
-      </div>
-
-      {% comment %}
-        Collection Tags
-      {% endcomment %}
       {% if collection.all_tags.size > 0 %}
         <ul class="tags section-header__tags">
           {% for tag in collection.all_tags %}
@@ -66,18 +46,12 @@
       Use class grid--uniform to have evenly sized columns clear
       each other properly at each breakpoint.
     {% endcomment %}
-    <div class="grid--uniform collection-grid">
-
-      {% comment %}
-        Loop through our products in the current collection.
-        See the snippet 'product-grid-item' for the layout.
-      {% endcomment %}
+    <div class="grid--uniform">
 
       {% for product in collection.products %}
         <div class="grid__item">
           {% comment %}
-            Link to your product with the 'within: collection' filter for the link to be aware of the collection.
-            This allows you to create collection-based navigation on the product page.
+            Link to your product with the 'within: collection' filter for the link to be aware of the collection. This allows you to create collection-based navigation on the product page.
 
             Results of using 'within: collection':
             - Instead of a URL with /products/product-handle
@@ -95,11 +69,6 @@
             <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
           </p>
           <p>
-            {% comment %}
-              You can show a leading 'from' or 'up to' by checking 'product.price_varies'
-              if your variants have different prices.
-            {% endcomment %}
-
             {% comment %}
               Check if the product is on sale.
             {% endcomment %}
@@ -151,7 +120,7 @@
             {{ 'theme-onboarding.css' | global_asset_url | stylesheet_tag }}
             {% assign onboardingLoaded = true %}
           {% endunless %}
-          <div class="grid__item grid-3 grid-2--mobile-only">
+          <div class="grid__item">
             <div class="helper-section">
               <div class="helper-note">
                 <span class="helper-icon"></span>
@@ -160,24 +129,24 @@
                 <p><a href="/admin/products/new" class="admin-btn-primary">{{ 'collections.onboarding.add_product' | t }}</a></p>
               </div>
 
-              <div class="grid helper-content">
-                {% assign index = 1 %}
+              <div class="grid--uniform helper-content">
+                {% assign collection_index = 1 %}
                 {% for i in (1..8) %}
                   {% case i %}
                     {% when 7 %}
-                      {% assign index = 1 %}
+                      {% assign collection_index = 1 %}
                     {% when 8 %}
-                      {% assign index = 2 %}
+                      {% assign collection_index = 2 %}
                   {% endcase %}
                   <div class="grid__item grid-3 grid-2--mobile-only">
                     <a href="/admin/products" class="grid__image">
-                      {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ index }}.png{% endcapture %}
+                      {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ collection_index }}.png{% endcapture %}
                       {{ imageUrl | img_tag }}
                     </a>
-                    <p class="h6"><a href="/admin/products">{{ 'homepage.onboarding.product_title' | t }}</a></p>
+                    <p><a href="/admin/products">{{ 'homepage.onboarding.product_title' | t }}</a></p>
                     <p>$19.99</p>
                   </div>
-                  {% assign index = index | plus: 1 %}
+                  {% assign collection_index = collection_index | plus: 1 %}
                 {% endfor %}
               </div>
             </div>

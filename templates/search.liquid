@@ -13,10 +13,6 @@
 {% assign respond_js_secret_key = shop.domain | md5 %}
 {% unless search.terms == respond_js_secret_key %}
 
-{% comment %}
-  Avoid accessing search.results before the opening paginate tag.
-  If you do, the pagination of results will be broken.
-{% endcomment %}
 {% paginate search.results by 10 %}
 
   <div class="grid">
@@ -58,8 +54,7 @@
         <div class="grid">
           {% for item in search.results %}
 
-            <!-- begin grid search results-->
-            <div class="grid__item search-result">
+            <div class="grid__item">
               {% if item.featured_image %}
                 <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
                   {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
@@ -68,6 +63,9 @@
 
               <h5>{{ item.title | link_to: item.url }}</h5>
 
+              {% comment %}
+                If a search item has a price, it's a product
+              {% endcomment %}
               {% if item.price %}
                 <p>
                   {% comment %}
@@ -101,7 +99,6 @@
                 <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
               {% endif %}
             </div>
-            <!-- //grid search results-->
 
           {% endfor %}
         </div>

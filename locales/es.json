@@ -87,17 +87,6 @@
     "sidebar": {
       "tags": "Etiquetas"
     },
-    "sorting": {
-      "title": "Ordenar por",
-      "featured": "Destacados",
-      "best_selling": "Más vendidos",
-      "az": "Alfabéticamente, A-Z",
-      "za": "Alfabéticamente, Z-A",
-      "price_ascending": "Precio, menor a mayor",
-      "price_descending": "Precio, mayor a menor",
-      "date_descending": "Fecha, nuevo a antiguo",
-      "date_ascending": "Fecha, antiguo a nuevo"
-    },
     "onboarding": {
       "modal_title": "Esta página mostrará todos los productos de su tienda",
       "no_products_html": "Todavía no hay productos pero, una vez que comience a añadirlos, se mostrarán aquí sin importar si están en una colección.",

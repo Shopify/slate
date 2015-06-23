@@ -87,17 +87,6 @@
     "sidebar": {
       "tags": "Marcadores"
     },
-    "sorting": {
-      "title": "Ordenar por",
-      "featured": "Em destaque",
-      "best_selling": "Mais vendidos",
-      "az": "Ordem alfabética, A–Z",
-      "za": "Ordem alfabética, Z–A",
-      "price_ascending": "Preço, do menor ao maior",
-      "price_descending": "Preço, do maior ao menor",
-      "date_descending": "Data, mais recente primeiro",
-      "date_ascending": "Data, mais antiga primeiro"
-    },
     "onboarding": {
       "modal_title": "Esta página mostrará todos os produtos de sua loja",
       "no_products_html": "Não há nenhum produto ainda, mas, quando você começar a adicioná-los, eles aparecerão aqui, independentemente se estiverem em uma coleção.",

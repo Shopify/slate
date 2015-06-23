@@ -1,15 +1,6 @@
 <!-- /templates/blog.liquid -->
-{% comment %}
-  Loop through a defined number of articles with the 'paginate' tag.
-  Don't forget to close the tag after your loop.
-{% endcomment %}
 
 {% paginate blog.articles by 5 %}
-
-{% comment %}
-  This template is also used for listing out articles of a specific tag.
-  You can change layouts or styles by checking if current_tags is true.
-{% endcomment %}
 
 <div class="grid">
   <div class="grid__item">
@@ -20,9 +11,6 @@
       <h1>{{ blog.title }}</h1>
     {% endif %}
 
-    {% comment %}
-      Blog tags
-    {% endcomment %}
     {% if blog.all_tags.size > 0 %}
       <h2>{{ 'blogs.categories' | t }}</h2>
       <ul>
@@ -53,7 +41,7 @@
       <p>{{ 'blogs.article.author_on_date_html' | t: author: author, date: date }}</p>
 
       {% comment %}
-        Since this is just a listing page, you can either use the excerpt or truncate the full article.
+        Use the excerpt if it exists or truncate the full article
       {% endcomment %}
       <div class="rte">
         {% if article.excerpt.size > 0 %}
@@ -64,7 +52,7 @@
       </div>
 
       {% comment %}
-        Show off meta information like number of comments and tags.
+        Show off meta information like number of comments and tags
       {% endcomment %}
       {% if blog.comments_enabled? or article.tags.size > 0 %}
         <ul>
@@ -77,7 +65,7 @@
           {% endif %}
 
           {% comment %}
-            Render a list item with all tags listed out.
+            Render a list item with all tags listed out
 
             More information:
              - http://docs.shopify.com/themes/liquid-variables/article
@@ -92,46 +80,6 @@
           {% endif %}
         </ul>
       {% endif %}
-
-      {% comment %}
-
-        Use with theme settings:
-        {% if settings.social_sharing_blog or settings.social_sharing_products %}
-          <div class="social-sharing" data-permalink="{{ permalinkURL }}">...</div>
-        {% endif %}
-
-      {% endcomment %}
-      {% capture permalinkURL %}{{ shop.url }}{{ product.url }}{% endcapture %}
-      {% capture shareTitle %}{{ article.title | url_param_escape }}{% endcapture %}
-
-
-      <div class="social-sharing" data-permalink="{{ permalinkURL }}">
-
-        {% if settings.share_facebook %}
-          <a target="_blank" href="//www.facebook.com/sharer.php?u={{ permalinkURL }}" class="share-facebook">
-            <span class="icon icon-facebook" aria-hidden="true"></span>
-            <span class="share-title">{{ 'general.social.share_on_facebook' | t }}</span>
-            <span class="share-count">0</span>
-          </a>
-        {% endif %}
-
-        {% if settings.share_twitter %}
-          <a target="_blank" href="//twitter.com/share?url={{ permalinkURL }}&amp;text={{ shareTitle }}" class="share-twitter">
-            <span class="icon icon-twitter" aria-hidden="true"></span>
-            <span class="share-title">{{ 'general.social.share_on_twitter' | t }}</span>
-            <span class="share-count">0</span>
-          </a>
-        {% endif %}
-
-        {% if settings.share_google %}
-          <a target="_blank" href="//plus.google.com/share?url={{ permalinkURL }}" class="share-google">
-            <!-- Cannot get Google+ share count with JS yet -->
-            <span class="icon icon-google" aria-hidden="true"></span>
-            <span class="share-count">+1</span>
-          </a>
-        {% endif %}
-
-      </div>
 
       <p><a href="{{ article.url }}">{{ 'blogs.article.read_more' | t }} &rarr;</a></p>
 
