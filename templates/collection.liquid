@@ -130,23 +130,23 @@
               </div>
 
               <div class="grid--uniform helper-content">
-                {% assign index = 1 %}
+                {% assign collection_index = 1 %}
                 {% for i in (1..8) %}
                   {% case i %}
                     {% when 7 %}
-                      {% assign index = 1 %}
+                      {% assign collection_index = 1 %}
                     {% when 8 %}
-                      {% assign index = 2 %}
+                      {% assign collection_index = 2 %}
                   {% endcase %}
                   <div class="grid__item grid-3 grid-2--mobile-only">
                     <a href="/admin/products" class="grid__image">
-                      {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ index }}.png{% endcapture %}
+                      {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ collection_index }}.png{% endcapture %}
                       {{ imageUrl | img_tag }}
                     </a>
                     <p><a href="/admin/products">{{ 'homepage.onboarding.product_title' | t }}</a></p>
                     <p>$19.99</p>
                   </div>
-                  {% assign index = index | plus: 1 %}
+                  {% assign collection_index = collection_index | plus: 1 %}
                 {% endfor %}
               </div>
             </div>
