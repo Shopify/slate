@@ -16,7 +16,6 @@
   #Variables
     *Color Variables
     *Sizing Variables
-    *Breakpoint Variables
     *Typography Variables
     *Z-Index
   #Mixins and Functions
@@ -27,7 +26,6 @@
     *Backface
     *User-select
   #Helper Classes
-  #Breakpoint Variables
   #Media Query
   #Responsive Helper Mixins
     *Show/Hide Helper
@@ -379,18 +377,6 @@ $z-index-dropdown : 2;
 }
 
 /*============================================================================
-  #Breakpoint Variables
-==============================================================================*/
-
-// Used by the `media-query` mixin
-$mobile: 'mobile';
-$tablet-only: 'tablet-only';
-$tablet-down: 'tablet-down';
-$tablet-up: 'tablet-up';
-$desktop-up: 'desktop-up';
-$widescreen: 'widescreen';
-
-/*============================================================================
   #Media Query Mixin
 ==============================================================================*/
 
@@ -463,22 +449,25 @@ $widescreen: 'widescreen';
     `grid-uniform-clearfix` mixin.
     - Based on csswizardry grid, but with floated columns, a fixed gutter size,
     and BEM classes
-    - Breakpoints defined above, under #Grid Variables
     - `.grid--uniform` is used to take care of clearfixes on evenly sized
     `.grid__items`
 ==============================================================================*/
+$mobile: 'mobile';
+$tablet-only: 'tablet-only';
+$tablet-down: 'tablet-down';
+$tablet-up: 'tablet-up';
+$desktop-up: 'desktop-up';
+$widescreen: 'widescreen';
 
 $grid-tablet: 750px;
 $grid-desktop: 990px;
 $grid-widescreen: 1400px;
-
 $grid-gutter: 30px;
-
 $grid-columns: 12;
 
-// The `$grid-breakpoints` list is used to build our media queries.  You can use
+// The `$grid-breakpoints` list is used to build our media queries. You can use
 // these in the media-queries mixin or as modifiers to your grid classes to
-// target specific breakpoint.  i.e. `.grid-6--tablet-down` will target screen
+// target specific breakpoint. i.e. `.grid-6--tablet-down` will target screen
 // widths below the value set by `$grid-desktop`
 $grid-breakpoints: (
   'mobile' '(max-width: #{$grid-tablet - 1})',
@@ -497,7 +486,6 @@ $grid-breakpoint-types: ('mobile', 'tablet-only', 'tablet-down', 'tablet-up', 'd
     2. Remove any margins and paddings that might affect the grid system.
     3. Apply a negative `margin-left` to negate the columns' gutters.
 ==============================================================================*/
-
 .grid,
 .grid--uniform {
   @include clearfix();
@@ -530,16 +518,6 @@ $grid-breakpoint-types: ('mobile', 'tablet-only', 'tablet-down', 'tablet-up', 'd
     direction: ltr;
     text-align: left;
     float: right;
-  }
-}
-
-/* Gutterless grids have all the properties of regular grids, minus any spacing. */
-.grid--no-gutter {
-  @extend .grid;
-  margin-left: 0;
-
-  > .grid__item {
-    padding-left: 0;
   }
 }
 
@@ -594,13 +572,12 @@ $grid-breakpoint-types: ('mobile', 'tablet-only', 'tablet-down', 'tablet-up', 'd
 /*============================================================================
   #Basic Styles
 ==============================================================================*/
-
 body,
 html {
   background-color: $color-body;
 }
 
-.wrapper {
+.page-width {
   @include clearfix();
   max-width: $width-site;
   margin: 0 auto;
@@ -641,7 +618,6 @@ h6 {
 }
 
 /*================ Headings ================*/
-//Use em() Sass function to declare font-size
 h1 {
 
 }
@@ -831,7 +807,6 @@ hr {
 /*============================================================================
   #Lists
 ==============================================================================*/
-
 ol {
   list-style: decimal;
 }
@@ -855,6 +830,8 @@ ol {
 }
 
 .list--inline {
+  padding-left: 0;
+
   li {
     display: inline-block;
   }

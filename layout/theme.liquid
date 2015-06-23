@@ -163,20 +163,19 @@
 
 <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
   <div id="PageContainer" class="">
-    <header class="site-header" role="banner">
-        <div class="grid">
-          <div class="grid__item">
+    <header class="site-header page-width" role="banner">
+      <div class="grid">
+        <div class="grid__item">
 
-            {% comment %}
-              Use the uploaded logo from theme settings if enabled.
-              Site name gets precedence with H1 tag on homepage, div on other pages.
-            {% endcomment %}
-
-            {% if template == 'index' %}
-              <h1 class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
-            {% else %}
-              <div class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
-            {% endif %}
+          {% comment %}
+            Use the uploaded logo from theme settings if enabled.
+            Site name gets precedence with H1 tag on homepage, div on other pages.
+          {% endcomment %}
+          {% if template == 'index' %}
+            <h1 class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
+          {% else %}
+            <div class="site-header__logo h1" itemscope itemtype="http://schema.org/Organization">
+          {% endif %}
 
             {% if settings.logo_use_image %}
               <a href="/" itemprop="url" class="site-header__logo-link">
@@ -186,166 +185,147 @@
               <a href="/" itemprop="url">{{ shop.name | escape }}</a>
             {% endif %}
 
-            {% if template == 'index' %}
-              </h1>
-            {% else %}
-              </div>
-            {% endif %}
-
-          </div><!-- //logo/site name container -->
-
-          <div class="grid__item">
-            {% comment %}
-              Show number of items in the cart and total cost in the /cart link
-            {% endcomment %}
-            <div>
-              <a href="/cart" class="site-header__cart" aria-controls="CartDrawer" aria-expanded="false">
-                <span class="icon icon-cart" aria-hidden="true"></span>
-                {{ 'layout.cart.title' | t }}
-                (<span id="CartCount">{{ cart.item_count }}</span>
-                {{ 'layout.cart.items_count' | t: count: cart.item_count }}
-                <span id="CartCost">{{ cart.total_price | money }}</span>)
-              </a>
+          {% if template == 'index' %}
+            </h1>
+          {% else %}
             </div>
+          {% endif %}
 
-            {% comment %}
-              If customer accounts are enabled, provide login and create account links
-            {% endcomment %}
-            {% if shop.customer_accounts_enabled %}
-              <div class="customer-login-links">
+        </div>
 
-                {% if customer %}
-                  {% if customer.first_name != blank %}
-                    {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
-                    {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
-                  {% else %}
-                    <a href="/account">{{ 'layout.customer.account' | t }}</a>
-                  {% endif %}
+        <div class="grid__item">
+          {% comment %}
+            Show number of items in the cart and total cost in the /cart link
+          {% endcomment %}
+          <div>
+            <a href="/cart" class="site-header__cart" aria-controls="CartDrawer" aria-expanded="false">
+              <span class="icon icon-cart" aria-hidden="true"></span>
+              {{ 'layout.cart.title' | t }}
+              (<span id="CartCount">{{ cart.item_count }}</span>
+              {{ 'layout.cart.items_count' | t: count: cart.item_count }}
+              <span id="CartCost">{{ cart.total_price | money }}</span>)
+            </a>
+          </div>
 
-                  | {{ 'layout.customer.log_out' | t | customer_logout_link }}
+          {% comment %}
+            If customer accounts are enabled, provide login and create account links
+          {% endcomment %}
+          {% if shop.customer_accounts_enabled %}
+            <div class="customer-login-links">
 
+              {% if customer %}
+                {% if customer.first_name != blank %}
+                  {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
+                  {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
                 {% else %}
-                  {{ 'layout.customer.log_in' | t | customer_login_link }}
-                  {% if shop.customer_accounts_optional %}
-                  | {{ 'layout.customer.create_account' | t | customer_register_link }}
-                  {% endif %}
+                  <a href="/account">{{ 'layout.customer.account' | t }}</a>
                 {% endif %}
 
-              </div>
-            {% endif %}
+                | {{ 'layout.customer.log_out' | t | customer_logout_link }}
 
-            <div class="site-header__search">
-              {% comment %}
-                Search - more info: http://docs.shopify.com/themes/liquid-variables/search
+              {% else %}
+                {{ 'layout.customer.log_in' | t | customer_login_link }}
+                {% if shop.customer_accounts_optional %}
+                | {{ 'layout.customer.create_account' | t | customer_register_link }}
+                {% endif %}
+              {% endif %}
 
-                To return only products in results:
-                  - http://docs.shopify.com/manual/configuration/store-customization/return-only-product-in-storefront-search-results
-                  - Or manually add type=product to the search URL as a query parameter
-                  - Uncomment hidden input with value="product" below
-              {% endcomment %}
-
-              <form action="/search" method="get" class="search-bar" role="search">
-
-                {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
-
-                <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
-
-                <button type="submit" class="icon-fallback-text">
-                  <span class="icon icon-search" aria-hidden="true"></span>
-                  <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
-                </button>
-              </form>
             </div>
+          {% endif %}
+
+          <div class="site-header__search">
+            {% comment %}
+              Search - more info: http://docs.shopify.com/themes/liquid-variables/search
+
+              To return only products in results:
+                - http://docs.shopify.com/manual/configuration/store-customization/return-only-product-in-storefront-search-results
+                - Or manually add type=product to the search URL as a query parameter
+                - Uncomment hidden input with value="product" below
+            {% endcomment %}
+
+            <form action="/search" method="get" class="search-bar" role="search">
+
+              {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
+
+              <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
+
+              <button type="submit" class="icon-fallback-text">
+                <span class="icon icon-search" aria-hidden="true"></span>
+                <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
+              </button>
+            </form>
           </div>
+        </div>
       </div>
     </header>
 
-    <nav class="nav-bar" role="navigation">
+    <nav class="page-width" role="navigation">
+      <ul class="site-nav list--inline" id="SiteNav">
+        {% for link in linklists.main-menu.links %}
           {% comment %}
-            List out your main-menu linklist (default)
-
-            More info on linklists:
-              - http://docs.shopify.com/themes/liquid-variables/linklists
+            Create a dropdown menu by naming a linklist the same as a link in the parent nav
+              - http://docs.shopify.com/manual/your-website/navigation/create-drop-down-menu
           {% endcomment %}
-          <!-- begin site-nav -->
-          <ul class="site-nav" id="SiteNav">
-            {% for link in linklists.main-menu.links %}
-              {% comment %}
-                Create a dropdown menu by naming a linklist the same as a link in the parent nav
-                  - http://docs.shopify.com/manual/your-website/navigation/create-drop-down-menu
-              {% endcomment %}
+          {% assign child_list_handle = link.title | handleize %}
 
-              {% assign child_list_handle = link.title | handleize %}
+          {% if linklists[child_list_handle].links != blank %}
+            <li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}">
+              <a href="{{ link.url }}" class="site-nav__link">
+                {{ link.title }}
+                <span class="icon icon-arrow-down" aria-hidden="true"></span>
+              </a>
 
-              {% if linklists[child_list_handle].links != blank %}
-                <li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}">
-                  <a href="{{ link.url }}" class="site-nav__link">
-                    {{ link.title }}
-                    <span class="icon icon-arrow-down" aria-hidden="true"></span>
-                  </a>
-
-                  <ul class="site-nav__dropdown">
-                    {% for childlink in linklists[child_list_handle].links %}
-                      <li {% if childlink.active %}class="site-nav--active"{% endif %}>
-                        <a href="{{ childlink.url }}" class="site-nav__link">{{ childlink.title | escape }}</a>
-                      </li>
-                    {% endfor %}
-                  </ul>
-                </li>
-              {% else %}
-                <li {% if link.active %}class="site-nav--active"{% endif %}>
-                  <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
-                </li>
-              {% endif %}
-            {% endfor %}
-          </ul>
-          <!-- //site-nav -->
+              <ul class="site-nav__dropdown">
+                {% for childlink in linklists[child_list_handle].links %}
+                  <li {% if childlink.active %}class="site-nav--active"{% endif %}>
+                    <a href="{{ childlink.url }}" class="site-nav__link">{{ childlink.title | escape }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% else %}
+            <li {% if link.active %}class="site-nav--active"{% endif %}>
+              <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
     </nav>
 
-    <main class="wrapper main-content" role="main">
-
+    <main class="page-width main-content" role="main">
       {{ content_for_layout }}
-
     </main>
 
-    <!-- begin site-footer -->
-    <footer class="site-footer" role="contentinfo">
+    <footer class="site-footer page-width" role="contentinfo">
       <div class="grid">
 
         {% comment %}
           Show social links defined in the settings with an accompanying url
         {% endcomment %}
-
-        {% if
-          settings.social_twitter_link != blank
-          or settings.social_facebook_link != blank
-        %}
-          <div class="grid__item">
-              <ul class="site-footer__social-icons">
-                {% if settings.social_twitter_link != blank %}
-                  <li>
-                    <a href="{{ settings.social_twitter_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}">
-                      <span class="icon icon-twitter" aria-hidden="true"></span>
-                      Twitter
-                    </a>
-                  </li>
-                {% endif %}
-                {% if settings.social_facebook_link != blank %}
-                  <li>
-                    <a href="{{ settings.social_facebook_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Facebook' }}">
-                      <span class="icon icon-facebook" aria-hidden="true"></span>
-                      Facebook
-                    </a>
-                  </li>
-                {% endif %}
-              </ul>
-          </div>
-        {% endif %}
+        <div class="grid__item">
+          <ul class="site-footer__social-icons">
+            {% if settings.social_twitter_link != blank %}
+              <li>
+                <a href="{{ settings.social_twitter_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}">
+                  <span class="icon icon-twitter" aria-hidden="true"></span>
+                  Twitter
+                </a>
+              </li>
+            {% endif %}
+            {% if settings.social_facebook_link != blank %}
+              <li>
+                <a href="{{ settings.social_facebook_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Facebook' }}">
+                  <span class="icon icon-facebook" aria-hidden="true"></span>
+                  Facebook
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
 
         {% comment %}
           Show Shop Links from footer linklist if it has any links
         {% endcomment %}
-
         {% if linklists.footer.links.size > 0 %}
           <div class="grid__item">
             <ul class="site-footer__linklist">
@@ -361,7 +341,6 @@
         </div>
       </div>
     </footer>
-    <!-- //site-footer -->
   </div>
 </body>
 </html>

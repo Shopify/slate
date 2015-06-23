@@ -2,9 +2,7 @@
   "current": "Default",
   "presets": {
     "Default": {
-      "favicon_enable": true,
-      "logo_use_image": true,
-      "social_twitter_link": ""
+      "logo_use_image": false
     }
   }
 }

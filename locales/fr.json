@@ -87,17 +87,6 @@
     "sidebar": {
       "tags": "Filtres"
     },
-    "sorting": {
-      "title": "Trier par",
-      "featured": "En vedette",
-      "best_selling": "Meilleurs vendeurs",
-      "az": "A-Z",
-      "za": "Z-A",
-      "price_ascending": "Prix: faible à élevé",
-      "price_descending": "Prix: élevé à faible",
-      "date_descending": "Date: récent à ancien",
-      "date_ascending": "Date: ancien à récent"
-    },
     "onboarding": {
       "modal_title": "Cette page affichera tous les produits de votre magasin",
       "no_products_html": "Il n'y a aucun produit pour l'instant, mais dès que vous commencerez à les ajouter, ils s'afficheront ici, qu'ils soient dans une collection ou non.",

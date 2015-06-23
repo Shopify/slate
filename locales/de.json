@@ -87,17 +87,6 @@
     "sidebar": {
       "tags": "Tags"
     },
-    "sorting": {
-      "title": "Sortieren nach",
-      "featured": "Ausgewählt",
-      "best_selling": "Meistverkauft",
-      "az": "Alphabetisch, A-Z",
-      "za": "Alphabetisch, Z-A",
-      "price_ascending": "Preis, niedrig nach hoch",
-      "price_descending": "Preis, hoch nach niedrig",
-      "date_descending": "Datum, neu nach alt",
-      "date_ascending": "Datum, alt nach neu"
-    },
     "onboarding": {
       "modal_title": "Auf dieser Seite werden alle Produkte Ihres Geschäfts angezeigt.",
       "no_products_html": "Es sind noch keine Produkte vorhanden, doch sobald Sie welche hinzufügen, werden sie hier angezeigt, ganz gleich, ob sie zu einer Kollektion gehören oder nicht.",
