@@ -20,7 +20,7 @@
   <link rel="canonical" href="{{ canonical_url }}">
   <!-- Title and description ================================================== -->
   <title>
-  {{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  {{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name | escape }}{% endunless %}
   </title>
 
   {% if page_description %}
@@ -76,7 +76,7 @@
     <meta property="og:description" content="{{ page_description | escape }}">
   {% endif %}
     <meta property="og:url" content="{{ canonical_url }}">
-    <meta property="og:site_name" content="{{ shop.name }}">
+    <meta property="og:site_name" content="{{ shop.name | escape }}">
 
   {% comment %}
     This renders meta data needed to create a Twitter card
@@ -182,10 +182,10 @@
 
             {% if settings.logo_use_image %}
               <a href="/" itemprop="url" class="site-header__logo-link">
-                <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
+                <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name | escape }}" itemprop="logo">
               </a>
             {% else %}
-              <a href="/" itemprop="url">{{ shop.name }}</a>
+              <a href="/" itemprop="url">{{ shop.name | escape }}</a>
             {% endif %}
 
             {% if template == 'index' %}
