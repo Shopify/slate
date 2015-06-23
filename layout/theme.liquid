@@ -198,7 +198,7 @@
             Show number of items in the cart and total cost in the /cart link
           {% endcomment %}
           <div>
-            <a href="/cart" class="site-header__cart" aria-controls="CartDrawer" aria-expanded="false">
+            <a href="/cart" class="site-header__cart">
               <span class="icon icon-cart" aria-hidden="true"></span>
               {{ 'layout.cart.title' | t }}
               (<span id="CartCount">{{ cart.item_count }}</span>
