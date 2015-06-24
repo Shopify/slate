@@ -26,6 +26,7 @@
     *Backface
     *User-select
   #Helper Classes
+  #Breakpoint Variables
   #Media Query
   #Responsive Helper Mixins
     *Show/Hide Helper
@@ -377,6 +378,18 @@ $z-index-dropdown : 2;
 }
 
 /*============================================================================
+  #Breakpoint Variables
+==============================================================================*/
+
+// Used by the `media-query` mixin
+$mobile: 'mobile';
+$tablet-only: 'tablet-only';
+$tablet-down: 'tablet-down';
+$tablet-up: 'tablet-up';
+$desktop-up: 'desktop-up';
+$widescreen: 'widescreen';
+
+/*============================================================================
   #Media Query Mixin
 ==============================================================================*/
 
@@ -452,12 +465,6 @@ $z-index-dropdown : 2;
     - `.grid--uniform` is used to take care of clearfixes on evenly sized
     `.grid__items`
 ==============================================================================*/
-$mobile: 'mobile';
-$tablet-only: 'tablet-only';
-$tablet-down: 'tablet-down';
-$tablet-up: 'tablet-up';
-$desktop-up: 'desktop-up';
-$widescreen: 'widescreen';
 
 $grid-tablet: 750px;
 $grid-desktop: 990px;
@@ -522,7 +529,7 @@ $grid-breakpoint-types: ('mobile', 'tablet-only', 'tablet-down', 'tablet-up', 'd
 }
 
 /*============================================================================
-  #GRID COLUMNS
+  #Grid Columns
     - Create width classes with the modifiers for each breakpoint.
 
     - Breakpoint specific columns are generated for each breakpoint based
@@ -537,7 +544,7 @@ $grid-breakpoint-types: ('mobile', 'tablet-only', 'tablet-down', 'tablet-up', 'd
 }
 
 /*============================================================================
-  #GRID HELPER MIXINS
+  #Grid Helper Mixins
 ==============================================================================*/
 
 /*================ Clearfix helper on uniform grids ================*/
@@ -553,7 +560,7 @@ $grid-breakpoint-types: ('mobile', 'tablet-only', 'tablet-down', 'tablet-up', 'd
 
 
 /*============================================================================
-  #BUILD THE GRID
+  #Build The Grid
 ==============================================================================*/
 
 /*================ Base Grid Classes ================*/
