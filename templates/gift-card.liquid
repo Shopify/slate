@@ -38,10 +38,10 @@
       <div class="header-logo" itemscope itemtype="http://schema.org/Organization">
         {% if settings.logo_use_image %}
           <a href="{{ shop.url }}" itemprop="url">
-            <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name | escape }}" itemprop="logo">
+            <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
           </a>
         {% else %}
-          <a href="{{ shop.url }}" itemprop="url">{{ shop.name | escape }}</a>
+          <a href="{{ shop.url }}" itemprop="url">{{ shop.name }}</a>
         {% endif %}
       </div>
       <div class="shop-url">{{ shop.url | escape }}</div>
