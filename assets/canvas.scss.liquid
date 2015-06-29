@@ -211,10 +211,6 @@ $color-btn-secondary-hover: darken($color-btn-secondary, 10%);
 $color-btn-secondary-active: darken($color-btn-secondary-hover, 10%);
 $color-btn-secondary-text: #fff;
 
-// Text link colors
-$color-link: $color-primary;
-$color-link-hover: lighten($color-primary, 15%);
-
 // Text colors
 $color-body-text: {{ settings.color_body_text }};
 
@@ -875,19 +871,9 @@ ol {
 /*============================================================================
   #Links and Buttons
 ==============================================================================*/
-a {
-  color: $color-link;
-
-  &:hover,
-  &:focus {
-    color: $color-link-hover;
-  }
-}
 
 /*================ Force an input/button to look like a text link ================*/
 .text-link {
-  @extend a;
-
   display: inline;
   border: 0 none;
   background: none;
