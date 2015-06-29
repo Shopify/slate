@@ -23,6 +23,7 @@ window.ShopifyCanvas = window.ShopifyCanvas || {};
  *
  */
 ShopifyCanvas.init = function () {
+  FastClick.attach(document.body);
   ShopifyCanvas.cacheSelectors();
   ShopifyCanvas.checkUrlHash();
   ShopifyCanvas.initEventListeners();
