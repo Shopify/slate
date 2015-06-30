@@ -39,11 +39,6 @@
     *Grid Columns
     *Uniform Grid
   #Basic Styles
-  #Typography
-    *Headings
-    *Blockquotes
-    *Code
-    *Horizontal Rules
   #Icons
     *Fallback Text
     *Icon Mapping
@@ -598,82 +593,9 @@ html {
 }
 
 /*============================================================================
-  #Typography
+  Typography
 ==============================================================================*/
-body,
-input,
-textarea,
-button,
-select {
-  font-size: $font-size-base;
-  font-family: $font-stack-body;
-  color: $color-body-text;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: $font-stack-header;
-  font-weight: $font-weight-header;
-}
-
-/*================ Headings ================*/
-h1 {
-
-}
-
-h2 {
-
-}
-
-h3 {
-
-}
-
-h4 {
-
-}
-
-h5 {
-
-}
-
-h6 {
-
-}
-
-
-.h1 {
-  @extend h1;
-}
-
-.h2 {
-  @extend h2;
-}
-
-.h3 {
-  @extend h3;
-}
-
-.h4 {
-  @extend h4;
-}
-
-.h5 {
-  @extend h5;
-}
-
-.h6 {
-  @extend h6;
-}
-
-
-/*================ Blockquotes ================*/
 blockquote {
-
   p {
 
     & + cite {
@@ -690,7 +612,6 @@ blockquote {
   }
 }
 
-/*================ Code ================*/
 code, pre {
   font-family: Consolas,monospace;
   font-size: 1em;
@@ -698,15 +619,6 @@ code, pre {
 
 pre {
   overflow: auto;
-}
-
-/*================ Horizontal Rules ================*/
-hr {
-  clear: both;
-  border-top: solid $color-border;
-  border-width: 1px 0 0;
-  margin: $gutter-site 0;
-  height: 0;
 }
 
 /*============================================================================
