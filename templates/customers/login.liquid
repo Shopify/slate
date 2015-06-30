@@ -19,11 +19,11 @@
 
         {{ form.errors | default_errors }}
 
-        <label for="CustomerEmail" class="hidden-label">{{ 'customer.login.email' | t }}</label>
+        <label for="CustomerEmail" class="label--hidden">{{ 'customer.login.email' | t }}</label>
         <input type="email" name="customer[email]" id="CustomerEmail" class="{% if form.errors contains 'email' %} form--error{% endif %}" placeholder="{{ 'customer.login.email' | t }}" autocorrect="off" autocapitalize="off" autofocus>
 
         {% if form.password_needed %}
-          <label for="CustomerPassword" class="hidden-label">{{ 'customer.login.password' | t }}</label>
+          <label for="CustomerPassword" class="label--hidden">{{ 'customer.login.password' | t }}</label>
           <input type="password" value="" name="customer[password]" id="CustomerPassword" class="{% if form.errors contains 'password' %} form--error{% endif %}" placeholder="{{ 'customer.login.password' | t }}">
         {% endif %}
 
@@ -58,7 +58,7 @@
             <span class="hide reset-password-success"></span>
           {% endif %}
 
-          <label for="RecoverEmail" class="hidden-label">{{ 'customer.recover_password.email' | t }}</label>
+          <label for="RecoverEmail" class="label--hidden">{{ 'customer.recover_password.email' | t }}</label>
           <input type="email" value="" name="email" id="RecoverEmail" class="input-full" placeholder="{{ 'customer.recover_password.email' | t }}" autocorrect="off" autocapitalize="off">
 
           <p>
