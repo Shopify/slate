@@ -697,26 +697,14 @@ pre {
   @include user-select();
   cursor: default;
 
-  li {
-    color: $color-primary;
-    cursor: default;
-  }
-
   .icon {
     font-size: $font-size-icons-payment;
   }
 }
 
 /*================ Social Icons ================*/
-.social-icons li {
-  @include media-query($tablet-up) {
-    margin-left: 0;
-  }
-
-  .icon {
-    font-size: $font-size-icons-social;
-  }
-
+.social-icons .icon {
+  font-size: $font-size-icons-social;
 }
 
 /*============================================================================
@@ -745,10 +733,12 @@ ol {
 }
 
 .list--inline {
-  padding-left: 0;
+  padding: 0;
+  margin: 0;
 
   li {
     display: inline-block;
+    margin-bottom: 0;
   }
 }
 

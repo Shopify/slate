@@ -239,7 +239,7 @@
 
               <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
 
-              <button type="submit" class="icon-fallback-text">
+              <button type="submit">
                 <span class="icon icon-search" aria-hidden="true"></span>
                 <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
               </button>
@@ -293,7 +293,7 @@
           Show social links defined in the settings with an accompanying url
         {% endcomment %}
         <div class="grid__item">
-          <ul class="site-footer__social-icons">
+          <ul class="list--inline social-icons">
             {% if settings.social_twitter_link != blank %}
               <li>
                 <a href="{{ settings.social_twitter_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}">
@@ -312,6 +312,19 @@
             {% endif %}
           </ul>
         </div>
+
+        {% unless shop.enabled_payment_types == empty %}
+          <div class="grid__item">
+            <ul class="list--inline payment-icons">
+              {% for type in shop.enabled_payment_types %}
+                <li>
+                  <span class="icon icon-{{type}}" aria-hidden="true"></span>
+                  <span class="icon__fallback-text">{{type | replace: '_',' '}}</span>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endunless %}
 
         {% comment %}
           Show Shop Links from footer linklist if it has any links
