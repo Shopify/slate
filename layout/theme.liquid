@@ -293,7 +293,7 @@
           Show social links defined in the settings with an accompanying url
         {% endcomment %}
         <div class="grid__item">
-          <ul class="site-footer__social-icons">
+          <ul class="list--inline site-footer__social-icons">
             {% if settings.social_twitter_link != blank %}
               <li>
                 <a href="{{ settings.social_twitter_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}">
@@ -315,7 +315,7 @@
 
         {% unless shop.enabled_payment_types == empty %}
           <div class="grid__item">
-            <ul class="inline-list site-footer__payment-icons">
+            <ul class="list--inline site-footer__payment-icons">
               {% for type in shop.enabled_payment_types %}
                 <li>
                   <span class="icon icon-{{type}}" aria-hidden="true"></span>
