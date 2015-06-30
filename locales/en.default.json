@@ -83,9 +83,6 @@
         "other": "{{ count }} items"
       }
     },
-    "sidebar": {
-      "tags": "Tags"
-    },
      "onboarding": {
       "modal_title": "This page will show all of your store's products",
       "no_products_html": "There are no products yet, but once you begin adding them they will show up here regardless if they are in a collection.",

@@ -83,9 +83,6 @@
         "other": "{{ count }} Produkte"
       }
     },
-    "sidebar": {
-      "tags": "Tags"
-    },
     "onboarding": {
       "modal_title": "Auf dieser Seite werden alle Produkte Ihres Geschäfts angezeigt.",
       "no_products_html": "Es sind noch keine Produkte vorhanden, doch sobald Sie welche hinzufügen, werden sie hier angezeigt, ganz gleich, ob sie zu einer Kollektion gehören oder nicht.",

@@ -83,9 +83,6 @@
         "other": "{{ count }} items"
       }
     },
-    "sidebar": {
-      "tags": "Filtres"
-    },
     "onboarding": {
       "modal_title": "Cette page affichera tous les produits de votre magasin",
       "no_products_html": "Il n'y a aucun produit pour l'instant, mais dès que vous commencerez à les ajouter, ils s'afficheront ici, qu'ils soient dans une collection ou non.",

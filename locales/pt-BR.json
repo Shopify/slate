@@ -83,9 +83,6 @@
         "other": "{{ count }} itens"
       }
     },
-    "sidebar": {
-      "tags": "Marcadores"
-    },
     "onboarding": {
       "modal_title": "Esta página mostrará todos os produtos de sua loja",
       "no_products_html": "Não há nenhum produto ainda, mas, quando você começar a adicioná-los, eles aparecerão aqui, independentemente se estiverem em uma coleção.",
