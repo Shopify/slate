@@ -47,8 +47,7 @@
         "other": "{{ count }} comentarios"
       }
     },
-    "sidebar": {
-      "recent_articles": "Artículos recientes",
+    "general": {
       "categories": "Categorías"
     }
   },

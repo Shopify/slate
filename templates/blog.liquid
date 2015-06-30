@@ -12,7 +12,7 @@
     {% endif %}
 
     {% if blog.all_tags.size > 0 %}
-      <h2>{{ 'blogs.categories' | t }}</h2>
+      <h2>{{ 'blogs.general.categories' | t }}</h2>
       <ul>
         {% for tag in blog.all_tags %}
           {% if current_tags contains tag %}
