@@ -8,6 +8,12 @@
       "title": "404 - Page non trouvée",
       "subtext_html": "Cette page n'est pas disponible. <a href=\"/collections/all\">Retourner au magasinage</a>"
     },
+    "social": {
+      "share_on_facebook": "Partager",
+      "share_on_twitter": "Tweeter",
+      "share_on_pinterest": "Épingler",
+      "share_on_fancy": "Partager sur Fancy"
+    },
     "breadcrumbs": {
       "home": "Accueil",
       "home_link_title": "Retour à la page d'accueil"

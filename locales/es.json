@@ -8,6 +8,12 @@
       "title": "404 Página no encontrada",
       "subtext_html": "La página que ha solicitado no existe. Haga clic <a href=\"/collections/all\">aquí</a> para continuar la compra."
     },
+    "social": {
+      "share_on_facebook": "Compartir",
+      "share_on_twitter": "Tuitear",
+      "share_on_pinterest": "Hacer pin",
+      "share_on_fancy": "Fancy"
+    },
     "breadcrumbs": {
       "home": "Inicio",
       "home_link_title": "Volver a la portada"
