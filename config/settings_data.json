@@ -2,7 +2,15 @@
   "current": "Default",
   "presets": {
     "Default": {
-      "logo_use_image": false
+      "cart_notes_enable": true,
+      "logo_use_image": false,
+      "share_facebook": true,
+      "share_fancy": true,
+      "share_google": true,
+      "share_pinterest": true,
+      "share_twitter": true,
+      "social_sharing_blog": true,
+      "social_sharing_products": true
     }
   }
 }
