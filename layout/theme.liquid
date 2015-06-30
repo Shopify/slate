@@ -313,8 +313,8 @@
           </ul>
         </div>
 
-        <div class="grid__item">
-          {% unless shop.enabled_payment_types == empty %}
+        {% unless shop.enabled_payment_types == empty %}
+          <div class="grid__item">
             <ul class="inline-list site-footer__payment-icons">
               {% for type in shop.enabled_payment_types %}
                 <li>
@@ -323,8 +323,8 @@
                 </li>
               {% endfor %}
             </ul>
-          {% endunless %}
-        </div>
+          </div>
+        {% endunless %}
 
         {% comment %}
           Show Shop Links from footer linklist if it has any links
