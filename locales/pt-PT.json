@@ -47,8 +47,7 @@
         "other": "{{ count }} comentários"
       }
     },
-    "sidebar": {
-      "recent_articles": "Artigos Recentes",
+    "general": {
       "categories": "Categorias"
     }
   },
@@ -83,9 +82,6 @@
         "one": "{{ count }} item",
         "other": "{{ count }} itens"
       }
-    },
-    "sidebar": {
-      "tags": "Etiquetas"
     },
     "onboarding": {
       "modal_title": "Esta página irá exibir todos os produtos da sua loja",

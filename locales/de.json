@@ -47,8 +47,7 @@
         "other": "{{ count }} Kommentare"
       }
     },
-    "sidebar": {
-      "recent_articles": "Neueste Artikel",
+    "General": {
       "categories": "Kategorien"
     }
   },
@@ -83,9 +82,6 @@
         "one": "{{ count }} Produkt",
         "other": "{{ count }} Produkte"
       }
-    },
-    "sidebar": {
-      "tags": "Tags"
     },
     "onboarding": {
       "modal_title": "Auf dieser Seite werden alle Produkte Ihres Geschäfts angezeigt.",
