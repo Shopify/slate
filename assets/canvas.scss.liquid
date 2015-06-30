@@ -693,14 +693,9 @@ pre {
 .icon-youtube:before { content: "\79"; }
 
 /*================ Payment Icons ================*/
-.payment-icons {
+.site-footer__payment-icons {
   @include user-select();
   cursor: default;
-
-  li {
-    color: $color-primary;
-    cursor: default;
-  }
 
   .icon {
     font-size: $font-size-icons-payment;
@@ -708,15 +703,8 @@ pre {
 }
 
 /*================ Social Icons ================*/
-.social-icons li {
-  @include media-query($tablet-up) {
-    margin-left: 0;
-  }
-
-  .icon {
-    font-size: $font-size-icons-social;
-  }
-
+.site-footer__social-icons .icon {
+  font-size: $font-size-icons-social;
 }
 
 /*============================================================================
@@ -745,10 +733,12 @@ ol {
 }
 
 .list--inline {
-  padding-left: 0;
+  padding: 0;
+  margin: 0;
 
   li {
     display: inline-block;
+    margin-bottom: 0;
   }
 }
 

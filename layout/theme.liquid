@@ -239,7 +239,7 @@
 
               <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
 
-              <button type="submit" class="icon-fallback-text">
+              <button type="submit">
                 <span class="icon icon-search" aria-hidden="true"></span>
                 <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
               </button>
@@ -311,6 +311,19 @@
               </li>
             {% endif %}
           </ul>
+        </div>
+
+        <div class="grid__item">
+          {% unless shop.enabled_payment_types == empty %}
+            <ul class="inline-list site-footer__payment-icons">
+              {% for type in shop.enabled_payment_types %}
+                <li>
+                  <span class="icon icon-{{type}}" aria-hidden="true"></span>
+                  <span class="icon__fallback-text">{{type | replace: '_',' '}}</span>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endunless %}
         </div>
 
         {% comment %}
