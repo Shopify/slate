@@ -18,6 +18,34 @@
     ]
   },
   {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "select",
+        "id": "type_base_size",
+        "label": "Base size",
+        "options": [
+          {
+            "value": "14px",
+            "label": "14px"
+          },
+          {
+            "value": "15px",
+            "label": "15px"
+          },
+          {
+            "value": "16px",
+            "label": "16px"
+          },
+          {
+            "value": "17px",
+            "label": "17px"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "name": "Colors",
     "settings": [
       {
@@ -68,6 +96,29 @@
   {
     "name": "Header",
     "settings": [
+      {
+        "type": "header",
+        "content": "Logo"
+      },
+      {
+        "type": "checkbox",
+        "id": "logo_use_image",
+        "label": "Use custom logo"
+      },
+      {
+        "type": "image",
+        "id": "logo.png",
+        "label": "Logo image",
+        "max-width": 450,
+        "max-height": 200,
+        "info": "Maximum logo dimensions are 450px wide by 200px high. The uploaded file will be resized to fit within those constraints."
+      },
+      {
+        "type": "text",
+        "id": "logo_max_width",
+        "label": "Max logo width",
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
       {
         "type": "header",
         "content": "Favicon"
