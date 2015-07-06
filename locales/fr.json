@@ -14,14 +14,6 @@
       "share_on_pinterest": "Épingler",
       "share_on_fancy": "Partager sur Fancy"
     },
-    "breadcrumbs": {
-      "home": "Accueil",
-      "home_link_title": "Retour à la page d'accueil"
-    },
-    "newsletter_form": {
-      "newsletter_email": "courriel@exemple.com",
-      "submit": "S'inscrire"
-    },
     "search": {
       "no_results_html": "Votre recherche pour \"{{ terms }}\" n'a pas généré de résultats.",
       "results_for_html": "Votre recherche pour \"{{ terms }}\" a généré les résultats suivants:",
@@ -33,8 +25,6 @@
   "blogs": {
     "article": {
       "author_on_date_html": "Publié par {{ author }} le {{ date }}",
-      "older_post": "Article précédent",
-      "newer_post": "Article suivant",
       "tags": "Tags",
       "comment_meta_html": "{{ author }} le {{ date }}",
       "read_more": "Plus"
@@ -79,11 +69,8 @@
   },
   "collections": {
     "general": {
-      "all_of_collection": "Tout",
       "no_matches": "Aucun produit ne correspond à votre recherche.",
       "link_title": "Consultez la collection {{ title }}",
-      "grid_view": "Grille",
-      "list_view": "Liste",
       "items_with_count": {
         "one": "{{ count }} item",
         "other": "{{ count }} items"
@@ -246,21 +233,17 @@
     },
     "footer": {
       "social_title": "Restez en contact",
-      "newsletter_title": "Infolettre",
-      "accepted_payments": "Méthodes de paiement acceptées"
+      "social_platform": "{{ name }} sur {{ platform }}"
     }
   },
   "products": {
     "general": {
-      "previous_product_html": "&larr; Produit précédent",
-      "next_product_html": "Produit suivant &rarr;",
       "from_text_html": "À partir de {{ price }}"
     },
     "product": {
       "sold_out": "Épuisé",
       "on_sale": "En solde",
       "on_sale_from_html": "<strong>En solde</strong> {{ price }}",
-      "unavailable": "Non disponible",
       "compare_at": "Était",
       "quantity": "Quantité",
       "add_to_cart": "Ajouter au panier"
@@ -275,7 +258,8 @@
       "active": "Expire le {{ expiry }}",
       "redeem": "Entrez ce code lors du paiement pour utiliser votre carte-cadeau",
       "shop_link": "Boutique",
-      "print": "Imprimer"
+      "print": "Imprimer",
+      "remaining_html": "{{ balance }} <small>restant<\/small>"
     }
   },
   "date_formats":{

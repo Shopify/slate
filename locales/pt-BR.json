@@ -14,14 +14,6 @@
       "share_on_pinterest": "Pin it",
       "share_on_fancy": "Fancy"
     },
-    "breadcrumbs": {
-      "home": "Início",
-      "home_link_title": "Voltar à \"Primeira Página\""
-    },
-    "newsletter_form": {
-      "newsletter_email": "e-mail@exemplo.com",
-      "submit": "Inscrever"
-    },
     "search": {
       "no_results_html": "Sua busca por \"{{ terms }}\" não gerou resultados.",
       "results_for_html": "Sua busca por \"{{ terms }}\" encontrou os itens a seguir:",
@@ -33,8 +25,6 @@
   "blogs": {
     "article": {
       "author_on_date_html": "Postado por{{ author }} em {{ date }}",
-      "older_post": "Postagem anterior",
-      "newer_post": "Postagem seguinte",
       "tags": "Marcadores",
       "comment_meta_html": "{{ author }} em {{ date }}",
       "read_more": "Ler mais"
@@ -79,11 +69,8 @@
   },
   "collections": {
     "general": {
-      "all_of_collection": "Todos de {{ collection }}",
       "no_matches": "Desculpe, mas não há produtos correspondentes à sua busca.",
       "link_title": "Explore a nossa coleção {{ title }}",
-      "grid_view": "Grelha",
-      "list_view": "Lista",
       "items_with_count": {
         "one": "{{ count }} item",
         "other": "{{ count }} itens"
@@ -246,21 +233,17 @@
     },
     "footer": {
       "social_title": "Conecte-se",
-      "newsletter_title": "Informativo",
-      "accepted_payments": "Formas de pagamento"
+      "social_platform": "{{ name }} em {{ platform }}"
     }
   },
   "products": {
     "general": {
-      "previous_product_html": "&larr; Produto anterior",
-      "next_product_html": "Próximo produto &rarr;",
       "from_text_html": "A partir de {{ price }}"
     },
     "product": {
       "sold_out": "Esgotado",
       "on_sale": "Em promoção",
       "on_sale_from_html": "<strong>Em promoção</strong>, a partir de {{ price }}",
-      "unavailable": "Indisponível",
       "compare_at": "Preço normal:",
       "quantity": "Quantidade",
       "add_to_cart": "Adicionar ao carrinho"
@@ -275,7 +258,8 @@
       "active": "Expira em {{ expiry }}",
       "redeem": "Para resgatar o seu vale-presente, utilize este código no fechamento do pedido",
       "shop_link": "Comece a comprar",
-      "print": "Imprimir"
+      "print": "Imprimir",
+      "remaining_html": "{{ balance }} <small>restantes<\/small>"
     }
   },
   "date_formats":{

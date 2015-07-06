@@ -14,14 +14,6 @@
       "share_on_pinterest": "Hacer pin",
       "share_on_fancy": "Fancy"
     },
-    "breadcrumbs": {
-      "home": "Inicio",
-      "home_link_title": "Volver a la portada"
-    },
-    "newsletter_form": {
-      "newsletter_email": "email@ejemplo.com",
-      "submit": "Suscribir"
-    },
     "search": {
       "no_results_html": "Su búsqueda de \"{{ terms }}\" no tuvo resultados.",
       "results_for_html": "Su búsqueda de \"{{ terms }}\" muestra lo siguiente:",
@@ -33,8 +25,6 @@
   "blogs": {
     "article": {
       "author_on_date_html": "Publicado por {{ author }} en {{ date }}",
-      "older_post": "Publicación más antigua",
-      "newer_post": "Publicación más reciente",
       "tags": "Etiquetas",
       "comment_meta_html": "{{ author }} en {{ date }}",
       "read_more": "Leer más"
@@ -79,11 +69,8 @@
   },
   "collections": {
     "general": {
-      "all_of_collection": "Todos",
       "no_matches": "Lo sentimos, no hay productos que coincidan con su búsqueda.",
       "link_title": "Navegue por nuestra colección {{ title }}",
-      "grid_view": "Tabla",
-      "list_view": "Lista",
       "items_with_count": {
         "one": "{{ count }} artículo",
         "other": "{{ count }} artículos"
@@ -246,21 +233,17 @@
     },
     "footer": {
       "social_title": "Conectarse",
-      "newsletter_title": "Boletín",
-      "accepted_payments": "Pagos aceptados"
+      "social_platform": "{{ name }} en {{ platform }}"
     }
   },
   "products": {
     "general": {
-      "previous_product_html": "&larr; Producto anterior",
-      "next_product_html": "Siguiente producto &rarr;",
       "from_text_html": "De {{ price }}"
     },
     "product": {
       "sold_out": "Agotado",
       "on_sale": "En oferta",
       "on_sale_from_html": "<strong>En oferta</strong> desde {{ price }}",
-      "unavailable": "No disponible",
       "compare_at": " Comparar en",
       "quantity": "Cantidad",
       "add_to_cart": "Agregar al carrito"
@@ -275,7 +258,8 @@
       "active": "Expira en {{ expiry }}",
       "redeem": "Use este código al terminar la comprar para canjear su tarjeta de regalo",
       "shop_link": "Empezar a comprar",
-      "print": "Imprimir"
+      "print": "Imprimir",
+      "remaining_html": "{{ balance }} <small>restante<\/small>"
     }
   },
   "date_formats":{

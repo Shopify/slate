@@ -14,14 +14,6 @@
       "share_on_pinterest": "Pin it",
       "share_on_fancy": "Fancy"
     },
-    "breadcrumbs": {
-      "home": "Home",
-      "home_link_title": "Back to the frontpage"
-    },
-    "newsletter_form": {
-      "newsletter_email": "email@example.com",
-      "submit": "Subscribe"
-    },
     "search": {
       "no_results_html": "Your search for \"{{ terms }}\" did not yield any results.",
       "results_for_html": "Your search for \"{{ terms }}\" revealed the following:",
@@ -33,8 +25,6 @@
   "blogs": {
     "article": {
       "author_on_date_html": "Posted by {{ author }} on {{ date }}",
-      "older_post": "Older Post",
-      "newer_post": "Newer Post",
       "tags": "Tags",
       "comment_meta_html": "{{ author }} on {{ date }}",
       "read_more": "Read more"
@@ -79,11 +69,8 @@
   },
   "collections": {
     "general": {
-      "all_of_collection": "All {{ collection }}",
       "no_matches": "Sorry, there are no products in this collection",
       "link_title": "Browse our {{ title }} collection",
-      "grid_view": "Grid view",
-      "list_view": "List view",
       "items_with_count": {
         "one": "{{ count }} item",
         "other": "{{ count }} items"
@@ -246,21 +233,17 @@
     },
     "footer": {
       "social_title": "Get Connected",
-      "newsletter_title": "Newsletter",
-      "accepted_payments": "Accepted Payments"
+      "social_platform": "{{ name }} on {{ platform }}",
     }
   },
   "products": {
     "general": {
-      "previous_product_html": "&larr; Previous Product",
-      "next_product_html": "Next Product &rarr;",
       "from_text_html": "From {{ price }}"
     },
     "product": {
       "sold_out": "Sold Out",
       "on_sale": "On Sale",
       "on_sale_from_html": "<strong>On Sale</strong> from {{ price }}",
-      "unavailable": "Unavailable",
       "compare_at": "Compare at",
       "quantity": "Quantity",
       "add_to_cart": "Add to Cart"
@@ -275,7 +258,8 @@
       "active": "Expires on {{ expiry }}",
       "redeem": "Use this code at checkout to redeem your gift card",
       "shop_link": "Start shopping",
-      "print": "Print"
+      "print": "Print",
+      "remaining_html": "{{ balance }} <small>left<\/small>"
     }
   },
   "date_formats":{

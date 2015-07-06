@@ -14,14 +14,6 @@
       "share_on_pinterest": "Pin it",
       "share_on_fancy": "Fancy"
     },
-    "breadcrumbs": {
-      "home": "Startseite",
-      "home_link_title": "Zurück zur Startseite"
-    },
-    "newsletter_form": {
-      "newsletter_email": "email@beispiel.com",
-      "submit": "Abonnieren"
-    },
     "search": {
       "no_results_html": "Ihre Suche nach \"{{ terms }}\" hat keine Ergebnisse hervorgebracht.",
       "results_for_html": "Ihre Suche nach \"{{ terms }}\" hat folgende Ergebnisse hervorgebracht:",
@@ -33,8 +25,6 @@
   "blogs": {
     "article": {
       "author_on_date_html": "Geposted von {{ author }} am {{ date }}",
-      "older_post": "Älterer Post",
-      "newer_post": "Neuerer Post",
       "tags": "Tags",
       "comment_meta_html": "{{ author }} am {{ date }}",
       "read_more": "Weiterlesen"
@@ -79,11 +69,8 @@
   },
   "collections": {
     "general": {
-      "all_of_collection": "Alle {{ collection }}",
       "no_matches": "Es tut uns leid, aber Ihre Suche nach Produkten hat keine Treffer ergeben.",
       "link_title": "Durchsuchen Sie unsere {{ title }}-Zusammenstellung",
-      "grid_view": "Gitteransicht",
-      "list_view": "Listenansicht",
       "items_with_count": {
         "one": "{{ count }} Produkt",
         "other": "{{ count }} Produkte"
@@ -246,21 +233,17 @@
     },
     "footer": {
       "social_title": "Bleiben Sie auf dem Laufenden",
-      "newsletter_title": "Newsletter",
-      "accepted_payments": "Akzeptierte Zahlungen"
+      "social_platform": "{{ name }} auf {{ platform }}"
     }
   },
   "products": {
     "general": {
-      "previous_product_html": "&larr; Vorheriger Artikel",
-      "next_product_html": "Nächster Artikel &rarr;",
       "from_text_html": "Von {{ price }}"
     },
     "product": {
       "sold_out": "Ausverkauft",
       "on_sale": "Im Angebot",
       "on_sale_from_html": "<strong>Im Angebot</strong> ab {{ price }}",
-      "unavailable": "Nicht verfügbar",
       "compare_at": "Vergleichen bei",
       "quantity": "Menge",
       "add_to_cart": "In den Einkaufswagen legen"
@@ -275,7 +258,8 @@
       "active": "Läuft ab am {{ expiry }}",
       "redeem": "Nutzen Sie an der Kasse diesen Code, um Ihre Geschenkkarte einzulösen",
       "shop_link": "Einkauf beginnen",
-      "print": "Drucken"
+      "print": "Drucken",
+      "remaining_html": "{{ balance }} <small>übrig<\/small>"
     }
   },
   "date_formats":{

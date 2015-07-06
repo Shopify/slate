@@ -66,13 +66,13 @@
           </div>
 
           <div class="giftcard__wrap">
-            <img src="{{ 'gift-card/card.jpg' | shopify_asset_url }}" alt="{{ 'gift_cards.card_image' | t }}">
+            <img src="{{ 'gift-card/card.jpg' | shopify_asset_url }}" alt="Gift card illustration">
 
             {% assign initial_value_size = formatted_initial_value | size %}
             <div class="giftcard__amount">
               {% if gift_card.balance != gift_card.initial_value %}
                 <span class="tooltip">
-                  <span class="tooltip__label">{{ gift_card.balance | money }}<small>{{ 'gift_cards.balance' | t }}</small></span>
+                  <span class="tooltip__label">{{ 'gift_cards.issued.remaining_html' | t: balance: gift_card.balance | money }}</span>
                 </span>
               {% endif %}
               <strong>{{ formatted_initial_value }}</strong>
