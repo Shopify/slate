@@ -710,26 +710,13 @@ pre {
 /*============================================================================
   #Lists
 ==============================================================================*/
+ul, ol {
+  margin: 0 0 ($gutter / 2) 20px;
+  padding: 0;
+}
+
 ol {
   list-style: decimal;
-}
-
-.list--square {
-  list-style: square outside;
-}
-
-.list--disc {
-  list-style: disc outside;
-}
-
-//for ordered lists
-.list--alpha {
-  list-style: lower-alpha outside;
-}
-
-.list--no-bullets {
-  list-style: none outside;
-  margin-left: 0;
 }
 
 .list--inline {
@@ -739,6 +726,18 @@ ol {
   li {
     display: inline-block;
     margin-bottom: 0;
+  }
+}
+
+.rte ul {
+  list-style: disc outside;
+
+  ul {
+    list-style: circle outside;
+
+    ul {
+      list-style: square outside;
+    }
   }
 }
 
