@@ -476,7 +476,17 @@ $grid-breakpoints: (
   'widescreen' '(min-width: #{$grid-widescreen})'
 );
 
+/*============================================================================
+  Add grid classes based on breaktpoint names.
+    - Example $grid-breakpoint-has-push: ('mobile', 'desktop-up');
+    - Remove names if you don't want those classes generated
+==============================================================================*/
 $grid-breakpoint-types: ('mobile', 'tablet-only', 'tablet-down', 'tablet-up', 'desktop-up', 'widescreen');
+
+/*============================================================================
+  Add push classes by including the appropriate breakpoint name(s).
+    - Example: $grid-breakpoint-has-push: ('tablet-only', 'desktop-up');
+==============================================================================*/
 $grid-breakpoint-has-push: ();
 
 /*============================================================================
