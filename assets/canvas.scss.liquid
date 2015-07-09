@@ -235,7 +235,7 @@ $font-stack-header: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-se
 $font-weight-header: 700;
 
 $font-stack-body: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$font-size-base: {{ settings.base_type_size }}; // Henseforth known as 1em
+$font-size-base: {{ settings.type_base_size }}; // Henseforth known as 1em
 
 @font-face {
   font-family: 'icons';
@@ -477,6 +477,7 @@ $grid-breakpoints: (
 );
 
 $grid-breakpoint-types: ('mobile', 'tablet-only', 'tablet-down', 'tablet-up', 'desktop-up', 'widescreen');
+$grid-breakpoint-has-push: ();
 
 /*============================================================================
   Grid Setup
@@ -534,9 +535,14 @@ $grid-breakpoint-types: ('mobile', 'tablet-only', 'tablet-down', 'tablet-up', 'd
   }
 }
 
-/*============================================================================
-  #Grid Helper Mixins
-==============================================================================*/
+/*================ Grid Push Setup ================*/
+@mixin grid-push-generator($grid-columns, $grid-breakpoint-type:"") {
+  @for $i from 1 through $grid-columns {
+    .grid-push-#{$i}#{$grid-breakpoint-type} {
+      margin-left: #{percentage($i / $grid-columns)};
+    }
+  }
+}
 
 /*================ Clearfix helper on uniform grids ================*/
 @mixin grid-uniform-clearfix($grid-breakpoint-type:"") {
@@ -551,14 +557,14 @@ $grid-breakpoint-types: ('mobile', 'tablet-only', 'tablet-down', 'tablet-up', 'd
 
 
 /*============================================================================
-  #Build The Grid
+  #Build The Grid Classes
 ==============================================================================*/
 
 /*================ Base Grid Classes ================*/
 @include grid-column-generator($grid-columns);
 @include responsive-display-helper();
 
-/*================ Responsive Grid classes ================*/
+/*================ Responsive Grid Classes ================*/
 @each $breakpoint in $grid-breakpoint-types {
   @include media-query($breakpoint) {
     @include grid-column-generator($grid-columns, '--#{$breakpoint}');
@@ -566,6 +572,14 @@ $grid-breakpoint-types: ('mobile', 'tablet-only', 'tablet-down', 'tablet-up', 'd
     @include responsive-display-helper('--#{$breakpoint}');
   }
 }
+
+/*================ Grid Push Classes ================*/
+@each $breakpoint in $grid-breakpoint-has-push {
+  @include media-query($breakpoint) {
+    @include grid-push-generator($grid-columns, '--#{$breakpoint}');
+  }
+}
+
 
 /*============================================================================
   #Basic Styles
