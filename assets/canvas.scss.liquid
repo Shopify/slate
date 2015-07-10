@@ -711,7 +711,7 @@ pre {
   #Lists
 ==============================================================================*/
 ul, ol {
-  margin: 0 0 ($gutter-site / 2) 20px;
+  margin: 0;
   padding: 0;
 }
 
@@ -729,20 +729,26 @@ ol {
   }
 }
 
-.rte ul {
-  list-style: disc outside;
+.rte {
+  ul, ol {
+    margin: 0 0 ($gutter-site / 2) $gutter-site;
+  }
 
   ul {
-    list-style: circle outside;
+    list-style: disc outside;
 
     ul {
-      list-style: square outside;
+      list-style: circle outside;
+
+      ul {
+        list-style: square outside;
+      }
     }
   }
 }
 
 /*============================================================================
-  #RTE
+  #Rich Text Editor
 ==============================================================================*/
 
 .rte {
