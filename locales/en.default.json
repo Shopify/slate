@@ -233,7 +233,7 @@
     },
     "footer": {
       "social_title": "Get Connected",
-      "social_platform": "{{ name }} on {{ platform }}",
+      "social_platform": "{{ name }} on {{ platform }}"
     }
   },
   "products": {
