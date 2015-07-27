@@ -115,10 +115,10 @@
         {% endcomment %}
         {% for address in customer.addresses %}
 
-          <h3>
+          <p>
             {{ address.first_name | capitalize }} {{ address.last_name | capitalize }}
             {% if address == customer.default_address %}({{ 'customer.addresses.default' | t }}){% endif %}
-          </h3>
+          </p>
 
           <p>
             {{ address.company }}<br>
