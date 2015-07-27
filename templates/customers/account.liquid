@@ -8,91 +8,88 @@
 
 <h1>{{ 'customer.account.title' | t }}</h1>
 
-<div class="grid">
-  <div class="grid__item">
-    <h2>{{ 'customer.orders.title' | t }}</h2>
+<hr>
+
+<h2>{{ 'customer.orders.title' | t }}</h2>
+
+{% comment %}
+  If we have past orders, loop through each one
+{% endcomment %}
+{% paginate customer.orders by 20 %}
+  {% if customer.orders.size != 0 %}
 
     {% comment %}
-      If we have past orders, loop through each one
+      Responsive Table for small screens
     {% endcomment %}
-    {% paginate customer.orders by 20 %}
-      {% if customer.orders.size != 0 %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>{{ 'customer.orders.order_number' | t }}</th>
+          <th>{{ 'customer.orders.date' | t }}</th>
+          <th>{{ 'customer.orders.payment_status' | t }}</th>
+          <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+          <th>{{ 'customer.orders.total' | t }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in customer.orders %}
+          <tr>
+            <td data-label="{{ 'customer.orders.order_number' | t }}">{{ order.name | link_to: order.customer_url }}</td>
+            <td data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | date: format: 'month_day_year' }}</td>
+            <td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</td>
+            <td data-label="{{ 'customer.orders.fulfillment_status' | t }}">{{ order.fulfillment_status_label }}</td>
+            <td data-label="{{ 'customer.orders.total' | t }}">{{ order.total_price | money }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 
-        {% comment %}
-          Responsive Table for small screens
-        {% endcomment %}
-        <table class="full">
-          <thead>
-            <tr>
-              <th>{{ 'customer.orders.order_number' | t }}</th>
-              <th>{{ 'customer.orders.date' | t }}</th>
-              <th>{{ 'customer.orders.payment_status' | t }}</th>
-              <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
-              <th>{{ 'customer.orders.total' | t }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for order in customer.orders %}
-              <tr>
-                <td>{{ order.name | link_to: order.customer_url }}</td>
-                <td>{{ order.created_at | date: format: 'month_day_year' }}</td>
-                <td>{{ order.financial_status_label }}</td>
-                <td>{{ order.fulfillment_status_label }}</td>
-                <td>{{ order.total_price | money }}</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+  {% else %}
 
-      {% else %}
+    <p>{{ 'customer.orders.none' | t }}</p>
 
-        <p>{{ 'customer.orders.none' | t }}</p>
+  {% endif %}
+  {% if paginate.pages > 1 %}
+    <div class="pagination">
+      {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
+    </div>
+  {% endif %}
+{% endpaginate %}
 
-      {% endif %}
-      {% if paginate.pages > 1 %}
-        <div class="pagination">
-          {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
-        </div>
-      {% endif %}
-    {% endpaginate %}
-  </div>
+<hr>
 
-  <div class="grid__item">
-    <h3>{{ 'customer.account.details' | t }}</h3>
+<h2>{{ 'customer.account.details' | t }}</h2>
 
-    <p>{{ customer.name }}</p>
+<p>{{ customer.name }}</p>
 
-    {% if customer.default_address != nil %}
-      <p>
-        {{ customer.default_address.address1 }}<br>
+{% if customer.default_address != nil %}
+  <p>
+    {{ customer.default_address.address1 }}<br>
 
-        {% if customer.default_address.address2 != "" %}
-          {{ customer.default_address.address2 }}<br>
-        {% endif %}
-
-        {% if customer.default_address.city != "" %}
-          {{ customer.default_address.city }}<br>
-        {% endif %}
-
-        {% if customer.default_address.province_code != "" %}
-          {{ customer.default_address.province_code | upcase }}<br>
-        {% endif %}
-
-        {% if customer.default_address.zip != "" %}
-          {{ customer.default_address.zip | upcase }}<br>
-        {% endif %}
-
-        {% if customer.default_address.country != "" %}
-          {{ customer.default_address.country }}<br>
-        {% endif %}
-
-        {% if customer.default_address.phone != "" %}
-          {{ customer.default_address.phone }}
-        {% endif %}
-      </p>
+    {% if customer.default_address.address2 != "" %}
+      {{ customer.default_address.address2 }}<br>
     {% endif %}
 
-    <p><a href="/account/addresses">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a></p>
-  </div>
+    {% if customer.default_address.city != "" %}
+      {{ customer.default_address.city }}<br>
+    {% endif %}
 
-</div>
+    {% if customer.default_address.province_code != "" %}
+      {{ customer.default_address.province_code | upcase }}<br>
+    {% endif %}
+
+    {% if customer.default_address.zip != "" %}
+      {{ customer.default_address.zip | upcase }}<br>
+    {% endif %}
+
+    {% if customer.default_address.country != "" %}
+      {{ customer.default_address.country }}<br>
+    {% endif %}
+
+    {% if customer.default_address.phone != "" %}
+      {{ customer.default_address.phone }}
+    {% endif %}
+  </p>
+{% endif %}
+
+<p><a href="/account/addresses">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a></p>
