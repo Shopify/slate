@@ -1,0 +1,18 @@
+machine:
+  ruby:
+    version:
+      1.9.3-p385
+
+dependencies:
+  bundler:
+    without:
+      - benchmark
+      - deploy
+      - production
+      - debug
+  cache_directories:
+    - .bundle/
+
+test:
+  override:
+    - bundle exec rspec spec
