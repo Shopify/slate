@@ -57,8 +57,7 @@
       "update": "Mettre à jour",
       "checkout": "Procéder au paiement",
       "empty": "Votre panier est vide.",
-      "continue_browsing_html": "<a href=\"/collections/all\">Retourner au magasinage</a>.",
-      "close_cart": "Fermer le panier"
+      "continue_browsing_html": "<a href=\"/collections/all\">Retourner au magasinage</a>."
     },
     "label": {
       "product": "Produit",
@@ -196,8 +195,7 @@
   "homepage": {
     "sections": {
       "frontpage_title": "Collection Frontpage",
-      "featured_title": "Collections en vedette",
-      "news_title": "Nouvelles récentes"
+      "featured_title": "Collections en vedette"
     },
     "onboarding": {
       "modal_title": "Nous y sommes presque...",
@@ -210,13 +208,6 @@
     }
   },
   "layout": {
-    "navigation": {
-      "menu": "Menu"
-    },
-    "drawers": {
-      "browse": "Explorer",
-      "close_menu": "Fermer le menu"
-    },
     "cart": {
       "title": "Panier",
       "items_count": {
@@ -232,7 +223,6 @@
       "create_account": "Créer un compte"
     },
     "footer": {
-      "social_title": "Restez en contact",
       "social_platform": "{{ name }} sur {{ platform }}"
     }
   },

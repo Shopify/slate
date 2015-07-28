@@ -57,8 +57,7 @@
       "update": "Update Cart",
       "checkout": "Check Out",
       "empty": "Your cart is currently empty.",
-      "continue_browsing_html": "Continue browsing <a href=\"/collections/all\">here</a>.",
-      "close_cart": "Close Cart"
+      "continue_browsing_html": "Continue browsing <a href=\"/collections/all\">here</a>."
     },
     "label": {
       "product": "Product",
@@ -196,8 +195,7 @@
   "homepage": {
     "sections": {
       "frontpage_title": "Frontpage Collection",
-      "featured_title": "Featured Collections",
-      "news_title": "Latest News"
+      "featured_title": "Featured Collections"
     },
     "onboarding": {
       "modal_title": "Almost there...",
@@ -210,13 +208,6 @@
     }
   },
   "layout": {
-    "navigation": {
-      "menu": "Menu"
-    },
-    "drawers": {
-      "browse": "Browse",
-      "close_menu": "Close menu"
-    },
     "cart": {
       "title": "Cart",
       "items_count": {
@@ -232,7 +223,6 @@
       "create_account": "Create account"
     },
     "footer": {
-      "social_title": "Get Connected",
       "social_platform": "{{ name }} on {{ platform }}"
     }
   },
