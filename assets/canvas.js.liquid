@@ -83,6 +83,38 @@ ShopifyCanvas.resetPasswordSuccess = function() {
   $('#ResetSuccess').removeClass('hide');
 };
 
+ShopifyCanvas.customerAddressForm = function () {
+  var $newAddressForm = $('#AddressNewForm');
+
+  if (!$newAddressForm.length) {
+    return;
+  }
+
+  // Initialize observers on address selectors, defined in shopify_common.js
+  new Shopify.CountryProvinceSelector('AddressCountryNew', 'AddressProvinceNew', {
+    hideElement: 'AddressProvinceContainerNew'
+  });
+
+  // Toggle new/edit address forms
+  $('.address-new-toggle').on('click', function() {
+    $newAddressForm.toggleClass('hide');
+  });
+
+  $('.address-edit-toggle').on('click', function () {
+    var formId = $(this).data('form-id');
+    $('#EditAddress_' + formId).toggleClass('hide');
+  });
+
+  $('#AddressDelete').on('click', function() {
+    var $el = $(this);
+    var formId = $el.data('form-id');
+    var confirmMessage = $el.data('confirm-message');
+    if (confirm(confirmMessage || "Are you sure you wish to delete this address?")) {
+      Shopify.postLink('/account/addresses/' + formId, {'parameters': { '_method': 'delete' }});
+    }
+  });
+};
+
 /**
  *
  *  Check URL for reset password hash
