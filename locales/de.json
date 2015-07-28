@@ -43,7 +43,7 @@
         "other": "{{ count }} Kommentare"
       }
     },
-    "General": {
+    "general": {
       "categories": "Kategorien"
     }
   },
@@ -57,8 +57,7 @@
       "update": "Einkaufswagen aktualisieren",
       "checkout": "Zur Kasse",
       "empty": "Ihr Einkaufswagen ist im Moment leer.",
-      "continue_browsing_html": "Mit der Suche <a href=\"/collections/all\">hier</a> fortfahren.",
-      "close_cart": "Einkaufswagen schließen"
+      "continue_browsing_html": "Mit der Suche <a href=\"/collections/all\">hier</a> fortfahren."
     },
     "label": {
       "product": "Artikel",
@@ -196,8 +195,7 @@
   "homepage": {
     "sections": {
       "frontpage_title": "Startseite-Zusammenstellung",
-      "featured_title": "Ausgewählte Zusammenstellungen",
-      "news_title": "Neueste Nachrichten"
+      "featured_title": "Ausgewählte Zusammenstellungen"
     },
     "onboarding": {
       "modal_title": "Fast fertig...",
@@ -210,13 +208,6 @@
     }
   },
   "layout": {
-    "navigation": {
-      "menu": "Menü"
-    },
-    "drawers": {
-      "browse": "Durchsuchen",
-      "close_menu": "Menü schließen"
-    },
     "cart": {
       "title": "Einkaufswagen",
       "items_count": {
@@ -232,7 +223,6 @@
       "create_account": "Account erstellen"
     },
     "footer": {
-      "social_title": "Bleiben Sie auf dem Laufenden",
       "social_platform": "{{ name }} auf {{ platform }}"
     }
   },

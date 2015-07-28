@@ -57,8 +57,7 @@
       "update": "Atualizar Carrinho de Compras",
       "checkout": "Check-Out",
       "empty": "O seu carrinho de compras está neste momento vazio.",
-      "continue_browsing_html": "Continue a ver <a href=\"/collections/all\">aqui</a>.",
-      "close_cart": "Fechar Carrinho de Compras"
+      "continue_browsing_html": "Continue a ver <a href=\"/collections/all\">aqui</a>."
     },
     "label": {
       "product": "Produto",
@@ -196,8 +195,7 @@
   "homepage": {
     "sections": {
       "frontpage_title": "Coleção Frontpage",
-      "featured_title": "Coleções em Destaque",
-      "news_title": "Notícias mais recentes"
+      "featured_title": "Coleções em Destaque"
     },
     "onboarding": {
       "modal_title": "Quase lá...",
@@ -210,13 +208,6 @@
     }
   },
   "layout": {
-    "navigation": {
-      "menu": "Menu"
-    },
-    "drawers": {
-      "browse": "Navegar",
-      "close_menu": "Fechar menu"
-    },
     "cart": {
       "title": "Carrinho de Compras",
       "items_count": {
@@ -232,7 +223,6 @@
       "create_account": "Criar conta"
     },
     "footer": {
-      "social_title": "Fique Ligado",
       "social_platform": "{{ name }} na {{ plataform }}"
     }
   },

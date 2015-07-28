@@ -57,8 +57,7 @@
       "update": "Actualizar carrito",
       "checkout": "Finalizar pedido",
       "empty": "Su carrito actualmente está vacío.",
-      "continue_browsing_html": "Continúe explorando <a href=\"/collections/all\">aquí</a>.",
-      "close_cart": "Cerrar carrito"
+      "continue_browsing_html": "Continúe explorando <a href=\"/collections/all\">aquí</a>."
     },
     "label": {
       "product": "Producto",
@@ -196,8 +195,7 @@
   "homepage": {
     "sections": {
       "frontpage_title": "Colección de portada",
-      "featured_title": "Colecciones destacadas",
-      "news_title": "Últimas noticias"
+      "featured_title": "Colecciones destacadas"
     },
     "onboarding": {
       "modal_title": "Casi allí...",
@@ -210,13 +208,6 @@
     }
   },
   "layout": {
-    "navigation": {
-      "menu": "Menú"
-    },
-    "drawers": {
-      "browse": "Navegar",
-      "close_menu": "Cerrar menú"
-    },
     "cart": {
       "title": "Carrito",
       "items_count": {
@@ -232,7 +223,6 @@
       "create_account": "Crear cuenta"
     },
     "footer": {
-      "social_title": "Conectarse",
       "social_platform": "{{ name }} en {{ platform }}"
     }
   },
