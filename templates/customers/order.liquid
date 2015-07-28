@@ -48,34 +48,34 @@
     {% endfor %}
   </tbody>
   <tfoot>
-    <tr>
-      <td colspan="4">{{ 'customer.order.subtotal' | t }}</td>
+    <tr class="responsive-table__row">
+      <td colspan="4" class="hide--mobile">{{ 'customer.order.subtotal' | t }}</td>
       <td data-label="{{ 'customer.order.subtotal' | t }}">{{ order.subtotal_price | money }}</td>
     </tr>
 
     {% for discount in order.discounts %}
       <tr class="order_summary discount">
-        <td colspan="4">{{ discount.code }} {{ 'customer.order.discount' | t }}</td>
+        <td colspan="4" class="hide--mobile">{{ discount.code }} {{ 'customer.order.discount' | t }}</td>
         <td data-label="{{ 'customer.order.discount' | t }}">{{ discount.savings | money }}</td>
       </tr>
     {% endfor %}
 
     {% for shipping_method in order.shipping_methods %}
       <tr>
-        <td colspan="4">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</td>
-        <td data-label="{{ 'customer.order.shipping' | t }}">{{ shipping_method.price | money }}</td>
+        <td colspan="4" class="hide--mobile">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</td>
+        <td data-label="{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})">{{ shipping_method.price | money }}</td>
       </tr>
     {% endfor %}
 
     {% for tax_line in order.tax_lines %}
       <tr>
-        <td colspan="4">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</td>
-        <td data-label="{{ 'customer.order.tax' | t }}">{{ tax_line.price | money }}</td>
+        <td colspan="4" class="hide--mobile">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</td>
+        <td data-label="{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)">{{ tax_line.price | money }}</td>
       </tr>
     {% endfor %}
 
     <tr>
-      <td colspan="4"><strong>{{ 'customer.order.total' | t }}</strong></td>
+      <td colspan="4" class="hide--mobile"><strong>{{ 'customer.order.total' | t }}</strong></td>
       <td data-label="{{ 'customer.order.total' | t }}"><strong>{{ order.total_price | money }} {{ order.currency }}</strong></td>
     </tr>
   </tfoot>
