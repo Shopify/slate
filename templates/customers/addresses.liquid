@@ -149,7 +149,7 @@
       <input type="text" id="AddressCity_{{ form.id }}" name="address[city]" value="{{ form.city }}" autocapitalize="words">
 
       <label for="AddressCountry_{{ form.id }}">{{ 'customer.addresses.country' | t }}</label>
-      <select id="AddressCountry_{{ form.id }}" name="address[country]" data-default="{{ form.country }}">{{ country_option_tags }}</select>
+      <select id="AddressCountry_{{ form.id }}" class="address-country-option" data-form-id="{{ form.id }}" name="address[country]" data-default="{{ form.country }}">{{ country_option_tags }}</select>
 
       <div id="AddressProvinceContainer_{{ form.id }}" style="display:none">
         <label for="AddressProvince_{{ form.id }}">{{ 'customer.addresses.province' | t }}</label>
