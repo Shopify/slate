@@ -892,11 +892,11 @@ th, td {
 }
 
 /*============================================================================
-  Responsive tables, defined with .table on table element.
+  Responsive tables, defined with .responsive-table on table element.
 ==============================================================================*/
 
 @include media-query($mobile) {
-  .table{
+  .responsive-table{
     thead {
       display: none;
     }
@@ -929,7 +929,7 @@ th, td {
     }
   }
 
-  .table__row + .table__row {
+  .responsive-table__row + .responsive-table__row {
     position: relative;
     margin-top: 10px;
     padding-top: $gutter-site / 2;

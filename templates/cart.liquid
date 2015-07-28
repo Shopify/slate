@@ -11,7 +11,7 @@
 
   <h1>{{ 'cart.general.title' | t }}</h1>
   <form action="/cart" method="post" novalidate class="cart">
-    <table class="table">
+    <table class="responsive-table">
       <thead class="cart__row cart__header-labels hide--mobile">
         <th colspan="2">{{ 'cart.label.product' | t }}</th>
         <th>{{ 'cart.label.price' | t }}</th>
@@ -20,7 +20,7 @@
       </thead>
       <tbody>
         {% for item in cart.items %}
-          <tr class="cart__row table__row">
+          <tr class="cart__row responsive-table__row">
             <td data-label="{{ 'customer.order.product' | t }}">
               <a href="{{ item.url | within: collections.all }}" class="cart__image">
                 {% comment %}
