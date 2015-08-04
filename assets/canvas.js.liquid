@@ -97,9 +97,11 @@ ShopifyCanvas.customerAddressForm = function () {
   }
 
   // Initialize observers on address selectors, defined in shopify_common.js
-  new Shopify.CountryProvinceSelector('AddressCountryNew', 'AddressProvinceNew', {
-    hideElement: 'AddressProvinceContainerNew'
-  });
+  if (Shopify) {
+    new Shopify.CountryProvinceSelector('AddressCountryNew', 'AddressProvinceNew', {
+      hideElement: 'AddressProvinceContainerNew'
+    });
+  }
 
   // Initialize each edit form's country/province selector
   $('.address-country-option').each(function() {
