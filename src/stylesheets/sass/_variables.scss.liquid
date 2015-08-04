@@ -1,0 +1,61 @@
+/*================ Color Variables ================*/
+$color-primary: {{ settings.color_primary }};
+$color-secondary: {{ settings.color_secondary }};
+
+// Button colors
+$color-btn-primary: $color-primary;
+$color-btn-primary-hover: darken($color-btn-primary, 10%);
+$color-btn-primary-active: darken($color-btn-primary-hover, 10%);
+$color-btn-primary-text: #fff;
+
+$color-btn-secondary: $color-secondary;
+$color-btn-secondary-hover: darken($color-btn-secondary, 10%);
+$color-btn-secondary-active: darken($color-btn-secondary-hover, 10%);
+$color-btn-secondary-text: #fff;
+
+// Text colors
+$color-body-text: {{ settings.color_body_text }};
+
+// Backgrounds
+$color-body: {{ settings.color_body_bg }};
+
+// Border colors
+$color-border: {{ settings.color_borders }};
+
+// Helper colors for form error states
+$color-disabled: #000;
+$color-border-disabled: #000;
+$color-error: #000;
+$color-error-bg: #000;
+$color-success: #000;
+$color-success-bg: #000;
+
+/*================ Sizing Variables ================*/
+$width-site: 1180px;
+$gutter-site: 30px;
+$gutter-heading: 30px;
+
+/*================ Typography Variables ================*/
+$font-stack-header: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-weight-header: 700;
+
+$font-stack-body: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-size-base: {{ settings.type_base_size }}; // Henseforth known as 1em
+
+@font-face {
+  font-family: 'icons';
+  src: url('{{ "icons.eot" | asset_url }}');
+  src: url('{{ "icons.eot" | asset_url }}#iefix') format("embedded-opentype"),
+       url('{{ "icons.woff" | asset_url }}') format("woff"),
+       url('{{ "icons.ttf" | asset_url }}') format("truetype"),
+       url('{{ "icons.svg" | asset_url }}#canvas-icons') format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+$font-stack-icons: 'icons';
+$font-size-icons-social: 30px;
+$font-size-icons-payment: 30px;
+
+/*================ Z-Index ================*/
+$z-index-dropdown : 2;

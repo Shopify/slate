@@ -1,0 +1,714 @@
+/*============================================================================
+  Canvas Table of Contents
+
+  #Normalize
+  #Helper Classes
+  #Basic Styles
+  #Icons
+    *Fallback Text
+    *Icon Mapping
+  #Lists
+  #Rich Text Editor
+  #Links and Buttons
+  #Tables
+  #Reponsive Tables
+  #Images and Iframes
+  #Forms
+    *Error States
+    *Labels
+  #Site Nav and Dropdowns
+  #Section Headers
+==============================================================================*/
+
+/*============================================================================
+  #Normalize
+  Based on normalize.css v3.0.2 | MIT License | git.io/normalize
+==============================================================================*/
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+// Remove default margin.
+body {
+  margin: 0;
+}
+
+// give HTML5 elements a consistent default for older IEs
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+// Standardize text weight rendering
+body,
+input,
+textarea,
+button,
+select {
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+// Remove the gray background color from active links in IE 10.
+a {
+  background-color: transparent;
+}
+
+// Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+b,
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
+
+// Address inconsistent and variable font size in all browsers.
+small {
+  font-size: 80%;
+}
+
+// Prevent `sub` and `sup` affecting `line-height` in all browsers.
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+// Remove border when inside `a` element in IE 8/9/10.
+img {
+  max-width: 100%;
+  border: 0;
+}
+
+// 1. Correct color not being inherited.
+//    Known issue: affects color of disabled elements.
+// 2. Correct font properties not being inherited.
+// 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit; // 1
+  font: inherit; // 2
+  margin: 0; // 3
+}
+
+// Re-set default cursor for disabled elements.
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+// 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+input[type="search"] {
+  -webkit-appearance: textfield; // 1
+}
+
+// Remove most spacing between table cells.
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+// Remove default vertical scrollbar in IE 8/9/10/11.
+textarea {
+  overflow: auto;
+}
+
+// hide outline on focus for elements which are given
+// focus by javascript
+[tabindex='-1']:focus {
+  outline: none;
+}
+
+/*============================================================================
+  #Helper Classes
+==============================================================================*/
+.clearfix {
+  @include clearfix();
+}
+
+.visually-hidden {
+  position: absolute !important;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0; border: 0;
+}
+
+/*============================================================================
+  #Basic Styles
+==============================================================================*/
+body,
+html {
+  background-color: $color-body;
+}
+
+.page-width {
+  @include clearfix();
+  max-width: $width-site;
+  margin: 0 auto;
+  padding: 0 ($gutter-site / 2);
+
+  @include media-query($mobile) {
+    padding: 0 $gutter-site;
+  }
+}
+
+.main-content {
+  display: block;
+  margin-top: $gutter-site;
+  padding-bottom: $gutter-site * 2;
+}
+
+/*============================================================================
+  Typography
+==============================================================================*/
+blockquote {
+  p {
+
+    & + cite {
+      margin-top: $gutter-site / 2;
+    }
+  }
+
+  cite {
+    display: block;
+
+    &:before {
+      content: '\2014 \0020';
+    }
+  }
+}
+
+code, pre {
+  font-family: Consolas,monospace;
+  font-size: 1em;
+}
+
+pre {
+  overflow: auto;
+}
+
+/*============================================================================
+  #Icons
+==============================================================================*/
+.icon {
+  display: inline-block;
+
+  .supports-no-fontface & {
+    display: none;
+  }
+}
+
+/*============================================================================
+  A generic way to visually hide content while
+  remaining accessible to screen readers (h5bp.com)
+==============================================================================*/
+.supports-fontface .icon__fallback-text {
+  @extend .visually-hidden;
+}
+
+.icon:before {
+  display: inline;
+  font-family: $font-stack-icons;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.supports-no-fontface .icon:before {
+  display: none;
+}
+
+/*================ Icon mapping ================*/
+.icon-american_express:before { content: "\41"; }
+.icon-arrow-down:before { content: "\e607"; }
+.icon-bitcoin:before { content: "\42"; }
+.icon-cart:before { content: "\e600"; }
+.icon-cirrus:before { content: "\43"; }
+.icon-dankort:before { content: "\64"; }
+.icon-diners_club:before { content: "\63"; }
+.icon-discover:before { content: "\44"; }
+.icon-facebook:before { content: "\66"; }
+.icon-fancy:before { content: "\46"; }
+.icon-google:before { content: "\67"; }
+.icon-google_wallet:before { content: "\47"; }
+.icon-grid-view:before { content: "\e603"; }
+.icon-hamburger:before { content: "\e601"; }
+.icon-instagram:before { content: "\69"; }
+.icon-interac:before { content: "\49"; }
+.icon-jcb:before { content: "\4a"; }
+.icon-list-view:before { content: "\e604"; }
+.icon-maestro:before { content: "\6d"; }
+.icon-master:before { content: "\4d"; }
+.icon-minus:before { content: "\e602"; }
+.icon-paypal:before { content: "\50"; }
+.icon-pinterest:before { content: "\70"; }
+.icon-plus:before { content: "\e605"; }
+.icon-rss:before { content: "\72"; }
+.icon-search:before { content: "\73"; }
+.icon-stripe:before { content: "\53"; }
+.icon-tumblr:before { content: "\74"; }
+.icon-twitter:before { content: "\54"; }
+.icon-vimeo:before { content: "\76"; }
+.icon-visa:before { content: "\56"; }
+.icon-x:before { content: "\e606"; }
+.icon-youtube:before { content: "\79"; }
+
+/*================ Payment Icons ================*/
+.payment-icons {
+  @include user-select();
+  cursor: default;
+
+  .icon {
+    font-size: $font-size-icons-payment;
+  }
+}
+
+/*================ Social Icons ================*/
+.social-icons .icon {
+  font-size: $font-size-icons-social;
+}
+
+/*============================================================================
+  #Lists
+==============================================================================*/
+ul, ol {
+  margin: 0;
+  padding: 0;
+}
+
+ol {
+  list-style: decimal;
+}
+
+.list--inline {
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: inline-block;
+    margin-bottom: 0;
+  }
+}
+
+.rte {
+  ul, ol {
+    margin: 0 0 ($gutter-site / 2) $gutter-site;
+  }
+
+  ul {
+    list-style: disc outside;
+
+    ul {
+      list-style: circle outside;
+
+      ul {
+        list-style: square outside;
+      }
+    }
+  }
+}
+
+/*============================================================================
+  #Rich Text Editor
+==============================================================================*/
+
+// allow table to scroll for tables in the RTE since we don't know
+// how many columns they will contain
+.rte__table-wrapper {
+  max-width: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+/*============================================================================
+  #Links and Buttons
+==============================================================================*/
+
+/*================ Force an input/button to look like a text link ================*/
+.text-link {
+  display: inline;
+  border: 0 none;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+.btn,
+.rte .btn {
+  display: inline-block;
+  width: auto;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid transparent;
+  @include user-select();
+  @include prefix(appearance, none, webkit moz spec);
+
+  // Set primary button colors - can override later
+  background-color: $color-btn-primary;
+  color: $color-btn-primary-text;
+
+  &:hover {
+    background-color: $color-btn-primary-hover;
+    color: $color-btn-primary-text;
+  }
+
+  &:active,
+  &:focus {
+   background-color: $color-btn-primary-active;
+   color: $color-btn-primary-text;
+  }
+
+  &[disabled],
+  &.btn--disabled {
+    cursor: default;
+    color: $color-border-disabled;
+    background-color: $color-disabled;
+  }
+}
+
+.btn--secondary,
+.rte .btn--secondary {
+  @extend .btn;
+  background-color: $color-btn-secondary;
+
+  &:hover {
+    background-color: $color-btn-secondary-hover;
+    color: $color-btn-secondary-text;
+  }
+
+  &:active,
+  &:focus {
+   background-color: $color-btn-secondary-active;
+   color: $color-btn-secondary-text;
+  }
+}
+
+/*============================================================================
+  #Tables
+==============================================================================*/
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th {
+  font-weight: bold;
+}
+
+th, td {
+  text-align: left;
+  border: 1px solid $color-border;
+}
+
+/*============================================================================
+  Responsive tables, defined with .responsive-table on table element.
+==============================================================================*/
+
+@include media-query($mobile) {
+  .responsive-table{
+    thead {
+      display: none;
+    }
+
+    tr {
+      display: block;
+    }
+
+    // IE9 table layout fixes
+    tr,
+    td {
+      float: left;
+      clear: both;
+      width: 100%;
+    }
+
+    th,
+    td {
+      display: block;
+      text-align: right;
+      padding: $gutter-site / 2;
+      margin: 0;
+    }
+
+    td:before {
+      content: attr(data-label);
+      float: left;
+      text-align: center;
+      font-size: 12px;
+      padding-right: 10px;
+    }
+  }
+
+  .responsive-table__row + .responsive-table__row,
+  tfoot > .responsive-table__row:first-child {
+    position: relative;
+    margin-top: 10px;
+    padding-top: $gutter-site / 2;
+
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: $gutter-site / 2;
+      right: $gutter-site / 2;
+      border-bottom: 1px solid $color-border;
+    }
+  }
+}
+
+/*============================================================================
+  #Images and Iframes
+==============================================================================*/
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+.video-wrapper {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+  height: auto;
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/*============================================================================
+  #Forms
+==============================================================================*/
+
+// Prevent zoom on touch devices in active inputs
+@include media-query($tablet-down) {
+  input,
+  textarea {
+    font-size: 16px;
+  }
+}
+
+fieldset {
+  border: 1px solid $color-border;
+  padding: $gutter-site / 2;
+}
+
+legend {
+  border: 0;
+  padding: 0;
+}
+
+button,
+input[type="submit"] {
+  cursor: pointer;
+}
+
+input,
+textarea,
+select {
+  border: 1px solid $color-border;
+  max-width: 100%;
+
+  &:focus {
+    border-color: darken($color-border, 10%);
+  }
+
+  &[disabled] {
+    cursor: default;
+    background-color: $color-disabled;
+    border-color: $color-border-disabled;
+  }
+}
+
+textarea {
+  min-height: 100px;
+}
+
+/*================ Error styles ================*/
+input,
+select,
+textarea {
+  &.error {
+    border-color: $color-error;
+    background-color: $color-error-bg;
+    color: $color-error;
+  }
+}
+
+label.error {
+  color: $color-error;
+}
+
+select {
+  @include prefix(appearance, none, webkit moz spec);
+  background-position: right center;
+  background: {
+    image: url('{{ "ico-select.svg" | asset_url }}');
+    repeat: no-repeat;
+    position: right 10px center;
+    color: transparent;
+  }
+  padding-right: 28px;
+  text-indent: 0.01px;
+  text-overflow: '';
+  cursor: pointer;
+
+  /*================ Hide the svg arrow in IE9 and below ================*/
+  .ie9 &,
+  .lt-ie9 & {
+    padding-right: 10px;
+    background-image: none;
+  }
+}
+
+optgroup {
+  font-weight: bold;
+}
+
+// Force option color (affects IE only)
+option {
+  color: #000;
+  background-color: #fff;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+/*================ Form labels ================*/
+.label--hidden {
+  position: absolute;
+  height: 0;
+  width: 0;
+  margin-bottom: 0;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+
+  // No placeholders, so force show labels
+  .ie9 &,
+  .lt-ie9 & {
+    position: static;
+    height: auto;
+    width: auto;
+    margin-bottom: 2px;
+    overflow: visible;
+    clip: initial;
+  }
+}
+
+label[for] {
+  cursor: pointer;
+}
+
+/*============================================================================
+  #Site Nav and Dropdowns
+==============================================================================*/
+
+.site-nav {
+
+  li {
+    display: inline-block;
+  }
+}
+
+/*================ Site Nav Links ================*/
+.site-nav__link {
+  display: block;
+  white-space: nowrap;
+
+  .icon-arrow-down {
+    position: relative;
+  }
+
+  .site-nav--active > & {
+  }
+}
+
+/*================ Dropdowns ================*/
+.site-nav--has-dropdown {
+  position: relative;
+}
+
+.site-nav__dropdown {
+  display: none;
+  position: absolute;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  z-index: $z-index-dropdown;
+
+  .supports-no-touch .site-nav--has-dropdown:hover &,
+  .site-nav--has-dropdown.nav-hover &,
+  .nav-focus + & {
+    display: block;
+  }
+
+  li {
+    display: block;
+  }
+}
+
+/*============================================================================
+  #Section Headers
+==============================================================================*/
+.section-header {
+  margin-bottom: $gutter-heading;
+}
