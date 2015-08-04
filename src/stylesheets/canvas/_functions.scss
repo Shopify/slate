@@ -31,3 +31,12 @@
 @function strip-units($value) {
   @return ($value / ($value * 0 + 1));
 }
+
+/*============================================================================
+  Strip units off number to have a safe working base, then append units.
+  Add unit by multiplying by 1 (ex. 20 * 1px = 20px)
+==============================================================================*/
+@function add-units($number, $units) {
+  $number: $number / ($number * 0 + 1);
+  @return $number * 1#{$units};
+}

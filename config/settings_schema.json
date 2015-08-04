@@ -117,7 +117,8 @@
         "type": "text",
         "id": "logo_max_width",
         "label": "Max logo width",
-        "info": "Defined in pixels. Do not add the 'px' unit."
+        "info": "Defined in pixels. Do not add the 'px' unit.",
+        "default": "450"
       },
       {
         "type": "header",
