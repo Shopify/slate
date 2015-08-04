@@ -33,7 +33,6 @@ __Do not make changes in `/assets` to `shop.scss.liquid` or `shop.js.liquid`. Th
 
 5. Insert private app keys
   - This setup uses [Shopify's Theme Gem](https://github.com/Shopify/shopify_theme). Follow the steps in that link if you don't have it set up.
-  - Alternatively, use [Theme Kit](https://github.com/csaunders/themekit).
   - Add your private app keys to a file named `config.yml`. Use [this sample file](https://github.com/Shopify/canvas/blob/master/config-sample.yml) to get started. [Learn to make a private app](http://docs.shopify.com/api/authentication/creating-a-private-app).
 
 ----------
