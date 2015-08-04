@@ -918,6 +918,7 @@ th, td {
       display: block;
       text-align: right;
       padding: $gutter-site / 2;
+      margin: 0;
     }
 
     td:before {
@@ -929,7 +930,8 @@ th, td {
     }
   }
 
-  .responsive-table__row + .responsive-table__row {
+  .responsive-table__row + .responsive-table__row,
+  tfoot > .responsive-table__row:first-child {
     position: relative;
     margin-top: 10px;
     padding-top: $gutter-site / 2;
