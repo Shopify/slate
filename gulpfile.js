@@ -40,7 +40,7 @@ var paths = {
     'templates/**/*'
   ],
   config: 'config.yml',
-  watch: '.themekit'
+  watch: 'src/.themekit'
 };
 
 /**
@@ -107,7 +107,7 @@ gulp.task('browser-sync', function(options) {
 
 gulp.task('theme-watch', function () {
   return gulp.src('')
-    .pipe(gulpif(argv.themekit, shell('theme watch --notify=.themekit'), shell('theme watch')));
+    .pipe(gulpif(argv.themekit, shell('theme watch --notify=src/.themekit'), shell('theme watch')));
 });
 
 /**
