@@ -1,12 +1,28 @@
 ---
-# THEME GEM USAGE - visit https://github.com/Shopify/shopify_theme
+# THEME GEM USAGE - https://github.com/Shopify/shopify_theme
+# THEME KIT USAGE - https://github.com/csaunders/themekit
 # Get your api_key and password at your-url.myshopify.com/admin/apps/private
 
-# example code
+# example THEME GEM config
 :api_key: 52ba03f2e17a1d24dafe1002b2bcddea
 :password: 177e715c47bf6529c2b877bd6c379198
 :store: your-url.myshopify.com
 :theme_id:
 :ignore_files:
+  - node_modules/
+  - src/
   # - settings_data.json
   # - logo.png
+
+# example THEME KIT config
+# development:
+#   api_key: d50c03309a412726388b6fdbcfbc32fd
+#   access_token: 681a4fdb2adfcb541bb6efd42b9b18e6
+#   store: blocklyn.myshopify.com
+#   ignore_files:
+#     - node_modules/
+#     - src/
+    # - logo.png
+    # - logo-inverted.png
+    # - favicon.png
+    # - settings_data.json

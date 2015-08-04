@@ -1,0 +1,24 @@
+{
+  "name": "Canvas",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Shopify/canvas.git"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.7.3",
+    "del": "^1.2.0",
+    "gulp": "^3.8.9",
+    "gulp-cssimport": "^1.2.3",
+    "gulp-if": "^1.2.5",
+    "gulp-imagemin": "^2.2.1",
+    "gulp-include": "^2.0.2",
+    "gulp-notify": "^2.2.0",
+    "gulp-open": "^0.3.2",
+    "gulp-shell": "^0.4.1",
+    "gulp-zip": "^3.0.2",
+    "js-yaml": "^3.3.1",
+    "run-sequence": "^1.1.0",
+    "yargs": "^3.13.0"
+  }
+}
