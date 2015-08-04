@@ -12,12 +12,6 @@ $tablet-up: 'tablet-up';
 $desktop-up: 'desktop-up';
 $widescreen: 'widescreen';
 
-$grid-tablet: 750px;
-$grid-desktop: 990px;
-$grid-widescreen: 1400px;
-$grid-gutter: 30px;
-$grid-columns: 12;
-
 // The `$grid-breakpoints` list is used to build our media queries. You can use
 // these in the media-queries mixin or as modifiers to your grid classes to
 // target specific breakpoint. i.e. `.grid-6--tablet-down` will target screen
