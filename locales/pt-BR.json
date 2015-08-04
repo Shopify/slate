@@ -126,7 +126,8 @@
       "update": "Atualizar endereço",
       "cancel": "Cancelar",
       "edit": "Editar",
-      "delete": "Excluir"
+      "delete": "Excluir",
+      "delete_confirm": "Deseja realmente excluir este endereço?"
     },
     "login": {
       "title": "Entrar",

@@ -126,7 +126,8 @@
       "update": "Actualizar dirección",
       "cancel": "Cancelar",
       "edit": "Editar",
-      "delete": "Eliminar"
+      "delete": "Eliminar",
+      "delete_confirm": "¿Está seguro de que desea eliminar esta dirección?"
     },
     "login": {
       "title": "Ingresar",
