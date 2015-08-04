@@ -224,7 +224,8 @@
       "create_account": "Créer un compte"
     },
     "footer": {
-      "social_platform": "{{ name }} sur {{ platform }}"
+      "social_platform": "{{ name }} sur {{ platform }}",
+      "copyright": "Droit d'auteur"
     }
   },
   "products": {

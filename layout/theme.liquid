@@ -340,7 +340,7 @@
         {% endif %}
 
         <div class="grid__item">
-          <small>{{ powered_by_link }}</small>
+          <small>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}. {{ powered_by_link }}</small>
         </div>
       </div>
     </footer>
