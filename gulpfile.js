@@ -27,7 +27,7 @@ var paths = {
     'src/stylesheets/[^_]*.*'
   ],
   parentIncludeJs: [
-    'src/javascripts/*.*'
+    'src/javascripts/[^_]*.*'
   ],
   images: 'src/images/*.{png,jpg,gif}',
   destAssets: 'assets',
