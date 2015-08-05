@@ -49,7 +49,7 @@
         <h1 itemprop="name">{{ product.title }}</h1>
 
         {% if settings.product_vendor_enable %}
-          <p class="h4" itemprop="brand">{{ product.vendor }}</p>
+          <p itemprop="brand">{{ product.vendor }}</p>
         {% endif %}
 
         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
