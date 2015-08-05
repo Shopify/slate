@@ -1,205 +1,60 @@
 /*============================================================================
-  Shopify Canvas
-  Copyright 2015 Shopify Inc.
+  Shopify Canvas [replace with theme name]
 
   Some things to know about this file:
     - Sass is compiled on Shopify's server so you don't need to convert it to CSS yourself
     - The output CSS is compressed and comments are removed
-    - You cannot use @imports in this file
+    - You cannot use native CSS/Sass @imports in this file without a build script
     - The font icons are prepared using https://icomoon.io/app
 ==============================================================================*/
 
+/*================ FUNCTIONS ================*/
 /*============================================================================
-  Table of Contents
+  Convert pixels to ems
 
-  #Normalize
-  #Variables
-    *Color Variables
-    *Sizing Variables
-    *Typography Variables
-    *Z-Index
-  #Mixins and Functions
-    *Clear Fix
-    *Prefix
-    *Em
-    *Strip-units
-    *Backface
-    *User-select
-  #Helper Classes
-  #Breakpoint Variables
-  #Media Query
-  #Responsive Helper Mixins
-    *Show/Hide Helper
-    *Text Align Helper
-    *Float Helper
-  #Grid
-    *Grid Setup
-    *Reverse Grid
-    *Gutterless Grid
-    *Grid Columns
-    *Uniform Grid
-  #Basic Styles
-  #Icons
-    *Fallback Text
-    *Icon Mapping
-  #Lists
-  #Rich Text Editor
-  #Links and Buttons
-  #Tables
-  #Reponsive Tables
-  #Images and Iframes
-  #Forms
-    *Error States
-    *Labels
-  #Site Nav and Dropdowns
-  #Section Headers
+  eg. for a relational value of 12px write em(12) when the parent is 16px
+  if the parent is another value say 24px write em(12, 24)
+
+  Based on https://github.com/thoughtbot/bourbon/blob/master/app/assets/stylesheets/functions/_px-to-em.scss
 ==============================================================================*/
-
-/*============================================================================
-  #Normalize
-
-  Based on normalize.css v3.0.2 | MIT License | git.io/normalize
-==============================================================================*/
-
-*, *:before, *:after {
-  box-sizing: border-box;
-}
-
-// Remove default margin.
-body {
-  margin: 0;
-}
-
-// give HTML5 elements a consistent default for older IEs
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-main,
-menu,
-nav,
-section,
-summary {
-  display: block;
-}
-
-// Standardize text weight rendering
-body,
-input,
-textarea,
-button,
-select {
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-size-adjust: 100%;
-}
-
-// Remove the gray background color from active links in IE 10.
-a {
-  background-color: transparent;
-}
-
-// Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
-b,
-strong {
-  font-weight: bold;
-}
-
-em {
-  font-style: italic;
-}
-
-
-// Address inconsistent and variable font size in all browsers.
-small {
-  font-size: 80%;
-}
-
-// Prevent `sub` and `sup` affecting `line-height` in all browsers.
-sub,
-sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-
-sup {
-  top: -0.5em;
-}
-
-sub {
-  bottom: -0.25em;
-}
-
-// Remove border when inside `a` element in IE 8/9/10.
-img {
-  max-width: 100%;
-  border: 0;
-}
-
-// 1. Correct color not being inherited.
-//    Known issue: affects color of disabled elements.
-// 2. Correct font properties not being inherited.
-// 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
-button,
-input,
-optgroup,
-select,
-textarea {
-  color: inherit; // 1
-  font: inherit; // 2
-  margin: 0; // 3
-}
-
-// Re-set default cursor for disabled elements.
-button[disabled],
-html input[disabled] {
-  cursor: default;
-}
-
-button::-moz-focus-inner,
-input::-moz-focus-inner {
-  border: 0;
-  padding: 0;
-}
-
-// 1. Address `appearance` set to `searchfield` in Safari and Chrome.
-input[type="search"] {
-  -webkit-appearance: textfield; // 1
-}
-
-// Remove most spacing between table cells.
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-td,
-th {
-  padding: 0;
-}
-
-// Remove default vertical scrollbar in IE 8/9/10/11.
-textarea {
-  overflow: auto;
-}
-
-// hide outline on focus for elements which are given
-// focus by javascript
-[tabindex='-1']:focus {
-  outline: none;
+@function em($pxval, $base: $font-size-base) {
+  @if not unitless($pxval) {
+    $pxval: strip-units($pxval);
+  }
+  @if not unitless($base) {
+    $base: strip-units($base);
+  }
+  @return ($pxval / $base) * 1em;
 }
 
 /*============================================================================
-  #Variables
+  Strips the unit from a number.
+
+  @param {Number (With Unit)} $value
+  @example scss - Usage
+    $dimension: strip-units(10em);
+  @example css - CSS Output
+    $dimension: 10;
+  @return {Number (Unitless)}
+
+  based on https://github.com/thoughtbot/bourbon/blob/master/app/assets/stylesheets/functions/_strip-units.scss
 ==============================================================================*/
+@function strip-units($value) {
+  @return ($value / ($value * 0 + 1));
+}
 
-/*================ #Color Variables ================*/
+/*============================================================================
+  Strip units off number to have a safe working base, then append units.
+  Add unit by multiplying by 1 (ex. 20 * 1px = 20px)
+==============================================================================*/
+@function add-units($number, $units) {
+  $number: $number / ($number * 0 + 1);
+  @return $number * 1#{$units};
+}
 
+
+/*================ VARIABLES ================*/
+/*================ Color Variables ================*/
 $color-primary: {{ settings.color_primary }};
 $color-secondary: {{ settings.color_secondary }};
 
@@ -231,14 +86,20 @@ $color-error-bg: #000;
 $color-success: #000;
 $color-success-bg: #000;
 
-/*================ #Sizing Variables ================*/
-
+/*================ Sizing Variables ================*/
 $width-site: 1180px;
 $gutter-site: 30px;
 $gutter-heading: 30px;
+$logo-max-width: add-units({{ settings.logo_max_width }}, 'px');
 
-/*================ #Typography Variables ================*/
+/*================ Grid and Breakpoint ================*/
+$grid-tablet: 750px;
+$grid-desktop: 990px;
+$grid-widescreen: 1400px;
+$grid-gutter: 30px;
+$grid-columns: 12;
 
+/*================ Typography Variables ================*/
 $font-stack-header: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $font-weight-header: 700;
 
@@ -260,16 +121,32 @@ $font-stack-icons: 'icons';
 $font-size-icons-social: 30px;
 $font-size-icons-payment: 30px;
 
-/*================ #Z-Index ================*/
-
+/*================ Z-Index ================*/
 $z-index-dropdown : 2;
 
+
+/*================ CANVAS ================*/
 /*============================================================================
-  #Mixins and Functions
+  Canvas Table of Contents
+
+  #Mixins
+  #Grid
+  #Normalize
+  #Helper Classes
+  #Basic Styles
+  #Icons
+  #Lists
+  #Rich Text Editor
+  #Links and Buttons
+  #Tables
+  #Reponsive Tables
+  #Images and Iframes
+  #Forms
+  #Site Nav and Dropdowns
+  #Section Headers
 ==============================================================================*/
 
-/*================ #Clear Fix ================*/
-
+/*================ #Mixins ================*/
 @mixin clearfix() {
   &:after {
     content: '';
@@ -281,7 +158,8 @@ $z-index-dropdown : 2;
 }
 
 /*============================================================================
-  Prefix mixin for generating vendor prefixes:
+  Prefix mixin for generating vendor prefixes.
+  Based on https://github.com/thoughtbot/bourbon/blob/master/app/assets/stylesheets/addons/_prefixer.scss
 
   Usage:
     // Input:
@@ -295,8 +173,6 @@ $z-index-dropdown : 2;
       -webkit-transform: scale(1);
       transform: scale(1);
     }
-
-  Based on https://github.com/thoughtbot/bourbon/blob/master/app/assets/stylesheets/addons/_prefixer.scss
 ==============================================================================*/
 @mixin prefix($property, $value, $prefixes) {
   @each $prefix in $prefixes {
@@ -316,82 +192,11 @@ $z-index-dropdown : 2;
   }
 }
 
-/*============================================================================
-  Convert pixels to ems
-
-  eg. for a relational value of 12px write em(12) when the parent is 16px
-  if the parent is another value say 24px write em(12, 24)
-
-  Based on https://github.com/thoughtbot/bourbon/blob/master/app/assets/stylesheets/functions/_px-to-em.scss
-==============================================================================*/
-@function em($pxval, $base: $font-base-size) {
-  @if not unitless($pxval) {
-    $pxval: strip-units($pxval);
-  }
-  @if not unitless($base) {
-    $base: strip-units($base);
-  }
-  @return ($pxval / $base) * 1em;
-}
-
-/*============================================================================
-  Strips the unit from a number.
-
-  @param {Number (With Unit)} $value
-  @example scss - Usage
-    $dimension: strip-units(10em);
-  @example css - CSS Output
-    $dimension: 10;
-  @return {Number (Unitless)}
-
-  based on https://github.com/thoughtbot/bourbon/blob/master/app/assets/stylesheets/functions/_strip-units.scss
-==============================================================================*/
-@function strip-units($value) {
-  @return ($value / ($value * 0 + 1));
-}
-
-@mixin backface($visibility: hidden) {
-  @include prefix(backface-visiblity, $visibility, webkit spec);
-}
-
 @mixin user-select($value: none) {
   @include prefix('user-select', #{$value}, moz ms webkit spec);
 }
 
-/*============================================================================
-  #Helper Classes
-==============================================================================*/
-
-.clearfix {
-  @include clearfix();
-}
-
-.visually-hidden {
-  position: absolute !important;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  width: 1px;
-  margin: -1px;
-  padding: 0; border: 0;
-}
-
-/*============================================================================
-  #Breakpoint Variables
-==============================================================================*/
-
-// Used by the `media-query` mixin
-$mobile: 'mobile';
-$tablet-only: 'tablet-only';
-$tablet-down: 'tablet-down';
-$tablet-up: 'tablet-up';
-$desktop-up: 'desktop-up';
-$widescreen: 'widescreen';
-
-/*============================================================================
-  #Media Query Mixin
-==============================================================================*/
-
+/*================ Media Query Mixin ================*/
 @mixin media-query($media-query) {
   $breakpoint-found: false;
 
@@ -413,11 +218,7 @@ $widescreen: 'widescreen';
   }
 }
 
-/*============================================================================
-  #Responsive Helper Mixins
-==============================================================================*/
-
-/*================ Show/Hide Helper ================*/
+/*================ Responsive Show/Hide Helper ================*/
 @mixin responsive-display-helper($grid-breakpoint-type:"") {
   .show#{$grid-breakpoint-type} {
     display: block !important;
@@ -428,7 +229,7 @@ $widescreen: 'widescreen';
   }
 }
 
-/*================ Text Alignment Helper ================*/
+/*================ Responsive Text Alignment Helper ================*/
 @mixin responsive-text-align-helper($grid-breakpoint-type:"") {
   .text-left#{$grid-breakpoint-type} {
     text-align: left !important;
@@ -443,7 +244,7 @@ $widescreen: 'widescreen';
   }
 }
 
-/*================ Float Helper ================*/
+/*================ Responsive Float Helper ================*/
 @mixin responsive-float-helper($grid-breakpoint-type:"") {
   .float-left#{$grid-breakpoint-type} {
     float: left !important;
@@ -459,17 +260,14 @@ $widescreen: 'widescreen';
     - Creates a 12 column responsive grid based on the `$grid-columns` variable.
     If you want to change the number of columns, be sure to also update the
     `grid-uniform-clearfix` mixin.
-    - Based on csswizardry grid, but with floated columns, a fixed gutter size,
-    and BEM classes
-    - `.grid--uniform` is used to take care of clearfixes on evenly sized
-    `.grid__items`
 ==============================================================================*/
 
-$grid-tablet: 750px;
-$grid-desktop: 990px;
-$grid-widescreen: 1400px;
-$grid-gutter: 30px;
-$grid-columns: 12;
+$mobile: 'mobile';
+$tablet-only: 'tablet-only';
+$tablet-down: 'tablet-down';
+$tablet-up: 'tablet-up';
+$desktop-up: 'desktop-up';
+$widescreen: 'widescreen';
 
 // The `$grid-breakpoints` list is used to build our media queries. You can use
 // these in the media-queries mixin or as modifiers to your grid classes to
@@ -539,10 +337,8 @@ $grid-breakpoint-has-push: ();
 }
 
 /*============================================================================
-  #Grid Columns
-    - Create width classes with the modifiers for each breakpoint.
-
-    - Breakpoint specific columns are generated for each breakpoint based
+  Grid Columns
+    - Breakpoint-specific columns are generated for each breakpoint based
     on the values in `$grid-breakpoints` e.g. `.grid-3` `.grid-3--tablet-up`
 ==============================================================================*/
 @mixin grid-column-generator($grid-columns, $grid-breakpoint-type:"") {
@@ -573,16 +369,11 @@ $grid-breakpoint-has-push: ();
   }
 }
 
-
-/*============================================================================
-  #Build The Grid Classes
-==============================================================================*/
-
-/*================ Base Grid Classes ================*/
+/*================ Build Base Grid Classes ================*/
 @include grid-column-generator($grid-columns);
 @include responsive-display-helper();
 
-/*================ Responsive Grid Classes ================*/
+/*================ Build Responsive Grid Classes ================*/
 @each $breakpoint in $grid-breakpoint-types {
   @include media-query($breakpoint) {
     @include grid-column-generator($grid-columns, '--#{$breakpoint}');
@@ -598,10 +389,142 @@ $grid-breakpoint-has-push: ();
   }
 }
 
-
 /*============================================================================
-  #Basic Styles
+  #Normalize
+  Based on normalize.css v3.0.2 | MIT License | git.io/normalize
 ==============================================================================*/
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+body,
+input,
+textarea,
+button,
+select {
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  background-color: transparent;
+}
+
+b,
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+img {
+  max-width: 100%;
+  border: 0;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+textarea {
+  overflow: auto;
+}
+
+// hide outline on focus for elements which are given focus by JS
+[tabindex='-1']:focus {
+  outline: none;
+}
+
+/*================ #Helper Classes ================*/
+.clearfix {
+  @include clearfix();
+}
+
+.visually-hidden {
+  position: absolute !important;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0; border: 0;
+}
+
+/*================ #Basic Styles ================*/
 body,
 html {
   background-color: $color-body;
@@ -624,9 +547,7 @@ html {
   padding-bottom: $gutter-site * 2;
 }
 
-/*============================================================================
-  Typography
-==============================================================================*/
+/*================ Typography ================*/
 blockquote {
   p {
 
@@ -653,9 +574,7 @@ pre {
   overflow: auto;
 }
 
-/*============================================================================
-  #Icons
-==============================================================================*/
+/*================ #Icons ================*/
 .icon {
   display: inline-block;
 
@@ -689,7 +608,7 @@ pre {
   display: none;
 }
 
-/*================ Icon mapping ================*/
+/*================ #Icon mapping ================*/
 .icon-american_express:before { content: "\41"; }
 .icon-arrow-down:before { content: "\e607"; }
 .icon-bitcoin:before { content: "\42"; }
@@ -739,9 +658,7 @@ pre {
   font-size: $font-size-icons-social;
 }
 
-/*============================================================================
-  #Lists
-==============================================================================*/
+/*================ #Lists ================*/
 ul, ol {
   margin: 0;
   padding: 0;
@@ -779,47 +696,17 @@ ol {
   }
 }
 
-/*============================================================================
-  #Rich Text Editor
-==============================================================================*/
-
-.rte {
-  // Page and Blog content generated in the /admin gets a class of `.rte` wrapped
-  // around it.  Add any styles you need here.  You must target elements and not
-  // `.classes` or `#IDs` since the HTML is automatically generated without
-}
-
-.rte--page-header {
-  // RTE content can be included as a header on some pages such as `/collection`
-  // you can use this class (or a similar one) to apply specific styles
-  // to any special cases of RTE content that appear in your theme.
-  //
-  // You must target elements and not
-  // `.classes` or `#IDs` since the HTML is automatically generated without
-}
+/*================ #Rich Text Editor ================*/
 
 // allow table to scroll for tables in the RTE since we don't know
-// how many columns they will contain
+// how many columns they will contain. Class added by JS.
 .rte__table-wrapper {
   max-width: 100%;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-
-/*============================================================================
-  #Links and Buttons
-==============================================================================*/
-
-/*================ Force an input/button to look like a text link ================*/
-.text-link {
-  display: inline;
-  border: 0 none;
-  background: none;
-  padding: 0;
-  margin: 0;
-}
-
+/*================ #Links and Buttons ================*/
 .btn,
 .rte .btn {
   display: inline-block;
@@ -873,9 +760,16 @@ ol {
   }
 }
 
-/*============================================================================
-  #Tables
-==============================================================================*/
+/*================ Force an input/button to look like a text link ================*/
+.text-link {
+  display: inline;
+  border: 0 none;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+/*================ #Tables ================*/
 table {
   width: 100%;
   border-collapse: collapse;
@@ -894,7 +788,6 @@ th, td {
 /*============================================================================
   Responsive tables, defined with .responsive-table on table element.
 ==============================================================================*/
-
 @include media-query($mobile) {
   .responsive-table{
     thead {
@@ -948,10 +841,7 @@ th, td {
   }
 }
 
-/*============================================================================
-  #Images and Iframes
-==============================================================================*/
-
+/*================ #Images and Iframes ================*/
 svg:not(:root) {
   overflow: hidden;
 }
@@ -973,9 +863,7 @@ svg:not(:root) {
   }
 }
 
-/*============================================================================
-  #Forms
-==============================================================================*/
+/*================ Forms ================*/
 
 // Prevent zoom on touch devices in active inputs
 @include media-query($tablet-down) {
@@ -1097,9 +985,13 @@ label[for] {
   cursor: pointer;
 }
 
-/*============================================================================
-  #Site Nav and Dropdowns
-==============================================================================*/
+/*================ #Site Nav and Dropdowns ================*/
+.site-header__logo {
+  img {
+    display: block;
+    max-width: $logo-max-width;
+  }
+}
 
 .site-nav {
 
@@ -1145,9 +1037,8 @@ label[for] {
   }
 }
 
-/*============================================================================
-  #Section Headers
-==============================================================================*/
+/*================ #Section Headers ================*/
 .section-header {
   margin-bottom: $gutter-heading;
 }
+

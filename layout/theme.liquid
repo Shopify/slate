@@ -118,7 +118,7 @@
   {% endif %}
 
   <!-- CSS ================================================== -->
-  {{ 'canvas.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'shop.scss.css' | asset_url | stylesheet_tag }}
 
   <!-- Header hook for plugins ================================================== -->
   {{ content_for_header }}
@@ -346,7 +346,6 @@
     </footer>
   </div>
 
-  {{ 'fastclick.min.js' | asset_url | script_tag }}
-  {{ 'canvas.js' | asset_url | script_tag }}
+  {{ 'shop.js' | asset_url | script_tag }}
 </body>
 </html>
