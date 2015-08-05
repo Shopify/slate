@@ -152,6 +152,16 @@
     ]
   },
   {
+    "name": "Products",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "product_vendor_enable",
+        "label": "Show product vendor"
+      }
+    ]
+  },
+  {
     "name": "Social media",
     "settings": [
       {
