@@ -3,7 +3,7 @@ Canvas [![Circle CI](https://circleci.com/gh/Shopify/canvas.svg?style=svg&circle
 
 Setup with Gulp
 ---------------------
-This theme uses Gulp for its development and support workflow. Follow the steps below when making any CSS changes.
+This theme uses Gulp for its development and support workflow. Follow the steps below when making any CSS or JS changes.
 
 If unsure of any step or need help, ping @cshold or @stevebosworth.
 
@@ -11,7 +11,11 @@ __Requirements__: [Node.js](http://nodejs.org/) (and Ruby 1.9+ on Windows).
 
 If you don't want to use Gulp and do not need to edit CSS or JS files, ignore the `src/` folder and edit the files found in `assets/`.
 
-__Do not make changes in `/assets` to `shop.scss.liquid` or `shop.js.liquid`. Those files are overwritten by the source files the next time someone uses the Gulp task.__
+__Do not make changes in `/assets` to `shop.scss.liquid` or `shop.js.liquid`.__ Those files are overwritten by the source files the next time someone uses the Gulp task.
+
+__Any files in the `src/` directory prepended with an underscore will not be uploaded to your shop.__ E.g. `src/stylesheets/_canvas.scss.liquid` will not be transfered to `assets/`.
+
+### Install
 
 1. Navigate to your local Theme folder in Terminal
   - `cd path/to/folder`
@@ -44,9 +48,6 @@ __Do not make changes in `/assets` to `shop.scss.liquid` or `shop.js.liquid`. Th
 - Watches `src/javascripts/` folder and concatenates scripts into `assets/shop.js.liquid`
 - Automatically compresses image files in `assets/`
 - Uploads valid saved theme files to your store
-
-`$gulp --themekit`
-- If you are using `themekit` instead of the `theme gem` to handle uploading changed files to your store, you can use the flag `--themekit` to also enable [browser-sync](http://www.browsersync.io/) for auto reloading your page after your changes have been uploaded.
 
 ----------
 
