@@ -29,6 +29,7 @@ ShopifyCanvas.init = function () {
   ShopifyCanvas.initEventListeners();
   ShopifyCanvas.resetPasswordSuccess();
   ShopifyCanvas.customerAddressForm();
+  ShopifyCanvas.rteElements();
 };
 
 /**
@@ -133,6 +134,16 @@ ShopifyCanvas.customerAddressForm = function () {
       Shopify.postLink('/account/addresses/' + formId, {'parameters': { '_method': 'delete' }});
     }
   });
+};
+
+/**
+ *
+ *  Wrap tables in the RTE with a scrollable div
+ *  so they cannot break the layout if too wide
+ *
+ */
+ShopifyCanvas.rteElements = function () {
+  $('.rte table').wrap('<div class="rte__table-wrapper"></div>');
 };
 
 /**

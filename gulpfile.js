@@ -17,10 +17,9 @@ var gulp        = require('gulp'),
 
 /**
  *
- *  All the paths used by all the tasks
+ *  All paths used by tasks
  *
  */
-
 var paths = {
   srcScss: 'src/stylesheets/**/*.*',
   srcJs: 'src/javascripts/**/*.*',
@@ -48,7 +47,6 @@ var paths = {
  *
  *   Concatenate css together into a single scss file for use in the theme
  */
-
 gulp.task('concat-css', function () {
   gulp.src(paths.parentIncludeScss)
     .pipe(cssimport())
@@ -60,7 +58,6 @@ gulp.task('concat-css', function () {
  *
  *   Concatenate JS together into a single file for use in the theme
  */
-
 gulp.task('concat-js', function () {
   gulp.src(paths.parentIncludeJs)
     .pipe(include())
@@ -73,7 +70,6 @@ gulp.task('concat-js', function () {
  *
  *    Minify Images
  */
-
 gulp.task('imagemin', function () {
   gulp.src(paths.images)
     .pipe(imagemin({
@@ -85,7 +81,6 @@ gulp.task('imagemin', function () {
 /**
  *  BROWSERSYNC
  */
-
 gulp.task('browser-sync', function(options) {
   // read the shop url from the config file
   var config = yaml.safeLoad(fs.readFileSync(paths.config, 'utf8'));
@@ -104,7 +99,6 @@ gulp.task('browser-sync', function(options) {
  *
  *  Run the theme gem watch to upload any changed files to your store
  */
-
 gulp.task('theme-watch', function () {
   return gulp.src('')
     .pipe(gulpif(argv.themekit, shell('theme watch --notify=src/.themekit'), shell('theme watch')));
@@ -117,7 +111,6 @@ gulp.task('theme-watch', function () {
  *  to use `gulp build` before running this task so it also builds the
  *  CSS, and images first.
  */
-
 gulp.task('replace', function () {
   gulp.src('')
     .pipe(shell('theme replace'));
@@ -131,7 +124,6 @@ gulp.task('replace', function () {
  *  your theme. It's best to use `gulp build` before running this task so it also builds the
  *  CSS, and images first.
  */
-
 gulp.task('upload', function () {
   gulp.src('')
     .pipe(shell('theme upload'));
@@ -143,7 +135,6 @@ gulp.task('upload', function () {
  *  Run both the gulp watch to build CSS, and images along side the theme gem watch
  *  to upload any changes to your store after being built
  */
-
 gulp.task('concurrent', function (cb) {
   runSequence(['watch', 'theme-watch'], cb);
 });
@@ -153,7 +144,6 @@ gulp.task('concurrent', function (cb) {
  *
  *  Clean up any stray files that might be created by other gulp tasks
  */
-
 gulp.task('clean', function (cb) {
   del([
     '*.zip',
@@ -167,7 +157,6 @@ gulp.task('clean', function (cb) {
  *
  *  compress theme and prepare it for the theme store
  */
-
 gulp.task('compress', function () {
   return gulp.src(paths.uploadFiles)
     .pipe(zip(pkg.name + '.zip'))
@@ -181,10 +170,9 @@ gulp.task('compress', function () {
  *  Open the theme editor page for your theme when you need to mass upgrade or
  *  deploy a theme.
  *
- *  Config.yml is passed in as the src for placeholder purposes only so the task
+ *  config.yml is passed in as the src for placeholder purposes only so the task
  *  will run.  Can be any file really.
  */
-
 gulp.task('open', function () {
   gulp.src(paths.config, {read: false})
     .pipe(open('', { url : 'https://themes.shopify.com/services/internal/themes/' + pkg.name + '/edit' }));
@@ -192,10 +180,7 @@ gulp.task('open', function () {
 
 /**
  *  WATCH
- *
- *  Watch Task
  */
-
 gulp.task('watch', function () {
   gulp.watch(paths.srcScss, ['concat-css']);
   gulp.watch(paths.srcJs, ['concat-js']);
@@ -207,11 +192,9 @@ gulp.task('watch', function () {
   }
 });
 
-
 /**
  *  Set default tasks depending on which upload tool we're using
  */
-
 function defaultTasks() {
   if (argv.themekit) {
     return ['build', 'browser-sync', 'concurrent'];
