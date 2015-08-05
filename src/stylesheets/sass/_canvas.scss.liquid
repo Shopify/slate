@@ -1,14 +1,12 @@
 /*============================================================================
   Canvas Table of Contents
 
-  #Grid
   #Mixins
+  #Grid
   #Normalize
   #Helper Classes
   #Basic Styles
   #Icons
-    *Fallback Text
-    *Icon Mapping
   #Lists
   #Rich Text Editor
   #Links and Buttons
@@ -16,158 +14,11 @@
   #Reponsive Tables
   #Images and Iframes
   #Forms
-    *Error States
-    *Labels
   #Site Nav and Dropdowns
   #Section Headers
 ==============================================================================*/
 
-/*============================================================================
-  #Grid
-    - Creates a 12 column responsive grid based on the `$grid-columns` variable.
-    If you want to change the number of columns, be sure to also update the
-    `grid-uniform-clearfix` mixin.
-==============================================================================*/
-
-$mobile: 'mobile';
-$tablet-only: 'tablet-only';
-$tablet-down: 'tablet-down';
-$tablet-up: 'tablet-up';
-$desktop-up: 'desktop-up';
-$widescreen: 'widescreen';
-
-// The `$grid-breakpoints` list is used to build our media queries. You can use
-// these in the media-queries mixin or as modifiers to your grid classes to
-// target specific breakpoint. i.e. `.grid-6--tablet-down` will target screen
-// widths below the value set by `$grid-desktop`
-$grid-breakpoints: (
-  'mobile' '(max-width: #{$grid-tablet - 1})',
-  'tablet-only' '(min-width: #{$grid-tablet}) and (max-width: #{$grid-desktop - 1})',
-  'tablet-down' '(max-width: #{$grid-desktop - 1})',
-  'tablet-up' '(min-width: #{$grid-tablet})',
-  'desktop-up' '(min-width: #{$grid-desktop})',
-  'widescreen' '(min-width: #{$grid-widescreen})'
-);
-
-/*============================================================================
-  Add grid classes based on breaktpoint names.
-    - Example $grid-breakpoint-has-push: ('mobile', 'desktop-up');
-    - Remove names if you don't want those classes generated
-==============================================================================*/
-$grid-breakpoint-types: ('mobile', 'tablet-only', 'tablet-down', 'tablet-up', 'desktop-up', 'widescreen');
-
-/*============================================================================
-  Add push classes by including the appropriate breakpoint name(s).
-    - Example: $grid-breakpoint-has-push: ('tablet-only', 'desktop-up');
-==============================================================================*/
-$grid-breakpoint-has-push: ();
-
-/*============================================================================
-  Grid Setup
-    1. Allow the grid system to be used on lists.
-    2. Remove any margins and paddings that might affect the grid system.
-    3. Apply a negative `margin-left` to negate the columns' gutters.
-==============================================================================*/
-.grid,
-.grid--uniform {
-  @include clearfix();
-}
-
-.grid,
-.grid--uniform {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  margin-left: -$grid-gutter;
-}
-
-.grid__item {
-  float: left;
-  padding-left: $grid-gutter;
-  width: 100%;
-}
-
-/*============================================================================
-  Reversed grids allow you to structure your source in the opposite
-  order to how your rendered layout will appear.
-==============================================================================*/
-.grid--rev {
-  @extend .grid;
-  direction: rtl;
-  text-align: left;
-
-  > .grid__item {
-    direction: ltr;
-    text-align: left;
-    float: right;
-  }
-}
-
-/*============================================================================
-  #Grid Columns
-    - Create width classes with the modifiers for each breakpoint.
-
-    - Breakpoint specific columns are generated for each breakpoint based
-    on the values in `$grid-breakpoints` e.g. `.grid-3` `.grid-3--tablet-up`
-==============================================================================*/
-@mixin grid-column-generator($grid-columns, $grid-breakpoint-type:"") {
-  @for $i from 1 through $grid-columns {
-    .grid-#{$i}#{$grid-breakpoint-type} {
-      width: #{percentage($i / $grid-columns)};
-    }
-  }
-}
-
-/*================ Grid Push Setup ================*/
-@mixin grid-push-generator($grid-columns, $grid-breakpoint-type:"") {
-  @for $i from 1 through $grid-columns {
-    .grid-push-#{$i}#{$grid-breakpoint-type} {
-      margin-left: #{percentage($i / $grid-columns)};
-    }
-  }
-}
-
-/*================ Clearfix helper on uniform grids ================*/
-@mixin grid-uniform-clearfix($grid-breakpoint-type:"") {
-  .grid--uniform {
-    .grid-1#{$grid-breakpoint-type}:nth-child(12n+1),
-    .grid-2#{$grid-breakpoint-type}:nth-child(6n+1),
-    .grid-3#{$grid-breakpoint-type}:nth-child(4n+1),
-    .grid-4#{$grid-breakpoint-type}:nth-child(3n+1),
-    .grid-6#{$grid-breakpoint-type}:nth-child(2n+1)    { clear: both; }
-  }
-}
-
-
-/*============================================================================
-  #Build The Grid Classes
-==============================================================================*/
-
-/*================ Base Grid Classes ================*/
-@include grid-column-generator($grid-columns);
-@include responsive-display-helper();
-
-/*================ Responsive Grid Classes ================*/
-@each $breakpoint in $grid-breakpoint-types {
-  @include media-query($breakpoint) {
-    @include grid-column-generator($grid-columns, '--#{$breakpoint}');
-    @include grid-uniform-clearfix('--#{$breakpoint}');
-    @include responsive-display-helper('--#{$breakpoint}');
-  }
-}
-
-/*================ Grid Push Classes ================*/
-@each $breakpoint in $grid-breakpoint-has-push {
-  @include media-query($breakpoint) {
-    @include grid-push-generator($grid-columns, '--#{$breakpoint}');
-  }
-}
-
-/*============================================================================
-  #Mixins
-==============================================================================*/
-
-/*================ #Clear Fix ================*/
+/*================ #Mixins ================*/
 @mixin clearfix() {
   &:after {
     content: '';
@@ -277,20 +128,151 @@ $grid-breakpoint-has-push: ();
 }
 
 /*============================================================================
+  #Grid
+    - Creates a 12 column responsive grid based on the `$grid-columns` variable.
+    If you want to change the number of columns, be sure to also update the
+    `grid-uniform-clearfix` mixin.
+==============================================================================*/
+
+$mobile: 'mobile';
+$tablet-only: 'tablet-only';
+$tablet-down: 'tablet-down';
+$tablet-up: 'tablet-up';
+$desktop-up: 'desktop-up';
+$widescreen: 'widescreen';
+
+// The `$grid-breakpoints` list is used to build our media queries. You can use
+// these in the media-queries mixin or as modifiers to your grid classes to
+// target specific breakpoint. i.e. `.grid-6--tablet-down` will target screen
+// widths below the value set by `$grid-desktop`
+$grid-breakpoints: (
+  'mobile' '(max-width: #{$grid-tablet - 1})',
+  'tablet-only' '(min-width: #{$grid-tablet}) and (max-width: #{$grid-desktop - 1})',
+  'tablet-down' '(max-width: #{$grid-desktop - 1})',
+  'tablet-up' '(min-width: #{$grid-tablet})',
+  'desktop-up' '(min-width: #{$grid-desktop})',
+  'widescreen' '(min-width: #{$grid-widescreen})'
+);
+
+/*============================================================================
+  Add grid classes based on breaktpoint names.
+    - Example $grid-breakpoint-has-push: ('mobile', 'desktop-up');
+    - Remove names if you don't want those classes generated
+==============================================================================*/
+$grid-breakpoint-types: ('mobile', 'tablet-only', 'tablet-down', 'tablet-up', 'desktop-up', 'widescreen');
+
+/*============================================================================
+  Add push classes by including the appropriate breakpoint name(s).
+    - Example: $grid-breakpoint-has-push: ('tablet-only', 'desktop-up');
+==============================================================================*/
+$grid-breakpoint-has-push: ();
+
+/*============================================================================
+  Grid Setup
+    1. Allow the grid system to be used on lists.
+    2. Remove any margins and paddings that might affect the grid system.
+    3. Apply a negative `margin-left` to negate the columns' gutters.
+==============================================================================*/
+.grid,
+.grid--uniform {
+  @include clearfix();
+}
+
+.grid,
+.grid--uniform {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-left: -$grid-gutter;
+}
+
+.grid__item {
+  float: left;
+  padding-left: $grid-gutter;
+  width: 100%;
+}
+
+/*============================================================================
+  Reversed grids allow you to structure your source in the opposite
+  order to how your rendered layout will appear.
+==============================================================================*/
+.grid--rev {
+  @extend .grid;
+  direction: rtl;
+  text-align: left;
+
+  > .grid__item {
+    direction: ltr;
+    text-align: left;
+    float: right;
+  }
+}
+
+/*============================================================================
+  Grid Columns
+    - Breakpoint-specific columns are generated for each breakpoint based
+    on the values in `$grid-breakpoints` e.g. `.grid-3` `.grid-3--tablet-up`
+==============================================================================*/
+@mixin grid-column-generator($grid-columns, $grid-breakpoint-type:"") {
+  @for $i from 1 through $grid-columns {
+    .grid-#{$i}#{$grid-breakpoint-type} {
+      width: #{percentage($i / $grid-columns)};
+    }
+  }
+}
+
+/*================ Grid Push Setup ================*/
+@mixin grid-push-generator($grid-columns, $grid-breakpoint-type:"") {
+  @for $i from 1 through $grid-columns {
+    .grid-push-#{$i}#{$grid-breakpoint-type} {
+      margin-left: #{percentage($i / $grid-columns)};
+    }
+  }
+}
+
+/*================ Clearfix helper on uniform grids ================*/
+@mixin grid-uniform-clearfix($grid-breakpoint-type:"") {
+  .grid--uniform {
+    .grid-1#{$grid-breakpoint-type}:nth-child(12n+1),
+    .grid-2#{$grid-breakpoint-type}:nth-child(6n+1),
+    .grid-3#{$grid-breakpoint-type}:nth-child(4n+1),
+    .grid-4#{$grid-breakpoint-type}:nth-child(3n+1),
+    .grid-6#{$grid-breakpoint-type}:nth-child(2n+1)    { clear: both; }
+  }
+}
+
+/*================ Build Base Grid Classes ================*/
+@include grid-column-generator($grid-columns);
+@include responsive-display-helper();
+
+/*================ Build Responsive Grid Classes ================*/
+@each $breakpoint in $grid-breakpoint-types {
+  @include media-query($breakpoint) {
+    @include grid-column-generator($grid-columns, '--#{$breakpoint}');
+    @include grid-uniform-clearfix('--#{$breakpoint}');
+    @include responsive-display-helper('--#{$breakpoint}');
+  }
+}
+
+/*================ Grid Push Classes ================*/
+@each $breakpoint in $grid-breakpoint-has-push {
+  @include media-query($breakpoint) {
+    @include grid-push-generator($grid-columns, '--#{$breakpoint}');
+  }
+}
+
+/*============================================================================
   #Normalize
   Based on normalize.css v3.0.2 | MIT License | git.io/normalize
 ==============================================================================*/
-
 *, *:before, *:after {
   box-sizing: border-box;
 }
 
-// Remove default margin.
 body {
   margin: 0;
 }
 
-// give HTML5 elements a consistent default for older IEs
 article,
 aside,
 details,
@@ -307,7 +289,6 @@ summary {
   display: block;
 }
 
-// Standardize text weight rendering
 body,
 input,
 textarea,
@@ -317,12 +298,10 @@ select {
   -webkit-text-size-adjust: 100%;
 }
 
-// Remove the gray background color from active links in IE 10.
 a {
   background-color: transparent;
 }
 
-// Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
 b,
 strong {
   font-weight: bold;
@@ -333,12 +312,10 @@ em {
 }
 
 
-// Address inconsistent and variable font size in all browsers.
 small {
   font-size: 80%;
 }
 
-// Prevent `sub` and `sup` affecting `line-height` in all browsers.
 sub,
 sup {
   font-size: 75%;
@@ -355,27 +332,21 @@ sub {
   bottom: -0.25em;
 }
 
-// Remove border when inside `a` element in IE 8/9/10.
 img {
   max-width: 100%;
   border: 0;
 }
 
-// 1. Correct color not being inherited.
-//    Known issue: affects color of disabled elements.
-// 2. Correct font properties not being inherited.
-// 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
 button,
 input,
 optgroup,
 select,
 textarea {
-  color: inherit; // 1
-  font: inherit; // 2
-  margin: 0; // 3
+  color: inherit;
+  font: inherit;
+  margin: 0;
 }
 
-// Re-set default cursor for disabled elements.
 button[disabled],
 html input[disabled] {
   cursor: default;
@@ -387,12 +358,10 @@ input::-moz-focus-inner {
   padding: 0;
 }
 
-// 1. Address `appearance` set to `searchfield` in Safari and Chrome.
 input[type="search"] {
-  -webkit-appearance: textfield; // 1
+  -webkit-appearance: textfield;
 }
 
-// Remove most spacing between table cells.
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -403,20 +372,16 @@ th {
   padding: 0;
 }
 
-// Remove default vertical scrollbar in IE 8/9/10/11.
 textarea {
   overflow: auto;
 }
 
-// hide outline on focus for elements which are given
-// focus by javascript
+// hide outline on focus for elements which are given focus by JS
 [tabindex='-1']:focus {
   outline: none;
 }
 
-/*============================================================================
-  #Helper Classes
-==============================================================================*/
+/*================ #Helper Classes ================*/
 .clearfix {
   @include clearfix();
 }
@@ -431,9 +396,7 @@ textarea {
   padding: 0; border: 0;
 }
 
-/*============================================================================
-  #Basic Styles
-==============================================================================*/
+/*================ #Basic Styles ================*/
 body,
 html {
   background-color: $color-body;
@@ -456,9 +419,7 @@ html {
   padding-bottom: $gutter-site * 2;
 }
 
-/*============================================================================
-  Typography
-==============================================================================*/
+/*================ Typography ================*/
 blockquote {
   p {
 
@@ -485,9 +446,7 @@ pre {
   overflow: auto;
 }
 
-/*============================================================================
-  #Icons
-==============================================================================*/
+/*================ #Icons ================*/
 .icon {
   display: inline-block;
 
@@ -521,7 +480,7 @@ pre {
   display: none;
 }
 
-/*================ Icon mapping ================*/
+/*================ #Icon mapping ================*/
 .icon-american_express:before { content: "\41"; }
 .icon-arrow-down:before { content: "\e607"; }
 .icon-bitcoin:before { content: "\42"; }
@@ -571,9 +530,7 @@ pre {
   font-size: $font-size-icons-social;
 }
 
-/*============================================================================
-  #Lists
-==============================================================================*/
+/*================ #Lists ================*/
 ul, ol {
   margin: 0;
   padding: 0;
@@ -611,12 +568,10 @@ ol {
   }
 }
 
-/*============================================================================
-  #Rich Text Editor
-==============================================================================*/
+/*================ #Rich Text Editor ================*/
 
 // allow table to scroll for tables in the RTE since we don't know
-// how many columns they will contain
+// how many columns they will contain. Class added by JS.
 .rte__table-wrapper {
   max-width: 100%;
   overflow: auto;
@@ -624,19 +579,7 @@ ol {
 }
 
 
-/*============================================================================
-  #Links and Buttons
-==============================================================================*/
-
-/*================ Force an input/button to look like a text link ================*/
-.text-link {
-  display: inline;
-  border: 0 none;
-  background: none;
-  padding: 0;
-  margin: 0;
-}
-
+/*================ #Links and Buttons ================*/
 .btn,
 .rte .btn {
   display: inline-block;
@@ -690,9 +633,16 @@ ol {
   }
 }
 
-/*============================================================================
-  #Tables
-==============================================================================*/
+/*================ Force an input/button to look like a text link ================*/
+.text-link {
+  display: inline;
+  border: 0 none;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+/*================ #Tables ================*/
 table {
   width: 100%;
   border-collapse: collapse;
@@ -711,7 +661,6 @@ th, td {
 /*============================================================================
   Responsive tables, defined with .responsive-table on table element.
 ==============================================================================*/
-
 @include media-query($mobile) {
   .responsive-table{
     thead {
@@ -765,10 +714,7 @@ th, td {
   }
 }
 
-/*============================================================================
-  #Images and Iframes
-==============================================================================*/
-
+/*================ #Images and Iframes ================*/
 svg:not(:root) {
   overflow: hidden;
 }
@@ -790,9 +736,7 @@ svg:not(:root) {
   }
 }
 
-/*============================================================================
-  #Forms
-==============================================================================*/
+/*================ Forms ================*/
 
 // Prevent zoom on touch devices in active inputs
 @include media-query($tablet-down) {
@@ -914,10 +858,7 @@ label[for] {
   cursor: pointer;
 }
 
-/*============================================================================
-  #Site Nav and Dropdowns
-==============================================================================*/
-
+/*================ #Site Nav and Dropdowns ================*/
 .site-header__logo {
   img {
     display: block;
@@ -969,9 +910,7 @@ label[for] {
   }
 }
 
-/*============================================================================
-  #Section Headers
-==============================================================================*/
+/*================ #Section Headers ================*/
 .section-header {
   margin-bottom: $gutter-heading;
 }
