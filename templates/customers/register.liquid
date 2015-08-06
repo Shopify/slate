@@ -13,10 +13,10 @@
     <input type="text" name="customer[last_name]" id="LastName" placeholder="{{ 'customer.register.last_name' | t }}" {% if form.last_name %}value="{{ form.last_name }}"{% endif %} autocapitalize="words">
 
     <label for="Email" class="label--hidden">{{ 'customer.register.email' | t }}</label>
-    <input type="email" name="customer[email]" id="Email" class="{% if form.errors contains 'email' %} form--error{% endif %}" placeholder="{{ 'customer.register.email' | t }}" {% if form.email %} value="{{ form.email }}"{% endif %} autocorrect="off" autocapitalize="off">
+    <input type="email" name="customer[email]" id="Email" class="{% if form.errors contains 'email' %} input--error{% endif %}" placeholder="{{ 'customer.register.email' | t }}" {% if form.email %} value="{{ form.email }}"{% endif %} autocorrect="off" autocapitalize="off">
 
     <label for="CreatePassword" class="label--hidden">{{ 'customer.register.password' | t }}</label>
-    <input type="password" name="customer[password]" id="CreatePassword" class="{% if form.errors contains 'password' %} form--error{% endif %}" placeholder="{{ 'customer.register.password' | t }}">
+    <input type="password" name="customer[password]" id="CreatePassword" class="{% if form.errors contains 'password' %} input--error{% endif %}" placeholder="{{ 'customer.register.password' | t }}">
 
     <p>
       <input type="submit" value="{{ 'customer.register.submit' | t }}" class="btn">

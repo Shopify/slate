@@ -117,15 +117,15 @@
 
               <div class="grid__item">
                 <label for="CommentAuthor" class="label--hidden">{{ 'blogs.comments.name' | t }}</label>
-                <input type="text" name="comment[author]" id="CommentAuthor" class="input-full{% if form.errors contains 'author' %} form--error{% endif %}" placeholder="{{ 'blogs.comments.name' | t }}" value="{{ form.author }}" autocapitalize="words">
+                <input type="text" name="comment[author]" id="CommentAuthor" class="input-full{% if form.errors contains 'author' %} input--error{% endif %}" placeholder="{{ 'blogs.comments.name' | t }}" value="{{ form.author }}" autocapitalize="words">
 
                 <label for="CommentEmail" class="label--hidden">{{ 'blogs.comments.email' | t }}</label>
-                <input type="email" name="comment[email]" id="CommentEmail" class="input-full{% if form.errors contains 'email' %} form--error{% endif %}" placeholder="{{ 'blogs.comments.email' | t }}" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
+                <input type="email" name="comment[email]" id="CommentEmail" class="input-full{% if form.errors contains 'email' %} input--error{% endif %}" placeholder="{{ 'blogs.comments.email' | t }}" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
               </div>
 
               <div class="grid__item">
                 <label for="CommentBody" class="label--hidden">{{ 'blogs.comments.message' | t }}</label>
-                <textarea name="comment[body]" id="CommentBody" class="input-full{% if form.errors contains 'body' %} form--error{% endif %}" placeholder="{{ 'blogs.comments.message' | t }}">{{ form.body }}</textarea>
+                <textarea name="comment[body]" id="CommentBody" class="input-full{% if form.errors contains 'body' %} input--error{% endif %}" placeholder="{{ 'blogs.comments.message' | t }}">{{ form.body }}</textarea>
               </div>
 
             </div>
