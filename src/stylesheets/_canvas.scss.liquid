@@ -244,6 +244,7 @@ $grid-breakpoint-has-push: ();
 /*================ Build Base Grid Classes ================*/
 @include grid-column-generator($grid-columns);
 @include responsive-display-helper();
+@include responsive-text-align-helper();
 
 /*================ Build Responsive Grid Classes ================*/
 @each $breakpoint in $grid-breakpoint-types {
@@ -610,7 +611,7 @@ ol {
   &[disabled],
   &.btn--disabled {
     cursor: default;
-    color: $color-border-disabled;
+    color: $color-disabled-border;
     background-color: $color-disabled;
   }
 }
@@ -747,6 +748,7 @@ svg:not(:root) {
 
 fieldset {
   border: 1px solid $color-border;
+  margin: 0 0 $gutter-site;
   padding: $gutter-site / 2;
 }
 
@@ -764,6 +766,7 @@ input,
 textarea,
 select {
   border: 1px solid $color-border;
+  border-radius: 0;
   max-width: 100%;
 
   &:focus {
@@ -773,7 +776,7 @@ select {
   &[disabled] {
     cursor: default;
     background-color: $color-disabled;
-    border-color: $color-border-disabled;
+    border-color: $color-disabled-border;
   }
 }
 
@@ -785,15 +788,11 @@ textarea {
 input,
 select,
 textarea {
-  &.error {
+  &.input--error {
     border-color: $color-error;
     background-color: $color-error-bg;
     color: $color-error;
   }
-}
-
-label.error {
-  color: $color-error;
 }
 
 select {
