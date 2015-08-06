@@ -244,6 +244,7 @@ $grid-breakpoint-has-push: ();
 /*================ Build Base Grid Classes ================*/
 @include grid-column-generator($grid-columns);
 @include responsive-display-helper();
+@include responsive-text-align-helper();
 
 /*================ Build Responsive Grid Classes ================*/
 @each $breakpoint in $grid-breakpoint-types {
