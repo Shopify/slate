@@ -252,6 +252,7 @@ $grid-breakpoint-has-push: ();
     @include grid-column-generator($grid-columns, '--#{$breakpoint}');
     @include grid-uniform-clearfix('--#{$breakpoint}');
     @include responsive-display-helper('--#{$breakpoint}');
+    @include responsive-text-align-helper('--#{$breakpoint}');
   }
 }
 
