@@ -179,9 +179,7 @@
 </div>
 
 {% if settings.home_page_content != blank %}
-  <div class="featured-page-content">
-    <div class="rte">
-      {{ pages[settings.home_page_content].content }}
-    </div>
+  <div class="rte">
+    {{ pages[settings.home_page_content].content }}
   </div>
 {% endif %}
