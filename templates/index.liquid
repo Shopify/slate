@@ -178,8 +178,8 @@
   </div>
 </div>
 
-<div class="featured-page-content">
+{% if settings.home_page_content != blank %}
   <div class="rte">
     {{ pages[settings.home_page_content].content }}
   </div>
-</div>
+{% endif %}
