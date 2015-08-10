@@ -229,13 +229,11 @@
     }
   },
   "products": {
-    "general": {
-      "from_text_html": "From {{ price }}"
-    },
     "product": {
       "sold_out": "Sold Out",
       "on_sale": "On Sale",
-      "on_sale_from_html": "<strong>On Sale</strong> from {{ price }}",
+      "on_sale_from_html": "On Sale from {{ price }}",
+      "from_text_html": "From {{ price }}",
       "compare_at": "Compare at",
       "quantity": "Quantity",
       "add_to_cart": "Add to Cart"

@@ -229,13 +229,11 @@
     }
   },
   "products": {
-    "general": {
-      "from_text_html": "Von {{ price }}"
-    },
     "product": {
       "sold_out": "Ausverkauft",
       "on_sale": "Im Angebot",
-      "on_sale_from_html": "<strong>Im Angebot</strong> ab {{ price }}",
+      "on_sale_from_html": "Im Angebot ab {{ price }}",
+      "from_text_html": "Von {{ price }}",
       "compare_at": "Vergleichen bei",
       "quantity": "Menge",
       "add_to_cart": "In den Einkaufswagen legen"
