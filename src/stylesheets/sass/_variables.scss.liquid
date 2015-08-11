@@ -44,8 +44,11 @@ $grid-gutter: 30px;
 $grid-columns: 12;
 
 /*================ Typography Variables ================*/
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
 $font-stack-header: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$font-weight-header: 700;
+$font-weight-header: $font-weight-bold;
 
 $font-stack-body: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $font-size-base: {{ settings.type_base_size }}; // Henseforth known as 1em
@@ -57,7 +60,7 @@ $font-size-base: {{ settings.type_base_size }}; // Henseforth known as 1em
        url('{{ "icons.woff" | asset_url }}') format("woff"),
        url('{{ "icons.ttf" | asset_url }}') format("truetype"),
        url('{{ "icons.svg" | asset_url }}#canvas-icons') format("svg");
-  font-weight: normal;
+  font-weight: $font-weight-normal;
   font-style: normal;
 }
 
