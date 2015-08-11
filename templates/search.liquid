@@ -80,7 +80,7 @@
               {% else %}
                 {% if item.price_varies %}
                   {% assign price = item.price | money %}
-                  <span itemprop="price">{{ 'products.general.from_text_html' | t: price: price }}</span>
+                  <span itemprop="price">{{ 'products.product.from_text_html' | t: price: price }}</span>
                 {% else %}
                   <span itemprop="price">{{ item.price | money }}</span>
                 {% endif %}

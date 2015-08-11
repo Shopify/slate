@@ -122,7 +122,7 @@
           {% else %}
             {% if product.price_varies %}
               {% assign price = product.price | money %}
-              {{ 'products.general.from_text_html' | t: price: price }}
+              {{ 'products.product.from_text_html' | t: price: price }}
             {% else %}
               {{ product.price | money }}
             {% endif %}
