@@ -28,14 +28,14 @@
   {% if template contains 'product' %}
 
     {% if settings.share_pinterest %}
-      <a target="_blank" href="http://pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media={{ product.featured_image | product_img_url: '1024x1024' }}&amp;description={{ shareTitle }}" class="share-pinterest">
+      <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media={{ product.featured_image | product_img_url: '1024x1024' }}&amp;description={{ shareTitle }}" class="share-pinterest">
         <span class="icon icon-pinterest" aria-hidden="true"></span>
         <span class="share-title">{{ 'general.social.share_on_pinterest' | t }}</span>
       </a>
     {% endif %}
 
     {% if settings.share_fancy %}
-      <a target="_blank" href="http://www.thefancy.com/fancyit?ItemURL={{ permalinkURL }}&amp;Title={{ shareTitle }}&amp;Category=Other&amp;ImageURL={{ product.featured_image | product_img_url: '1024x1024' }}" class="share-fancy">
+      <a target="_blank" href="//fancy.com/fancyit?ItemURL={{ permalinkURL }}&amp;Title={{ shareTitle }}&amp;Category=Other&amp;ImageURL={{ product.featured_image | product_img_url: '1024x1024' }}" class="share-fancy">
         <span class="icon icon-fancy" aria-hidden="true"></span>
         <span class="share-title">{{ 'general.social.share_on_fancy' | t }}</span>
       </a>
