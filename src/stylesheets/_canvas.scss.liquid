@@ -409,17 +409,10 @@ html {
   @include clearfix();
   max-width: $width-site;
   margin: 0 auto;
-  padding: 0 ($gutter-site / 2);
-
-  @include media-query($mobile) {
-    padding: 0 $gutter-site;
-  }
 }
 
 .main-content {
   display: block;
-  margin-top: $gutter-site;
-  padding-bottom: $gutter-site * 2;
 }
 
 /*================ Typography ================*/
@@ -441,7 +434,7 @@ blockquote {
 }
 
 code, pre {
-  font-family: Consolas,monospace;
+  font-family: Consolas, monospace;
   font-size: 1em;
 }
 
@@ -616,8 +609,7 @@ ol {
    color: $color-btn-primary-text;
   }
 
-  &[disabled],
-  &.btn--disabled {
+  &[disabled] {
     cursor: default;
     color: $color-disabled-border;
     background-color: $color-disabled;
@@ -693,7 +685,6 @@ th, td {
       content: attr(data-label);
       float: left;
       text-align: center;
-      font-size: 12px;
       padding-right: 10px;
     }
   }
@@ -880,9 +871,6 @@ label[for] {
 
   .icon-arrow-down {
     position: relative;
-  }
-
-  .site-nav--active > & {
   }
 }
 
