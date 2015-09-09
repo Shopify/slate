@@ -80,7 +80,7 @@ $color-border: {{ settings.color_borders }};
 
 // Helper colors for form error states
 $color-disabled: #000;
-$color-border-disabled: #000;
+$color-disabled-border: #000;
 $color-error: #000;
 $color-error-bg: #000;
 $color-success: #000;
@@ -100,8 +100,11 @@ $grid-gutter: 30px;
 $grid-columns: 12;
 
 /*================ Typography Variables ================*/
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
 $font-stack-header: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$font-weight-header: 700;
+$font-weight-header: $font-weight-bold;
 
 $font-stack-body: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $font-size-base: {{ settings.type_base_size }}; // Henseforth known as 1em
@@ -113,7 +116,7 @@ $font-size-base: {{ settings.type_base_size }}; // Henseforth known as 1em
        url('{{ "icons.woff" | asset_url }}') format("woff"),
        url('{{ "icons.ttf" | asset_url }}') format("truetype"),
        url('{{ "icons.svg" | asset_url }}#canvas-icons') format("svg");
-  font-weight: normal;
+  font-weight: $font-weight-normal;
   font-style: normal;
 }
 
@@ -372,6 +375,7 @@ $grid-breakpoint-has-push: ();
 /*================ Build Base Grid Classes ================*/
 @include grid-column-generator($grid-columns);
 @include responsive-display-helper();
+@include responsive-text-align-helper();
 
 /*================ Build Responsive Grid Classes ================*/
 @each $breakpoint in $grid-breakpoint-types {
@@ -379,6 +383,7 @@ $grid-breakpoint-has-push: ();
     @include grid-column-generator($grid-columns, '--#{$breakpoint}');
     @include grid-uniform-clearfix('--#{$breakpoint}');
     @include responsive-display-helper('--#{$breakpoint}');
+    @include responsive-text-align-helper('--#{$breakpoint}');
   }
 }
 
@@ -432,7 +437,7 @@ a {
 
 b,
 strong {
-  font-weight: bold;
+  font-weight: $font-weight-bold;
 }
 
 em {
@@ -491,6 +496,7 @@ input[type="search"] {
 }
 
 table {
+  width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
 }
@@ -534,17 +540,10 @@ html {
   @include clearfix();
   max-width: $width-site;
   margin: 0 auto;
-  padding: 0 ($gutter-site / 2);
-
-  @include media-query($mobile) {
-    padding: 0 $gutter-site;
-  }
 }
 
 .main-content {
   display: block;
-  margin-top: $gutter-site;
-  padding-bottom: $gutter-site * 2;
 }
 
 /*================ Typography ================*/
@@ -566,7 +565,7 @@ blockquote {
 }
 
 code, pre {
-  font-family: Consolas,monospace;
+  font-family: Consolas, monospace;
   font-size: 1em;
 }
 
@@ -596,7 +595,7 @@ pre {
   font-family: $font-stack-icons;
   text-decoration: none;
   font-style: normal;
-  font-weight: normal;
+  font-weight: $font-weight-normal;
   font-variant: normal;
   text-transform: none;
   line-height: 1;
@@ -706,6 +705,12 @@ ol {
   -webkit-overflow-scrolling: touch;
 }
 
+.rte {
+  img {
+    height: auto;
+  }
+}
+
 /*================ #Links and Buttons ================*/
 .btn,
 .rte .btn {
@@ -735,10 +740,9 @@ ol {
    color: $color-btn-primary-text;
   }
 
-  &[disabled],
-  &.btn--disabled {
+  &[disabled] {
     cursor: default;
-    color: $color-border-disabled;
+    color: $color-disabled-border;
     background-color: $color-disabled;
   }
 }
@@ -770,14 +774,8 @@ ol {
 }
 
 /*================ #Tables ================*/
-table {
-  width: 100%;
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
 th {
-  font-weight: bold;
+  font-weight: $font-weight-bold;
 }
 
 th, td {
@@ -818,7 +816,6 @@ th, td {
       content: attr(data-label);
       float: left;
       text-align: center;
-      font-size: 12px;
       padding-right: 10px;
     }
   }
@@ -875,6 +872,7 @@ svg:not(:root) {
 
 fieldset {
   border: 1px solid $color-border;
+  margin: 0 0 $gutter-site;
   padding: $gutter-site / 2;
 }
 
@@ -892,6 +890,7 @@ input,
 textarea,
 select {
   border: 1px solid $color-border;
+  border-radius: 0;
   max-width: 100%;
 
   &:focus {
@@ -901,7 +900,7 @@ select {
   &[disabled] {
     cursor: default;
     background-color: $color-disabled;
-    border-color: $color-border-disabled;
+    border-color: $color-disabled-border;
   }
 }
 
@@ -913,15 +912,11 @@ textarea {
 input,
 select,
 textarea {
-  &.error {
+  &.input--error {
     border-color: $color-error;
     background-color: $color-error-bg;
     color: $color-error;
   }
-}
-
-label.error {
-  color: $color-error;
 }
 
 select {
@@ -947,7 +942,7 @@ select {
 }
 
 optgroup {
-  font-weight: bold;
+  font-weight: $font-weight-bold;
 }
 
 // Force option color (affects IE only)
@@ -1007,9 +1002,6 @@ label[for] {
 
   .icon-arrow-down {
     position: relative;
-  }
-
-  .site-nav--active > & {
   }
 }
 
