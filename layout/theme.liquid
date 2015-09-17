@@ -123,11 +123,7 @@
   <!-- Header hook for plugins ================================================== -->
   {{ content_for_header }}
 
-  <!-- Fixes for Older Versions of IE ================================================== -->
-  {% comment %}
-    oldIE fixes/shivs
-    HTML5 shiv, Selectivizer
-  {% endcomment %}
+  <!-- HTML5 fixes for old IE ================================================== -->
   <!--[if lt IE 9]>
   {{ '//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js' | script_tag }}
   <![endif]-->
