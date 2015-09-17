@@ -7,12 +7,6 @@
 
 {% endcomment %}
 
-{% comment %}
-  Check to enforce respond.js
-{% endcomment %}
-{% assign respond_js_secret_key = shop.domain | md5 %}
-{% unless search.terms == respond_js_secret_key %}
-
 {% paginate search.results by 10 %}
 
   {% if search.performed %}
@@ -109,8 +103,3 @@
   {% endif %}
 
 {% endpaginate %}
-
-{% else %}
-  {% include 'respond' %}
-  {% layout none %}
-{% endunless %}
