@@ -26,9 +26,8 @@
   {% endif %}
 
   <!-- Social Meta Tags ================================================== -->
-
   {% comment %}
-    Add Facebook and Pinterest Open Graph meta tags to product pages
+    Add Facebook and Pinterest Open Graph meta tags to various templates
     for friendly Facebook sharing and Pinterest pinning.
 
     More info Open Graph meta tags
@@ -41,6 +40,7 @@
     Validate your Pinterest rich pins
       - https://developers.pinterest.com/rich_pins/validator/
   {% endcomment %}
+  <meta property="og:site_name" content="{{ shop.name }}">
   {% if template contains 'product' %}
     <meta property="og:type" content="product">
     <meta property="og:title" content="{{ product.title | strip_html | escape }}">
@@ -53,14 +53,21 @@
   {% elsif template contains 'article' %}
     <meta property="og:type" content="article">
     <meta property="og:title" content="{{ article.title | strip_html | escape }}">
-    {% assign img_tag = '<' | append: 'img' %}
+    {% assign img_tag = '<img' %}
     {% if article.content contains img_tag %}
       {% assign src = article.content | split: 'src="' %}
       {% assign src = src[1] | split: '"' | first | remove: 'https:' | remove: 'http:' %}
       {% if src %}
-    <meta property="og:image" content="http:{{ src }}">
-    <meta property="og:image:secure_url" content="https:{{ src }}">
+        <meta property="og:image" content="http:{{ src }}">
+        <meta property="og:image:secure_url" content="https:{{ src }}">
       {% endif %}
+    {% endif %}
+  {% elsif template == 'password' %}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ shop.name }}">
+    {% if settings.logo_use_image %}
+    <meta property="og:image" content="http:{{ 'logo.png' | asset_url }}">
+    <meta property="og:image:secure_url" content="https:{{ 'logo.png' | asset_url }}">
     {% endif %}
   {% else %}
     <meta property="og:type" content="website">
@@ -71,10 +78,13 @@
     {% endif %}
   {% endif %}
   {% if page_description %}
-    <meta property="og:description" content="{{ page_description | escape }}">
+    <meta property="og:description" content="{{ page_description }}">
   {% endif %}
+  {% if template == 'password' %}
+    <meta property="og:url" content="{{ shop.url }}">
+  {% else %}
     <meta property="og:url" content="{{ canonical_url }}">
-    <meta property="og:site_name" content="{{ shop.name }}">
+  {% endif %}
 
   {% comment %}
     This renders meta data needed to create a Twitter card
