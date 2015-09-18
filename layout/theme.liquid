@@ -90,29 +90,32 @@
   {% comment %}
     Twitter user name of the site, based on theme settings
   {% endcomment %}
-  {% if settings.social_twitter_link != blank %}
-    <meta name="twitter:site" content="@{{ settings.social_twitter_link | split: 'twitter.com/' | last }}">
-  {% endif %}
-
   <meta name="twitter:card" content="summary">
+  {% comment %}
+    Twitter user name of the site, based on theme settings
+  {% endcomment %}
+  {% unless settings.social_twitter_link == blank %}
+    <meta name="twitter:site" content="@{{ settings.social_twitter_link | split: 'twitter.com/' | last }}">
+  {% endunless %}
+
   {% if template contains 'product' %}
-    <meta name="twitter:title" content="{{ product.title }}">
-    <meta name="twitter:description" content="{{ product.description | strip_html | truncatewords: 140, '' | escape }}">
-    <meta name="twitter:image" content="https:{{ product.featured_image.src | img_url: 'medium' }}">
+    <meta name="twitter:title" content="{{ product.title | strip_html | escape }}">
+    <meta name="twitter:description" content="{{ product.description | strip_html | truncatewords: 50, '' | escape }}">
+    <meta name="twitter:image" content="https:{{ product | img_url: 'medium' }}">
     <meta name="twitter:image:width" content="240">
     <meta name="twitter:image:height" content="240">
   {% elsif template contains 'article' %}
-    <meta name="twitter:title" content="{{ article.title }}">
-    <meta name="twitter:description" content="{{ article.excerpt_or_content | strip_html | truncatewords: 140, '' | escape }}">
+    <meta name="twitter:title" content="{{ article.title | strip_html | escape }}">
+    <meta name="twitter:description" content="{{ article.excerpt_or_content | strip_html | truncatewords: 50, '' | escape }}">
     {% comment %}
       Check if content contains an image to add to the card
         - Source: http://blog.viralica.com/2013/09/twitter-product-cards-on-shopify/
     {% endcomment %}
-    {% if article.content contains "<img" %}
+    {% if article.content contains '<img' %}
       {% assign src = article.content | split: 'src="' %}
-      {% assign src = src[1] | split: '"' | first | replace: '//cdn', 'http://cdn' | replace: 'http:http://', 'http://' | remove: 'https:' %}
+      {% assign src = src[1] | split: '"' | first | remove: 'https:' | remove: 'http:' %}
       {% if src %}
-      <meta property="twitter:image" content="{{ src }}">
+        <meta property="twitter:image" content="https:{{ src }}">
       {% endif %}
     {% endif %}
   {% endif %}
