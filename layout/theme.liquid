@@ -123,20 +123,9 @@
   <!-- Header hook for plugins ================================================== -->
   {{ content_for_header }}
 
-  <!-- Fixes for Older Versions of IE ================================================== -->
-  {% comment %}
-    oldIE fixes/shivs
-    HTML5 shiv, Selectivizer
-    - respond.js Gavin Ballard
-    - http://gavinballard.com/using-respond.js-with-shopify-redux/
-  {% endcomment %}
-  {% assign respond_js_secret_key = shop.domain | md5 %}
+  <!-- HTML5 fixes for old IE ================================================== -->
   <!--[if lt IE 9]>
   {{ '//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js' | script_tag }}
-  {{ 'respond.min.js' | asset_url | script_tag }}
-  <link href="{{ 'respond-proxy.html' | asset_url | split: '?' | first }}" id="respond-proxy" rel="respond-proxy" />
-  <link href="//{{ shop.domain }}/search?q={{ respond_js_secret_key }}" id="respond-redirect" rel="respond-redirect" />
-  <script src="//{{ shop.domain }}/search?q={{ respond_js_secret_key }}" type="text/javascript"></script>
   <![endif]-->
 
   {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
