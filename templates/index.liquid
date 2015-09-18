@@ -118,6 +118,7 @@
               <strong>{{ 'products.product.on_sale' | t }}</strong>
               {{ product.price | money }}
             {% endif %}
+            <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
             <s>{{ product.compare_at_price | money }}</s>
           {% else %}
             {% if product.price_varies %}

@@ -230,11 +230,12 @@
   },
   "products": {
     "product": {
+      "regular_price": "Preço normal",
       "sold_out": "Esgotado",
+      "unavailable": "Indisponível",
       "on_sale": "Em promoção",
       "on_sale_from_html": "Em promoção, a partir de {{ price }}",
       "from_text_html": "A partir de {{ price }}",
-      "compare_at": "Preço normal:",
       "quantity": "Quantidade",
       "add_to_cart": "Adicionar ao carrinho"
     }

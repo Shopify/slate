@@ -94,9 +94,10 @@
             </span>
 
             {% if product.compare_at_price_max > product.price %}
-              <p class="product-form__price--compare">
-                {{ 'products.product.compare_at' | t }} {{ current_variant.compare_at_price | money }}
-              </p>
+              <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+              <s class="product-form__price--compare" id="ComparePrice">
+                {{ current_variant.compare_at_price | money }}
+              </s>
             {% endif %}
 
             <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
@@ -118,3 +119,14 @@
     </div>
   </div>
 </div>
+
+<script>
+  // Override default values of shop.strings for each template.
+  // Alternate product templates can change values of
+  // add to cart button, sold out, and unavailable states here.
+  window.productStrings = {
+    addToCart: {{ 'products.product.add_to_cart' | t | json }},
+    soldOut: {{ 'products.product.sold_out' | t | json }},
+    unavailable: {{ 'products.product.unavailable' | t | json }}
+  }
+</script>

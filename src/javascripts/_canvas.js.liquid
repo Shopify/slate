@@ -148,6 +148,24 @@ ShopifyCanvas.rteElements = function () {
 
 /**
  *
+ *  Adjust option_selection.js labels based on variant default values
+ *
+ */
+ShopifyCanvas.simplifyVariantLabels = function (product) {
+  // option_selection.js does not add a label if there is only one variant option.
+  // Add one as long as it is not 'Title' (Shopify's default), add one.
+  if (product.options.length === 1 && product.options[0] !== 'Title') {
+    $('.selector-wrapper:eq(0)').prepend('<label for="ProductSelect-option-0">'+ product.options[0] +'</label>');
+  }
+
+  // Hide variant dropdown if only one exists and title contains 'Default'
+  if (product.variants.length && product.variants[0].title.indexOf('Default') >= 0) {
+    $('.selector-wrapper').hide();
+  }
+};
+
+/**
+ *
  *  Check URL for reset password hash
  *
  */
