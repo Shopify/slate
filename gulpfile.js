@@ -13,7 +13,8 @@ var gulp        = require('gulp'),
     fs          = require('fs'),
     yaml        = require('js-yaml'),
     argv        = require('yargs').argv,
-    gulpif      = require('gulp-if');
+    gulpif      = require('gulp-if'),
+    changed     = require('gulp-changed');
 
 /**
  *
@@ -23,6 +24,14 @@ var gulp        = require('gulp'),
 var paths = {
   srcScss: 'src/stylesheets/**/*.*',
   srcJs: 'src/javascripts/**/*.*',
+  srcAssets: [
+    'src/assets/',
+    'src/templates/**/*.*',
+    'src/snippets/',
+    'src/locales/',
+    'src/config/',
+    'src/layout/'
+  ],
   parentIncludeScss: [
     'src/stylesheets/[^_]*.*'
   ],
@@ -30,16 +39,10 @@ var paths = {
     'src/javascripts/[^_]*.*'
   ],
   images: 'src/images/*.{png,jpg,gif}',
-  destAssets: 'assets',
-  uploadFiles: [
-    'config/*',
-    'layout/*',
-    'locales/*',
-    'snippets/*',
-    'templates/**/*'
-  ],
+  destAssets: 'dist/assets',
   config: 'config.yml',
-  watch: 'src/.themekit'
+  watch: '.themekit',
+  dist: 'dist/'
 };
 
 /**
@@ -66,6 +69,27 @@ gulp.task('concat-js', function () {
 });
 
 /**
+ *   BUILD ASSETS:
+ *
+ *   Move all your templates, snippets, config, and assets into the dist folder
+ */
+gulp.task('build-assets', function () {
+  gulp.src(paths.srcAssets, {base: 'src/'})
+    .pipe(changed(paths.dist))
+    .pipe(gulp.dest(paths.dist));
+});
+
+/**
+ *   CONFIG:
+ *
+ *
+ */
+gulp.task('config', function () {
+  return gulp.src(paths.config)
+    .pipe(gulp.dest(paths.dist));
+});
+
+/**
  *    IMAGEMIN
  *
  *    Minify Images
@@ -81,7 +105,7 @@ gulp.task('imagemin', function () {
 /**
  *  BROWSERSYNC
  */
-gulp.task('browser-sync', function(options) {
+gulp.task('browser-sync', function (options) {
   // read the shop url from the config file
   var config = yaml.safeLoad(fs.readFileSync(paths.config, 'utf8'));
 
@@ -101,7 +125,7 @@ gulp.task('browser-sync', function(options) {
  */
 gulp.task('theme-watch', function () {
   return gulp.src('')
-    .pipe(gulpif(argv.themekit, shell('theme watch --notify=src/.themekit'), shell('theme watch')));
+    .pipe(gulpif(argv.sync, shell('theme watch --notify=../.themekit', {cwd: paths.dist}), shell('theme watch', {cwd: paths.dist})));
 });
 
 /**
@@ -113,7 +137,7 @@ gulp.task('theme-watch', function () {
  */
 gulp.task('replace', function () {
   gulp.src('')
-    .pipe(shell('theme replace'));
+    .pipe(shell('theme replace', {cwd: paths.dist}));
 });
 
 /**
@@ -126,7 +150,7 @@ gulp.task('replace', function () {
  */
 gulp.task('upload', function () {
   gulp.src('')
-    .pipe(shell('theme upload'));
+    .pipe(shell('theme upload', {cwd: paths.dist}));
 });
 
 /**
@@ -136,8 +160,9 @@ gulp.task('upload', function () {
  *  to upload any changes to your store after being built
  */
 gulp.task('concurrent', function (cb) {
-  runSequence(['watch', 'theme-watch'], cb);
+  runSequence('build', 'watch', 'theme-watch', cb);
 });
+
 
 /**
  *  CLEAN
@@ -147,8 +172,8 @@ gulp.task('concurrent', function (cb) {
 gulp.task('clean', function (cb) {
   del([
     '*.zip',
-    'assets/**/*',
-    '!assets/*.*'
+    'dist/assets/**/*',
+    '!dist/assets/*.*'
   ], cb)
 });
 
@@ -158,7 +183,7 @@ gulp.task('clean', function (cb) {
  *  compress theme and prepare it for the theme store
  */
 gulp.task('compress', function () {
-  return gulp.src(paths.uploadFiles)
+  return gulp.src(['dist/**/*.*', '!dist/config.yml'])
     .pipe(zip(pkg.name + '.zip'))
     .pipe(gulp.dest('./'))
     .pipe(notify('Zip File Created'));
@@ -184,11 +209,19 @@ gulp.task('open', function () {
 gulp.task('watch', function () {
   gulp.watch(paths.srcScss, ['concat-css']);
   gulp.watch(paths.srcJs, ['concat-js']);
+  gulp.watch(paths.srcAssets, ['build-assets']);
   gulp.watch(paths.config, ['config', 'browser-sync']);
   gulp.watch(paths.images, ['imagemin']);
 
-  if (argv.themekit) {
-    gulp.watch(paths.watch).on('change', browserSync.reload);
+  if (argv.sync) {
+    if (argv.notify) {
+      gulp.watch(paths.watch, function () {
+        gulp.src('')
+          .pipe(notify('Upload Complete'));
+      }).on('change', browserSync.reload);
+    } else {
+      gulp.watch(paths.watch).on('change', browserSync.reload);
+    }
   }
 });
 
@@ -196,14 +229,18 @@ gulp.task('watch', function () {
  *  Set default tasks depending on which upload tool we're using
  */
 function defaultTasks() {
-  if (argv.themekit) {
-    return ['build', 'browser-sync', 'concurrent'];
+  if (argv.sync) {
+    return ['concurrent', 'browser-sync'];
   } else {
-    return ['build', 'concurrent']
+    return ['concurrent'];
   }
 }
 
 gulp.task('default', defaultTasks());
-gulp.task('build', ['concat-css', 'concat-js', 'imagemin', 'clean']);
-gulp.task('deploy', ['build', 'replace']);
-gulp.task('zip', ['build', 'compress', 'open']);
+gulp.task('build', ['config', 'build-assets', 'concat-css', 'concat-js', 'imagemin', 'clean']);
+gulp.task('deploy', function (cb) {
+  runSequence('build', 'replace', cb);
+});
+gulp.task('zip', function (cb) {
+  runSequence('build', 'compress', 'open', cb)
+});
