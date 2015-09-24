@@ -23,9 +23,9 @@
 
             <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" class="grid__image">
               {% if collection.image %}
-                {{ collection.image.src | img_url: 'large' | img_tag: collection_title }}
+                {{ collection | img_url: 'large' | img_tag: collection_title }}
               {% else %}
-                {{ collection.products.first.featured_image | img_url: 'large' | img_tag: collection_title }}
+                {{ collection.products.first | img_url: 'large' | img_tag: collection_title }}
               {% endif %}
             </a>
             <p><a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ collection.title }}</a></p>

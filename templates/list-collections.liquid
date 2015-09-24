@@ -9,30 +9,36 @@
 {% endcomment %}
 
 {% comment %}
+  {{ page_title }} is set to 'Collections' if active language is English.
+  This can be translated on Edit language page under 'Checkout & system / Page titles'.
+{% endcomment %}
+
+<h1>{{ page_title }}</h1>
+
+{% comment %}
   Loop through each collection, except 'frontpage'
 {% endcomment %}
 
-<div class="section-header">
-  <h1 class="section-header__title">{{ collection.title | escape }}</h1>
-  <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">More {{ collection.title | escape }} &rsaquo;</a>
-</div>
-
-<div class="grid">
+<div class="grid--uniform">
   {% for collection in collections %}
     {% unless collection.handle == 'frontpage' %}
 
-      <div class="grid__item collection-item">
-        <div class="collection-item__image">
+      <div class="grid__item">
+        {% comment %}
+          Use capture to put the collection title in a variable that is used in liquid filters
+        {% endcomment %}
+        {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+
+        <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" class="grid__image">
           {% if collection.image %}
-            {{ collection.image | img_url: medium | img_tag: collection.title }}
+            {{ collection | img_url: 'large' | img_tag: collection_title }}
           {% else %}
-            {{ collection.products.first.featured_image | img_url: medium | img_tag: collection.title }}
+            {{ collection.products.first | img_url: 'large' | img_tag: collection_title }}
           {% endif %}
-        </div>
-        <div class="collection-item__title">
-          <h2>{{ collection.title }}</h2>
-        </div>
-      </div>
+        </a>
+        <p><a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ collection.title }}</a></p>
+        <p>{{ 'collections.general.items_with_count' | t: count: collection.all_products_count }}</p>
+      </div> <!-- //grid-item -->
 
     {% endunless %}
   {% endfor %}
