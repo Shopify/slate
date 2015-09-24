@@ -45,3 +45,4 @@ grunt-config.json
 config.yml
 /_site
 assets/logo.png
+/.idea
