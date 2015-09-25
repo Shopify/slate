@@ -1,4 +1,102 @@
+window.shop = window.shop || {};
+
 //=require vendor/fastclick.min.js
 //=require _canvas.js.liquid
+//=require _strings.js.liquid
 
 // Add theme-related JS after _canvas.js.liquid
+
+shop.initCache = function () {
+  shop.cache = {
+    $addToCart: $('#AddToCart'),
+    $productPrice: $('#ProductPrice'),
+    $comparePrice: $('#ComparePrice'),
+    $addToCartText: $('#AddToCartText'),
+    $productFeaturedImage: $('#ProductPhotoImg'),
+    $productThumbs: $('#ProductThumbs').find('.product-single__thumbnail')
+  };
+
+  shop.settings = {
+    moneyFormat: '{{ shop.money_format }}'
+  }
+};
+
+shop.init = function () {
+  shop.initCache();
+  shop.stringOverrides();
+  shop.initProductVariant();
+};
+
+shop.stringOverrides = function () {
+  // Override defaults in shop.strings with potential
+  // template overrides
+
+  window.productStrings = window.productStrings || {};
+  $.extend(shop.strings, window.productStrings);
+};
+
+shop.initProductVariant = function () {
+  // productSingleObject is a global JSON object defined in product.liquid
+  if (!shop.productSingleObject) {
+    return;
+  }
+
+  // Pre-loading product images to avoid a lag when a thumbnail is clicked, or
+  // when a variant is selected that has a variant image. Change 'large' to
+  // what fits your theme.
+  Shopify.Image.preload(shop.productSingleObject.images, 'large');
+
+  // Initialize multiple variant selector dropdowns, using option_selection.js
+  new Shopify.OptionSelectors('ProductSelect', {
+    product: shop.productSingleObject,
+    onVariantSelected: shop.productVariantCallback,
+    enableHistoryState: true
+  });
+
+  // Clean up variant labels if the Shopify-defined
+  // defaults are the only ones left
+  ShopifyCanvas.simplifyVariantLabels(shop.productSingleObject);
+};
+
+shop.productVariantCallback = function (variant, selector) {
+  if (variant) {
+    // Update variant image, if one is set
+    if (variant.featured_image) {
+      shop.switchProductImage(variant.featured_image.src);
+    }
+
+    // Update the product price
+    shop.cache.$productPrice.text(Shopify.formatMoney(variant.price, shop.settings.moneyFormat));
+
+    // Update and show the product's compare price if necessary
+    if (variant.compare_at_price > variant.price) {
+      shop.cache.$comparePrice.text(Shopify.formatMoney(variant.compare_at_price, shop.settings.moneyFormat)).removeClass('hide');
+    } else {
+      shop.cache.$comparePrice.addClass('hide');
+    }
+
+    // Select a valid variant if available
+    if (variant.available) {
+      // We have a valid product variant, so enable the submit button
+      shop.cache.$addToCart.prop('disabled', false);
+      shop.cache.$addToCartText.text(shop.strings.addToCart);
+    } else {
+      // Variant is sold out, disable the submit button and change the text
+      shop.cache.$addToCart.prop('disabled', true);
+      shop.cache.$addToCartText.text(shop.strings.soldOut);
+    }
+  } else {
+    // The variant doesn't exist, disable submit button and change the text.
+    // This may be an error or notice that a specific variant is not available.
+    shop.cache.$addToCart.prop('disabled', true);
+    shop.cache.$addToCartText.text(shop.strings.unavailable);
+  }
+};
+
+shop.switchProductImage = function (image) {
+  if (shop.cache.$productFeaturedImage) {
+    shop.cache.$productFeaturedImage.attr('src', image);
+  }
+};
+
+$(shop.init);
