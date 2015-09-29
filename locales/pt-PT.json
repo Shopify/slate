@@ -8,6 +8,22 @@
       "title": "404 Página Não Encontrada",
       "subtext_html": "A página que solicitou não existe. Clique <a href=\"/collections/all\">aqui</a> para continuar as suas compras."
     },
+    "password_page": {
+      "opening_soon": "Abre Brevemente",
+      "spread_the_word": "Passe a palavra",
+      "login_form_heading": "Entre na loja usando a palavra-passe",
+      "login_form_password_label": "Palavra-passe",
+      "login_form_password_placeholder": "A sua palavra-passe",
+      "login_form_submit": "Entrar",
+      "signup_form_heading": "Descubra quando abrimos",
+      "signup_form_email_label": "Email",
+      "signup_form_email_placeholder": "O seu email",
+      "signup_form_submit": "Submeter",
+      "signup_form_success": "Iremos enviar-lhe um email imediatamente antes de abrirmos!",
+      "admin_link_html": "É o dono da loja? <a href=\"/admin\" class=\"text-link\">Inicie sessão aqui</a>",
+      "password_link": "Entre usando a palavra-passe",
+      "powered_by_shopify_html": "Esta loja será movida por {{ shopify }}"
+    },
     "social": {
       "share_on_facebook": "Partilhar",
       "share_on_twitter": "Tweet",

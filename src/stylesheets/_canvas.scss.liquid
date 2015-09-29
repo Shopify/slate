@@ -16,6 +16,7 @@
   #Forms
   #Site Nav and Dropdowns
   #Section Headers
+  #Password Template
 ==============================================================================*/
 
 /*================ #Mixins ================*/
@@ -396,7 +397,8 @@ textarea {
   height: 1px;
   width: 1px;
   margin: -1px;
-  padding: 0; border: 0;
+  padding: 0;
+  border: 0;
 }
 
 /*================ #Basic Styles ================*/
@@ -905,4 +907,17 @@ label[for] {
 /*================ #Section Headers ================*/
 .section-header {
   margin-bottom: $gutter-heading;
+}
+
+/*================ #Password Template ================*/
+.shopify-logo-svg {
+  width: 1.5 * $font-size-base * 120 / 35;
+  height: 1.5 * $font-size-base;
+  display: inline-block;
+  line-height: 0;
+  vertical-align: middle;
+
+  path {
+    fill: currentColor;
+  }
 }
