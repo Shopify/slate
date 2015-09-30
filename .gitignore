@@ -40,9 +40,11 @@ Thumbs.db
 # Custom #
 ######################
 *.sass-cache*
-/node_modules
 grunt-config.json
 config.yml
-/_site
 assets/logo.png
+*.zip
+/node_modules
+/_site
+/dist
 /.idea

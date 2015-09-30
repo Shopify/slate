@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe "Canvas" do
-  FILE_KEYS = Dir["./**/*.liquid"].map do |path|
+  FILE_KEYS = Dir["./src/**/*.liquid"].map do |path|
     match_tags(path)
   end.flatten.sort
 
   HTML_TRANSLATIONS = {}
   LOCALE_KEYS = {}
 
-  Dir["./locales/*.json"].each do |path|
+  Dir["./src/locales/*.json"].each do |path|
     translations = match_translations(path)
     locale = locale_name_from_path(path)
 

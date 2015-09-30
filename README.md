@@ -48,6 +48,7 @@ __Any files in the `src/` directory prepended with an underscore will not be upl
 - Watches `src/javascripts/` folder and concatenates scripts into `assets/shop.js.liquid`
 - Automatically compresses image files in `assets/`
 - Uploads valid saved theme files to your store
+- *The first time you run gulp in a Canvas project, or if you have to remove your delete folder, you will need to run `gulp deploy` and then `gulp` to ensure your assets are properly tracked*
 
 ----------
 
