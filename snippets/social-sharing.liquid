@@ -2,11 +2,12 @@
 {% if template contains 'article' or template contains 'blog' %}
   {% capture permalinkURL %}{{ shop.url }}{{ article.url }}{% endcapture %}
   {% capture shareTitle %}{{ article.title | url_param_escape }}{% endcapture %}
-
 {% elsif template contains 'product' %}
   {% capture permalinkURL %}{{ shop.url }}{{ product.url }}{% endcapture %}
   {% capture shareTitle %}{{ product.title | url_param_escape }}{% endcapture %}
-
+{% else %}
+  {% capture permalinkURL %}{{ shop.url }}{% endcapture %}
+  {% capture shareTitle %}{{ page_description | url_param_escape }}{% endcapture %}
 {% endif %}
 
 <div class="social-sharing" data-permalink="{{ permalinkURL }}">
