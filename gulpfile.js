@@ -25,12 +25,12 @@ var paths = {
   srcScss: 'src/stylesheets/**/*.*',
   srcJs: 'src/javascripts/**/*.*',
   srcAssets: [
-    'src/assets/',
+    'src/assets/*.*',
     'src/templates/**/*.*',
-    'src/snippets/',
-    'src/locales/',
-    'src/config/',
-    'src/layout/'
+    'src/snippets/*.*',
+    'src/locales/*.*',
+    'src/config/*.*',
+    'src/layout/*.*'
   ],
   parentIncludeScss: [
     'src/stylesheets/[^_]*.*'

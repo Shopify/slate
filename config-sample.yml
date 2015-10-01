@@ -1,13 +1,11 @@
 ---
-# Theme gem usage - https://github.com/Shopify/shopify_theme
+# Theme Kit - http://themekit.cat
 # Get your api_key and password at your-url.myshopify.com/admin/apps/private
+# Copy this file and rename it config.yml
 
-:api_key:
-:password:
-:store: your-url.myshopify.com
-:theme_id:
-:ignore_files:
-  - node_modules/
-  - src/
-  # - settings_data.json
-  # - logo.png
+development:
+  access_token:
+  store: your-url.myshopify.com
+  theme_id:
+  ignore_files:
+    # - Relative to the dist/ folder
