@@ -266,7 +266,8 @@
       "redeem": "Use este código ao fazer o check-out para redimir o seu cartão-presente",
       "shop_link": "Começar a fazer compras",
       "print": "Imprimir",
-      "remaining_html": "{{ balance }} <small>restante<\/small>"
+      "remaining_html": "{{ balance }} restante",
+      "add_to_apple_wallet": "Adicionar ao Apple Wallet"
     }
   },
   "date_formats":{

@@ -1,18 +1,4 @@
-/**
- *  Vendor
- *
- *  Small minified vendor scripts can be placed at the top of this file to
- *  reduce network requests.
- *
- */
-
-
-/**
- *
- *  ShopifyCanvas JS
- *  - Base Canvas functions and utilities.
- *
- */
+//=require vendor/fastclick.min.js
 
 window.ShopifyCanvas = window.ShopifyCanvas || {};
 
@@ -30,6 +16,7 @@ ShopifyCanvas.init = function () {
   ShopifyCanvas.resetPasswordSuccess();
   ShopifyCanvas.customerAddressForm();
   ShopifyCanvas.rteElements();
+  ShopifyCanvas.giftCardTemplate();
 };
 
 /**
@@ -39,8 +26,8 @@ ShopifyCanvas.init = function () {
  */
 ShopifyCanvas.cacheSelectors = function () {
   ShopifyCanvas.cache = {
-    $html : $('html'),
-    $body : $('body')
+    $html: $('html'),
+    $body: $('body')
   }
 };
 
@@ -161,6 +148,49 @@ ShopifyCanvas.simplifyVariantLabels = function (product) {
   // Hide variant dropdown if only one exists and title contains 'Default'
   if (product.variants.length && product.variants[0].title.indexOf('Default') >= 0) {
     $('.selector-wrapper').hide();
+  }
+};
+
+/**
+ *
+ *  Gift card template helpers
+ *
+ */
+ShopifyCanvas.giftCardTemplate = function () {
+  if (!ShopifyCanvas.cache.$body.hasClass('template-giftcard')) {
+    return;
+  }
+
+  new QRCode(document.getElementById('QrCode'), {
+    text: $('#QrCode').attr('data-identifier'),
+    width: 120,
+    height: 120
+  });
+
+  $('#PrintGiftCard').on('click', function() {
+    window.print();
+  });
+
+  /*============================================================================
+    Auto-select gift card code on click, based on ID passed to the function
+  ==============================================================================*/
+  $('.giftcard__code').on('click', { element: 'GiftCardDigits' }, selectText);
+
+  function selectText(evt) {
+    var doc = document,
+        text = doc.getElementById(evt.data.element);
+
+    if (doc.body.createTextRange) { // ms method
+      var range = doc.body.createTextRange();
+      range.moveToElementText(text);
+      range.select();
+    } else if (window.getSelection) { // moz, opera, webkit method
+      var selection = window.getSelection(),
+          range = doc.createRange();
+      range.selectNodeContents(text);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
   }
 };
 

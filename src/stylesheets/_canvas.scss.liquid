@@ -17,6 +17,7 @@
   #Site Nav and Dropdowns
   #Section Headers
   #Password Template
+  #Giftcard Template
 ==============================================================================*/
 
 /*================ #Mixins ================*/
@@ -892,5 +893,49 @@ label[for] {
 
   path {
     fill: currentColor;
+  }
+}
+
+/*================ #Giftcard Template ================*/
+.giftcard__qr-code {
+  display: none;
+
+  img {
+    margin: 0 auto;
+  }
+}
+
+.giftcard__apple-wallet-image {
+  display: block;
+  margin: 0 auto;
+}
+
+.giftcard__wrap {
+  margin: 0 auto $gutter-site;
+}
+
+/*================ Print Giftcard Styles ================*/
+@media print {
+  @page {
+    margin: 0.5cm;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  html, body {
+    background-color: #fff;
+    color: #000;
+  }
+
+  .giftcard__qr-code {
+    display: block;
+  }
+
+  .giftcard__print-link,
+  .giftcard__apple-wallet {
+    display: none;
   }
 }
