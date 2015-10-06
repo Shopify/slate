@@ -51,19 +51,17 @@
     <main class="giftcard__wrapper{% if gift_card.expired or gift_card.enabled != true %} giftcard__disabled{% endif %}" role="main">
       <div class="giftcard__content">
 
-        <div class="giftcard__header">
-          <h1 class="giftcard__title">{{ 'gift_cards.issued.subtext' | t }}</h1>
-          {% unless gift_card.enabled %}
-            <span class="giftcard__tag">{{ 'gift_cards.issued.disabled' | t }}</span>
-          {% endunless %}
-          {% assign gift_card_expiry_date = gift_card.expires_on | date: "%d/%m/%y" %}
-          {% if gift_card.expired and gift_card.enabled %}
-             <span class="giftcard__tag">{{ 'gift_cards.issued.expired' | t: expiry: gift_card_expiry_date }}</span>
-          {% endif %}
-          {% if gift_card.expired != true and gift_card.expires_on and gift_card.enabled %}
-            <span class="giftcard__tag giftcard__tag--active">{{ 'gift_cards.issued.active' | t: expiry: gift_card_expiry_date }}</span>
-          {% endif %}
-        </div>
+        <h1 class="giftcard__title">{{ 'gift_cards.issued.subtext' | t }}</h1>
+        {% unless gift_card.enabled %}
+          <span class="giftcard__tag">{{ 'gift_cards.issued.disabled' | t }}</span>
+        {% endunless %}
+        {% assign gift_card_expiry_date = gift_card.expires_on | date: "%d/%m/%y" %}
+        {% if gift_card.expired and gift_card.enabled %}
+           <span class="giftcard__tag">{{ 'gift_cards.issued.expired' | t: expiry: gift_card_expiry_date }}</span>
+        {% endif %}
+        {% if gift_card.expired != true and gift_card.expires_on and gift_card.enabled %}
+          <span class="giftcard__tag giftcard__tag--active">{{ 'gift_cards.issued.active' | t: expiry: gift_card_expiry_date }}</span>
+        {% endif %}
 
         <div class="giftcard__wrap">
           <img src="{{ 'gift-card/card.jpg' | shopify_asset_url }}" alt="Gift card illustration">
