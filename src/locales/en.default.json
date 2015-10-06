@@ -266,7 +266,8 @@
       "redeem": "Use this code at checkout to redeem your gift card",
       "shop_link": "Start shopping",
       "print": "Print",
-      "remaining_html": "{{ balance }} <small>left<\/small>"
+      "remaining_html": "{{ balance }} left",
+      "add_to_apple_wallet": "Add to Apple Wallet"
     }
   },
   "date_formats":{

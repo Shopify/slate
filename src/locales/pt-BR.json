@@ -266,7 +266,8 @@
       "redeem": "Para resgatar o seu vale-presente, utilize este código no fechamento do pedido",
       "shop_link": "Comece a comprar",
       "print": "Imprimir",
-      "remaining_html": "{{ balance }} <small>restantes<\/small>"
+      "remaining_html": "{{ balance }} restantes",
+      "add_to_apple_wallet": "Adicionar ao Apple Wallet"
     }
   },
   "date_formats":{

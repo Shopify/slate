@@ -266,7 +266,8 @@
       "redeem": "Entrez ce code lors du paiement pour utiliser votre carte-cadeau",
       "shop_link": "Boutique",
       "print": "Imprimer",
-      "remaining_html": "{{ balance }} <small>restant<\/small>"
+      "remaining_html": "{{ balance }} restant",
+      "add_to_apple_wallet": "Ajouter à Apple Wallet"
     }
   },
   "date_formats":{

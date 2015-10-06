@@ -266,7 +266,8 @@
       "redeem": "Use este código al terminar la comprar para canjear su tarjeta de regalo",
       "shop_link": "Empezar a comprar",
       "print": "Imprimir",
-      "remaining_html": "{{ balance }} <small>restante<\/small>"
+      "remaining_html": "{{ balance }} restante",
+      "add_to_apple_wallet": "Añadir a Apple Wallet"
     }
   },
   "date_formats":{
