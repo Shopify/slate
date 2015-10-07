@@ -551,7 +551,8 @@ ol {
 }
 
 .rte {
-  ul, ol {
+  ul,
+  ol {
     margin: 0 0 ($gutter-site / 2) $gutter-site;
   }
 
@@ -565,6 +566,15 @@ ol {
         list-style: square outside;
       }
     }
+  }
+}
+
+.text-center.rte,
+.text-center .rte {
+  ul,
+  ol {
+    margin-left: 0;
+    list-style-position: inside;
   }
 }
 
