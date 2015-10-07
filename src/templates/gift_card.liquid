@@ -83,20 +83,24 @@
           {{ 'gift_cards.issued.redeem' | t }}
         </p>
 
-        <div id="QrCode" class="giftcard__qr-code" data-identifier="{{ gift_card.qr_identifier }}"></div>
-
         <p>
           <a href="{{ shop.url }}" class="btn" target="_blank">{{ 'gift_cards.issued.shop_link' | t }}</a>
         </p>
+
+        <div id="QrCode" class="giftcard__qr-code" data-identifier="{{ gift_card.qr_identifier }}"></div>
+
+        {% if gift_card.pass_url %}
+          <p>
+            <a class="giftcard__apple-wallet" href="{{ gift_card.pass_url }}">
+              <img class="giftcard__apple-wallet-image" src="{{ 'gift-card/add-to-apple-wallet.svg' | shopify_asset_url }}" width="120" height="40" alt="{{ 'gift_cards.issued.add_to_apple_wallet' | t }}">
+            </a>
+          </p>
+        {% endif %}
+
         <p>
           <a href="#" id="PrintGiftCard" class="giftcard__print-link">
             {{ 'gift_cards.issued.print' | t }}
           </a>
-          {% if gift_card.pass_url %}
-            <a class="giftcard__apple-wallet" href="{{ gift_card.pass_url }}">
-              <img class="giftcard__apple-wallet-image" src="{{ 'gift-card/add-to-apple-wallet.svg' | shopify_asset_url }}" width="120" height="40" alt="{{ 'gift_cards.issued.add_to_apple_wallet' | t }}">
-            </a>
-          {% endif %}
         </p>
 
       </div>
