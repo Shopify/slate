@@ -22,6 +22,10 @@
 
 <article class="page-width" itemscope itemtype="http://schema.org/Article">
 
+  {% if article.image %}
+    {{ article | img_url: '1024x1024' | img_tag: article.title }}
+  {% endif %}
+
   <header class="section-header">
     <h1 class="section-header__title">{{ article.title }}</h1>
     {% capture author %}<strong>{{ article.author }}</strong>{% endcapture %}

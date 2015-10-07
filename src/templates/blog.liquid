@@ -36,6 +36,12 @@
     {% capture date %}<time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time>{% endcapture %}
     <p>{{ 'blogs.article.author_on_date_html' | t: author: author, date: date }}</p>
 
+    {% if article.image %}
+      <a href="{{ article.url }}">
+        {{ article | img_url: '1024x1024' | img_tag: article.title }}
+      </a>
+    {% endif %}
+
     {% comment %}
       Use the excerpt if it exists or truncate the full article
     {% endcomment %}
