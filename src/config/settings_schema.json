@@ -132,9 +132,10 @@
       {
         "type": "image",
         "id": "favicon.png",
-        "label": "16px x 16px png",
-        "max-width": 16,
-        "max-height": 16
+        "label": "Favicon image",
+        "info": "32 x 32px .png",
+        "max-width": 32,
+        "max-height": 32
       }
     ]
   },
