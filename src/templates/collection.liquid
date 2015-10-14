@@ -41,7 +41,7 @@
     Use class grid--uniform to have evenly sized columns clear
     each other properly at each breakpoint.
   {% endcomment %}
-  <div class="grid--uniform">
+  <div class="grid grid--uniform">
 
     {% for product in collection.products %}
       <div class="grid__item">
@@ -125,7 +125,7 @@
               <p><a href="/admin/products/new" class="admin-btn-primary">{{ 'collections.onboarding.add_product' | t }}</a></p>
             </div>
 
-            <div class="grid--uniform helper-content">
+            <div class="grid grid--uniform helper-content">
               {% assign collection_index = 1 %}
               {% for i in (1..8) %}
                 {% case i %}
@@ -134,7 +134,7 @@
                   {% when 8 %}
                     {% assign collection_index = 2 %}
                 {% endcase %}
-                <div class="grid__item grid-3 grid-2--mobile-only">
+                <div class="grid__item small--one-half medium-up--one-quarter">
                   <a href="/admin/products" class="grid__image">
                     {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ collection_index }}.png{% endcapture %}
                     {{ imageUrl | img_tag }}
@@ -151,7 +151,7 @@
         {% comment %}
           If collection exists but is empty, display message
         {% endcomment %}
-        <div class="grid__item grid-3 grid-2--mobile-only">
+        <div class="grid__item">
           <p>{{ 'collections.general.no_matches' | t }}</p>
         </div>
       {% endif %}

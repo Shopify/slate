@@ -29,7 +29,7 @@
               {% endif %}
             </a>
             <p><a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ collection.title }}</a></p>
-          </div> <!-- //grid-item -->
+          </div>
           {% assign featured_collection_index = featured_collection_index | plus: 1 %}
         {% endunless %}
       {% endunless %}
@@ -57,7 +57,7 @@
 
           <div class="grid helper-content">
             {% for i in (1..5) %}
-              <div class="grid__item grid-2--desktop-up grid-6--tablet-down">
+              <div class="grid__item medium-up--one-fifth small--one-half">
                 <a href="#" class="grid__image">
                   {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ i }}.png{% endcapture %}
                   {{ imageUrl | img_tag }}
@@ -162,7 +162,7 @@
 
           <div class="grid helper-content">
             {% for i in (1..5) %}
-              <div class="grid__item grid-2--desktop-up grid-6--tablet-down">
+              <div class="grid__item medium-up--one-fifth small--one-half">
                 <a href="/admin/products" class="grid__image">
                   {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ i }}.png{% endcapture %}
                   {{ imageUrl | img_tag }}

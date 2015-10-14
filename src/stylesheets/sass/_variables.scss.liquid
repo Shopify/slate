@@ -1,3 +1,29 @@
+/*============================================================================
+  Grid Breakpoints and Class Names
+    - Do not change the variable names
+==============================================================================*/
+$grid-medium: 750px;
+$grid-large: 990px;
+$grid-widescreen: 1400px;
+$grid-gutter: 30px;
+
+$small: 'small';
+$medium: 'medium';
+$medium-down: 'medium-down';
+$medium-up: 'medium-up';
+$large: 'large';
+$large-down: 'large-down';
+$large-up: 'large-up';
+$widescreen: 'widescreen';
+
+/*============================================================================
+  Generate breakpoint-specific column widths and push classes
+    - Default column widths: $grid-breakpoint-has-widths: ($small, $medium-up);
+    - Default is no push classes
+==============================================================================*/
+$grid-breakpoint-has-widths: ($small, $medium-up);
+$grid-breakpoint-has-push: ();
+
 /*================ Color Variables ================*/
 $color-primary: {{ settings.color_primary }};
 $color-secondary: {{ settings.color_secondary }};
@@ -31,13 +57,6 @@ $width-site: 1180px;
 $gutter-site: 30px;
 $gutter-heading: 30px;
 $logo-max-width: add-units({{ settings.logo_max_width }}, 'px');
-
-/*================ Grid and Breakpoint ================*/
-$grid-tablet: 750px;
-$grid-desktop: 990px;
-$grid-widescreen: 1400px;
-$grid-gutter: 30px;
-$grid-columns: 12;
 
 /*================ Typography Variables ================*/
 $font-weight-normal: 400;

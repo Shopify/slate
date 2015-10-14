@@ -19,7 +19,7 @@
   Loop through each collection, except 'frontpage'
 {% endcomment %}
 
-<div class="grid--uniform">
+<div class="grid grid--uniform">
   {% for collection in collections %}
     {% unless collection.handle == 'frontpage' %}
 
@@ -37,7 +37,7 @@
           {% endif %}
         </a>
         <p><a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ collection.title }}</a></p>
-      </div> <!-- //grid-item -->
+      </div>
 
     {% endunless %}
   {% endfor %}
