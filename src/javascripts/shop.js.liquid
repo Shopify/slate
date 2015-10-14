@@ -61,7 +61,9 @@ shop.productVariantCallback = function (variant, selector) {
   if (variant) {
     // Update variant image, if one is set
     if (variant.featured_image) {
-      shop.switchProductImage(variant.featured_image.src);
+      var size = Shopify.Image.imageSize(shop.cache.$productFeaturedImage.attr('src'));
+      var sizedImgUrl = Shopify.Image.getSizedImageUrl(variant.featured_image.src, size);
+      shop.switchProductImage(sizedImgUrl);
     }
 
     // Update the product price
