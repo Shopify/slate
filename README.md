@@ -42,11 +42,15 @@ Follow the instructions on the [Theme Kit website](http://themekit.cat/) to inst
 
 ### Gulp Tasks
 `$ gulp`
+or
+`$ gulp --sync`
 - Default task
 - Watches for changes in `src/` and moves changed files to `dist/`
 - Concatenates `src/stylesheets/` and `src/javascripts/` files before moving to `dist/`
 - Automatically compresses image files in `src/assets/`
 - Uploads valid saved theme files to your store
+- If using `--sync` flag, BrowserSync is enabled and will reload your browsers at http://localhost:3000
+  - On mobile, navigate to your local IP on the same port. E.g. http://192.168.0.10:3000
 
 ----------
 
