@@ -5,6 +5,9 @@
 {% elsif template contains 'product' %}
   {% capture permalinkURL %}{{ shop.url }}{{ product.url }}{% endcapture %}
   {% capture shareTitle %}{{ product.title | url_param_escape }}{% endcapture %}
+{% elsif template == 'password' %}
+  {% capture permalinkURL %}{{ shop.url }}{% endcapture %}
+  {% capture shareTitle %}{% unless shop.description == blank %}{{ shop.description | url_param_escape }}{% else %}{{ shop.name | url_param_escape }}{% endunless %}{% endcapture %}
 {% else %}
   {% capture permalinkURL %}{{ shop.url }}{% endcapture %}
   {% capture shareTitle %}{{ page_description | url_param_escape }}{% endcapture %}
@@ -20,7 +23,7 @@
   {% endif %}
 
   {% if settings.share_twitter %}
-    <a target="_blank" href="//twitter.com/share?url={{ permalinkURL }}&amp;text={{ shareTitle }}" class="share-twitter">
+    <a target="_blank" href="//twitter.com/share?text={{ shareTitle }}&amp;url={{ permalinkURL }}" class="share-twitter">
       <span class="icon icon-twitter" aria-hidden="true"></span>
       <span class="share-title">{{ 'general.social.share_on_twitter' | t }}</span>
     </a>
