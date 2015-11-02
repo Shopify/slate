@@ -1,14 +1,4 @@
 <!-- /templates/product.liquid -->
-{% comment %}
-
-  Rich snippets (itemscope, itemtype, etc.) for products are a theme requirement,
-  and allow search engines to easily understand what the content is.
-
-  For more information on these Scheme.org tags, visit:
-    - http://schema.org/docs/gs.html
-
-{% endcomment %}
-
 <div itemscope itemtype="http://schema.org/Product">
 
   <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
@@ -26,9 +16,6 @@
         <img src="{{ featured_image | img_url: 'large' }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg">
       </div>
 
-      {% comment %}
-        Create thumbnails if we have more than one product image
-      {% endcomment %}
       {% if product.images.size > 1 %}
         <ul class="product-single__thumbnails grid-uniform" id="ProductThumbs">
 
@@ -58,20 +45,6 @@
           <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
 
           <form action="/cart/add" method="post" enctype="multipart/form-data" class="product-form">
-
-            {% comment %}
-              Add product variants as a dropdown.
-                - By default, each variant (or combination of variants) will display as its own <option>
-                - To separate these into multiple steps, which we suggest, use option_selection.js (see below)
-
-              You can leverage jQuery to add a callback on page load and each time the select element changes:
-                - Include option_selection.js (as seen at the bottom of this file)
-                - This allows you to use JavaScript anytime the variant dropdown changes
-                - This also separates out your variant options (ie. size, color, etc.) to separate select elements
-
-              For more information on products with multiple options, visit:
-                - http://docs.shopify.com/support/your-website/themes/can-i-make-my-theme-use-products-with-multiple-options#update-product-liquid
-            {% endcomment %}
             <select name="id" id="ProductSelect" class="product-form__variants">
               {% for variant in product.variants %}
                 {% if variant.available %}

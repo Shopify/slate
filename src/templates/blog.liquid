@@ -1,5 +1,4 @@
 <!-- /templates/blog.liquid -->
-
 {% paginate blog.articles by 5 %}
 
 <div class="page-width">
@@ -23,13 +22,6 @@
     </ul>
   {% endif %}
 
-  {% comment %}
-    Loop through each article in your blog. This is limited to what you set for pagination above.
-
-    For more info on article liquid tags:
-      - http://docs.shopify.com/themes/liquid-variables/article
-  {% endcomment %}
-
   {% for article in blog.articles %}
     <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
     {% capture author %}<strong>{{ article.author }}</strong>{% endcapture %}
@@ -42,9 +34,6 @@
       </a>
     {% endif %}
 
-    {% comment %}
-      Use the excerpt if it exists or truncate the full article
-    {% endcomment %}
     <div class="rte">
       {% if article.excerpt.size > 0 %}
         {{ article.excerpt }}
@@ -53,9 +42,6 @@
       {% endif %}
     </div>
 
-    {% comment %}
-      Show off meta information like number of comments and tags
-    {% endcomment %}
     {% if blog.comments_enabled? or article.tags.size > 0 %}
       <ul>
         {% if blog.comments_enabled? %}
@@ -66,12 +52,6 @@
           </li>
         {% endif %}
 
-        {% comment %}
-          Render a list item with all tags listed out
-
-          More information:
-           - http://docs.shopify.com/themes/liquid-variables/article
-        {% endcomment %}
         {% if article.tags.size > 0 %}
           <li>
             <span>{{ 'blogs.article.tags' | t }}:</span>
