@@ -1,0 +1,76 @@
+<!-- /snippets/social-meta-tags.liquid -->
+{% comment %}
+  Open graph tags
+{% endcomment %}
+{% if template == 'index' %}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:description" content="{{ page_description }}">
+{% elsif template contains 'product' %}
+  <meta property="og:type" content="product">
+  <meta property="og:title" content="{{ product.title | strip_html | escape }}">
+  {% for image in product.images reversed limit:3 %}
+    <meta property="og:image" content="http:{{ image | img_url: 'grande' }}">
+    <meta property="og:image:secure_url" content="https:{{ image | img_url: 'grande' }}">
+  {% endfor %}
+  <meta property="og:description" content="{{ product.description | strip_html | escape }}">
+  <meta property="og:price:amount" content="{{ product.price | money_without_currency | strip_html | escape }}">
+  <meta property="og:price:currency" content="{{ shop.currency }}">
+{% elsif template contains 'article' %}
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{ article.title | strip_html | escape }}">
+  {% if article.image %}
+    <meta property="og:image" content="http:{{ article | img_url: '1024x1024' }}">
+    <meta property="og:image:secure_url" content="https:{{ article | img_url: '1024x1024' }}">
+  {% endif %}
+  <meta property="og:description" content="{{ article.excerpt_or_content | strip_html | escape }}">
+{% elsif template == 'password' %}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ shop.name | escape }}">
+  <meta property="og:description" content="{% unless shop.description == blank %}{{ shop.description | escape }}{% else %}{{ shop.name | escape }}{% endunless %}">
+  {% if settings.logo_use_image %}
+    <meta property="og:image" content="http:{{ 'logo.png' | asset_url }}">
+    <meta property="og:image:secure_url" content="https:{{ 'logo.png' | asset_url }}">
+  {% endif %}
+{% else %}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ page_title | escape }}">
+  {% if settings.logo_use_image %}
+    <meta property="og:image" content="http:{{ 'logo.png' | asset_url }}">
+    <meta property="og:image:secure_url" content="https:{{ 'logo.png' | asset_url }}">
+  {% endif %}
+{% endif %}
+{% if template == 'password' %}
+  <meta property="og:url" content="{{ shop.url }}">
+{% else %}
+  <meta property="og:url" content="{{ canonical_url }}">
+{% endif %}
+<meta property="og:site_name" content="{{ shop.name }}">
+
+{% comment %}
+  Twitter card
+{% endcomment %}
+{% unless settings.social_twitter_link == blank %}
+  <meta name="twitter:site" content="@{{ settings.social_twitter_link | split: 'twitter.com/' | last }}">
+{% endunless %}
+{% if template contains 'article' and article.image %}
+  <meta name="twitter:card" content="summary_large_image">
+{% else %}
+  <meta name="twitter:card" content="summary">
+{% endif %}
+{% if template == 'index' %}
+  <meta name="twitter:title" content="{{ page_title }}">
+  <meta name="twitter:description" content="{{ page_description | escape }}">
+{% elsif template contains 'product' %}
+  <meta name="twitter:title" content="{{ product.title | strip_html | escape }}">
+  <meta name="twitter:description" content="{{ product.description | strip_html | truncate: 200, '' | escape }}">
+  <meta name="twitter:image" content="https:{{ product | img_url: 'grande' }}">
+  <meta name="twitter:image:width" content="600">
+  <meta name="twitter:image:height" content="600">
+{% elsif template contains 'article' %}
+  <meta name="twitter:title" content="{{ article.title | strip_html | escape }}">
+  <meta name="twitter:description" content="{{ article.excerpt_or_content | strip_html | truncate: 200, '' | escape }}">
+  {% if article.image %}
+    <meta property="twitter:image" content="https:{{ article | img_url: '1024x1024' }}">
+  {% endif %}
+{% endif %}
