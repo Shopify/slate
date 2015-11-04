@@ -1,14 +1,9 @@
 <!-- /templates/article.liquid -->
 {% comment %}
-
   Comments will not appear right after they are submitted, either to be checked for spam
   or to await moderation. When a comment is submitted, the browser is redirected to a page
   that includes the new comment id in its URL.
     Example: http://shopname.myshopify.com/blogs/news/2022072-my-post?comment=3721372
-
-  More information:
-    - http://docs.shopify.com/themes/liquid-variables/comment
-
 {% endcomment %}
 
 {% assign number_of_comments = article.comments_count %}
@@ -37,9 +32,6 @@
     {{ article.content }}
   </div>
 
-  {% comment %}
-    Show off meta information like comments and tags.
-  {% endcomment %}
   {% if article.tags.size > 0 %}
     <ul>
       <li>
@@ -56,9 +48,6 @@
   {% if blog.comments_enabled? %}
     <h3>{{ 'blogs.comments.comments_with_count' | t: count: number_of_comments }}</h3>
 
-    {% comment %}
-      Just like blog.liquid page, define how many comments should be on each page.
-    {% endcomment %}
     {% paginate article.comments by 5 %}
 
       {% comment %}
@@ -87,9 +76,6 @@
               </li>
             {% endif %}
 
-            {% comment %}
-              Showing the rest of the comments.
-            {% endcomment %}
             {% for comment in article.comments %}
               <li id="{{ comment.id }}" class="comment">
                 {% include 'comment' %}
@@ -104,16 +90,10 @@
           {% endif %}
         {% endif %}
 
-        {% comment %}
-          Comment submission form
-        {% endcomment %}
         <div class="comment-form">
           {% form 'new_comment', article %}
 
-            {% comment %}
-              #AddCommentTitle is used simply as an anchor link when a comment error exists
-            {% endcomment %}
-            <h3 id="AddCommentTitle">{{ 'blogs.comments.title' | t }}</h3>
+            <h3>{{ 'blogs.comments.title' | t }}</h3>
 
             {{ form.errors | default_errors }}
 

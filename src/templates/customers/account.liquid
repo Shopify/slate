@@ -1,26 +1,13 @@
 <!-- /templates/customers/account.liquid -->
-{% comment %}
-
-  For all available customer liquid tags:
-    - http://docs.shopify.com/themes/liquid-variables/customer
-
-{% endcomment %}
-
 <h1>{{ 'customer.account.title' | t }}</h1>
 
 <hr>
 
 <h2>{{ 'customer.orders.title' | t }}</h2>
 
-{% comment %}
-  If we have past orders, loop through each one
-{% endcomment %}
 {% paginate customer.orders by 20 %}
   {% if customer.orders.size != 0 %}
 
-    {% comment %}
-      Responsive Table for small screens
-    {% endcomment %}
     <table class="responsive-table">
       <thead>
         <tr>

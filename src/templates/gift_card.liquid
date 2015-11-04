@@ -7,7 +7,6 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="{{ shop.locale }}"> <!--<![endif]-->
 
 <head>
-  <!-- Basic page needs ================================================== -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -18,13 +17,11 @@
     <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png" />
   {% endif %}
 
-  <!-- Title and description ================================================== -->
   <title>{{ 'gift_cards.issued.title' | t: value: formatted_initial_value_stripped, shop: shop.name }}</title>
   <meta name="description" content="{{ 'gift_cards.issued.subtext' | t }}">
 
   {{ 'shop.scss.css' | asset_url | stylesheet_tag }}
 
-  <!-- Header hook for plugins ================================================== -->
   {{ content_for_header }}
 
   {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}

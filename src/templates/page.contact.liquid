@@ -1,29 +1,13 @@
 <!-- /templates/page.contact.liquid -->
-{% comment %}
-
-  This page template is a requirement if you are submitting your theme to the Shopify Theme Store.
-  Be sure to select page.contact as the template from the admin page to have this template take effect.
-
-  For information on adding more fields, visit:
-    - http://docs.shopify.com/support/configuration/store-customization/adding-fields-to-the-liquid-contact-form
-
-{% endcomment %}
-
 <h1>{{ page.title }}</h1>
 
 <div class="rte">
   {{ page.content }}
 </div>
 
-{% comment %}
-  Contact form starts here
-{% endcomment %}
 <div class="contact-form">
   {% form 'contact' %}
 
-    {% comment %}
-      Successful message
-    {% endcomment %}
     {% if form.posted_successfully? %}
       <p class="note form-success">
         {{ 'contact.form.post_success' | t }}

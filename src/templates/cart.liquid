@@ -1,12 +1,4 @@
 <!-- /templates/cart.liquid -->
-{% comment %}
-
-  For info on test orders:
-    - General http://docs.shopify.com/manual/your-store/orders/test-orders
-    - Shopify Payments - http://docs.shopify.com/manual/more/shopify-payments/testing-shopify-payments
-
-{% endcomment %}
-
 {% if cart.item_count > 0 %}
 
   <h1>{{ 'cart.general.title' | t }}</h1>
@@ -23,10 +15,6 @@
           <tr class="cart__row responsive-table__row">
             <td data-label="{{ 'customer.order.product' | t }}">
               <a href="{{ item.url | within: collections.all }}" class="cart__image">
-                {% comment %}
-                  More image size options at:
-                    - http://docs.shopify.com/themes/filters/product-img-url
-                {% endcomment %}
                 <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
               </a>
             </td>
@@ -110,9 +98,6 @@
     </div>
   </form>
 {% else %}
-  {% comment %}
-    The cart is empty
-  {% endcomment %}
   <h1>{{ 'cart.general.title' | t }}</h1>
   <p>{{ 'cart.general.empty' | t }}</p>
   <p>{{ 'cart.general.continue_browsing_html' | t }}</p>

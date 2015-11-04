@@ -1,11 +1,4 @@
 <!-- /templates/collection.liquid -->
-{% comment %}
-
-  For more information on collection tags:
-    - http://docs.shopify.com/themes/liquid-variables/collection
-
-{% endcomment %}
-
 {% paginate collection.products by 12 %}
 
   <header class="section-header">
@@ -25,10 +18,6 @@
             </li>
           {% else %}
             <li>
-              {% comment %}
-                Use link_to_add_tag if you want to allow filtering
-                by multiple tags
-              {% endcomment %}
               {{ tag | link_to_tag: tag }}
             </li>
           {% endif %}
@@ -37,25 +26,10 @@
     {% endif %}
   </header>
 
-  {% comment %}
-    Use class grid--uniform to have evenly sized columns clear
-    each other properly at each breakpoint.
-  {% endcomment %}
   <div class="grid grid--uniform">
 
     {% for product in collection.products %}
       <div class="grid__item">
-        {% comment %}
-          Link to your product with the 'within: collection' filter for the link to be aware of the collection. This allows you to create collection-based navigation on the product page.
-
-          Results of using 'within: collection':
-          - Instead of a URL with /products/product-handle
-            you would get /collections/collection-handle/products/product-handle
-
-          For more info on navigation within a collection
-            - http://docs.shopify.com/support/your-store/collections/how-to-navigate-within-a-collection
-
-        {% endcomment %}
         <a href="{{ product.url | within: collection }}" class="collection-grid__image">
           <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
         </a>
@@ -64,9 +38,6 @@
           <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
         </p>
         <p>
-          {% comment %}
-            Check if the product is on sale.
-          {% endcomment %}
           {% if product.compare_at_price > product.price %}
 
             {% if product.price_varies %}
@@ -93,9 +64,6 @@
             <s>{{ product.compare_at_price | money }}</s>
           {% endif %}
 
-          {% comment %}
-            Check if the product is sold out.
-          {% endcomment %}
           {% unless product.available %}
             <strong>{{ 'products.product.sold_out' | t }}</strong>
           {% endunless %}

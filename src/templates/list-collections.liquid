@@ -1,32 +1,15 @@
 <!-- /templates/list-collections.liquid -->
 {% comment %}
-
   This page represents the /collections and /products pages.
-
-  More info:
-    - http://docs.shopify.com/manual/configuration/store-customization/taking-control-of-collections-listing
-
-{% endcomment %}
-
-{% comment %}
-  {{ page_title }} is set to 'Collections' if active language is English.
-  This can be translated on Edit language page under 'Checkout & system / Page titles'.
 {% endcomment %}
 
 <h1>{{ page_title }}</h1>
-
-{% comment %}
-  Loop through each collection, except 'frontpage'
-{% endcomment %}
 
 <div class="grid grid--uniform">
   {% for collection in collections %}
     {% unless collection.handle == 'frontpage' %}
 
       <div class="grid__item">
-        {% comment %}
-          Use capture to put the collection title in a variable that is used in liquid filters
-        {% endcomment %}
         {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
 
         <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" class="grid__image">

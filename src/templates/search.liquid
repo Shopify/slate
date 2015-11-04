@@ -1,12 +1,4 @@
 <!-- /templates/search.liquid -->
-{% comment %}
-
-  To return only products or pages in results:
-    - http://docs.shopify.com/manual/configuration/store-customization/return-only-product-in-storefront-search-results
-    - Or manually add type=product or type=page to the search URL as a parameter
-
-{% endcomment %}
-
 {% paginate search.results by 10 %}
 
   {% if search.performed %}
@@ -19,18 +11,7 @@
     <h1>{{ 'general.search.title' | t }}</h1>
   {% endif %}
 
-  {% comment %}
-    Search - more info: http://docs.shopify.com/themes/liquid-variables/search
-
-    To return only products in results:
-      - http://docs.shopify.com/manual/configuration/store-customization/return-only-product-in-storefront-search-results
-      - Or manually add type=product to the search URL as a query parameter
-      - Uncomment hidden input with value="product" below
-
-  {% endcomment %}
-
   <form action="/search" method="get" class="search-bar" role="search">
-
     {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
 
     <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
@@ -59,9 +40,6 @@
           {% endcomment %}
           {% if item.price %}
             <p>
-              {% comment %}
-                Check if the product is on sale.
-              {% endcomment %}
               {% if item.compare_at_price > item.price %}
                 {% if item.price_varies %}
                   {% assign sale_price = item.price | money %}
@@ -80,9 +58,6 @@
                   <span itemprop="price">{{ item.price | money }}</span>
                 {% endif %}
               {% endif %}
-              {% comment %}
-                Check if the product is sold out.
-              {% endcomment %}
               {% unless item.available %}
                 <strong>{{ 'products.product.sold_out' | t }}</strong>
               {% endunless %}

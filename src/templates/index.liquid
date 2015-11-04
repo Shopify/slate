@@ -1,14 +1,6 @@
 <!-- /templates/index.liquid -->
 <div class="featured-collections">
   <h2>{{ 'homepage.sections.featured_title' | t }}</h2>
-
-  {% comment %}
-    Show five collections, unless it's 'frontpage'.
-
-    Use an index variable in combination to the limit filter
-    to account for the frontpage collection being in top six returned.
-  {% endcomment %}
-
   <div class="grid">
 
     {% assign featured_collection_index = 1 %}
@@ -35,9 +27,6 @@
       {% endunless %}
     {% endfor %}
 
-    {% comment %}
-      For onboarding new users to your theme, we add some default collections and onboarding tutorials to help populate their store
-    {% endcomment %}
     {% if shop.collections_count <= 1 %}
       {% unless onboardingLoaded %}
         {% comment %}
@@ -76,16 +65,9 @@
 <div class="featured-products">
 
   <h2>{{ 'homepage.sections.frontpage_title' | t }}</h2>
-
-  {% comment %}
-    By default, featured products come from your Frontpage collection.
-    This collection is empty by default and must have products added to it
-  {% endcomment %}
-
   <div class="grid">
 
     {% for product in collections.frontpage.products limit:4 %}
-
       <div class="grid__item">
 
         {% comment %}
@@ -136,7 +118,6 @@
           {% endunless %}
         </p>
       </div>
-
     {% else %}
       {% comment %}
         If collection is empty, show onboarding state
