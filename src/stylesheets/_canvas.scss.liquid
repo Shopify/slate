@@ -811,7 +811,8 @@ svg:not(:root) {
 // Prevent zoom on touch devices in active inputs
 @include media-query($medium-down) {
   input,
-  textarea {
+  textarea,
+  select {
     font-size: 16px;
   }
 }
