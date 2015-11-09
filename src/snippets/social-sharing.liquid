@@ -17,14 +17,14 @@
 
   {% if settings.share_facebook %}
     <a target="_blank" href="//www.facebook.com/sharer.php?u={{ permalinkURL }}" class="share-facebook">
-      <span class="icon icon-facebook" aria-hidden="true"></span>
+      {% include 'icon', name: 'facebook' %}
       <span class="share-title">{{ 'general.social.share_on_facebook' | t }}</span>
     </a>
   {% endif %}
 
   {% if settings.share_twitter %}
     <a target="_blank" href="//twitter.com/share?text={{ shareTitle }}&amp;url={{ permalinkURL }}" class="share-twitter">
-      <span class="icon icon-twitter" aria-hidden="true"></span>
+      {% include 'icon', name: 'twitter' %}
       <span class="share-title">{{ 'general.social.share_on_twitter' | t }}</span>
     </a>
   {% endif %}
@@ -33,14 +33,14 @@
 
     {% if settings.share_pinterest %}
       <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media={{ product | img_url: '1024x1024' }}&amp;description={{ shareTitle }}" class="share-pinterest">
-        <span class="icon icon-pinterest" aria-hidden="true"></span>
+        {% include 'icon', name: 'pinterest' %}
         <span class="share-title">{{ 'general.social.share_on_pinterest' | t }}</span>
       </a>
     {% endif %}
 
     {% if settings.share_fancy %}
       <a target="_blank" href="//fancy.com/fancyit?ItemURL={{ permalinkURL }}&amp;Title={{ shareTitle }}&amp;Category=Other&amp;ImageURL={{ product | img_url: '1024x1024' }}" class="share-fancy">
-        <span class="icon icon-fancy" aria-hidden="true"></span>
+        {% include 'icon', name: 'fancy' %}
         <span class="share-title">{{ 'general.social.share_on_fancy' | t }}</span>
       </a>
     {% endif %}
@@ -49,7 +49,7 @@
 
   {% if settings.share_google %}
     <a target="_blank" href="//plus.google.com/share?url={{ permalinkURL }}" class="share-google">
-      <span class="icon icon-google" aria-hidden="true"></span>
+      {% include 'icon', name: 'google' %}
       <span class="share-title">+1</span>
     </a>
   {% endif %}

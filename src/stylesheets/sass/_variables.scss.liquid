@@ -68,18 +68,6 @@ $font-weight-header: $font-weight-bold;
 $font-stack-body: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $font-size-base: {{ settings.type_base_size }}; // Henseforth known as 1em
 
-@font-face {
-  font-family: 'icons';
-  src: url('{{ "icons.eot" | asset_url }}');
-  src: url('{{ "icons.eot" | asset_url }}#iefix') format("embedded-opentype"),
-       url('{{ "icons.woff" | asset_url }}') format("woff"),
-       url('{{ "icons.ttf" | asset_url }}') format("truetype"),
-       url('{{ "icons.svg" | asset_url }}#canvas-icons') format("svg");
-  font-weight: $font-weight-normal;
-  font-style: normal;
-}
-
-$font-stack-icons: 'icons';
 $font-size-icons-social: 30px;
 $font-size-icons-payment: 30px;
 
