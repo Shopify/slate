@@ -75,7 +75,7 @@ gulp.task('concat-js', function () {
 });
 
 /**
- *  SVG SPRITES
+ *  SVG CLASSES
  *
  *  Make sure all icons have class="icon"
  *  Files with `-full-color` in their name will also get
