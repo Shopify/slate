@@ -1,20 +1,22 @@
-var gulp        = require('gulp'),
-    imagemin    = require('gulp-imagemin'),
-    notify      = require('gulp-notify'),
-    cssimport   = require('gulp-cssimport'),
-    include     = require("gulp-include"),
-    shell       = require('gulp-shell'),
-    zip         = require('gulp-zip'),
-    open        = require('gulp-open'),
-    runSequence = require('run-sequence'),
-    del         = require('del'),
-    pkg         = require('./package.json')
-    browserSync = require('browser-sync').create(),
-    fs          = require('fs'),
-    yaml        = require('js-yaml'),
-    argv        = require('yargs').argv,
-    gulpif      = require('gulp-if'),
-    changed     = require('gulp-changed');
+var gulp        = require('gulp');
+var imagemin    = require('gulp-imagemin');
+var notify      = require('gulp-notify');
+var cssimport   = require('gulp-cssimport');
+var include     = require("gulp-include");
+var shell       = require('gulp-shell');
+var zip         = require('gulp-zip');
+var open        = require('gulp-open');
+var runSequence = require('run-sequence');
+var del         = require('del');
+var pkg         = require('./package.json')
+var browserSync = require('browser-sync').create();
+var fs          = require('fs');
+var yaml        = require('js-yaml');
+var argv        = require('yargs').argv;
+var gulpif      = require('gulp-if');
+var svgSprite   = require('gulp-svg-sprite');
+var changed     = require('gulp-changed');
+var cheerio     = require('gulp-cheerio');
 
 /**
  *
@@ -24,6 +26,9 @@ var gulp        = require('gulp'),
 var paths = {
   srcScss: 'src/stylesheets/**/*.*',
   srcJs: 'src/javascripts/**/*.*',
+  srcIcons: 'src/icons/*.svg',
+  tempIcons: 'src/icons/temp', // so we never overwrite original files
+  srcIconsTemp: 'src/icons/temp/*.svg',
   srcAssets: [
     'src/assets/*.*',
     'src/templates/**/*.*',
@@ -40,6 +45,7 @@ var paths = {
   ],
   images: 'src/images/*.{png,jpg,gif}',
   destAssets: 'dist/assets',
+  destSnippets: 'dist/snippets',
   config: 'config.yml',
   watch: '.themekit',
   dist: 'dist/'
@@ -66,6 +72,56 @@ gulp.task('concat-js', function () {
     .pipe(include())
       .on('error', console.log)
     .pipe(gulp.dest(paths.destAssets));
+});
+
+/**
+ *  SVG CLASSES
+ *
+ *  Make sure all icons have class="icon"
+ *  Files with `-full-color` in their name will also get
+ *  class="icon--full-color" so CSS cannot override them
+ */
+gulp.task('icon-class', function (callback) {
+  return gulp
+    .src(paths.srcIcons)
+      .pipe(changed(paths.tempIcons))
+      .pipe(cheerio({
+        run: function ($, file) {
+          var $svg = $('svg');
+          if (file.relative.indexOf('-full-color') >= 0){
+            $svg.addClass('icon icon--full-color')
+          }
+          $svg.addClass('icon');
+       }
+   }))
+   .pipe(gulp.dest(paths.tempIcons));
+});
+
+/**
+ *  SVG SPRITES
+ *
+ *  Create an svg sprite from all svg icon files
+ *  Runs after icon-class task
+ */
+gulp.task('svgicons', ['icon-class'], function() {
+  gulp.src(paths.srcIconsTemp)
+    .pipe(svgSprite({
+      svg: {
+        namespaceClassnames: false
+      },
+      mode: {
+        symbol: {
+          inline: true,
+          sprite: 'icon-sprite.svg.liquid',
+          dest: '.'
+        }
+      }
+    }))
+      .on('error', function(error){
+        console.log('Error with svgicons task. Potentially trying to parse an empty file. Full error below.');
+        console.log(error);
+      })
+    .pipe(gulp.dest(paths.destSnippets));
 });
 
 /**
@@ -163,7 +219,6 @@ gulp.task('concurrent', function (cb) {
   runSequence('build', 'watch', 'theme-watch', cb);
 });
 
-
 /**
  *  CLEAN
  *
@@ -207,6 +262,7 @@ gulp.task('open', function () {
  *  WATCH
  */
 gulp.task('watch', function () {
+  gulp.watch(paths.srcIcons, ['svgicons']);
   gulp.watch(paths.srcScss, ['concat-css']);
   gulp.watch(paths.srcJs, ['concat-js']);
   gulp.watch(paths.srcAssets, ['build-assets']);
@@ -237,7 +293,7 @@ function defaultTasks() {
 }
 
 gulp.task('default', defaultTasks());
-gulp.task('build', ['config', 'build-assets', 'concat-css', 'concat-js', 'imagemin', 'clean']);
+gulp.task('build', ['config', 'build-assets', 'svgicons', 'concat-css', 'concat-js', 'imagemin', 'clean']);
 gulp.task('deploy', function (cb) {
   runSequence('build', 'replace', cb);
 });

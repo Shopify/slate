@@ -457,7 +457,7 @@
 				"attrs": [],
 				"isMulticolor": false,
 				"tags": [
-					"google_wallet"
+					"google"
 				],
 				"defaultCode": 71,
 				"grid": 10
@@ -468,7 +468,7 @@
 				"order": 8,
 				"prevSize": 20,
 				"code": 71,
-				"name": "google_wallet"
+				"name": "google"
 			},
 			"setIdx": 1,
 			"setId": 0,
@@ -741,7 +741,7 @@
 				"attrs": [],
 				"isMulticolor": false,
 				"tags": [
-					"google"
+					"google-plus"
 				],
 				"defaultCode": 103,
 				"grid": 10
@@ -752,7 +752,7 @@
 				"order": 23,
 				"prevSize": 20,
 				"code": 103,
-				"name": "google"
+				"name": "google-plus"
 			},
 			"setIdx": 1,
 			"setId": 0,
