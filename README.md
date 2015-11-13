@@ -79,6 +79,8 @@ Canvas uses SVG icons for easy maintainability and better front end performance.
 
 While `gulp` is running (or manually with `gulp build`) these icons will be optimized and placed in `src/icons/temp` and then have an SVG spritesheet created from them. The temporary icons will not be tracked in GitHub.
 
+Note: Illustrator doesn't render the nicest SVG icons. Sketch is suggested for creating and editing SVGs.
+
 ### Usage | customizable colors
 
 Most icons should allow their color to be changed with CSS. Depending on the icon, this will be via the `fill` or `path` attributes.
