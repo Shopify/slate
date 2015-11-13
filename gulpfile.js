@@ -216,7 +216,7 @@ gulp.task('upload', function () {
  *  to upload any changes to your store after being built
  */
 gulp.task('concurrent', function (cb) {
-  runSequence('build', 'watch', 'theme-watch', cb);
+  runSequence('clean', 'build', 'watch', 'theme-watch', cb);
 });
 
 /**
@@ -227,8 +227,7 @@ gulp.task('concurrent', function (cb) {
 gulp.task('clean', function (cb) {
   del([
     '*.zip',
-    'dist/assets/**/*',
-    '!dist/assets/*.*'
+    'dist/**/*.*'
   ], cb)
 });
 
@@ -293,10 +292,10 @@ function defaultTasks() {
 }
 
 gulp.task('default', defaultTasks());
-gulp.task('build', ['config', 'build-assets', 'svgicons', 'concat-css', 'concat-js', 'imagemin', 'clean']);
+gulp.task('build', ['config', 'build-assets', 'svgicons', 'concat-css', 'concat-js', 'imagemin']);
 gulp.task('deploy', function (cb) {
-  runSequence('build', 'replace', cb);
+  runSequence('clean', 'build', 'replace', cb);
 });
 gulp.task('zip', function (cb) {
-  runSequence('build', 'compress', 'open', cb)
+  runSequence('clean', 'build', 'compress', 'open', cb)
 });
