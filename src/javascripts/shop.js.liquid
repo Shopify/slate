@@ -14,10 +14,6 @@ shop.initCache = function () {
     $productFeaturedImage: $('#ProductPhotoImg'),
     $productThumbs: $('#ProductThumbs').find('.product-single__thumbnail')
   };
-
-  shop.settings = {
-    moneyFormat: '{{ shop.money_format }}'
-  }
 };
 
 shop.init = function () {
@@ -67,11 +63,11 @@ shop.productVariantCallback = function (variant, selector) {
     }
 
     // Update the product price
-    shop.cache.$productPrice.text(Shopify.formatMoney(variant.price, shop.settings.moneyFormat));
+    shop.cache.$productPrice.text(Shopify.formatMoney(variant.price, shop.moneyFormat));
 
     // Update and show the product's compare price if necessary
     if (variant.compare_at_price > variant.price) {
-      shop.cache.$comparePrice.text(Shopify.formatMoney(variant.compare_at_price, shop.settings.moneyFormat)).removeClass('hide');
+      shop.cache.$comparePrice.text(Shopify.formatMoney(variant.compare_at_price, shop.moneyFormat)).removeClass('hide');
     } else {
       shop.cache.$comparePrice.addClass('hide');
     }

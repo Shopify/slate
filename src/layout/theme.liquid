@@ -207,6 +207,7 @@
     <script>
       // Set a global variable for shop.js to use on product single init
       window.shop = window.shop || {};
+      shop.moneyFormat = {{ shop.money_format | json }};
       shop.productSingleObject = {{ product | json }};
     </script>
   {% endif %}
