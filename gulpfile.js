@@ -130,7 +130,7 @@ gulp.task('svgicons', ['icon-class'], function() {
  *   Move all your templates, snippets, config, and assets into the dist folder
  */
 gulp.task('build-assets', function () {
-  gulp.src(paths.srcAssets, {base: 'src/'})
+  return gulp.src(paths.srcAssets, {base: 'src/'})
     .pipe(changed(paths.dist))
     .pipe(gulp.dest(paths.dist));
 });
@@ -222,13 +222,10 @@ gulp.task('concurrent', function (cb) {
 /**
  *  CLEAN
  *
- *  Clean up any stray files that might be created by other gulp tasks
+ *  Scrap the dist folder and any zips lying around
  */
 gulp.task('clean', function (cb) {
-  del([
-    '*.zip',
-    'dist/**/*.*'
-  ], cb)
+  del([ '*.zip', 'dist' ], cb)
 });
 
 /**
