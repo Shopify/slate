@@ -1,0 +1,50 @@
+/*================ #Icons ================*/
+.icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+
+  .supports-no-fontface & {
+    display: none;
+  }
+}
+
+svg.icon:not(.icon--full-color),
+symbol.icon:not(.icon--full-color) {
+  circle,
+  ellipse,
+  g,
+  line,
+  path,
+  polygon,
+  polyline,
+  rect {
+    fill: inherit;
+    stroke: inherit;
+  }
+}
+
+/*============================================================================
+  A generic way to visually hide content while
+  remaining accessible to screen readers (h5bp.com)
+==============================================================================*/
+.supports-svg .icon__fallback-text {
+  @extend .visually-hidden;
+}
+
+/*================ Payment Icons ================*/
+.payment-icons {
+  @include user-select();
+  cursor: default;
+
+  .icon {
+    width: $font-size-icons-payment;
+    height: $font-size-icons-payment;
+  }
+}
+
+/*================ Social Icons ================*/
+.social-icons .icon {
+  width: $font-size-icons-social;
+  height: $font-size-icons-social;
+}

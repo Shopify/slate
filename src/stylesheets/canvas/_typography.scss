@@ -1,0 +1,26 @@
+/*================ Typography ================*/
+blockquote {
+  p {
+
+    & + cite {
+      margin-top: $gutter-site / 2;
+    }
+  }
+
+  cite {
+    display: block;
+
+    &:before {
+      content: '\2014 \0020';
+    }
+  }
+}
+
+code, pre {
+  font-family: Consolas, monospace;
+  font-size: 1em;
+}
+
+pre {
+  overflow: auto;
+}
