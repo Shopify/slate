@@ -57,7 +57,7 @@ var paths = {
  *   Concatenate css together into a single scss file for use in the theme
  */
 gulp.task('concat-css', function () {
-  gulp.src(paths.parentIncludeScss)
+  return gulp.src(paths.parentIncludeScss)
     .pipe(cssimport())
     .pipe(gulp.dest(paths.destAssets));
 });
@@ -68,7 +68,7 @@ gulp.task('concat-css', function () {
  *   Concatenate JS together into a single file for use in the theme
  */
 gulp.task('concat-js', function () {
-  gulp.src(paths.parentIncludeJs)
+  return gulp.src(paths.parentIncludeJs)
     .pipe(include())
       .on('error', console.log)
     .pipe(gulp.dest(paths.destAssets));
@@ -82,17 +82,16 @@ gulp.task('concat-js', function () {
  *  class="icon--full-color" so CSS cannot override them
  */
 gulp.task('icon-class', function (callback) {
-  return gulp
-    .src(paths.srcIcons)
-      .pipe(changed(paths.tempIcons))
-      .pipe(cheerio({
-        run: function ($, file) {
-          var $svg = $('svg');
-          if (file.relative.indexOf('-full-color') >= 0){
-            $svg.addClass('icon icon--full-color')
-          }
-          $svg.addClass('icon');
-       }
+  return gulp.src(paths.srcIcons)
+    .pipe(changed(paths.tempIcons))
+    .pipe(cheerio({
+      run: function ($, file) {
+        var $svg = $('svg');
+        if (file.relative.indexOf('-full-color') >= 0){
+          $svg.addClass('icon icon--full-color')
+        }
+        $svg.addClass('icon');
+     }
    }))
    .pipe(gulp.dest(paths.tempIcons));
 });
@@ -104,7 +103,7 @@ gulp.task('icon-class', function (callback) {
  *  Runs after icon-class task
  */
 gulp.task('svgicons', ['icon-class'], function() {
-  gulp.src(paths.srcIconsTemp)
+  return gulp.src(paths.srcIconsTemp)
     .pipe(svgSprite({
       svg: {
         namespaceClassnames: false
@@ -151,7 +150,7 @@ gulp.task('config', function () {
  *    Minify Images
  */
 gulp.task('imagemin', function () {
-  gulp.src(paths.images)
+  return gulp.src(paths.images)
     .pipe(imagemin({
         optimizationLevel: 3
     }))
