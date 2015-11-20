@@ -1,0 +1,19 @@
+/*================ #Basic Styles ================*/
+body,
+html {
+  background-color: $color-body;
+}
+
+.page-width {
+  @include clearfix();
+  max-width: $width-site;
+  margin: 0 auto;
+}
+
+.main-content {
+  display: block;
+}
+
+.section-header {
+  margin-bottom: $gutter-heading;
+}
