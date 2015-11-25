@@ -56,7 +56,7 @@ $color-success-bg: #000;
 $width-site: 1180px;
 $gutter-site: 30px;
 $gutter-heading: 30px;
-$logo-max-width: add-units({{ settings.logo_max_width }}, 'px');
+$logo-max-width: {{ settings.logo_max_width | default: '450' | remove: 'px' | append: 'px'}};
 
 /*================ Typography Variables ================*/
 $font-weight-normal: 400;
