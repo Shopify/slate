@@ -135,7 +135,7 @@ gulp.task('build-assets', function () {
 });
 
 /**
- *  CONFIG:
+ *  CONFIG
  *
  *  Move config file to `dist/` for theme-watch to use
  */
@@ -160,7 +160,7 @@ gulp.task('imagemin', function () {
 /**
  *  BROWSERSYNC
  *
- *  Setup proxy browser to enable live reload
+ *  Setup proxy server to enable live reload when `--sync` flag is used
  */
 gulp.task('browser-sync', function (options) {
   // read the shop url from the config file
