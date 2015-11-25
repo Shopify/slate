@@ -19,9 +19,9 @@ var changed     = require('gulp-changed');
 var cheerio     = require('gulp-cheerio');
 
 /**
+ *  PATHS
  *
  *  All paths used by tasks
- *
  */
 var paths = {
   srcScss: 'src/stylesheets/**/*.*',
@@ -52,9 +52,9 @@ var paths = {
 };
 
 /**
- *   CONCAT CSS:
+ *  CONCAT CSS
  *
- *   Concatenate css together into a single scss file for use in the theme
+ *  Concatenate css together into a single scss file for use in the theme
  */
 gulp.task('concat-css', function () {
   return gulp.src(paths.parentIncludeScss)
@@ -63,9 +63,9 @@ gulp.task('concat-css', function () {
 });
 
 /**
- *   CONCAT JS:
+ *  CONCAT JS
  *
- *   Concatenate JS together into a single file for use in the theme
+ *  Concatenate JS together into a single file for use in the theme
  */
 gulp.task('concat-js', function () {
   return gulp.src(paths.parentIncludeJs)
@@ -124,9 +124,9 @@ gulp.task('svgicons', ['icon-class'], function() {
 });
 
 /**
- *   BUILD ASSETS:
+ *  BUILD ASSETS
  *
- *   Move all your templates, snippets, config, and assets into the dist folder
+ *  Move all your templates, snippets, config, and assets into the dist folder
  */
 gulp.task('build-assets', function () {
   return gulp.src(paths.srcAssets, {base: 'src/'})
@@ -135,9 +135,9 @@ gulp.task('build-assets', function () {
 });
 
 /**
- *   CONFIG:
+ *  CONFIG:
  *
- *
+ *  Move config file to `dist/` for theme-watch to use
  */
 gulp.task('config', function () {
   return gulp.src(paths.config)
@@ -145,9 +145,9 @@ gulp.task('config', function () {
 });
 
 /**
- *    IMAGEMIN
+ *  IMAGEMIN
  *
- *    Minify Images
+ *  Minify Images
  */
 gulp.task('imagemin', function () {
   return gulp.src(paths.images)
@@ -159,6 +159,8 @@ gulp.task('imagemin', function () {
 
 /**
  *  BROWSERSYNC
+ *
+ *  Setup proxy browser to enable live reload
  */
 gulp.task('browser-sync', function (options) {
   // read the shop url from the config file
@@ -277,6 +279,8 @@ gulp.task('watch', function () {
 });
 
 /**
+ *  DEFAULT TASKS
+ *
  *  Set default tasks depending on which upload tool we're using
  */
 function defaultTasks() {
