@@ -35,6 +35,9 @@
 </head>
 
 <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
+
+  <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
   <div id="PageContainer" class="">
     <header class="site-header page-width" role="banner">
       <div class="grid">
@@ -145,7 +148,7 @@
       </ul>
     </nav>
 
-    <main class="page-width main-content" role="main">
+    <main class="page-width main-content" id="MainContent" role="main">
       {{ content_for_layout }}
     </main>
 

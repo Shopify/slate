@@ -1,5 +1,8 @@
 {
   "general": {
+    "accessibility": {
+      "skip_to_content": "Direkt zum Inhalt"
+    },
     "meta": {
       "tags": "Getaggt \"{{ tags }}\"",
       "page": "Seite {{ page }}"

@@ -1,5 +1,8 @@
 {
   "general": {
+    "accessibility": {
+      "skip_to_content": "Pular para o Conteúdo"
+    },
     "meta": {
       "tags": "Marcado \"{{ tags }}\"",
       "page": "Página {{ page }}"

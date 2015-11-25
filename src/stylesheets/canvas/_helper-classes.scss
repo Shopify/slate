@@ -13,3 +13,23 @@
   padding: 0;
   border: 0;
 }
+
+.js-focus-hidden:focus {
+  outline: none;
+}
+
+/*============================================================================
+  Skip to content button
+    - Overrides .visually-hidden when focused
+==============================================================================*/
+.skip-link:focus {
+  clip: auto;
+  width: auto;
+  height: auto;
+  margin: 0;
+  color: $color-body-text;
+  background-color: $color-body;
+  padding: $gutter-site / 2;
+  z-index: $z-index-skip-to-content;
+  transition: none;
+}
