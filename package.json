@@ -16,7 +16,7 @@
     "gulp-imagemin": "^2.2.1",
     "gulp-include": "^2.0.2",
     "gulp-notify": "^2.2.0",
-    "gulp-open": "^0.3.2",
+    "gulp-open": "^1.0.0",
     "gulp-shell": "^0.4.1",
     "gulp-svg-sprite": "^1.2.13",
     "gulp-zip": "^3.0.2",

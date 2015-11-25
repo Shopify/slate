@@ -250,10 +250,12 @@ gulp.task('compress', function () {
  *  config.yml is passed in as the src for placeholder purposes only so the task
  *  will run.  Can be any file really.
  */
-gulp.task('open', function () {
-  gulp.src(paths.config, {read: false})
-    .pipe(open('', { url : 'https://themes.shopify.com/services/internal/themes/' + pkg.name + '/edit' }));
-});
+ gulp.task('open', function () {
+   gulp.src(paths.config, {read: false})
+     .pipe(open({
+       uri: 'https://themes.shopify.com/services/internal/themes/' + pkg.name + '/edit'
+     }));
+ });
 
 /**
  *  WATCH
