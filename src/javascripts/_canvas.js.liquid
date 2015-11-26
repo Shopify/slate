@@ -1,6 +1,7 @@
-//=require vendor/fastclick.min.js
-
 window.ShopifyCanvas = window.ShopifyCanvas || {};
+
+//=require vendor/fastclick.min.js
+//=require canvas/a11y-helpers.js
 
 /**
  *
@@ -10,6 +11,7 @@ window.ShopifyCanvas = window.ShopifyCanvas || {};
  */
 ShopifyCanvas.init = function () {
   FastClick.attach(document.body);
+  new ShopifyCanvas.A11yHelpers();
   ShopifyCanvas.cacheSelectors();
   ShopifyCanvas.checkUrlHash();
   ShopifyCanvas.initEventListeners();
@@ -200,21 +202,12 @@ ShopifyCanvas.giftCardTemplate = function () {
  *
  */
 ShopifyCanvas.checkUrlHash = function () {
-  var hash = ShopifyCanvas.getHash();
+  var hash = window.location.hash;
 
   // Allow deep linking to recover password form
   if (hash == '#recover') {
     ShopifyCanvas.toggleRecoverPasswordForm();
   }
-};
-
-/**
- *
- *  Get the hash from the URL
- *
- */
-ShopifyCanvas.getHash = function () {
-  return window.location.hash;
 };
 
 // Initialize ShopifyCanvas's JS on docready
