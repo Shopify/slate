@@ -17,6 +17,9 @@ var gulpif      = require('gulp-if');
 var svgSprite   = require('gulp-svg-sprite');
 var changed     = require('gulp-changed');
 var cheerio     = require('gulp-cheerio');
+var scssLint    = require('gulp-scss-lint');
+var cached      = require('gulp-cached');
+var gutil       = require('gulp-util');
 
 /**
  *  PATHS
@@ -37,6 +40,7 @@ var paths = {
     'src/config/*.*',
     'src/layout/*.*'
   ],
+  srcScssLint: 'src/stylesheets/**/*.scss',
   parentIncludeScss: [
     'src/stylesheets/[^_]*.*'
   ],
@@ -56,11 +60,34 @@ var paths = {
  *
  *  Concatenate css together into a single scss file for use in the theme
  */
-gulp.task('concat-css', function () {
+gulp.task('concat-css', ['scss-lint'], function () {
   return gulp.src(paths.parentIncludeScss)
     .pipe(cssimport())
     .pipe(gulp.dest(paths.destAssets));
 });
+
+/**
+ *  LINT SCSS
+ *
+ *  Make sure our SCSS is really really really good looking
+ */
+ var scssLintCustomReporter = function(file) {
+   if (!file.scsslint.success) {
+    gulp.src('')
+      .pipe(notify(file.scsslint.issues.length + ' issues found in ' + file.path));
+   }
+ };
+
+ gulp.task('scss-lint', function () {
+   return gulp.src(paths.srcScssLint)
+    .pipe(cached('scss-lint'))
+    .pipe(scssLint({
+      'config': 'scss-lint.yml',
+      'reporterOutput': 'scss-lint-report.json',
+      'bundleExec': true,
+      customReport: scssLintCustomReporter
+    }));
+ });
 
 /**
  *  CONCAT JS
