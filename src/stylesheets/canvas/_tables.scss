@@ -3,7 +3,8 @@ th {
   font-weight: $font-weight-bold;
 }
 
-th, td {
+th,
+td {
   text-align: left;
   border: 1px solid $color-border;
 }
@@ -12,7 +13,7 @@ th, td {
   Responsive tables, defined with .responsive-table on table element.
 ==============================================================================*/
 @include media-query($small) {
-  .responsive-table{
+  .responsive-table {
     thead {
       display: none;
     }
@@ -37,7 +38,7 @@ th, td {
       margin: 0;
     }
 
-    td:before {
+    td::before {
       content: attr(data-label);
       float: left;
       text-align: center;
@@ -51,7 +52,7 @@ th, td {
     margin-top: 10px;
     padding-top: $gutter-site / 2;
 
-    &:after {
+    &::after {
       content: '';
       display: block;
       position: absolute;

@@ -1,6 +1,6 @@
 ---
 
-scss_files: 'app/assets/stylesheets/**/*.scss'
+scss_files: 'src/stylesheets/**/*.scss'
 exclude: 'vendor/**/*'
 
 linters:

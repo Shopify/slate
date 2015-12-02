@@ -9,19 +9,22 @@
   }
 }
 
-svg.icon:not(.icon--full-color),
-symbol.icon:not(.icon--full-color) {
-  circle,
-  ellipse,
-  g,
-  line,
-  path,
-  polygon,
-  polyline,
-  rect {
-    fill: inherit;
-    stroke: inherit;
+svg,
+symbol {
+  &.icon:not(.icon--full-color) {
+    circle,
+    ellipse,
+    g,
+    line,
+    path,
+    polygon,
+    polyline,
+    rect {
+      fill: inherit;
+      stroke: inherit;
+    }
   }
+
 }
 
 /*============================================================================
