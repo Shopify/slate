@@ -1,11 +1,12 @@
 /*================ #Mixins ================*/
 @mixin clearfix() {
-  &:after {
+  &::after {
     content: '';
     display: table;
     clear: both;
   }
 
+  // scss-lint:disable PropertySpelling
   *zoom: 1;
 }
 
@@ -39,7 +40,7 @@
     } @else if $prefix == spec {
       #{$property}: $value;
     } @else  {
-      @warn "Unrecognized prefix: #{$prefix}";
+      @warn 'Unrecognized prefix: #{$prefix}';
     }
   }
 }
@@ -66,12 +67,13 @@
   }
 
   @if $breakpoint-found == false {
-    @warn "Breakpoint '#{$media-query}' does not exist";
+    @warn 'Breakpoint "#{$media-query}" does not exist';
   }
 }
 
 /*================ Responsive Show/Hide Helper ================*/
-@mixin responsive-display-helper($grid-breakpoint-type:"") {
+@mixin responsive-display-helper($grid-breakpoint-type:'') {
+  // scss-lint:disable ImportantRule
   .#{$grid-breakpoint-type}show {
     display: block !important;
   }
@@ -81,8 +83,10 @@
   }
 }
 
+
 /*================ Responsive Text Alignment Helper ================*/
-@mixin responsive-text-align-helper($grid-breakpoint-type:"") {
+@mixin responsive-text-align-helper($grid-breakpoint-type:'') {
+  // scss-lint:disable ImportantRule
   .#{$grid-breakpoint-type}text-left {
     text-align: left !important;
   }

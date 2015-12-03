@@ -25,9 +25,10 @@
     widows: 3;
   }
 
-  html, body {
-    background-color: #fff;
-    color: #000;
+  html,
+  body {
+    background-color: $color-body;
+    color: $color-body-text;
   }
 
   .giftcard__print-link,
