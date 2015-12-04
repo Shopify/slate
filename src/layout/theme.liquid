@@ -36,6 +36,8 @@
 
 <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
 
+  {% include 'icon-sprite.svg' %}
+
   <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
 
   <div id="PageContainer" class="">
@@ -217,6 +219,5 @@
 
   {{ 'shop.js' | asset_url | script_tag }}
 
-  {% include 'icon-sprite.svg' %}
 </body>
 </html>
