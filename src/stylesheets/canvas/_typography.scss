@@ -1,22 +1,20 @@
 /*================ Typography ================*/
 blockquote {
-  p {
-
-    & + cite {
-      margin-top: $gutter-site / 2;
-    }
+  p + cite {
+    margin-top: $gutter-site / 2;
   }
 
   cite {
     display: block;
 
-    &:before {
+    &::before {
       content: '\2014 \0020';
     }
   }
 }
 
-code, pre {
+code,
+pre {
   font-family: Consolas, monospace;
   font-size: 1em;
 }

@@ -20,9 +20,20 @@ legend {
   padding: 0;
 }
 
-button,
-input[type="submit"] {
+button {
   cursor: pointer;
+}
+
+input {
+  &[type="submit"] {
+    cursor: pointer;
+  }
+}
+
+label {
+  &[for] {
+    cursor: pointer;
+  }
 }
 
 input,
@@ -62,7 +73,7 @@ select {
   @include prefix(appearance, none, webkit moz spec);
   background-position: right center;
   background: {
-    image: url('{{ "ico-select.svg" | asset_url }}');
+    image: url($svg-select-icon);
     repeat: no-repeat;
     position: right 10px center;
     color: transparent;
@@ -73,8 +84,7 @@ select {
   cursor: pointer;
 
   /*================ Hide the svg arrow in IE9 and below ================*/
-  .ie9 &,
-  .lt-ie9 & {
+  .ie9 & {
     padding-right: 10px;
     background-image: none;
   }
@@ -86,8 +96,8 @@ optgroup {
 
 // Force option color (affects IE only)
 option {
-  color: #000;
-  background-color: #fff;
+  color: $color-body-text;
+  background-color: $color-body;
 }
 
 select::-ms-expand {
@@ -104,8 +114,7 @@ select::-ms-expand {
   clip: rect(1px, 1px, 1px, 1px);
 
   // No placeholders, so force show labels
-  .ie9 &,
-  .lt-ie9 & {
+  .ie9 & {
     position: static;
     height: auto;
     width: auto;
@@ -113,8 +122,4 @@ select::-ms-expand {
     overflow: visible;
     clip: initial;
   }
-}
-
-label[for] {
-  cursor: pointer;
 }

@@ -2,7 +2,9 @@
   #Normalize
   Based on normalize.css v3.0.2 | MIT License | git.io/normalize
 ==============================================================================*/
-*, *:before, *:after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -31,6 +33,7 @@ input,
 textarea,
 button,
 select {
+  // scss-lint:disable VendorPrefix
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   -moz-osx-font-smoothing: grayscale;
@@ -85,9 +88,11 @@ textarea {
   margin: 0;
 }
 
-button[disabled],
-html input[disabled] {
-  cursor: default;
+button,
+html input {
+  &[disabled] {
+    cursor: default;
+  }
 }
 
 button::-moz-focus-inner,
@@ -96,9 +101,12 @@ input::-moz-focus-inner {
   padding: 0;
 }
 
-input[type="search"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+input {
+  &[type="search"] {
+    // scss-lint:disable VendorPrefix
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
 }
 
 table {

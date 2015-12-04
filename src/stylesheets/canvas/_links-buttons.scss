@@ -1,6 +1,8 @@
 /*================ #Links and Buttons ================*/
 .btn,
 .rte .btn {
+  @include user-select();
+  @include prefix(appearance, none, webkit moz spec);
   display: inline-block;
   width: auto;
   text-decoration: none;
@@ -9,8 +11,6 @@
   white-space: nowrap;
   cursor: pointer;
   border: 1px solid transparent;
-  @include user-select();
-  @include prefix(appearance, none, webkit moz spec);
 
   // Set primary button colors - can override later
   background-color: $color-btn-primary;

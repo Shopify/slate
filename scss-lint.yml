@@ -1,0 +1,219 @@
+---
+
+scss_files: 'src/stylesheets/**/*.scss'
+exclude: 'vendor/**/*'
+
+linters:
+  # Border 0 required when enabled
+  BorderZero:
+    enabled: true
+
+  CapitalizationInSelector:
+    ignored_types: id
+
+  # Prefer hexadecimal color codes over color keywords.
+  # Good argument here wrt to it being easier to search/replace if only one is used
+  # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#colorkeyword
+  ColorKeyword:
+    enabled: true
+
+  # Force colors to be stored in variables
+  # https://github.com/brigade/scss-lint/blob/master/lib/scss_lint/linter/README.md#colorvariable
+  ColorVariable:
+    enabled: true
+
+  # Our FED style guide calls for using /* ... */ style comments
+  # https://vault.shopify.com/Front-End-Development/Style-Guide#_table-of-contents_before-you-start_code-style_html_css-architecture_naming-conventions_scss-architecture_syntax-spacing_shorthands_commenting
+  # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#comment
+  Comment:
+    enabled: false
+
+  # did you forget a @debug?
+  DebugStatement:
+    enabled: true
+
+  # Move @extend to top of a style
+  # enforce @extend and @include declaration order
+  # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#declarationorder
+  DeclarationOrder:
+    enabled: true
+
+  # Won’t work if we’re adding rgb fallbacks for example
+  # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#duplicateproperty
+  DuplicateProperty:
+    enabled: false
+
+  # As per styleguide
+  ElsePlacement:
+    enabled: true
+    style: same_line
+
+  EmptyLineBetweenBlocks:
+    enabled: true
+    ignore_single_line_blocks: false
+
+  # No empty rules
+  EmptyRule:
+    enabled: true
+
+  FinalNewline:
+    enabled: true
+
+  # #fff or #ffffff
+  HexLength:
+    enabled: true
+    style: short
+
+  # #fff or #FFF
+  HexNotation:
+    enabled: true
+    style: lowercase
+
+  # Checks that hex codes are valid
+  HexValidation:
+    enabled: true
+
+  # IDs as selectors
+  # https://github.com/brigade/scss-lint/tree/master/lib/scss_lint/linter#idselector
+  IdSelector:
+    enabled: true
+
+  # Prevent usage of !important
+  # https://github.com/brigade/scss-lint/blob/master/lib/scss_lint/linter/README.md#importantrule
+  ImportantRule:
+    enabled: true
+
+  # exclude file extensions and leading underscores from imports
+  ImportPath:
+    enabled: true
+
+  Indentation:
+    enabled: true
+    character: space
+    width: 2
+
+  # 0.1 is more readable than .1
+  LeadingZero:
+    enabled: true
+    style: include_zero
+
+  # Watches for duplicated selectors and missing nesting
+  # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#mergeableselector
+  MergeableSelector:
+    enabled: true
+
+  # Conventions around sass vars, functions, mixins
+  # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#nameformat
+  NameFormat:
+    enabled: true
+
+  # https://github.com/brigade/scss-lint/blob/master/lib/scss_lint/linter/README.md#nestingdepth
+  NestingDepth:
+    enabled: false
+
+  # Probably too harsh, sometimes we might just want to extend a class
+  # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#placeholderinextend
+  PlaceholderInExtend:
+    enabled: false
+
+  # We will never agree on this; alphas vs thematic order
+  # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#propertysortorder
+  PropertySortOrder:
+    enabled: false
+
+  # No typos in properties
+  # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#propertyspelling
+  PropertySpelling:
+    extra_properties:
+      - mso-table-lspace
+      - mso-table-rspace
+    enabled: true
+
+  # Qualifying element is an element with a selector i.e div.foo
+  # https://github.com/brigade/scss-lint/tree/master/lib/scss_lint/linter#qualifyingelement
+  QualifyingElement:
+    enabled: true
+
+  # Don't go deeper than 3 levels for selectors
+  # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#selectordepth
+  SelectorDepth:
+    enabled: true
+
+  SelectorFormat:
+    enabled: true
+    convention: hyphenated_BEM
+
+  # Shorthand property descriptions
+  # never use a long style when shorthand will suffice
+  # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#shorthand
+  Shorthand:
+    enabled: true
+
+  SingleLinePerProperty:
+    enabled: true
+    allow_single_line_rule_sets: false
+
+  SingleLinePerSelector:
+    enabled: true
+
+  SpaceAfterComma:
+    enabled: true
+
+  SpaceAfterPropertyColon:
+    enabled: true
+    style: one_space
+
+  SpaceAfterPropertyName:
+    enabled: true
+
+  SpaceBeforeBrace:
+    enabled: true
+
+  SpaceBetweenParens:
+    enabled: true
+    spaces: 0
+
+  # Single vs double quotes
+  # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#stringquotes
+  StringQuotes:
+    enabled: true
+
+  TrailingSemicolon:
+    enabled: true
+
+  # Prevent unnecessary trailing zeros i.e. 0.5em GOOD - 0.500em BAD
+  # https://github.com/brigade/scss-lint/tree/master/lib/scss_lint/linter#trailingzero
+  TrailingZero:
+    enabled: true
+
+  # Numeric values should not contain unnecessary fractional portions.
+  # 1.0em vs 1em
+  # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#unnecessarymantissa
+  UnnecessaryMantissa:
+    enabled: true
+
+  # Remove unecessary &
+  # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#unnecessaryparentreference
+  UnnecessaryParentReference:
+    enabled: true
+
+  # No protocols in urls
+  # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#urlformat
+  UrlFormat:
+    enabled: true
+
+  # Quotes around URLs
+  # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#urlquotes
+  UrlQuotes:
+    enabled: true
+
+  # Prevent use of plain browser prefixes
+  # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#vendorprefix
+  VendorPrefix:
+    enabled: true
+    excluded_identifiers: ['selection']
+
+  # Will only apply to lengths
+  # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#zerounit
+  ZeroUnit:
+    enabled: true
