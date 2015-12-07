@@ -130,6 +130,7 @@ Since you must also style the sprite in the spritesheet for this to take effect,
 ### Update a theme's icons without Gulp
 
 If you need to add an icon to a live shop, no fret. Follow these steps:
+
 1. Create an SVG icon.
 2. Open it in a text editor and change its root element from `svg` to `symbol`. Don't forget the closing tag.
 3. Add `class="icon"` to the `symbol` tag. Without this, the icon's color will not be changeable in CSS.
