@@ -12,25 +12,12 @@ window.ShopifyCanvas = window.ShopifyCanvas || {};
 ShopifyCanvas.init = function () {
   FastClick.attach(document.body);
   new ShopifyCanvas.A11yHelpers();
-  ShopifyCanvas.cacheSelectors();
   ShopifyCanvas.checkUrlHash();
   ShopifyCanvas.initEventListeners();
   ShopifyCanvas.resetPasswordSuccess();
   ShopifyCanvas.customerAddressForm();
   ShopifyCanvas.rteElements();
   ShopifyCanvas.giftCardTemplate();
-};
-
-/**
- *
- *  Cache any jQuery objects.
- *
- */
-ShopifyCanvas.cacheSelectors = function () {
-  ShopifyCanvas.cache = {
-    $html: $('html'),
-    $body: $('body')
-  }
 };
 
 ShopifyCanvas.initEventListeners = function () {
@@ -159,7 +146,7 @@ ShopifyCanvas.simplifyVariantLabels = function (product) {
  *
  */
 ShopifyCanvas.giftCardTemplate = function () {
-  if (!ShopifyCanvas.cache.$body.hasClass('template-giftcard')) {
+  if (!$('body').hasClass('template-giftcard')) {
     return;
   }
 
