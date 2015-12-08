@@ -200,7 +200,7 @@ $grid-breakpoints: (
     .#{$grid-breakpoint-type}two-twelfths:nth-child(6n+1),
     .#{$grid-breakpoint-type}three-twelfths:nth-child(4n+1),
     .#{$grid-breakpoint-type}four-twelfths:nth-child(3n+1),
-    .#{$grid-breakpoint-type}six-twelfths:nth-child(2n+1 { clear: both; }
+    .#{$grid-breakpoint-type}six-twelfths:nth-child(2n+1) { clear: both; }
   }
 }
 // scss-lint:enable SingleLinePerProperty EmptyLineBetweenBlocks
