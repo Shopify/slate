@@ -21,6 +21,7 @@
     "gulp-scss-lint": "^0.3.8",
     "gulp-shell": "^0.4.1",
     "gulp-svg-sprite": "^1.2.13",
+    "gulp-util": "^3.0.7",
     "gulp-zip": "^3.0.2",
     "js-yaml": "^3.3.1",
     "run-sequence": "^1.1.0",
