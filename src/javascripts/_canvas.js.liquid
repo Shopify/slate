@@ -102,7 +102,7 @@ ShopifyCanvas.customerAddressForm = function () {
     $('#EditAddress_' + formId).toggleClass('hide');
   });
 
-  $('#AddressDelete').on('click', function() {
+  $('.address-delete').on('click', function() {
     var $el = $(this);
     var formId = $el.data('form-id');
     var confirmMessage = $el.data('confirm-message');
