@@ -82,7 +82,7 @@ gulp.task('concat-css', ['scss-lint'], function () {
    return gulp.src(paths.srcScssLint)
     .pipe(cached('scss-lint'))
     .pipe(scssLint({
-      'config': 'scss-lint.yml',
+      'config': '.scss-lint.yml',
       'reporterOutput': 'scss-lint-report.json',
       'bundleExec': true,
       customReport: scssLintCustomReporter

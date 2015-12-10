@@ -56,11 +56,11 @@
           {% endif %}
 
             {% if settings.logo_use_image %}
-              <a href="/" itemprop="url" class="site-header__logo-link">
+              <a href="/" itemprop="url" class="site-header__logo-image">
                 <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
               </a>
             {% else %}
-              <a href="/" itemprop="url">{{ shop.name }}</a>
+              <a href="/" itemprop="url" class="site-header__logo-link">{{ shop.name }}</a>
             {% endif %}
 
           {% if template == 'index' %}
