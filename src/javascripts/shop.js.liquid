@@ -63,11 +63,11 @@ shop.productVariantCallback = function (variant, selector) {
     }
 
     // Update the product price
-    shop.cache.$productPrice.text(Shopify.formatMoney(variant.price, shop.moneyFormat));
+    shop.cache.$productPrice.html(Shopify.formatMoney(variant.price, shop.moneyFormat));
 
     // Update and show the product's compare price if necessary
     if (variant.compare_at_price > variant.price) {
-      shop.cache.$comparePrice.text(Shopify.formatMoney(variant.compare_at_price, shop.moneyFormat)).removeClass('hide');
+      shop.cache.$comparePrice.html(Shopify.formatMoney(variant.compare_at_price, shop.moneyFormat)).removeClass('hide');
     } else {
       shop.cache.$comparePrice.addClass('hide');
     }
@@ -76,17 +76,17 @@ shop.productVariantCallback = function (variant, selector) {
     if (variant.available) {
       // We have a valid product variant, so enable the submit button
       shop.cache.$addToCart.prop('disabled', false);
-      shop.cache.$addToCartText.text(shop.strings.addToCart);
+      shop.cache.$addToCartText.html(shop.strings.addToCart);
     } else {
       // Variant is sold out, disable the submit button and change the text
       shop.cache.$addToCart.prop('disabled', true);
-      shop.cache.$addToCartText.text(shop.strings.soldOut);
+      shop.cache.$addToCartText.html(shop.strings.soldOut);
     }
   } else {
     // The variant doesn't exist, disable submit button and change the text.
     // This may be an error or notice that a specific variant is not available.
     shop.cache.$addToCart.prop('disabled', true);
-    shop.cache.$addToCartText.text(shop.strings.unavailable);
+    shop.cache.$addToCartText.html(shop.strings.unavailable);
   }
 };
 
