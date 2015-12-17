@@ -1,4 +1,7 @@
 /*================ Forms ================*/
+form {
+  margin: 0;
+}
 
 // Prevent zoom on touch devices in active inputs
 @include media-query($medium-down) {
