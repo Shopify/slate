@@ -1,6 +1,7 @@
 <!-- /templates/product.liquid -->
 <div itemscope itemtype="http://schema.org/Product">
 
+  <meta itemprop="name" content="{{ product.title }}">
   <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
   <meta itemprop="image" content="{{ product.featured_image.src | img_url: 'grande' }}">
 
