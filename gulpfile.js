@@ -14,7 +14,8 @@ var fs          = require('fs');
 var yaml        = require('js-yaml');
 var argv        = require('yargs').argv;
 var gulpif      = require('gulp-if');
-var svgSprite   = require('gulp-svg-sprite');
+var svgmin      = require('gulp-svgmin');
+var extReplace  = require('gulp-ext-replace');
 var changed     = require('gulp-changed');
 var cheerio     = require('gulp-cheerio');
 var scssLint    = require('gulp-scss-lint');
@@ -30,8 +31,6 @@ var paths = {
   srcScss: 'src/stylesheets/**/*.*',
   srcJs: 'src/javascripts/**/*.*',
   srcIcons: 'src/icons/*.svg',
-  tempIcons: 'src/icons/temp', // so we never overwrite original files
-  srcIconsTemp: 'src/icons/temp/*.svg',
   srcAssets: [
     'src/assets/*.*',
     'src/templates/**/*.*',
@@ -102,51 +101,48 @@ gulp.task('concat-js', function () {
 });
 
 /**
- *  SVG CLASSES
+ *  SVG ICONS
  *
- *  Make sure all icons have class="icon"
- *  Files with `-full-color` in their name will also get
- *  class="icon--full-color" so CSS cannot override them
+ *  1. Minify original SVG icons
+ *  2. Make sure all icons have class="icon"
+ *       Files with `-full-color` in their name will also get
+ *       class="icon--full-color" so CSS cannot override them
+ *  3. Convert svg element to symbol
+ *  4. Change extension to liquid and move to dist/snippets
  */
-gulp.task('icon-class', function (callback) {
-  return gulp.src(paths.srcIcons)
-    .pipe(changed(paths.tempIcons))
-    .pipe(cheerio({
-      run: function ($, file) {
-        var $svg = $('svg');
-        if (file.relative.indexOf('-full-color') >= 0){
-          $svg.addClass('icon icon--full-color')
-        }
-        $svg.addClass('icon');
-     }
-   }))
-   .pipe(gulp.dest(paths.tempIcons));
-});
+gulp.task('svgicons', function (callback) {
+  return gulp
+    .src(paths.srcIcons)
+      .pipe(changed(paths.srcIcons))
+      .pipe(svgmin({
+        plugins: [
+          { removeTitle: true },
+          { removeDesc: true }
+        ]
+      }))
+      .pipe(cheerio({
+        run: function ($, file) {
+          var $svg = $('svg');
+          var $symbol = $('<symbol />');
+          var idAttr = file.relative.replace('.svg', '');
+          var viewBoxAttr = $svg.attr('viewbox');
 
-/**
- *  SVG SPRITES
- *
- *  Create an svg sprite from all svg icon files
- *  Runs after icon-class task
- */
-gulp.task('svgicons', ['icon-class'], function() {
-  return gulp.src(paths.srcIconsTemp)
-    .pipe(svgSprite({
-      svg: {
-        namespaceClassnames: false
-      },
-      mode: {
-        symbol: {
-          inline: true,
-          sprite: 'icon-sprite.svg.liquid',
-          dest: '.'
-        }
+          // Add necessary attributes
+          $symbol.attr('id', idAttr);
+          if (viewBoxAttr) {
+            $symbol.attr('viewBox', viewBoxAttr);
+          }
+
+          // Add required classes
+          if (file.relative.indexOf('-full-color') >= 0){
+            $symbol.addClass('icon icon--full-color')
+          }
+          $symbol.addClass('icon').append($svg.contents());
+          $svg.after($symbol);
+          $svg.remove();
       }
     }))
-      .on('error', function(error){
-        console.log('Error with svgicons task. Potentially trying to parse an empty file. Full error below.');
-        console.log(error);
-      })
+    .pipe(extReplace('.liquid'))
     .pipe(gulp.dest(paths.destSnippets));
 });
 

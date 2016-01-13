@@ -1,1 +1,12 @@
+{% comment %}
+  If iconsOnPage exists, add the new icon to the variable.
+  Otherwise, create the variable. It will be converted to an array
+  before the spritesheet is created for the current page.
+{% endcomment %}
+{% if iconsOnPage %}
+  {% capture iconsOnPage %}{{ iconsOnPage}}|{{name}}{% endcapture %}
+{% else %}
+  {% assign iconsOnPage = name %}
+{% endif %}
+
 <svg class="icon icon-{{ name }}{% if full_color == true %} icon--full-color{% endif %}" aria-hidden="true" focusable="false"><use xlink:href="#icon-{{ name }}"></use></svg>

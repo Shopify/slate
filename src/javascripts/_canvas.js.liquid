@@ -13,6 +13,7 @@ ShopifyCanvas.init = function () {
   FastClick.attach(document.body);
   new ShopifyCanvas.A11yHelpers();
   ShopifyCanvas.checkUrlHash();
+  ShopifyCanvas.svgSpriteFix();
   ShopifyCanvas.initEventListeners();
   ShopifyCanvas.resetPasswordSuccess();
   ShopifyCanvas.customerAddressForm();
@@ -212,6 +213,17 @@ ShopifyCanvas.checkUrlHash = function () {
   if (hash == '#recover') {
     ShopifyCanvas.toggleRecoverPasswordForm();
   }
+};
+
+ShopifyCanvas.svgSpriteFix = function () {
+  // Trigger a repaint on ui_icons to make them display correctly on Safari 8.x.
+  $.each($('#GlobalIconSymbols symbol'), function (i, el) {
+    // jQuery .addClass() doesn't work on SVG elements
+    // Neither does el.className, and el.classList is IE10+ only
+    var $el = $(el);
+    var existingClasses = $el.attr('class') || '';
+    $el.attr('class', existingClasses + ' icon--loaded');
+  });
 };
 
 // Initialize ShopifyCanvas's JS on docready
