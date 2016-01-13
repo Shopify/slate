@@ -1,26 +1,21 @@
 Canvas [![Circle CI](https://circleci.com/gh/Shopify/canvas.svg?style=svg&circle-token=7b55fa8bdc61003d81a45d4d550621646e08d117)](https://circleci.com/gh/Shopify/canvas)
 =====================
 
-Canvas
----------------------
-
 Canvas is the new baseline set of tools, templates and styles for developing themes at Shopify.  Canvas replaces [timber](timber.com) as our bootstrap theme for development at Shopify.  
 
 The goal of Canvas is to provide an unopinionated set of templates and styles to speed up theme development.  Canvas captures design patterns and tools which are used by 100% of themes developed at Shopify.
 
-Contributing
----------------------
+## Contributing
 
 Contributions and questions are always welcome in the form of PRs or Issues.  Questions can be directed at the Themes FED team:
 
-Themes Team - @Shopify/themes-team
-Michael Patten - @m-ux
-Carson Shold - @cshold
-Steve Bosworth - @stevebosworth
-Thomas Kelly - @t-kelly
+- Themes Team - @Shopify/themes-team
+- Michael Patten - @m-ux
+- Carson Shold - @cshold
+- Steve Bosworth - @stevebosworth
+- Thomas Kelly - @t-kelly
 
-Working with Canvas
----------------------
+## Working with Canvas
 
 ### Gulp and Theme Kit
 
@@ -92,8 +87,7 @@ or
 - Runs `gulp build` and creates a zip with only valid theme files
 
 
-SVG Icons
----------------------
+## SVG Icons
 
 Canvas uses SVG icons for easy maintainability and better front end performance. Place all of your SVG icons in `src/icons`, prefaced with the name `icon-`. E.g. `icon-arrow-down.svg`.
 
