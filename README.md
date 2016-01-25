@@ -91,7 +91,9 @@ or
 
 Canvas uses SVG icons for easy maintainability and better front end performance. Place all of your SVG icons in `src/icons`, prefaced with the name `icon-`. E.g. `icon-arrow-down.svg`.
 
-While `gulp` is running (or manually with `gulp build`) these icons will be optimized and placed in `src/icons/temp` and then have an SVG spritesheet created from them. The temporary icons will not be tracked in GitHub.
+__Make sure the `viewBox` attribute is case sensitive.__
+
+While `gulp` is running (or manually with `gulp build`) these icons will be optimized and converted to snippets in your `dist/snippets` folder as `symbol` elements. These snippets will be used to create a spritesheet.
 
 Note: Illustrator doesn't render the nicest SVG icons. Sketch is suggested for creating and editing SVGs.
 
@@ -144,9 +146,8 @@ Since you must also style the sprite in the spritesheet for this to take effect,
 ### Update a theme's icons without Gulp
 
 If you need to add an icon to a live shop, no fret. Follow these steps:
-
 1. Create an SVG icon.
 2. Open it in a text editor and change its root element from `svg` to `symbol`. Don't forget the closing tag.
 3. Add `class="icon"` to the `symbol` tag. Without this, the icon's color will not be changeable in CSS.
-4. Add your new `symbol` tag to `snippets/icon-sprite.svg.liquid`. Make sure it has an id, such as `icon-cool-shape`.
+4. Add your new `symbol` code to a snippet in `snippets/icon-name.liquid`. Make sure it has an id, such as `icon-cool-shape`.
 5. That's it. Include your new icon with `{% include 'icon', name: 'cool-shape' %}` and edit the CSS with `.icon-cool-shape`.

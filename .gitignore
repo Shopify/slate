@@ -44,7 +44,6 @@ config.yml
 assets/logo.png
 *.zip
 /node_modules
-src/icons/temp
 /_site
 /dist
 /.idea
