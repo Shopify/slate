@@ -49,10 +49,6 @@
     "name": "Colors",
     "settings": [
       {
-        "type": "paragraph",
-        "content": "Use class=\"color\" on an input tag to bring up the color picker. Only a few colors have been included here as an example."
-      },
-      {
         "type": "header",
         "content": "General Colors"
       },
@@ -65,31 +61,10 @@
       },
       {
         "type": "color",
-        "id": "color_secondary",
-        "label": "Secondary Color",
-        "default": "#204a80",
-        "info": "Used for secondary buttons"
-      },
-      {
-        "type": "color",
-        "id": "color_body_bg",
-        "label": "Background Color",
-        "default": "#fff",
-        "info": "Background color for your theme"
-      },
-      {
-        "type": "color",
         "id": "color_body_text",
         "label": "Text Color",
         "default": "#000",
         "info": "Color used for content and paragraph text"
-      },
-      {
-        "type": "color",
-        "id": "color_borders",
-        "label": "Border Color",
-        "default": "#000",
-        "info": "Border and separator color"
       }
     ]
   },

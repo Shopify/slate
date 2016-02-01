@@ -1,0 +1,28 @@
+/*============================================================================
+  #Links & Buttons
+==============================================================================*/
+
+a {
+  color: $color-primary;
+}
+
+.text-link {
+  display: inline;
+  border: 0 none;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+// Buttons
+.btn {
+  @include user-select();
+  @include prefix(appearance, none, webkit moz spec);
+  display: inline-block;
+  width: auto;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  cursor: pointer;
+}
