@@ -35,10 +35,7 @@
 
           <h5>{{ item.title | link_to: item.url }}</h5>
 
-          {% comment %}
-            If a search item has a price, it's a product
-          {% endcomment %}
-          {% if item.price %}
+          {% if item.object_type == 'product' %}
             <p>
               {% if item.compare_at_price > item.price %}
                 {% if item.price_varies %}
