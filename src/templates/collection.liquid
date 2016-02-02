@@ -1,8 +1,8 @@
 <!-- /templates/collection.liquid -->
 {% paginate collection.products by 12 %}
 
-  <header class="section-header">
-    <h1 class="section-header__title">{{ collection.title }}</h1>
+  <header>
+    <h1>{{ collection.title }}</h1>
     {% if collection.description != blank %}
       <div class="rte">
         {{ collection.description }}
@@ -10,7 +10,7 @@
     {% endif %}
 
     {% if collection.all_tags.size > 0 %}
-      <ul class="tags section-header__tags">
+      <ul class="tags">
         {% for tag in collection.all_tags %}
           {% if current_tags contains tag %}
             <li class="tag--active">

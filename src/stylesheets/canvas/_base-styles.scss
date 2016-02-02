@@ -7,13 +7,6 @@ html {
 .page-width {
   @include clearfix();
   max-width: $width-site;
+  padding: 0 $gutter;
   margin: 0 auto;
-}
-
-.main-content {
-  display: block;
-}
-
-.section-header {
-  margin-bottom: $gutter-heading;
 }
