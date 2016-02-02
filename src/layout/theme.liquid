@@ -38,171 +38,169 @@
 
   <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
 
-  <div id="PageContainer" class="">
-    <header class="site-header page-width" role="banner">
-      <div class="grid">
-        <div class="grid__item">
+  <header class="site-header page-width" role="banner">
+    <div class="grid">
+      <div class="grid__item">
 
-          {% comment %}
-            Use the uploaded logo from theme settings if enabled.
-            Site name gets precedence with H1 tag on homepage, div on other pages.
-          {% endcomment %}
-          {% if template == 'index' %}
-            <h1 class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
-          {% else %}
-            <div class="site-header__logo h1" itemscope itemtype="http://schema.org/Organization">
-          {% endif %}
+        {% comment %}
+          Use the uploaded logo from theme settings if enabled.
+          Site name gets precedence with H1 tag on homepage, div on other pages.
+        {% endcomment %}
+        {% if template == 'index' %}
+          <h1 class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
+        {% else %}
+          <div class="site-header__logo h1" itemscope itemtype="http://schema.org/Organization">
+        {% endif %}
 
-            {% if settings.logo_use_image %}
-              <a href="/" itemprop="url" class="site-header__logo-image">
-                <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
-              </a>
-            {% else %}
-              <a href="/" itemprop="url" class="site-header__logo-link">{{ shop.name }}</a>
-            {% endif %}
-
-          {% if template == 'index' %}
-            </h1>
-          {% else %}
-            </div>
-          {% endif %}
-
-        </div>
-
-        <div class="grid__item">
-          <div>
-            <a href="/cart" class="site-header__cart">
-              {% include 'icon', name: 'cart' %}
-              {{ 'layout.cart.title' | t }}
-              (<span id="CartCount">{{ cart.item_count }}</span>
-              {{ 'layout.cart.items_count' | t: count: cart.item_count }}
-              <span id="CartCost">{{ cart.total_price | money }}</span>)
+          {% if settings.logo_use_image %}
+            <a href="/" itemprop="url" class="site-header__logo-image">
+              <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
             </a>
-          </div>
-
-          {% if shop.customer_accounts_enabled %}
-            <div class="customer-login-links">
-
-              {% if customer %}
-                {% if customer.first_name != blank %}
-                  {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
-                  {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
-                {% else %}
-                  <a href="/account">{{ 'layout.customer.account' | t }}</a>
-                {% endif %}
-
-                | {{ 'layout.customer.log_out' | t | customer_logout_link }}
-
-              {% else %}
-                {{ 'layout.customer.log_in' | t | customer_login_link }}
-                {% if shop.customer_accounts_optional %}
-                | {{ 'layout.customer.create_account' | t | customer_register_link }}
-                {% endif %}
-              {% endif %}
-
-            </div>
-          {% endif %}
-
-          <div class="site-header__search">
-            <form action="/search" method="get" class="search-bar" role="search">
-              {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
-
-              <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
-
-              <button type="submit">
-                {% include 'icon', name: 'search' %}
-                <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <nav class="page-width" role="navigation">
-      <ul class="site-nav list--inline" id="SiteNav">
-        {% for link in linklists.main-menu.links %}
-          {% assign child_list_handle = link.title | handleize %}
-
-          {% if linklists[child_list_handle].links != blank %}
-            <li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}">
-              <a href="{{ link.url }}" class="site-nav__link">
-                {{ link.title }}
-                {% include 'icon', name: 'arrow-down' %}
-              </a>
-
-              <ul class="site-nav__dropdown">
-                {% for childlink in linklists[child_list_handle].links %}
-                  <li {% if childlink.active %}class="site-nav--active"{% endif %}>
-                    <a href="{{ childlink.url }}" class="site-nav__link">{{ childlink.title | escape }}</a>
-                  </li>
-                {% endfor %}
-              </ul>
-            </li>
           {% else %}
-            <li {% if link.active %}class="site-nav--active"{% endif %}>
-              <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
-            </li>
+            <a href="/" itemprop="url" class="site-header__logo-link">{{ shop.name }}</a>
           {% endif %}
-        {% endfor %}
-      </ul>
-    </nav>
 
-    <main class="page-width main-content" id="MainContent" role="main">
-      {{ content_for_layout }}
-    </main>
-
-    <footer class="site-footer page-width" role="contentinfo">
-      <div class="grid">
-        <div class="grid__item">
-          <ul class="list--inline social-icons">
-            {% if settings.social_twitter_link != blank %}
-              <li>
-                <a href="{{ settings.social_twitter_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}">
-                  {% include 'icon', name: 'twitter' %}
-                  Twitter
-                </a>
-              </li>
-            {% endif %}
-            {% if settings.social_facebook_link != blank %}
-              <li>
-                <a href="{{ settings.social_facebook_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Facebook' }}">
-                  {% include 'icon', name: 'facebook' %}
-                  Facebook
-                </a>
-              </li>
-            {% endif %}
-          </ul>
-        </div>
-
-        {% unless shop.enabled_payment_types == empty %}
-          <div class="grid__item">
-            <ul class="list--inline payment-icons">
-              {% for type in shop.enabled_payment_types %}
-                <li>
-                  {% include 'icon', name: type %}
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-        {% endunless %}
-
-        {% if linklists.footer.links.size > 0 %}
-          <div class="grid__item">
-            <ul class="site-footer__linklist">
-              {% for link in linklists.footer.links %}
-                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-              {% endfor %}
-            </ul>
+        {% if template == 'index' %}
+          </h1>
+        {% else %}
           </div>
         {% endif %}
 
-        <div class="grid__item">
-          <small>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}. {{ powered_by_link }}</small>
+      </div>
+
+      <div class="grid__item">
+        <div>
+          <a href="/cart" class="site-header__cart">
+            {% include 'icon', name: 'cart' %}
+            {{ 'layout.cart.title' | t }}
+            (<span id="CartCount">{{ cart.item_count }}</span>
+            {{ 'layout.cart.items_count' | t: count: cart.item_count }}
+            <span id="CartCost">{{ cart.total_price | money }}</span>)
+          </a>
+        </div>
+
+        {% if shop.customer_accounts_enabled %}
+          <div class="customer-login-links">
+
+            {% if customer %}
+              {% if customer.first_name != blank %}
+                {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
+                {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
+              {% else %}
+                <a href="/account">{{ 'layout.customer.account' | t }}</a>
+              {% endif %}
+
+              | {{ 'layout.customer.log_out' | t | customer_logout_link }}
+
+            {% else %}
+              {{ 'layout.customer.log_in' | t | customer_login_link }}
+              {% if shop.customer_accounts_optional %}
+              | {{ 'layout.customer.create_account' | t | customer_register_link }}
+              {% endif %}
+            {% endif %}
+
+          </div>
+        {% endif %}
+
+        <div class="site-header__search">
+          <form action="/search" method="get" class="search-bar" role="search">
+            {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
+
+            <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
+
+            <button type="submit">
+              {% include 'icon', name: 'search' %}
+              <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
+            </button>
+          </form>
         </div>
       </div>
-    </footer>
-  </div>
+    </div>
+  </header>
+
+  <nav class="page-width" role="navigation">
+    <ul class="site-nav list--inline" id="SiteNav">
+      {% for link in linklists.main-menu.links %}
+        {% assign child_list_handle = link.title | handleize %}
+
+        {% if linklists[child_list_handle].links != blank %}
+          <li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}">
+            <a href="{{ link.url }}" class="site-nav__link">
+              {{ link.title }}
+              {% include 'icon', name: 'arrow-down' %}
+            </a>
+
+            <ul class="site-nav__dropdown">
+              {% for childlink in linklists[child_list_handle].links %}
+                <li {% if childlink.active %}class="site-nav--active"{% endif %}>
+                  <a href="{{ childlink.url }}" class="site-nav__link">{{ childlink.title | escape }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </li>
+        {% else %}
+          <li {% if link.active %}class="site-nav--active"{% endif %}>
+            <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </nav>
+
+  <main class="main-content" id="MainContent" role="main">
+    {{ content_for_layout }}
+  </main>
+
+  <footer class="site-footer page-width" role="contentinfo">
+    <div class="grid">
+      <div class="grid__item">
+        <ul class="list--inline social-icons">
+          {% if settings.social_twitter_link != blank %}
+            <li>
+              <a href="{{ settings.social_twitter_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}">
+                {% include 'icon', name: 'twitter' %}
+                Twitter
+              </a>
+            </li>
+          {% endif %}
+          {% if settings.social_facebook_link != blank %}
+            <li>
+              <a href="{{ settings.social_facebook_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Facebook' }}">
+                {% include 'icon', name: 'facebook' %}
+                Facebook
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+
+      {% unless shop.enabled_payment_types == empty %}
+        <div class="grid__item">
+          <ul class="list--inline payment-icons">
+            {% for type in shop.enabled_payment_types %}
+              <li>
+                {% include 'icon', name: type %}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endunless %}
+
+      {% if linklists.footer.links.size > 0 %}
+        <div class="grid__item">
+          <ul class="site-footer__linklist">
+            {% for link in linklists.footer.links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      <div class="grid__item">
+        <small>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}. {{ powered_by_link }}</small>
+      </div>
+    </div>
+  </footer>
 
   {% if template contains 'product' %}
     {{ 'option_selection.js' | shopify_asset_url | script_tag }}
