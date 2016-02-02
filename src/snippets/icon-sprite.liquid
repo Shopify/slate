@@ -1,9 +1,0 @@
-<div id="GlobalIconSymbols" style="display: none;">
-  <svg width="0" height="0" style="position: absolute">
-    {% assign iconArray = iconsOnPage | split: '|' %}
-    {% for item in iconArray %}
-      {% capture iconName %}icon-{{item}}{% endcapture %}
-      {% include iconName %}
-    {% endfor %}
-  </svg>
-</div>

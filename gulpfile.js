@@ -110,41 +110,47 @@ gulp.task('concat-js', function () {
  *  3. Convert svg element to symbol
  *  4. Change extension to liquid and move to dist/snippets
  */
-gulp.task('svgicons', function (callback) {
-  return gulp
-    .src(paths.srcIcons)
-      .pipe(changed(paths.srcIcons))
-      .pipe(svgmin({
-        plugins: [
-          { removeTitle: true },
-          { removeDesc: true }
-        ]
-      }))
-      .pipe(cheerio({
-        run: function ($, file) {
-          var $svg = $('svg');
-          var $symbol = $('<symbol />');
-          var idAttr = file.relative.replace('.svg', '');
-          var viewBoxAttr = $svg.attr('viewbox');
+ gulp.task('svgicons', function (callback) {
+   return gulp
+     .src(paths.srcIcons)
+       .pipe(changed(paths.srcIcons))
+       .pipe(svgmin({
+         plugins: [
+           { removeTitle: true },
+           { removeDesc: true }
+         ]
+       }))
+       .pipe(cheerio({
+         run: function ($, file) {
+           var $svg = $('svg');
+           var $newSvg = $('<svg aria-hidden="true" focusable="false" />');
+           var fileName = file.relative.replace('.svg', '');
+           var viewBoxAttr = $svg.attr('viewbox');
 
-          // Add necessary attributes
-          $symbol.attr('id', idAttr);
-          if (viewBoxAttr) {
-            $symbol.attr('viewBox', viewBoxAttr);
-          }
+           // Add necessary attributes
+           $newSvg.attr('id', fileName);
+           if (viewBoxAttr) {
+             $newSvg.attr('viewBox', viewBoxAttr);
+           }
 
-          // Add required classes
-          if (file.relative.indexOf('-full-color') >= 0){
-            $symbol.addClass('icon icon--full-color')
-          }
-          $symbol.addClass('icon').append($svg.contents());
-          $svg.after($symbol);
-          $svg.remove();
-      }
-    }))
-    .pipe(extReplace('.liquid'))
-    .pipe(gulp.dest(paths.destSnippets));
-});
+           // Add required classes to full color icons
+           if (file.relative.indexOf('-full-color') >= 0){
+             $svg.addClass('icon icon--full-color');
+           }
+
+           $newSvg
+            .addClass('icon')
+            .addClass(fileName)
+            .append($svg.contents());
+
+           $newSvg.append($svg.contents());
+           $svg.after($newSvg);
+           $svg.remove();
+       }
+     }))
+     .pipe(extReplace('.liquid'))
+     .pipe(gulp.dest(paths.destSnippets));
+ });
 
 /**
  *  BUILD ASSETS

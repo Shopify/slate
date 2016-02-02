@@ -71,7 +71,7 @@
       <div class="grid__item">
         <div>
           <a href="/cart" class="site-header__cart">
-            {% include 'icon', name: 'cart' %}
+            {% include 'icon-cart' %}
             {{ 'layout.cart.title' | t }}
             (<span id="CartCount">{{ cart.item_count }}</span>
             {{ 'layout.cart.items_count' | t: count: cart.item_count }}
@@ -109,7 +109,7 @@
             <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
 
             <button type="submit">
-              {% include 'icon', name: 'search' %}
+              {% include 'icon-search' %}
               <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
             </button>
           </form>
@@ -127,7 +127,7 @@
           <li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}">
             <a href="{{ link.url }}" class="site-nav__link">
               {{ link.title }}
-              {% include 'icon', name: 'arrow-down' %}
+              {% include 'icon-arrow-down' %}
             </a>
 
             <ul class="site-nav__dropdown">
@@ -158,7 +158,7 @@
           {% if settings.social_twitter_link != blank %}
             <li>
               <a href="{{ settings.social_twitter_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}">
-                {% include 'icon', name: 'twitter' %}
+                {% include 'icon-twitter' %}
                 Twitter
               </a>
             </li>
@@ -166,7 +166,7 @@
           {% if settings.social_facebook_link != blank %}
             <li>
               <a href="{{ settings.social_facebook_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Facebook' }}">
-                {% include 'icon', name: 'facebook' %}
+                {% include 'icon-facebook' %}
                 Facebook
               </a>
             </li>
@@ -179,7 +179,8 @@
           <ul class="list--inline payment-icons">
             {% for type in shop.enabled_payment_types %}
               <li>
-                {% include 'icon', name: type %}
+                {% assign icon_name = type | prepend: 'icon-' %}
+                {% include icon_name %}
               </li>
             {% endfor %}
           </ul>
@@ -214,7 +215,5 @@
   {% endif %}
 
   {{ 'theme.js' | asset_url | script_tag }}
-
-  {% include 'icon-sprite' %}
 </body>
 </html>
