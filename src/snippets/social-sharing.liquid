@@ -16,41 +16,41 @@
 <div class="social-sharing" data-permalink="{{ permalinkURL }}">
 
   {% if settings.share_facebook %}
-    <a target="_blank" href="//www.facebook.com/sharer.php?u={{ permalinkURL }}" class="share-facebook">
+    <a target="_blank" href="//www.facebook.com/sharer.php?u={{ permalinkURL }}" class="social-sharing__link">
       {% include 'icon', name: 'facebook' %}
-      <span class="share-title">{{ 'general.social.share_on_facebook' | t }}</span>
+      {{ 'general.social.share_on_facebook' | t }}
     </a>
   {% endif %}
 
   {% if settings.share_twitter %}
-    <a target="_blank" href="//twitter.com/share?text={{ shareTitle }}&amp;url={{ permalinkURL }}" class="share-twitter">
+    <a target="_blank" href="//twitter.com/share?text={{ shareTitle }}&amp;url={{ permalinkURL }}" class="social-sharing__link">
       {% include 'icon', name: 'twitter' %}
-      <span class="share-title">{{ 'general.social.share_on_twitter' | t }}</span>
+      {{ 'general.social.share_on_twitter' | t }}
     </a>
   {% endif %}
 
   {% if template contains 'product' %}
 
     {% if settings.share_pinterest %}
-      <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media={{ product | img_url: '1024x1024' }}&amp;description={{ shareTitle }}" class="share-pinterest">
+      <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media={{ product | img_url: '1024x1024' }}&amp;description={{ shareTitle }}" class="social-sharing__link">
         {% include 'icon', name: 'pinterest' %}
-        <span class="share-title">{{ 'general.social.share_on_pinterest' | t }}</span>
+        {{ 'general.social.share_on_pinterest' | t }}
       </a>
     {% endif %}
 
     {% if settings.share_fancy %}
-      <a target="_blank" href="//fancy.com/fancyit?ItemURL={{ permalinkURL }}&amp;Title={{ shareTitle }}&amp;Category=Other&amp;ImageURL={{ product | img_url: '1024x1024' }}" class="share-fancy">
+      <a target="_blank" href="//fancy.com/fancyit?ItemURL={{ permalinkURL }}&amp;Title={{ shareTitle }}&amp;Category=Other&amp;ImageURL={{ product | img_url: '1024x1024' }}" class="social-sharing__link">
         {% include 'icon', name: 'fancy' %}
-        <span class="share-title">{{ 'general.social.share_on_fancy' | t }}</span>
+        {{ 'general.social.share_on_fancy' | t }}
       </a>
     {% endif %}
 
   {% endif %}
 
   {% if settings.share_google %}
-    <a target="_blank" href="//plus.google.com/share?url={{ permalinkURL }}" class="share-google">
+    <a target="_blank" href="//plus.google.com/share?url={{ permalinkURL }}" class="share-google" class="social-sharing__link">
       {% include 'icon', name: 'google-plus' %}
-      <span class="share-title">+1</span>
+      +1
     </a>
   {% endif %}
 

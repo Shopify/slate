@@ -21,11 +21,11 @@
     {{ article | img_url: '1024x1024' | img_tag: article.title }}
   {% endif %}
 
-  <header class="section-header">
-    <h1 class="section-header__title">{{ article.title }}</h1>
+  <header>
+    <h1>{{ article.title }}</h1>
     {% capture author %}<strong>{{ article.author }}</strong>{% endcapture %}
     {% capture date %}<time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time>{% endcapture %}
-    <p class="section-header__author">{{ 'blogs.article.author_on_date_html' | t: author: author, date: date }}</p>
+    <p>{{ 'blogs.article.author_on_date_html' | t: author: author, date: date }}</p>
   </header>
 
   <div class="rte" itemprop="articleBody">
