@@ -12,31 +12,10 @@ form {
   }
 }
 
-fieldset {
-  border: 1px solid $color-border;
-  margin: 0 0 $gutter;
-  padding: $gutter / 2;
-}
-
-legend {
-  border: 0;
-  padding: 0;
-}
-
-button {
+button,
+input[type="submit"],
+label[for] {
   cursor: pointer;
-}
-
-input {
-  &[type="submit"] {
-    cursor: pointer;
-  }
-}
-
-label {
-  &[for] {
-    cursor: pointer;
-  }
 }
 
 input,
