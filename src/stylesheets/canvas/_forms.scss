@@ -12,13 +12,11 @@ form {
   }
 }
 
-// scss-lint:disable QualifyingElement
 button,
 input[type="submit"],
 label[for] {
   cursor: pointer;
 }
-// scss-lint:enable QualifyingElement
 
 input,
 textarea,
