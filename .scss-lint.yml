@@ -210,7 +210,7 @@ linters:
   # Prevent use of plain browser prefixes
   # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#vendorprefix
   VendorPrefix:
-    enabled: true
+    enabled: false
     excluded_identifiers: ['selection']
 
   # Will only apply to lengths
