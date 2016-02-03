@@ -132,7 +132,7 @@ linters:
   # Qualifying element is an element with a selector i.e div.foo
   # https://github.com/brigade/scss-lint/tree/master/lib/scss_lint/linter#qualifyingelement
   QualifyingElement:
-    enabled: true
+    enabled: false
 
   # Don't go deeper than 3 levels for selectors
   # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#selectordepth
