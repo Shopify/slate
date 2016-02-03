@@ -1,7 +1,7 @@
 Canvas [![Circle CI](https://circleci.com/gh/Shopify/canvas.svg?style=svg&circle-token=7b55fa8bdc61003d81a45d4d550621646e08d117)](https://circleci.com/gh/Shopify/canvas)
 =====================
 
-Canvas is the new baseline set of tools, templates and styles for developing themes at Shopify.  Canvas replaces [timber](timber.com) as our bootstrap theme for development at Shopify.  
+Canvas is the new baseline set of tools, templates and styles for developing themes at Shopify.
 
 The goal of Canvas is to provide an unopinionated set of templates and styles to speed up theme development.  Canvas captures design patterns and tools which are used by 100% of themes developed at Shopify.
 
@@ -45,7 +45,11 @@ Follow the instructions on the [Theme Kit website](http://themekit.cat/) to inst
 
         $ npm install
 
-4. Setup your `dist/` folder for the first time
+4. Install required `scss_lint` gem. To do: make this optional.
+
+        $ bundle install
+
+5. Setup your `dist/` folder for the first time
 
         $ gulp build
 
