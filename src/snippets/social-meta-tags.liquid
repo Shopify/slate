@@ -60,16 +60,16 @@
 {% endif %}
 {% if template == 'index' %}
   <meta name="twitter:title" content="{{ page_title }}">
-  <meta name="twitter:description" content="{{ page_description | escape }}">
+  <meta name="twitter:description" content="{{ page_description | truncate: 140 | escape }}">
 {% elsif template contains 'product' %}
   <meta name="twitter:title" content="{{ product.title | strip_html | escape }}">
-  <meta name="twitter:description" content="{{ product.description | strip_html | truncate: 200, '' | escape }}">
+  <meta name="twitter:description" content="{{ page_description | truncate: 140 | escape }}">
   <meta name="twitter:image" content="https:{{ product | img_url: 'grande' }}">
   <meta name="twitter:image:width" content="600">
   <meta name="twitter:image:height" content="600">
 {% elsif template contains 'article' %}
   <meta name="twitter:title" content="{{ article.title | strip_html | escape }}">
-  <meta name="twitter:description" content="{{ article.excerpt_or_content | strip_html | truncate: 200, '' | escape }}">
+  <meta name="twitter:description" content="{{ page_description | truncate: 140 | escape }}">
   {% if article.image %}
     <meta property="twitter:image" content="https:{{ article | img_url: '1024x1024' }}">
   {% endif %}
