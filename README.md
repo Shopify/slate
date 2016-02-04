@@ -1,7 +1,7 @@
 Canvas [![Circle CI](https://circleci.com/gh/Shopify/canvas.svg?style=svg&circle-token=7b55fa8bdc61003d81a45d4d550621646e08d117)](https://circleci.com/gh/Shopify/canvas)
 =====================
 
-Canvas is the new baseline set of tools, templates and styles for developing themes at Shopify.
+Canvas is the baseline set of tools, templates and styles for developing themes at Shopify.
 
 The goal of Canvas is to provide an unopinionated set of templates and styles to speed up theme development.  Canvas captures design patterns and tools which are used by 100% of themes developed at Shopify.
 
@@ -107,7 +107,7 @@ Most icons should allow their color to be changed with CSS. Depending on the ico
 
 Liquid:
 ```
-{% include 'icon', name: 'cart' %}
+{% include 'icon-cart' %}
 ```
 
 SCSS:
@@ -122,11 +122,11 @@ SCSS:
 
 ### Usage | full color icons
 
-If you want the SVG to maintain its colors, append `-full-color` to the file name. E.g. `icon-amazon_payments-full-color`. The CSS is set up to prevent its colors from being overwritten. In CSS you only have to control the size of the icon.
+If you want the SVG to maintain its colors, append `-full-color` to the file name. E.g. `icon-shopify-logo-full-color`. The CSS is set up to prevent its colors from being overwritten. In CSS you only have to control the size of the icon.
 
 Liquid:
 ```
-{% include 'icon', name: 'cart', full_color: true %}
+{% include 'icon-shopify-logo-full-color' %}
 ```
 
 ### Usage | multiple customizable colors
@@ -151,7 +151,10 @@ Since you must also style the sprite in the spritesheet for this to take effect,
 
 If you need to add an icon to a live shop, no fret. Follow these steps:
 1. Create an SVG icon.
-2. Open it in a text editor and change its root element from `svg` to `symbol`. Don't forget the closing tag.
-3. Add `class="icon"` to the `symbol` tag. Without this, the icon's color will not be changeable in CSS.
-4. Add your new `symbol` code to a snippet in `snippets/icon-name.liquid`. Make sure it has an id, such as `icon-cool-shape`.
-5. That's it. Include your new icon with `{% include 'icon', name: 'cool-shape' %}` and edit the CSS with `.icon-cool-shape`.
+2. Change the file from an `.svg` extension to `.liquid` and place it in `snippets/`. Make sure the file name starts with `icon-` for consistency.
+3. Add `aria-hidden="true"` and `focusable="false"` to the `svg` element.
+5. Add `class="icon"` to the `svg` element. Add `icon--full-color` if it's a full color icon.
+6. Add a class the same name as the file name to the `svg`. E.g. `icon-cart`.
+7. Remove any unneeded elements like `DOCTYPE` and `<?xml>`.
+8. Include your new icon with `{% include 'icon-cart' %}`.
+9. Control the size and colors in CSS with `.icon-cart`.
