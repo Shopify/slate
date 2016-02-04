@@ -128,7 +128,6 @@ gulp.task('concat-js', function () {
            var viewBoxAttr = $svg.attr('viewbox');
 
            // Add necessary attributes
-           $newSvg.attr('id', fileName);
            if (viewBoxAttr) {
              $newSvg.attr('viewBox', viewBoxAttr);
            }
