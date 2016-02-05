@@ -123,7 +123,7 @@ gulp.task('concat-js', function () {
        .pipe(cheerio({
          run: function ($, file) {
            var $svg = $('svg');
-           var $newSvg = $('<svg aria-hidden="true" focusable="false" />');
+           var $newSvg = $('<svg aria-hidden="true" focusable="false" role="presentation" />');
            var fileName = file.relative.replace('.svg', '');
            var viewBoxAttr = $svg.attr('viewbox');
 
