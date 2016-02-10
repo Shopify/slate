@@ -47,7 +47,7 @@
         {% if blog.comments_enabled? %}
           <li>
             <a href="{{ article.url }}#Comments">
-              {{ 'blogs.comments.comments_with_count' | t: count: article.comments_count }}
+              {{ 'blogs.comments.with_count' | t: count: article.comments_count }}
             </a>
           </li>
         {% endif %}

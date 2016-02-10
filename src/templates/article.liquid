@@ -46,7 +46,7 @@
   {% include 'social-sharing' %}
 
   {% if blog.comments_enabled? %}
-    <h3>{{ 'blogs.comments.comments_with_count' | t: count: number_of_comments }}</h3>
+    <h3>{{ 'blogs.comments.with_count' | t: count: number_of_comments }}</h3>
 
     {% paginate article.comments by 5 %}
 

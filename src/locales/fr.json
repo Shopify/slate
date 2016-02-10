@@ -57,7 +57,7 @@
       "moderated": "Veuillez noter que les commentaires doivent être approvés avant d'être affichés",
       "success_moderated": "Votre commentaire a été soumis avec succès. Nous le publierons sous peu, suite à notre processus de modération.",
       "success": "Votre commentaire a été publié avec succès!",
-      "comments_with_count": {
+      "with_count": {
         "one": "{{ count }} commentaire",
         "other": "{{ count }} commentaires"
       }
