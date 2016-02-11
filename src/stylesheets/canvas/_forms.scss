@@ -65,7 +65,7 @@ select {
   text-overflow: '';
   cursor: pointer;
 
-  /*================ Hide the svg arrow in IE9 and below ================*/
+  /*================ Hide the svg arrow in IE9 ================*/
   .ie9 & {
     padding-right: 10px;
     background-image: none;
@@ -84,24 +84,4 @@ option {
 
 select::-ms-expand {
   display: none;
-}
-
-/*================ Form labels ================*/
-.label--hidden {
-  position: absolute;
-  height: 0;
-  width: 0;
-  margin-bottom: 0;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-
-  // No placeholders, so force show labels
-  .ie9 & {
-    position: static;
-    height: auto;
-    width: auto;
-    margin-bottom: 2px;
-    overflow: visible;
-    clip: initial;
-  }
 }

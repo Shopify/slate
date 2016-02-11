@@ -21,7 +21,6 @@ ShopifyCanvas.A11yHelpers = (function () {
     var eventName = eventNamespace ? 'focusin.' + eventNamespace : 'focusin';
 
     $container.attr('tabindex', '-1');
-
     $(document).on(eventName, function (evt) {
       if ($container[0] !== evt.target && !$container.has(evt.target).length) {
         $container.focus();
@@ -50,7 +49,6 @@ ShopifyCanvas.A11yHelpers = (function () {
         $element
           .removeClass('js-focus-hidden')
           .removeAttr('tabindex');
-
       });
     }
   };
