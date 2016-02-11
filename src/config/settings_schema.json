@@ -50,19 +50,19 @@
     "settings": [
       {
         "type": "header",
-        "content": "General Colors"
+        "content": "General colors"
       },
       {
         "type": "color",
         "id": "color_primary",
-        "label": "Primary Color",
+        "label": "Primary color",
         "default": "#000",
         "info": "Used for text links, and primary buttons"
       },
       {
         "type": "color",
         "id": "color_body_text",
-        "label": "Text Color",
+        "label": "Text color",
         "default": "#000",
         "info": "Color used for content and paragraph text"
       }
@@ -114,7 +114,7 @@
     ]
   },
   {
-    "name": "Home - Page Content",
+    "name": "Home page",
     "settings": [
       {
         "type": "paragraph",
@@ -124,16 +124,6 @@
         "type": "page",
         "id": "home_page_content",
         "label": "Choose page"
-      }
-    ]
-  },
-  {
-    "name": "Products",
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "product_vendor_enable",
-        "label": "Show product vendor"
       }
     ]
   },

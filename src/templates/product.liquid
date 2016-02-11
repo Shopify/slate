@@ -36,9 +36,7 @@
       <div class="product-single__meta">
         <h1 itemprop="name">{{ product.title }}</h1>
 
-        {% if settings.product_vendor_enable %}
-          <p itemprop="brand">{{ product.vendor }}</p>
-        {% endif %}
+        <p itemprop="brand">{{ product.vendor }}</p>
 
         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
           <meta itemprop="priceCurrency" content="{{ shop.currency }}">
