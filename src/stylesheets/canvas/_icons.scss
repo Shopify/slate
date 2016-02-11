@@ -3,8 +3,9 @@
   display: inline-block;
   width: 20px;
   height: 20px;
+  vertical-align: middle;
 
-  .supports-no-fontface & {
+  .supports-no-svg & {
     display: none;
   }
 }
@@ -31,8 +32,18 @@ symbol {
   A generic way to visually hide content while
   remaining accessible to screen readers (h5bp.com)
 ==============================================================================*/
-.supports-svg .icon__fallback-text {
+.icon__fallback-text {
   @extend .visually-hidden;
+
+  .supports-no-svg & {
+    // scss-lint:disable ImportantRule
+    position: static !important;
+    overflow: inherit;
+    clip: none;
+    height: auto;
+    width: auto;
+    margin: 0;
+  }
 }
 
 /*================ Payment Icons ================*/
