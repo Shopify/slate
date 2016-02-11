@@ -26,9 +26,7 @@
                 <small>{{ item.variant.title }}</small>
               {% endunless %}
 
-              {% if settings.product_vendor_enable %}
-                <p>{{ item.vendor }}</p>
-              {% endif %}
+              <p>{{ item.vendor }}</p>
 
               {% comment %}
                 Optional, loop through custom product line items if available
