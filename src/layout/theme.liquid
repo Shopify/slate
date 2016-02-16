@@ -154,20 +154,76 @@
   <footer class="site-footer page-width" role="contentinfo">
     <div class="grid">
       <div class="grid__item">
-        <ul class="list--inline social-icons">
-          {% if settings.social_twitter_link != blank %}
-            <li>
-              <a href="{{ settings.social_twitter_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}">
-                {% include 'icon-twitter' %}
-                Twitter
-              </a>
-            </li>
-          {% endif %}
+        <ul class="list--inline">
           {% if settings.social_facebook_link != blank %}
             <li>
               <a href="{{ settings.social_facebook_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Facebook' }}">
                 {% include 'icon-facebook' %}
-                Facebook
+                <span class="icon__fallback-text">Facebook</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if settings.social_twitter_link != blank %}
+            <li>
+              <a href="{{ settings.social_twitter_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}">
+                {% include 'icon-twitter' %}
+                <span class="icon__fallback-text">Twitter</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if settings.social_pinterest_link != blank %}
+            <li>
+              <a href="{{ settings.social_pinterest_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Pinterest' }}">
+                {% include 'icon-pinterest' %}
+                <span class="icon__fallback-text">Pinterest</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if settings.social_instagram_link != blank %}
+            <li>
+              <a href="{{ settings.social_instagram_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Instagram' }}">
+                {% include 'icon-instagram' %}
+                <span class="icon__fallback-text">Instagram</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if settings.social_tumblr_link != blank %}
+            <li>
+              <a href="{{ settings.social_tumblr_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Tumblr' }}">
+                {% include 'icon-tumblr' %}
+                <span class="icon__fallback-text">Tumblr</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if settings.social_youtube_link != blank %}
+            <li>
+              <a href="{{ settings.social_youtube_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'YouTube' }}">
+                {% include 'icon-youtube' %}
+                <span class="icon__fallback-text">YouTube</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if settings.social_vimeo_link != blank %}
+            <li>
+              <a href="{{ settings.social_vimeo_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Vimeo' }}">
+                {% include 'icon-vimeo' %}
+                <span class="icon__fallback-text">Vimeo</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if settings.social_fancy_link != blank %}
+            <li>
+              <a href="{{ settings.social_fancy_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Fancy' }}">
+                {% include 'icon-fancy' %}
+                <span class="icon__fallback-text">Fancy</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if settings.social_google_plus_link != blank %}
+            <li>
+              <a href="{{ settings.social_google_plus_link }}" rel="publisher" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Google Plus' }}">
+                {% include 'icon-google-plus' %}
+                <span class="icon__fallback-text">Google Plus</span>
               </a>
             </li>
           {% endif %}
