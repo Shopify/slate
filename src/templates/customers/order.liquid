@@ -24,7 +24,7 @@
   </thead>
   <tbody>
     {% for line_item in order.line_items %}
-    <tr id="{{ line_item.id }}" class="responsive-table__row" >
+    <tr id="{{ line_item.key }}" class="responsive-table__row" >
       <td data-label="{{ 'customer.order.product' | t }}">
         {{ line_item.title | link_to: line_item.product.url }}
         {% if line_item.fulfillment %}
