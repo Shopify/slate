@@ -1,0 +1,29 @@
+{
+  "tags": {
+    "allowUnknownTags": true
+  },
+  "source": {
+    "include": ["gulpfile.js", "tasks"]
+  },
+  "plugins": ["docs/plugins/markdown"],
+  "markdown": {
+    "tags": ["summary"]
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "applicationName": "Slate: Shopify Theme Framework",
+    "googleAnalytics": "",
+    "linenums": true
+  },
+  "opts": {
+    "template": "docs/templates/jaguarjs",
+    "encoding": "utf8",
+    "destination": "docs/js",
+    "recurse": true,
+    "verbose": true,
+    "private": false,
+    "package": "package.json",
+    "readme": "README.md"
+  }
+}

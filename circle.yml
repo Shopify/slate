@@ -1,9 +1,12 @@
 machine:
   ruby:
-    version:
-      1.9.3-p385
+    version: 1.9.3-p385
+  node:
+    version: 5.1.0
 
 dependencies:
+  pre:
+    - npm install -g npm
   bundler:
     without:
       - benchmark
