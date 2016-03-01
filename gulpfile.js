@@ -199,8 +199,7 @@ gulp.task('browser-sync', function (options) {
   config = config.development;
 
   browserSync.init({
-    proxy: 'https://' + config.store,
-    https: true
+    proxy: 'https://' + config.store
   });
 });
 
