@@ -1,9 +1,9 @@
-Canvas [![Circle CI](https://circleci.com/gh/Shopify/canvas.svg?style=svg&circle-token=7b55fa8bdc61003d81a45d4d550621646e08d117)](https://circleci.com/gh/Shopify/canvas)
+Slate [![Circle CI](https://circleci.com/gh/Shopify/canvas.svg?style=svg&circle-token=7b55fa8bdc61003d81a45d4d550621646e08d117)](https://circleci.com/gh/Shopify/canvas)
 =====================
 
-Canvas is the baseline set of tools, templates and styles for developing themes at Shopify.
+Slate is the baseline set of tools, templates and styles for developing themes at Shopify.
 
-The goal of Canvas is to provide an unopinionated set of templates and styles to speed up theme development.  Canvas captures design patterns and tools which are used by 100% of themes developed at Shopify.
+The goal of Slate is to provide an unopinionated set of templates and styles to speed up theme development. Slate captures design patterns and tools which are used by 100% of themes developed at Shopify.
 
 ## Contributing
 
@@ -15,11 +15,11 @@ Contributions and questions are always welcome in the form of PRs or Issues.  Qu
 - Steve Bosworth - @stevebosworth
 - Thomas Kelly - @t-kelly
 
-## Working with Canvas
+## Working with Slate
 
 ### Gulp and Theme Kit
 
-Any Canvas-based theme will use a combination of Gulp and [Theme Kit](https://github.com/Shopify/themekit) for development and support workflows. Once setup, only edit files in `src/`. Files will be copied to `dist/` and be a mirror image of the theme uploaded to your shop. The `dist/` folder will not be tracked in GitHub.
+Any Slate-based theme will use a combination of Gulp and [Theme Kit](https://github.com/Shopify/themekit) for development and support workflows. Once setup, only edit files in `src/`. Files will be copied to `dist/` and be a mirror image of the theme uploaded to your shop. The `dist/` folder will not be tracked in GitHub.
 
 If unsure of any step or need help, ping @cshold or @stevebosworth.
 
@@ -55,7 +55,7 @@ Follow the instructions on the [Theme Kit website](http://themekit.cat/) to inst
 
 5. Insert private app keys
   - Rename `config-sample.yml` to `config.yml`
-  - Add your private app credentials to `config.yml`. Use [this sample file](https://github.com/Shopify/canvas/blob/master/config-sample.yml) to get started. [Learn to make a private app](http://docs.shopify.com/api/authentication/creating-a-private-app).
+  - Add your private app credentials to `config.yml`. Use [this sample file](https://github.com/Shopify/slate/blob/master/config-sample.yml) to get started. [Learn to make a private app](http://docs.shopify.com/api/authentication/creating-a-private-app).
 
 ----------
 
@@ -76,7 +76,7 @@ or
 `$ gulp build`
 - Builds css/js files, compresses images, and moves all files to `dist/`
 - Files are not uploaded to your store
-- __Files in `src/` prepended with an underscore will not be uploaded to your shop.__ E.g. `src/stylesheets/_canvas.scss.liquid` will not be transfered to `assets/`.
+- __Files in `src/` prepended with an underscore will not be uploaded to your shop.__ E.g. `src/stylesheets/_slate.scss.liquid` will not be transfered to `assets/`.
 
 ----------
 
@@ -93,7 +93,7 @@ or
 
 ## SVG Icons
 
-Canvas uses SVG icons for easy maintainability and better front end performance. Place all of your SVG icons in `src/icons`, prefaced with the name `icon-`. E.g. `icon-arrow-down.svg`.
+Slate uses SVG icons for easy maintainability and better front end performance. Place all of your SVG icons in `src/icons`, prefaced with the name `icon-`. E.g. `icon-arrow-down.svg`.
 
 __Make sure the `viewBox` attribute is case sensitive.__
 

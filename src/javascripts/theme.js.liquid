@@ -1,9 +1,9 @@
 window.theme = window.theme || {};
 
-//=require _canvas.js.liquid
+//=require _slate.js.liquid
 //=require _strings.js.liquid
 
-// Add theme-related JS after _canvas.js.liquid
+// Add theme-related JS after _slate.js.liquid
 
 theme.initCache = function () {
   theme.cache = {
@@ -50,7 +50,7 @@ theme.initProductVariant = function () {
 
   // Clean up variant labels if the Shopify-defined
   // defaults are the only ones left
-  ShopifyCanvas.simplifyVariantLabels(theme.productSingleObject);
+  Slate.simplifyVariantLabels(theme.productSingleObject);
 };
 
 theme.productVariantCallback = function (variant, selector) {

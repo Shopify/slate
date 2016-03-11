@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Canvas" do
+describe "Slate" do
   FILE_KEYS = Dir["./src/**/*.liquid"].map do |path|
     match_tags(path)
   end.flatten.sort

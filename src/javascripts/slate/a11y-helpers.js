@@ -1,4 +1,4 @@
-ShopifyCanvas.A11yHelpers = (function () {
+Slate.A11yHelpers = (function () {
   var A11yHelpers = function () {
     this.init();
 

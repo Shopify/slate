@@ -1,9 +1,9 @@
 {
-  "name": "Canvas",
+  "name": "Slate",
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Shopify/canvas.git"
+    "url": "https://github.com/Shopify/slate.git"
   },
   "devDependencies": {
     "browser-sync": "2.7.3",
