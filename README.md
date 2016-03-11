@@ -1,4 +1,4 @@
-Slate [![Circle CI](https://circleci.com/gh/Shopify/canvas.svg?style=svg&circle-token=7b55fa8bdc61003d81a45d4d550621646e08d117)](https://circleci.com/gh/Shopify/canvas)
+Slate [![Circle CI](https://circleci.com/gh/Shopify/slate.svg?style=svg&circle-token=7b55fa8bdc61003d81a45d4d550621646e08d117)](https://circleci.com/gh/Shopify/slate)
 =====================
 
 Slate is the baseline set of tools, templates and styles for developing themes at Shopify.
