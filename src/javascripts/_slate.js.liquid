@@ -1,36 +1,36 @@
-window.ShopifyCanvas = window.ShopifyCanvas || {};
+window.Slate = window.Slate || {};
 
 //=require vendor/fastclick.min.js
-//=require canvas/a11y-helpers.js
+//=require slate/a11y-helpers.js
 
 /**
  *
- *  Initialize function for all ShopifyCanvas JS.
+ *  Initialize function for all Slate JS.
  *  - call any functions required on page load here.
  *
  */
-ShopifyCanvas.init = function () {
+Slate.init = function () {
   FastClick.attach(document.body);
-  new ShopifyCanvas.A11yHelpers();
-  ShopifyCanvas.checkUrlHash();
-  ShopifyCanvas.initEventListeners();
-  ShopifyCanvas.resetPasswordSuccess();
-  ShopifyCanvas.customerAddressForm();
-  ShopifyCanvas.rteElements();
-  ShopifyCanvas.giftCardTemplate();
+  new Slate.A11yHelpers();
+  Slate.checkUrlHash();
+  Slate.initEventListeners();
+  Slate.resetPasswordSuccess();
+  Slate.customerAddressForm();
+  Slate.rteElements();
+  Slate.giftCardTemplate();
 };
 
-ShopifyCanvas.initEventListeners = function () {
+Slate.initEventListeners = function () {
   //Show reset password form
   $('#RecoverPassword').on('click', function(evt) {
     evt.preventDefault();
-    ShopifyCanvas.toggleRecoverPasswordForm();
+    Slate.toggleRecoverPasswordForm();
   });
 
   //Hide reset password form
   $('#HideRecoverPasswordLink').on('click', function(evt) {
     evt.preventDefault();
-    ShopifyCanvas.toggleRecoverPasswordForm();
+    Slate.toggleRecoverPasswordForm();
   });
 };
 
@@ -39,7 +39,7 @@ ShopifyCanvas.initEventListeners = function () {
  *  Show/Hide recover password form
  *
  */
-ShopifyCanvas.toggleRecoverPasswordForm = function () {
+Slate.toggleRecoverPasswordForm = function () {
   $('#RecoverPasswordForm').toggleClass('hide');
   $('#CustomerLoginForm').toggleClass('hide');
 };
@@ -49,7 +49,7 @@ ShopifyCanvas.toggleRecoverPasswordForm = function () {
  *  Show reset password success message
  *
  */
-ShopifyCanvas.resetPasswordSuccess = function() {
+Slate.resetPasswordSuccess = function() {
   var $formState = $('.reset-password-success');
 
   //check if reset password form was successfully submited.
@@ -66,7 +66,7 @@ ShopifyCanvas.resetPasswordSuccess = function() {
  *  Show/hide customer address forms
  *
  */
-ShopifyCanvas.customerAddressForm = function () {
+Slate.customerAddressForm = function () {
   var $newAddressForm = $('#AddressNewForm');
 
   if (!$newAddressForm.length) {
@@ -119,7 +119,7 @@ ShopifyCanvas.customerAddressForm = function () {
  *  Wrap videos in div to force responsive layout.
  *
  */
-ShopifyCanvas.rteElements = function () {
+Slate.rteElements = function () {
   $('.rte table').wrap('<div class="rte__table-wrapper"></div>');
 
   var $iframeVideo = $('iframe[src*="youtube.com/embed"], iframe[src*="player.vimeo"]');
@@ -144,7 +144,7 @@ ShopifyCanvas.rteElements = function () {
  *  Adjust option_selection.js labels based on variant default values
  *
  */
-ShopifyCanvas.simplifyVariantLabels = function (product) {
+Slate.simplifyVariantLabels = function (product) {
   // option_selection.js does not add a label if there is only one variant option.
   // Add one as long as it is not 'Title' (Shopify's default), add one.
   if (product.options.length === 1 && product.options[0] !== 'Title') {
@@ -162,7 +162,7 @@ ShopifyCanvas.simplifyVariantLabels = function (product) {
  *  Gift card template helpers
  *
  */
-ShopifyCanvas.giftCardTemplate = function () {
+Slate.giftCardTemplate = function () {
   if (!$('body').hasClass('template-giftcard')) {
     return;
   }
@@ -205,14 +205,14 @@ ShopifyCanvas.giftCardTemplate = function () {
  *  Check URL for reset password hash
  *
  */
-ShopifyCanvas.checkUrlHash = function () {
+Slate.checkUrlHash = function () {
   var hash = window.location.hash;
 
   // Allow deep linking to recover password form
   if (hash == '#recover') {
-    ShopifyCanvas.toggleRecoverPasswordForm();
+    Slate.toggleRecoverPasswordForm();
   }
 };
 
-// Initialize ShopifyCanvas's JS on docready
-$(ShopifyCanvas.init);
+// Initialize Slate's JS on docready
+$(Slate.init);
