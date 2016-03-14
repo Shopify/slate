@@ -45,10 +45,6 @@
   }
 }
 
-@mixin user-select($value: none) {
-  @include prefix('user-select', #{$value}, moz ms webkit spec);
-}
-
 /*================ Media Query Mixin ================*/
 @mixin media-query($media-query) {
   $breakpoint-found: false;
