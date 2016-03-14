@@ -48,6 +48,6 @@ symbol {
 
 /*================ Payment Icons ================*/
 .payment-icons {
-  @include user-select();
+  @include prefix('user-select', 'none', moz ms webkit spec);
   cursor: default;
 }

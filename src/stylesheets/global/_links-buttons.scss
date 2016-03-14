@@ -1,11 +1,6 @@
 /*============================================================================
   #Links & Buttons
 ==============================================================================*/
-
-a {
-  color: $color-primary;
-}
-
 .text-link {
   display: inline;
   border: 0 none;
@@ -14,9 +9,8 @@ a {
   margin: 0;
 }
 
-// Buttons
 .btn {
-  @include user-select();
+  @include prefix('user-select', 'none', moz ms webkit spec);
   @include prefix(appearance, none, webkit moz spec);
   display: inline-block;
   width: auto;
