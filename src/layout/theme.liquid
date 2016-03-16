@@ -227,13 +227,16 @@
       </div>
 
       {% unless shop.enabled_payment_types == empty %}
+        {% assign payment_icons_available = 'amazon_payments,american_express,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,google,interac,jcb,laser,litecoin,maestro,master,paypal,solo,stripe,switch,visa' | split: ',' %}
         <div class="grid__item">
           <ul class="list--inline payment-icons">
             {% for type in shop.enabled_payment_types %}
-              <li>
-                {% assign icon_name = type | prepend: 'icon-' %}
-                {% include icon_name %}
-              </li>
+              {% if payment_icons_available contains type %}
+                <li>
+                  {% assign icon_name = type | prepend: 'icon-' %}
+                  {% include icon_name %}
+                </li>
+              {% endif %}
             {% endfor %}
           </ul>
         </div>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.6.1 (26313) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-litecoin</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon-litecoin" fill="#222222">
+            <path d="M8,0 C3.58857143,0 0,3.58857143 0,8 C0,12.4114286 3.58857143,16 8,16 C12.4114286,16 16,12.4114286 16,8 C16,3.58857143 12.4114286,0 8,0 L8,0 Z M11.0628571,11.8171429 L4.75428571,11.8171429 L5.39428571,9.34857143 L4.52571429,9.66857143 L4.75428571,8.68571429 L5.64571429,8.36571429 L6.69714286,4.20571429 L9.25714286,4.20571429 L8.36571429,7.36 L9.39428571,6.97142857 L9.09714286,7.97714286 L8.06857143,8.34285714 L7.49714286,10.3542857 L11.4514286,10.3542857 L11.0628571,11.8171429 L11.0628571,11.8171429 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>
