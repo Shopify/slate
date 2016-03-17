@@ -92,9 +92,7 @@
 
             {% else %}
               {{ 'layout.customer.log_in' | t | customer_login_link }}
-              {% if shop.customer_accounts_optional %}
               | {{ 'layout.customer.create_account' | t | customer_register_link }}
-              {% endif %}
             {% endif %}
 
           </div>
