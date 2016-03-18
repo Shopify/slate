@@ -1,7 +1,8 @@
 ---
 
 scss_files: 'src/stylesheets/**/*.scss'
-exclude: 'vendor/**/*'
+exclude:
+  - 'src/stylesheets/global/_normalize.scss'
 
 linters:
   # Border 0 required when enabled
