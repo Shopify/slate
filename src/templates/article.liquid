@@ -15,7 +15,7 @@
   {% assign number_of_comments = article.comments_count | plus: 1 %}
 {% endif %}
 
-<article class="page-width" itemscope itemtype="http://schema.org/Article">
+<article itemscope itemtype="http://schema.org/Article">
 
   {% if article.image %}
     {{ article | img_url: '1024x1024' | img_tag: article.title }}
@@ -56,7 +56,7 @@
       <div id="comments">
 
         {% if comment and comment.created_at %}
-          <p class="note form-success">
+          <p class="form-success">
             {% if blog.moderated? %}
               {{ 'blogs.comments.success_moderated' | t }}
             {% else %}
@@ -66,18 +66,18 @@
         {% endif %}
 
         {% if number_of_comments > 0 %}
-          <ul class="comments">
+          <ul>
             {% comment %}
               If a comment was just submitted with no blank field, show it.
             {% endcomment %}
             {% if comment and comment.created_at %}
-              <li id="{{ comment.id }}" class="comment">
+              <li id="{{ comment.id }}">
                 {% include 'comment' %}
               </li>
             {% endif %}
 
             {% for comment in article.comments %}
-              <li id="{{ comment.id }}" class="comment">
+              <li id="{{ comment.id }}">
                 {% include 'comment' %}
               </li>
             {% endfor %}
@@ -90,37 +90,32 @@
           {% endif %}
         {% endif %}
 
-        <div class="comment-form">
-          {% form 'new_comment', article %}
+        {% form 'new_comment', article %}
+          <h3>{{ 'blogs.comments.title' | t }}</h3>
 
-            <h3>{{ 'blogs.comments.title' | t }}</h3>
+          {{ form.errors | default_errors }}
 
-            {{ form.errors | default_errors }}
+          <p>
+            <label for="CommentAuthor" class="label--hidden">{{ 'blogs.comments.name' | t }}</label>
+            <input type="text" name="comment[author]" id="CommentAuthor" class="{% if form.errors contains 'author' %} input--error{% endif %}" placeholder="{{ 'blogs.comments.name' | t }}" value="{{ form.author }}" autocapitalize="words">
+          </p>
 
-            <div class="grid">
+          <p>
+            <label for="CommentEmail" class="label--hidden">{{ 'blogs.comments.email' | t }}</label>
+            <input type="email" name="comment[email]" id="CommentEmail" class="{% if form.errors contains 'email' %} input--error{% endif %}" placeholder="{{ 'blogs.comments.email' | t }}" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
+          </p>
 
-              <div class="grid__item">
-                <label for="CommentAuthor" class="label--hidden">{{ 'blogs.comments.name' | t }}</label>
-                <input type="text" name="comment[author]" id="CommentAuthor" class="input-full{% if form.errors contains 'author' %} input--error{% endif %}" placeholder="{{ 'blogs.comments.name' | t }}" value="{{ form.author }}" autocapitalize="words">
+          <p>
+            <label for="CommentBody" class="label--hidden">{{ 'blogs.comments.message' | t }}</label>
+            <textarea name="comment[body]" id="CommentBody" class="{% if form.errors contains 'body' %} input--error{% endif %}" placeholder="{{ 'blogs.comments.message' | t }}">{{ form.body }}</textarea>
+          </p>
 
-                <label for="CommentEmail" class="label--hidden">{{ 'blogs.comments.email' | t }}</label>
-                <input type="email" name="comment[email]" id="CommentEmail" class="input-full{% if form.errors contains 'email' %} input--error{% endif %}" placeholder="{{ 'blogs.comments.email' | t }}" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
-              </div>
+          {% if blog.moderated? %}
+            <p>{{ 'blogs.comments.moderated' | t }}</p>
+          {% endif %}
 
-              <div class="grid__item">
-                <label for="CommentBody" class="label--hidden">{{ 'blogs.comments.message' | t }}</label>
-                <textarea name="comment[body]" id="CommentBody" class="input-full{% if form.errors contains 'body' %} input--error{% endif %}" placeholder="{{ 'blogs.comments.message' | t }}">{{ form.body }}</textarea>
-              </div>
-
-            </div>
-
-            {% if blog.moderated? %}
-              <p>{{ 'blogs.comments.moderated' | t }}</p>
-            {% endif %}
-
-            <input type="submit" class="btn" value="{{ 'blogs.comments.post' | t }}">
-          {% endform %}
-        </div>
+          <input type="submit" class="btn" value="{{ 'blogs.comments.post' | t }}">
+        {% endform %}
 
       </div>
     {% endpaginate %}

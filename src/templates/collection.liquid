@@ -10,10 +10,13 @@
     {% endif %}
 
     {% if collection.all_tags.size > 0 %}
-      <ul class="tags">
+      <ul>
         {% for tag in collection.all_tags %}
           {% if current_tags contains tag %}
-            <li class="tag--active">
+            {% comment %}
+              Your currently active tag
+            {% endcomment %}
+            <li>
               {{ tag | link_to_remove_tag: tag }}
             </li>
           {% else %}
@@ -26,11 +29,10 @@
     {% endif %}
   </header>
 
-  <div class="grid grid--uniform">
-
+  <div>
     {% for product in collection.products %}
-      <div class="grid__item">
-        <a href="{{ product.url | within: collection }}" class="collection-grid__image">
+      <div>
+        <a href="{{ product.url | within: collection }}">
           <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
         </a>
 
@@ -70,12 +72,6 @@
         </p>
       </div>
     {% else %}
-      {% comment %}
-        Add default products to help with onboarding for collections/all only.
-
-        The onboarding styles and products are only loaded if the
-        store has no products.
-      {% endcomment %}
       {% if collection.handle == 'all' %}
         {% unless onboardingLoaded %}
           {% comment %}
@@ -84,42 +80,40 @@
           {{ 'theme-onboarding.css' | global_asset_url | stylesheet_tag }}
           {% assign onboardingLoaded = true %}
         {% endunless %}
-        <div class="grid__item">
-          <div class="helper-section">
-            <div class="helper-note">
-              <span class="helper-icon"></span>
-              <h3>{{ 'collections.onboarding.modal_title' | t }}</h3>
-              <p>{{ 'collections.onboarding.no_products_html' | t }}</p>
-              <p><a href="/admin/products/new" class="admin-btn-primary">{{ 'collections.onboarding.add_product' | t }}</a></p>
-            </div>
+        <div class="helper-section">
+          <div class="helper-note">
+            <span class="helper-icon"></span>
+            <h3>{{ 'collections.onboarding.modal_title' | t }}</h3>
+            <p>{{ 'collections.onboarding.no_products_html' | t }}</p>
+            <p><a href="/admin/products/new" class="admin-btn-primary">{{ 'collections.onboarding.add_product' | t }}</a></p>
+          </div>
 
-            <div class="grid grid--uniform helper-content">
-              {% assign collection_index = 1 %}
-              {% for i in (1..8) %}
-                {% case i %}
-                  {% when 7 %}
-                    {% assign collection_index = 1 %}
-                  {% when 8 %}
-                    {% assign collection_index = 2 %}
-                {% endcase %}
-                <div class="grid__item small--one-half medium-up--one-quarter">
-                  <a href="/admin/products" class="grid__image">
-                    {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ collection_index }}.png{% endcapture %}
-                    {{ imageUrl | img_tag }}
-                  </a>
-                  <p><a href="/admin/products">{{ 'homepage.onboarding.product_title' | t }}</a></p>
-                  <p>$19.99</p>
-                </div>
-                {% assign collection_index = collection_index | plus: 1 %}
-              {% endfor %}
-            </div>
+          <div class="helper-content">
+            {% assign collection_index = 1 %}
+            {% for i in (1..8) %}
+              {% case i %}
+                {% when 7 %}
+                  {% assign collection_index = 1 %}
+                {% when 8 %}
+                  {% assign collection_index = 2 %}
+              {% endcase %}
+              <div>
+                <a href="/admin/products">
+                  {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ collection_index }}.png{% endcapture %}
+                  {{ imageUrl | img_tag }}
+                </a>
+                <p><a href="/admin/products">{{ 'homepage.onboarding.product_title' | t }}</a></p>
+                <p>$19.99</p>
+              </div>
+              {% assign collection_index = collection_index | plus: 1 %}
+            {% endfor %}
           </div>
         </div>
       {% else %}
         {% comment %}
-          If collection exists but is empty, display message
+          The collection exists but is empty, display message
         {% endcomment %}
-        <div class="grid__item">
+        <div>
           <p>{{ 'collections.general.no_matches' | t }}</p>
         </div>
       {% endif %}
@@ -131,6 +125,5 @@
       {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
     </div>
   {% endif %}
-</div>
 
 {% endpaginate %}

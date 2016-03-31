@@ -7,11 +7,9 @@
 <p>{{ 'customer.order.date' | t: date: order.created_at | date: "%B %d, %Y %I:%M%p" }}</p>
 
 {% if order.cancelled %}
-  <div class="order--cancelled">
-    {% assign cancelled_at = order.cancelled_at | date: "%B %d, %Y %I:%M%p" %}
-    <p>{{ 'customer.order.cancelled' | t: date: cancelled_at }}</p>
-    <p>{{ 'customer.order.cancelled_reason' | t: reason: order.cancel_reason }}</p>
-  </div>
+  {% assign cancelled_at = order.cancelled_at | date: "%B %d, %Y %I:%M%p" %}
+  <p>{{ 'customer.order.cancelled' | t: date: cancelled_at }}</p>
+  <p>{{ 'customer.order.cancelled_reason' | t: reason: order.cancel_reason }}</p>
 {% endif %}
 
 <table class="responsive-table">
@@ -30,7 +28,7 @@
       <td data-label="{{ 'customer.order.product' | t }}">
         {{ line_item.title | link_to: line_item.product.url }}
         {% if line_item.fulfillment %}
-          <div class="note">
+          <div>
             {% assign created_at = line_item.fulfillment.created_at | date: format: 'month_day_year' %}
             {{ 'customer.order.fulfilled_at' | t: date: created_at }}
             {% if line_item.fulfillment.tracking_number %}
@@ -53,7 +51,7 @@
     </tr>
 
     {% for discount in order.discounts %}
-      <tr class="order_summary discount">
+      <tr>
         <td colspan="4" class="small--hide">{{ discount.code }} {{ 'customer.order.discount' | t }}</td>
         <td data-label="{{ 'customer.order.discount' | t }}">{{ discount.savings | money }}</td>
       </tr>

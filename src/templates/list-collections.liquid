@@ -5,23 +5,21 @@
 
 <h1>{{ page_title }}</h1>
 
-<div class="grid grid--uniform">
-  {% for collection in collections %}
-    {% unless collection.handle == 'frontpage' %}
+{% for collection in collections %}
+  {% unless collection.handle == 'frontpage' %}
 
-      <div class="grid__item">
-        {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+    <div>
+      {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
 
-        <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" class="grid__image">
-          {% if collection.image %}
-            {{ collection | img_url: 'large' | img_tag: collection_title }}
-          {% else %}
-            {{ collection.products.first | img_url: 'large' | img_tag: collection_title }}
-          {% endif %}
-        </a>
-        <p><a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ collection.title }}</a></p>
-      </div>
+      <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">
+        {% if collection.image %}
+          {{ collection | img_url: 'large' | img_tag: collection_title }}
+        {% else %}
+          {{ collection.products.first | img_url: 'large' | img_tag: collection_title }}
+        {% endif %}
+      </a>
+      <p><a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ collection.title }}</a></p>
+    </div>
 
-    {% endunless %}
-  {% endfor %}
-</div>
+  {% endunless %}
+{% endfor %}

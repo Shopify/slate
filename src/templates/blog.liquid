@@ -1,8 +1,6 @@
 <!-- /templates/blog.liquid -->
 {% paginate blog.articles by 5 %}
 
-<div class="page-width">
-
   {% if current_tags %}
     <h1>{{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}</h1>
   {% else %}
@@ -72,7 +70,5 @@
       {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
     </div>
   {% endif %}
-
-</div>
 
 {% endpaginate %}

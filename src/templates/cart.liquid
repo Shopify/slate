@@ -2,9 +2,9 @@
 {% if cart.item_count > 0 %}
 
   <h1>{{ 'cart.general.title' | t }}</h1>
-  <form action="/cart" method="post" novalidate class="cart">
+  <form action="/cart" method="post" novalidate>
     <table class="responsive-table">
-      <thead class="cart__row cart__header-labels small--hide">
+      <thead class="small--hide">
         <th colspan="2">{{ 'cart.label.product' | t }}</th>
         <th>{{ 'cart.label.price' | t }}</th>
         <th>{{ 'cart.label.quantity' | t }}</th>
@@ -12,9 +12,9 @@
       </thead>
       <tbody>
         {% for item in cart.items %}
-          <tr class="cart__row responsive-table__row">
+          <tr class="responsive-table__row">
             <td data-label="{{ 'customer.order.product' | t }}">
-              <a href="{{ item.url | within: collections.all }}" class="cart__image">
+              <a href="{{ item.url | within: collections.all }}">
                 <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
               </a>
             </td>
@@ -56,7 +56,7 @@
                 {% endfor %}
               {% endif %}
 
-              <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="cart__remove">
+              <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
                 <small>{{ 'cart.general.remove' | t }}</small>
               </a>
             </td>
@@ -77,19 +77,17 @@
         {% endfor %}
       </tbody>
     </table>
-    <div class="grid cart__row">
+    <div>
       {% if settings.cart_notes_enable %}
-        <div class="grid__item">
+        <div>
           <label for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>
           <textarea name="note" id="CartSpecialInstructions">{{ cart.note }}</textarea>
         </div>
       {% endif %}
-      <div class="grid__item">
-        <p>
-          <span class="cart__subtotal-title">{{ 'cart.general.subtotal' | t }}</span>
-          <span class="cart__subtotal">{{ cart.total_price | money }}</span>
-        </p>
-        <p><em>{{ 'cart.general.shipping_at_checkout' | t }}</em></p>
+      <div>
+        <p>{{ 'cart.general.subtotal' | t }}</p>
+        <p>{{ cart.total_price | money }}</p>
+        <p>{{ 'cart.general.shipping_at_checkout' | t }}</p>
         <input type="submit" name="update" value="{{ 'cart.general.update' | t }}">
         <input type="submit" name="checkout" class="btn" value="{{ 'cart.general.checkout' | t }}">
       </div>
