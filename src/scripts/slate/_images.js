@@ -3,94 +3,61 @@ window.slate = window.slate || {};
 /**
  * Image Helper Functions
  * -----------------------------------------------------------------------------
- * A collection of functions that help with basic image operations.
- *
+ * A collection of functions that help with basic Shopify image operations.
  */
 
 slate.images = {
 
   /**
-   * Preloads an image in memory and uses the browsers cache to store it until needed.
-   *
-   * @param {Array} images - A list of image urls
-   * @param {String} size - A shopify image size attribute
-   */
-
-  preload: function(images, size) {
-    for (var i = 0; i < images.length; i++) {
-      var image = images[i];
-
-      this.loadImage(this.getSizedImageUrl(image, size));
-    }
-  },
-
-  /**
-   * Loads and caches an image in the browsers cache.
-   * @param {string} path - An image url
-   */
-  loadImage: function(path) {
-    new Image().src = path;
-  },
-
-  /**
-   * Swaps the src of an image for another OR returns the imageURL to the callback function
-   * @param image
-   * @param element
-   * @param callback
-   */
-  switchImage: function(image, element, callback) {
-    var size = this.imageSize(element.src);
-    var imageUrl = this.getSizedImageUrl(image.src, size);
-
-    if (callback) {
-      callback(imageUrl, image, element);
-    } else {
-      element.src = imageUrl;
-    }
-  },
-
-  /**
-   * +++ Useful
    * Find the Shopify image attribute size
    *
-   * @param {string} src
-   * @returns {null}
+   * @param {string} src - URL of image
+   * @returns {string | null} - Returns size of image or null if not found
    */
   imageSize: function(src) {
-    var match = src.match(/_(1024x1024|2048x2048|pico|icon|thumb|small|compact|medium|large|grande)\./);
-    return match !== null ? match[1] : null;
+    var imageSizes = ['pico', 'icon', 'thumb', 'small', 'compact', 'medium', 'large', 'grande', '1024x1024', '2048x2048'];
+    return src.match(new RegExp('/_(' + imageSizes.join('|') + ')\./'))[1];
   },
 
   /**
-   * +++ Useful
-   * Adds a Shopify size attribute to a URL
+   * Get the file extension from an image URL
    *
-   * @param src
-   * @param size
-   * @returns {*}
+   * @param {string} src - URL of image
+   * @returns {string | null} - Returns extension of image or null if not found
    */
-  getSizedImageUrl: function(src, size) {
-    if (size == null) {
-      return src;
-    }
-
-    if (size === 'master') {
-      return this.removeProtocol(src);
-    }
-
-    var match = src.match(/\.(jpg|jpeg|gif|png|bmp|bitmap|tiff|tif)(\?v=\d+)?$/i);
-
-    if (match != null) {
-      var prefix = src.split(match[0]);
-      var suffix = match[0];
-
-      return this.removeProtocol(prefix[0] + "_" + size + suffix);
-    } else {
-      return null;
-    }
+  imageExtension: function(src) {
+    var imageExtensions = ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'bitmap', 'tiff', 'tif'];
+    return src.match(new RegExp('/\.(' + imageExtensions.join('|') + ')(\?v=\d+)?$', 'i'))[1];
   },
 
-  removeProtocol: function(path) {
-    return path.replace(/http(s)?:/, "");
+  /**
+   * Get the master URL for an image
+   *
+   * @param {string} src - URL of image
+   * @returns {string} - URL of master image
+   */
+  masterImage: function(src) {
+    var srcSize = this.imageSize(src) || 'master';
+    if (srcSize !== 'master') {
+      src = src.replace(new RegExp('_' + srcSize), '');
+    }
+    return src.replace(/http(s)?:/, '');
+  },
+
+  /**
+   * Get the URL for a specific size of image if specified, otherwise return the
+   * master URL.
+   *
+   * @param {string} src - URL of image
+   * @param {string} [size] - Shopify image size string
+   * @returns {string} - URL of sized iamge
+   */
+  sizedImage: function(src, size) {
+    var srcExt = this.imageExtension(src);
+    src = this.masterImage(src);
+    if (size !== 'master') {
+      src = src.replace(new RegExp('.' + srcExt), '_' + size + '.' + srcExt);
+    }
+    return src;
   }
 };
