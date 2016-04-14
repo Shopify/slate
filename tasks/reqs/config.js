@@ -61,7 +61,7 @@ var config = {
   environment: 'development',
   paths: {
     srcScss: 'src/stylesheets/**/*.*',
-    srcJs: 'src/javascripts/**/*.*',
+    srcJs: 'src/scripts/**/*.*',
     srcIcons: 'src/icons/**/*.svg',
     srcBase: 'src/',
     srcAssets: [
@@ -77,7 +77,7 @@ var config = {
       'src/stylesheets/[^_]*.*'
     ],
     parentIncludeJs: [
-      'src/javascripts/[^_]*.*'
+      'src/scripts/[^_]*.*'
     ],
     scss: 'src/stylesheets/**/*.scss',
     images: 'src/images/*.{png,jpg,gif}',
