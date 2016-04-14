@@ -37,7 +37,7 @@ linters:
   # enforce @extend and @include declaration order
   # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#declarationorder
   DeclarationOrder:
-    enabled: true
+    enabled: false
 
   # Won’t work if we’re adding rgb fallbacks for example
   # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md#duplicateproperty
