@@ -3,7 +3,7 @@ var gutil = require('gulp-util');
 
 exports.publish = function(data, opts) {
   if (typeof opts.destination === 'undefined') {
-    gutil.log('destination must be provided (via comma');
+    gutil.log('destination must be provided');
   } else {
     var docs = data().get().filter(function(doc) {
       return !doc.undocumented;
