@@ -70,7 +70,8 @@ var config = {
       'src/snippets/*.*',
       'src/locales/*.*',
       'src/config/*.*',
-      'src/layout/*.*'
+      'src/layout/*.*',
+      'src/sections/*.*'
     ],
     yamlConfig: 'config.yml',
     parentIncludeScss: [
