@@ -70,7 +70,8 @@ var config = {
       'src/snippets/*.*',
       'src/locales/*.*',
       'src/config/*.*',
-      'src/layout/*.*'
+      'src/layout/*.*',
+      'src/sections/*.*'
     ],
     yamlConfig: 'config.yml',
     parentIncludeScss: [
@@ -79,7 +80,7 @@ var config = {
     parentIncludeJs: [
       'src/scripts/[^_]*.*'
     ],
-    scss: 'src/stylesheets/**/*.scss',
+    scss: 'src/stylesheets/**/*.{scss, scss.liquid}',
     images: 'src/images/*.{png,jpg,gif}',
     destAssets: 'dist/assets',
     destSnippets: 'dist/snippets',
