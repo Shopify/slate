@@ -1,11 +1,7 @@
 {% layout none %}
-{% assign formatted_initial_value = gift_card.initial_value | money_without_trailing_zeros: gift_card.currency %}
-{% assign formatted_initial_value_stripped = formatted_initial_value | strip_html %}
-
 <!doctype html>
-<!--[if IE 9]><html class="ie9 no-js" lang="{{ shop.locale }}"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="{{ shop.locale }}"> <!--<![endif]-->
-
+<!--[if IE 9]> <html class="ie9 supports-no-js" lang="{{ shop.locale }}"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="supports-no-js" lang="{{ shop.locale }}"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -17,19 +13,17 @@
     <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png" />
   {% endif %}
 
+  {% assign formatted_initial_value = gift_card.initial_value | money_without_trailing_zeros: gift_card.currency %}
+  {% assign formatted_initial_value_stripped = formatted_initial_value | strip_html %}
   <title>{{ 'gift_cards.issued.title' | t: value: formatted_initial_value_stripped, shop: shop.name }}</title>
   <meta name="description" content="{{ 'gift_cards.issued.subtext' | t }}">
 
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
 
   {{ content_for_header }}
-
-  {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
-  {{ 'modernizr.gift-card.js' | shopify_asset_url | script_tag }}
 </head>
 
-<body id="{{ page_title | handle }}" class="template-giftcard">
-
+<body class="template-giftcard">
   <div class="text-center">
 
     <header class="giftcard__header" role="banner">
@@ -107,6 +101,5 @@
 
   {{ 'vendor/qrcode.js' | shopify_asset_url | script_tag }}
   {{ 'theme.js' | asset_url | script_tag }}
-
 </body>
 </html>
