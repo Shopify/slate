@@ -3,6 +3,8 @@
 ==============================================================================*/
 @include media-query($small) {
   .responsive-table {
+    width: 100%;
+
     thead {
       display: none;
     }

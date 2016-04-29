@@ -27,7 +27,7 @@ gulp.task('build:scss', function() {
  * @static
  */
 gulp.task('watch:scss', function() {
-  chokidar.watch([config.paths.scss], {ignoreInitial: true})
+  chokidar.watch([config.paths.srcScss], {ignoreInitial: true})
     .on('all', function(event, path) {
       messages.logFileEvent(event, path);
       processScss();
