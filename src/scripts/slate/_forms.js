@@ -263,7 +263,7 @@ slate.OptionSelectorsFromDOM = function(existingSelectorId, options){
   Shopify.OptionSelectorsFromDOM.baseConstructor.call(this, existingSelectorId, options);
 };
 
-slate.extend(slate.OptionSelectorsFromDOM, slate.OptionSelectors);
+// slate.extend(slate.OptionSelectorsFromDOM, slate.OptionSelectors);
 
 // updates the product_json from existing select element
 slate.OptionSelectorsFromDOM.prototype.createProductFromSelector = function(domId, optionNames, priceFieldExists, delimiter) {
