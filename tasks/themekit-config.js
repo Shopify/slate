@@ -6,6 +6,7 @@ var chokidar = require('chokidar');
 var config = require('./reqs/config.js');
 var utils = require('./reqs/utilities.js');
 var messages = require('./reqs/messages.js');
+var events = require('./reqs/events.js');
 
 
 /**
@@ -24,9 +25,10 @@ gulp.task('build:config', function() {
 
 gulp.task('watch:config', function() {
   chokidar.watch([config.paths.yamlConfig], {ignoreInitial: true})
-    .on('change', function(event, path) {
+    .on('all', function(event, path) {
       messages.logFileEvent(event, path);
       processConfig(path);
+      events.emitEvt('stop-watchers');
     });
 });
 

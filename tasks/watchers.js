@@ -7,10 +7,13 @@ var fs = require('fs');
 var config = require('./reqs/config.js');
 var utils = require('./reqs/utilities.js');
 var messages = require('./reqs/messages.js');
+var events = require('./reqs/events.js');
 
 var activeDeploy = false;
 var cache = utils.createEventCache();
 var debouncedDeployStatus = _.debounce(checkDeployStatus, 320); // prevent early execution on multi-file events
+
+// var myEmitter = new Events();
 
 
 /**
@@ -53,6 +56,11 @@ gulp.task('watch:dist', function() {
     messages.logFileEvent(event, path);
     cache.addEvent(event, path);
     debouncedDeployStatus();
+  });
+
+  events.onEvt('stop-watchers', function() {
+    console.log('stop');
+    console.log(watcher.close());
   });
 });
 
