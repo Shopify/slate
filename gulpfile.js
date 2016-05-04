@@ -38,7 +38,6 @@ require('require-dir')('./tasks');
  * @memberof slate-cli.tasks
  */
 
-
 /**
  * __dependencies:__  `[build:scss, build:js, build:assets, build:config, build:svg, build:img]`
  * Does a full (re)build of the `dist` directory, based on the state of files from
@@ -74,7 +73,18 @@ gulp.task('build:clean', function() {
  * @memberof slate-cli.tasks.watch
  * @static
  */
-gulp.task('watch', ['watch:src', 'watch:dist']);
+gulp.task('watch', defineWatchTasks());
+
+function defineWatchTasks() {
+  var tasks = ['watch:src', 'watch:dist'];
+
+  // unless --nosync flag is set, start browser-sync
+  if (!argv.nosync) {
+    tasks.push('deploy:sync-reload');
+  }
+
+  return tasks;
+}
 
 /**
  * Does a full (re)build followed by a full deploy, cleaning existing files on the
@@ -112,12 +122,6 @@ gulp.task('deploy:manual', function(done) {
  * @memberof slate-cli.tasks
  * @static
  */
-gulp.task('default', getDefaultTasks());
-
-function getDefaultTasks() {
-  var tasks = ['build', 'watch'];
-  if (argv.sync) {
-    tasks.push('deploy:sync-reload');
-  }
-  return tasks;
-}
+gulp.task('default', function(done) {
+  runSequence('deploy', 'watch', done);
+});
