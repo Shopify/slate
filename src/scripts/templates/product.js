@@ -31,7 +31,7 @@ theme.product = (function () {
 
   // Clean up variant labels if the Shopify-defined
   // defaults are the only ones left
-  self.simplifyVariantLabels(theme.productSingleObject);
+  simplifyVariantLabels(theme.productSingleObject);
 
   /**
    * Updates the product page once a varient is selected. Changes button

@@ -15,8 +15,8 @@ theme.password = (function() {
   };
 
 
-  this.checkUrlHash();
-  this.resetPasswordSuccess();
+  checkUrlHash();
+  resetPasswordSuccess();
 
   $(config.recoverPasswordForm).on('click', onShowHidePasswordForm);
   $(config.hideRecoverPasswordLink).on('click', onShowHidePasswordForm);
