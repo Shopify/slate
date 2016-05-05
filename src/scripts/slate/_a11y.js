@@ -59,19 +59,26 @@ slate.a11y = {
   /**
    * Traps the focus in a particular container
    *
-   * @param {JQuery} $container - Container to be acted upon
-   * @param {string} namespace - Namespace used for new focus event handler
+   * @param {object} options - Options to be used
+   * @param {jQuery} options.$container - Container to trap focus within
+   * @param {jQuery} options.$elementToFocus - Element to be focused when focus leaves container
+   * @param {string} options.namespace - Namespace used for new focus event handler
    */
-  trapFocus: function ($container, namespace) {
-    var eventName = namespace
-      ? 'focusin.' + namespace
+  trapFocus: function (options) {
+    var eventName = options.eventNamespace
+      ? 'focusin.' + eventNamespace
       : 'focusin';
 
-    $container.attr('tabindex', '-1');
+    if (!options.hasOwnProperty('$elementToFocus')) {
+      options.$elementToFocus = options.$container;
+      options.$container.attr('tabindex', '-1');
+    }
+
+    options.$elementToFocus.focus();
 
     $(document).on(eventName, function (evt) {
-      if ($container[0] !== evt.target && !$container.has(evt.target).length) {
-        $container.focus();
+      if (options.$container[0] !== evt.target && !options.$container.has(evt.target).length) {
+        options.$container.focus();
       }
     });
   },
@@ -79,13 +86,19 @@ slate.a11y = {
   /**
    * Removes the trap of focus in a particular container
    *
-   * @param {JQuery} $container - Container to be acted upon
-   * @param {string} namespace - Namespace used for new focus event handler
+   * @param {object} options - Options to be used
+   * @param {jQuery} options.$container - Container to trap focus within
+   * @param {string} options.namespace - Namespace used for new focus event handler
    */
-  removeTrapFocus: function ($container, namespace) {
-    var eventName = namespace ? 'focusin.' + namespace : 'focusin';
+  removeTrapFocus: function (options) {
+    var eventName = options.namespace
+      ? 'focusin.' + options.namespace
+      : 'focusin';
 
-    $container.removeAttr('tabindex');
+    if (options.hasOwnProperty('$container')) {
+      options.$container.removeAttr('tabindex');
+    }
+
     $(document).off(eventName);
   }
 };
