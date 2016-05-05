@@ -33,16 +33,10 @@ symbol {
   remaining accessible to screen readers (h5bp.com)
 ==============================================================================*/
 .icon__fallback-text {
-  @extend .visually-hidden;
+  @include visually-hidden();
 
   .supports-no-svg & {
-    // scss-lint:disable ImportantRule
-    position: static !important;
-    overflow: inherit;
-    clip: none;
-    height: auto;
-    width: auto;
-    margin: 0;
+    @include visually-shown(static);
   }
 }
 
