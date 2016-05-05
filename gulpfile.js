@@ -66,6 +66,11 @@ gulp.task('build:clean', function() {
   return del(['*.zip', 'dist']);
 });
 
+
+gulp.task('build:zip', function(done) {
+  runSequence('build:clean', 'build', 'zip', done);
+});
+
 /**
  * Simple wrapper around src & dist watchers
  * @summary Monitor your codebase for file changes and take the appropriate action
@@ -103,14 +108,14 @@ gulp.task('deploy', function(done) {
 /**
  * Provides a simple kickoff for manual uploads of themes by clean/(re)building `dist`
  * zipping the files, and opening up the appropriate URL for manual upload of theme
- * files
+ * files to the Themes Store
  *
- * @function deploy:manual
+ * @function deploy:themes-store
  * @memberof slate-cli.tasks.deploy
  * @static
  */
-gulp.task('deploy:manual', function(done) {
-  runSequence('build:clean', 'build', 'deploy:zip', 'deploy:open-sfe', done);
+gulp.task('deploy:themes-store', function(done) {
+  runSequence('build:clean', 'build', 'zip', 'open', done);
 });
 
 /**

@@ -58,9 +58,8 @@ gulp.task('watch:dist', function() {
     debouncedDeployStatus();
   });
 
-  events.onEvt('stop-watchers', function() {
+  events.onEvt('error', function() {
     console.log('stop');
-    console.log(watcher.close());
   });
 });
 

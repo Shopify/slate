@@ -28,7 +28,7 @@ gulp.task('watch:config', function() {
     .on('all', function(event, path) {
       messages.logFileEvent(event, path);
       processConfig(path);
-      events.emitEvt('stop-watchers');
+      events.emitEvt(error, new Error('crash'));
     });
 });
 

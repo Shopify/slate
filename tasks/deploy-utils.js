@@ -5,6 +5,7 @@ var zip = require('gulp-zip');
 var plumber = require('gulp-plumber');
 var Promise = require('bluebird');
 var open = Promise.promisify(require('open'));
+var pkg = require('../package.json');
 
 var config = require('./reqs/config.js');
 var utils = require('./reqs/utilities.js');
@@ -20,28 +21,33 @@ gulp.task('deploy:replace', function() {
 });
 
 /**
- * compress theme and prepare it for the theme store
- * @function deploy:zip
+ * compress theme and prepare it for the Themes store
+ * @function zip
  * @memberof slate-cli.tasks.deploy
  * @static
  */
-gulp.task('deploy:zip', function() {
-  var distFiles = config.paths.dist + '**/*.*';
+gulp.task('zip', function() {
+  var distFiles = config.paths.dist;
   var distConfig = config.paths.dist + 'config.yml';
+
+  console.log(distFiles);
+  console.log(distConfig);
+  console.log(pkg.name);
 
   return gulp.src([distFiles, '!' + distConfig])
     .pipe(plumber(utils.errorHandler))
-    .pipe(zip(config.zipFileName))
+    .pipe(zip(pkg.name + '.zip'))
     .pipe(gutil.log('zip file created'))
     .pipe(gulp.dest('./'));
 });
 
 /**
- * Opens your Storefront Editor in the default browser (for manual upgrade/deployment).
- * @function deploy:open-sfe
+ * Opens the Themes Store in the default browser (for manual upgrade/deployment)
+ * for themes available on the Themes Store
+ * @function open
  * @memberof slate-cli.tasks.deploy
  * @static
  */
-gulp.task('deploy:open-sfe', function() {
+gulp.task('open', function() {
   return open({uri: config.storeURI});
 });
