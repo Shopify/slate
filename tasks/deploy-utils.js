@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var gutil = require('gulp-util');
 var spawn = require('child_process').spawn;
 var zip = require('gulp-zip');
 var plumber = require('gulp-plumber');
@@ -27,17 +26,12 @@ gulp.task('deploy:replace', function() {
  * @static
  */
 gulp.task('zip', function() {
-  var distFiles = config.paths.dist;
+  var distFiles = config.paths.dist + '**/*';
   var distConfig = config.paths.dist + 'config.yml';
-
-  console.log(distFiles);
-  console.log(distConfig);
-  console.log(pkg.name);
 
   return gulp.src([distFiles, '!' + distConfig])
     .pipe(plumber(utils.errorHandler))
     .pipe(zip(pkg.name + '.zip'))
-    .pipe(gutil.log('zip file created'))
     .pipe(gulp.dest('./'));
 });
 

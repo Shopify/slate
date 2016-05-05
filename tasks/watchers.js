@@ -7,7 +7,6 @@ var fs = require('fs');
 var config = require('./reqs/config.js');
 var utils = require('./reqs/utilities.js');
 var messages = require('./reqs/messages.js');
-var events = require('./reqs/events.js');
 
 var activeDeploy = false;
 var cache = utils.createEventCache();
@@ -56,10 +55,6 @@ gulp.task('watch:dist', function() {
     messages.logFileEvent(event, path);
     cache.addEvent(event, path);
     debouncedDeployStatus();
-  });
-
-  events.onEvt('error', function() {
-    console.log('stop');
   });
 });
 

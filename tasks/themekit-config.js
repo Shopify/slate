@@ -6,7 +6,6 @@ var chokidar = require('chokidar');
 var config = require('./reqs/config.js');
 var utils = require('./reqs/utilities.js');
 var messages = require('./reqs/messages.js');
-var events = require('./reqs/events.js');
 
 
 /**
@@ -28,7 +27,7 @@ gulp.task('watch:config', function() {
     .on('all', function(event, path) {
       messages.logFileEvent(event, path);
       processConfig(path);
-      events.emitEvt(error, new Error('crash'));
+      throw new Error('Config.yml was changed. Restart your tasks and do a fresh deploy to see changes on your store');
     });
 });
 
