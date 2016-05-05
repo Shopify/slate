@@ -67,7 +67,7 @@ slate.a11y = {
       ? 'focusin.' + namespace
       : 'focusin';
 
-    $container.attr('tabindex', '-1');
+    $container.attr('tabindex', '-1').focus();
 
     $(document).on(eventName, function (evt) {
       if ($container[0] !== evt.target && !$container.has(evt.target).length) {
