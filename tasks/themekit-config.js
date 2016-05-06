@@ -24,9 +24,10 @@ gulp.task('build:config', function() {
 
 gulp.task('watch:config', function() {
   chokidar.watch([config.paths.yamlConfig], {ignoreInitial: true})
-    .on('change', function(event, path) {
+    .on('all', function(event, path) {
       messages.logFileEvent(event, path);
       processConfig(path);
+      throw new Error('Config.yml was changed. Restart your tasks and do a fresh deploy to see changes on your store');
     });
 });
 

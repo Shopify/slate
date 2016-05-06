@@ -12,7 +12,6 @@ var activeDeploy = false;
 var cache = utils.createEventCache();
 var debouncedDeployStatus = _.debounce(checkDeployStatus, 320); // prevent early execution on multi-file events
 
-
 /**
  * Aggregate task watching for file changes in `src` and building/cleaning/updating
  * `dist` accordingly.  *Made up of individual tasks referenced in other files

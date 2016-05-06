@@ -66,6 +66,18 @@ gulp.task('build:clean', function() {
   return del(['*.zip', 'dist']);
 });
 
+
+/**
+ * Does a full clean/rebuild of your theme and creates a `.zip` compatible with
+ * shopify.
+ * @function zip
+ * @memberof slate-cli.tasks.build
+ * @static
+ */
+gulp.task('zip', function(done) {
+  runSequence('build:clean', 'build', 'zip', done);
+});
+
 /**
  * Simple wrapper around src & dist watchers
  * @summary Monitor your codebase for file changes and take the appropriate action
@@ -103,14 +115,26 @@ gulp.task('deploy', function(done) {
 /**
  * Provides a simple kickoff for manual uploads of themes by clean/(re)building `dist`
  * zipping the files, and opening up the appropriate URL for manual upload of theme
- * files
+ * files to the Themes Store
  *
- * @function deploy:manual
+ * @function deploy:themes-store
+ * @memberof slate-cli.tasks.deploy
+ * @static
+ */
+gulp.task('deploy:themes-store', function(done) {
+  runSequence('zip', 'open', done);
+});
+
+/**
+ * Creates a zip of your theme and opens the store from `config.yml` to manually
+ * install a theme from the zip
+ *
+ * @function deploy:themes-store
  * @memberof slate-cli.tasks.deploy
  * @static
  */
 gulp.task('deploy:manual', function(done) {
-  runSequence('build:clean', 'build', 'deploy:zip', 'deploy:open-sfe', done);
+  runSequence('zip', 'open:sfe', done);
 });
 
 /**

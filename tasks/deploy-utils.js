@@ -1,10 +1,14 @@
+/* eslint-disable no-sync */
+
 var gulp = require('gulp');
-var gutil = require('gulp-util');
 var spawn = require('child_process').spawn;
 var zip = require('gulp-zip');
 var plumber = require('gulp-plumber');
 var Promise = require('bluebird');
 var open = Promise.promisify(require('open'));
+var pkg = require('../package.json');
+var yaml = require('js-yaml');
+var fs = require('fs');
 
 var config = require('./reqs/config.js');
 var utils = require('./reqs/utilities.js');
@@ -20,28 +24,40 @@ gulp.task('deploy:replace', function() {
 });
 
 /**
- * compress theme and prepare it for the theme store
- * @function deploy:zip
+ * Compress theme and build a shopify-compatible `.zip` file for uploading to store
+ * @function compress
  * @memberof slate-cli.tasks.deploy
  * @static
  */
-gulp.task('deploy:zip', function() {
-  var distFiles = config.paths.dist + '**/*.*';
+gulp.task('compress', function() {
+  var distFiles = config.paths.dist + '**/*';
   var distConfig = config.paths.dist + 'config.yml';
 
   return gulp.src([distFiles, '!' + distConfig])
     .pipe(plumber(utils.errorHandler))
-    .pipe(zip(config.zipFileName))
-    .pipe(gutil.log('zip file created'))
+    .pipe(zip(pkg.name + '.zip'))
     .pipe(gulp.dest('./'));
 });
 
 /**
- * Opens your Storefront Editor in the default browser (for manual upgrade/deployment).
- * @function deploy:open-sfe
+ * Opens the Themes Store in the default browser (for manual upgrade/deployment)
+ * for themes available on the Themes Store
+ * @function open
  * @memberof slate-cli.tasks.deploy
  * @static
  */
-gulp.task('deploy:open-sfe', function() {
+gulp.task('open', function() {
   return open({uri: config.storeURI});
+});
+
+/**
+ * Opens the Store in the default browser (for manual upgrade/deployment)
+ * @function open
+ * @memberof slate-cli.tasks.deploy
+ * @static
+ */
+gulp.task('open:sfe', function() {
+  var shopUrl = yaml.safeLoad(fs.readFileSync('./' + config.paths.yamlConfig, 'utf8'));
+  var editUrl = 'https://' + shopUrl[config.environment].store + '/admin/themes';
+  return open(editUrl);
 });
