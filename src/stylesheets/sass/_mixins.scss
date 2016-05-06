@@ -95,3 +95,25 @@
     text-align: center !important;
   }
 }
+
+@mixin visually-hidden() {
+  // scss-lint:disable ImportantRule
+  position: absolute !important;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+@mixin visually-shown($position: inherit) {
+  // scss-lint:disable ImportantRule
+  position: $position !important;
+  overflow: auto;
+  clip: auto;
+  width: auto;
+  height: auto;
+  margin: 0;
+}

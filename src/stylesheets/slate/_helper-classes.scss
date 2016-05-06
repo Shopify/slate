@@ -4,15 +4,7 @@
 }
 
 .visually-hidden {
-  // scss-lint:disable ImportantRule
-  position: absolute !important;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  width: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
+  @include visually-hidden();
 }
 
 .js-focus-hidden:focus {
@@ -20,33 +12,23 @@
 }
 
 .label--hidden {
-  position: absolute;
-  height: 0;
-  width: 0;
-  margin-bottom: 0;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
+  @include visually-hidden();
 
   // No placeholders, so force show labels
   .supports-no-placeholder & {
-    position: static;
-    height: auto;
-    width: auto;
-    margin-bottom: 2px;
-    overflow: visible;
-    clip: initial;
+    @include visually-shown();
   }
 }
 
+.visually-shown {
+  @include visually-shown();
+}
 /*============================================================================
   Skip to content button
     - Overrides .visually-hidden when focused
 ==============================================================================*/
 .skip-link:focus {
-  clip: auto;
-  width: auto;
-  height: auto;
-  margin: 0;
+  @include visually-shown(absolute);
   color: $color-body-text;
   background-color: $color-body;
   padding: $gutter / 2;
