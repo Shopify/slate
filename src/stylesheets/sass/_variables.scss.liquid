@@ -16,9 +16,9 @@ $large-down: 'large-down';
 $large-up: 'large-up';
 $widescreen: 'widescreen';
 
-// The `$grid-breakpoints` list is used to build our media queries.
+// The `$breakpoints` list is used to build our media queries.
 // You can use these in the media-query mixin.
-$grid-breakpoints: (
+$breakpoints: (
   $small '(max-width: #{$grid-medium - 1})',
   $medium '(min-width: #{$grid-medium}) and (max-width: #{$grid-large - 1})',
   $medium-down '(max-width: #{$grid-large - 1})',
@@ -31,12 +31,12 @@ $grid-breakpoints: (
 
 /*============================================================================
   Generate breakpoint-specific column widths and push classes
-    - Default column widths: $grid-breakpoint-has-widths: ($small, $medium-up);
+    - Default column widths: $breakpoint-has-widths: ($small, $medium-up);
     - Default is no push classes
     - Will not work if `theme/_grid.scss` is removed
 ==============================================================================*/
-$grid-breakpoint-has-widths: ($small, $medium-up);
-$grid-breakpoint-has-push: ();
+$breakpoint-has-widths: ($small, $medium-up);
+$breakpoint-has-push: ();
 
 /*================ Color Variables ================*/
 $color-primary: {{ settings.color_primary }};

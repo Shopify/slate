@@ -49,7 +49,7 @@
 @mixin media-query($media-query) {
   $breakpoint-found: false;
 
-  @each $breakpoint in $grid-breakpoints {
+  @each $breakpoint in $breakpoints {
     $name: nth($breakpoint, 1);
     $declaration: nth($breakpoint, 2);
 
@@ -68,30 +68,30 @@
 }
 
 /*================ Responsive Show/Hide Helper ================*/
-@mixin responsive-display-helper($grid-breakpoint-type:'') {
+@mixin responsive-display-helper($breakpoint:'') {
   // scss-lint:disable ImportantRule
-  .#{$grid-breakpoint-type}show {
+  .#{$breakpoint}show {
     display: block !important;
   }
 
-  .#{$grid-breakpoint-type}hide {
+  .#{$breakpoint}hide {
     display: none !important;
   }
 }
 
 
 /*================ Responsive Text Alignment Helper ================*/
-@mixin responsive-text-align-helper($grid-breakpoint-type:'') {
+@mixin responsive-text-align-helper($breakpoint:'') {
   // scss-lint:disable ImportantRule
-  .#{$grid-breakpoint-type}text-left {
+  .#{$breakpoint}text-left {
     text-align: left !important;
   }
 
-  .#{$grid-breakpoint-type}text-right {
+  .#{$breakpoint}text-right {
     text-align: right !important;
   }
 
-  .#{$grid-breakpoint-type}text-center {
+  .#{$breakpoint}text-center {
     text-align: center !important;
   }
 }
