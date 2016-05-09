@@ -69,7 +69,7 @@ slate.a11y = {
       ? 'focusin.' + eventNamespace
       : 'focusin';
 
-    if (!options.hasOwnProperty('$elementToFocus')) {
+    if (!options.$elementToFocus) {
       options.$elementToFocus = options.$container;
       options.$container.attr('tabindex', '-1');
     }
@@ -95,7 +95,7 @@ slate.a11y = {
       ? 'focusin.' + options.namespace
       : 'focusin';
 
-    if (options.hasOwnProperty('$container')) {
+    if (options.$container && options.$container.length) {
       options.$container.removeAttr('tabindex');
     }
 
