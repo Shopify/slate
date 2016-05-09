@@ -35,5 +35,9 @@
     "run-sequence": "1.1.5",
     "vinyl-paths": "2.1.0",
     "yargs": "4.2.0"
+  },
+  "devDependencies": {
+    "gulp-eslint": "^2.0.0",
+    "gulp-notify": "^2.2.0"
   }
 }

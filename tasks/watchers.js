@@ -27,6 +27,7 @@ gulp.task('watch:src',
     'watch:svg',
     'watch:img',
     'watch:scss-lint',
+    'watch:eslint',
     'watch:scss',
     'watch:js'
   ]

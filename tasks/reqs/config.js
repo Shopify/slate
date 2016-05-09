@@ -85,7 +85,8 @@ var config = {
     destAssets: 'dist/assets',
     destSnippets: 'dist/snippets',
     deployLog: 'deploy.log',
-    dist: 'dist/'
+    dist: 'dist/',
+    eslintReport: 'eslint-report.json'
   },
   plugins: {
     cheerio: {run: utils.processSvg},
