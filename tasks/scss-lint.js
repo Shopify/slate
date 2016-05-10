@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var cached = require('gulp-cached');
 var scssLint = require('gulp-scss-lint');
 var plumber = require('gulp-plumber');
 var chokidar = require('chokidar');
@@ -7,7 +6,6 @@ var notify = require('gulp-notify');
 
 var config = require('./reqs/config.js');
 var utils = require('./reqs/utilities.js');
-var messages = require('./reqs/messages.js');
 
 
 /**
@@ -29,7 +27,7 @@ gulp.task('build:scss-lint', function() {
  */
 gulp.task('watch:scss-lint', function() {
   chokidar.watch([config.paths.srcScss], {ignoreInitial: true})
-    .on('all', function(event, path) {
+    .on('all', function() {
       return processLint();
     });
 });

@@ -27,7 +27,6 @@ gulp.task('watch:config', function() {
     .on('all', function(event, path) {
       messages.logFileEvent(event, path);
       processConfig(path);
-      throw new Error('Config.yml was changed. Restart your tasks and do a fresh deploy to see changes on your store');
     });
 });
 
