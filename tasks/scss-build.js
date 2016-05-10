@@ -15,7 +15,7 @@ var messages = require('./reqs/messages.js');
  * @memberof slate-cli.tasks.build
  * @static
  */
-gulp.task('build:scss', function() {
+gulp.task('build:scss', ['build:scss-lint'], function() {
   return processScss();
 });
 
@@ -26,7 +26,7 @@ gulp.task('build:scss', function() {
  * @memberof slate-cli.tasks.watch
  * @static
  */
-gulp.task('watch:scss', function() {
+gulp.task('watch:scss', ['build:scss-lint'], function() {
   chokidar.watch([config.paths.srcScss], {ignoreInitial: true})
     .on('all', function(event, path) {
       messages.logFileEvent(event, path);

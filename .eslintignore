@@ -1,0 +1,2 @@
+src/scripts/vendor
+src/scripts/**/_*.js.liquid
