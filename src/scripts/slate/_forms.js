@@ -88,7 +88,7 @@ slate.OptionSelectors.prototype.initDropdown = function() {
     var self = this;
     setTimeout(function() {
       if (!self.selectVariantFromParams(options)) {
-        self.fireOnChangeForFirstDropdown.call(self, options);
+        self.fireOnChangeForFirstDropdown(self, options);
       }
     });
   }
@@ -254,10 +254,13 @@ slate.OptionSelectors.prototype.updateSelectors = function(index, options) {
 slate.OptionSelectorsFromDOM = function(existingSelectorId, options) {
   // build product json from selectors
   // create new options hash
-  var optionNames = options.optionNames || [];
-  var priceFieldExists = options.priceFieldExists || true;
-  var delimiter = options.delimiter || '/';
-  var productObj = this.createProductFromSelector(existingSelectorId, optionNames, priceFieldExists, delimiter);
+  var productSelector = {
+    existingSelectorId: existingSelectorId,
+    optionNames: options.optionNames || [],
+    priceFieldExists: options.priceFieldExists || true,
+    delimiter: options.delimiter || '/'
+  };
+  var productObj = this.createProductFromSelector(productSelector);
   options.product = productObj;
   Shopify.OptionSelectorsFromDOM.baseConstructor.call(this, existingSelectorId, options);
 };
@@ -265,30 +268,29 @@ slate.OptionSelectorsFromDOM = function(existingSelectorId, options) {
 // slate.extend(slate.OptionSelectorsFromDOM, slate.OptionSelectors);
 
 // updates the product_json from existing select element
-slate.OptionSelectorsFromDOM.prototype.createProductFromSelector = function(domId, optionNames, priceFieldExists, delimiter) {
-  if (!Shopify.isDefined(priceFieldExists)) { priceFieldExists = true; }
-  if (!Shopify.isDefined(delimiter)) { delimiter = '/'; }
+slate.OptionSelectorsFromDOM.prototype.createProductFromSelector = function(options) {
+  if (!Shopify.isDefined(options.priceFieldExists)) { options.priceFieldExists = true; }
+  if (!Shopify.isDefined(options.delimiter)) { options.delimiter = '/'; }
 
-  var oldSelector = document.getElementById(domId);
-  var options = oldSelector.childNodes;
+  var oldSelector = document.getElementById(options.domId);
+  var oldOptions = oldSelector.childNodes;
   var parent = oldSelector.parentNode;
 
-  var optionCount = optionNames.length;
+  var optionCount = options.optionNames.length;
 
   // build product json + messages array
   var variants = [];
   var self = this;
-  Shopify.each(options, function(option, variantIndex) {
-    if (option.nodeType == 1 && option.tagName.toLowerCase() == 'option') {
-      var chunks = option.innerHTML.split(new RegExp('\\s*\\'+ delimiter +'\\s*'));
+  Shopify.each(oldOptions, function(option) {
+    if (option.nodeType === 1 && option.tagName.toLowerCase() === 'option') {
+      var chunks = option.innerHTML.split(new RegExp('\\s*\\'+ options.delimiter +'\\s*'));
 
-      if (optionNames.length == 0) {
-        optionCount = chunks.length - (priceFieldExists ? 1 : 0);
+      if (options.optionNames.length === 0) {
+        optionCount = chunks.length - (options.priceFieldExists ? 1 : 0);
       }
 
       var optionOptionValues = chunks.slice(0, optionCount);
-      var message = (priceFieldExists ? chunks[optionCount] : '');
-      var variantId = option.getAttribute('value');
+      var message = (options.priceFieldExists ? chunks[optionCount] : '');
 
       var attributes = {
         available: (option.disabled ? false : true),
@@ -298,15 +300,16 @@ slate.OptionSelectorsFromDOM.prototype.createProductFromSelector = function(domI
         option2: optionOptionValues[1],
         option3: optionOptionValues[2]
       };
+
       variants.push(attributes);
     }
   });
   var updateObj = {variants: variants};
-  if (optionNames.length === 0) {
+  if (options.optionNames.length === 0) {
     updateObj.options = [];
     for (var i = 0; i < optionCount; i++) { updateObj.options[i] = ('option ' + (i + 1)); }
   } else {
-    updateObj.options = optionNames;
+    updateObj.options = options.optionNames;
   }
   return updateObj;
 };
@@ -420,7 +423,7 @@ slate.CountryProvinceSelector.prototype = {
       this.provinceContainer.style.display = 'none';
     } else {
       for (var i = 0; i < provinces.length; i++) {
-        var opt = document.createElement('option');
+        opt = document.createElement('option');
         opt.value = provinces[i][0];
         opt.innerHTML = provinces[i][1];
         this.provinceEl.appendChild(opt);
