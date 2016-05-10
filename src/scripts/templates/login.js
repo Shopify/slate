@@ -49,7 +49,7 @@ theme.password = (function() {
   function resetPasswordSuccess() {
     var $formState = $('.reset-password-success');
 
-    //check if reset password form was successfully submited.
+    // check if reset password form was successfully submited.
     if (!$formState.length) {
       return;
     }

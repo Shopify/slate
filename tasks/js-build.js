@@ -14,7 +14,7 @@ var messages = require('./reqs/messages.js');
  * @memberof slate-cli.tasks.build
  * @static
  */
-gulp.task('build:js', ['build:eslint'], function() {
+gulp.task('build:js', function() {
   processJs();
 });
 

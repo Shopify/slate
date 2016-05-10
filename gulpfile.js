@@ -50,7 +50,7 @@ require('require-dir')('./tasks');
  */
 gulp.task('build', function(done) {
   runSequence(
-    ['build:scss', 'build:js', 'build:assets', 'build:config'],
+    ['build:scss', 'build:eslint', 'build:js', 'build:assets', 'build:config'],
     ['build:svg', 'build:img'],
     done
   );

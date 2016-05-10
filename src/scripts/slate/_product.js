@@ -24,7 +24,7 @@ slate.Product.prototype.update = function(json) {
 
 // returns array of option names for product
 slate.Product.prototype.optionNames = function() {
-  if (Shopify.getClass(this.options) == 'Array') {
+  if (Shopify.getClass(this.options) === 'Array') {
     return this.options;
   } else {
     return [];
@@ -35,8 +35,8 @@ slate.Product.prototype.optionNames = function() {
 slate.Product.prototype.optionValues = function(index) {
   if (!Shopify.isDefined(this.variants)) { return null; }
   var results = Shopify.map(this.variants, function(e) {
-    var option_col = "option" + (index+1);
-    return (e[option_col] == undefined) ? null : e[option_col];
+    var optionCol = 'option' + (index + 1);
+    return (e[optionCol] === undefined) ? null : e[optionCol];
   });
   return (results[0] == null ? null : Shopify.uniq(results));
 };
@@ -44,17 +44,17 @@ slate.Product.prototype.optionValues = function(index) {
 // return the variant object if exists with given values, otherwise return null
 slate.Product.prototype.getVariant = function(selectedValues) {
   var found = null;
-  if (selectedValues.length != this.options.length) { return found; }
+  if (selectedValues.length !== this.options.length) { return found; }
 
   Shopify.each(this.variants, function(variant) {
     var satisfied = true;
     for (var j = 0; j < selectedValues.length; j++) {
-      var option_col = "option"+(j+1);
-      if (variant[option_col] != selectedValues[j]) {
+      var optionCol = 'option' + (j + 1);
+      if (variant[optionCol] !== selectedValues[j]) {
         satisfied = false;
       }
     }
-    if (satisfied == true) {
+    if (satisfied === true) {
       found = variant;
       return;
     }
@@ -66,10 +66,10 @@ slate.Product.prototype.getVariantById = function(id) {
   for (var i = 0; i < this.variants.length; i++) {
     var variant = this.variants[i];
 
-    if (id == variant.id) {
+    if (id === variant.id) {
       return variant;
     }
   }
 
   return null;
-}
+};
