@@ -88,7 +88,7 @@ gulp.task('zip', function(done) {
 gulp.task('watch', defineWatchTasks());
 
 function defineWatchTasks() {
-  var tasks = ['watch:src', 'watch:dist'];
+  var tasks = ['watch:src', 'watch:dist', 'watch:dist-config'];
 
   // unless --nosync flag is set, start browser-sync
   if (!argv.nosync) {
