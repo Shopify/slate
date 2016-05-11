@@ -34,10 +34,12 @@ slate.Product.prototype.optionNames = function() {
 // returns array of all option values (in order) for a given option name index
 slate.Product.prototype.optionValues = function(index) {
   if (!Shopify.isDefined(this.variants)) { return null; }
+
   var results = Shopify.map(this.variants, function(e) {
     var optionCol = 'option' + (index + 1);
     return (e[optionCol] === undefined) ? null : e[optionCol];
   });
+
   return (results[0] == null ? null : Shopify.uniq(results));
 };
 
