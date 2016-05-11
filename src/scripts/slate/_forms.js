@@ -16,38 +16,37 @@ slate.forms = {
    *
    * @returns {Shopify.CountryProvinceSelector}
    */
-  addressObserver: function () {
-    if (!Shopify) { return }
+  addressObserver: function() {
+    if (!Shopify) { return false; }
 
-    return new Shopify.CountryProvinceSelector('AddressCountryNew', 'AddressProvinceNew', {
-      hideElement: 'AddressProvinceContainerNew'
-    });
+    return new Shopify.CountryProvinceSelector('AddressCountryNew', 'AddressProvinceNew', {hideElement: 'AddressProvinceContainerNew'});
   },
 
   /**
    * Initializes a new instance of a Shopify Country and Province selector
    *
-   * @param $element {jquery selection}
+   * @param $el {jquery selection}
    * @returns {Shopify.CountryProvinceSelector}
    */
-  countryProvinceSelector: function($element) {
-      var formId = $element.data('form-id');
-      var countrySelector = 'AddressCountry_' + formId;
-      var provinceSelector = 'AddressProvince_' + formId;
-      var containerSelector = 'AddressProvinceContainer_' + formId;
+  countryProvinceSelector: function($el) {
+    var formId = $el.data('form-id');
+    var countrySelector = 'AddressCountry_' + formId;
+    var provinceSelector = 'AddressProvince_' + formId;
+    var containerSelector = 'AddressProvinceContainer_' + formId;
 
-      return new Shopify.CountryProvinceSelector(countrySelector, provinceSelector, { hideElement: containerSelector });
+    return new Shopify.CountryProvinceSelector(countrySelector, provinceSelector, {hideElement: containerSelector});
   },
 
   /**
    *
-   * @param $element
+   * @param $el
    */
-  deleteAddressInput: function($element) {
-    var formId = $element.data('form-id');
+  deleteAddressInput: function($el) {
+
+    var formId = $el.data('form-id');
     var confirmMessage = $el.data('confirm-message');
-    if (confirm(confirmMessage || "Are you sure you wish to delete this address?")) {
-      Shopify.postLink('/account/addresses/' + formId, {'parameters': { '_method': 'delete' }});
+    if (confirm(confirmMessage || 'Are you sure you wish to delete this address?')) {
+      Shopify.postLink('/account/addresses/' + formId, {parameters: {_method: 'delete'}});
     }
   }
 
@@ -60,16 +59,16 @@ slate.forms = {
 
 
 slate.OptionSelectors = function(existingSelectorId, options) {
-  this.selectorDivClass       = 'selector-wrapper';
-  this.selectorClass          = 'single-option-selector';
+  this.selectorDivClass = 'selector-wrapper';
+  this.selectorClass = 'single-option-selector';
   this.variantIdFieldIdSuffix = '-variant-id';
 
-  this.variantIdField    = null;
-  this.historyState      = null;
-  this.selectors         = [];
-  this.domIdPrefix       = existingSelectorId;
-  this.product           = new Shopify.Product(options.product);
-  this.onVariantSelected = Shopify.isDefined(options.onVariantSelected) ? options.onVariantSelected : function(){};
+  this.variantIdField = null;
+  this.historyState = null;
+  this.selectors = [];
+  this.domIdPrefix = existingSelectorId;
+  this.product = new Shopify.Product(options.product);
+  this.onVariantSelected = Shopify.isDefined(options.onVariantSelected) ? options.onVariantSelected : function() {};
 
   this.replaceSelector(existingSelectorId); // create the dropdowns
   this.initDropdown();
@@ -81,13 +80,13 @@ slate.OptionSelectors = function(existingSelectorId, options) {
   return true;
 };
 
-slate.OptionSelectors.prototype.initDropdown = function () {
+slate.OptionSelectors.prototype.initDropdown = function() {
   var options = {initialLoad: true};
   var successDropdownSelection = this.selectVariantFromDropdown(options);
 
   if (!successDropdownSelection) {
     var self = this;
-    setTimeout(function () {
+    setTimeout(function() {
       if (!self.selectVariantFromParams(options)) {
         self.fireOnChangeForFirstDropdown.call(self, options);
       }
@@ -95,12 +94,12 @@ slate.OptionSelectors.prototype.initDropdown = function () {
   }
 };
 
-slate.OptionSelectors.prototype.fireOnChangeForFirstDropdown = function (options) {
+slate.OptionSelectors.prototype.fireOnChangeForFirstDropdown = function(options) {
   this.selectors[0].element.onchange(options);
 };
 
-slate.OptionSelectors.prototype.selectVariantFromParamsOrDropdown = function (options) {
-  var success = this.selectVariantFromParams(options)
+slate.OptionSelectors.prototype.selectVariantFromParamsOrDropdown = function(options) {
+  var success = this.selectVariantFromParams(options);
 
   if (!success) {
     this.selectVariantFromDropdown(options);
@@ -118,7 +117,7 @@ slate.OptionSelectors.prototype.replaceSelector = function(domId) {
   this.variantIdField = oldSelector;
 };
 
-slate.OptionSelectors.prototype.selectVariantFromDropdown = function (options) {
+slate.OptionSelectors.prototype.selectVariantFromDropdown = function(options) {
   // get selected variant from hidden dropdown
   var option = document.getElementById(this.domIdPrefix).querySelector('[selected]');
 
@@ -135,13 +134,13 @@ slate.OptionSelectors.prototype.selectVariantFromDropdown = function (options) {
   return this.selectVariant(variantId, options);
 };
 
-slate.OptionSelectors.prototype.selectVariantFromParams = function (options) {
-  var variantId = Shopify.urlParam("variant");
+slate.OptionSelectors.prototype.selectVariantFromParams = function(options) {
+  var variantId = Shopify.urlParam('variant');
   return this.selectVariant(variantId, options);
 };
 
-slate.OptionSelectors.prototype.selectVariant = function (variantId, options) {
-  var variant  = this.product.getVariantById(variantId);
+slate.OptionSelectors.prototype.selectVariant = function(variantId, options) {
+  var variant = this.product.getVariantById(variantId);
 
   if (variant == null) {
     return false;
@@ -149,7 +148,7 @@ slate.OptionSelectors.prototype.selectVariant = function (variantId, options) {
 
   for (var i = 0; i < this.selectors.length; i++) {
     var element = this.selectors[i].element;
-    var optionName = element.getAttribute("data-option")
+    var optionName = element.getAttribute('data-option');
     var value = variant[optionName];
     if (value == null || !this.optionExistInSelect(element, value)) {
       continue;
@@ -167,9 +166,9 @@ slate.OptionSelectors.prototype.selectVariant = function (variantId, options) {
   return true;
 };
 
-slate.OptionSelectors.prototype.optionExistInSelect = function (select, value) {
+slate.OptionSelectors.prototype.optionExistInSelect = function(select, value) {
   for (var i = 0; i < select.options.length; i++) {
-    if (select.options[i].value == value) {
+    if (select.options[i].value === value) {
       return true;
     }
   }
@@ -180,7 +179,7 @@ slate.OptionSelectors.prototype.optionExistInSelect = function (select, value) {
 slate.OptionSelectors.prototype.insertSelectors = function(domId, messageElementId) {
   if (Shopify.isDefined(messageElementId)) { this.setMessageElement(messageElementId); }
 
-  this.domIdPrefix = "product-" + this.product.id + "-variant-selector";
+  this.domIdPrefix = 'product-' + this.product.id + '-variant-selector';
 
   var parent = document.getElementById(domId);
   Shopify.each(this.buildSelectors(), function(el) {
@@ -232,7 +231,7 @@ slate.OptionSelectors.prototype.selectedValues = function() {
 // callback when a selector is updated.
 slate.OptionSelectors.prototype.updateSelectors = function(index, options) {
   var currValues = this.selectedValues(); // get current values
-  var variant    = this.product.getVariant(currValues);
+  var variant = this.product.getVariant(currValues);
   if (variant) {
     this.variantIdField.disabled = false;
     this.variantIdField.value = variant.id; // update hidden selector with new variant id
@@ -252,7 +251,7 @@ slate.OptionSelectors.prototype.updateSelectors = function(index, options) {
 //
 // ---------------------------------------------------------------------------
 
-slate.OptionSelectorsFromDOM = function(existingSelectorId, options){
+slate.OptionSelectorsFromDOM = function(existingSelectorId, options) {
   // build product json from selectors
   // create new options hash
   var optionNames = options.optionNames || [];
@@ -267,8 +266,8 @@ slate.OptionSelectorsFromDOM = function(existingSelectorId, options){
 
 // updates the product_json from existing select element
 slate.OptionSelectorsFromDOM.prototype.createProductFromSelector = function(domId, optionNames, priceFieldExists, delimiter) {
-  if (!Shopify.isDefined(priceFieldExists)) { var priceFieldExists = true; }
-  if (!Shopify.isDefined(delimiter)) { var delimiter = '/'; }
+  if (!Shopify.isDefined(priceFieldExists)) { priceFieldExists = true; }
+  if (!Shopify.isDefined(delimiter)) { delimiter = '/'; }
 
   var oldSelector = document.getElementById(domId);
   var options = oldSelector.childNodes;
@@ -293,7 +292,7 @@ slate.OptionSelectorsFromDOM.prototype.createProductFromSelector = function(domI
 
       var attributes = {
         available: (option.disabled ? false : true),
-        id:  parseFloat(option.value),
+        id: parseFloat(option.value),
         price: message,
         option1: optionOptionValues[0],
         option2: optionOptionValues[1],
@@ -302,10 +301,10 @@ slate.OptionSelectorsFromDOM.prototype.createProductFromSelector = function(domI
       variants.push(attributes);
     }
   });
-  var updateObj = { variants: variants };
-  if (optionNames.length == 0) {
+  var updateObj = {variants: variants};
+  if (optionNames.length === 0) {
     updateObj.options = [];
-    for (var i=0;i<optionCount;i++) { updateObj.options[i] = ('option ' + (i + 1)) }
+    for (var i = 0; i < optionCount; i++) { updateObj.options[i] = ('option ' + (i + 1)); }
   } else {
     updateObj.options = optionNames;
   }
@@ -330,7 +329,7 @@ slate.SingleOptionSelector = function(multiSelector, index, name, values) {
     this.element.appendChild(opt);
   }
   this.element.setAttribute('class', this.multiSelector.selectorClass);
-  this.element.setAttribute('data-option', 'option' + (index+1));
+  this.element.setAttribute('data-option', 'option' + (index + 1));
   this.element.id = multiSelector.domIdPrefix + '-option-' + index;
   this.element.onchange = function(event, options) {
     options = options || {};
@@ -347,27 +346,27 @@ slate.SingleOptionSelector = function(multiSelector, index, name, values) {
 // Gets events from Push State
 // ---------------------------------------------------------------------------
 
-slate.OptionSelectors.HistoryState = function (optionSelector) {
+slate.OptionSelectors.HistoryState = function(optionSelector) {
   if (this.browserSupports()) {
     this.register(optionSelector);
   }
 };
 
-slate.OptionSelectors.HistoryState.prototype.register = function (optionSelector) {
-  window.addEventListener("popstate", function(event) {
+slate.OptionSelectors.HistoryState.prototype.register = function(optionSelector) {
+  window.addEventListener('popstate', function() {
     optionSelector.selectVariantFromParamsOrDropdown({popStateCall: true});
   });
 };
 
-slate.OptionSelectors.HistoryState.prototype.onVariantChange = function (variant, selector, data) {
+slate.OptionSelectors.HistoryState.prototype.onVariantChange = function(variant, selector, data) {
   if (this.browserSupports()) {
     if (variant && !data.initialLoad && !data.popStateCall) {
-      Shopify.setParam("variant", variant.id);
+      Shopify.setParam('variant', variant.id);
     }
   }
 };
 
-slate.OptionSelectors.HistoryState.prototype.browserSupports = function () {
+slate.OptionSelectors.HistoryState.prototype.browserSupports = function() {
   return window.history && window.history.replaceState;
 };
 
@@ -386,12 +385,12 @@ slate.OptionSelectors.HistoryState.prototype.browserSupports = function () {
  *     ...
  *   </select>
  */
-slate.CountryProvinceSelector = function(country_domid, province_domid, options) {
-  this.countryEl         = document.getElementById(country_domid);
-  this.provinceEl        = document.getElementById(province_domid);
-  this.provinceContainer = document.getElementById(options['hideElement'] || province_domid);
+slate.CountryProvinceSelector = function(countryDomId, provinceDomId, options) {
+  this.countryEl = document.getElementById(countryDomId);
+  this.provinceEl = document.getElementById(provinceDomId);
+  this.provinceContainer = document.getElementById(options.hideElement || provinceDomId);
 
-  Shopify.addListener(this.countryEl, 'change', Shopify.bind(this.countryHandler,this));
+  Shopify.addListener(this.countryEl, 'change', Shopify.bind(this.countryHandler, this));
 
   this.initCountry();
   this.initProvince();
@@ -411,13 +410,13 @@ slate.CountryProvinceSelector.prototype = {
     }
   },
 
-  countryHandler: function(e) {
-    var opt       = this.countryEl.options[this.countryEl.selectedIndex];
-    var raw       = opt.getAttribute('data-provinces');
+  countryHandler: function() {
+    var opt = this.countryEl.options[this.countryEl.selectedIndex];
+    var raw = opt.getAttribute('data-provinces');
     var provinces = JSON.parse(raw);
 
     this.clearOptions(this.provinceEl);
-    if (provinces && provinces.length == 0) {
+    if (provinces && provinces.length === 0) {
       this.provinceContainer.style.display = 'none';
     } else {
       for (var i = 0; i < provinces.length; i++) {
@@ -427,7 +426,7 @@ slate.CountryProvinceSelector.prototype = {
         this.provinceEl.appendChild(opt);
       }
 
-      this.provinceContainer.style.display = "";
+      this.provinceContainer.style.display = '';
     }
   },
 
@@ -438,7 +437,7 @@ slate.CountryProvinceSelector.prototype = {
   },
 
   setOptions: function(selector, values) {
-    for (var i = 0, count = values.length; i < values.length; i++) {
+    for (var i = 0; i < values.length; i++) {
       var opt = document.createElement('option');
       opt.value = values[i];
       opt.innerHTML = values[i];

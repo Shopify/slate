@@ -47,7 +47,7 @@ gulp.task('watch:config', function() {
  * @static
  */
 gulp.task('watch:dist-config', function() {
-  chokidar.watch([config.paths.dist + config.paths.distYamlConfig], {ignoreInitial: true})
+  chokidar.watch([config.paths.dist + config.paths.yamlConfig], {ignoreInitial: true})
     .on('all', function(event, path) {
       messages.logFileEvent(event, path);
 

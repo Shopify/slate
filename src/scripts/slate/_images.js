@@ -16,8 +16,8 @@ slate.images = {
    * @param {String} size - A shopify image size attribute
    */
 
-  preload: function (images, size) {
-    for (var i=0; i < images.length; i++) {
+  preload: function(images, size) {
+    for (var i = 0; i < images.length; i++) {
       var image = images[i];
 
       this.loadImage(this.getSizedImageUrl(image, size));
@@ -28,7 +28,7 @@ slate.images = {
    * Loads and caches an image in the browsers cache.
    * @param {string} path - An image url
    */
-  loadImage: function (path) {
+  loadImage: function(path) {
     new Image().src = path;
   },
 
@@ -38,7 +38,7 @@ slate.images = {
    * @param element
    * @param callback
    */
-  switchImage: function (image, element, callback) {
+  switchImage: function(image, element, callback) {
     var size = this.imageSize(element.src);
     var imageUrl = this.getSizedImageUrl(image.src, size);
 
@@ -56,7 +56,7 @@ slate.images = {
    * @param {string} src
    * @returns {null}
    */
-  imageSize: function (src) {
+  imageSize: function(src) {
     var match = src.match(/_(1024x1024|2048x2048|pico|icon|thumb|small|compact|medium|large|grande)\./);
     return match !== null ? match[1] : null;
   },
@@ -69,16 +69,16 @@ slate.images = {
    * @param size
    * @returns {*}
    */
-  getSizedImageUrl: function (src, size) {
+  getSizedImageUrl: function(src, size) {
     if (size == null) {
       return src;
     }
 
-    if (size == 'master') {
+    if (size === 'master') {
       return this.removeProtocol(src);
     }
 
-    var match  = src.match(/\.(jpg|jpeg|gif|png|bmp|bitmap|tiff|tif)(\?v=\d+)?$/i);
+    var match = src.match(/\.(jpg|jpeg|gif|png|bmp|bitmap|tiff|tif)(\?v=\d+)?$/i);
 
     if (match != null) {
       var prefix = src.split(match[0]);
@@ -90,7 +90,7 @@ slate.images = {
     }
   },
 
-  removeProtocol: function (path) {
+  removeProtocol: function(path) {
     return path.replace(/http(s)?:/, "");
   }
 };

@@ -1,26 +1,26 @@
 window.theme = window.theme || {};
 
-//=require vendor/fastclick.min.js
-//=require vendor/jquery-2.2.3.min.js
-//=require vendor/modernizr.min.js
+// =require vendor/fastclick.min.js
+// =require vendor/jquery-2.2.3.min.js
+// =require vendor/modernizr.min.js
 
-//=require slate/_a11y.js
-//=require slate/_currency.js
-//=require slate/_forms.js
-//=require slate/_images.js
-//=require slate/_product.js
-//=require slate/_video.js
+// =require slate/_a11y.js
+// =require slate/_currency.js
+// =require slate/_forms.js
+// =require slate/_images.js
+// =require slate/_product.js
+// =require slate/_video.js
 
-//=require _strings.js.liquid
+// =require _strings.js.liquid
 
-$(document).ready(function () {
+$(document).ready(function() {
 
   // Include Template Scripts
-  //----------------------------------------------------------------------------
-  //=require templates/customer-addresses.js
-  //=require templates/gift-card.js
-  //=require templates/login.js
-  //=require templates/product.js
+  // ----------------------------------------------------------------------------
+  // =require templates/customer-addresses.js
+  // =require templates/gift-card.js
+  // =require templates/login.js
+  // =require templates/product.js
 
   // Custom Theme Scripts
   // ---------------------------------------------------------------------------
@@ -31,7 +31,7 @@ $(document).ready(function () {
   // Common a11y fixes
   slate.a11y.pageLinkFocus($(window.location.hash));
 
-  $('.in-page-link').on('click', function (evt) {
+  $('.in-page-link').on('click', function(evt) {
     slate.a11y.pageLinkFocus($(evt.currentTarget.hash));
   });
 
@@ -43,6 +43,6 @@ $(document).ready(function () {
   // layout if too wide.
   $('.rte table').wrap('<div class="rte__table-wrapper"></div>');
 
-  //Wrap videos in div to force responsive layout.
+  // Wrap videos in div to force responsive layout.
   slate.iframes.iframeReset();
 });

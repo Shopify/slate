@@ -19,7 +19,7 @@ slate.a11y = {
    *
    * @param {JQuery} $element - The element to be acted upon
    */
-  pageLinkFocus: function ($element) {
+  pageLinkFocus: function($element) {
     var focusClass = 'js-focus-hidden';
 
     $element.first()
@@ -64,9 +64,9 @@ slate.a11y = {
    * @param {jQuery} options.$elementToFocus - Element to be focused when focus leaves container
    * @param {string} options.namespace - Namespace used for new focus event handler
    */
-  trapFocus: function (options) {
+  trapFocus: function(options) {
     var eventName = options.eventNamespace
-      ? 'focusin.' + eventNamespace
+      ? 'focusin.' + options.eventNamespace
       : 'focusin';
 
     if (!options.$elementToFocus) {
@@ -76,7 +76,7 @@ slate.a11y = {
 
     options.$elementToFocus.focus();
 
-    $(document).on(eventName, function (evt) {
+    $(document).on(eventName, function(evt) {
       if (options.$container[0] !== evt.target && !options.$container.has(evt.target).length) {
         options.$container.focus();
       }
@@ -90,7 +90,7 @@ slate.a11y = {
    * @param {jQuery} options.$container - Container to trap focus within
    * @param {string} options.namespace - Namespace used for new focus event handler
    */
-  removeTrapFocus: function (options) {
+  removeTrapFocus: function(options) {
     var eventName = options.namespace
       ? 'focusin.' + options.namespace
       : 'focusin';

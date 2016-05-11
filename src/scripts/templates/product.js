@@ -8,9 +8,9 @@ window.theme = window.theme || {};
    * @namespace product
  */
 
-theme.product = (function () {
+theme.product = (function() {
 
-  if (!theme.productSingleObject) { return }
+  if (!theme.productSingleObject) { return; }
 
   var cache = {
     $addToCart: $('#AddToCart'),
@@ -58,7 +58,7 @@ theme.product = (function () {
     }
 
     // Update the product prices
-    updateProductPrices(variant.price, variant.compare_at_price)
+    updateProductPrices(variant.price, variant.compare_at_price);
   }
 
   /**
@@ -100,7 +100,7 @@ theme.product = (function () {
     // option. Add one as long as it is not 'Title' (Shopify's default), add
     // one.
     if (product.options.length === 1 && product.options[0] !== 'Title') {
-      $('.selector-wrapper:eq(0)').prepend('<label for="ProductSelect-option-0">'+ product.options[0] +'</label>');
+      $('.selector-wrapper:eq(0)').prepend('<label for="ProductSelect-option-0">' + product.options[0] + '</label>');
     }
 
     // Hide variant dropdown if only one exists and title contains 'Default'
