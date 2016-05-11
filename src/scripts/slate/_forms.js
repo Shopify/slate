@@ -254,13 +254,10 @@ slate.OptionSelectors.prototype.updateSelectors = function(index, options) {
 slate.OptionSelectorsFromDOM = function(existingSelectorId, options) {
   // build product json from selectors
   // create new options hash
-  var productSelector = {
-    existingSelectorId: existingSelectorId,
-    optionNames: options.optionNames || [],
-    priceFieldExists: options.priceFieldExists || true,
-    delimiter: options.delimiter || '/'
-  };
-  var productObj = this.createProductFromSelector(productSelector);
+  var optionNames = options.optionNames || [];
+  var priceFieldExists = options.priceFieldExists || true;
+  var delimiter = options.delimiter || '/';
+  var productObj = this.createProductFromSelector(existingSelectorId, optionNames, priceFieldExists, delimiter);
   options.product = productObj;
   Shopify.OptionSelectorsFromDOM.baseConstructor.call(this, existingSelectorId, options);
 };
@@ -268,29 +265,27 @@ slate.OptionSelectorsFromDOM = function(existingSelectorId, options) {
 // slate.extend(slate.OptionSelectorsFromDOM, slate.OptionSelectors);
 
 // updates the product_json from existing select element
-slate.OptionSelectorsFromDOM.prototype.createProductFromSelector = function(options) {
-  if (!Shopify.isDefined(options.priceFieldExists)) { options.priceFieldExists = true; }
-  if (!Shopify.isDefined(options.delimiter)) { options.delimiter = '/'; }
+slate.OptionSelectorsFromDOM.prototype.createProductFromSelector = function(domId, optionNames, priceFieldExists, delimiter) {
+  if (!Shopify.isDefined(priceFieldExists)) { priceFieldExists = true; }
+  if (!Shopify.isDefined(delimiter)) { delimiter = '/'; }
 
-  var oldSelector = document.getElementById(options.domId);
-  var oldOptions = oldSelector.childNodes;
-  var parent = oldSelector.parentNode;
+  var oldSelector = document.getElementById(domId);
+  var options = oldSelector.childNodes;
 
-  var optionCount = options.optionNames.length;
+  var optionCount = optionNames.length;
 
   // build product json + messages array
   var variants = [];
-  var self = this;
-  Shopify.each(oldOptions, function(option) {
+  Shopify.each(options, function(option) {
     if (option.nodeType === 1 && option.tagName.toLowerCase() === 'option') {
-      var chunks = option.innerHTML.split(new RegExp('\\s*\\'+ options.delimiter +'\\s*'));
+      var chunks = option.innerHTML.split(new RegExp('\\s*\\' + delimiter + '\\s*'));
 
-      if (options.optionNames.length === 0) {
-        optionCount = chunks.length - (options.priceFieldExists ? 1 : 0);
+      if (optionNames.length === 0) {
+        optionCount = chunks.length - (priceFieldExists ? 1 : 0);
       }
 
       var optionOptionValues = chunks.slice(0, optionCount);
-      var message = (options.priceFieldExists ? chunks[optionCount] : '');
+      var message = (priceFieldExists ? chunks[optionCount] : '');
 
       var attributes = {
         available: (option.disabled ? false : true),
@@ -305,11 +300,11 @@ slate.OptionSelectorsFromDOM.prototype.createProductFromSelector = function(opti
     }
   });
   var updateObj = {variants: variants};
-  if (options.optionNames.length === 0) {
+  if (optionNames.length === 0) {
     updateObj.options = [];
     for (var i = 0; i < optionCount; i++) { updateObj.options[i] = ('option ' + (i + 1)); }
   } else {
-    updateObj.options = options.optionNames;
+    updateObj.options = optionNames;
   }
   return updateObj;
 };
