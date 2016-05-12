@@ -38,40 +38,10 @@ $breakpoints: (
 $breakpoint-has-widths: ($small, $medium-up);
 $breakpoint-has-push: ();
 
-/*================ Color Variables ================*/
-$color-primary: {{ settings.color_primary }};
-
-// Text colors
-$color-body-text: {{ settings.color_body_text }};
-
-// Backgrounds
-$color-body: #fff;
-
-// Border colors
-$color-border: #f6f6f6;
-
-// Helper colors for form error states
-$color-disabled: #000;
-$color-disabled-border: #000;
-$color-error: #000;
-$color-error-bg: #000;
-$color-success: #000;
-$color-success-bg: #000;
-
 /*================ Sizing Variables ================*/
 $width-site: 1180px;
 $gutter: 30px;
 $logo-max-width: {{ settings.logo_max_width | default: '450' | remove: 'px' | append: 'px'}};
-
-/*================ Typography Variables ================*/
-$font-weight-normal: 400;
-$font-weight-bold: 700;
-
-$font-stack-header: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$font-weight-header: $font-weight-bold;
-
-$font-stack-body: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$font-size-base: {{ settings.type_base_size }}; // Henseforth known as 1em
 
 /*================ Z-Index ================*/
 $z-index-dropdown : 2;

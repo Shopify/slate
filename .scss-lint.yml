@@ -2,7 +2,7 @@
 
 scss_files: 'src/stylesheets/**/*.scss'
 exclude:
-  - 'src/stylesheets/global/_normalize.scss'
+  - 'src/stylesheets/settings/*.scss.liquid'
 
 linters:
   # Border 0 required when enabled
