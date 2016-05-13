@@ -211,7 +211,7 @@
     </ul>
 
     {% unless shop.enabled_payment_types == empty %}
-      {% assign payment_icons_available = 'amazon_payments,american_express,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,google,interac,jcb,laser,litecoin,maestro,master,paypal,solo,stripe,switch,visa' | split: ',' %}
+      {% assign payment_icons_available = 'amazon_payments,american_express,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,laser,litecoin,maestro,master,paypal,solo,stripe,switch,visa' | split: ',' %}
       <ul class="list--inline payment-icons">
         {% for type in shop.enabled_payment_types %}
           {% if payment_icons_available contains type %}

@@ -10,6 +10,10 @@
   }
 }
 
+.icon--wide {
+  width: 40px;
+}
+
 svg,
 symbol {
   &.icon:not(.icon--full-color) {
