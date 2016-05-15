@@ -1,7 +1,8 @@
 var npm = require('global-npm');
 var path = require('path');
 var slateRoot = path.resolve(__dirname, '../..');
-var currentDirname = process.cwd().split(path.sep).pop();
+var destRoot = process.cwd();
+var destName = destRoot.split(path.sep).pop();
 
 module.exports = function(args/*, options*/) {
   if (args.length === 0) {
@@ -14,7 +15,7 @@ module.exports = function(args/*, options*/) {
 
       switch (args[0]) {
       case 'theme':
-        npm.commands.run(['generate-theme', currentDirname]);
+        npm.commands.run(['generate-theme', destName, destRoot]);
         break;
 
       default:
