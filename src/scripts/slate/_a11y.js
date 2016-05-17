@@ -71,9 +71,9 @@ slate.a11y = {
 
     if (!options.$elementToFocus) {
       options.$elementToFocus = options.$container;
-      options.$container.attr('tabindex', '-1');
     }
 
+    options.$container.attr('tabindex', '-1');
     options.$elementToFocus.focus();
 
     $(document).on(eventName, function(evt) {
