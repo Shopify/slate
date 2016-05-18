@@ -54,7 +54,7 @@
           {% endfor %}
         </select>
 
-        <span id="ProductPrice" itemprop="price">
+        <span id="ProductPrice" itemprop="price" content="{{ current_variant.price | divided_by: 100 }}">
           {{ current_variant.price | money }}
         </span>
 
