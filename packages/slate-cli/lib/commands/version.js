@@ -1,5 +1,5 @@
-var pkg = require('../../package.json');
+var msg = require('../includes/messages.js');
 
 module.exports = function() {
-  process.stdout.write('slate-cli: version ' + pkg.version + ' - Shopify Theme Development Framework  \n');
+  process.stdout.write(msg.versionInfo());
 };

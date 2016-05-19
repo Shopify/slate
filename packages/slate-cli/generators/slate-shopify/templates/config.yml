@@ -1,19 +1,10 @@
-development:
-  theme-id:
-  api_key: <%= apikey %>
-  access_token: <%= token %>
-  store: <%= storeurl %>
-  bucketSize: 30
+<% environments.forEach(function(env) { %>
+<%= env %>:
+  theme-id: (optional - if empty, you will write to the active theme)
+  password: XXXXXXXXXX
+  store: my-store-name.myshopify.com
+<% }); %>
   ignore_files:
-    - config/settings_schema.json
-    - config/settings_data.json
-    - assets/logo.png
-    - assets/hero_logo.png
-    - assets/favicon.png
-    - assets/hero_slide_1.jpg
-    - assets/hero_slide_2.jpg
-    - assets/hero_slide_3.jpg
-    - assets/hero_slide_4.jpg
-    - assets/hero_slide_5.jpg
-    - assets/hero_slide_6.jpg
-
+    - config/settings.html
+    - "*.png"
+    - "*.jpg"

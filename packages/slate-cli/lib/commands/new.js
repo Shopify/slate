@@ -1,27 +1,26 @@
-var npm = require('global-npm');
 var path = require('path');
+var utils = require('../includes/utils.js');
+var msg = require('../includes/messages.js');
+
 var slateRoot = path.resolve(__dirname, '../..');
 var destRoot = process.cwd();
-var destName = destRoot.split(path.sep).pop();
 
 module.exports = function(args/*, options*/) {
   if (args.length === 0) {
-    process.stdout.write('No generator specified, please use one of the following:\n ' +
-      ' new theme\n');
+    process.stdout.write(msg.noGenerator());
 
   } else {
-    npm.load({prefix: slateRoot, loglevel: 'silent'}, function(err) {
-      if (err) { throw err; }
-
-      switch (args[0]) {
-      case 'theme':
-        npm.commands.run(['generate-theme', destName, destRoot]);
-        break;
-
-      default:
-        process.stdout.write('Unknown generator, please use one of the following:\n' +
-          ' new theme\n');
+    switch (args[0]) {
+    case 'theme':
+      var scriptArgs = ['generate-theme', destRoot];
+      if (args[1]) {
+        scriptArgs.push(args[1]);
       }
-    });
+      utils.runScript(slateRoot, scriptArgs);
+      break;
+
+    default:
+      process.stdout.write(msg.unknownGenerator());
+    }
   }
 };
