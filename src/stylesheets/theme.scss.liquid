@@ -3,27 +3,30 @@
     - You cannot use native CSS/Sass @imports in this file without a build script
 ==============================================================================*/
 
-/*================ SASS HELPERS ================*/
-@import url('sass/_mixins.scss');
-@import url('sass/_variables.scss.liquid');
+/*================ UTILS ================*/
+@import url('tools/_mixins.scss');
 
-/*================ RESETS ================*/
-@import url('global/_normalize.scss');
-@import url('global/_slate-reset.scss');
 
-/*================ SLATE ================*/
-@import url('slate/_helper-classes.scss');
-@import url('slate/_icons.scss');
-@import url('slate/_lists.scss');
-@import url('slate/_rte.scss');
-@import url('slate/_responsive-tables.scss');
-@import url('slate/_media.scss');
+/*================ SETTINGS ================*/
+@import url('settings/_variables.scss.liquid');
+@import url('settings/_colors.scss.liquid');
+@import url('settings/_typography.scss.liquid');
 
-/*================ SCAFFOLDING ================*/
-@import url('theme/_grid.scss');
-@import url('theme/_layout.scss');
-@import url('theme/_links-buttons.scss');
-@import url('theme/_site-header.scss');
-@import url('theme/_form-styles.scss');
-@import url('theme/_password-template.scss');
-@import url('theme/_gift-card-template.scss');
+/*================ COMMON ================*/
+@import url('common/_normalize.scss');
+@import url('common/_slate-reset.scss');
+@import url('common/_helper-classes.scss');
+@import url('common/_grid.scss');
+@import url('common/_layout.scss');
+@import url('common/_icons.scss');
+@import url('common/_lists.scss');
+@import url('common/_rte.scss');
+@import url('common/_responsive-tables.scss');
+@import url('common/_links-buttons.scss');
+@import url('common/_media.scss');
+@import url('common/_forms.scss');
+
+/*================ MODULES ================*/
+@import url('modules/_site-header.scss');
+@import url('modules/_password-template.scss');
+@import url('modules/_gift-card-template.scss');

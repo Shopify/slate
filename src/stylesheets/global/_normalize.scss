@@ -143,6 +143,7 @@ h1 {
  */
 
 mark {
+  // scss-lint:disable ColorVariable
   background: #ff0;
   color: #000;
 }
@@ -374,6 +375,7 @@ input[type="search"]::-webkit-search-decoration {
  */
 
 fieldset {
+  // scss-lint:disable ColorVariable
   border: 1px solid #c0c0c0;
   margin: 0 2px;
   padding: 0.35em 0.625em 0.75em;

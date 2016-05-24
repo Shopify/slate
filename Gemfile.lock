@@ -27,7 +27,7 @@ GEM
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
     sass (3.4.19)
-    scss_lint (0.43.2)
+    scss_lint (0.48.0)
       rainbow (~> 2.0)
       sass (~> 3.4.15)
     slop (3.6.0)
