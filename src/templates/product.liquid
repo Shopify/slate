@@ -1,18 +1,20 @@
 <!-- /templates/product.liquid -->
 <div itemscope itemtype="http://schema.org/Product">
 
-  <meta itemprop="name" content="{{ product.title }}">
-  <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
-  <meta itemprop="image" content="{{ product.featured_image.src | img_url: 'grande' }}">
-
   {% comment %}
     Get first variant, or deep linked one
   {% endcomment %}
   {% assign current_variant = product.selected_or_first_available_variant %}
+  {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+
+  <meta itemprop="name" content="{{ product.title }}{% unless current_variant.title == 'Default Title' %} - {{ current_variant.title }}{% endunless %}">
+  <meta itemprop="url" content="{{ shop.url }}{{ current_variant.url }}">
+  <meta itemprop="brand" content="{{ product.vendor }}">
+  <meta itemprop="image" content="{{ featured_image | img_url: 'grande' }}">
+  <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
 
   <div>
     <div id="ProductPhoto">
-      {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
       <img src="{{ featured_image | img_url: 'large' }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg">
     </div>
     {% if product.images.size > 1 %}
@@ -29,32 +31,25 @@
   </div>
 
   <div>
-    <h1 itemprop="name">{{ product.title }}</h1>
-    <p itemprop="brand">{{ product.vendor }}</p>
+    <h1>{{ product.title }}</h1>
+    <p>{{ product.vendor }}</p>
 
     <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
       <meta itemprop="priceCurrency" content="{{ shop.currency }}">
-      <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+      <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+      <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
 
       <form action="/cart/add" method="post" enctype="multipart/form-data">
         <select name="id" id="ProductSelect">
           {% for variant in product.variants %}
-            {% if variant.available %}
-
-              {% comment %}
-                Note: if you use option_selection.js, your <select> tag will be overwritten, meaning what you have inside <option> will not reflect what you coded below.
-              {% endcomment %}
-              <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
-
-            {% else %}
-              <option disabled="disabled">
-                {{ variant.title }} - {{ 'products.product.sold_out' | t }}
-              </option>
-            {% endif %}
+            {% comment %}
+              Note: if you use option_selection.js, your <select> tag will be overwritten, meaning what you have inside <option> will not reflect what you coded below.
+            {% endcomment %}
+            <option {% unless variant.available %}disabled="disabled"{% endunless %} {% if variant == current_variant %}selected="selected"{% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {% if variant.available %}{{ variant.price | money_with_currency }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</option>
           {% endfor %}
         </select>
 
-        <span id="ProductPrice" itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+        <span id="ProductPrice">
           {{ current_variant.price | money }}
         </span>
 
@@ -75,7 +70,7 @@
 
     </div>
 
-    <div itemprop="description" class="rte">
+    <div class="rte">
       {{ product.description }}
     </div>
 
