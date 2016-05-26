@@ -5,6 +5,7 @@ window.theme = window.theme || {};
 // =require vendor/modernizr.min.js
 
 // =require slate/_a11y.js
+// =require slate/_uri-helpers.js
 // =require slate/_currency.js
 // =require slate/_forms.js
 // =require slate/_images.js
@@ -12,6 +13,10 @@ window.theme = window.theme || {};
 // =require slate/_video.js
 
 // =require _strings.js.liquid
+
+theme.variables = {
+  queryParams: slate.QueryString.parse(location.search)
+};
 
 $(document).ready(function() {
 
