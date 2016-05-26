@@ -80,7 +80,7 @@ var config = {
     parentIncludeJs: [
       'src/scripts/[^_]*.*'
     ],
-    scss: 'src/stylesheets/**/*.{scss, scss.liquid}',
+    scss: 'src/stylesheets/**/*.scss',
     images: 'src/images/*.{png,jpg,gif}',
     destAssets: 'dist/assets',
     destSnippets: 'dist/snippets',
