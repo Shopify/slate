@@ -1,34 +1,34 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    coderay (1.1.0)
+    coderay (1.1.1)
     diff-lcs (1.2.5)
     htmlentities (4.3.4)
     method_source (0.8.2)
     mini_portile2 (2.0.0)
-    nokogiri (1.6.7)
+    nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    rainbow (2.0.0)
+    rake (11.1.2)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
       rspec-mocks (~> 3.4.0)
-    rspec-core (3.4.1)
+    rspec-core (3.4.4)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
-    rspec-mocks (3.4.0)
+    rspec-mocks (3.4.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
-    sass (3.4.19)
+    sass (3.4.22)
     scss_lint (0.48.0)
-      rainbow (~> 2.0)
+      rake (>= 0.9, < 12)
       sass (~> 3.4.15)
     slop (3.6.0)
 
@@ -43,4 +43,4 @@ DEPENDENCIES
   scss_lint
 
 BUNDLED WITH
-   1.10.6
+   1.12.3
