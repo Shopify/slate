@@ -1,17 +1,14 @@
-/* eslint-disable no-sync */
-
 var gulp = require('gulp');
-var spawn = require('child_process').spawn;
-var zip = require('gulp-zip');
-var plumber = require('gulp-plumber');
-var Promise = require('bluebird');
-var open = Promise.promisify(require('open'));
 var pkg = require('../package.json');
-var yaml = require('js-yaml');
+var spawn = require('child_process').spawn;
+var Promise = require('bluebird');
 var fs = require('fs');
+var open = Promise.promisify(require('open'));
+var readFile = Promise.promisify(fs.readFile);
+var yaml = require('js-yaml');
 
-var config = require('./reqs/config.js');
-var utils = require('./reqs/utilities.js');
+var config = require('./includes/config.js');
+var utils = require('./includes/utilities.js');
 
 /**
  * Replace your existing theme using ThemeKit.
@@ -20,44 +17,31 @@ var utils = require('./reqs/utilities.js');
  * @static
  */
 gulp.task('deploy:replace', function() {
-  return utils.resolveShell(spawn('theme', ['replace'], {cwd: config.paths.dist}));
-});
-
-/**
- * Compress theme and build a shopify-compatible `.zip` file for uploading to store
- * @function compress
- * @memberof slate-cli.tasks.deploy
- * @static
- */
-gulp.task('compress', function() {
-  var distFiles = config.paths.dist + '**/*';
-  var distConfig = config.paths.dist + 'config.yml';
-
-  return gulp.src([distFiles, '!' + distConfig])
-    .pipe(plumber(utils.errorHandler))
-    .pipe(zip(pkg.name + '.zip'))
-    .pipe(gulp.dest('./'));
-});
-
-/**
- * Opens the Themes Store in the default browser (for manual upgrade/deployment)
- * for themes available on the Themes Store
- * @function open
- * @memberof slate-cli.tasks.deploy
- * @static
- */
-gulp.task('open', function() {
-  return open({uri: config.storeURI});
+  return utils.resolveShell(
+    spawn('theme', ['replace'], {cwd: config.dist.root})
+  );
 });
 
 /**
  * Opens the Store in the default browser (for manual upgrade/deployment)
- * @function open
+ * @function open:admin
  * @memberof slate-cli.tasks.deploy
  * @static
  */
-gulp.task('open:sfe', function() {
-  var shopUrl = yaml.safeLoad(fs.readFileSync('./' + config.paths.yamlConfig, 'utf8'));
-  var editUrl = 'https://' + shopUrl[config.environment].store + '/admin/themes';
-  return open(editUrl);
+gulp.task('open:admin', function() {
+  return readFile(config.tkConfig, 'utf8')
+    .then(function(response) {
+      var tkConfig = yaml.safeLoad(response);
+      return open('https://' + tkConfig[config.environment].store + '/admin/themes');
+    });
+});
+
+/**
+ * Opens the Zip file in the file browser
+ * @function open:zip
+ * @memberof slate-cli.tasks.deploy
+ * @static
+ */
+gulp.task('open:zip', function() {
+  return open('./upload/');
 });

@@ -5,10 +5,19 @@ var vinylPaths = require('vinyl-paths');
 var del = require('del');
 var size = require('gulp-size');
 
-var config = require('./reqs/config.js');
-var utils = require('./reqs/utilities.js');
-var messages = require('./reqs/messages.js');
+var config = require('./includes/config.js');
+var utils = require('./includes/utilities.js');
+var messages = require('./includes/messages.js');
 
+
+var assetsPaths = [
+  config.src.assets,
+  config.src.templates,
+  config.src.snippets,
+  config.src.locales,
+  config.src.config,
+  config.src.layout
+];
 
 /**
  * copies assets to dist dir ...
@@ -17,7 +26,7 @@ var messages = require('./reqs/messages.js');
  * @static
  */
 gulp.task('build:assets', function() {
-  return processAssets(config.paths.srcAssets);
+  return processAssets(assetsPaths);
 });
 
 /**
@@ -27,13 +36,13 @@ gulp.task('build:assets', function() {
  * @static
  */
 gulp.task('watch:assets', function() {
-  var cache = utils.createEventCache();
+  var eventCache = utils.createEventCache();
 
-  chokidar.watch([config.paths.srcAssets], {ignoreInitial: true})
+  chokidar.watch(assetsPaths, {ignoreInitial: true})
     .on('all', function(event, path) {
       messages.logFileEvent(event, path);
-      cache.addEvent(event, path);
-      utils.processCache(cache, processAssets, removeAssets);
+      eventCache.addEvent(event, path);
+      utils.processCache(eventCache, processAssets, removeAssets);
     });
 });
 
@@ -43,11 +52,11 @@ gulp.task('watch:assets', function() {
  * @private
  */
 function processAssets(files) {
-  messages.logProcessFiles('build:assets', files);
-  return gulp.src(files, {base: config.paths.srcBase})
+  messages.logProcessFiles('build:assets');
+  return gulp.src(files, {base: config.src.root})
     .pipe(plumber(utils.errorHandler))
     .pipe(size({showFiles: true, pretty: true}))
-    .pipe(gulp.dest(config.paths.dist));
+    .pipe(gulp.dest(config.dist.root));
 }
 
 /**
@@ -56,9 +65,9 @@ function processAssets(files) {
  * @private
  */
 function removeAssets(files) {
-  messages.logProcessFiles('remove:assets', files);
+  messages.logProcessFiles('remove:assets');
   files = files.map(function(file) {
-    file = file.replace('src/', 'dist/');
+    file = file.replace(config.src.root, config.dist.root);
     return file;
   });
 

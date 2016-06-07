@@ -1,3 +1,33 @@
+/*================ Color Variables ================*/
+$color-primary: $settings-color-primary;
+
+// Text colors
+$color-body-text: $settings-color-body-text;
+
+// Backgrounds
+$color-body: #fff;
+
+// Border colors
+$color-border: #f6f6f6;
+
+// Helper colors for form error states
+$color-disabled: #000;
+$color-disabled-border: #000;
+$color-error: #000;
+$color-error-bg: #000;
+$color-success: #000;
+$color-success-bg: #000;
+
+/*================ Typography Variables ================*/
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
+$font-stack-header: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-weight-header: $font-weight-bold;
+
+$font-stack-body: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-size-base: $settings-font-size-base; // Henseforth known as 1em
+
 /*============================================================================
   Grid Breakpoints and Class Names
     - Do not change the variable names
@@ -33,7 +63,7 @@ $breakpoints: (
   Generate breakpoint-specific column widths and push classes
     - Default column widths: $breakpoint-has-widths: ($small, $medium-up);
     - Default is no push classes
-    - Will not work if `theme/_grid.scss` is removed
+    - Will not work if `theme/grid.scss` is removed
 ==============================================================================*/
 $breakpoint-has-widths: ($small, $medium-up);
 $breakpoint-has-push: ();
@@ -41,10 +71,10 @@ $breakpoint-has-push: ();
 /*================ Sizing Variables ================*/
 $width-site: 1180px;
 $gutter: 30px;
-$logo-max-width: {{ settings.logo_max_width | default: '450' | remove: 'px' | append: 'px'}};
+$logo-max-width: $settings-logo-max-width;
 
 /*================ Z-Index ================*/
-$z-index-dropdown : 2;
+$z-index-dropdown: 2;
 $z-index-skip-to-content: 10000; // really high to be safe of app markup
 
 /*================ SVG ================*/

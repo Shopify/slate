@@ -1,6 +1,6 @@
 var gutil = require('gulp-util');
-var del = require('del');
 var _ = require('lodash');
+var Promise = require('bluebird');
 
 /**
  * Utility & reusable functions used by our Gulp Tasks
@@ -43,10 +43,11 @@ var utilities = {
    * @param {fs} file - current file being linted
    */
   scssLintReporter: function(file) {
-    if (!file.scsslint.success) {
-      var errorMsg = file.scsslint.issues.length + ' issues found in ' + file.path;
-      gutil.log(gutil.colors.yellow(errorMsg));
+    if (file.scsslint.success) {
+      return;
     }
+    var errorMsg = file.scsslint.issues.length + ' issues found in ' + file.path;
+    gutil.log(gutil.colors.yellow(errorMsg));
   },
 
   /**
@@ -54,7 +55,7 @@ var utilities = {
    * based information to each svg element's markup...
    *
    * @memberof slate-cli.utilities
-   * @param {Object} $ - jQuery reference
+   * @param {Function} $ - jQuery reference
    * @param {fs} file - reference to current icon file?
    */
   processSvg: function($, file) {

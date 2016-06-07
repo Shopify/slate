@@ -1,9 +1,0 @@
-{
-    "linters": {
-        "eslint": {
-            "excludes": [
-                "**/src/scripts/[_]**.js.liquid"
-            ]
-        }
-    }
-}

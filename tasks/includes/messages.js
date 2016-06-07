@@ -18,20 +18,18 @@ var messages = {
     );
   },
 
-  logProcessFiles: function(processName, fileList) {
+  logProcessFiles: function(processName) {
     gutil.log('running task',
       gutil.colors.white('-'),
-      gutil.colors.cyan(processName),
-      gutil.colors.yellow('passing', fileList.length, 'file(s)...')
+      gutil.colors.cyan(processName)
     );
   },
 
-  logChildProcess: function(cmd, files) {
+  logChildProcess: function(cmd) {
     gutil.log('running task',
       gutil.colors.bold('[child process]'),
       gutil.colors.white('-'),
-      gutil.colors.cyan('theme', cmd),
-      gutil.colors.yellow('passing', files.length, 'files(s)...')
+      gutil.colors.cyan('theme', cmd)
     );
   },
 
@@ -42,6 +40,11 @@ var messages = {
     var fileList = files.join(', ') + '.\n';
 
     return timestamp + action + amount + fileList;
+  },
+
+  configChange: function() {
+    return 'Changes to ThemeKit Config Detected: You may need to quit <slate watch>' +
+      ' and run a full <slate deploy> as a result.';
   }
 };
 module.exports = messages;

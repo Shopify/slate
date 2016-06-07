@@ -1,15 +1,12 @@
-/* eslint-disable no-sync */
-
 var gulp = require('gulp');
-var gutil = require('gulp-util');
 var browserSync = require('browser-sync').create();
 var fs = require('fs');
 var yaml = require('js-yaml');
 var Promise = require('bluebird');
 var readFile = Promise.promisify(fs.readFile);
 
-var config = require('./reqs/config.js');
-var messages = require('./reqs/messages.js');
+var config = require('./includes/config.js');
+var messages = require('./includes/messages.js');
 
 /**
  * Starts a [browserSync]{@link https://www.browsersync.io/} session proxying your
@@ -24,15 +21,15 @@ gulp.task('deploy:sync-init', function(done) {
     browserSync.exit(); // stop any existing browsersync instance before (re)running init
   } else {
     // reset deploy log on first init & ensure file exists for watching on reload
-    fs.writeFile(config.paths.deployLog, '');
+    fs.writeFile(config.deployLog, '');
   }
 
   // read the store url from the config file
-  readFile(config.paths.yamlConfig, 'utf8')
+  return readFile(config.tkConfig, 'utf8')
     .then(function(response) {
-      var browserSyncConfig = yaml.safeLoad(response);
+      var tkConfig = yaml.safeLoad(response);
       browserSync.init({
-        proxy: 'https://' + browserSyncConfig[config.environment].store
+        proxy: 'https://' + tkConfig[config.environment].store
       });
       done();
     });
@@ -47,8 +44,8 @@ gulp.task('deploy:sync-init', function(done) {
  * @static
  */
 gulp.task('deploy:sync-reload', ['deploy:sync-init'], function() {
-  gulp.watch(config.paths.yamlConfig, ['deploy:sync-init']); // re-init on settings change
-  gulp.watch(config.paths.deployLog, function() {
+  gulp.watch(config.tkConfig, ['deploy:sync-init']); // re-init on settings change
+  gulp.watch(config.deployLog, function() {
     messages.logTransferDone();
     browserSync.reload();
   });

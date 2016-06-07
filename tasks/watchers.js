@@ -4,9 +4,9 @@ var spawn = require('child_process').spawn;
 var chokidar = require('chokidar');
 var fs = require('fs');
 
-var config = require('./reqs/config.js');
-var utils = require('./reqs/utilities.js');
-var messages = require('./reqs/messages.js');
+var config = require('./includes/config.js');
+var utils = require('./includes/utilities.js');
+var messages = require('./includes/messages.js');
 
 var activeDeploy = false;
 var cache = utils.createEventCache();
@@ -20,18 +20,15 @@ var debouncedDeployStatus = _.debounce(checkDeployStatus, 320); // prevent early
  * @memberof slate-cli.tasks.watch
  * @static
  */
-gulp.task('watch:src',
-  [
-    'watch:assets',
-    'watch:config',
-    'watch:svg',
-    'watch:img',
-    'watch:scss-lint',
-    'watch:eslint',
-    'watch:scss',
-    'watch:js'
-  ]
-);
+gulp.task('watch:src', [
+  'watch:assets',
+  'watch:config',
+  'watch:svg',
+  'watch:css-lint',
+  'watch:js-lint',
+  'watch:css',
+  'watch:js'
+]);
 
 /**
  * Watches for changes in the `./dist` folder and passes event data to the `cache`
@@ -45,7 +42,7 @@ gulp.task('watch:src',
  */
 gulp.task('watch:dist', function() {
   var watcher = chokidar.watch(['./', '!config.yml'], {
-    cwd: config.paths.dist,
+    cwd: config.dist.root,
     ignoreInitial: true
   });
 
@@ -84,13 +81,13 @@ function checkDeployStatus() {
  * @private
  */
 function deploy(cmd, files) {
-  messages.logChildProcess(cmd, files);
+  messages.logChildProcess(cmd);
   activeDeploy = true;
 
-  utils.resolveShell(spawn('theme', [cmd].concat(files), {cwd: config.paths.dist}))
+  utils.resolveShell(spawn('theme', [cmd].concat(files), {cwd: config.dist.root}))
     .then(function() {
       activeDeploy = false;
-      fs.appendFile(config.paths.deployLog, messages.logDeploys(cmd, files));
+      fs.appendFile(config.deployLog, messages.logDeploys(cmd, files));
       checkDeployStatus();
     });
 }
