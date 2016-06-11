@@ -1,0 +1,17 @@
+var npm = require('global-npm');
+
+module.exports = {
+
+  /**
+   * Uses internal/programmatic npm code to execute npm scripts from an npm package
+   *
+   * @param dir {String} - the location (path) to execute the script from
+   * @param script {Array} - the script/args sent to to `npm run`
+   */
+  runScript: function(dir, script) {
+    npm.load({prefix: dir, loglevel: 'silent'}, function(err) {
+      if (err) { throw err; }
+      npm.commands.run(script);
+    });
+  }
+};

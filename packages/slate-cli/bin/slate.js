@@ -7,11 +7,13 @@ var slate = require('../lib');
 
 var validOpts = {
   version: Boolean,
-  manual: Boolean // flag for manual deploy (used with deploy command)
+  manual: Boolean, // flag for manual deploy (used with deploy command)
+  nosync: Boolean
 };
 var shorthand = {
   v: '--version',
-  m: '--manual'
+  m: '--manual',
+  ns: '--nosync'
 };
 
 // filtered list of valid options that were passed w/ the command

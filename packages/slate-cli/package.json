@@ -2,14 +2,6 @@
   "name": "slate-cli",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
-  "bin": {
-    "slate": "./bin/slate.js"
-  },
-  "scripts": {
-    "lint": "eslint . --max-warnings 0; exit 0",
-    "generate-theme": "yo ./generators/slate-shopify/theme.js"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Shopify/slate-cli.git"
@@ -20,17 +12,26 @@
     "url": "https://github.com/Shopify/slate-cli/issues"
   },
   "homepage": "https://github.com/Shopify/slate-cli#readme",
+  "main": "index.js",
+  "bin": {
+    "slate": "./bin/slate.js"
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings 0; exit 0",
+    "generate-theme": "yo ./generators/slate-shopify/theme.js"
+  },
   "dependencies": {
+    "find-root": "1.0.0",
     "global-npm": "0.3.0",
-    "lodash": "4.12.0",
+    "lodash": "4.13.1",
     "nopt": "3.0.6",
     "update-notifier": "0.7.0",
     "yeoman-generator": "0.23.3",
-    "yo": "1.8.1"
+    "yo": "1.8.4"
   },
   "devDependencies": {
-    "eslint": "2.9.0",
-    "eslint-plugin-shopify": "11.1.3"
+    "eslint": "2.12.0",
+    "eslint-plugin-shopify": "12.1.0"
   },
   "eslintConfig": {
     "extends": [
