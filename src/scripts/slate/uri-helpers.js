@@ -1,3 +1,4 @@
+/* eslint no-undefined: "off" */
 window.slate = window.slate || {};
 
 /**
@@ -10,13 +11,13 @@ window.slate = window.slate || {};
  * location.search = slate.QueryString.stringify(queryParams);
  */
 
-slate.QueryString = (function () {
-  var _encode = function (value) {
+slate.QueryString = (function() {
+  function _encode(value) {
     return encodeURIComponent(value);
-  };
+  }
 
   return {
-    parse: function (str) {
+    parse: function(str) {
       var ret = Object.create(null);
 
       if (typeof str !== 'string') {
@@ -29,7 +30,7 @@ slate.QueryString = (function () {
         return ret;
       }
 
-      str.split('&').forEach(function (param) {
+      str.split('&').forEach(function(param) {
         var parts = param.replace(/\+/g, ' ').split('=');
         // Firefox (pre 40) decodes `%3D` to `=`
         // https://github.com/sindresorhus/query-string/pull/37
@@ -54,8 +55,8 @@ slate.QueryString = (function () {
       return ret;
     },
 
-    stringify: function (obj) {
-      return obj ? Object.keys(obj).sort().map(function (key) {
+    stringify: function(obj) {
+      return obj ? Object.keys(obj).sort().map(function(key) {
         var val = obj[key];
 
         if (val === undefined) {
@@ -69,7 +70,7 @@ slate.QueryString = (function () {
         if (Array.isArray(val)) {
           var result = [];
 
-          val.slice().sort().forEach(function (val2) {
+          val.slice().sort().forEach(function(val2) {
             if (val2 === undefined) {
               return;
             }
@@ -85,9 +86,11 @@ slate.QueryString = (function () {
         }
 
         return _encode(key) + '=' + _encode(val);
-      }).filter(function (x) {
+      })
+      .filter(function(x) {
         return x.length > 0;
-      }).join('&') : '';
+      })
+      .join('&') : '';
     }
   };
 })();

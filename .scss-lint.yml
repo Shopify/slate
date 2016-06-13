@@ -1,8 +1,12 @@
 ---
 
-scss_files: 'src/stylesheets/**/*.scss'
+scss_files:
+  - 'src/styles/**/*.scss'
+  - 'src/styles/*.scss'
 exclude:
-  - 'src/stylesheets/settings/*.scss.liquid'
+  - 'src/styles/settings/*.scss.liquid'
+  - 'src/styles/vendor/**/*.scss'
+  - 'src/styles/vendor/*.scss'
 
 linters:
   # Border 0 required when enabled

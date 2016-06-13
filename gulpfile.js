@@ -8,7 +8,6 @@
  * @namespace slate-cli
  */
 var gulp = require('gulp');
-var del = require('del');
 var argv = require('yargs').argv;
 
 // this is a temporary hack, and will be deprecated when gulp 4.0 is released
@@ -39,7 +38,7 @@ require('require-dir')('./tasks');
  */
 
 /**
- * __dependencies:__  `[build:scss, build:js, build:assets, build:config, build:svg, build:img]`
+ * __dependencies:__  `[build:scss, build:js, build:assets, build:config, build:svg]`
  * Does a full (re)build of the `dist` directory, based on the state of files from
  * the `src` directory
  *
@@ -50,32 +49,31 @@ require('require-dir')('./tasks');
  */
 gulp.task('build', function(done) {
   runSequence(
-    ['build:scss', 'build:eslint', 'build:js', 'build:assets', 'build:config'],
-    ['build:svg', 'build:img'],
+    ['clean'],
+    ['build:js', 'build:css', 'build:assets', 'build:config', 'build:svg'],
     done
   );
 });
 
 /**
- * Clean up build dirs/files whenever doing a full/clean (re)build.
- * @function build:clean
- * @memberof slate-cli.tasks.build
- * @static
- */
-gulp.task('build:clean', function() {
-  return del(['*.zip', 'dist']);
-});
-
-
-/**
  * Does a full clean/rebuild of your theme and creates a `.zip` compatible with
  * shopify.
  * @function zip
- * @memberof slate-cli.tasks.build
+ * @memberof slate-cli.tasks
  * @static
  */
 gulp.task('zip', function(done) {
-  runSequence('build:clean', 'build', 'zip', done);
+  runSequence('build', 'compress', done);
+});
+
+/**
+ * Runs any testing / linting tasks that are specified within this function.
+ * @function test
+ * @memberof slate-cli.tasks
+ * @static
+ */
+gulp.task('test', function(done) {
+  runSequence('lint:js', 'lint:css', done);
 });
 
 /**
@@ -104,25 +102,12 @@ function defineWatchTasks() {
  * the build
  *
  * @summary Deploy your built files to the Shopify Store set in `slate-cli.config`
- * @function deploy
+ * @function deploy:manual
  * @memberof slate-cli.tasks.deploy
  * @static
  */
 gulp.task('deploy', function(done) {
-  runSequence('build:clean', 'build', 'deploy:replace', done);
-});
-
-/**
- * Provides a simple kickoff for manual uploads of themes by clean/(re)building `dist`
- * zipping the files, and opening up the appropriate URL for manual upload of theme
- * files to the Themes Store
- *
- * @function deploy:themes-store
- * @memberof slate-cli.tasks.deploy
- * @static
- */
-gulp.task('deploy:themes-store', function(done) {
-  runSequence('zip', 'open', done);
+  runSequence('build', 'deploy:replace', done);
 });
 
 /**
@@ -134,7 +119,7 @@ gulp.task('deploy:themes-store', function(done) {
  * @static
  */
 gulp.task('deploy:manual', function(done) {
-  runSequence('zip', 'open:sfe', done);
+  runSequence('zip', 'open:admin', 'open:zip', done);
 });
 
 /**

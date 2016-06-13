@@ -8,9 +8,9 @@ var cheerio = require('gulp-cheerio');
 var extReplace = require('gulp-ext-replace');
 var plumber = require('gulp-plumber');
 
-var config = require('./reqs/config.js');
-var utils = require('./reqs/utilities.js');
-var messages = require('./reqs/messages.js');
+var config = require('./includes/config.js');
+var utils = require('./includes/utilities.js');
+var messages = require('./includes/messages.js');
 
 
 /**
@@ -20,7 +20,7 @@ var messages = require('./reqs/messages.js');
  * @static
  */
 gulp.task('build:svg', function() {
-  return processIcons(config.paths.srcIcons);
+  return processIcons(config.src.icons);
 });
 
 /**
@@ -32,7 +32,7 @@ gulp.task('build:svg', function() {
 gulp.task('watch:svg', function() {
   var cache = utils.createEventCache();
 
-  chokidar.watch([config.paths.srcIcons], {ignoreInitial: true})
+  chokidar.watch([config.src.icons], {ignoreInitial: true})
     .on('all', function(event, path) {
       messages.logFileEvent(event, path);
       cache.addEvent(event, path);
@@ -45,30 +45,30 @@ gulp.task('watch:svg', function() {
  * Processing for SVGs prior to deployment - adds accessibility markup, and converts
  * the file to a liquid snippet.
  *
- * @param {Array} files - glob/array of files to match & send to the stream
+ * @param {String|Array} files - glob/array of files to match & send to the stream
  * @returns {Stream}
  * @private
  */
 function processIcons(files) {
-  messages.logProcessFiles('build:svg', files);
+  messages.logProcessFiles('build:svg');
   return gulp.src(files)
     .pipe(plumber(utils.errorHandler))
     .pipe(svgmin(config.plugins.svgmin))
     .pipe(cheerio(config.plugins.cheerio))
     .pipe(extReplace('.liquid'))
     .pipe(size({showFiles: true, pretty: true}))
-    .pipe(gulp.dest(config.paths.destSnippets));
+    .pipe(gulp.dest(config.dist.snippets));
 }
 
 /**
  * Cleanup/remove liquid snippets from the `dist` directory during watch tasks if
  * any underlying SVG files in the `src` folder have been removed.
- * @param {Array} files - glob/array of files to match & send to the stream
+ * @param {String|Array} files - glob/array of files to match & send to the stream
  * @returns {Stream}
  * @private
  */
 function removeIcons(files) {
-  messages.logProcessFiles('remove:svg', files);
+  messages.logProcessFiles('remove:svg');
   files = files.map(function(file) {
     file = file.replace('src/icons', 'dist/snippets');
     file = file.replace('.svg', '.liquid');

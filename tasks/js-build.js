@@ -1,11 +1,12 @@
 var gulp = require('gulp');
 var include = require('gulp-include');
+var extReplace = require('gulp-ext-replace');
 var plumber = require('gulp-plumber');
-var errorHandler = require('./reqs/utilities.js');
 var chokidar = require('chokidar');
 
-var config = require('./reqs/config.js');
-var messages = require('./reqs/messages.js');
+var config = require('./includes/config.js');
+var messages = require('./includes/messages.js');
+var utils = require('./includes/utilities.js');
 
 /**
  * Concatenate JS together into a single file for use in the theme
@@ -14,7 +15,7 @@ var messages = require('./reqs/messages.js');
  * @memberof slate-cli.tasks.build
  * @static
  */
-gulp.task('build:js', function() {
+gulp.task('build:js', ['lint:js'], function() {
   processJs();
 });
 
@@ -26,7 +27,7 @@ gulp.task('build:js', function() {
  * @static
  */
 gulp.task('watch:js', function() {
-  chokidar.watch([config.paths.srcJs], {ignoreInitial: true})
+  chokidar.watch([config.src.js], {ignoreInitial: true})
     .on('all', function(event, path) {
       messages.logFileEvent(event, path);
       processJs();
@@ -34,9 +35,10 @@ gulp.task('watch:js', function() {
 });
 
 function processJs() {
-  messages.logProcessFiles('build:js', config.paths.parentIncludeJs);
-  return gulp.src(config.paths.parentIncludeJs)
-     .pipe(plumber(errorHandler))
-     .pipe(include())
-     .pipe(gulp.dest(config.paths.destAssets));
+  messages.logProcessFiles('build:js');
+  return gulp.src(config.roots.js)
+    .pipe(plumber(utils.errorHandler))
+    .pipe(include())
+    .pipe(extReplace('.js.liquid'))
+    .pipe(gulp.dest(config.dist.assets));
 }

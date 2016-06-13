@@ -1,7 +1,7 @@
 window.slate = window.slate || {};
 
 /**
- * _forms.js
+ * forms.js
  * -----------------------------------------------------------------------------
  * A collection of helper functions for common forms found throughout a Shopify
  * storefront.

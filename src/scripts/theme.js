@@ -4,15 +4,15 @@ window.theme = window.theme || {};
 // =require vendor/jquery-2.2.3.min.js
 // =require vendor/modernizr.min.js
 
-// =require slate/_a11y.js
-// =require slate/_uri-helpers.js
-// =require slate/_currency.js
-// =require slate/_forms.js
-// =require slate/_images.js
-// =require slate/_product.js
-// =require slate/_video.js
+// =require slate/a11y.js
+// =require slate/uri-helpers.js
+// =require slate/currency.js
+// =require slate/forms.js
+// =require slate/images.js
+// =require slate/product.js
+// =require slate/video.js
 
-// =require _strings.js.liquid
+// =require strings.js.liquid
 
 theme.variables = {
   queryParams: slate.QueryString.parse(location.search)
