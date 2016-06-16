@@ -14,7 +14,7 @@ var utils = require('./includes/utilities.js');
  * @static
  */
 gulp.task('lint:css', function() {
-  return processLint(config.src.css);
+  return processLint(config.src.cssLint);
 });
 
 /**
@@ -25,7 +25,7 @@ gulp.task('lint:css', function() {
  * @static
  */
 gulp.task('watch:css-lint', function() {
-  chokidar.watch([config.src.css, '!' + config.src.vendorCss])
+  chokidar.watch([config.src.cssLint, '!' + config.src.vendorCss])
     .on('all', function(event, files) {
       return processLint(files);
     });
