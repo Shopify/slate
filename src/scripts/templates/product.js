@@ -23,9 +23,10 @@ theme.product = (function() {
 
   Shopify.Image.preload(theme.productSingleObject.images, 'large');
 
+  // eslint-disable-next-line no-new
   new Shopify.OptionSelectors('ProductSelect', {
     product: theme.productSingleObject,
-    onVariantSelected: self.updateVarientSelection,
+    onVariantSelected: updateVariantSelection,
     enableHistoryState: true
   });
 
@@ -39,7 +40,7 @@ theme.product = (function() {
    *
    * @param {Object} variant - Product object
    */
-  function updateVarientSelection(variant) {
+  function updateVariantSelection(variant) {
     // Update cart button and text status
     if (!variant) {
       updateAddToCartState(false, theme.strings.unavailable);
