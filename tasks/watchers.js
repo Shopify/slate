@@ -26,8 +26,10 @@ gulp.task('watch:src', [
   'watch:svg',
   'watch:css-lint',
   'watch:js-lint',
+  'watch:json-lint',
   'watch:css',
-  'watch:js'
+  'watch:js',
+  'watch:sections'
 ]);
 
 /**

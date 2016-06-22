@@ -94,9 +94,14 @@ var utilities = {
    * file changes that occur in rapid succession during Watch tasks.
    *
    * @memberof slate-cli.utilities
+   * @param {Object} options
    * @returns {eventCache} see type definition for more robust documentation
    */
-  createEventCache: function() {
+  createEventCache: function(options) {
+    _.defaults(options = options || {}, {
+      changeEvents: ['add', 'change'],
+      unlinkEvents: ['unlink']
+    });
 
     /**
      * A cache object used for caching `[chokidar]{@link https://github.com/paulmillr/chokidar}`
@@ -120,12 +125,17 @@ var utilities = {
        * @param {String} path - relative path to file passed via event
        */
       addEvent: function(event, path) {
-        if (event === 'add' || event === 'change') {
-          this.change.push(path);
+        _.each(options.changeEvents, function(eventType) {
+          if (event === eventType) {
+            this.change.push(path);
+          }
+        }.bind(this));
 
-        } else if (event === 'unlink') {
-          this.unlink.push(path);
-        }
+        _.each(options.unlinkEvents, function(eventType) {
+          if (event === eventType) {
+            this.unlink.push(path);
+          }
+        }.bind(this));
       }
     };
   },

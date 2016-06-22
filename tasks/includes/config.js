@@ -34,6 +34,7 @@ var config = {
   src: {
     root: 'src/',
     js: 'src/scripts/**/*.js',
+    json: 'src/**/*.json',
     css: 'src/styles/**/*.{scss,scss.liquid}',
     cssLint: 'src/styles/**/*.scss',
     vendorCss: 'src/styles/vendor/*.scss',
@@ -41,6 +42,7 @@ var config = {
     icons: 'src/icons/**/*.svg',
     templates: 'src/templates/**/*',
     snippets: 'src/snippets/*',
+    sections: 'src/sections/',
     locales: 'src/locales/*',
     config: 'src/config/*',
     layout: 'src/layout/*'
@@ -50,6 +52,7 @@ var config = {
     root: 'dist/',
     assets: 'dist/assets/',
     snippets: 'dist/snippets/',
+    sections: 'dist/sections/',
     layout: 'dist/layout/',
     templates: 'dist/templates/',
     locales: 'dist/locales/'

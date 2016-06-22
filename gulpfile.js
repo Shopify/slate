@@ -50,7 +50,7 @@ require('require-dir')('./tasks');
 gulp.task('build', function(done) {
   runSequence(
     ['clean'],
-    ['build:js', 'build:css', 'build:assets', 'build:config', 'build:svg'],
+    ['build:js', 'build:css', 'build:assets', 'build:sections', 'build:config', 'build:svg'],
     done
   );
 });
@@ -73,7 +73,7 @@ gulp.task('zip', function(done) {
  * @static
  */
 gulp.task('test', function(done) {
-  runSequence('lint:js', 'lint:css', done);
+  runSequence('lint:js', 'lint:css', 'lint:json', done);
 });
 
 /**
