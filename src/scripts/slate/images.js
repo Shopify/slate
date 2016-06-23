@@ -16,6 +16,7 @@ slate.images = {
    */
   imageSize: function(src) {
     var imageSizes = ['pico', 'icon', 'thumb', 'small', 'compact', 'medium', 'large', 'grande', '1024x1024', '2048x2048'];
+    // eslint-disable-next-line no-useless-escape
     return src.match(new RegExp('/_(' + imageSizes.join('|') + ')\./'))[1];
   },
 
@@ -27,6 +28,7 @@ slate.images = {
    */
   imageExtension: function(src) {
     var imageExtensions = ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'bitmap', 'tiff', 'tif'];
+    // eslint-disable-next-line no-useless-escape
     return src.match(new RegExp('/\.(' + imageExtensions.join('|') + ')(\?v=\d+)?$', 'i'))[1];
   },
 

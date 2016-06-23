@@ -19,7 +19,6 @@ slate.formatMoney = function(cents, format) {
   var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
   var formatString = (format || theme.moneyFormat);
 
-
   function formatWithDelimiters(options) {
     var precision = options.precision || 2;
     var thousands = options.thousands || ',';
@@ -36,7 +35,7 @@ slate.formatMoney = function(cents, format) {
     return dollars + cents;
   }
 
-  switch(formatString.match(placeholderRegex)[1]) {
+  switch (formatString.match(placeholderRegex)[1]) {
   case 'amount':
     value = formatWithDelimiters({
       number: cents,
@@ -76,12 +75,3 @@ slate.formatMoney = function(cents, format) {
 
   return formatString.replace(placeholderRegex, value);
 };
-
-function floatToString(numeric, decimals) {
-  var amount = numeric.toFixed(decimals).toString();
-  if(amount.match(/^\.\d+/)) {
-    return '0' + amount;
-  } else {
-    return amount;
-  }
-}

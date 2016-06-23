@@ -42,9 +42,9 @@ slate.forms = {
    * @param $el
    */
   deleteAddressInput: function($el) {
-
     var formId = $el.data('form-id');
     var confirmMessage = $el.data('confirm-message');
+    // eslint-disable-next-line no-alert
     if (confirm(confirmMessage || 'Are you sure you wish to delete this address?')) {
       Shopify.postLink('/account/addresses/' + formId, {parameters: {_method: 'delete'}});
     }
@@ -68,6 +68,7 @@ slate.OptionSelectors = function(existingSelectorId, options) {
   this.selectors = [];
   this.domIdPrefix = existingSelectorId;
   this.product = new Shopify.Product(options.product);
+  // eslint-disable-next-line no-empty-function
   this.onVariantSelected = Shopify.isDefined(options.onVariantSelected) ? options.onVariantSelected : function() {};
 
   this.replaceSelector(existingSelectorId); // create the dropdowns
@@ -172,6 +173,8 @@ slate.OptionSelectors.prototype.optionExistInSelect = function(select, value) {
       return true;
     }
   }
+
+  return false;
 };
 
 // insertSelectors(domId, msgDomId)
@@ -277,27 +280,29 @@ slate.OptionSelectorsFromDOM.prototype.createProductFromSelector = function(domI
   // build product json + messages array
   var variants = [];
   Shopify.each(options, function(option) {
-    if (option.nodeType === 1 && option.tagName.toLowerCase() === 'option') {
-      var chunks = option.innerHTML.split(new RegExp('\\s*\\' + delimiter + '\\s*'));
-
-      if (optionNames.length === 0) {
-        optionCount = chunks.length - (priceFieldExists ? 1 : 0);
-      }
-
-      var optionOptionValues = chunks.slice(0, optionCount);
-      var message = (priceFieldExists ? chunks[optionCount] : '');
-
-      var attributes = {
-        available: (option.disabled ? false : true),
-        id: parseFloat(option.value),
-        price: message,
-        option1: optionOptionValues[0],
-        option2: optionOptionValues[1],
-        option3: optionOptionValues[2]
-      };
-
-      variants.push(attributes);
+    if (option.nodeType !== 1 && option.tagName.toLowerCase() !== 'option') {
+      return;
     }
+
+    var chunks = option.innerHTML.split(new RegExp('\\s*\\' + delimiter + '\\s*'));
+
+    if (optionNames.length === 0) {
+      optionCount = chunks.length - (priceFieldExists ? 1 : 0);
+    }
+
+    var optionOptionValues = chunks.slice(0, optionCount);
+    var message = (priceFieldExists ? chunks[optionCount] : '');
+
+    var attributes = {
+      available: option.disabled,
+      id: parseFloat(option.value),
+      price: message,
+      option1: optionOptionValues[0],
+      option2: optionOptionValues[1],
+      option3: optionOptionValues[2]
+    };
+
+    variants.push(attributes);
   });
   var updateObj = {variants: variants};
   if (optionNames.length === 0) {
