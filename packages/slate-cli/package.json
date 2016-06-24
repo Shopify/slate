@@ -18,7 +18,8 @@
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0; exit 0",
-    "generate-theme": "yo ./generators/slate-shopify/theme.js"
+    "generate-theme": "yo ./generators/slate-shopify/theme.js",
+    "generate-section": "yo ./generators/new-section/section.js"
   },
   "dependencies": {
     "bin-wrapper": "3.0.2",

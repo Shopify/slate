@@ -38,8 +38,8 @@ module.exports = {
         message: 'Please enter a name for your theme (folder will be created)',
         validate: function(answer) {
           return answer
-            ? 'You must provide a name for your theme.'
-            : true;
+            ? true
+            : 'You must provide a name for your theme.';
         }
       });
     }

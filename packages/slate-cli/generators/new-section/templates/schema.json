@@ -1,0 +1,8 @@
+{
+  "settings": [],
+  "presets": [{
+    "name": "Section preset",
+    "category": "Miscellaneous"
+  }],
+  "blocks" : {}
+}

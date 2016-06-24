@@ -18,7 +18,7 @@ module.exports = {
   },
 
   generatorsList: function() {
-    return ' slate new theme\n';
+    return ' slate new theme\n slate new section\n';
   },
 
   unknownInstaller: function() {
