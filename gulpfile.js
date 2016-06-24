@@ -83,7 +83,7 @@ gulp.task('test', function(done) {
  * @memberof slate-cli.tasks.watch
  * @static
  */
-gulp.task('watch', defineWatchTasks());
+gulp.task('watch', runSequence('build:config', defineWatchTasks()));
 
 function defineWatchTasks() {
   var tasks = ['watch:src', 'watch:dist', 'watch:dist-config'];
