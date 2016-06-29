@@ -201,6 +201,11 @@
       "from": "beeper@>=1.0.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/beeper/-/beeper-1.1.0.tgz"
     },
+    "bin-check": {
+      "version": "2.0.0",
+      "from": "bin-check@>=2.0.0 <3.0.0",
+      "resolved": "https://registry.npmjs.org/bin-check/-/bin-check-2.0.0.tgz"
+    },
     "bin-version": {
       "version": "1.0.4",
       "from": "bin-version@>=1.0.0 <2.0.0",
@@ -217,6 +222,11 @@
           "resolved": "https://registry.npmjs.org/semver/-/semver-4.3.6.tgz"
         }
       }
+    },
+    "bin-wrapper": {
+      "version": "3.0.2",
+      "from": "bin-wrapper@latest",
+      "resolved": "https://registry.npmjs.org/bin-wrapper/-/bin-wrapper-3.0.2.tgz"
     },
     "binaryextensions": {
       "version": "1.0.1",
@@ -436,7 +446,8 @@
       "dependencies": {
         "object-assign": {
           "version": "4.1.0",
-          "from": "object-assign@>=4.0.1 <5.0.0"
+          "from": "object-assign@4.1.0",
+          "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.0.tgz"
         }
       }
     },
@@ -1013,6 +1024,11 @@
       "version": "1.0.0",
       "from": "execall@>=1.0.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/execall/-/execall-1.0.0.tgz"
+    },
+    "executable": {
+      "version": "1.1.0",
+      "from": "executable@>=1.0.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/executable/-/executable-1.1.0.tgz"
     },
     "exit-hook": {
       "version": "1.1.1",
@@ -1867,6 +1883,11 @@
       "from": "latest-version@>=2.0.0 <3.0.0",
       "resolved": "https://registry.npmjs.org/latest-version/-/latest-version-2.0.0.tgz"
     },
+    "lazy-req": {
+      "version": "1.1.0",
+      "from": "lazy-req@>=1.0.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/lazy-req/-/lazy-req-1.1.0.tgz"
+    },
     "lazystream": {
       "version": "1.0.0",
       "from": "lazystream@>=1.0.0 <2.0.0",
@@ -2377,6 +2398,11 @@
       "version": "0.3.0",
       "from": "ordered-read-streams@>=0.3.0 <0.4.0",
       "resolved": "https://registry.npmjs.org/ordered-read-streams/-/ordered-read-streams-0.3.0.tgz"
+    },
+    "os-filter-obj": {
+      "version": "1.0.3",
+      "from": "os-filter-obj@>=1.0.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/os-filter-obj/-/os-filter-obj-1.0.3.tgz"
     },
     "os-homedir": {
       "version": "1.0.1",

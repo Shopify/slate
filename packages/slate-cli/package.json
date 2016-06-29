@@ -21,6 +21,7 @@
     "generate-theme": "yo ./generators/slate-shopify/theme.js"
   },
   "dependencies": {
+    "bin-wrapper": "3.0.2",
     "find-root": "1.0.0",
     "global-npm": "0.3.0",
     "lodash": "4.13.1",
