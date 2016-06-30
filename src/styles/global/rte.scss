@@ -19,7 +19,6 @@
     ul {
       list-style: circle outside;
 
-      // scss-lint:disable SelectorDepth
       ul {
         list-style: square outside;
       }
@@ -38,6 +37,7 @@
 
 // allow table to scroll for tables in the RTE since we don't know
 // how many columns they will contain. Class added by JS.
+// sass-lint:disable no-misspelled-properties
 .rte__table-wrapper {
   max-width: 100%;
   overflow: auto;

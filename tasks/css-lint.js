@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var scssLint = require('gulp-scss-lint');
+var scssLint = require('gulp-sass-lint');
 var plumber = require('gulp-plumber');
 var chokidar = require('chokidar');
 
@@ -35,7 +35,8 @@ function processLint(files) {
   return gulp.src(files)
     .pipe(plumber(utils.errorHandler))
     .pipe(scssLint({
-      config: config.scssLintConfig,
-      bundleExec: true
-    }));
+      configFile: config.scssLintConfig
+    }))
+    .pipe(scssLint.format())
+    .pipe(scssLint.failOnError());
 }

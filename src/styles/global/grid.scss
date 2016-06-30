@@ -16,7 +16,7 @@
   padding-left: $grid-gutter;
   width: 100%;
 
-  &[class*="--push"] {
+  &[class*='--push'] {
     position: relative;
   }
 }
@@ -40,8 +40,8 @@
   Grid Columns
     - Create width classes, prepended by the breakpoint name.
 ==============================================================================*/
-// scss-lint:disable SingleLinePerProperty EmptyLineBetweenBlocks
-@mixin grid-column-generator($breakpoint:'') {
+// sass-lint:disable brace-style empty-line-between-blocks
+@mixin grid-column-generator($breakpoint: '') {
   /** Whole */
   .#{$breakpoint}one-whole { width: 100%; }
 
@@ -105,7 +105,7 @@
 }
 
 /*================ Grid push classes ================*/
-@mixin grid-push-generator($breakpoint:'') {
+@mixin grid-push-generator($breakpoint: '') {
   /* Halves */
   .#{$breakpoint}push-one-half { left: percentage(1 / 2); }
 
@@ -166,7 +166,7 @@
 }
 
 /*================ Clearfix helper on uniform grids ================*/
-@mixin grid-uniform-clearfix($breakpoint:'') {
+@mixin grid-uniform-clearfix($breakpoint: '') {
   .grid--uniform {
     .#{$breakpoint}one-half:nth-child(2n+1),
     .#{$breakpoint}one-third:nth-child(3n+1),
@@ -186,7 +186,7 @@
     .#{$breakpoint}six-twelfths:nth-child(2n+1) { clear: both; }
   }
 }
-// scss-lint:enable SingleLinePerProperty EmptyLineBetweenBlocks
+// sass-lint:enable brace-style empty-line-between-blocks
 
 /*================ Build Base Grid Classes ================*/
 @include grid-column-generator();

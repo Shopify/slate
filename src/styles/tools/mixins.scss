@@ -6,7 +6,7 @@
     clear: both;
   }
 
-  // scss-lint:disable PropertySpelling
+  // sass-lint:disable no-misspelled-properties
   *zoom: 1;
 }
 
@@ -68,8 +68,8 @@
 }
 
 /*================ Responsive Show/Hide Helper ================*/
-@mixin responsive-display-helper($breakpoint:'') {
-  // scss-lint:disable ImportantRule
+@mixin responsive-display-helper($breakpoint: '') {
+  // sass-lint:disable no-important
   .#{$breakpoint}show {
     display: block !important;
   }
@@ -81,8 +81,8 @@
 
 
 /*================ Responsive Text Alignment Helper ================*/
-@mixin responsive-text-align-helper($breakpoint:'') {
-  // scss-lint:disable ImportantRule
+@mixin responsive-text-align-helper($breakpoint: '') {
+  // sass-lint:disable no-important
   .#{$breakpoint}text-left {
     text-align: left !important;
   }
@@ -97,7 +97,7 @@
 }
 
 @mixin visually-hidden() {
-  // scss-lint:disable ImportantRule
+  // sass-lint:disable no-important
   position: absolute !important;
   overflow: hidden;
   clip: rect(0 0 0 0);
@@ -109,7 +109,7 @@
 }
 
 @mixin visually-shown($position: inherit) {
-  // scss-lint:disable ImportantRule
+  // sass-lint:disable no-important
   position: $position !important;
   overflow: auto;
   clip: auto;

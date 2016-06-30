@@ -18,7 +18,7 @@ var utils = require('./includes/utilities.js');
  */
 gulp.task('deploy:replace', function() {
   return utils.resolveShell(
-    spawn('theme', ['replace'], {cwd: config.dist.root})
+    spawn('slate', ['replace'], {cwd: config.dist.root})
   );
 });
 

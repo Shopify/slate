@@ -84,7 +84,7 @@ function deploy(cmd, files) {
   messages.logChildProcess(cmd);
   activeDeploy = true;
 
-  utils.resolveShell(spawn('theme', [cmd].concat(files), {cwd: config.dist.root}))
+  utils.resolveShell(spawn('slate', [cmd].concat(files), {cwd: config.dist.root}))
     .then(function() {
       activeDeploy = false;
       fs.appendFile(config.deployLog, messages.logDeploys(cmd, files));
