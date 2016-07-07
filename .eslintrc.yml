@@ -1,0 +1,18 @@
+---
+
+extends:
+  - "plugin:shopify/es5"
+  - "plugin:shopify/node"
+  - "plugin:shopify/jquery"
+env:
+  browser: true
+  node: true
+  jquery: true
+globals:
+  theme: true
+  Shopify: false
+  slate: true
+rules:
+  no-lonely-if: 0
+  comma-dangle: 0
+  spaced-comment: 0

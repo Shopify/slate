@@ -2,11 +2,11 @@ machine:
   ruby:
     version: 1.9.3-p385
   node:
-    version: 5.1.0
+    version: 6.2.2
 
 dependencies:
   pre:
-    - npm install -g npm
+    - npm install -g npm shopify/sass-lint eslint eslint-plugin-shopify eslint-plugin-node jsonlint
   bundler:
     without:
       - benchmark
@@ -19,3 +19,6 @@ dependencies:
 test:
   override:
     - bundle exec rspec spec
+    - sass-lint --config '.scss-lint.yml' --max-warnings 0 --verbose
+    - eslint 'src/scripts/**/*.js' --config '.eslintrc.yml' --ignore-path '.eslintignore' --max-warnings 0
+    - ls src/**/*.json | xargs -n1 jsonlint -q
