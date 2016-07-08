@@ -27,7 +27,7 @@ gulp.task('build:js', ['lint:js'], function() {
  * @static
  */
 gulp.task('watch:js', function() {
-  chokidar.watch([config.src.js], {ignoreInitial: true})
+  chokidar.watch(config.src.js, {ignoreInitial: true})
     .on('all', function(event, path) {
       messages.logFileEvent(event, path);
       processJs();

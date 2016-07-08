@@ -16,7 +16,7 @@ var messages = require('./includes/messages.js');
  * @memberof slate-cli.tasks.deploy
  * @static
  */
-gulp.task('deploy:sync-init', function(done) {
+gulp.task('deploy:sync-init', function() {
   if (browserSync.active) {
     browserSync.exit(); // stop any existing browsersync instance before (re)running init
   } else {
@@ -31,7 +31,6 @@ gulp.task('deploy:sync-init', function(done) {
       browserSync.init({
         proxy: 'https://' + tkConfig[config.environment].store
       });
-      done();
     });
 });
 

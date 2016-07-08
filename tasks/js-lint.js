@@ -12,14 +12,14 @@ gulp.task('lint:js', function() {
 });
 
 gulp.task('watch:js-lint', function() {
-  chokidar.watch([config.src.js], {ignoreInitial: true})
+  chokidar.watch(config.src.js, {ignoreInitial: true})
     .on('all', function() {
       return processLint();
     });
 });
 
 function processLint() {
-  return gulp.src([config.src.js])
+  return gulp.src(config.src.js)
     .pipe(plumber(utils.errorHandler))
     .pipe(eslint())
     .pipe(eslint.format());

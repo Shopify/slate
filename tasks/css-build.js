@@ -28,7 +28,7 @@ gulp.task('build:css', ['lint:css'], function() {
  * @static
  */
 gulp.task('watch:css', function() {
-  chokidar.watch([config.src.css], {ignoreInitial: true})
+  chokidar.watch(config.src.css, {ignoreInitial: true})
     .on('all', function(event, path) {
       messages.logFileEvent(event, path);
       processCss();
