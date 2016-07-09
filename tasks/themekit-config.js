@@ -58,7 +58,7 @@ gulp.task('watch:dist-config', function() {
 });
 
 function processConfig(file) {
-  messages.logProcessFiles('build:config', file);
+  messages.logProcessFiles('build:config');
 
   return gulp.src(file)
     .pipe(plumber(utils.errorHandler))
