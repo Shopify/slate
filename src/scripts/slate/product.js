@@ -17,8 +17,10 @@ slate.Product = function(json) {
 };
 
 slate.Product.prototype.update = function(json) {
-  for (property in json) {
-    this[property] = json[property];
+  for (var property in json) {
+    if (json.hasOwnProperty(property)) {
+      this[property] = json[property];
+    }
   }
 };
 
@@ -35,9 +37,9 @@ slate.Product.prototype.optionNames = function() {
 slate.Product.prototype.optionValues = function(index) {
   if (!Shopify.isDefined(this.variants)) { return null; }
 
-  var results = Shopify.map(this.variants, function(e) {
+  var results = Shopify.map(this.variants, function(value) {
     var optionCol = 'option' + (index + 1);
-    return (e[optionCol] === undefined) ? null : e[optionCol];
+    return (typeof value[optionCol] === 'undefined') ? null : value[optionCol];
   });
 
   return (results[0] == null ? null : Shopify.uniq(results));

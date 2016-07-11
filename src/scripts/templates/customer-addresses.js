@@ -37,7 +37,7 @@ theme.customerAddresses = (function() {
   });
 
   $(config.editToggle).on('click', function() {
-    var formId = $(this).dagta('form-id');
+    var formId = $(this).data('form-id');
     $(config.editAddress + formId).toggleClass('hide');
   });
 
