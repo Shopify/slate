@@ -8,6 +8,13 @@ module.exports = function() {
     });
 };
 
+/**
+ * Uses ThemeKit include to install ThemeKit and write the
+ * status of the install.
+ *
+ * @returns {Promise} - The ThemeKit install
+ * @private
+ */
 function setupThemeKit() {
   return themekit
     .install()

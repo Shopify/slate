@@ -7,6 +7,14 @@ var slateRoot = path.resolve(__dirname, '../..');
 var base = 'https://github.com/Shopify/themekit/releases/download/0.3.6';
 
 module.exports = {
+
+  /**
+   * Uses BinWrapper to fetch the ThemeKit binary based on
+   * system and architecture. The binary gets stored in
+   * slate-cli bin.
+   *
+   * @returns {Object} - BinWrapper instance for ThemeKit
+   */
   get: function() {
     return new BinWrapper()
       .src(base + '/darwin-amd64.zip', 'darwin')
@@ -17,6 +25,13 @@ module.exports = {
       .dest(path.join(slateRoot, '/bin'))
       .use(process.platform === 'win32' ? 'theme.exe' : 'theme');
   },
+
+  /**
+   * Uses BinWrapper instance and executes version command
+   * to test the ThemeKit binary.
+   *
+   * @returns {Promise} - The ThemeKit installation
+   */
   install: function() {
     var installer = this.get();
 
@@ -30,9 +45,24 @@ module.exports = {
       });
     });
   },
+
+  /**
+   * Resolves the path to local ThemeKit binary.
+   *
+   * @returns {String} - The path to ThemeKit
+   */
   path: function() {
     return path.resolve(this.get().path());
   },
+
+  /**
+   * Uses child_process to spawn a new thread and
+   * executes the command with the local ThemeKit
+   * binary.
+   *
+   * @param args {Object} - The command and additional args to execute.
+   * @returns {Promise} - The child_process stream
+   */
   commands: function(args) {
     var error = '';
     var childProcess = spawn(this.path(), args);
