@@ -1,4 +1,3 @@
-<!-- /templates/customers/account.liquid -->
 <h1>{{ 'customer.account.title' | t }}</h1>
 
 <hr>
@@ -7,7 +6,6 @@
 
 {% paginate customer.orders by 20 %}
   {% if customer.orders.size != 0 %}
-
     <table class="responsive-table">
       <thead>
         <tr>
@@ -30,53 +28,20 @@
         {% endfor %}
       </tbody>
     </table>
-
   {% else %}
-
     <p>{{ 'customer.orders.none' | t }}</p>
+  {% endif %}
 
-  {% endif %}
-  {% if paginate.pages > 1 %}
-    <div class="pagination">
-      {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
-    </div>
-  {% endif %}
+  {% include '__pagination' %}
+
 {% endpaginate %}
 
 <hr>
 
 <h2>{{ 'customer.account.details' | t }}</h2>
 
-<p>{{ customer.name }}</p>
+{% include 'customers__address' with customer.default_address %}
 
-{% if customer.default_address != nil %}
-  <p>
-    {{ customer.default_address.address1 }}<br>
-
-    {% if customer.default_address.address2 != "" %}
-      {{ customer.default_address.address2 }}<br>
-    {% endif %}
-
-    {% if customer.default_address.city != "" %}
-      {{ customer.default_address.city }}<br>
-    {% endif %}
-
-    {% if customer.default_address.province_code != "" %}
-      {{ customer.default_address.province_code | upcase }}<br>
-    {% endif %}
-
-    {% if customer.default_address.zip != "" %}
-      {{ customer.default_address.zip | upcase }}<br>
-    {% endif %}
-
-    {% if customer.default_address.country != "" %}
-      {{ customer.default_address.country }}<br>
-    {% endif %}
-
-    {% if customer.default_address.phone != "" %}
-      {{ customer.default_address.phone }}
-    {% endif %}
-  </p>
-{% endif %}
-
-<p><a href="/account/addresses">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a></p>
+<p>
+  <a href="/account/addresses">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a>
+</p>

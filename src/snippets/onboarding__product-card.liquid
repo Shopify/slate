@@ -1,0 +1,33 @@
+{% comment %}
+  Snippet for showing onboarding content wherever `snippets/__product-card.liquid` is used.
+{% endcomment %}
+
+<div class="helper-section">
+  <div class="helper-note">
+    <span class="helper-icon"></span>
+    <h3>{{ 'collections.onboarding.modal_title' | t }}</h3>
+    <p>{{ 'collections.onboarding.no_products_html' | t }}</p>
+    <p><a href="/admin/products/new" class="admin-btn-primary">{{ 'collections.onboarding.add_product' | t }}</a></p>
+  </div>
+
+  <div class="helper-content">
+    {% assign collection_index = 1 %}
+    {% for i in (1..8) %}
+      {% case i %}
+        {% when 7 %}
+          {% assign collection_index = 1 %}
+        {% when 8 %}
+          {% assign collection_index = 2 %}
+      {% endcase %}
+      <div>
+        <a href="/admin/products">
+          {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ collection_index }}.png{% endcapture %}
+          {{ imageUrl | img_tag }}
+        </a>
+        <p><a href="/admin/products">{{ 'homepage.onboarding.product_title' | t }}</a></p>
+        <p>$19.99</p>
+      </div>
+      {% assign collection_index = collection_index | plus: 1 %}
+    {% endfor %}
+  </div>
+</div>

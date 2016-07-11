@@ -1,0 +1,56 @@
+<header class="site-header" role="banner">
+  {% if template == 'index' %}
+    <h1 itemscope itemtype="http://schema.org/Organization">
+  {% else %}
+    <div class="h1" itemscope itemtype="http://schema.org/Organization">
+  {% endif %}
+    <a href="/" itemprop="url" class="site-header__logo">
+      {% if settings.logo_use_image %}
+        <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
+      {% else %}
+        {{ shop.name }}
+      {% endif %}
+    </a>
+  {% if template == 'index' %}
+    </h1>
+  {% else %}
+    </div>
+  {% endif %}
+
+  <div>
+    <a href="/cart" class="site-header__cart">
+      {% include 'icon-cart' %}
+      {{ 'layout.cart.title' | t }}
+      (<span id="CartCount">{{ cart.item_count }}</span>
+      {{ 'layout.cart.items_count' | t: count: cart.item_count }}
+      <span id="CartCost">{{ cart.total_price | money }}</span>)
+    </a>
+  </div>
+
+  {% if shop.customer_accounts_enabled %}
+    <ul class="list--inline">
+      {% if customer %}
+        <li>
+          {% if customer.first_name != blank %}
+            {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
+            {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
+          {% else %}
+            <a href="/account">{{ 'layout.customer.account' | t }}</a>
+          {% endif %}
+        </li>
+        <li>
+          {{ 'layout.customer.log_out' | t | customer_logout_link }}
+        </li>
+      {% else %}
+        <li>
+          {{ 'layout.customer.log_in' | t | customer_login_link }}
+        </li>
+        <li>
+          {{ 'layout.customer.create_account' | t | customer_register_link }}
+        </li>
+      {% endif %}
+    </ul>
+  {% endif %}
+
+  {% include '__search' %}
+</header>

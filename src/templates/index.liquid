@@ -1,11 +1,7 @@
-<!-- /templates/index.liquid -->
 <h2>{{ 'homepage.sections.featured_title' | t }}</h2>
 {% assign featured_collection_index = 1 %}
 {% for collection in collections limit:5 %}
   <div>
-    {% comment %}
-      Use capture to put the collection title in a variable that is used in liquid filters
-    {% endcomment %}
     {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
 
     <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">

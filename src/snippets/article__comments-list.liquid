@@ -1,0 +1,13 @@
+<ul>
+  {% if comment and comment.created_at %}
+    <li id="{{ comment.id }}">
+      {% include '__comment' %}
+    </li>
+  {% endif %}
+
+  {% for comment in article.comments %}
+    <li id="{{ comment.id }}">
+      {% include '__comment' %}
+    </li>
+  {% endfor %}
+</ul>

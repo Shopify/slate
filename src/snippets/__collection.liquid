@@ -1,0 +1,15 @@
+<div>
+  {% capture title %}{{ collection.title | escape }}{% endcapture %}
+
+  <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: title }}">
+    {% if collection.image %}
+      {{ collection | img_url: 'large' | img_tag: title }}
+    {% else %}
+      {{ collection.products.first | img_url: 'large' | img_tag: title }}
+    {% endif %}
+  </a>
+
+  <p>
+    <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: title }}">{{ collection.title }}</a>
+  </p>
+</div>

@@ -1,0 +1,48 @@
+<footer class="site-footer" role="contentinfo">
+  {% assign social_media_types = 'facebook,twitter,pinterest,instagram,tumblr,youtube,vimeo,fancy,google_plus' | split: ',' %}
+
+  <ul class="list--inline">
+    {% for type in social_media_types %}
+      {% assign settings_id = type | prepend: 'social_' | append: '_link' %}
+      {% assign name = type | capitalize | replace: '_', ' '  %}
+      {% assign link = settings[settings_id] %}
+      {% assign icon = type | prepend: 'icon-' %}
+
+      {% if link != blank %}
+        <li>
+          <a href="{{ link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: name }}">
+            {% include icon %}
+            <span class="icon__fallback-text">{{ name }}</span>
+          </a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+
+  {% unless shop.enabled_payment_types == empty %}
+    {% assign payment_icons_available = 'amazon_payments,american_express,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,stripe,visa' | split: ',' %}
+
+    <ul class="list--inline payment-icons">
+      {% for type in shop.enabled_payment_types %}
+        {% if payment_icons_available contains type %}
+          <li>
+            {% assign icon_name = type | prepend: 'icon-' %}
+            {% include icon_name %}
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  {% endunless %}
+
+  {% if menus.footer.links.size > 0 %}
+    <ul>
+      {% for link in menus.footer.links %}
+        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <div>
+    <small>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}. {{ powered_by_link }}</small>
+  </div>
+</footer>

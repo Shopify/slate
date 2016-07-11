@@ -1,4 +1,3 @@
-<!-- /snippets/social-sharing.liquid -->
 {% if template contains 'article' or template contains 'blog' %}
   {% capture permalinkURL %}{{ shop.url }}{{ article.url }}{% endcapture %}
   {% capture shareTitle %}{{ article.title | url_param_escape }}{% endcapture %}
@@ -49,7 +48,7 @@
 
   {% if settings.share_google %}
     <a target="_blank" href="//plus.google.com/share?url={{ permalinkURL }}" class="social-sharing__link">
-      {% include 'icon-google-plus' %}
+      {% include 'icon-google_plus' %}
       +1
     </a>
   {% endif %}

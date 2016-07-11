@@ -1,4 +1,3 @@
-<!-- /templates/page.contact.liquid -->
 <h1>{{ page.title }}</h1>
 
 <div class="rte">
@@ -15,16 +14,16 @@
 
   {{ form.errors | default_errors }}
 
-  <label for="ContactFormName" class="label--hidden">{{ 'contact.form.name' | t }}</label>
+  <label for="ContactFormName">{{ 'contact.form.name' | t }}</label>
   <input type="text" id="ContactFormName" name="contact[name]" placeholder="{{ 'contact.form.name' | t }}" autocapitalize="words" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
 
-  <label for="ContactFormEmail" class="label--hidden">{{ 'contact.form.email' | t }}</label>
+  <label for="ContactFormEmail">{{ 'contact.form.email' | t }}</label>
   <input type="email" id="ContactFormEmail" name="contact[email]" placeholder="{{ 'contact.form.email' | t }}" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
 
-  <label for="ContactFormPhone" class="label--hidden">{{ 'contact.form.phone' | t }}</label>
+  <label for="ContactFormPhone">{{ 'contact.form.phone' | t }}</label>
   <input type="tel" id="ContactFormPhone" name="contact[phone]" placeholder="{{ 'contact.form.phone' | t }}" pattern="[0-9\-]*" value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
 
-  <label for="ContactFormMessage" class="label--hidden">{{ 'contact.form.message' | t }}</label>
+  <label for="ContactFormMessage">{{ 'contact.form.message' | t }}</label>
   <textarea rows="10" id="ContactFormMessage" name="contact[body]" placeholder="{{ 'contact.form.message' | t }}">{% if form.body %}{{ form.body }}{% endif %}</textarea>
 
   <input type="submit" class="btn" value="{{ 'contact.form.send' | t }}">
