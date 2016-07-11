@@ -1,0 +1,20 @@
+# This file contains the information needed for Shopify to authenticate
+# requests and edit/update the theme files in the manner specified.
+#
+# Please update each environment with the appropriate parameters for
+# your workflow. Don't forget to update the ignore_files!
+#
+# Note: If no theme_id is specified, the currently active theme will
+# be modified.
+#
+# More information @ http://themekit.cat/docs/#config-variables.
+
+<% environments.forEach(function(env) { %>
+<%= env %>:
+  theme_id: (optional - if empty, you will write to the active theme)
+  password: XXXXXXXXXX
+  store: my-store-name.myshopify.com
+  # ignore_files:
+    # - config/settings_data.json
+    # - "*.log"
+<% }); %>
