@@ -2678,7 +2678,7 @@
     },
     "rimraf": {
       "version": "2.5.2",
-      "from": "rimraf@>=2.2.0 <3.0.0",
+      "from": "rimraf@latest",
       "resolved": "https://registry.npmjs.org/rimraf/-/rimraf-2.5.2.tgz"
     },
     "root-check": {

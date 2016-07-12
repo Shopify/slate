@@ -23,10 +23,14 @@
   },
   "dependencies": {
     "bin-wrapper": "3.0.2",
+    "bluebird": "3.4.1",
     "find-root": "1.0.0",
     "global-npm": "0.3.0",
     "lodash": "4.13.1",
+    "nodegit": "0.14.1",
     "nopt": "3.0.6",
+    "open": "0.0.5",
+    "rimraf": "2.5.2",
     "update-notifier": "0.7.0",
     "yeoman-generator": "0.23.3",
     "yo": "1.8.4"
@@ -50,6 +54,7 @@
       "Promise": true
     },
     "rules": {
+      "no-unsafe-finally": 0,
       "no-lonely-if": 0,
       "comma-dangle": 0,
       "spaced-comment": 0
