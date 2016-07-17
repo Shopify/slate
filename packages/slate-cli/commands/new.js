@@ -3,7 +3,7 @@ var findRoot = require('find-root');
 var utils = require('../includes/utils.js');
 var msg = require('../includes/messages.js');
 
-var slateRoot = path.resolve(__dirname, '../..');
+var slateRoot = path.resolve(__dirname, '..');
 var destRoot = process.cwd();
 
 module.exports = function(args/*, options*/) {

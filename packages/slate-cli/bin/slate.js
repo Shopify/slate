@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 var _ = require('lodash');
 var parseOptions = require('nopt');
-var slate = require('../lib');
+var slate = require('../index.js');
 // var pkg = require('../package.json');
 // require('update-notifier')({packageName: pkg.name,packageVersion: pkg.version}).notify();
 
