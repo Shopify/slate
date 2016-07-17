@@ -1,18 +1,23 @@
 #!/usr/bin/env node
+
 var _ = require('lodash');
 var parseOptions = require('nopt');
 var slate = require('../index.js');
 // var pkg = require('../package.json');
 // require('update-notifier')({packageName: pkg.name,packageVersion: pkg.version}).notify();
 
+/* eslint-disable quote-props ,id-length */
 var validOpts = {
-  version: Boolean,
-  manual: Boolean, // flag for manual deploy (used with deploy command)
-  nosync: Boolean
+  'version': Boolean,
+  'manual': Boolean, // flag for manual deploy (used with deploy command)
+  'environment': [null, String],
+  'nosync': Boolean
 };
+
 var shorthand = {
   v: '--version',
   m: '--manual',
+  e: '--environment',
   ns: '--nosync'
 };
 
