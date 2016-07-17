@@ -38,6 +38,21 @@ var utilities = {
   },
 
   /**
+   * executes an array of promises in series
+   * @param promiseArrayFactory {Function} - an array of promise factories
+   * @returns {Promise} - promise.all() style array of results from each promise
+   */
+  promiseSeries: function(promiseArrayFactory) {
+    var results = [];
+
+    return Promise.each(promiseArrayFactory, function(factory) {
+      var result = factory();
+      results.push(result);
+      return result;
+    }).thenReturn(results).all();
+  },
+
+  /**
    * Custom reporting function for scss-lint
    *
    * @memberof slate-cli.utilities
