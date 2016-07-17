@@ -1,7 +1,7 @@
 var path = require('path');
 var BinWrapper = require('bin-wrapper');
 var spawn = require('child_process').spawn;
-var slateRoot = path.resolve(__dirname, '../..');
+var slateRoot = path.resolve(__dirname, '..');
 // https://github.com/Shopify/themekit/releases.atom:
 // fetch feed, parse for release version number, and append to base
 var base = 'https://github.com/Shopify/themekit/releases/download/0.3.6';
