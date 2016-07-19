@@ -18,3 +18,4 @@ rules:
   no-lonely-if: 0
   comma-dangle: 0
   spaced-comment: 0
+  indent: ["error", 2, {"SwitchCase": 1}]

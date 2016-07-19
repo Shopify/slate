@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var pkg = require('../package.json');
 var spawn = require('child_process').spawn;
 var Promise = require('bluebird');
 var fs = require('fs');
