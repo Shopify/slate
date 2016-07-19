@@ -21,7 +21,11 @@ var messages = require('./includes/messages.js');
  * @static
  */
 gulp.task('build:sections', function() {
-  processAssets(config.src.sections);
+  var sectionsDir = config.src.sections;
+
+  if (fs.existsSync(sectionsDir)) {
+    processAssets(sectionsDir);
+  }
 });
 
 /**
