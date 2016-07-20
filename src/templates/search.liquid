@@ -1,4 +1,3 @@
-<!-- /templates/search.liquid -->
 {% paginate search.results by 10 %}
 
   {% if search.performed %}
@@ -11,61 +10,14 @@
     <h1>{{ 'general.search.title' | t }}</h1>
   {% endif %}
 
-  <form action="/search" method="get" role="search">
-    {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
-    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
-    <button type="submit" class="btn">
-      {% include 'icon-search' %}
-      <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
-    </button>
-  </form>
+  {% include '__search' %}
 
   {% if search.performed %}
     {% for item in search.results %}
-      <div>
-        {% if item.featured_image %}
-          <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-            {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
-          </a>
-        {% endif %}
-
-        <h5>{{ item.title | link_to: item.url }}</h5>
-
-        {% if item.object_type == 'product' %}
-          <p>
-            {% if item.compare_at_price > item.price %}
-              {% if item.price_varies %}
-                {% assign sale_price = item.price | money %}
-                {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
-              {% else %}
-                <strong>{{ 'products.product.on_sale' | t }}</strong>
-                <span itemprop="price">{{ item.price | money }}</span>
-              {% endif %}
-              <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-              <s>{{ item.compare_at_price | money }}</s>
-            {% else %}
-              {% if item.price_varies %}
-                {% assign price = item.price | money %}
-                <span itemprop="price">{{ 'products.product.from_text_html' | t: price: price }}</span>
-              {% else %}
-                <span itemprop="price">{{ item.price | money }}</span>
-              {% endif %}
-            {% endif %}
-            {% unless item.available %}
-              <strong>{{ 'products.product.sold_out' | t }}</strong>
-            {% endunless %}
-          </p>
-        {% else %}
-          <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
-        {% endif %}
-      </div>
+      {% include 'search__result' %}
     {% endfor %}
 
-    {% if paginate.pages > 1 %}
-      <div class="pagination">
-        {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
-      </div>
-    {% endif %}
+    {% include '__pagination' %}
 
   {% endif %}
 

@@ -1,4 +1,3 @@
-<!-- /templates/collection.liquid -->
 {% paginate collection.products by 12 %}
 
   <header>
@@ -13,10 +12,7 @@
       <ul>
         {% for tag in collection.all_tags %}
           {% if current_tags contains tag %}
-            {% comment %}
-              Your currently active tag
-            {% endcomment %}
-            <li>
+            <li class="active">
               {{ tag | link_to_remove_tag: tag }}
             </li>
           {% else %}
@@ -31,46 +27,7 @@
 
   <div>
     {% for product in collection.products %}
-      <div>
-        <a href="{{ product.url | within: collection }}">
-          <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
-        </a>
-
-        <p>
-          <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
-        </p>
-        <p>
-          {% if product.compare_at_price > product.price %}
-
-            {% if product.price_varies %}
-              {% assign sale_price = product.price | money %}
-              {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
-            {% else %}
-              <strong>{{ 'products.product.on_sale' | t }}</strong>
-              {{ product.price | money }}
-            {% endif %}
-
-          {% else %}
-
-            {% if product.price_varies %}
-              {% assign price = product.price | money %}
-              {{ 'products.product.from_text_html' | t: price: price }}
-            {% else %}
-              {{ product.price | money }}
-            {% endif %}
-
-          {% endif %}
-
-          {% if product.compare_at_price > product.price %}
-            <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-            <s>{{ product.compare_at_price | money }}</s>
-          {% endif %}
-
-          {% unless product.available %}
-            <strong>{{ 'products.product.sold_out' | t }}</strong>
-          {% endunless %}
-        </p>
-      </div>
+      {% include '__product-card' %}
     {% else %}
       {% if collection.handle == 'all' %}
         {% unless onboardingLoaded %}
@@ -80,39 +37,9 @@
           {{ 'theme-onboarding.css' | global_asset_url | stylesheet_tag }}
           {% assign onboardingLoaded = true %}
         {% endunless %}
-        <div class="helper-section">
-          <div class="helper-note">
-            <span class="helper-icon"></span>
-            <h3>{{ 'collections.onboarding.modal_title' | t }}</h3>
-            <p>{{ 'collections.onboarding.no_products_html' | t }}</p>
-            <p><a href="/admin/products/new" class="admin-btn-primary">{{ 'collections.onboarding.add_product' | t }}</a></p>
-          </div>
 
-          <div class="helper-content">
-            {% assign collection_index = 1 %}
-            {% for i in (1..8) %}
-              {% case i %}
-                {% when 7 %}
-                  {% assign collection_index = 1 %}
-                {% when 8 %}
-                  {% assign collection_index = 2 %}
-              {% endcase %}
-              <div>
-                <a href="/admin/products">
-                  {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ collection_index }}.png{% endcapture %}
-                  {{ imageUrl | img_tag }}
-                </a>
-                <p><a href="/admin/products">{{ 'homepage.onboarding.product_title' | t }}</a></p>
-                <p>$19.99</p>
-              </div>
-              {% assign collection_index = collection_index | plus: 1 %}
-            {% endfor %}
-          </div>
-        </div>
+        {% include 'onboarding__product-card' %}
       {% else %}
-        {% comment %}
-          The collection exists but is empty, display message
-        {% endcomment %}
         <div>
           <p>{{ 'collections.general.no_matches' | t }}</p>
         </div>
@@ -120,10 +47,6 @@
     {% endfor %}
   </div>
 
-  {% if paginate.pages > 1 %}
-    <div class="pagination">
-      {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
-    </div>
-  {% endif %}
+  {% include '__pagination' %}
 
 {% endpaginate %}

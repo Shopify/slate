@@ -1,10 +1,7 @@
-<!-- /templates/customers/activate_account.liquid -->
-
 <h1>{{ 'customer.activate_account.title' | t }}</h1>
 <p>{{ 'customer.activate_account.subtext' | t }}</p>
 
 {% form 'activate_customer_password' %}
-
   {{ form.errors | default_errors }}
 
   <p>

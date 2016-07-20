@@ -1,0 +1,43 @@
+{% if customers__address != '' %}
+
+  <p>
+    {{ customers__address.first_name | capitalize }} {{ customers__address.last_name | capitalize }}
+
+    {% unless template == 'customers/account' %}
+      {% if customers__address == customer.default_address %}
+        ({{ 'customer.addresses.default' | t }})
+      {% endif %}
+    {% endunless %}
+  </p>
+
+  <p>
+    {% if customers__address.company != '' %}
+      {{ customers__address.company }}<br>
+    {% endif %}
+
+    {% if customers__address.street != '' %}
+      {{ customers__address.street }}<br>
+    {% endif %}
+
+    {% if customers__address.city != '' %}
+      {{ customers__address.city | capitalize }}<br>
+    {% endif %}
+
+    {% if customers__address.province_code != '' %}
+      {{ customers__address.province_code | upcase }}<br>
+    {% endif %}
+
+    {% if customers__address.zip != '' %}
+      {{ customers__address.zip | upcase }}<br>
+    {% endif %}
+
+    {% if customers__address.country != '' %}
+      {{ customers__address.country }}<br>
+    {% endif %}
+
+    {% if customers__address.phone != '' %}
+      {{ customers__address.phone }}
+    {% endif %}
+  </p>
+
+{% endif %}

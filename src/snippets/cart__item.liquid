@@ -1,0 +1,51 @@
+{% comment %}
+  The data-label attributes on <td> elements are mobile-friendly
+  helpers used for responsive-table labels
+{% endcomment %}
+
+<tr class="responsive-table__row">
+  <td data-label="{{ 'customer.order.product' | t }}">
+    <a href="{{ item.url | within: collections.all }}">
+      <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
+    </a>
+  </td>
+  <td>
+    <a href="{{ item.url }}">{{ item.product.title }}</a>
+
+    {% unless item.variant.title contains 'Default' %}
+      <small>{{ item.variant.title }}</small>
+    {% endunless %}
+
+    <p>{{ item.vendor }}</p>
+
+    {% assign property_size = item.properties | size %}
+
+    {% if property_size > 0 %}
+      {% for p in item.properties %}
+        {% unless p.last == blank %}
+          {{ p.first }}:
+
+          {% if p.last contains '/uploads/' %}
+            <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+          {% else %}
+            {{ p.last }}
+          {% endif %}
+
+        {% endunless %}
+      {% endfor %}
+    {% endif %}
+
+    <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
+      <small>{{ 'cart.general.remove' | t }}</small>
+    </a>
+  </td>
+  <td data-label="{{ 'cart.label.price' | t }}">
+    <span>{{ item.price | money }}</span>
+  </td>
+  <td data-label="{{ 'cart.label.quantity' | t }}">
+    <input type="number" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" min="0">
+  </td>
+  <td data-label="{{ 'cart.label.total' | t }}">
+    <span>{{ item.line_price | money }}</span>
+  </td>
+</tr>

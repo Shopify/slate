@@ -1,0 +1,16 @@
+{% comment %}
+  Product card used on anywhere a product is shown in a grid
+{% endcomment %}
+
+<div>
+  <a href="{{ product.url | within: collection }}">
+    <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
+  </a>
+
+  <p>
+    <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+  </p>
+  <p>
+    {% include '__pricing' %}
+  </p>
+</div>

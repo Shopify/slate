@@ -1,4 +1,3 @@
-<!-- /templates/cart.liquid -->
 {% if cart.item_count > 0 %}
 
   <h1>{{ 'cart.general.title' | t }}</h1>
@@ -12,68 +11,7 @@
       </thead>
       <tbody>
         {% for item in cart.items %}
-          <tr class="responsive-table__row">
-            <td data-label="{{ 'customer.order.product' | t }}">
-              <a href="{{ item.url | within: collections.all }}">
-                <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
-              </a>
-            </td>
-            <td>
-              <a href="{{ item.url }}">
-                {{ item.product.title }}
-              </a>
-              {% unless item.variant.title contains 'Default' %}
-                <small>{{ item.variant.title }}</small>
-              {% endunless %}
-
-              <p>{{ item.vendor }}</p>
-
-              {% comment %}
-                Optional, loop through custom product line items if available
-
-                Line item properties come in as having two parts. The first part will be passed with the default form,
-                but p.last is the actual custom property and may be blank. If it is, don't show it.
-
-                For more info on line item properties, visit:
-                  - http://docs.shopify.com/support/your-store/products/how-do-I-collect-additional-information-on-the-product-page-Like-for-a-monogram-engraving-or-customization
-              {% endcomment %}
-              {% assign property_size = item.properties | size %}
-              {% if property_size > 0 %}
-                {% for p in item.properties %}
-                  {% unless p.last == blank %}
-                    {{ p.first }}:
-
-                    {% comment %}
-                      Check if there was an uploaded file associated
-                    {% endcomment %}
-                    {% if p.last contains '/uploads/' %}
-                      <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
-                    {% else %}
-                      {{ p.last }}
-                    {% endif %}
-
-                  {% endunless %}
-                {% endfor %}
-              {% endif %}
-
-              <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
-                <small>{{ 'cart.general.remove' | t }}</small>
-              </a>
-            </td>
-            <td data-label="{{ 'cart.label.price' | t }}">
-              <span>
-                {{ item.price | money }}
-              </span>
-            </td>
-            <td data-label="{{ 'cart.label.quantity' | t }}">
-              <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
-            </td>
-            <td data-label="{{ 'cart.label.total' | t }}">
-              <span>
-                {{ item.line_price | money }}
-              </span>
-            </td>
-          </tr>
+          {% include 'cart__item' %}
         {% endfor %}
       </tbody>
     </table>
