@@ -36,41 +36,41 @@ slate.formatMoney = function(cents, format) {
   }
 
   switch (formatString.match(placeholderRegex)[1]) {
-  case 'amount':
-    value = formatWithDelimiters({
-      number: cents,
-      precision: 2
-    });
-    break;
-  case 'amount_no_decimals':
-    value = formatWithDelimiters({
-      number: cents,
-      precision: 0
-    });
-    break;
-  case 'amount_with_comma_separator':
-    value = formatWithDelimiters({
-      number: cents,
-      precision: 2,
-      thousands: '.',
-      decimal: ','
-    });
-    break;
-  case 'amount_no_decimals_with_comma_separator':
-    value = formatWithDelimiters({
-      number: cents,
-      precision: 0,
-      thousands: '.',
-      decimal: ','
-    });
-    break;
-  case 'amount_no_decimals_with_space_separator':
-    value = formatWithDelimiters({
-      number: cents,
-      precision: 0,
-      thousands: ' '
-    });
-    break;
+    case 'amount':
+      value = formatWithDelimiters({
+        number: cents,
+        precision: 2
+      });
+      break;
+    case 'amount_no_decimals':
+      value = formatWithDelimiters({
+        number: cents,
+        precision: 0
+      });
+      break;
+    case 'amount_with_comma_separator':
+      value = formatWithDelimiters({
+        number: cents,
+        precision: 2,
+        thousands: '.',
+        decimal: ','
+      });
+      break;
+    case 'amount_no_decimals_with_comma_separator':
+      value = formatWithDelimiters({
+        number: cents,
+        precision: 0,
+        thousands: '.',
+        decimal: ','
+      });
+      break;
+    case 'amount_no_decimals_with_space_separator':
+      value = formatWithDelimiters({
+        number: cents,
+        precision: 0,
+        thousands: ' '
+      });
+      break;
   }
 
   return formatString.replace(placeholderRegex, value);

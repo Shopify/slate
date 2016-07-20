@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var linter = require('gulp-jsonlint');
-var plumber = require('gulp-plumber');
 var chokidar = require('chokidar');
 
 var config = require('./includes/config.js');
