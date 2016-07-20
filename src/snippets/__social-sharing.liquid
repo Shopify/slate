@@ -1,3 +1,9 @@
+{% capture permalinkURL %}{{ shop.url }}{% endcapture %}
+{% capture shareTitle %}{{ page_description | url_param_escape }}{% endcapture %}
+
+{% comment %}
+  Template specific overrides
+{% endcomment %}
 {% if template contains 'article' or template contains 'blog' %}
   {% capture permalinkURL %}{{ shop.url }}{{ article.url }}{% endcapture %}
   {% capture shareTitle %}{{ article.title | url_param_escape }}{% endcapture %}
@@ -7,9 +13,6 @@
 {% elsif template == 'password' %}
   {% capture permalinkURL %}{{ shop.url }}{% endcapture %}
   {% capture shareTitle %}{% unless shop.description == blank %}{{ shop.description | url_param_escape }}{% else %}{{ shop.name | url_param_escape }}{% endunless %}{% endcapture %}
-{% else %}
-  {% capture permalinkURL %}{{ shop.url }}{% endcapture %}
-  {% capture shareTitle %}{{ page_description | url_param_escape }}{% endcapture %}
 {% endif %}
 
 <div class="social-sharing" data-permalink="{{ permalinkURL }}">
@@ -48,7 +51,7 @@
 
   {% if settings.share_google %}
     <a target="_blank" href="//plus.google.com/share?url={{ permalinkURL }}" class="social-sharing__link">
-      {% include 'icon-google_plus' %}
+      {% include 'icon-google-plus' %}
       +1
     </a>
   {% endif %}

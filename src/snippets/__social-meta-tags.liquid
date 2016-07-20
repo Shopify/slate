@@ -10,9 +10,11 @@
   {% capture twitter_image_tag %}<meta name="twitter:image" content="http:{{ 'logo.png' | asset_img_url: 'grande' }}">{% endcapture %}
 {% endif %}
 
-{% comment %} Template specific overides {% endcomment %}
+{% comment %}
+  Template specific overides
+{% endcomment %}
 {% if template_base == 'index' %}
-  {% if settings.hp_content != blank %}
+  {% if settings.home_page_content != blank %}
     {% assign og_description = pages[settings.home_page_content].content | strip_html %}
   {% endif %}
 

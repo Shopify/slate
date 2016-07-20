@@ -18,12 +18,10 @@
   {% endif %}
 
   <div>
-    <a href="/cart" class="site-header__cart">
+    <a href="/cart">
       {% include 'icon-cart' %}
       {{ 'layout.cart.title' | t }}
-      (<span id="CartCount">{{ cart.item_count }}</span>
-      {{ 'layout.cart.items_count' | t: count: cart.item_count }}
-      <span id="CartCost">{{ cart.total_price | money }}</span>)
+      ({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
     </a>
   </div>
 

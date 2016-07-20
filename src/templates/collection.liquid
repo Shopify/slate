@@ -1,5 +1,4 @@
 {% paginate collection.products by 12 %}
-
   <header>
     <h1>{{ collection.title }}</h1>
     {% if collection.description != blank %}
@@ -30,23 +29,20 @@
       {% include '__product-card' %}
     {% else %}
       {% if collection.handle == 'all' %}
+
         {% unless onboardingLoaded %}
-          {% comment %}
-            Only load onboarding styles if they have not already been loaded.
-          {% endcomment %}
           {{ 'theme-onboarding.css' | global_asset_url | stylesheet_tag }}
           {% assign onboardingLoaded = true %}
         {% endunless %}
 
-        {% include 'onboarding__product-card' %}
+        {% include '__product-card-onboarding' %}
+
       {% else %}
-        <div>
-          <p>{{ 'collections.general.no_matches' | t }}</p>
-        </div>
+        <p>{{ 'collections.general.no_matches' | t }}</p>
       {% endif %}
+
     {% endfor %}
   </div>
 
   {% include '__pagination' %}
-
 {% endpaginate %}
