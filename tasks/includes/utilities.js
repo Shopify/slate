@@ -1,4 +1,5 @@
 var gutil = require('gulp-util');
+var fs = require('fs');
 var _ = require('lodash');
 var Promise = require('bluebird');
 
@@ -48,6 +49,20 @@ var utilities = {
     }
     var errorMsg = file.scsslint.issues.length + ' issues found in ' + file.path;
     gutil.log(gutil.colors.yellow(errorMsg));
+  },
+
+  /**
+   * Checks whether the path is a directory
+   * 
+   * @param path {String} - a string representing the path to a file
+   * @returns {boolean}
+   */
+  isDirectory: function(path) {
+    try {
+      return fs.statSync(path).isDirectory();
+    } catch (error) {
+      return false;
+    }
   },
 
   /**

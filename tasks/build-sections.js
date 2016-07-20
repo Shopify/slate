@@ -80,7 +80,9 @@ function processAssets(files) {
 
   messages.logProcessFiles('build:sections');
   _.each(compileSections(sectionList), function(section) {
-    fs.writeFileSync(section.filename, section.content);
+    if (typeof section !== 'undefined') {
+      fs.writeFileSync(section.filename, section.content);
+    }
   });
 }
 
@@ -114,7 +116,13 @@ function compileSections(sectionList) {
 
   _.each(sectionList, function(section, i) {
     var path = config.src.sections + section + '/';
-    var sectionFiles = fs.readdirSync(path);
+    var sectionFiles = [];
+
+    if (!utils.isDirectory(path)) {
+      return;
+    }
+
+    sectionFiles = fs.readdirSync(path);
 
     sections[i] = {
       filename: config.dist.sections + section + '.liquid',
