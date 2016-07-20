@@ -53,12 +53,13 @@ var utilities = {
 
   /**
    * Checks whether the path is a directory
-   * 
+   *
    * @param path {String} - a string representing the path to a file
    * @returns {boolean}
    */
   isDirectory: function(path) {
     try {
+      // eslint-disable-next-line no-sync
       return fs.statSync(path).isDirectory();
     } catch (error) {
       return false;
