@@ -1,20 +1,25 @@
 {% paginate blog.articles by 5 %}
 
+  {% assign blog_title = blog.title %}
+
   {% if current_tags %}
-    <h1>{{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}</h1>
-  {% else %}
-    <h1>{{ blog.title }}</h1>
+    {% capture blog_title %}{{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}{% endcapture %}
   {% endif %}
+
+  <h1>{{ blog_title }}</h1>
 
   {% if blog.all_tags.size > 0 %}
     <h2>{{ 'blogs.general.categories' | t }}</h2>
+
     <ul>
       {% for tag in blog.all_tags %}
+
         {% if current_tags contains tag %}
           <li>{{ tag }}</li>
         {% else %}
           <li>{{ tag | link_to_tag: tag }}</li>
         {% endif %}
+
       {% endfor %}
     </ul>
   {% endif %}

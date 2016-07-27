@@ -20,7 +20,6 @@
 </header>
 
 <main class="giftcard__wrapper{% if gift_card.expired or gift_card.enabled != true %} giftcard__disabled{% endif %}" role="main">
-  {% include 'gift-card__content' %}
 
   <div class="giftcard__content">
     <h1 class="giftcard__title">{{ 'gift_cards.issued.subtext' | t }}</h1>
@@ -78,6 +77,5 @@
       </a>
     </p>
   </div>
-
 
 </main>

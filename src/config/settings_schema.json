@@ -190,8 +190,8 @@
       },
       {
         "type": "text",
-        "id": "social_google_plus_link",
-        "label": "Google plus link"
+        "id": "social_google-plus_link",
+        "label": "Google Plus link"
       },
       {
         "type": "text",

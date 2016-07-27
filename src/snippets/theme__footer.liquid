@@ -1,21 +1,9 @@
 <footer class="site-footer" role="contentinfo">
-  {% assign social_media_types = 'facebook,twitter,pinterest,instagram,tumblr,youtube,vimeo,fancy,google_plus' | split: ',' %}
 
+  {% assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Tumblr, YouTube, Vimeo, Fancy, Google Plus' | split: ', ' %}
   <ul class="list--inline">
-    {% for type in social_media_types %}
-      {% assign settings_id = type | prepend: 'social_' | append: '_link' %}
-      {% assign name = type | capitalize | replace: '_', ' '  %}
-      {% assign link = settings[settings_id] %}
-      {% assign icon = type | prepend: 'icon-' %}
-
-      {% if link != blank %}
-        <li>
-          <a href="{{ link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: name }}">
-            {% include icon %}
-            <span class="icon__fallback-text">{{ name }}</span>
-          </a>
-        </li>
-      {% endif %}
+    {% for social in social_accounts %}
+      {% include '__social-list-item' with social %}
     {% endfor %}
   </ul>
 

@@ -1,0 +1,46 @@
+<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+  <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+  <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+  <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
+
+  <form action="/cart/add" method="post" enctype="multipart/form-data">
+    <select name="id" id="ProductSelect">
+      {% for variant in product.variants %}
+
+        <option {% unless variant.available %}disabled="disabled"{% endunless %}
+                {% if variant == current_variant %}selected="selected"{% endif %}
+                data-sku="{{ variant.sku }}"
+                value="{{ variant.id }}">
+
+          {{ variant.title }} -
+          {% if variant.available %}
+            {{ variant.price | money_with_currency }}
+          {% else %}
+            {{ 'products.product.sold_out' | t }}
+          {% endif %}
+
+        </option>
+
+      {% endfor %}
+    </select>
+
+    <span id="ProductPrice">
+      {{ current_variant.price | money }}
+    </span>
+
+    {% if product.compare_at_price_max > product.price %}
+      <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+      <s id="ComparePrice">
+        {{ current_variant.compare_at_price | money }}
+      </s>
+    {% endif %}
+
+    <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
+    <input type="number" id="Quantity" name="quantity" value="1" min="1">
+
+    <button type="submit" name="add" id="AddToCart">
+      <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
+    </button>
+  </form>
+
+</div>

@@ -11,34 +11,36 @@
 
 <article itemscope itemtype="http://schema.org/Article">
 
-  {% include 'article__content' %}
+  {% if article.image %}
+    {{ article | img_url: '1024x1024' | img_tag: article.title }}
+  {% endif %}
+
+  <header>
+    <h1>{{ article.title }}</h1>
+    {% include '__date', date_time: article.published_at %}
+    <p>{{ 'blogs.article.author_on_date_html' | t: author: article.author, date: date }}</p>
+  </header>
+
+  <div class="rte" itemprop="articleBody">
+    {{ article.content }}
+  </div>
+
+  {% if article.tags.size > 0 %}
+    <ul>
+      <li>
+        <span>{{ 'blogs.article.tags' | t }}:</span>
+        {% for tag in article.tags %}
+          <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+        {% endfor %}
+      </li>
+    </ul>
+  {% endif %}
+
+  {% include '__social-sharing' %}
 
   {% if blog.comments_enabled? %}
-    <h3>{{ 'blogs.comments.with_count' | t: count: number_of_comments }}</h3>
-
-    {% paginate article.comments by 5 %}
-      <div id="comments">
-
-        {% if comment and comment.created_at %}
-          <p class="form-success">
-            {% if blog.moderated? %}
-              {{ 'blogs.comments.success_moderated' | t }}
-            {% else %}
-              {{ 'blogs.comments.success' | t }}
-            {% endif %}
-          </p>
-        {% endif %}
-
-        {% if number_of_comments > 0 %}
-          {% include 'article__comments-list' %}
-
-          {% include '__pagination' %}
-        {% endif %}
-
-        {% include 'article__comments-form' %}
-
-      </div>
-    {% endpaginate %}
+    {% include 'article__comments-list' %}
+    {% include 'article__comments-form' %}
   {% endif %}
 
 </article>

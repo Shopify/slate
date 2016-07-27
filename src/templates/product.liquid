@@ -1,6 +1,6 @@
 {% comment %}
-  Note: if you use option_selection.js, your <select> tag will be overwritten, meaning what you
-  have inside <option> will not reflect what you coded below.
+  Note: if you use option_selection.js, your `select` tag will be overwritten, meaning what you
+  have inside `option` will not reflect what you coded below.
 {% endcomment %}
 
 <div itemscope itemtype="http://schema.org/Product">
@@ -14,66 +14,18 @@
   <meta itemprop="image" content="{{ featured_image | img_url: 'grande' }}">
   <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
 
-  <div>
-    <div id="ProductPhoto">
-      <img src="{{ featured_image | img_url: 'large' }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg">
-    </div>
-    {% if product.images.size > 1 %}
-      <ul id="ProductThumbs" class="list--inline">
-        {% for image in product.images %}
-          <li>
-            <a href="{{ image.src | img_url: 'large' }}" class="product-single__thumbnail">
-              <img src="{{ image.src | img_url: 'compact' }}" alt="{{ image.alt | escape }}">
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    {% endif %}
+  {% include 'product__images' %}
+
+  <h1>{{ product.title }}</h1>
+  <p>{{ product.vendor }}</p>
+
+  {% include 'product__add-to-cart' %}
+
+  <div class="rte">
+    {{ product.description }}
   </div>
 
-  <div>
-    <h1>{{ product.title }}</h1>
-    <p>{{ product.vendor }}</p>
-
-    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-      <meta itemprop="priceCurrency" content="{{ shop.currency }}">
-      <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
-      <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
-
-      <form action="/cart/add" method="post" enctype="multipart/form-data">
-        <select name="id" id="ProductSelect">
-          {% for variant in product.variants %}
-            <option {% unless variant.available %}disabled="disabled"{% endunless %} {% if variant == current_variant %}selected="selected"{% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {% if variant.available %}{{ variant.price | money_with_currency }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</option>
-          {% endfor %}
-        </select>
-
-        <span id="ProductPrice">
-          {{ current_variant.price | money }}
-        </span>
-
-        {% if product.compare_at_price_max > product.price %}
-          <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-          <s id="ComparePrice">
-            {{ current_variant.compare_at_price | money }}
-          </s>
-        {% endif %}
-
-        <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
-        <input type="number" id="Quantity" name="quantity" value="1" min="1">
-
-        <button type="submit" name="add" id="AddToCart">
-          <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
-        </button>
-      </form>
-
-    </div>
-
-    <div class="rte">
-      {{ product.description }}
-    </div>
-
-    {% include '__social-sharing' %}
-  </div>
+  {% include '__social-sharing' %}
 </div>
 
 <script>

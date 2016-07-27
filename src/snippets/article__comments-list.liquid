@@ -1,13 +1,31 @@
-<ul>
+<h3>{{ 'blogs.comments.with_count' | t: count: number_of_comments }}</h3>
+
+{% paginate article.comments by 5 %}
+
+<div id="comments">
   {% if comment and comment.created_at %}
-    <li id="{{ comment.id }}">
-      {% include '__comment' %}
-    </li>
+    <p class="form-success">
+      {% if blog.moderated? %}
+        {{ 'blogs.comments.success_moderated' | t }}
+      {% else %}
+        {{ 'blogs.comments.success' | t }}
+      {% endif %}
+    </p>
   {% endif %}
 
-  {% for comment in article.comments %}
-    <li id="{{ comment.id }}">
-      {% include '__comment' %}
-    </li>
-  {% endfor %}
-</ul>
+  {% if number_of_comments > 0 %}
+    <ul>
+      {% if comment and comment.created_at %}
+        {% include '__comment' %}
+      {% endif %}
+
+      {% for comment in article.comments %}
+        {% include '__comment' %}
+      {% endfor %}
+    </ul>
+
+    {% include '__pagination' %}
+  {% endif %}
+</div>
+
+{% endpaginate %}

@@ -9,12 +9,11 @@
   <link rel="canonical" href="{{ canonical_url }}">
 
   {% if settings.favicon_enable %}
-    <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png" />
+    <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png">
   {% endif %}
 
-  <title>
-    {{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
-  </title>
+  {% include '__seo-title' %}
+  <title>{{ seo_title }}</title>
 
   {% if page_description %}
     <meta name="description" content="{{ page_description | escape }}">
@@ -34,7 +33,7 @@
   {% endif %}
 </head>
 
-<body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | split: '.' | first | handle }}" >
+<body id="{{ page_title | handle }}" class="template-{{ template | split: '.' | first | handle }}">
 
   <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
 
