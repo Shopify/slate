@@ -45,6 +45,16 @@ var messages = {
   configChange: function() {
     return 'Changes to ThemeKit Config Detected: You may need to quit <slate watch>' +
       ' and run a full <slate deploy> as a result.';
+  },
+
+  deployTo: function(environment) {
+    gutil.log('Initiating deploy to', gutil.colors.bold(environment));
+  },
+
+  allDeploysComplete: function() {
+    gutil.log('Multiple environments:',
+      gutil.colors.green('Deploy completed for all environments in series')
+    );
   }
 };
 module.exports = messages;

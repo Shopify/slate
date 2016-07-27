@@ -7,7 +7,9 @@ var readFile = Promise.promisify(fs.readFile);
 var yaml = require('js-yaml');
 
 var config = require('./includes/config.js');
+var messages = require('./includes/messages.js');
 var utils = require('./includes/utilities.js');
+
 
 /**
  * Replace your existing theme using ThemeKit.
@@ -16,9 +18,32 @@ var utils = require('./includes/utilities.js');
  * @static
  */
 gulp.task('deploy:replace', function() {
-  return utils.resolveShell(
-    spawn('slate', ['replace'], {cwd: config.dist.root})
-  );
+
+  if (process.env.tkEnvironments) { // eslint-disable-line no-process-env
+    var environments = process.env.tkEnvironments.split(/\s*,\s*|\s+/); // eslint-disable-line no-process-env
+    var promises = [];
+
+    environments.forEach(function(environment) {
+      function factory() {
+        messages.deployTo(environment);
+        return utils.resolveShell(
+          spawn('slate', ['replace', environment], {cwd: config.dist.root})
+        );
+      }
+
+      promises.push(factory);
+    });
+
+    return utils.promiseSeries(promises)
+      .then(function(/*arrayOfResults*/) {
+        messages.allDeploysComplete();
+      });
+
+  } else {
+    return utils.resolveShell(
+      spawn('slate', ['replace'], {cwd: config.dist.root})
+    );
+  }
 });
 
 /**
