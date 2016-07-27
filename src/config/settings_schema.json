@@ -200,6 +200,11 @@
       },
       {
         "type": "text",
+        "id": "social_snapchat_link",
+        "label": "Snapchat link"
+      },
+      {
+        "type": "text",
         "id": "social_tumblr_link",
         "label": "Tumblr link"
       },
