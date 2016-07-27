@@ -1,6 +1,5 @@
 window.theme = window.theme || {};
 
-// =require vendor/fastclick.min.js
 // =require vendor/jquery-2.2.3.min.js
 // =require vendor/modernizr.min.js
 
@@ -29,9 +28,6 @@ $(document).ready(function() {
 
   // Custom Theme Scripts
   // ---------------------------------------------------------------------------
-
-  // Init FastClick
-  FastClick.attach(document.body);
 
   // Common a11y fixes
   slate.a11y.pageLinkFocus($(window.location.hash));

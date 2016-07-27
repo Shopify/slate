@@ -12,7 +12,6 @@ globals:
   theme: true
   Shopify: false
   slate: true
-  FastClick: false
   QRCode: false
 rules:
   no-lonely-if: 0
