@@ -27,12 +27,11 @@
 
   {% if article.tags.size > 0 %}
     <ul>
-      <li>
-        <span>{{ 'blogs.article.tags' | t }}:</span>
-        {% for tag in article.tags %}
+      {% for tag in article.tags %}
+        <li>
           <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
-        {% endfor %}
-      </li>
+        </li>
+      {% endfor %}
     </ul>
   {% endif %}
 

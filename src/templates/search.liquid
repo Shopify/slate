@@ -1,21 +1,27 @@
 {% paginate search.results by 10 %}
 
-  {% if search.performed %}
-    {% if search.results_count == 0 %}
-      <h1>{{ 'general.search.no_results_html' | t: terms: search.terms }}</h1>
+  <h1>
+    {% if search.performed %}
+      {% if search.results_count == 0 %}
+        {{ 'general.search.no_results_html' | t: terms: search.terms }}
+      {% else %}
+        {{ 'general.search.results_for_html' | t: terms: search.terms }}
+      {% endif %}
     {% else %}
-      <h1>{{ 'general.search.results_for_html' | t: terms: search.terms }}</h1>
+      {{ 'general.search.title' | t }}
     {% endif %}
-  {% else %}
-    <h1>{{ 'general.search.title' | t }}</h1>
-  {% endif %}
+  </h1>
 
   {% include '__search' %}
 
   {% if search.performed %}
+    <ul>
     {% for item in search.results %}
-      {% include 'search__result' %}
+      <li>
+        {% include 'search__result' %}
+      </li>
     {% endfor %}
+    </ul>
 
     {% include '__pagination' %}
   {% endif %}

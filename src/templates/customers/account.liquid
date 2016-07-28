@@ -16,7 +16,7 @@
       </thead>
       <tbody>
         {% for order in customer.orders %}
-          <tr>
+          <tr class="responsive-table__row">
             <td data-label="{{ 'customer.orders.order_number' | t }}">{{ order.name | link_to: order.customer_url }}</td>
             <td data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | date: format: 'month_day_year' }}</td>
             <td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</td>
@@ -34,12 +34,8 @@
 
 {% endpaginate %}
 
-<hr>
-
 <h2>{{ 'customer.account.details' | t }}</h2>
 
 {% include 'customers__address' with customer.default_address %}
 
-<p>
-  <a href="/account/addresses">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a>
-</p>
+<a href="/account/addresses">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a>

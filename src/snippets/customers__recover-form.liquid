@@ -5,12 +5,19 @@
     <span class="hide reset-password-success"></span>
   {% endif %}
 
-  <label for="RecoverEmail" class="label--hidden">{{ 'customer.recover_password.email' | t }}</label>
-  <input type="email" value="" name="email" id="RecoverEmail" placeholder="{{ 'customer.recover_password.email' | t }}" autocorrect="off" autocapitalize="off">
+  <label for="RecoverEmail" class="label--hidden">
+    {{ 'customer.recover_password.email' | t }}
+  </label>
+  <input type="email"
+    name="email"
+    id="RecoverEmail"
+    placeholder="{{ 'customer.recover_password.email' | t }}"
+    spellcheck="false"
+    autocapitalize="off">
 
-  <p>
-    <input type="submit" class="btn" value="{{ 'customer.recover_password.submit' | t }}">
-  </p>
+  <input type="submit" class="btn" value="{{ 'customer.recover_password.submit' | t }}">
 
-  <button type="button" id="HideRecoverPasswordLink">{{ 'customer.recover_password.cancel' | t }}</button>
+  <button type="button" id="HideRecoverPasswordLink">
+    {{ 'customer.recover_password.cancel' | t }}
+  </button>
 {% endform %}

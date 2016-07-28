@@ -5,7 +5,7 @@
   height: 20px;
   vertical-align: middle;
 
-  .supports-no-svg & {
+  .no-svg & {
     display: none;
   }
 }
@@ -39,7 +39,7 @@ symbol {
 .icon__fallback-text {
   @include visually-hidden();
 
-  .supports-no-svg & {
+  .no-svg & {
     @include visually-shown(static);
   }
 }

@@ -8,9 +8,9 @@
       {% for variant in product.variants %}
 
         <option {% unless variant.available %}disabled="disabled"{% endunless %}
-                {% if variant == current_variant %}selected="selected"{% endif %}
-                data-sku="{{ variant.sku }}"
-                value="{{ variant.id }}">
+          {% if variant == current_variant %}selected="selected"{% endif %}
+          data-sku="{{ variant.sku }}"
+          value="{{ variant.id }}">
 
           {{ variant.title }} -
           {% if variant.available %}

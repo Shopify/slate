@@ -13,7 +13,7 @@
     <a href="{{ item.url }}">{{ item.product.title }}</a>
 
     {% unless item.variant.title contains 'Default' %}
-      <small>{{ item.variant.title }}</small>
+      {{ item.variant.title }}
     {% endunless %}
 
     <p>{{ item.vendor }}</p>
@@ -40,12 +40,16 @@
     </a>
   </td>
   <td data-label="{{ 'cart.label.price' | t }}">
-    <span>{{ item.price | money }}</span>
+    {{ item.price | money }}
   </td>
   <td data-label="{{ 'cart.label.quantity' | t }}">
-    <input type="number" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" min="0">
+    <input type="number"
+      name="updates[]"
+      id="updates_{{ item.id }}"
+      value="{{ item.quantity }}"
+      min="0">
   </td>
   <td data-label="{{ 'cart.label.total' | t }}">
-    <span>{{ item.line_price | money }}</span>
+    {{ item.line_price | money }}
   </td>
 </tr>

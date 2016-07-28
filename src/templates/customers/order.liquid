@@ -29,7 +29,7 @@
   </thead>
   <tbody>
     {% for line_item in order.line_items %}
-      <tr id="{{ line_item.key }}" class="responsive-table__row" >
+      <tr id="{{ line_item.key }}" class="responsive-table__row">
         <td data-label="{{ 'customer.order.product' | t }}">
           {{ line_item.title | link_to: line_item.product.url }}
           {% if line_item.fulfillment %}
@@ -77,22 +77,20 @@
     {% endfor %}
 
     <tr>
-      <td colspan="4" class="small--hide"><strong>{{ 'customer.order.total' | t }}</strong></td>
-      <td data-label="{{ 'customer.order.total' | t }}"><strong>{{ order.total_price | money }} {{ order.currency }}</strong></td>
+      <td colspan="4" class="small--hide">{{ 'customer.order.total' | t }}</td>
+      <td data-label="{{ 'customer.order.total' | t }}">{{ order.total_price | money }} {{ order.currency }}</td>
     </tr>
   </tfoot>
 </table>
 
-<hr>
-
 <h3>{{ 'customer.order.billing_address' | t }}</h3>
 
-<p><strong>{{ 'customer.order.payment_status' | t }}:</strong> {{ order.financial_status_label }}</p>
+<p>{{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }}</p>
 
 {% include 'customers__address' with order.billing_adress %}
 
 <h3>{{ 'customer.order.shipping_address' | t }}</h3>
 
-<p><strong>{{ 'customer.order.fulfillment_status' | t }}:</strong> {{ order.fulfillment_status_label }}</p>
+<p>{{ 'customer.order.fulfillment_status' | t }}: {{ order.fulfillment_status_label }}</p>
 
 {% include 'customers__address' with order.shipping_address %}

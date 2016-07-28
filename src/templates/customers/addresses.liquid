@@ -24,10 +24,12 @@
   {% for address in customer.addresses %}
     {% include 'customers__address' with address %}
 
-    <p>
-      <button type="button" class="address-edit-toggle" data-form-id="{{ address.id }}">{{ 'customer.addresses.edit' | t }}</button>
-      <button type="button" class="address-delete" data-form-id="{{ address.id }}" data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}">{{ 'customer.addresses.delete' | t }}</button>
-    </p>
+    <button type="button" class="address-edit-toggle" data-form-id="{{ address.id }}">
+      {{ 'customer.addresses.edit' | t }}
+    </button>
+    <button type="button" class="address-delete" data-form-id="{{ address.id }}" data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}">
+      {{ 'customer.addresses.delete' | t }}
+    </button>
 
     <div id="EditAddress_{{ address.id }}" class="hide">
       {% include 'customers__edit-address-form' %}

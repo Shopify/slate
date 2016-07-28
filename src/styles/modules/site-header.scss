@@ -1,9 +1,12 @@
 /*================ Site Header ================*/
-.site-header__logo {
+.site-logo {
   display: block;
+}
+
+.site-logo--has-image {
+  max-width: $logo-max-width;
 
   img {
     display: block;
-    max-width: $logo-max-width;
   }
 }

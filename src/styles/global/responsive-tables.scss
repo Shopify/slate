@@ -37,6 +37,7 @@
     }
   }
 
+  // Add a keyline between rows
   .responsive-table__row + .responsive-table__row,
   tfoot > .responsive-table__row:first-child {
     position: relative;

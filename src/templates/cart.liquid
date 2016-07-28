@@ -4,10 +4,12 @@
   <form action="/cart" method="post" novalidate>
     <table class="responsive-table">
       <thead class="small--hide">
-        <th colspan="2">{{ 'cart.label.product' | t }}</th>
-        <th>{{ 'cart.label.price' | t }}</th>
-        <th>{{ 'cart.label.quantity' | t }}</th>
-        <th>{{ 'cart.label.total' | t }}</th>
+        <tr>
+          <th colspan="2">{{ 'cart.label.product' | t }}</th>
+          <th>{{ 'cart.label.price' | t }}</th>
+          <th>{{ 'cart.label.quantity' | t }}</th>
+          <th>{{ 'cart.label.total' | t }}</th>
+        </tr>
       </thead>
       <tbody>
         {% for item in cart.items %}
@@ -15,21 +17,17 @@
         {% endfor %}
       </tbody>
     </table>
-    <div>
-      {% if settings.cart_notes_enable %}
-        <div>
-          <label for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>
-          <textarea name="note" id="CartSpecialInstructions">{{ cart.note }}</textarea>
-        </div>
-      {% endif %}
-      <div>
-        <p>{{ 'cart.general.subtotal' | t }}</p>
-        <p>{{ cart.total_price | money }}</p>
-        <p>{{ 'cart.general.shipping_at_checkout' | t }}</p>
-        <input type="submit" name="update" value="{{ 'cart.general.update' | t }}">
-        <input type="submit" name="checkout" class="btn" value="{{ 'cart.general.checkout' | t }}">
-      </div>
-    </div>
+
+    {% if settings.cart_notes_enable %}
+      <label for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>
+      <textarea name="note" id="CartSpecialInstructions">{{ cart.note }}</textarea>
+    {% endif %}
+
+    <p>{{ 'cart.general.subtotal' | t }}</p>
+    <p>{{ cart.total_price | money }}</p>
+    <p>{{ 'cart.general.shipping_at_checkout' | t }}</p>
+    <input type="submit" name="update" value="{{ 'cart.general.update' | t }}">
+    <input type="submit" name="checkout" class="btn" value="{{ 'cart.general.checkout' | t }}">
   </form>
 {% else %}
   <h1>{{ 'cart.general.title' | t }}</h1>
