@@ -2,7 +2,7 @@ var generators = require('yeoman-generator');
 var _ = require('lodash');
 var open = require('open');
 var questions = require('./includes/questions');
-var fetchRepo = require('./includes/cloneRepo.js');
+var scaffold = require('./includes/scaffold.js');
 
 var mainGenerator = generators.Base.extend({
 
@@ -31,14 +31,12 @@ var mainGenerator = generators.Base.extend({
 
         this.environments = env;
         this.defaultEnv = answers.defaultEnv;
+        this.initGit = answers.initGit;
+        this.repositoryUrl = answers.repositoryUrl;
 
         if (answers.dirname) {
           this.dirname = answers.dirname;
         }
-
-        this.repo = answers.repo;
-        this.initGit = answers.initGit;
-        this.repositoryUrl = answers.repositoryUrl;
       }.bind(this));
   },
 
@@ -50,17 +48,16 @@ var mainGenerator = generators.Base.extend({
   },
 
   writing: function() {
-    return this._cloneRepo(this.repo, this.destinationPath())
-      .then(function() {
-        if (this.initGit) {
-          return this._initRepo(this.destinationRoot(), 0)
-            .then(function(repo) {
-              return this._addRemote(repo, 'origin', this.repositoryUrl);
-            }.bind(this));
-        } else {
-          return true;
-        }
-      }.bind(this));
+    this._copyScaffold(this._getScaffoldPath('Slate'), this.destinationPath());
+
+    if (this.initGit) {
+      var options = {
+        cwd: this.destinationPath()
+      };
+
+      this.spawnCommandSync('git', ['init'], options); // eslint-disable-line no-sync
+      this.spawnCommandSync('git', ['remote', 'add', 'origin', this.repositoryUrl], options); // eslint-disable-line no-sync
+    }
   },
 
   install: function() {
@@ -78,6 +75,6 @@ var mainGenerator = generators.Base.extend({
   }
 });
 
-_.extend(mainGenerator.prototype, fetchRepo);
+_.extend(mainGenerator.prototype, scaffold);
 
 module.exports = mainGenerator;

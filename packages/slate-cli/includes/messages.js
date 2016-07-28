@@ -25,6 +25,14 @@ module.exports = {
     return ' slate new theme\n slate new section\n';
   },
 
+  unknownScaffold: function() {
+    return 'Unknown scaffold, please use one of the following scaffolds:\n' + this.scaffoldsList();
+  },
+
+  scaffoldsList: function() {
+    return ' slate\n';
+  },
+
   unknownInstaller: function() {
     return 'Unknown installer, please use one of the following commands:\n' + this.installersList();
   },
