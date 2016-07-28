@@ -50,9 +50,7 @@
 
   <p>{{ 'gift_cards.issued.redeem' | t }}</p>
 
-  <p>
-    <a href="{{ shop.url }}" class="btn" target="_blank">{{ 'gift_cards.issued.shop_link' | t }}</a>
-  </p>
+  <a href="{{ shop.url }}" class="btn" target="_blank">{{ 'gift_cards.issued.shop_link' | t }}</a>
 
   <div id="QrCode" class="giftcard__qr-code" data-identifier="{{ gift_card.qr_identifier }}"></div>
 
