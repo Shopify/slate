@@ -9,6 +9,10 @@ module.exports = {
     return 'No files provided\n';
   },
 
+  missingDependencies: function() {
+    return 'Dependencies missing. Please run slate setup\n';
+  },
+
   noGenerator: function() {
     return 'No generator specified, please use one of the following commands:\n ' + this.generatorsList();
   },

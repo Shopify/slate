@@ -5,6 +5,9 @@ module.exports = function(args) {
   if (args.length === 0) {
     process.stdout.write(msg.noFiles());
   } else {
-    themekit.commands(['remove'].concat(args));
+    themekit.test()
+      .then(function() {
+        return themekit.commands(['remove'].concat(args));
+      });
   }
 };

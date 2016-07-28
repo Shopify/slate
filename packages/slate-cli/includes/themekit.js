@@ -1,4 +1,7 @@
+var Promise = require('bluebird');
+var stat = Promise.promisify(require('fs').stat);
 var path = require('path');
+var msg = require('./messages.js');
 var BinWrapper = require('bin-wrapper');
 var spawn = require('child_process').spawn;
 var slateRoot = path.resolve(__dirname, '..');
@@ -44,6 +47,18 @@ module.exports = {
         }
       });
     });
+  },
+
+  test: function() {
+    return stat(this.path())
+      .catch(function(err) {
+        if (err.code === 'ENOENT') {
+          process.stdout.write(msg.missingDependencies());
+          process.exit(5);
+        } else {
+          throw new Error(err);
+        }
+      });
   },
 
   /**
