@@ -7,18 +7,17 @@
     <select name="id" id="ProductSelect">
       {% for variant in product.variants %}
 
-        <option {% unless variant.available %}disabled="disabled"{% endunless %}
+        <option
+          {% unless variant.available %}disabled="disabled"{% endunless %}
           {% if variant == current_variant %}selected="selected"{% endif %}
           data-sku="{{ variant.sku }}"
           value="{{ variant.id }}">
-
           {{ variant.title }} -
           {% if variant.available %}
             {{ variant.price | money_with_currency }}
           {% else %}
             {{ 'products.product.sold_out' | t }}
           {% endif %}
-
         </option>
 
       {% endfor %}
