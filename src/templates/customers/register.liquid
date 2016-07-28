@@ -3,7 +3,7 @@
 {% form 'create_customer' %}
   {{ form.errors | default_errors }}
 
-  <label for="FirstName" class="label--hidden">
+  <label for="FirstName" class="label-hidden">
     {{ 'customer.register.first_name' | t }}
   </label>
   <input type="text"
@@ -14,7 +14,7 @@
     autofocus
     {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
 
-  <label for="LastName" class="label--hidden">
+  <label for="LastName" class="label-hidden">
     {{ 'customer.register.last_name' | t }}
   </label>
   <input type="text"
@@ -24,7 +24,7 @@
     autocapitalize="words"
     {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
 
-  <label for="Email" class="label--hidden">
+  <label for="Email" class="label-hidden">
     {{ 'customer.register.email' | t }}
   </label>
   <input type="email"
@@ -36,7 +36,7 @@
     autocapitalize="off"
     {% if form.email %}value="{{ form.email }}"{% endif %}>
 
-  <label for="CreatePassword" class="label--hidden">
+  <label for="CreatePassword" class="label-hidden">
     {{ 'customer.register.password' | t }}
   </label>
   <input type="password"

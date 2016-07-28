@@ -3,7 +3,7 @@
 
   {{ form.errors | default_errors }}
 
-  <label for="CommentAuthor" class="label--hidden">
+  <label for="CommentAuthor" class="label-hidden">
     {{ 'blogs.comments.name' | t }}
   </label>
   <input type="text"
@@ -14,7 +14,7 @@
     value="{{ form.author }}"
     autocapitalize="words">
 
-  <label for="CommentEmail" class="label--hidden">
+  <label for="CommentEmail" class="label-hidden">
     {{ 'blogs.comments.email' | t }}
   </label>
   <input type="email"
@@ -26,7 +26,7 @@
     spellcheck="false"
     autocapitalize="off">
 
-  <label for="CommentBody" class="label--hidden">
+  <label for="CommentBody" class="label-hidden">
     {{ 'blogs.comments.message' | t }}
   </label>
   <textarea

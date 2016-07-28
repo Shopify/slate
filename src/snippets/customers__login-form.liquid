@@ -3,7 +3,7 @@
 
   {{ form.errors | default_errors }}
 
-  <label for="CustomerEmail" class="label--hidden">
+  <label for="CustomerEmail" class="label-hidden">
     {{ 'customer.login.email' | t }}
   </label>
   <input type="email"
@@ -16,7 +16,7 @@
     autofocus>
 
   {% if form.password_needed %}
-    <label for="CustomerPassword" class="label--hidden">
+    <label for="CustomerPassword" class="label-hidden">
       {{ 'customer.login.password' | t }}
     </label>
     <input type="password"
