@@ -29,6 +29,7 @@
     placeholder="{{ 'contact.form.email' | t }}"
     value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
     spellcheck="false"
+    autocomplete="off"
     autocapitalize="off">
 
   <label for="ContactFormPhone">{{ 'contact.form.phone' | t }}</label>
