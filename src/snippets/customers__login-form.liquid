@@ -9,7 +9,7 @@
   <input type="email"
     name="customer[email]"
     id="CustomerEmail"
-    class="{% if form.errors contains 'email' %} input--error{% endif %}"
+    class="{% if form.errors contains 'email' %}input-error{% endif %}"
     placeholder="{{ 'customer.login.email' | t }}"
     spellcheck="false"
     autocomplete="off"
@@ -23,7 +23,7 @@
     <input type="password"
       name="customer[password]"
       id="CustomerPassword"
-      class="{% if form.errors contains 'password' %} input--error{% endif %}"
+      class="{% if form.errors contains 'password' %}input-error{% endif %}"
       placeholder="{{ 'customer.login.password' | t }}">
   {% endif %}
 

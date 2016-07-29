@@ -55,7 +55,7 @@ select::-ms-expand {
 input,
 select,
 textarea {
-  &.input--error {
+  &.input-error {
     border-color: $color-error;
     background-color: $color-error-bg;
     color: $color-error;

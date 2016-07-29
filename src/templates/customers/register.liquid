@@ -30,7 +30,7 @@
   <input type="email"
     name="customer[email]"
     id="Email"
-    class="{% if form.errors contains 'email' %}input--error{% endif %}"
+    class="{% if form.errors contains 'email' %}input-error{% endif %}"
     placeholder="{{ 'customer.register.email' | t }}"
     value="{% if form.email %}{{ form.email }}{% endif %}"
     spellcheck="false"
@@ -43,7 +43,7 @@
   <input type="password"
     name="customer[password]"
     id="CreatePassword"
-    class="{% if form.errors contains 'password' %} input--error{% endif %}"
+    class="{% if form.errors contains 'password' %}input-error{% endif %}"
     placeholder="{{ 'customer.register.password' | t }}">
 
   <p>
