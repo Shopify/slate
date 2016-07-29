@@ -8,7 +8,7 @@
     {% assign sale_price = product.price | money %}
     {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
   {% else %}
-    <strong>{{ 'products.product.on_sale' | t }}</strong>
+    {{ 'products.product.on_sale' | t }}
     {{ product.price | money }}
   {% endif %}
 
@@ -29,5 +29,5 @@
 {% endif %}
 
 {% unless product.available %}
-  <strong>{{ 'products.product.sold_out' | t }}</strong>
+  {{ 'products.product.sold_out' | t }}
 {% endunless %}

@@ -16,9 +16,7 @@
   <h2>{{ 'customer.recover_password.title' | t }}</h2>
   <p>{{ 'customer.recover_password.subtext' | t }}</p>
 
-  <div>
-    {% include 'customers__recover-form' %}
-  </div>
+  {% include 'customers__recover-form' %}
 </div>
 
 {% if shop.checkout.guest_login %}

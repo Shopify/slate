@@ -1,16 +1,14 @@
-<div>
-  <div id="ProductPhoto">
-    <img src="{{ featured_image | img_url: 'large' }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg">
-  </div>
-  {% if product.images.size > 1 %}
-    <ul id="ProductThumbs" class="list--inline">
-      {% for image in product.images %}
-        <li>
-          <a href="{{ image.src | img_url: 'large' }}" class="product-single__thumbnail">
-            <img src="{{ image.src | img_url: 'compact' }}" alt="{{ image.alt | escape }}">
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
-  {% endif %}
+<div id="ProductPhoto">
+  <img src="{{ featured_image | img_url: 'large' }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg">
 </div>
+{% if product.images.size > 1 %}
+  <ul id="ProductThumbs">
+    {% for image in product.images %}
+      <li>
+        <a href="{{ image.src | img_url: 'large' }}" class="product-single-thumbnail">
+          <img src="{{ image.src | img_url: 'compact' }}" alt="{{ image.alt | escape }}">
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}

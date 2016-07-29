@@ -11,11 +11,11 @@
   outline: none;
 }
 
-.label--hidden {
+.label-hidden {
   @include visually-hidden();
 
   // No placeholders, so force show labels
-  .supports-no-placeholder & {
+  .no-placeholder & {
     @include visually-shown();
   }
 }

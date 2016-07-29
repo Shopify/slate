@@ -18,7 +18,7 @@ theme.product = (function() {
     $comparePrice: $('#ComparePrice'),
     $addToCartText: $('#AddToCartText'),
     $productFeaturedImage: $('#ProductPhotoImg'),
-    $productThumbs: $('#ProductThumbs').find('.product-single__thumbnail')
+    $productThumbs: $('#ProductThumbs').find('.product-single-thumbnail')
   };
 
   Shopify.Image.preload(theme.productSingleObject.images, 'large');

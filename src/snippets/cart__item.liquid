@@ -3,7 +3,7 @@
   helpers used for responsive-table labels
 {% endcomment %}
 
-<tr class="responsive-table__row">
+<tr class="responsive-table-row">
   <td data-label="{{ 'customer.order.product' | t }}">
     <a href="{{ item.url | within: collections.all }}">
       <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
@@ -13,7 +13,7 @@
     <a href="{{ item.url }}">{{ item.product.title }}</a>
 
     {% unless item.variant.title contains 'Default' %}
-      <small>{{ item.variant.title }}</small>
+      <p>{{ item.variant.title }}</p>
     {% endunless %}
 
     <p>{{ item.vendor }}</p>
@@ -40,12 +40,16 @@
     </a>
   </td>
   <td data-label="{{ 'cart.label.price' | t }}">
-    <span>{{ item.price | money }}</span>
+    {{ item.price | money }}
   </td>
   <td data-label="{{ 'cart.label.quantity' | t }}">
-    <input type="number" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" min="0">
+    <input type="number"
+      name="updates[]"
+      id="updates_{{ item.id }}"
+      value="{{ item.quantity }}"
+      min="0">
   </td>
   <td data-label="{{ 'cart.label.total' | t }}">
-    <span>{{ item.line_price | money }}</span>
+    {{ item.line_price | money }}
   </td>
 </tr>

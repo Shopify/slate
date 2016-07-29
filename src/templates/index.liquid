@@ -50,8 +50,6 @@
   </div>
 {% endif %}
 
-<hr>
-
 <h2>{{ 'homepage.sections.frontpage_title' | t }}</h2>
 {% for product in collections.frontpage.products limit:4 %}
   <div>
@@ -72,7 +70,7 @@
           {% assign sale_price = product.price | money %}
           {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
         {% else %}
-          <strong>{{ 'products.product.on_sale' | t }}</strong>
+          {{ 'products.product.on_sale' | t }}
           {{ product.price | money }}
         {% endif %}
         <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
@@ -87,7 +85,7 @@
       {% endif %}
 
       {% unless product.available %}
-        <strong>{{ 'products.product.sold_out' | t }}</strong>
+        {{ 'products.product.sold_out' | t }}
       {% endunless %}
     </p>
   </div>
@@ -128,7 +126,6 @@
 {% endfor %}
 
 {% if settings.home_page_content != blank %}
-  <hr>
   <div class="rte">
     {{ pages[settings.home_page_content].content }}
   </div>

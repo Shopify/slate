@@ -1,7 +1,7 @@
-<footer class="site-footer" role="contentinfo">
+<footer>
 
   {% assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo, Fancy, Google Plus' | split: ', ' %}
-  <ul class="list--inline">
+  <ul>
     {% for social in social_accounts %}
       {% include '__social-list-item' with social %}
     {% endfor %}
@@ -10,7 +10,7 @@
   {% unless shop.enabled_payment_types == empty %}
     {% assign payment_icons_available = 'amazon_payments,american_express,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,visa' | split: ',' %}
 
-    <ul class="list--inline payment-icons">
+    <ul class="payment-icons">
       {% for type in shop.enabled_payment_types %}
         {% if payment_icons_available contains type %}
           <li>

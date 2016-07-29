@@ -37,8 +37,9 @@
     }
   }
 
-  .responsive-table__row + .responsive-table__row,
-  tfoot > .responsive-table__row:first-child {
+  // Add a keyline between rows
+  .responsive-table-row + .responsive-table-row,
+  tfoot > .responsive-table-row:first-child {
     position: relative;
     margin-top: 10px;
     padding-top: $gutter / 2;

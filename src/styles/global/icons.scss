@@ -5,7 +5,7 @@
   height: 20px;
   vertical-align: middle;
 
-  .supports-no-svg & {
+  .no-svg & {
     display: none;
   }
 }
@@ -36,10 +36,10 @@ symbol {
   A generic way to visually hide content while
   remaining accessible to screen readers (h5bp.com)
 ==============================================================================*/
-.icon__fallback-text {
+.icon-fallback-text {
   @include visually-hidden();
 
-  .supports-no-svg & {
+  .no-svg & {
     @include visually-shown(static);
   }
 }

@@ -44,7 +44,6 @@
   "blogs": {
     "article": {
       "author_on_date_html": "Publicado por {{ author }} en {{ date }}",
-      "tags": "Etiquetas",
       "comment_meta_html": "{{ author }} en {{ date }}",
       "read_more": "Leer más"
     },

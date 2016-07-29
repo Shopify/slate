@@ -15,16 +15,40 @@
   {{ form.errors | default_errors }}
 
   <label for="ContactFormName">{{ 'contact.form.name' | t }}</label>
-  <input type="text" id="ContactFormName" name="contact[name]" placeholder="{{ 'contact.form.name' | t }}" autocapitalize="words" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+  <input type="text"
+    name="contact[name]"
+    id="ContactFormName"
+    placeholder="{{ 'contact.form.name' | t }}"
+    value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}"
+    autocapitalize="words">
 
   <label for="ContactFormEmail">{{ 'contact.form.email' | t }}</label>
-  <input type="email" id="ContactFormEmail" name="contact[email]" placeholder="{{ 'contact.form.email' | t }}" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+  <input type="email"
+    name="contact[email]"
+    id="ContactFormEmail"
+    placeholder="{{ 'contact.form.email' | t }}"
+    value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+    spellcheck="false"
+    autocomplete="off"
+    autocapitalize="off">
 
   <label for="ContactFormPhone">{{ 'contact.form.phone' | t }}</label>
-  <input type="tel" id="ContactFormPhone" name="contact[phone]" placeholder="{{ 'contact.form.phone' | t }}" pattern="[0-9\-]*" value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+  <input type="tel"
+    name="contact[phone]"
+    id="ContactFormPhone"
+    placeholder="{{ 'contact.form.phone' | t }}"
+    value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+    pattern="[0-9\-]*">
 
   <label for="ContactFormMessage">{{ 'contact.form.message' | t }}</label>
-  <textarea rows="10" id="ContactFormMessage" name="contact[body]" placeholder="{{ 'contact.form.message' | t }}">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+  <textarea rows="10"
+    name="contact[body]"
+    id="ContactFormMessage"
+    placeholder="{{ 'contact.form.message' | t }}">
+    {% if form.body %}
+      {{ form.body }}
+    {% endif %}
+  </textarea>
 
   <input type="submit" class="btn" value="{{ 'contact.form.send' | t }}">
 

@@ -14,7 +14,7 @@ theme.giftCard = (function() {
   var config = {
     qrCode: '#QrCode',
     printButton: '#PrintGiftCard',
-    giftCardCode: '.giftcard__code'
+    giftCardCode: '#GiftCardDigits'
   };
 
   function selectText(evt) {
