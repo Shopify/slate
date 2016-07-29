@@ -42,7 +42,7 @@ $(document).ready(function() {
 
   // Wrap tables in the RTE with a scrollable div so they cannot break the
   // layout if too wide.
-  $('.rte table').wrap('<div class="rte__table-wrapper"></div>');
+  $('.rte table').wrap('<div class="rte-table"></div>');
 
   // Wrap videos in div to force responsive layout.
   slate.iframes.iframeReset();

@@ -5,7 +5,7 @@
   <ul id="ProductThumbs">
     {% for image in product.images %}
       <li>
-        <a href="{{ image.src | img_url: 'large' }}" class="product-single__thumbnail">
+        <a href="{{ image.src | img_url: 'large' }}" class="product-single-thumbnail">
           <img src="{{ image.src | img_url: 'compact' }}" alt="{{ image.alt | escape }}">
         </a>
       </li>

@@ -1,12 +1,12 @@
 /*================ Giftcard Template ================*/
-.giftcard__qr-code {
+.giftcard-qr {
   img {
     display: block;
     margin: 0 auto;
   }
 }
 
-.giftcard__apple-wallet-image {
+.apple-wallet-image {
   display: block;
   margin: 0 auto;
 }
@@ -29,8 +29,8 @@
     color: #000;
   }
 
-  .giftcard__print-link,
-  .giftcard__apple-wallet {
+  .print-giftcard,
+  .apple-wallet {
     display: none;
   }
 }
