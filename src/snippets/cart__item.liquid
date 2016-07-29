@@ -13,7 +13,7 @@
     <a href="{{ item.url }}">{{ item.product.title }}</a>
 
     {% unless item.variant.title contains 'Default' %}
-      {{ item.variant.title }}
+      <p>{{ item.variant.title }}</p>
     {% endunless %}
 
     <p>{{ item.vendor }}</p>
