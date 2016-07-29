@@ -16,7 +16,7 @@
       </thead>
       <tbody>
         {% for order in customer.orders %}
-          <tr class="responsive-table__row">
+          <tr class="responsive-table-row">
             <td data-label="{{ 'customer.orders.order_number' | t }}">{{ order.name | link_to: order.customer_url }}</td>
             <td data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | date: format: 'month_day_year' }}</td>
             <td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</td>
