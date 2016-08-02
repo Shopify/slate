@@ -5,9 +5,9 @@
 {% assign og_description = page_description | default: shop.description | default: shop.name %}
 
 {% if settings.logo_use_image %}
-  {% capture og_image_tags %}<meta property="og:image" content="http:{{ 'logo.png' | asset_img_url: 'grande' }}">{% endcapture %}
-  {% capture og_image_secure_url_tags %}<meta property="og:image:secure_url" content="https:{{ 'logo.png' | asset_img_url: 'grande' }}">{% endcapture %}
-  {% capture twitter_image_tag %}<meta name="twitter:image" content="http:{{ 'logo.png' | asset_img_url: 'grande' }}">{% endcapture %}
+  {% capture og_image_tags %}<meta property="og:image" content="http:{{ 'logo.png' | asset_img_url: '600x600' }}">{% endcapture %}
+  {% capture og_image_secure_url_tags %}<meta property="og:image:secure_url" content="https:{{ 'logo.png' | asset_img_url: '600x600' }}">{% endcapture %}
+  {% capture twitter_image_tag %}<meta name="twitter:image" content="http:{{ 'logo.png' | asset_img_url: '600x600' }}">{% endcapture %}
 {% endif %}
 
 {% comment %}

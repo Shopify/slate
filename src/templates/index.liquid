@@ -6,9 +6,9 @@
 
     <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">
       {% if collection.image %}
-        {{ collection | img_url: 'large' | img_tag: collection_title }}
+        {{ collection | img_url: '480x480' | img_tag: collection_title }}
       {% else %}
-        {{ collection.products.first | img_url: 'large' | img_tag: collection_title }}
+        {{ collection.products.first | img_url: '480x480' | img_tag: collection_title }}
       {% endif %}
     </a>
     <p>
@@ -54,7 +54,7 @@
 {% for product in collections.frontpage.products limit:4 %}
   <div>
     <a href="{{ product.url | within: collection }}">
-      <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
+      <img src="{{ product.featured_image.src | img_url: '480x480' }}" alt="{{ product.featured_image.alt | escape }}">
     </a>
 
     <p>

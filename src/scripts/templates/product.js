@@ -21,7 +21,12 @@ theme.product = (function() {
     $productThumbs: $('#ProductThumbs').find('.product-single-thumbnail')
   };
 
-  Shopify.Image.preload(theme.productSingleObject.images, 'large');
+  // Temporary data attribute to get the image size.
+  // Removed when option_selection.js is updated
+  // https://github.com/Shopify/shopify/pull/80212
+  var productImagesize = cache.$productFeaturedImage.data('size');
+
+  Shopify.Image.preload(theme.productSingleObject.images, productImagesize);
 
   // eslint-disable-next-line no-new
   new Shopify.OptionSelectors('ProductSelect', {
@@ -123,8 +128,7 @@ theme.product = (function() {
       return;
     }
 
-    var size = Shopify.Image.imageSize(cache.$productFeaturedImage.attr('src'));
-    var sizedImgUrl = Shopify.Image.getSizedImageUrl(src, size);
+    var sizedImgUrl = Shopify.Image.getSizedImageUrl(src, productImagesize);
 
     $featuredImage.attr('src', sizedImgUrl);
   }

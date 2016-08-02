@@ -2,9 +2,9 @@
 
 <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: title }}">
   {% if collection.image %}
-    {{ collection | img_url: 'large' | img_tag: title }}
+    {{ collection | img_url: '480x480' | img_tag: title }}
   {% else %}
-    {{ collection.products.first | img_url: 'large' | img_tag: title }}
+    {{ collection.products.first | img_url: '480x480' | img_tag: title }}
   {% endif %}
 </a>
 

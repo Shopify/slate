@@ -1,12 +1,12 @@
 <div id="ProductPhoto">
-  <img src="{{ featured_image | img_url: 'large' }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg">
+  <img src="{{ featured_image | img_url: '480x480' }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg" data-size="480x480">
 </div>
 {% if product.images.size > 1 %}
   <ul id="ProductThumbs">
     {% for image in product.images %}
       <li>
-        <a href="{{ image.src | img_url: 'large' }}" class="product-single-thumbnail">
-          <img src="{{ image.src | img_url: 'compact' }}" alt="{{ image.alt | escape }}">
+        <a href="{{ image.src | img_url: '480x480' }}" class="product-single-thumbnail">
+          <img src="{{ image.src | img_url: '160x160' }}" alt="{{ image.alt | escape }}">
         </a>
       </li>
     {% endfor %}
