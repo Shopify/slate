@@ -14,8 +14,9 @@ var utils = require('./includes/utilities.js');
 var messages = require('./includes/messages.js');
 
 /**
- * concat component files for each folder in `src/sections` into a single
+ * Concat component files for each folder in `src/sections` into a single
  * `<section>.liquid` file and write to `dist/sections`.
+ *
  * @function build:sections
  * @memberof slate-cli.tasks.build
  * @static
@@ -29,7 +30,8 @@ gulp.task('build:sections', function() {
 });
 
 /**
- * watch for changes in `src/sections`, process or remove assets as necessary
+ * Watch for changes in `src/sections`, process or remove assets as necessary
+ *
  * @function watch:sections
  * @memberof slate-cli.tasks.watch
  * @static
@@ -51,6 +53,7 @@ gulp.task('watch:sections', function() {
 
 /**
  * Concat liquid/css/js/json section files from `src` to single liquid file in dist
+ *
  * @param {String|Array} files - root section dir from build, array of files from watch
  * @returns {Stream}
  * @private
@@ -70,7 +73,6 @@ function processAssets(files) {
     sectionList = fs.readdirSync(files);
   }
 
-  // if the `dist/` & `dist/sections/` folders haven't been created yet, create them
   if (!fs.existsSync(config.dist.root)) {
     fs.mkdirSync(config.dist.root);
   }
@@ -107,6 +109,7 @@ function removeAssets(files) {
 /**
  * Reads files from the provided section paths and concats their contents into a
  * "compiled" map of sections to be written to the `dist` directory.
+ *
  * @param {Array} sectionList
  * @returns {Array}
  * @private
@@ -134,8 +137,9 @@ function compileSections(sectionList) {
 }
 
 /**
- * concats the files for a particular section, in the appropriate order, skipping
+ * Concats the files for a particular section, in the appropriate order, skipping
  * any empty files along the way.
+ *
  * @param {Array} files
  * @param {String} path
  * @returns {String}

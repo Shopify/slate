@@ -9,7 +9,6 @@ var config = require('./includes/config.js');
 var utils = require('./includes/utilities.js');
 var messages = require('./includes/messages.js');
 
-
 var assetsPaths = [
   config.src.assets,
   config.src.templates,
@@ -20,7 +19,8 @@ var assetsPaths = [
 ];
 
 /**
- * copies assets to dist dir ...
+ * Copies assets to the `/dist` directory
+ *
  * @function build:assets
  * @memberof slate-cli.tasks.build
  * @static
@@ -30,7 +30,8 @@ gulp.task('build:assets', function() {
 });
 
 /**
- * watches assets in src dir ...
+ * Watches assets in the `/src` directory
+ *
  * @function watch:assets
  * @memberof slate-cli.tasks.watch
  * @static
@@ -47,6 +48,8 @@ gulp.task('watch:assets', function() {
 });
 
 /**
+ * Copies assets to the `/dist` directory
+ *
  * @param {Array} files
  * @returns {Stream}
  * @private
@@ -60,6 +63,8 @@ function processAssets(files) {
 }
 
 /**
+ * Deletes specified files
+ *
  * @param {Array} files
  * @returns {Stream}
  * @private

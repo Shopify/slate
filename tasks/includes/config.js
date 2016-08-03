@@ -1,15 +1,5 @@
 /**
- * slate-cli configuration object
- * ## Markdown stuff
- *
- * It's a big description written in `markdown`
- *
- * Example:
- *
- * ```javascript
- * $('something')
- *   .something(else);
- * ```
+ * Slate-CLI configuration object
  *
  * @namespace config
  * @memberof slate-cli

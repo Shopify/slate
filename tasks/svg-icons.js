@@ -12,9 +12,9 @@ var config = require('./includes/config.js');
 var utils = require('./includes/utilities.js');
 var messages = require('./includes/messages.js');
 
-
 /**
- * pre-processing for svg icons...
+ * Pre-processing for svg icons
+ *
  * @function build:svg
  * @memberof slate-cli.tasks.build
  * @static
@@ -24,7 +24,8 @@ gulp.task('build:svg', function() {
 });
 
 /**
- * watches source svg icons for changes...
+ * Watches source svg icons for changes...
+ *
  * @function watch:svg
  * @memberof slate-cli.tasks.watch
  * @static
@@ -63,6 +64,7 @@ function processIcons(files) {
 /**
  * Cleanup/remove liquid snippets from the `dist` directory during watch tasks if
  * any underlying SVG files in the `src` folder have been removed.
+ *
  * @param {String|Array} files - glob/array of files to match & send to the stream
  * @returns {Stream}
  * @private

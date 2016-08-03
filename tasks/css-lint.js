@@ -6,9 +6,9 @@ var chokidar = require('chokidar');
 var config = require('./includes/config.js');
 var utils = require('./includes/utilities.js');
 
-
 /**
- * Sass Linter - Checks your scss files for potential errors
+ * SCSS Linter - Checks your scss files for potential errors
+ *
  * @function build:scss-lint
  * @memberof slate-cli.tasks.build
  * @static
@@ -18,7 +18,7 @@ gulp.task('lint:css', function() {
 });
 
 /**
- * watches scss in src dir ...
+ * Watches SCSS in `/src` directory
  *
  * @function watch:scss-lint
  * @memberof slate-cli.tasks.watch
@@ -31,6 +31,13 @@ gulp.task('watch:css-lint', function() {
     });
 });
 
+/**
+ * Lints SCSS files for potetential errors
+ *
+ * @param {Array} files
+ * @returns {Stream}
+ * @private
+ */
 function processLint(files) {
   return gulp.src(files)
     .pipe(plumber(utils.errorHandler))

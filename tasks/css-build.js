@@ -21,7 +21,7 @@ gulp.task('build:css', ['lint:css'], function() {
 });
 
 /**
- * watches css in src dir ...
+ * Watches css in the `/src` directory
  *
  * @function watch:css
  * @memberof slate-cli.tasks.watch
@@ -35,6 +35,13 @@ gulp.task('watch:css', function() {
     });
 });
 
+/**
+ * Concatenate css via gulp-cssimport and copys to the `/dist` folder
+ *
+ * @param {Array} files
+ * @returns {Stream}
+ * @private
+ */
 function processCss() {
   messages.logProcessFiles('build:css');
   return gulp.src(config.roots.css)
