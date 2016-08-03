@@ -1,6 +1,12 @@
 var npm = require('global-npm');
 
 module.exports = {
+  logHelpMsg: function(messageArray) {
+    messageArray.unshift('');
+    messageArray.push('\n');
+
+    process.stdout.write(messageArray.join('\n'));
+  },
 
   /**
    * Uses internal/programmatic npm code to execute npm scripts from an npm package

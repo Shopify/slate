@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var parseOptions = require('nopt');
 var slate = require('../index.js');
+var msg = require('../includes/messages.js');
 // var pkg = require('../package.json');
 // require('update-notifier')({packageName: pkg.name,packageVersion: pkg.version}).notify();
 
@@ -11,14 +12,16 @@ var validOpts = {
   'version': Boolean,
   'manual': Boolean, // flag for manual deploy (used with deploy command)
   'environment': [null, String],
-  'nosync': Boolean
+  'nosync': Boolean,
+  'help': Boolean
 };
 
 var shorthand = {
   v: '--version',
   m: '--manual',
   e: '--environment',
-  ns: '--nosync'
+  ns: '--nosync',
+  h: '--help'
 };
 
 // filtered list of valid options that were passed w/ the command
@@ -27,17 +30,22 @@ if (opts.argv.remain[0]) {
   var command = opts.argv.remain[0]; // the first arg in the `remain` array is the command
   var args = opts.argv.remain.slice(1); // the remaining args to be passed with the command
 
-  if (_.isFunction(slate[command])) {
-    slate[command](args, opts);
+  if (_.has(slate, command) && _.isFunction(slate[command].command)) {
+    if (opts.help) {
+      slate[command].help();
+    } else {
+      slate[command].command(args, opts);
+    }
   } else {
-    slate.help();
+    process.stdout.write(msg.unknownCommand());
+    slate.help.command();
   }
 
-// No args were passed...
+  // No args were passed...
 } else {
   if (opts.version) {
-    slate.version();
+    slate.version.command();
   } else {
-    slate.help();
+    slate.help.command();
   }
 }
