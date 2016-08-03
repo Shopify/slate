@@ -6,9 +6,11 @@ module.exports = {
     var themeRoot = findRoot(process.cwd());
 
     if (options.environment) {
-      // needed to pass arguments to npm scripts when calling `run` programatically
-      // eslint-disable-next-line no-process-env
-      process.env.tkEnvironments = options.environment;
+      process.env.tkEnvironments = options.environment; // eslint-disable-line no-process-env
+    }
+
+    if (options.active) {
+      process.env.activeTheme = options.active; // eslint-disable-line no-process-env
     }
 
     var scriptArgs = options.manual

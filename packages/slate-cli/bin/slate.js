@@ -9,19 +9,21 @@ var msg = require('../includes/messages.js');
 
 /* eslint-disable quote-props ,id-length */
 var validOpts = {
-  'version': Boolean,
-  'manual': Boolean, // flag for manual deploy (used with deploy command)
+  'active': Boolean,
   'environment': [null, String],
+  'help': Boolean,
+  'manual': Boolean, // flag for manual deploy (used with deploy command)
   'nosync': Boolean,
-  'help': Boolean
+  'version': Boolean
 };
 
 var shorthand = {
-  v: '--version',
-  m: '--manual',
+  a: '--active',
   e: '--environment',
-  ns: '--nosync',
-  h: '--help'
+  h: '--help',
+  m: '--manual',
+  n: '--nosync',
+  v: '--version'
 };
 
 // filtered list of valid options that were passed w/ the command
