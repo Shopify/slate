@@ -19,8 +19,7 @@
   "scripts": {
     "lint": "eslint . --max-warnings 0; exit 0",
     "generate-theme": "yo ./generators/new-theme/theme.js",
-    "generate-section": "yo ./generators/new-section/section.js",
-    "postinstall": "slate setup"
+    "generate-section": "yo ./generators/new-section/section.js"
   },
   "dependencies": {
     "Slate": "github:shopify/slate",
