@@ -13,14 +13,15 @@ var utils = require('./includes/utilities.js');
 
 /**
  * Replace your existing theme using ThemeKit.
+ *
  * @function deploy:replace
  * @memberof slate-cli.tasks.deploy
  * @static
  */
 gulp.task('deploy:replace', function() {
 
-  if (process.env.tkEnvironments) { // eslint-disable-line no-process-env
-    var environments = process.env.tkEnvironments.split(/\s*,\s*|\s+/); // eslint-disable-line no-process-env
+  if (process.env.tkEnvironments) {
+    var environments = process.env.tkEnvironments.split(/\s*,\s*|\s+/);
     var promises = [];
 
     environments.forEach(function(environment) {
@@ -35,7 +36,7 @@ gulp.task('deploy:replace', function() {
     });
 
     return utils.promiseSeries(promises)
-      .then(function(/*arrayOfResults*/) {
+      .then(function() {
         messages.allDeploysComplete();
       });
 
@@ -48,6 +49,7 @@ gulp.task('deploy:replace', function() {
 
 /**
  * Opens the Store in the default browser (for manual upgrade/deployment)
+ *
  * @function open:admin
  * @memberof slate-cli.tasks.deploy
  * @static
@@ -62,6 +64,7 @@ gulp.task('open:admin', function() {
 
 /**
  * Opens the Zip file in the file browser
+ *
  * @function open:zip
  * @memberof slate-cli.tasks.deploy
  * @static

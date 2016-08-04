@@ -20,7 +20,7 @@ gulp.task('build:js', ['lint:js'], function() {
 });
 
 /**
- * watches js in src dir ...
+ * Watches js in src dir ...
  *
  * @function watch:js
  * @memberof slate-cli.tasks.watch
@@ -34,6 +34,13 @@ gulp.task('watch:js', function() {
     });
 });
 
+/**
+ * Concatenates JS and copys to the `/dist` folder
+ *
+ * @param {Array} files
+ * @returns {Stream}
+ * @private
+ */
 function processJs() {
   messages.logProcessFiles('build:js');
   return gulp.src(config.roots.js)

@@ -4,7 +4,7 @@ var _ = require('lodash');
 var Promise = require('bluebird');
 
 /**
- * Utility & reusable functions used by our Gulp Tasks
+ * Utility and reusable functions used by our Gulp Tasks
  *
  * @summary a set of utility functions used within the gulp tasks of slate-cli
  * @namespace slate-cli.utilities
@@ -24,7 +24,8 @@ var utilities = {
   },
 
   /**
-   * separates filename & directory from a path string & returns an object containing both.
+   * Separates filename and directory from a path string. Returns an object containing both.
+   *
    * @memberof slate-cli.utilities
    * @param path {String} - a string representing the path to a file
    * @returns {Object} - an object with separated `file` (the filename) and `dir` (path minus filename) properties
@@ -38,7 +39,8 @@ var utilities = {
   },
 
   /**
-   * executes an array of promises in series
+   * Executes an array of promises in series
+   *
    * @param promiseArrayFactory {Function} - an array of promise factories
    * @returns {Promise} - promise.all() style array of results from each promise
    */
@@ -82,7 +84,7 @@ var utilities = {
   },
 
   /**
-   * function passed to cheerio.run - adds aria tags & other accessibility
+   * Function passed to cheerio.run - adds aria tags & other accessibility
    * based information to each svg element's markup...
    *
    * @memberof slate-cli.utilities
@@ -150,6 +152,7 @@ var utilities = {
 
       /**
        * Pushes events to upload & remove caches for later batch deployment
+       *
        * @function addEvent
        * @memberof eventCache
        * @param {String} event - chokidar event type - only cares about `(add|change|unlink)`

@@ -13,8 +13,9 @@ var cache = utils.createEventCache();
 var debouncedDeployStatus = _.debounce(checkDeployStatus, 320); // prevent early execution on multi-file events
 
 /**
- * Aggregate task watching for file changes in `src` and building/cleaning/updating
- * `dist` accordingly.  *Made up of individual tasks referenced in other files
+ * Aggregate task watching for file changes in `src` and
+ * building/cleaning/updating `dist` accordingly.  *Made up of individual tasks
+ * referenced in other files
  *
  * @function watch:src
  * @memberof slate-cli.tasks.watch
@@ -33,10 +34,10 @@ gulp.task('watch:src', [
 ]);
 
 /**
- * Watches for changes in the `./dist` folder and passes event data to the `cache`
- * via {@link pushToCache}. A debounced {@link deployStatus} is also called to pass
- * files updated to the remote server through {@link deploy} when any active deploy
- * completes.
+ * Watches for changes in the `./dist` folder and passes event data to the
+ * `cache` via {@link pushToCache}. A debounced {@link deployStatus} is also
+ * called to pass files updated to the remote server through {@link deploy}
+ * when any active deploy completes.
  *
  * @function watch:dist
  * @memberof slate-cli.tasks.watch
@@ -56,8 +57,8 @@ gulp.task('watch:dist', function() {
 });
 
 /**
- * If no deploy is active, call {@link deploy}
- * passing files stored in `cache`
+ * If no deploy is active, call {@link deploy} passing files stored in
+ *
  * @private
  */
 function checkDeployStatus() {
@@ -74,12 +75,13 @@ function checkDeployStatus() {
 }
 
 /**
- * Executes a deployment (wrapped in a promise).  When the initial deploy resolves,
- * executes a call to {@link deployStatus}, recursively iterating through subsequent
- * cached files and deploying until no changes remain.
+ * Executes a deployment (wrapped in a promise).  When the initial deploy
+ * resolves, executes a call to {@link deployStatus}, recursively iterating
+ * through subsequent cached files and deploying until no changes remain.
  *
  * @param {String|Array} cmd - the ThemeKit command to run (upload|remove)
- * @param {Array} files - an array of files to upload or remove @ the remote server
+ * @param {Array} files - an array of files to upload or remove @ the remote
+ *   server
  * @private
  */
 function deploy(cmd, files) {

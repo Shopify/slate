@@ -10,6 +10,7 @@ var utils = require('./includes/utilities.js');
 
 /**
  * Clean up build dirs/files whenever doing a full/clean (re)build.
+ *
  * @function build:clean
  * @memberof slate-cli.tasks.build
  * @static
@@ -20,6 +21,7 @@ gulp.task('clean', function() {
 
 /**
  * Compress theme and build a shopify-compatible `.zip` file for uploading to store
+ *
  * @function compress
  * @memberof slate-cli.tasks.deploy
  * @static

@@ -18,13 +18,11 @@ var messages = require('./includes/messages.js');
  */
 gulp.task('deploy:sync-init', function() {
   if (browserSync.active) {
-    browserSync.exit(); // stop any existing browsersync instance before (re)running init
+    browserSync.exit();
   } else {
-    // reset deploy log on first init & ensure file exists for watching on reload
     fs.writeFile(config.deployLog, '');
   }
 
-  // read the store url from the config file
   return readFile(config.tkConfig, 'utf8')
     .then(function(response) {
       var tkConfig = yaml.safeLoad(response);
@@ -43,7 +41,7 @@ gulp.task('deploy:sync-init', function() {
  * @static
  */
 gulp.task('deploy:sync-reload', ['deploy:sync-init'], function() {
-  gulp.watch(config.tkConfig, ['deploy:sync-init']); // re-init on settings change
+  gulp.watch(config.tkConfig, ['deploy:sync-init']);
   gulp.watch(config.deployLog, function() {
     messages.logTransferDone();
     browserSync.reload();
