@@ -44,6 +44,7 @@ theme.product = (function() {
     // Update cart button and text status
     if (!variant) {
       updateAddToCartState(false, theme.strings.unavailable);
+
       return;
     }
 
@@ -116,9 +117,15 @@ theme.product = (function() {
    * @param {string} src - Image src URL
    */
   function updateProductImage(src) {
+    var $featuredImage = $('#ProductPhotoImg');
+
+    if ($featuredImage.attr('src') === src) {
+      return;
+    }
+
     var size = Shopify.Image.imageSize(cache.$productFeaturedImage.attr('src'));
     var sizedImgUrl = Shopify.Image.getSizedImageUrl(src, size);
 
-    $('#ProductPhotoImg').attr('src', sizedImgUrl);
+    $featuredImage.attr('src', sizedImgUrl);
   }
 })();

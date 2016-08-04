@@ -4,14 +4,10 @@ window.theme = window.theme || {};
 // =require vendor/modernizr.min.js
 
 // =require slate/a11y.js
-// =require slate/uri-helpers.js
-// =require slate/currency.js
 // =require slate/forms.js
-// =require slate/images.js
-// =require slate/product.js
+// =require slate/uri-helpers.js
 // =require slate/video.js
 
-// =require strings.js.liquid
 
 theme.variables = {
   queryParams: slate.QueryString.parse(location.search)
