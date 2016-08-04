@@ -11,30 +11,9 @@ git clone https://github.com/Shopify/slate-cli
 cd slate-cli
 ```
 
-#### 2. Run `npm install`.
-This will install both run-time project dependencies and developer tools listed in the [package.json](package.json) file.
+#### 2. Run `npm link`
+This will install both run-time project dependencies and developer tools listed in the [package.json](package.json) file. It also creates a symbolic link from this project to your global npm directory.
 
-#### 3. Run `npm link` 
-This creates a symbolic link from this project to your global npm directory.
-
-## Creating a New Theme
-
-#### 1. Create a new project
-Run the following commands to create a new project and replace `my-theme` with the name of your Shopify theme.
-
-```shell
-slate new theme my-theme 
-cd my-theme
-```
-
-#### 2. Add your store settings in `config.yml`.
-These settings include the theme ID, password, and store URL. See [config variables](http://themekit.cat/docs/#config-variables) for more details.
-
-#### 3. Run `slate setup`
-This will install project specific dependencies and developer tools.
-
-#### 4. Run `slate start` 
-This command will build your theme from the [source files](https://github.com/Shopify/slate/tree/master/src) into a `dist` directory. A [Node.js](https://nodejs.org) server and [Browsersync](https://browsersync.io/) will start automatically once the initial build is completed.
 ## Global Options
 
 #### Help `-h, --help`
