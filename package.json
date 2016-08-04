@@ -33,7 +33,7 @@
     "gulp-notify": "2.2.0",
     "gulp-open": "2.0.0",
     "gulp-plumber": "1.1.0",
-    "gulp-sass-lint": "git://github.com/shopify/gulp-sass-lint#97b214c3e62cee4fa8479851b63e5fe3250a9b75",
+    "gulp-sass-lint": "github:shopify/gulp-sass-lint#e38a984d346b65fac7bcb944a88c2fab52a3f2d9",
     "gulp-size": "2.1.0",
     "gulp-svgmin": "1.2.2",
     "gulp-util": "3.0.7",
