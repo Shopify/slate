@@ -137,6 +137,8 @@ Sets up the watchers for all theme assets.
 
 By default, Browsersync will launch a new browser tab at [https://localhost:3000](https://localhost:3000) and watch for any files changes. You can ignore this by passing the `--nosync` option to the command.
 
+**Warning: running `watch` by itself will override your active theme if you do not have a `theme_id` in your config.yml use `slate start` to avoid this.**
+
 #### Options
 ```
 -ns, --nosync     Stops Browsersync from launching.
