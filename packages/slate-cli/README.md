@@ -14,6 +14,9 @@ cd slate-cli
 #### 2. Run `npm link`
 This will install both run-time project dependencies and developer tools listed in the [package.json](package.json) file. It also creates a symbolic link from this project to your global npm directory.
 
+#### 3. Run `slate setup`
+This will install project specific dependencies and developer tools.
+
 ## Global Options
 
 #### Help `-h, --help`
