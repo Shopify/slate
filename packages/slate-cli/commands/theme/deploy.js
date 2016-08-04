@@ -27,6 +27,7 @@ module.exports = {
       '',
       'Options:',
       '',
+      '  -a, --active       overwrite active theme if theme_id is invalid'
       '  -e, --environment  deploy to a comma-separated list of environments',
       '  -m, --manual       disable auto-deployment of the theme files'
     ]);
