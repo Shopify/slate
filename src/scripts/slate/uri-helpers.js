@@ -1,5 +1,4 @@
 /* eslint no-undefined: "off" */
-window.slate = window.slate || {};
 
 /**
  * URI Helper Functions
@@ -11,7 +10,7 @@ window.slate = window.slate || {};
  * location.search = slate.QueryString.stringify(queryParams);
  */
 
-slate.QueryString = (function() {
+module.exports = (function() {
   function _encode(value) {
     return encodeURIComponent(value);
   }

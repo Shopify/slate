@@ -41,6 +41,10 @@ var messages = {
     return timestamp + action + amount + fileList;
   },
 
+  logBundleJs: function() {
+    gutil.log('Updating JS Bundle...');
+  },
+
   configChange: function() {
     return 'Changes to ThemeKit Config Detected: You may need to quit <slate watch>' +
       ' and run a full <slate deploy> as a result.';

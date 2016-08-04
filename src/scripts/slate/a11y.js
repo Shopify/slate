@@ -1,5 +1,3 @@
-window.slate = window.slate || {};
-
 /**
  * A11y Helpers
  * -----------------------------------------------------------------------------
@@ -10,7 +8,7 @@ window.slate = window.slate || {};
  * @namespace a11y
  */
 
-slate.a11y = {
+module.exports = {
 
   /**
    * For use when focus shifts to a container rather than a link

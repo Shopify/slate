@@ -32,6 +32,7 @@ gulp.task('watch:src', [
   'watch:json-lint',
   'watch:css',
   'watch:js',
+  'watch:vendor-js',
   'watch:sections'
 ]);
 

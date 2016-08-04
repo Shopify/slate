@@ -1,35 +1,28 @@
-window.theme = window.theme || {};
+require('./templates/customer-addresses');
+require('./templates/gift-card');
+require('./templates/login');
+require('./templates/product');
 
-// =require vendor/jquery-2.2.3.min.js
-// =require vendor/modernizr.min.js
-
-// =require slate/a11y.js
-// =require slate/forms.js
-// =require slate/uri-helpers.js
-// =require slate/video.js
+var a11y = require('./slate/a11y');
+var uriHelpers = require('./slate/uri-helpers');
+var iframes = require('./slate/iframes');
 
 
-theme.variables = {
-  queryParams: slate.QueryString.parse(location.search)
+var theme = {
+  variables: {
+    queryParams: uriHelpers.parse(location.search)
+  }
 };
 
 $(document).ready(function() {
-
-  // Include Template Scripts
-  // ----------------------------------------------------------------------------
-  // =require templates/customer-addresses.js
-  // =require templates/gift-card.js
-  // =require templates/login.js
-  // =require templates/product.js
-
   // Custom Theme Scripts
   // ---------------------------------------------------------------------------
 
   // Common a11y fixes
-  slate.a11y.pageLinkFocus($(window.location.hash));
+  a11y.pageLinkFocus($(window.location.hash));
 
   $('.in-page-link').on('click', function(evt) {
-    slate.a11y.pageLinkFocus($(evt.currentTarget.hash));
+    a11y.pageLinkFocus($(evt.currentTarget.hash));
   });
 
   // Override defaults in theme.strings with potential template overrides
@@ -38,8 +31,8 @@ $(document).ready(function() {
 
   // Wrap tables in the RTE with a scrollable div so they cannot break the
   // layout if too wide.
-  $('.rte table').wrap('<div class="rte-table"></div>');
+  $('.rte table').wrap('<div class="rte__table-wrapper"></div>');
 
   // Wrap videos in div to force responsive layout.
-  slate.iframes.iframeReset();
+  iframes.iframeReset();
 });

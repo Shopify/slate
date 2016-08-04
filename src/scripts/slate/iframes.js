@@ -1,5 +1,3 @@
-window.slate = window.slate || {};
-
 /**
  * iFrames
  * -----------------------------------------------------------------------------
@@ -8,7 +6,7 @@ window.slate = window.slate || {};
  * @namespace iframes
  */
 
-slate.iframes = {
+module.exports = {
   iframeReset: function() {
     var $iframeVideo = $('iframe[src*="youtube.com/embed"], iframe[src*="player.vimeo"]');
     var $iframeReset = $iframeVideo.add('iframe#admin_bar_iframe');

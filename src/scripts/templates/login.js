@@ -1,5 +1,3 @@
-window.theme = window.theme || {};
-
 /**
  * Password Template Script
  * ------------------------------------------------------------------------------
@@ -8,7 +6,7 @@ window.theme = window.theme || {};
  * @namespace password
  */
 
-theme.password = (function() {
+module.exports = (function() {
   var config = {
     recoverPasswordForm: '#RecoverPassword',
     hideRecoverPasswordLink: '#HideRecoverPasswordLink'

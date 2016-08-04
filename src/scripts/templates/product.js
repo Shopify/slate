@@ -1,5 +1,3 @@
-window.theme = window.theme || {};
-
 /**
  * Product Template Script
  * ------------------------------------------------------------------------------
@@ -8,7 +6,11 @@ window.theme = window.theme || {};
    * @namespace product
  */
 
-theme.product = (function() {
+/* TODO: temp fix - this is relying on globals that have been broken by
+    browserify implementation.  someone needs to look into how to handle this. */
+var theme = {};
+
+module.exports = (function() {
 
   if (!theme.productSingleObject) { return; }
 

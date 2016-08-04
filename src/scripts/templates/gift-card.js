@@ -1,5 +1,3 @@
-window.theme = window.theme || {};
-
 /**
  * Gift Card Template Script
  * ------------------------------------------------------------------------------
@@ -8,7 +6,7 @@ window.theme = window.theme || {};
  * @namespace giftCard
  */
 
-theme.giftCard = (function() {
+module.exports = (function() {
   if (!$('body').hasClass('template-giftcard')) { return; }
 
   var config = {

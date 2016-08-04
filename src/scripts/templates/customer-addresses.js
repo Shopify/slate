@@ -1,5 +1,3 @@
-window.theme = window.theme || {};
-
 /**
  * Customer Addresses Script
  * ------------------------------------------------------------------------------
@@ -8,8 +6,9 @@ window.theme = window.theme || {};
  *
  * @namespace customerAddresses
  */
+var slate = require('../slate/main.js');
 
-theme.customerAddresses = (function() {
+module.exports = (function() {
   var config = {
     formId: '#AddressNewForm',
     countryOption: '.address-country-option',
