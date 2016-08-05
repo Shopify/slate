@@ -49,7 +49,7 @@
     "yargs": "4.7.1"
   },
   "devDependencies": {
-    "eslint": "2.12.0",
-    "eslint-plugin-shopify": "12.1.0"
+    "eslint": "3.2.2",
+    "eslint-plugin-shopify": "13.0.0"
   }
 }

@@ -24,7 +24,7 @@ var messages = require('./includes/messages.js');
 gulp.task('build:sections', function() {
   var sectionsDir = config.src.sections;
 
-  if (fs.existsSync(sectionsDir)) {
+  if (fs.existsSync(sectionsDir)) { // eslint-disable-line node/no-deprecated-api
     processAssets(sectionsDir);
   }
 });
@@ -73,10 +73,10 @@ function processAssets(files) {
     sectionList = fs.readdirSync(files);
   }
 
-  if (!fs.existsSync(config.dist.root)) {
+  if (!fs.existsSync(config.dist.root)) { // eslint-disable-line node/no-deprecated-api
     fs.mkdirSync(config.dist.root);
   }
-  if (!fs.existsSync(config.dist.sections)) {
+  if (!fs.existsSync(config.dist.sections)) { // eslint-disable-line node/no-deprecated-api
     fs.mkdirSync(config.dist.sections);
   }
 

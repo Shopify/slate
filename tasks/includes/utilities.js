@@ -233,17 +233,17 @@ var utilities = {
       });
 
       childProcess.on('close', function(code) {
-        if (!error) {
-          gutil.log('Process closed:',
-            gutil.colors.green(mapCode(code))
-          );
-          resolve();
-        } else {
+        if (error) {
           gutil.log('Process closed with error:',
             gutil.colors.red(mapCode(code), '\n'),
             gutil.colors.white(error)
           );
           reject(new Error(error));
+        } else {
+          gutil.log('Process closed:',
+            gutil.colors.green(mapCode(code))
+          );
+          resolve();
         }
       });
     });
