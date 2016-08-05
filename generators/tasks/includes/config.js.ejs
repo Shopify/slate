@@ -34,6 +34,7 @@ var config = {
   src: {
     root: 'src/',
     js: 'src/scripts/**/*.js',
+    jsSections: 'src/sections/**/*.js',
     json: 'src/**/*.json',
     css: 'src/styles/**/*.{scss,scss.liquid}',
     cssLint: 'src/styles/**/*.scss',
