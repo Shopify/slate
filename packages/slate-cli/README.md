@@ -17,6 +17,9 @@ This will install both run-time project dependencies and developer tools listed 
 #### 3. Run `slate setup`
 This will install project specific dependencies and developer tools.
 
+#### 4. Run `npm install gulp -g`
+Temporary. This will be moved into `slate setup` soon.
+
 ## Global Options
 
 #### Help `-h, --help`
