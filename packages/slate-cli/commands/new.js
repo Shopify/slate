@@ -39,7 +39,7 @@ module.exports = {
   },
   help: function() {
     utils.logHelpMsg([
-      'Usage: slate new [args] [--options]',
+      'Usage: slate new [args]',
       '',
       'Scaffold a theme or section.',
       '',
