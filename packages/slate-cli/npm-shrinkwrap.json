@@ -2611,8 +2611,8 @@
     },
     "Slate": {
       "version": "1.0.0",
-      "from": "git+ssh://git@github.com/shopify/slate.git#88464711497675b7078fa1f25d7569ed1161cc89",
-      "resolved": "git+ssh://git@github.com/shopify/slate.git#88464711497675b7078fa1f25d7569ed1161cc89",
+      "from": "git+ssh://git@github.com/shopify/slate.git#6518f5432cf501477e4ab7b807c28b3c4826b2f8",
+      "resolved": "git+ssh://git@github.com/shopify/slate.git#6518f5432cf501477e4ab7b807c28b3c4826b2f8",
       "dependencies": {
         "abab": {
           "version": "1.0.3",
