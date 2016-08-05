@@ -5,6 +5,9 @@ Slate provides a set of tools and templates for developing Shopify themes.
 
 Its goal is to provide developers with a fully documented and easy-to-use theme toolkit. It allows developers to manage their libraries and dependencies, to clearly structure their code, and to seamlessly deploy their themes to remote environments.
 
+## Requirements
+Git (otherwise Slate CLI does not work) and [Node.js](https://nodejs.org).
+
 ## Getting Started
 Slate comes with a [CLI](https://github.com/Shopify/slate-cli) tool that allows you to run commands that help with generating, setting up and deploying Shopify themes.
 Although not a requirement, it does simplify the process of working with themes.
@@ -27,6 +30,9 @@ These settings include the theme ID, password, and store URL. See [config variab
 
 #### 4. Run `slate start` 
 This command will build your theme from the [source files](https://github.com/Shopify/slate/tree/master/src) into a `dist` directory. A [Node.js](https://nodejs.org) server and [Browsersync](https://browsersync.io/) will start automatically once the initial build is complete.
+
+## Slate Commands
+A full list of possible Slate commands can be found [here](https://github.com/Shopify/slate-cli#overview).
 
 ----------
 
