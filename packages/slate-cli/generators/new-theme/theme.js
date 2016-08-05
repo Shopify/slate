@@ -30,7 +30,7 @@ var mainGenerator = generators.Base.extend({
         }
 
         this.environments = env;
-        this.defaultEnv = answers.defaultEnv;
+        this.defaultEnv = answers.defaultEnv || 'development';
         this.initGit = answers.initGit;
         this.repositoryUrl = answers.repositoryUrl;
 
