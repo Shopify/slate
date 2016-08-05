@@ -19,8 +19,7 @@
     name="contact[name]"
     id="ContactFormName"
     placeholder="{{ 'contact.form.name' | t }}"
-    value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}"
-    autocapitalize="words">
+    value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
 
   <label for="ContactFormEmail">{{ 'contact.form.email' | t }}</label>
   <input type="email"
