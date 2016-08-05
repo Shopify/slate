@@ -17,13 +17,14 @@
     "slate": "./bin/slate.js"
   },
   "scripts": {
-    "lint": "eslint . --max-warnings 0; exit 0",
+    "lint": "eslint . --config '.eslintrc.yml' --ignore-path '.eslintignore' --max-warnings 0; exit 0",
     "generate-theme": "yo ./generators/new-theme/theme.js",
     "generate-section": "yo ./generators/new-section/section.js"
   },
   "dependencies": {
-    "Slate": "github:shopify/slate",
+    "Slate": "git+ssh://git@github.com/shopify/slate.git#88464711497675b7078fa1f25d7569ed1161cc89",
     "bin-wrapper": "3.0.2",
+    "bluebird": "3.4.1",
     "find-root": "1.0.0",
     "global-npm": "0.3.0",
     "lodash": "4.13.1",
@@ -34,28 +35,8 @@
     "yo": "1.8.4"
   },
   "devDependencies": {
-    "eslint": "2.12.0",
-    "eslint-plugin-shopify": "12.1.0"
-  },
-  "eslintConfig": {
-    "extends": [
-      "plugin:shopify/es5",
-      "plugin:shopify/node",
-      "plugin:shopify/jquery"
-    ],
-    "env": {
-      "browser": true,
-      "node": true,
-      "jquery": true
-    },
-    "globals": {
-      "Promise": true
-    },
-    "rules": {
-      "no-unsafe-finally": 0,
-      "no-lonely-if": 0,
-      "comma-dangle": 0,
-      "spaced-comment": 0
-    }
+    "eslint": "3.2.2",
+    "eslint-plugin-node": "2.0.0",
+    "eslint-plugin-shopify": "13.0.0"
   }
 }

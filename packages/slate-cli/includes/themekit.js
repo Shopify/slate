@@ -54,7 +54,7 @@ module.exports = {
       .catch(function(err) {
         if (err.code === 'ENOENT') {
           process.stdout.write(msg.missingDependencies());
-          process.exit(5);
+          process.exit(5); // eslint-disable-line no-process-exit
         } else {
           throw new Error(err);
         }
@@ -99,10 +99,10 @@ module.exports = {
       });
 
       childProcess.on('close', function() {
-        if (!error) {
-          resolve();
-        } else {
+        if (error) {
           reject(new Error(error));
+        } else {
+          resolve();
         }
       });
     });
