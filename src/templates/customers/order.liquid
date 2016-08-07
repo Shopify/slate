@@ -87,10 +87,10 @@
 
 <p>{{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }}</p>
 
-{% include 'customers__address' with order.billing_adress %}
+{% include 'address' with order.billing_adress %}
 
 <h3>{{ 'customer.order.shipping_address' | t }}</h3>
 
 <p>{{ 'customer.order.fulfillment_status' | t }}: {{ order.fulfillment_status_label }}</p>
 
-{% include 'customers__address' with order.shipping_address %}
+{% include 'address' with order.shipping_address %}

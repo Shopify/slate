@@ -15,9 +15,9 @@
     {{ article | img_url: '1024x1024' | img_tag: article.title }}
   {% endif %}
 
-  <header>
+  <header role="banner">
     <h1>{{ article.title }}</h1>
-    {% include '__date', date_time: article.published_at %}
+    {% include 'date', date_time: article.published_at %}
     <p>{{ 'blogs.article.author_on_date_html' | t: author: article.author, date: date }}</p>
   </header>
 
@@ -35,11 +35,116 @@
     </ul>
   {% endif %}
 
-  {% include '__social-sharing' %}
+  {% include 'social-sharing' %}
 
   {% if blog.comments_enabled? %}
-    {% include 'article__comments-list' %}
-    {% include 'article__comments-form' %}
+
+    {% comment %}
+
+    Comments (List)
+    =======================
+    {% endcomment %}
+
+    <h3>{{ 'blogs.comments.with_count' | t: count: number_of_comments }}</h3>
+
+    {% paginate article.comments by 5 %}
+
+    <div id="comments">
+      {% if comment and comment.created_at %}
+        <p class="form-success">
+          {% if blog.moderated? %}
+            {{ 'blogs.comments.success_moderated' | t }}
+          {% else %}
+            {{ 'blogs.comments.success' | t }}
+          {% endif %}
+        </p>
+      {% endif %}
+
+      {% if number_of_comments > 0 %}
+        <ul>
+          {% if comment and comment.created_at %}
+            <li id="{{ comment.id }}">
+              <div class="rte">
+                {{ comment.content }}
+              </div>
+              {% include 'date', date_time: comment.created_at %}
+              <p>{{ 'blogs.article.comment_meta_html' | t: author: comment.author, date: date }}</p>
+            </li>
+
+          {% endif %}
+
+          {% for comment in article.comments %}
+            <li id="{{ comment.id }}">
+              <div class="rte">
+                {{ comment.content }}
+              </div>
+              {% include 'date', date_time: comment.created_at %}
+              <p>{{ 'blogs.article.comment_meta_html' | t: author: comment.author, date: date }}</p>
+            </li>
+
+          {% endfor %}
+        </ul>
+
+        {% include 'pagination' %}
+      {% endif %}
+    </div>
+
+    {% endpaginate %}
+
+
+    {% comment %}
+
+    Create new comment
+    =======================
+    {% endcomment %}
+
+    {% form 'new_comment', article %}
+      <h3>{{ 'blogs.comments.title' | t }}</h3>
+
+      {{ form.errors | default_errors }}
+
+      <label for="CommentAuthor" class="label-hidden">
+        {{ 'blogs.comments.name' | t }}
+      </label>
+      <input type="text"
+             name="comment[author]"
+             id="CommentAuthor"
+             class="{% if form.errors contains 'author' %}input-error{% endif %}"
+             placeholder="{{ 'blogs.comments.name' | t }}"
+             value="{{ form.author }}"
+             autocapitalize="words">
+
+      <label for="CommentEmail" class="label-hidden">
+        {{ 'blogs.comments.email' | t }}
+      </label>
+      <input type="email"
+             name="comment[email]"
+             id="CommentEmail"
+             class="{% if form.errors contains 'email' %}input-error{% endif %}"
+             placeholder="{{ 'blogs.comments.email' | t }}"
+             value="{{ form.email }}"
+             spellcheck="false"
+             autocomplete="off"
+             autocapitalize="off">
+
+      <label for="CommentBody" class="label-hidden">
+        {{ 'blogs.comments.message' | t }}
+      </label>
+      <textarea
+        name="comment[body]"
+        id="CommentBody"
+        class="{% if form.errors contains 'body' %}input-error{% endif %}"
+        placeholder="{{ 'blogs.comments.message' | t }}">
+        {{ form.body }}
+      </textarea>
+
+      {% if blog.moderated? %}
+        <p>{{ 'blogs.comments.moderated' | t }}</p>
+      {% endif %}
+
+      <input type="submit" class="btn" value="{{ 'blogs.comments.post' | t }}">
+    {% endform %}
+
   {% endif %}
 
 </article>

@@ -1,5 +1,5 @@
 {% paginate collection.products by 12 %}
-  <header>
+  <header role="banner">
     <h1>{{ collection.title }}</h1>
     {% if collection.description != blank %}
       <div class="rte">
@@ -26,7 +26,56 @@
 
   <div>
     {% for product in collection.products %}
-      {% include '__product-card' %}
+
+      {% comment %}
+
+      Collection Item
+      =====================
+      {% endcomment %}
+
+      <div>
+        <a href="{{ product.url | within: collection }}">
+          <img src="{{ product.featured_image.src | img_url: '480x480' }}" alt="{{ product.featured_image.alt | escape }}">
+        </a>
+
+        <p>
+          <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+        </p>
+        <p>
+
+          {% if product.compare_at_price > product.price %}
+
+            {% if product.price_varies %}
+              {%- assign sale_price = product.price | money -%}
+              {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+            {% else %}
+              {{ 'products.product.on_sale' | t }}
+              {{ product.price | money }}
+            {% endif %}
+
+          {% else %}
+
+            {% if product.price_varies %}
+              {%- assign price = product.price | money -%}
+              {{ 'products.product.from_text_html' | t: price: price }}
+            {% else %}
+              {{ product.price | money }}
+            {% endif %}
+
+          {% endif %}
+
+          {% if product.compare_at_price > product.price %}
+            <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+            <s>{{ product.compare_at_price | money }}</s>
+          {% endif %}
+
+          {% unless product.available %}
+          {{ 'products.product.sold_out' | t }}
+          {% endunless %}
+
+        </p>
+      </div>
+
     {% else %}
       {% if collection.handle == 'all' %}
 
@@ -35,7 +84,36 @@
           {%- assign onboardingLoaded = true -%}
         {% endunless %}
 
-        {% include '__product-card-onboarding' %}
+        <div class="helper-section">
+          <div class="helper-note">
+            <span class="helper-icon"></span>
+            <h3>{{ 'collections.onboarding.modal_title' | t }}</h3>
+            <p>{{ 'collections.onboarding.no_products_html' | t }}</p>
+            <p><a href="/admin/products/new" class="admin-btn-primary">{{ 'collections.onboarding.add_product' | t }}</a></p>
+          </div>
+
+          <div class="helper-content">
+            {%- assign collection_index = 1 -%}
+            {% for i in (1..8) %}
+              {% case i %}
+              {% when 7 %}
+              {%- assign collection_index = 1 -%}
+              {% when 8 %}
+              {%- assign collection_index = 2 -%}
+              {% endcase %}
+              <div>
+                <a href="/admin/products">
+                  {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ collection_index }}.png{% endcapture %}
+                  {{ imageUrl | img_tag }}
+                </a>
+                <p><a href="/admin/products">{{ 'homepage.onboarding.product_title' | t }}</a></p>
+                <p>$19.99</p>
+              </div>
+              {%- assign collection_index = collection_index | plus: 1 -%}
+            {% endfor %}
+          </div>
+        </div>
+
 
       {% else %}
         <p>{{ 'collections.general.no_matches' | t }}</p>
@@ -44,5 +122,5 @@
     {% endfor %}
   </div>
 
-  {% include '__pagination' %}
+  {% include 'pagination' %}
 {% endpaginate %}
