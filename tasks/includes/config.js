@@ -34,7 +34,7 @@ var config = {
     templates: 'src/templates/**/*',
     snippets: 'src/snippets/*',
     sections: 'src/sections/*.liquid',
-    sectionFolders: 'src/sections/',
+    sectionsDir: 'src/sections/',
     locales: 'src/locales/*',
     config: 'src/config/*',
     layout: 'src/layout/*'
