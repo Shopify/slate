@@ -11,8 +11,7 @@
     id="CommentAuthor"
     class="{% if form.errors contains 'author' %}input-error{% endif %}"
     placeholder="{{ 'blogs.comments.name' | t }}"
-    value="{{ form.author }}"
-    autocapitalize="words">
+    value="{{ form.author }}">
 
   <label for="CommentEmail" class="label-hidden">
     {{ 'blogs.comments.email' | t }}

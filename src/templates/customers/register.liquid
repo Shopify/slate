@@ -10,7 +10,6 @@
     name="customer[first_name]"
     id="FirstName"
     placeholder="{{ 'customer.register.first_name' | t }}"
-    autocapitalize="words"
     autofocus
     {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
 
@@ -21,7 +20,6 @@
     name="customer[last_name]"
     id="LastName"
     placeholder="{{ 'customer.register.last_name' | t }}"
-    autocapitalize="words"
     {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
 
   <label for="Email" class="label-hidden">
