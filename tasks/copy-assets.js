@@ -12,7 +12,7 @@ var messages = require('./includes/messages.js');
 var assetsPaths = [
   config.src.assets,
   config.src.templates,
-  config.src.sections,
+  config.src.sectionsDir + '*.liquid',
   config.src.snippets,
   config.src.locales,
   config.src.config,

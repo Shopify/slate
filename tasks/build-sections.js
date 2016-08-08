@@ -22,7 +22,7 @@ var messages = require('./includes/messages.js');
  * @static
  */
 gulp.task('build:sections', function() {
-  var sectionsDir = config.src.sectionsDir;
+  var sectionsDir = config.src.sections;
 
   if (fs.existsSync(sectionsDir)) { // eslint-disable-line node/no-deprecated-api
     processAssets(sectionsDir);
@@ -42,7 +42,7 @@ gulp.task('watch:sections', function() {
     unlinkEvents: ['unlinkDir']
   });
 
-  chokidar.watch(config.src.sectionsDir, {ignoreInitial: true})
+  chokidar.watch(config.src.sections, {ignoreInitial: true})
     .on('all', function(event, path) {
       messages.logFileEvent(event, path);
       eventCache.addEvent(event, path);
@@ -126,7 +126,6 @@ function compileSections(sectionList) {
     }
 
     sectionFiles = fs.readdirSync(path);
-
     sections[i] = {
       filename: config.dist.sections + section + '.liquid',
       content: concatContent(sectionFiles, path)

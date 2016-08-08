@@ -33,8 +33,8 @@ var config = {
     icons: 'src/icons/**/*.svg',
     templates: 'src/templates/**/*',
     snippets: 'src/snippets/*',
-    sections: 'src/sections/*.liquid',
     sectionsDir: 'src/sections/',
+    sections: ['src/sections/**/*', '!src/sections/*.liquid'],
     locales: 'src/locales/*',
     config: 'src/config/*',
     layout: 'src/layout/*'
