@@ -54,9 +54,7 @@ var config = {
     js: [
       'src/scripts/theme.js'
     ],
-    css: [
-      'src/styles/theme.scss'
-    ]
+    css: 'src/styles/*.scss'
   },
 
   plugins: {
