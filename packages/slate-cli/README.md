@@ -1,8 +1,8 @@
 # Slate CLI
 Slate CLI is a command line tool for [Slate](https://github.com/Shopify/slate) that allows you
-to run commands that help with generating, setting up and deploying Shopify themes.
+to run commands to generate, set up, and deploy Shopify themes.
 
-## Getting Started
+## Getting started
 
 #### 1. Get the latest version
 Clone the latest version of Slate CLI to your local machine by running:
@@ -12,15 +12,15 @@ cd slate-cli
 ```
 
 #### 2. Run `npm install -g gulp`
-This will install Gulp and its dependencies globally.
+This will install [Gulp](http://gulpjs.com/) and its dependencies globally.
 
 #### 3. Run `npm link`
-This will install both run-time project dependencies and developer tools listed in the [package.json](package.json) file. It also creates a symbolic link from this project to your global npm directory.
+This will install project dependencies and developer tools listed in the [package.json](package.json) file. It also creates a symbolic link from this project to your global npm directory.
 
 #### 4. Run `slate setup`
-This will install project specific dependencies and developer tools.
+This installs project-specific dependencies and developer tools. More details [here](#setup).
 
-## Global Options
+## Global options
 
 #### Help `-h, --help`
 Outputs usage information for generic help. This can also be used for a specific command.
@@ -42,7 +42,7 @@ Command                      | Usage
 [new theme](#new-theme)      | `slate new theme [name]`
 [new section](#new-section)  | `slate new section [name]`
 
-### [Theme Commands](#theme-commands-1)
+### [Theme commands](#theme-commands-1)
 
 Theme commands allow you to interact with theme dependent utilities, such as starting a local
 server, compiling and deploying assets to a Shopify store. They also act as a wrapper for
@@ -64,7 +64,7 @@ Command            | Usage
 slate setup
 ```
 
-Installs framework dependencies.
+Installs [Theme Kit](http://themekit.cat/), a cross-platform tool which provides utilities that allow you to interact with Shopify themes.
 
 ### new
 ```
@@ -158,4 +158,5 @@ Performs a fresh build of your theme and zips them into a file that's compatible
 If ever you encounter any issues, running `slate setup` should fix them.
 
 ## License
-Slate CLI is licensed under the terms of the [MIT license](LICENSE).
+This project is licensed under the terms of the [MIT license](LICENSE).
+
