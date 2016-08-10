@@ -1,21 +1,10 @@
 [
   {
     "name": "theme_info",
-    "logo": "https:\/\/cdn.shopify.com\/s\/global\/branding\/shopify_logo_256x256.png",
-    "settings": [
-      {
-        "type": "header",
-        "content": "Slate"
-      },
-      {
-        "type": "paragraph",
-        "content": "v0.0.0"
-      },
-      {
-        "type": "paragraph",
-        "content": "Theme settings allow designers to provide an easy way for any user to customize the look and feel of their shop without having to delve into HTML or CSS code. Please see our [help page on theme settings](http:\/\/docs.shopify.com\/themes\/theme-templates\/settings) to learn more about how you can make the theme customizable."
-      }
-    ]
+    "theme_name": "Slate",
+    "theme_version": "1.0.0",
+    "theme_documentation_url": "https://github.com/Shopify/slate",
+    "theme_support_email": "theme-support@shopify.com"
   },
   {
     "name": "Typography",
