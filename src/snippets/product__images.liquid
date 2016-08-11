@@ -1,5 +1,5 @@
 <div id="ProductPhoto">
-  <img src="{{ featured_image | img_url: '480x480' }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg" data-size="480x480">
+  <img src="{{ featured_image | img_url: '480x480' }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg">
 </div>
 {% if product.images.size > 1 %}
   <ul id="ProductThumbs">
