@@ -11,13 +11,10 @@ git clone https://github.com/Shopify/slate-cli
 cd slate-cli
 ```
 
-#### 2. Run `npm install -g gulp`
-This will install [Gulp](http://gulpjs.com/) and its dependencies globally.
-
-#### 3. Run `npm link`
+#### 2. Run `npm link`
 This will install project dependencies and developer tools listed in the [package.json](package.json) file. It also creates a symbolic link from this project to your global npm directory.
 
-#### 4. Run `slate setup`
+#### 3. Run `slate setup`
 This installs project-specific dependencies and developer tools. More details [here](#setup).
 
 ## Global options
@@ -159,4 +156,3 @@ If ever you encounter any issues, running `slate setup` should fix them.
 
 ## License
 This project is licensed under the terms of the [MIT license](LICENSE).
-
