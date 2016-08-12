@@ -3,6 +3,7 @@
     "name": "theme_info",
     "theme_name": "Slate",
     "theme_version": "1.0.0",
+    "theme_author": "Shopify",
     "theme_documentation_url": "https://github.com/Shopify/slate",
     "theme_support_email": "theme-support@shopify.com"
   },
@@ -13,6 +14,7 @@
         "type": "select",
         "id": "type_base_size",
         "label": "Base size",
+        "default": "16px",
         "options": [
           {
             "value": "14px",
