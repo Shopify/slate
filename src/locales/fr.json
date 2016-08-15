@@ -31,7 +31,14 @@
       "share_on_facebook": "Partager",
       "share_on_twitter": "Tweeter",
       "share_on_pinterest": "Épingler",
-      "share_on_fancy": "Partager sur Fancy"
+      "share_on_fancy": "Ajouter à Fancy",
+      "alt_text": {
+        "share_on_facebook": "Partager sur Facebook",
+        "share_on_twitter": "Tweeter sur Twitter",
+        "share_on_pinterest": "Épingler sur Pinterest",
+        "share_on_fancy": "Ajouter à Fancy",
+        "share_on_google": "+1 sur Google Plus"
+      }
     },
     "search": {
       "no_results_html": "Votre recherche pour \"{{ terms }}\" n'a pas généré de résultats.",

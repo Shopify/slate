@@ -29,9 +29,16 @@
     },
     "social": {
       "share_on_facebook": "Partilhar",
-      "share_on_twitter": "Tweet",
+      "share_on_twitter": "Tweetar",
       "share_on_pinterest": "Pin it",
-      "share_on_fancy": "Fancy"
+      "share_on_fancy": "Adicione ao Fancy",
+      "alt_text": {
+        "share_on_facebook": "Partilhe no Facebook",
+        "share_on_twitter": "Tuíte no Twitter",
+        "share_on_pinterest": "Adicione no Pinterest",
+        "share_on_fancy": "Adicione ao Fancy",
+        "share_on_google": "+1 no Google Plus"
+      }
     },
     "search": {
       "no_results_html": "A sua pesquisa por \"{{ terms }}\" não produziu resultados.",

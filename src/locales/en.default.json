@@ -31,7 +31,14 @@
       "share_on_facebook": "Share",
       "share_on_twitter": "Tweet",
       "share_on_pinterest": "Pin it",
-      "share_on_fancy": "Fancy"
+      "share_on_fancy": "Fancy",
+      "alt_text": {
+        "share_on_facebook": "Share on Facebook",
+        "share_on_twitter": "Tweet on Twitter",
+        "share_on_pinterest": "Pin on Pinterest",
+        "share_on_fancy": "Add to Fancy",
+        "share_on_google": "+1 on Google Plus"
+      }
     },
     "search": {
       "no_results_html": "Your search for \"{{ terms }}\" did not yield any results.",

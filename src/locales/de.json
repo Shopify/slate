@@ -30,8 +30,15 @@
     "social": {
       "share_on_facebook": "Teilen",
       "share_on_twitter": "Twittern",
-      "share_on_pinterest": "Pin it",
-      "share_on_fancy": "Fancy"
+      "share_on_pinterest": "Pinnen",
+      "share_on_fancy": "Zu Fancy hinzufügen",
+      "alt_text": {
+        "share_on_facebook": "Auf Facebook teilen",
+        "share_on_twitter": "Auf Twitter twittern",
+        "share_on_pinterest": "Auf Pinterest pinnen",
+        "share_on_fancy": "Zu Fancy hinzufügen",
+        "share_on_google": "+1 auf Google Plus"
+      }
     },
     "search": {
       "no_results_html": "Ihre Suche nach \"{{ terms }}\" hat keine Ergebnisse hervorgebracht.",

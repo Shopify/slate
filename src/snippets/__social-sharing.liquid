@@ -20,14 +20,16 @@
   {% if settings.share_facebook %}
     <a target="_blank" href="//www.facebook.com/sharer.php?u={{ permalinkURL }}">
       {% include 'icon-facebook' %}
-      {{ 'general.social.share_on_facebook' | t }}
+      <span aria-hidden="true">{{ 'general.social.share_on_facebook' | t }}</span>
+      <span class="visually-hidden">{{ 'general.social.alt_text.share_on_facebook' | t }}</span>
     </a>
   {% endif %}
 
   {% if settings.share_twitter %}
     <a target="_blank" href="//twitter.com/share?text={{ shareTitle }}&amp;url={{ permalinkURL }}">
       {% include 'icon-twitter' %}
-      {{ 'general.social.share_on_twitter' | t }}
+      <span aria-hidden="true">{{ 'general.social.share_on_twitter' | t }}</span>
+      <span class="visually-hidden">{{ 'general.social.alt_text.share_on_twitter' | t }}</span>
     </a>
   {% endif %}
 
@@ -36,14 +38,16 @@
     {% if settings.share_pinterest %}
       <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media={{ product | img_url: '1024x1024' }}&amp;description={{ shareTitle }}">
         {% include 'icon-pinterest' %}
-        {{ 'general.social.share_on_pinterest' | t }}
+        <span aria-hidden="true">{{ 'general.social.share_on_pinterest' | t }}</span>
+        <span class="visually-hidden">{{ 'general.social.alt_text.share_on_pinterest' | t }}</span>
       </a>
     {% endif %}
 
     {% if settings.share_fancy %}
       <a target="_blank" href="//fancy.com/fancyit?ItemURL={{ permalinkURL }}&amp;Title={{ shareTitle }}&amp;Category=Other&amp;ImageURL={{ product | img_url: '1024x1024' }}">
         {% include 'icon-fancy' %}
-        {{ 'general.social.share_on_fancy' | t }}
+        <span aria-hidden="true">{{ 'general.social.share_on_fancy' | t }}</span>
+        <span class="visually-hidden">{{ 'general.social.alt_text.share_on_fancy' | t }}</span>
       </a>
     {% endif %}
 
@@ -52,7 +56,8 @@
   {% if settings.share_google %}
     <a target="_blank" href="//plus.google.com/share?url={{ permalinkURL }}">
       {% include 'icon-google-plus' %}
-      +1
+      <span aria-hidden="true">+1</span>
+      <span class="visually-hidden">{{ 'general.social.alt_text.share_on_google' | t }}</span>
     </a>
   {% endif %}
 
