@@ -18,8 +18,8 @@
   },
   "scripts": {
     "lint": "eslint . --config '.eslintrc.yml' --ignore-path '.eslintignore' --max-warnings 0; exit 0",
-    "generate-theme": "yo ./generators/new-theme/theme.js",
-    "generate-section": "yo ./generators/new-section/section.js"
+    "generate-theme": "yo --no-insight --no-update-notifier ./generators/new-theme/theme.js",
+    "generate-section": "yo --no-insight --no-update-notifier ./generators/new-section/section.js"
   },
   "dependencies": {
     "Slate": "git+ssh://git@github.com/shopify/slate.git#c8b8d597c58b85b6472cf5faac213f09f3d806c2",
