@@ -1,6 +1,6 @@
 {% paginate blog.articles by 5 %}
 
-  {% assign blog_title = blog.title %}
+  {%- assign blog_title = blog.title -%}
 
   {% if current_tags %}
     {% capture blog_title %}{{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}{% endcapture %}

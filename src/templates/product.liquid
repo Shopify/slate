@@ -5,8 +5,8 @@
 
 <div itemscope itemtype="http://schema.org/Product">
 
-  {% assign current_variant = product.selected_or_first_available_variant %}
-  {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+  {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
 
   <meta itemprop="name" content="{{ product.title }}{% unless current_variant.title == 'Default Title' %} - {{ current_variant.title }}{% endunless %}">
   <meta itemprop="url" content="{{ shop.url }}{{ current_variant.url }}">

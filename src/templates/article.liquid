@@ -3,10 +3,10 @@
 
   #comments is a required ID and is used as an anchor link by Shopify.
 {% endcomment %}
-{% assign number_of_comments = article.comments_count %}
+{%- assign number_of_comments = article.comments_count -%}
 
 {% if comment and comment.created_at %}
-  {% assign number_of_comments = article.comments_count | plus: 1 %}
+  {%- assign number_of_comments = article.comments_count | plus: 1 -%}
 {% endif %}
 
 <article itemscope itemtype="http://schema.org/Article">

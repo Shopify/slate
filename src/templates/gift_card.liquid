@@ -26,7 +26,7 @@
     <span class="giftcard-tag">{{ 'gift_cards.issued.disabled' | t }}</span>
   {% endunless %}
 
-  {% assign gift_card_expiry_date = gift_card.expires_on | date: "%d/%m/%y" %}
+  {%- assign gift_card_expiry_date = gift_card.expires_on | date: "%d/%m/%y" -%}
 
   {% if gift_card.expired and gift_card.enabled %}
     <span class="giftcard-tag">{{ 'gift_cards.issued.expired' | t: expiry: gift_card_expiry_date }}</span>
@@ -38,14 +38,14 @@
 
   <img src="{{ 'gift-card/card.jpg' | shopify_asset_url }}" alt="Gift card illustration">
 
-  {% assign initial_value_size = formatted_initial_value | size %}
+  {%- assign initial_value_size = formatted_initial_value | size -%}
   <h2>{{ formatted_initial_value }}</h2>
 
   {% if gift_card.balance != gift_card.initial_value %}
     <p>{{ 'gift_cards.issued.remaining_html' | t: balance: gift_card.balance | money }}</p>
   {% endif %}
 
-  {% assign code_size = gift_card.code | format_code | size %}
+  {%- assign code_size = gift_card.code | format_code | size -%}
   <span id="GiftCardDigits">{{ gift_card.code | format_code }}</span>
 
   <p>{{ 'gift_cards.issued.redeem' | t }}</p>

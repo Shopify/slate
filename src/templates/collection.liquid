@@ -32,7 +32,7 @@
 
         {% unless onboardingLoaded %}
           {{ 'theme-onboarding.css' | global_asset_url | stylesheet_tag }}
-          {% assign onboardingLoaded = true %}
+          {%- assign onboardingLoaded = true -%}
         {% endunless %}
 
         {% include '__product-card-onboarding' %}
