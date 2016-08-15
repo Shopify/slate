@@ -7,6 +7,7 @@ machine:
 dependencies:
   pre:
     - npm install -g npm shopify/sass-lint eslint eslint-plugin-shopify eslint-plugin-node jsonlint
+    - npm install ejs
   bundler:
     without:
       - benchmark
@@ -15,6 +16,8 @@ dependencies:
       - debug
   cache_directories:
     - .bundle/
+  post:
+    - node ci/compile.js
 
 test:
   override:
