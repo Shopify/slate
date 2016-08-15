@@ -1,13 +1,10 @@
 # This file contains the information needed for Shopify to authenticate
-# requests and edit/update the theme files in the manner specified.
+# requests and edit/update your remote theme files.
 #
-# Please update each environment with the appropriate parameters for
-# your workflow. Don't forget to update the ignore_files!
+# 1. Set up a private app (https://help.shopify.com/api/guides/api-credentials#generate-private-app-credentials).
+# 2. Replace the appropriate variables for each environment below.
 #
-# Note: If no theme_id is specified, the currently active theme will
-# be modified.
-#
-# More information @ http://themekit.cat/docs/#config-variables.
+# For more information on configuration variables, go to http://themekit.cat/docs/#config-variables.
 
 <% environments.forEach(function(env) { %>
 <%= env %>:
