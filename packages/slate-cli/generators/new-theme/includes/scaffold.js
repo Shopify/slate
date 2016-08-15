@@ -35,9 +35,8 @@ module.exports = {
       '!' + scaffold + '/jsdoc-conf.json',
       '!' + scaffold + '/docs/**',
       '!' + scaffold + '/package.json',
-      '!' + scaffold + '/tasks/includes/config.js',
       '!' + scaffold + '/.npmignore',
-      '!' + scaffold + '/generators/**'
+      '!' + scaffold + '/**/*.ejs'
     ];
 
     this.fs.copy(glob, destination, {
@@ -54,14 +53,14 @@ module.exports = {
     }
 
     this.fs.copyTpl(
-      path.join(scaffold, '/generators/config.yml.ejs'),
+      path.join(scaffold, '/config.yml.ejs'),
       path.join(destination, '/config.yml'), {
         environments: this.environments
       }
     );
 
     this.fs.copyTpl(
-      path.join(scaffold, '/generators/package.json.ejs'),
+      path.join(scaffold, '/package.json.ejs'),
       path.join(destination, '/package.json'), {
         name: this.dirname,
         hasGitRepo: this.initGit,
@@ -70,7 +69,7 @@ module.exports = {
     );
 
     this.fs.copyTpl(
-      path.join(scaffold, '/generators/tasks/includes/config.js.ejs'),
+      path.join(scaffold, '/tasks/includes/config.js.ejs'),
       path.join(destination, '/tasks/includes/config.js'), {
         env: this.defaultEnv
       }
