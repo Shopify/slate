@@ -18,7 +18,7 @@ module.exports = {
   },
 
   noGenerator: function() {
-    return 'No generator specified, please use one of the following commands:\n ' + this.generatorsList();
+    return 'No generator specified, please use one of the following commands:\n' + this.generatorsList();
   },
 
   unknownGenerator: function() {
