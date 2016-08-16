@@ -50,3 +50,4 @@ assets/logo.png
 deploy.log
 /docs/js
 ci/
+repodb.yml
