@@ -1,9 +1,8 @@
 var gutil = require('gulp-util');
-var utils = require('./utilities.js');
 
 var messages = {
   logFileEvent: function(event, path) {
-    path = utils.separatePath(path);
+    path = separatePath(path);
     gutil.log('change in',
       gutil.colors.magenta(path.dir),
       gutil.colors.white('-'),
@@ -64,3 +63,18 @@ var messages = {
 };
 
 module.exports = messages;
+
+/**
+ * Separates filename and directory from a path string. Returns an object containing both.
+ *
+ * @param path {String} - a string representing the path to a file
+ * @returns {Object} - an object with separated `file` (the filename) and `dir` (path minus filename) properties
+ * @private
+ */
+function separatePath(path) {
+  var tmp = path.split('/');
+  return {
+    file: tmp.pop(),
+    dir: tmp.join('/')
+  };
+}

@@ -2,6 +2,8 @@ var gutil = require('gulp-util');
 var fs = require('fs');
 var _ = require('lodash');
 var Promise = require('bluebird');
+var inquirer = require('inquirer');
+var messages = require('./messages.js');
 
 /**
  * Utility and reusable functions used by our Gulp Tasks
@@ -21,21 +23,6 @@ var utilities = {
   errorHandler: function(err) {
     gutil.log(gutil.colors.red(err));
     this.emit('end');
-  },
-
-  /**
-   * Separates filename and directory from a path string. Returns an object containing both.
-   *
-   * @memberof slate-cli.utilities
-   * @param path {String} - a string representing the path to a file
-   * @returns {Object} - an object with separated `file` (the filename) and `dir` (path minus filename) properties
-   */
-  separatePath: function(path) {
-    var tmp = path.split('/');
-    return {
-      file: tmp.pop(),
-      dir: tmp.join('/')
-    };
   },
 
   /**
@@ -247,8 +234,45 @@ var utilities = {
         }
       });
     });
+  },
+
+  /**
+   * Checks a yaml environment object to see if a theme_id property is present
+   * if no theme_id exists, prompt the user to ensure nothing gets overwritten
+   * if theme_id is not a number, prompt the user to ensure nothing gets overwritten
+   *
+   * @memberof slate-cli.utilities
+   * @param environment
+   * @returns {Promise}
+   */
+  checkThemeId: function(name, environment) {
+    var validThemeId = true;
+
+    if (!environment.theme_id) {
+      validThemeId = false;
+    } else if (environment.theme_id !== parseInt(environment.theme_id, 10)) {
+      validThemeId = false;
+    }
+
+    if (!validThemeId && !process.env.activeTheme) {
+      return inquirer.prompt([{
+        type: 'confirm',
+        name: 'active',
+        message: messages.overwriteActiveTheme()
+      }])
+        .then(function(answers) {
+          if (answers.active) {
+            return Promise.resolve(name);
+          } else {
+            return Promise.resolve(false);
+          }
+        });
+    } else {
+      return Promise.resolve(name);
+    }
   }
 };
+
 module.exports = utilities;
 
 /**

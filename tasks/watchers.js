@@ -1,8 +1,10 @@
 var gulp = require('gulp');
 var _ = require('lodash');
+var Promise = require('bluebird');
 var spawn = require('child_process').spawn;
 var chokidar = require('chokidar');
 var fs = require('fs');
+var yaml = require('js-yaml');
 
 var config = require('./includes/config.js');
 var utils = require('./includes/utilities.js');
@@ -62,14 +64,47 @@ gulp.task('watch:dist', function() {
  * @private
  */
 function checkDeployStatus() {
-  if (!activeDeploy) {
-    if (cache.change.length) {
-      deploy('upload', cache.change);
-      cache.change = [];
+  if (activeDeploy) {
+    return;
+  } else {
+    var file = fs.readFileSync(config.tkConfig, 'utf8'); // eslint-disable-line no-sync
+    var tkConfig = yaml.safeLoad(file);
+    var envObj;
+    var environment;
 
+    if (process.env.tkEnvironments) {
+      environment = process.env.tkEnvironments;
+    } else {
+      environment = config.environment;
+    }
+
+    envObj = tkConfig[environment];
+    messages.deployTo(environment);
+
+    if (cache.change.length) {
+      utils.checkThemeId(environment, envObj)
+        .then(function(env) {
+          if (env) {
+            return deploy('upload', cache.change, env);
+          } else {
+            return Promise.resolve();
+          }
+        })
+        .then(function() {
+          cache.change = [];
+        });
     } else if (cache.unlink.length) {
-      deploy('remove', cache.unlink);
-      cache.unlink = [];
+      utils.checkThemeId(environment, envObj)
+        .then(function(env) {
+          if (env) {
+            return deploy('remove', cache.unlink, env);
+          } else {
+            return Promise.resolve();
+          }
+        })
+        .then(function() {
+          cache.unlink = [];
+        });
     }
   }
 }
@@ -84,11 +119,11 @@ function checkDeployStatus() {
  *   server
  * @private
  */
-function deploy(cmd, files) {
+function deploy(cmd, files, env) {
   messages.logChildProcess(cmd);
   activeDeploy = true;
 
-  utils.resolveShell(spawn('slate', [cmd].concat(files), {cwd: config.dist.root}))
+  utils.resolveShell(spawn('slate', [cmd, '--environment', env].concat(files), {cwd: config.dist.root}))
     .then(function() {
       activeDeploy = false;
       fs.appendFile(config.deployLog, messages.logDeploys(cmd, files));

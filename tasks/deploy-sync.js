@@ -2,8 +2,6 @@ var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 var fs = require('fs');
 var yaml = require('js-yaml');
-var Promise = require('bluebird');
-var readFile = Promise.promisify(fs.readFile);
 
 var config = require('./includes/config.js');
 var messages = require('./includes/messages.js');
@@ -23,13 +21,23 @@ gulp.task('deploy:sync-init', function() {
     fs.writeFile(config.deployLog, '');
   }
 
-  return readFile(config.tkConfig, 'utf8')
-    .then(function(response) {
-      var tkConfig = yaml.safeLoad(response);
-      browserSync.init({
-        proxy: 'https://' + tkConfig[config.environment].store
-      });
-    });
+  var file = fs.readFileSync(config.tkConfig, 'utf8'); // eslint-disable-line no-sync
+  var tkConfig = yaml.safeLoad(file);
+  var envObj;
+  var environment;
+
+  if (process.env.tkEnvironments) {
+    var environments = process.env.tkEnvironments.split(/\s*,\s*|\s+/);
+    environment = environments[0];
+  } else {
+    environment = config.environment;
+  }
+
+  envObj = tkConfig[environment];
+
+  browserSync.init({
+    proxy: 'https://' + envObj.store + '?preview_theme_id=' + envObj.theme_id
+  });
 });
 
 /**
