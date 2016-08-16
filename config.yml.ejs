@@ -5,11 +5,13 @@
 #    with read and write access to theme templates and theme assets.
 # 2. Replace the appropriate variables for each environment below.
 #
+# theme_id, password and store variables must be kept within this file.
+#
 # For more information on configuration variables, go to http://themekit.cat/docs/#config-variables.
 
 <% environments.forEach(function(env) { %>
 <%= env %>:
-  theme_id: (optional - if empty, you will write to the active theme)
+  theme_id: (if left empty, it will write to the active theme)
   password: XXXXXXXXXX
   store: my-store-name.myshopify.com
   # ignore_files:
