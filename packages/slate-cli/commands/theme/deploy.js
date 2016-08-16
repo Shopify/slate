@@ -4,13 +4,13 @@ var utils = require('../../includes/utils.js');
 module.exports = {
   command: function(args, options) {
     var themeRoot = findRoot(process.cwd());
+    
+    if (options.active) {
+      process.env.activeTheme = options.active; // eslint-disable-line no-process-env
+    }
 
     if (options.environment) {
       process.env.tkEnvironments = options.environment; // eslint-disable-line no-process-env
-    }
-
-    if (options.active) {
-      process.env.activeTheme = options.active; // eslint-disable-line no-process-env
     }
 
     var scriptArgs = options.manual

@@ -20,7 +20,7 @@ module.exports = {
       '',
       '  build                   compile theme files and assets',
       '  deploy [--options]      replace theme on specified environment',
-      '  start                   deploy theme and watch for file changes',
+      '  start [--options]       deploy theme and watch for file changes',
       '  test                    test/lint theme JavaScript, CSS and JSON',
       '  watch [--options]       watch for file changes',
       '  zip                     zip compiled theme files',

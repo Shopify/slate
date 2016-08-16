@@ -1,11 +1,14 @@
 var themekit = require('../includes/themekit.js');
 
 module.exports = {
-  command: function() {
-    // add environment param
+  command: function(args, options) {
     themekit.test()
       .then(function() {
-        return themekit.commands(['replace']);
+        if (options.environment) {
+          return themekit.commands(['replace', '-env', options.environment].concat(args));
+        } else {
+          return themekit.commands(['replace'].concat(args));
+        }
       });
   }
 };

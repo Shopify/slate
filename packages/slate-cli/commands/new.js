@@ -7,7 +7,7 @@ var slateRoot = path.resolve(__dirname, '..');
 var destRoot = process.cwd();
 
 module.exports = {
-  command: function(args/*, options*/) {
+  command: function(args) {
     if (args.length === 0) {
       process.stdout.write(msg.noGenerator());
 
