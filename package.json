@@ -55,7 +55,9 @@
     "watchify": "3.7.0",
     "yargs": "4.7.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "ejs": "^2.5.1"
+  },
   "browserify": {
     "transform": [
       "browserify-shim"
