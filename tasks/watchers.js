@@ -1,10 +1,8 @@
 var gulp = require('gulp');
 var _ = require('lodash');
-var Promise = require('bluebird');
 var spawn = require('child_process').spawn;
 var chokidar = require('chokidar');
 var fs = require('fs');
-var yaml = require('js-yaml');
 
 var config = require('./includes/config.js');
 var utils = require('./includes/utilities.js');
@@ -68,9 +66,6 @@ function checkDeployStatus() {
   if (activeDeploy) {
     return;
   } else {
-    var file = fs.readFileSync(config.tkConfig, 'utf8'); // eslint-disable-line no-sync
-    var tkConfig = yaml.safeLoad(file);
-    var envObj;
     var environment;
 
     if (process.env.tkEnvironments) {
@@ -79,33 +74,14 @@ function checkDeployStatus() {
       environment = config.environment;
     }
 
-    envObj = tkConfig[environment];
     messages.deployTo(environment);
 
     if (cache.change.length) {
-      utils.checkThemeId(environment, envObj)
-        .then(function(env) {
-          if (env) {
-            return deploy('upload', cache.change, env);
-          } else {
-            return Promise.resolve();
-          }
-        })
-        .then(function() {
-          cache.change = [];
-        });
+      deploy('upload', cache.change, environment);
+      cache.change = [];
     } else if (cache.unlink.length) {
-      utils.checkThemeId(environment, envObj)
-        .then(function(env) {
-          if (env) {
-            return deploy('remove', cache.unlink, env);
-          } else {
-            return Promise.resolve();
-          }
-        })
-        .then(function() {
-          cache.unlink = [];
-        });
+      deploy('remove', cache.unlink, environment);
+      cache.unlink = [];
     }
   }
 }

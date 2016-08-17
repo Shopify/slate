@@ -50,11 +50,6 @@ var messages = {
       ' and run a full <slate deploy> as a result.';
   },
 
-  overwriteActiveTheme: function() {
-    return '*WARNING* An invalid theme_id has been specified for this environment. ' +
-      'This action will overwrite your active Theme. Are you sure?';
-  },
-
   deployTo: function(environment) {
     gutil.log('Initiating deploy to', gutil.colors.bold(environment));
   },

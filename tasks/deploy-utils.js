@@ -20,26 +20,14 @@ var utils = require('./includes/utilities.js');
  * @static
  */
 gulp.task('deploy:replace', function() {
-  var file = fs.readFileSync(config.tkConfig, 'utf8');
-  var tkConfig = yaml.safeLoad(file);
-  var envObj;
-
   if (process.env.tkEnvironments) {
     var environments = process.env.tkEnvironments.split(/\s*,\s*|\s+/);
     var promises = [];
 
     environments.forEach(function(environment) {
       function factory() {
-        envObj = tkConfig[environment];
         messages.deployTo(environment);
-        return utils.checkThemeId(environment, envObj)
-          .then(function(env) {
-            if (env) {
-              return deploy(env);
-            } else {
-              return Promise.resolve();
-            }
-          });
+        return deploy(environment);
       }
       promises.push(factory);
     });
@@ -50,16 +38,8 @@ gulp.task('deploy:replace', function() {
       });
 
   } else {
-    envObj = tkConfig[config.environment];
     messages.deployTo(config.environment);
-    return utils.checkThemeId(config.environment, envObj)
-      .then(function(env) {
-        if (env) {
-          return deploy(env);
-        } else {
-          return Promise.resolve();
-        }
-      });
+    return deploy(config.environment);
   }
 });
 
