@@ -25,6 +25,7 @@ gulp.task('deploy:sync-init', function() {
   var tkConfig = yaml.safeLoad(file);
   var envObj;
   var environment;
+  var queryString = '';
 
   if (process.env.tkEnvironments) {
     var environments = process.env.tkEnvironments.split(/\s*,\s*|\s+/);
@@ -35,8 +36,12 @@ gulp.task('deploy:sync-init', function() {
 
   envObj = tkConfig[environment];
 
+  if (envObj.theme_id && (envObj.theme_id === parseInt(envObj.theme_id, 10))) {
+    queryString = '?preview_theme_id=' + envObj.theme_id;
+  }
+
   browserSync.init({
-    proxy: 'https://' + envObj.store + '?preview_theme_id=' + envObj.theme_id
+    proxy: 'https://' + envObj.store + queryString
   });
 });
 
