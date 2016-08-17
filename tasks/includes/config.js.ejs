@@ -33,8 +33,9 @@ var config = {
 
   src: {
     root: 'src/',
-    js: 'src/scripts/**/*.js',
+    js: 'src/scripts/',
     jsSections: 'src/sections/**/*.js',
+    vendorJs: 'src/scripts/vendor/*.js',
     json: 'src/**/*.json',
     css: 'src/styles/**/*.{scss,scss.liquid}',
     cssLint: 'src/styles/**/*.scss',
@@ -61,12 +62,8 @@ var config = {
   },
 
   roots: {
-    js: [
-      'src/scripts/theme.js'
-    ],
-    css: [
-      'src/styles/theme.scss'
-    ]
+    js: 'src/scripts/theme.js',
+    css: 'src/styles/*.scss'
   },
 
   plugins: {

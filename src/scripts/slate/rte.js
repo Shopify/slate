@@ -1,17 +1,20 @@
-window.slate = window.slate || {};
-
 /**
- * iFrames
+ * Rich Text Editor
  * -----------------------------------------------------------------------------
  * Wrap videos in div to force responsive layout.
  *
- * @namespace iframes
+ * @namespace rte
  */
 
-slate.iframes = {
+module.exports = {
+
+  wrapTable: function() {
+    $('.rte table').wrap('<div class="rte__table-wrapper"></div>');
+  },
+
   iframeReset: function() {
-    var $iframeVideo = $('iframe[src*="youtube.com/embed"], iframe[src*="player.vimeo"]');
-    var $iframeReset = $iframeVideo.add('iframe#admin_bar_iframe');
+    var $iframeVideo = $('.rte iframe[src*="youtube.com/embed"], .rte iframe[src*="player.vimeo"]');
+    var $iframeReset = $iframeVideo.add('.rte iframe#admin_bar_iframe');
 
     $iframeVideo.each(function() {
       // Add wrapper to make video responsive
