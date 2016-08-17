@@ -23,8 +23,6 @@
     "browserify-shim": "^3.8.12",
     "chokidar": "1.5.2",
     "del": "2.2.0",
-    "eslint": "3.2.2",
-    "eslint-plugin-shopify": "13.0.0",
     "gulp": "3.9.1",
     "gulp-cached": "1.1.0",
     "gulp-changed": "1.3.0",
@@ -56,7 +54,9 @@
     "yargs": "4.7.1"
   },
   "devDependencies": {
-    "ejs": "^2.5.1"
+    "ejs": "^2.5.1",
+    "eslint": "3.2.2",
+    "eslint-plugin-shopify": "13.0.0"
   },
   "browserify": {
     "transform": [
