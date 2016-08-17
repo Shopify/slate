@@ -4,10 +4,6 @@ var utils = require('../../includes/utils.js');
 module.exports = {
   command: function(args, options) {
     var themeRoot = findRoot(process.cwd());
-    
-    if (options.active) {
-      process.env.activeTheme = options.active; // eslint-disable-line no-process-env
-    }
 
     if (options.environment) {
       process.env.tkEnvironments = options.environment; // eslint-disable-line no-process-env
@@ -27,7 +23,6 @@ module.exports = {
       '',
       'Options:',
       '',
-      '  -a, --active       overwrite active theme if theme_id is invalid',
       '  -e, --environment  deploy to a comma-separated list of environments',
       '  -m, --manual       disable auto-deployment of the theme files'
     ]);

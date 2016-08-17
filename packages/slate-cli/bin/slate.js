@@ -9,7 +9,6 @@ var msg = require('../includes/messages.js');
 
 /* eslint-disable quote-props ,id-length */
 var validOpts = {
-  'active': Boolean,
   'environment': String,
   'help': Boolean,
   'manual': Boolean, // flag for manual deploy (used with deploy command)
@@ -18,7 +17,6 @@ var validOpts = {
 };
 
 var shorthand = {
-  a: '--active',
   e: '--environment',
   h: '--help',
   m: '--manual',

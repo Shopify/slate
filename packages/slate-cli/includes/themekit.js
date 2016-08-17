@@ -7,7 +7,7 @@ var spawn = require('child_process').spawn;
 var slateRoot = path.resolve(__dirname, '..');
 // https://github.com/Shopify/themekit/releases.atom:
 // fetch feed, parse for release version number, and append to base
-var base = 'https://github.com/Shopify/themekit/releases/download/0.3.6';
+var base = 'https://github.com/Shopify/themekit/releases/download/0.4.0';
 
 module.exports = {
 
