@@ -10,7 +10,7 @@ module.exports = {
     utils.logHelpMsg([
       'Usage: slate test',
       '',
-      'Test and lint theme JavaScript, CSS and JSON.'
+      'Test and lint JavaScript, CSS and JSON files in the theme.'
     ]);
   }
 };

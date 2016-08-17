@@ -7,11 +7,9 @@ module.exports = {
   upload: require('./commands/upload'),
   remove: require('./commands/remove'),
   replace: require('./commands/replace'),
-  //update: require('./commands/update'),
 
   // generator functions
   new: require('./commands/new'),
-  //init: require('./commands/init'),
 
   // local theme tasks
   start: require('./commands/theme/start'),

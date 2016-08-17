@@ -4,8 +4,6 @@ var _ = require('lodash');
 var parseOptions = require('nopt');
 var slate = require('../index.js');
 var msg = require('../includes/messages.js');
-// var pkg = require('../package.json');
-// require('update-notifier')({packageName: pkg.name,packageVersion: pkg.version}).notify();
 
 /* eslint-disable quote-props ,id-length */
 var validOpts = {

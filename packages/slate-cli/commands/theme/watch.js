@@ -19,12 +19,12 @@ module.exports = {
     utils.logHelpMsg([
       'Usage: slate watch [--options]',
       '',
-      'Launch Browsersync in a new browser tab at http://localhost:3000 and watch for file changes.',
+      'Start a server to watch for changes in the theme, using Browsersync at localhost:3000 to auto-refresh the browser when files change.',
       '',
       'Options:',
       '',
       '  -e, --environment  deploy to a specific environment',
-      '  -n, --nosync       disable Browsersync from launching'
+      '  -n, --nosync       watch for changes without using Browsersync'
     ]);
   }
 };

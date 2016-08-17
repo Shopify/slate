@@ -24,7 +24,7 @@ module.exports = {
       'Options:',
       '',
       '  -e, --environment  deploy to a specific environment',
-      '  -n, --nosync       disable Browsersync from launching'
+      '  -n, --nosync       watch for changes without using Browsersync'
     ]);
   }
 };
