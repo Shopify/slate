@@ -1,7 +1,7 @@
 <nav>
   <ul class="site-nav">
     {% for link in menus.main-menu.links %}
-      {% assign child_list_handle = link.title | handleize %}
+      {%- assign child_list_handle = link.title | handleize -%}
       {% if menus[child_list_handle].links != blank %}
         <li class="site-nav--has-submenu{% if link.active %} site-nav--active{% endif %}">
           <a href="{{ link.url }}" class="site-nav__link">

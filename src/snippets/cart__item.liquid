@@ -18,7 +18,7 @@
 
     <p>{{ item.vendor }}</p>
 
-    {% assign property_size = item.properties | size %}
+    {%- assign property_size = item.properties | size -%}
 
     {% if property_size > 0 %}
       {% for p in item.properties %}

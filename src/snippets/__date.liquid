@@ -1,5 +1,5 @@
 {% comment %}
   When snippets/date is used, {{ date }} is returned as a formatted `time` element
 {% endcomment %}
-{% assign date_format = date_format | default: 'month_day_year' %}
+{%- assign date_format = date_format | default: 'month_day_year' -%}
 {% capture date %}<time datetime="{{ date_time | date: '%Y-%m-%d' }}">{{ date_time | date: format: date_format }}</time>{% endcapture %}
