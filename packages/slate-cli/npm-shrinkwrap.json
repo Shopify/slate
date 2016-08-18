@@ -2490,7 +2490,7 @@
     },
     "request": {
       "version": "2.74.0",
-      "from": "request@>=2.40.0 <3.0.0",
+      "from": "request@latest",
       "resolved": "https://registry.npmjs.org/request/-/request-2.74.0.tgz"
     },
     "require-uncached": {
@@ -2604,8 +2604,8 @@
     },
     "Slate": {
       "version": "1.0.0",
-      "from": "git+ssh://git@github.com/shopify/slate.git#95c30eef00955c59bc89c51a26672ca66bd716f0",
-      "resolved": "git+ssh://git@github.com/shopify/slate.git#95c30eef00955c59bc89c51a26672ca66bd716f0"
+      "from": "git+ssh://git@github.com/shopify/slate.git#cbe922b3fbfce8893bd07974dcc4694efa426b49",
+      "resolved": "git+ssh://git@github.com/shopify/slate.git#cbe922b3fbfce8893bd07974dcc4694efa426b49"
     },
     "slice-ansi": {
       "version": "0.0.4",

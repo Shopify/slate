@@ -36,6 +36,7 @@ module.exports = {
       '!' + scaffold + '/docs/**',
       '!' + scaffold + '/package.json',
       '!' + scaffold + '/.npmignore',
+      '!' + scaffold + '/circle.yml',
       '!' + scaffold + '/**/*.ejs'
     ];
 
@@ -51,6 +52,11 @@ module.exports = {
         path.join(destination, '/.gitignore')
       );
     }
+    
+    this.fs.copy(
+      path.join(scaffold, '/circle.yml.ejs'),
+      path.join(destination, '/circle.yml')
+    );
 
     this.fs.copyTpl(
       path.join(scaffold, '/config.yml.ejs'),
