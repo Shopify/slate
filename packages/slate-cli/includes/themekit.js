@@ -1,5 +1,6 @@
 var Promise = require('bluebird');
 var stat = Promise.promisify(require('fs').stat);
+var unlink = Promise.promisify(require('fs').unlink);
 var path = require('path');
 var msg = require('./messages.js');
 var BinWrapper = require('bin-wrapper');
@@ -36,17 +37,37 @@ module.exports = {
    * @returns {Promise} - The ThemeKit installation
    */
   install: function() {
-    var installer = this.get();
+    var exists = true;
 
-    return new Promise(function(resolve, reject) {
-      installer.run(['version'], function(error) {
-        if (error) {
-          reject(error);
+    return stat(this.path())
+      .catch(function(err) {
+        if (err.code === 'ENOENT') {
+          exists = false;
         } else {
-          resolve();
+          throw new Error(err);
         }
+      })
+      .then(function() {
+        if (exists) {
+          return unlink(this.path());
+        } else {
+          return Promise.resolve();
+        }
+      }.bind(this))
+      .then(function() {
+        return this.get();
+      }.bind(this))
+      .then(function(installer) {
+        return new Promise(function(resolve, reject) {
+          installer.run(['version'], function(err) {
+            if (err) {
+              reject(err);
+            } else {
+              resolve();
+            }
+          });
+        });
       });
-    });
   },
 
   test: function() {
