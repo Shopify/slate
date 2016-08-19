@@ -1,7 +1,0 @@
-<li id="{{ comment.id }}">
-  <div class="rte">
-    {{ comment.content }}
-  </div>
-  {% include '__date', date_time: comment.created_at %}
-  <p>{{ 'blogs.article.comment_meta_html' | t: author: comment.author, date: date }}</p>
-</li>
