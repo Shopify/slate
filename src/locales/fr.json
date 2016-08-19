@@ -82,7 +82,8 @@
       "update": "Mettre à jour",
       "checkout": "Procéder au paiement",
       "empty": "Votre panier est vide.",
-      "continue_browsing_html": "<a href=\"/collections/all\">Retourner au magasinage</a>."
+      "continue_browsing_html": "<a href=\"/collections/all\">Retourner au magasinage</a>.",
+      "item_quantity": "Quantité de l'article"
     },
     "label": {
       "product": "Produit",

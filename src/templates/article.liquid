@@ -9,7 +9,7 @@
   {%- assign number_of_comments = article.comments_count | plus: 1 -%}
 {% endif %}
 
-<article itemscope itemtype="http://schema.org/Article">
+<article role="article" itemscope itemtype="http://schema.org/Article">
 
   {% if article.image %}
     {{ article | img_url: '1024x1024' | img_tag: article.title }}

@@ -82,7 +82,8 @@
       "update": "Atualizar Carrinho",
       "checkout": "Fechar pedido",
       "empty": "Seu carrinho está vazio no momento.",
-      "continue_browsing_html": "Continue navegando <a href=\"/collections/all\">aqui</a>."
+      "continue_browsing_html": "Continue navegando <a href=\"/collections/all\">aqui</a>.",
+      "item_quantity": "Quantidade de itens"
     },
     "label": {
       "product": "Produto",

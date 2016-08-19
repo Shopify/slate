@@ -14,6 +14,10 @@ select {
   -webkit-text-size-adjust: 100%;
 }
 
+a:focus {
+  color: inherit;
+}
+
 form {
   margin: 0;
 }

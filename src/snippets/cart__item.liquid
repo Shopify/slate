@@ -47,7 +47,8 @@
       name="updates[]"
       id="updates_{{ item.key }}"
       value="{{ item.quantity }}"
-      min="0">
+      min="0"
+      aria-label="{{ 'cart.general.item_quantity' | t }}">
   </td>
   <td data-label="{{ 'cart.label.total' | t }}">
     {{ item.line_price | money }}
