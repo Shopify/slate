@@ -1,5 +1,5 @@
 # Slate
-[![Circle CI](https://circleci.com/gh/Shopify/slate.svg?style=svg&circle-token=7b55fa8bdc61003d81a45d4d550621646e08d117)](https://circleci.com/gh/Shopify/slate)
+[![Circle CI](https://circleci.com/gh/Shopify/slate.svg?style=svg&circle-token=f18ea06638792678e7dbfa1b8413570cd2896dff)](https://circleci.com/gh/Shopify/slate)
 
 Slate provides a set of tools and templates for developing Shopify themes.
 
@@ -28,7 +28,7 @@ cd my-theme
 #### 3. Add your store settings in `config.yml`.
 These settings include the theme ID, password, and store URL. See [config variables](http://themekit.cat/docs/#config-variables) for more details. Generate these credentials by creating a [private app](https://help.shopify.com/api/guides/api-credentials#generate-private-app-credentials).
 
-#### 4. Run `slate start` 
+#### 4. Run `slate start`
 This command will build your theme from the [source files](https://github.com/Shopify/slate/tree/master/src) into a `dist` directory. A [Node.js](https://nodejs.org) server and [Browsersync](https://browsersync.io/) will start automatically once the initial build is complete.
 
 ## Slate Commands
