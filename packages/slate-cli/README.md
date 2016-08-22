@@ -1,4 +1,6 @@
 # Slate CLI
+[![CircleCI](https://circleci.com/gh/Shopify/slate-cli.svg?style=svg&circle-token=83ed3f203115767f7bc4e6f3be07cb93788f4bd2)](https://circleci.com/gh/Shopify/slate-cli)
+
 Slate CLI is a command line tool for theme development that allows you to run commands to generate, set up, and deploy Shopify themes.
 
 ## Installation
