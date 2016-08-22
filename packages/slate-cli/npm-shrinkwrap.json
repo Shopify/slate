@@ -1,6 +1,6 @@
 {
   "name": "slate-cli",
-  "version": "0.1.0",
+  "version": "0.8.0",
   "dependencies": {
     "abbrev": {
       "version": "1.0.9",
