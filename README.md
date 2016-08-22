@@ -1,5 +1,5 @@
 # Slate
-[![Circle CI](https://circleci.com/gh/Shopify/slate.svg?style=svg&circle-token=f18ea06638792678e7dbfa1b8413570cd2896dff)](https://circleci.com/gh/Shopify/slate)
+[![CircleCI](https://circleci.com/gh/Shopify/slate.svg?style=svg&circle-token=f18ea06638792678e7dbfa1b8413570cd2896dff)](https://circleci.com/gh/Shopify/slate)
 
 Slate provides a set of tools and templates for developing Shopify themes.
 
