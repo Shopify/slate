@@ -2385,7 +2385,7 @@
     },
     "progress": {
       "version": "1.1.8",
-      "from": "progress@>=1.1.8 <2.0.0",
+      "from": "progress@latest",
       "resolved": "https://registry.npmjs.org/progress/-/progress-1.1.8.tgz"
     },
     "proto-list": {
@@ -2620,9 +2620,9 @@
       "resolved": "https://registry.npmjs.org/sinon/-/sinon-1.17.5.tgz"
     },
     "Slate": {
-      "version": "1.0.0",
-      "from": "git+ssh://git@github.com/shopify/slate.git#cbe922b3fbfce8893bd07974dcc4694efa426b49",
-      "resolved": "git+ssh://git@github.com/shopify/slate.git#cbe922b3fbfce8893bd07974dcc4694efa426b49"
+      "version": "0.8.0",
+      "from": "git+ssh://git@github.com/shopify/slate.git#6d47bd6b90dd8be698c4d5cd64812daa9be5073c",
+      "resolved": "git+ssh://git@github.com/shopify/slate.git#6d47bd6b90dd8be698c4d5cd64812daa9be5073c"
     },
     "slice-ansi": {
       "version": "0.0.4",
