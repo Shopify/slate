@@ -1,0 +1,12 @@
+extends:
+  - "plugin:shopify/es5"
+  - "plugin:shopify/node"
+env:
+  browser: true
+  node: true
+rules:
+  no-lonely-if: 0
+  comma-dangle: 0
+  spaced-comment: 0
+  no-process-env: 0
+  indent: ["error", 2, {"SwitchCase": 1}]

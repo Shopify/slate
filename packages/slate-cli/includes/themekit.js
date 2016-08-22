@@ -2,93 +2,57 @@ var Promise = require('bluebird');
 var stat = Promise.promisify(require('fs').stat);
 var unlink = Promise.promisify(require('fs').unlink);
 var path = require('path');
+var _ = require('lodash');
+var FeedParser = require('feedparser');
+var request = require('request');
 var msg = require('./messages.js');
 var BinWrapper = require('bin-wrapper');
 var spawn = require('child_process').spawn;
 var slateRoot = path.resolve(__dirname, '..');
-// https://github.com/Shopify/themekit/releases.atom:
-// fetch feed, parse for release version number, and append to base
-var base = 'https://github.com/Shopify/themekit/releases/download/0.4.2';
+var themeKitBin = {};
+var themeKitPath = '';
+var themeKitRepo = 'https://github.com/Shopify/themekit';
 
-module.exports = {
-
-  /**
-   * Uses BinWrapper to fetch the ThemeKit binary based on
-   * system and architecture. The binary gets stored in
-   * slate-cli bin.
-   *
-   * @returns {Object} - BinWrapper instance for ThemeKit
-   */
-  get: function() {
-    return new BinWrapper()
-      .src(base + '/darwin-amd64.zip', 'darwin')
-      .src(base + '/linux-386.zip', 'linux')
-      .src(base + '/linux-amd64.zip', 'linux', 'x64')
-      .src(base + '/windows-386.zip', 'win32')
-      .src(base + '/windows-amd64.zip', 'win32', 'x64')
-      .dest(path.join(slateRoot, '/bin'))
-      .use(process.platform === 'win32' ? 'theme.exe' : 'theme');
-  },
+/**
+ * @module ThemeKit
+ *
+ */
+var themeKit = {
 
   /**
    * Uses BinWrapper instance and executes version command
    * to test the ThemeKit binary.
    *
-   * @returns {Promise} - The ThemeKit installation
+   * @returns {Promise:String} - The ThemeKit installation
    */
   install: function() {
-    var exists = true;
-
-    return stat(this.path())
-      .catch(function(err) {
-        if (err.code === 'ENOENT') {
-          exists = false;
-        } else {
-          throw new Error(err);
-        }
-      })
-      .then(function() {
-        if (exists) {
-          return unlink(this.path());
-        } else {
+    return test()
+      .then(function(exists) {
+        if (!exists) {
           return Promise.resolve();
         }
-      }.bind(this))
+
+        return getPath()
+          .then(function(binPath) {
+            return unlink(binPath);
+          });
+      })
       .then(function() {
-        return this.get();
-      }.bind(this))
-      .then(function(installer) {
+        return get();
+      })
+      .then(function(bin) {
         return new Promise(function(resolve, reject) {
-          installer.run(['version'], function(err) {
+          process.stdout.write(msg.fetchingDependencies());
+
+          bin.run(['version'], function(err) {
             if (err) {
               reject(err);
             } else {
-              resolve();
+              resolve(getPath());
             }
           });
         });
       });
-  },
-
-  test: function() {
-    return stat(this.path())
-      .catch(function(err) {
-        if (err.code === 'ENOENT') {
-          process.stdout.write(msg.missingDependencies());
-          process.exit(5); // eslint-disable-line no-process-exit
-        } else {
-          throw new Error(err);
-        }
-      });
-  },
-
-  /**
-   * Resolves the path to local ThemeKit binary.
-   *
-   * @returns {String} - The path to ThemeKit
-   */
-  path: function() {
-    return path.resolve(this.get().path());
   },
 
   /**
@@ -101,31 +65,191 @@ module.exports = {
    */
   commands: function(args) {
     var error = '';
-    var childProcess = spawn(this.path(), args);
 
-    return new Promise(function(resolve, reject) {
-      childProcess.stdout.setEncoding('utf8');
-      childProcess.stdout.on('data', function(data) {
-        process.stdout.write(data);
-      });
-
-      childProcess.stderr.on('data', function(data) {
-        process.stdout.write(data);
-        error += data;
-      });
-
-      childProcess.on('error', function(err) {
-        process.stdout.write(err);
-        reject(err);
-      });
-
-      childProcess.on('close', function() {
-        if (error) {
-          reject(new Error(error));
+    return test()
+      .then(function(exists) {
+        if (exists) {
+          return getPath();
         } else {
-          resolve();
+          throw new Error(msg.missingDependencies());
         }
+      })
+      .then(function(binPath) {
+        var childProcess = spawn(binPath, args);
+
+        return new Promise(function(resolve, reject) {
+          childProcess.stdout.setEncoding('utf8');
+          childProcess.stdout.on('data', function(data) {
+            process.stdout.write(data);
+          });
+
+          childProcess.stderr.on('data', function(data) {
+            process.stdout.write(data);
+            error += data;
+          });
+
+          childProcess.on('error', function(err) {
+            process.stdout.write(err);
+            reject(err);
+          });
+
+          childProcess.on('close', function() {
+            if (error) {
+              reject(new Error(error));
+            } else {
+              resolve();
+            }
+          });
+        });
       });
-    });
   }
 };
+
+module.exports = themeKit;
+
+/**
+ * Initializes BinWrapper to have a single instance.
+ *
+ * @returns {Object} - BinWrapper instance for themeKitBin
+ *
+ * @private
+ */
+function init() {
+  if (_.isEmpty(themeKitBin)) {
+    themeKitBin = new BinWrapper();
+  }
+
+  return themeKitBin;
+}
+
+/**
+ * Uses BinWrapper to fetch the ThemeKit binary based on
+ * system and architecture. The binary gets stored in
+ * slate-cli bin.
+ *
+ * @returns {Promise:Object} - BinWrapper instance for ThemeKit
+ *
+ * @private
+ */
+function get() {
+  var bin = init();
+
+  return getLatestRelease()
+    .then(function(latestRelease) {
+      return bin
+        .src(latestRelease + '/darwin-amd64.zip', 'darwin')
+        .src(latestRelease + '/linux-386.zip', 'linux')
+        .src(latestRelease + '/linux-amd64.zip', 'linux', 'x64')
+        .src(latestRelease + '/windows-386.zip', 'win32')
+        .src(latestRelease + '/windows-amd64.zip', 'win32', 'x64')
+        .dest(path.join(slateRoot, '/bin'))
+        .use(process.platform === 'win32' ? 'theme.exe' : 'theme');
+    });
+}
+
+/**
+ * Resolves the path to local ThemeKit binary.
+ *
+ * @returns {Promise:String} - The path to ThemeKit
+ *
+ * @private
+ */
+function getPath() {
+  if (themeKitPath) {
+    return Promise.resolve(themeKitPath);
+  }
+
+  return get()
+    .then(function(bin) {
+      themeKitPath = bin.path();
+      return themeKitPath;
+    });
+}
+
+/**
+ * Fetches releases based on Atom GitHub feed.
+ *
+ * @returns {Promise:Array} - All releases available for URL
+ *
+ * @private
+ */
+function getReleases(feedUrl) {
+  var req = request(feedUrl);
+  var feedparser = new FeedParser();
+  var items = [];
+
+  return new Promise(function(resolve, reject) {
+    req.on('error', function(err) {
+      reject(err);
+    });
+
+    req.on('response', function(res) {
+      if (res.statusCode !== 200) {
+        reject(new Error('Bad status code'));
+      }
+
+      this.pipe(feedparser);
+    });
+
+    feedparser.on('error', function(err) {
+      reject(err);
+    });
+
+    feedparser.on('readable', function() {
+      var item;
+
+      while (item = this.read()) { //eslint-disable-line no-cond-assign
+        items.push(item);
+      }
+    });
+
+    feedparser.on('end', function() {
+      resolve(items);
+    });
+  });
+}
+
+/**
+ * Fetches releases based on Atom GitHub feed. Gets the
+ * latest release of ThemeKit based on the feed.
+ *
+ * @returns {Promise:String} - Download URL for latest ThemeKit release
+ *
+ * @private
+ */
+function getLatestRelease() {
+  return getReleases(themeKitRepo + '/releases.atom')
+    .then(function(releases) {
+      var base = themeKitRepo + '/releases/download/';
+      var latestTag = releases.length > 0 ? releases[0].title : '0.4.2';
+      var latestRelease = base + latestTag;
+
+      return latestRelease;
+    });
+}
+
+/**
+ * Tests if ThemeKit binary exists.
+ *
+ * @returns {Promise:Boolean} - If ThemeKit exists
+ *
+ * @private
+ */
+function test() {
+  var exists = true;
+
+  return getPath()
+    .then(function(binPath) {
+      return stat(binPath);
+    })
+    .catch(function(err) {
+      if (err.code === 'ENOENT') {
+        exists = false;
+      } else {
+        throw new Error(err);
+      }
+    })
+    .then(function() {
+      return exists;
+    });
+}

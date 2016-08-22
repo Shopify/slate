@@ -115,12 +115,12 @@ function hasGitRepo(answers) {
  */
 function getDefaultEnvSelect(answers) {
   var hasCustom = hasCustomEnvironments(answers);
-  
+
   if (hasCustom) {
     answers.environments.pop(); // removes `custom` selection
     answers.environments = answers.environments.concat(answers.customEnv.split(/,\s*/));
   }
-  
+
   return answers.environments;
 }
 

@@ -52,7 +52,7 @@ module.exports = {
         path.join(destination, '/.gitignore')
       );
     }
-    
+
     this.fs.copy(
       path.join(scaffold, '/circle.yml.ejs'),
       path.join(destination, '/circle.yml')

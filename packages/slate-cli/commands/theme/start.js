@@ -4,15 +4,15 @@ var utils = require('../../includes/utils.js');
 module.exports = {
   command: function(args, options) {
     var themeRoot = findRoot(process.cwd());
-    
+
     if (options.environment) {
       process.env.tkEnvironments = options.environment.split(/\s*,\s*|\s+/)[0]; // eslint-disable-line no-process-env
     }
-    
+
     var scriptArgs = options.nosync
       ? ['start-nosync']
       : ['start'];
-    
+
     utils.runScript(themeRoot, scriptArgs);
   },
   help: function() {

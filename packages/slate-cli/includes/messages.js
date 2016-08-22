@@ -13,6 +13,10 @@ module.exports = {
     return 'Unknown command, please refer to help. \n';
   },
 
+  fetchingDependencies: function() {
+    return 'Fetching dependencies...\n';
+  },
+
   missingDependencies: function() {
     return 'Dependencies missing. Please run slate setup\n';
   },
