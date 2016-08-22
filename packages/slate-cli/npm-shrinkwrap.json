@@ -2621,8 +2621,8 @@
     },
     "Slate": {
       "version": "0.8.0",
-      "from": "git+ssh://git@github.com/shopify/slate.git#6d47bd6b90dd8be698c4d5cd64812daa9be5073c",
-      "resolved": "git+ssh://git@github.com/shopify/slate.git#6d47bd6b90dd8be698c4d5cd64812daa9be5073c"
+      "from": "git+ssh://git@github.com/shopify/slate.git#e6a0fcb247f6cdacb4e6f4f9fe6c4bda7ac28d46",
+      "resolved": "git+ssh://git@github.com/shopify/slate.git#e6a0fcb247f6cdacb4e6f4f9fe6c4bda7ac28d46"
     },
     "slice-ansi": {
       "version": "0.0.4",
@@ -3251,7 +3251,8 @@
           "dependencies": {
             "configstore": {
               "version": "2.0.0",
-              "from": "configstore@>=2.0.0 <3.0.0"
+              "from": "configstore@2.0.0",
+              "resolved": "https://registry.npmjs.org/configstore/-/configstore-2.0.0.tgz"
             }
           }
         }
