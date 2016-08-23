@@ -25,6 +25,7 @@ gulp.task('deploy:sync-init', function() {
   var tkConfig = yaml.safeLoad(file);
   var envObj;
   var environment;
+  var proxyTarget = '';
   var queryStringComponents = [];
 
   if (process.env.tkEnvironments) {
@@ -35,9 +36,10 @@ gulp.task('deploy:sync-init', function() {
   }
 
   envObj = tkConfig[environment];
+  proxyTarget = 'https://' + envObj.store;
 
   if (envObj.theme_id && (envObj.theme_id === parseInt(envObj.theme_id, 10))) {
-    queryStringComponents.push('preview_theme_id=' + envObj.theme_id);
+    proxyTarget += '?preview_theme_id=' + envObj.theme_id;
   }
 
   /**
@@ -48,7 +50,7 @@ gulp.task('deploy:sync-init', function() {
 
   browserSync.init({
     proxy: {
-      target: 'https://' + envObj.store,
+      target: proxyTarget,
       middleware: function(req, res, next) {
         var prefix = req.url.indexOf('?') > -1 ? '&' : '?';
         req.url += prefix + queryStringComponents.join('&');
