@@ -26,6 +26,22 @@ This will install project dependencies and developer tools listed in the [packag
 #### 3. Run `slate setup`
 This installs project-specific dependencies and developer tools. More details [here](#setup).
 
+## Updating
+
+#### 1. Pull the latest version from GitHub
+Make sure that your current branch is master and that your master branch is up-to-date.
+
+#### 2. Run `npm update`
+This will update all project dependencies and developer tools listed in the [package.json](package.json) file.
+
+#### 3. Run `slate setup`
+This installs project-specific dependencies and developer tools. More details [here](#setup).
+
+#### 4. Run `npm prune` and `npm install` (optional)
+After major changes, it may be necessary to clean out your `node_modules` and make sure that new modules have been correctly installed.
+
+This will remove any unused dependencies from `node_modules` and install all new dependencies.
+
 ## Getting started
 
 #### 1. Create a new project
