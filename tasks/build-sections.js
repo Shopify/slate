@@ -152,21 +152,20 @@ function concatContent(files, path) {
     var tempContents = fs.readFileSync(path + file, 'utf-8');
     var tempMatch;
 
-    if (file === 'schema.json') {
-      contents[0] = '{% schema %}\n' + tempContents + '{% endschema %}\n';
-
-    } else if (file === 'style.liquid') {
+    if (file === 'style.liquid') {
       tempMatch = tempContents.replace(hasComments, '');
-      contents[1] = isEmpty.test(tempMatch)
+      contents[0] = isEmpty.test(tempMatch)
         ? null : tempContents;
 
     } else if (file === 'template.liquid') {
-      contents[2] = tempContents;
+      contents[1] = tempContents;
 
     } else if (file === 'javascript.js') {
       tempMatch = tempContents.replace(hasComments, '');
-      contents[3] = isEmpty.test(tempMatch)
+      contents[2] = isEmpty.test(tempMatch)
         ? null : '{% javascript %}\n' + tempContents + '{% endjavascript %}\n';
+    } else if (file === 'schema.json') {
+      contents[3] = '{% schema %}\n' + tempContents + '{% endschema %}\n';
     }
   });
   _.remove(contents, function(item) { return !item; });
