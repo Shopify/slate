@@ -3,11 +3,17 @@ module.exports = {
     var questions = [{
       type: 'confirm',
       name: 'multiEnv',
-      message: 'Will you be deploying this theme to multiple environments?'
+      message:
+        'Environment Setup\n' +
+        '-----------------\n' +
+        'Slate can manage deploys to your development and production stores.  ' +
+        'Will you be deploying this theme to more than one store/environment?'
     }, {
       type: 'checkbox',
       name: 'environments',
-      message: 'Which environments would you like to use?',
+      message:
+        'Please provide an alias for each store/environment you would like to deploy to:',
+
       choices: [{
         name: 'production',
         checked: true
@@ -25,23 +31,23 @@ module.exports = {
     }, {
       type: 'input',
       name: 'customEnv',
-      message: 'Enter the custom environment names you would like to create (comma separated)',
+      message: 'Custom store/environment aliases (comma separated):',
       when: hasCustomEnvironments
     }, {
       type: 'list',
       name: 'defaultEnv',
-      message: 'Which environment would you like to use as default?',
+      message: 'Which store/environment would you like to deploy to by default?',
       choices: getDefaultEnvSelect,
       when: hasMultipleEnvironments,
       validate: requireEnv
     }, {
       type: 'confirm',
       name: 'initGit',
-      message: 'Will you be tracking this theme in git?'
+      message: 'Would you like to track this theme in git?'
     }, {
       type: 'input',
       name: 'repositoryUrl',
-      message: 'Enter the URL of your git repository',
+      message: 'Please enter the URL the git repository for this theme:',
       when: hasGitRepo,
       validate: function(answer) {
         return answer.length < 1
@@ -132,6 +138,6 @@ function getDefaultEnvSelect(answers) {
  */
 function requireEnv(answer) {
   return answer.length < 1
-    ? 'You must create at least one environment.'
+    ? 'You must provide at least one store/environment alias.'
     : true;
 }
