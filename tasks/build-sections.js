@@ -42,7 +42,7 @@ gulp.task('watch:sections', function() {
     unlinkEvents: ['unlinkDir']
   });
 
-  chokidar.watch(config.src.sectionsDir, {ignoreInitial: true})
+  chokidar.watch(config.src.sections, {ignoreInitial: true})
     .on('all', function(event, path) {
       messages.logFileEvent(event, path);
       eventCache.addEvent(event, path);
@@ -64,9 +64,19 @@ function processAssets(files) {
   if (_.isArray(files)) {
     _.each(files, function(file) {
       var pathArray = file.split('/');
-      var dirname = pathArray[pathArray.length - 2];
-      if (!_.includes(sectionList, dirname)) {
-        sectionList.push(dirname);
+      var folderDepth = pathArray.length;
+      var section = '';
+
+      if (folderDepth === 4) {
+        section = pathArray[pathArray.length - 2];
+      } else if (folderDepth === 3) {
+        section = pathArray[pathArray.length - 1];
+      } else {
+        return;
+      }
+
+      if (!_.includes(sectionList, section)) {
+        sectionList.push(section);
       }
     });
   } else {
@@ -118,10 +128,15 @@ function compileSections(sectionList) {
   var sections = [];
 
   _.each(sectionList, function(section, i) {
-    var path = config.src.sectionsDir + section + '/';
+    var path = config.src.sectionsDir + section;
     var sectionFiles = [];
 
     if (!utils.isDirectory(path)) {
+      sections[i] = {
+        filename: config.dist.sections + section,
+        content: fs.readFileSync(path)
+      };
+
       return;
     }
 
@@ -149,7 +164,7 @@ function concatContent(files, path) {
   var isEmpty = /^\s*$/;
 
   _.each(files, function(file) {
-    var tempContents = fs.readFileSync(path + file, 'utf-8');
+    var tempContents = fs.readFileSync(path + '/' + file, 'utf-8');
     var tempMatch;
 
     if (file === 'style.liquid') {
