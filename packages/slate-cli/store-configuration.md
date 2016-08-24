@@ -2,6 +2,9 @@
 
 Knowing what to put in your `config.yml` isn't always straightforward.  This guide aims to clarify what data is needed, and where to get it.
 
+_Note: [ThemeKit](http://themekit.cat) is the tool that powers Slate deploys.  See it's 
+[configuration variables documentation](http://themekit.cat/docs/#config-variables) for more details._
+
 #### `config.yml` environment properties
 
 - **store:** the shopify-specifc URL for this store/ environment (ie. [my-store.myshopify.com](https://my-store.myshopify.com)).
@@ -36,6 +39,3 @@ and copy the `id` for the theme you would like to update:
   Assign the private app permissions to "Read and Write" for theme templates and theme assets:
   
   ![https://screenshot.click/17-09-owv1p-5lugl.png](https://screenshot.click/17-09-owv1p-5lugl.png)
-
-_Note: [ThemeKit](http://themekit.cat) is the tool that powers Slate deploys.  See it's 
-[configuration variables documentation](http://themekit.cat/docs/#config-variables) for more details._
