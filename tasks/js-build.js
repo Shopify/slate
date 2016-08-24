@@ -6,12 +6,15 @@ var size = require('gulp-size');
 var stream = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var browserify = require('browserify');
-var watchify = require('watchify');
 
 var config = require('./includes/config.js');
 var messages = require('./includes/messages.js');
 var utils = require('./includes/utilities.js');
 
+var bundler = browserify(config.roots.js, {
+  extensions: ['.js', '.js.liquid'],
+  debug: false
+});
 var lintTask = config.enableLinting ? ['lint:js'] : [];
 
 /**
@@ -34,10 +37,10 @@ gulp.task('build:vendor-js', function() {
  */
 gulp.task('watch:vendor-js', function() {
   chokidar.watch(config.src.vendorJs, {ignoreInitial: true})
-  .on('all', function(event, path) {
-    messages.logFileEvent(event, path);
-    processVendorJs();
-  });
+    .on('all', function(event, path) {
+      messages.logFileEvent(event, path);
+      processVendorJs();
+    });
 });
 
 function processVendorJs() {
@@ -50,37 +53,24 @@ function processVendorJs() {
 
 
 gulp.task('build:js', [].concat(lintTask), function() {
-  var bundler = browserify(config.roots.js, {
-    extensions: ['.js', '.js.liquid'],
-    debug: false
-  });
-
-  return bundle(bundler);
+  return bundle();
 });
 
 gulp.task('watch:js', function() {
-
-  var bundler = browserify({
-    entries: [config.roots.js],
-    extensions: ['.js', '.js.liquid'],
-    debug: false,
-    plugin: [watchify],
-    cache: {},
-    packageCache: {}
-  }).on('update', function() {
-    bundle(bundler);
-  });
-
-  return bundle(bundler);
+  chokidar.watch(config.src.js, {ignoreInitial: true})
+    .on('all', function(event, path) {
+      messages.logFileEvent(event, path);
+      return bundle();
+    });
 });
 
 /**
+ * Concatenate js via browserify and copys to the `/dist` folder
  *
- * @param bundler {Object} - watchify instance
- * @returns {} -
+ * @returns {Stream}
  * @private
  */
-function bundle(bundler) {
+function bundle() {
   messages.logBundleJs();
   return bundler.bundle()
     .on('error', utils.errorHandler)
