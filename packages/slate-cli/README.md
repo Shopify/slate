@@ -77,7 +77,7 @@ In `/src` you'll see [the familiar Theme structure](https://help.shopify.com/the
 - `/icons` - custom svg icons. These are converted to snippets for use with `{% include %}` (see [slate#svg-icons](https://github.com/Shopify/slate#svg-icons)).
 - `/scripts` - You can add sub-folders to help with organization. `scripts/theme.js` is the main entry point.
 - `/scripts/vendor` - external JS. This folder is combined to a `vendor.js` file and included in the main layout.
-- `/styles` - You can add sub-folders to help with organization. `scripts/theme.scss` is the main entry point.
+- `/styles` - You can add sub-folders to help with organization. `styles/theme.scss` is the main entry point.
 
 #### 4. Start developing your Theme
 You're ready to start developing with slate.  To get started, run the following command from your theme directory:
