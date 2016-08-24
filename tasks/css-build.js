@@ -8,6 +8,7 @@ var config = require('./includes/config.js');
 var utils = require('./includes/utilities.js');
 var messages = require('./includes/messages.js');
 
+var lintTask = config.enableLinting ? ['lint:css'] : [];
 
 /**
  * Concatenate css via gulp-cssimport
@@ -16,7 +17,7 @@ var messages = require('./includes/messages.js');
  * @memberof slate-cli.tasks.build
  * @static
  */
-gulp.task('build:css', ['lint:css'], function() {
+gulp.task('build:css', [].concat(lintTask), function() {
   return processCss();
 });
 

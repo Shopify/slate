@@ -12,6 +12,8 @@ var config = require('./includes/config.js');
 var messages = require('./includes/messages.js');
 var utils = require('./includes/utilities.js');
 
+var lintTask = config.enableLinting ? ['lint:js'] : [];
+
 /**
  * Concatenate JS together into a single file for use in the theme
  *
@@ -47,7 +49,7 @@ function processVendorJs() {
 }
 
 
-gulp.task('build:js', function() {
+gulp.task('build:js', [].concat(lintTask), function() {
   var bundler = browserify(config.roots.js, {
     extensions: ['.js', '.js.liquid'],
     debug: false
