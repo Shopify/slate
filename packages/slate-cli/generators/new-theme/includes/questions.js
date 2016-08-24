@@ -47,13 +47,8 @@ module.exports = {
     }, {
       type: 'input',
       name: 'repositoryUrl',
-      message: 'Please enter the URL the git repository for this theme:',
-      when: hasGitRepo,
-      validate: function(answer) {
-        return answer.length < 1
-          ? 'You must provide a URL for your git repository.'
-          : true;
-      }
+      message: 'Enter the URL the git repository for this theme (leave this blank if you want to manually set this up later):',
+      when: hasGitRepo
     }];
 
     if (!generator.dirname) {

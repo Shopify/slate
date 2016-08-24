@@ -30,7 +30,7 @@ git clone git@github.com:Shopify/slate-cli.git
 cd slate-cli
 npm link
 ```
-_note: if you get an **`EACCESS`** error, you may need to run `sudo npm link` instead_
+_note: if you get an **`EACCES`** error, you may need to run `sudo npm link` instead_
 
 This command installs node dependencies (equivalent to running `npm install`) and creates 
 a symbolic link to your global npm directory.
@@ -60,7 +60,7 @@ current directory (similar to `git clone`).
 Once the boilerplate has been generated, Slate runs `npm install` to download remaining dependencies (~1min).
 
 #### 2. Configure your Store / Environment settings
-When the theme generator has finished, the theme's `config.yml` file should open automatically.
+When the theme generator has finished, the theme's `config.yml` file will open automatically.
 You will need to fill in the required fields for each store / environment.
 
 > _For more details on configuring your environments please see our 
@@ -68,11 +68,13 @@ You will need to fill in the required fields for each store / environment.
 
 #### 3. Navigating the codebase
 
-Slate includes some extra files to help manage your development workflow.  Your main theme files are stored in the 
-[`/src`](https://github.com/Shopify/slate/tree/master/src) directory, the contents of which are transformed into a 
-regular theme directory during `slate build`.
+The [`/src`](https://github.com/Shopify/slate/tree/master/src) directory is where you develop your theme. It includes 
+the [standard Theme structure](https://help.shopify.com/themes/development/templates), and a few additional folders. 
 
-In `/src` you'll see [the familiar Theme structure](https://help.shopify.com/themes/development/templates) with a few changes/additions:
+The contents of `/src` will be compiled into a `dist/` directory during most slate tasks. The compiled files in `/dist` 
+are the files that will be uploaded to your store.
+
+Some new folders have been included in the `/src` directory:
 
 - `/icons` - custom svg icons. These are converted to snippets for use with `{% include %}` (see [slate#svg-icons](https://github.com/Shopify/slate#svg-icons)).
 - `/scripts` - You can add sub-folders to help with organization. `scripts/theme.js` is the main entry point.
@@ -80,7 +82,7 @@ In `/src` you'll see [the familiar Theme structure](https://help.shopify.com/the
 - `/styles` - You can add sub-folders to help with organization. `styles/theme.scss` is the main entry point.
 
 #### 4. Start developing your Theme
-You're ready to start developing with slate.  To get started, run the following command from your theme directory:
+You're ready to start developing with Slate.  To get started, run the following command from your theme directory:
  
  ```shell
  slate start
@@ -90,8 +92,9 @@ You're ready to start developing with slate.  To get started, run the following 
  
  The `/dist` folder will be uploaded to the store / theme_id specified in your default environment. 
  
- A [Browsersync](https://browsersync.io/) proxy server will launch when deploy is complete and automatically launch in your browser. 
- Slate will deploy and auto-reload the store URL in your browser whenever you save a file change.
+ A [Browsersync](https://browsersync.io/) proxy will run when deployment is complete and automatically launch in your browser. 
+ Slate will begin watching your theme directory for file changes and deploy them to your store whenever you make a change.  Browsersync 
+ will live-reload as soon as your changes are deployed.
 
 ## Updating Slate
 
@@ -226,7 +229,7 @@ by passing the `--nosync` option to the command.
 slate zip
 ```
 
-Performs a fresh build of your theme and zips them into a file that's compatible with Shopify. 
+Performs a fresh build of your theme and zips it into a file that's compatible with Shopify. 
 The zip file can be found within an upload folder that is generated within your theme project root folder. 
 The zip is overwritten each time you use this command and is not meant to be used for versioning.
 

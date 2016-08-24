@@ -56,7 +56,10 @@ var mainGenerator = generators.Base.extend({
       };
 
       this.spawnCommandSync('git', ['init'], options); // eslint-disable-line no-sync
-      this.spawnCommandSync('git', ['remote', 'add', 'origin', this.repositoryUrl], options); // eslint-disable-line no-sync
+
+      if (this.repositoryUrl) {
+        this.spawnCommandSync('git', ['remote', 'add', 'origin', this.repositoryUrl], options); // eslint-disable-line no-sync
+      }
     }
   },
 
