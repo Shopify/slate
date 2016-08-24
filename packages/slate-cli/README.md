@@ -88,7 +88,7 @@ You're ready to start developing with Slate.  To get started, run the following 
  slate start
  ```
  
- This will build your theme from the `/src` contents to the format expected by the server (outputs a `/dist` directory). 
+ This will build your theme from the `/src` contents to the format required by Shopify (outputs a `/dist` directory). 
  
  The `/dist` folder will be uploaded to the store / theme_id specified in your default environment. 
  
