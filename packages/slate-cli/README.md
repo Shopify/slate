@@ -35,7 +35,8 @@ _note: if you get an **`EACCES`** error, you may need to run `sudo npm link` ins
 This command installs node dependencies (equivalent to running `npm install`) and creates 
 a symbolic link to your global npm directory.
 
-You should now be able to run slate from your terminal. Try running `slate -v` to verify that everything worked.
+You should now be able to run slate from your terminal. Try running `slate -v` to verify that everything worked
+(if this didn't work, see [Troubleshooting](#troubleshooting) for guidance).
 
 #### 3. Run slate setup
 
