@@ -60,7 +60,7 @@ gulp.task('watch:js', function() {
   chokidar.watch(config.src.js, {ignoreInitial: true})
     .on('all', function(event, path) {
       messages.logFileEvent(event, path);
-      return bundle();
+      bundle();
     });
 });
 
