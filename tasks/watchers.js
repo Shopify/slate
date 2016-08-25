@@ -11,6 +11,7 @@ var messages = require('./includes/messages.js');
 var activeDeploy = false;
 var cache = utils.createEventCache();
 var debouncedDeployStatus = _.debounce(checkDeployStatus, 320); // prevent early execution on multi-file events
+var lintTasks = config.enableLinting ? ['watch:css-lint', 'watch:js-lint', 'watch:json-lint'] : [];
 
 /**
  * Aggregate task watching for file changes in `src` and
@@ -25,14 +26,11 @@ gulp.task('watch:src', [
   'watch:assets',
   'watch:config',
   'watch:svg',
-  'watch:css-lint',
-  'watch:js-lint',
-  'watch:json-lint',
   'watch:css',
   'watch:js',
   'watch:vendor-js',
   'watch:sections'
-]);
+].concat(lintTasks));
 
 /**
  * Watches for changes in the `./dist` folder and passes event data to the
