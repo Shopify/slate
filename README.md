@@ -36,6 +36,12 @@ A full list of possible Slate commands can be found [here](https://github.com/Sh
 
 ----------
 
+## Linting
+
+By default, JS and CSS linting are disabled in Slate. To enable this feature, open `tasks/includes/config.js` and set `enableLinting` to `true`.
+
+**Note:** Although linting is disabled by default, it can still be run manually via `slate test`.
+
 ## SVG Icons
 
 Slate uses SVG icons for easy maintainability and better front end performance. Place all of your SVG icons in `src/icons`, prefaced with the name `icon-`. E.g. `icon-arrow-down.svg`.
