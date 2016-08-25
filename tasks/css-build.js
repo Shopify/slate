@@ -17,7 +17,7 @@ var lintTask = config.enableLinting ? ['lint:css'] : [];
  * @memberof slate-cli.tasks.build
  * @static
  */
-gulp.task('build:css', [].concat(lintTask), function() {
+gulp.task('build:css', lintTask, function() {
   return processCss();
 });
 

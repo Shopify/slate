@@ -49,7 +49,7 @@ function processVendorJs() {
 }
 
 
-gulp.task('build:js', [].concat(lintTask), function() {
+gulp.task('build:js', lintTask, function() {
   var bundler = browserify(config.roots.js, {
     extensions: ['.js', '.js.liquid'],
     debug: false
