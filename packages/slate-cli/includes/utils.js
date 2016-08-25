@@ -15,13 +15,11 @@ module.exports = {
    * @param script {Array} - the script/args sent to to `npm run`
    */
   runScript: function(dir, script) {
-    npm.load({prefix: dir, loglevel: 'silent'}, function(err) {
+    npm.load({prefix: dir, loglevel: 'silent', progress: false}, function(err) {
       if (err) { throw err; }
 
-      npm.commands.run(script, function(runErr, output) { // eslint-disable-line no-unused-vars
+      npm.commands.run(script, function(runErr) {
         if (runErr) { throw runErr; }
-
-        output = null;
       });
     });
   }
