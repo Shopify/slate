@@ -22,7 +22,7 @@
     "generate-section": "yo --no-insight --no-update-notifier ./generators/new-section/section.js"
   },
   "dependencies": {
-    "Slate": "git+ssh://git@github.com/shopify/slate.git#db9ff366eccd8287f09d6f099de6a8966f33fe05",
+    "Slate": "git+ssh://git@github.com/shopify/slate.git#c0e7d0e63e526cf4673c66d89127c00dec24993a",
     "bin-wrapper": "3.0.2",
     "bluebird": "3.4.1",
     "feedparser": "1.1.4",
