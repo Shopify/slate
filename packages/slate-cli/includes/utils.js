@@ -17,7 +17,12 @@ module.exports = {
   runScript: function(dir, script) {
     npm.load({prefix: dir, loglevel: 'silent'}, function(err) {
       if (err) { throw err; }
-      npm.commands.run(script);
+
+      npm.commands.run(script, function(runErr, output) { // eslint-disable-line no-unused-vars
+        if (runErr) { throw runErr; }
+
+        output = null;
+      });
     });
   }
 };
