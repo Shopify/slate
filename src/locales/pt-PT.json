@@ -100,11 +100,6 @@
         "one": "{{ count }} item",
         "other": "{{ count }} itens"
       }
-    },
-    "onboarding": {
-      "modal_title": "Esta página irá exibir todos os produtos da sua loja",
-      "no_products_html": "Ainda não há artigos, mas assim que começar a adicioná-los, eles vão surgir aqui, mesmo se não estiverem inseridos numa colecção.",
-      "add_product": "Adicionar Produto"
     }
   },
   "contact": {
@@ -225,12 +220,7 @@
       "featured_title": "Coleções em Destaque"
     },
     "onboarding": {
-      "modal_title": "Quase lá...",
-      "no_products_html": "Não tem produtos na sua Coleção Frontpage. Esta imagem de preenchimento será exibida até <a href=\"/admin/collections?tutorial=Frontpage\">adicionar um produto a esta coleção</a>.",
-      "add_product": "Adicionar um produto",
       "product_title": "Título do Produto Exemplo",
-      "no_collections_html": "Ainda não tem coleções para exibir aqui. <a href=\"/admin/custom_collections\">Adicione algumas coleções</a> para continuar com a Frontpage predefinida.",
-      "add_collection": "Adicionar uma coleção",
       "collection_title": "Título da Coleção Exemplo"
     }
   },
