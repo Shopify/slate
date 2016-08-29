@@ -100,11 +100,6 @@
         "one": "{{ count }} item",
         "other": "{{ count }} items"
       }
-    },
-    "onboarding": {
-      "modal_title": "Cette page affichera tous les produits de votre magasin",
-      "no_products_html": "Il n'y a aucun produit pour l'instant, mais dès que vous commencerez à les ajouter, ils s'afficheront ici, qu'ils soient dans une collection ou non.",
-      "add_product": "Ajouter un produit"
     }
   },
   "contact": {
@@ -225,12 +220,7 @@
       "featured_title": "Collections en vedette"
     },
     "onboarding": {
-      "modal_title": "Nous y sommes presque...",
-      "no_products_html": "Vous n'avez pas de produit dans votre collection Frontpage. Ce message apparaitra jusqu'à ce qu'un produit soit <a href=\"/admin/collections?tutorial=Frontpage\">ajouté à cette collection</a>.",
-      "add_product": "Ajouter un produit",
       "product_title": "Titre du produit",
-      "no_collections_html": "Vous n'avez pas de collection à afficher ici. <a href=\"/admin/custom_collections\">Ajoutez une ou plusieurs collections</a> pour compléter la page d'accueil par défaut.",
-      "add_collection": "Ajouter une collection",
       "collection_title": "Titre de la collection"
     }
   },

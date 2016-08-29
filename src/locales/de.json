@@ -100,11 +100,6 @@
         "one": "{{ count }} Produkt",
         "other": "{{ count }} Produkte"
       }
-    },
-    "onboarding": {
-      "modal_title": "Auf dieser Seite werden alle Produkte Ihres Geschäfts angezeigt.",
-      "no_products_html": "Es sind noch keine Produkte vorhanden, doch sobald Sie welche hinzufügen, werden sie hier angezeigt, ganz gleich, ob sie zu einer Kollektion gehören oder nicht.",
-      "add_product": "Artikel hinzufügen"
     }
   },
   "contact": {
@@ -225,12 +220,7 @@
       "featured_title": "Ausgewählte Zusammenstellungen"
     },
     "onboarding": {
-      "modal_title": "Fast fertig...",
-      "no_products_html": "Sie haben keine Artikel in Ihrer Startseiten-Zusammenstellung. Dieser Platzhalter verschwindet, wenn Sie <a href=\"/admin/collections?tutorial=Frontpage\">dieser Zusammenstellung einen Artikel hinzufügen</a>.",
-      "add_product": "Fügen Sie ein Produkt",
       "product_title": "Beispielhafter Produkttitel",
-      "no_collections_html": "Sie haben hier keine Zusammenstellungen zum Anzeigen. <a href=\"/admin/custom_collections\">Fügen Sie ein paar Zusammenstellungen</a> zur Standard-Startseite hinzu.",
-      "add_collection": "Fügen Sie eine Sammlung",
       "collection_title": "Beispielhafter Zusammenstellungstitel"
     }
   },

@@ -18,36 +18,18 @@
 {% endfor %}
 
 {% if shop.collections_count <= 1 %}
-  {% unless onboardingLoaded %}
-    {% comment %}
-      Only load onboarding styles if they have not already been loaded.
-    {% endcomment %}
-    {{ 'theme-onboarding.css' | global_asset_url | stylesheet_tag }}
-    {%- assign onboardingLoaded = true -%}
-  {% endunless %}
-  <div class="helper-section">
-    <div class="helper-note">
-      <span class="helper-icon"></span>
-      <h3>{{ 'homepage.onboarding.modal_title' | t }}</h3>
-      <p>{{ 'homepage.onboarding.no_collections_html' | t }}</p>
-      <p><a class="admin-btn-primary" href="/admin/custom_collections">{{ 'homepage.onboarding.add_collection' | t }}</a></p>
+  {% for i in (1..5) %}
+    <div>
+      <a href="#">
+        {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ i }}.png{% endcapture %}
+        {{ imageUrl | img_tag }}
+      </a>
+      <p>
+        <a href="#">{{ 'homepage.onboarding.collection_title' | t }}</a>
+      </p>
+      <p>{{ 'collections.general.items_with_count' | t: count: i }}</p>
     </div>
-
-    <div class="helper-content">
-      {% for i in (1..5) %}
-        <div>
-          <a href="#">
-            {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ i }}.png{% endcapture %}
-            {{ imageUrl | img_tag }}
-          </a>
-          <p>
-            <a href="#">{{ 'homepage.onboarding.collection_title' | t }}</a>
-          </p>
-          <p>{{ 'collections.general.items_with_count' | t: count: i }}</p>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
+  {% endfor %}
 {% endif %}
 
 <h2>{{ 'homepage.sections.frontpage_title' | t }}</h2>
@@ -92,37 +74,17 @@
 {% else %}
   {% comment %}
     If collection is empty, show onboarding state
-    For onboarding new users to your theme, we add some default products and onboarding tutorials to help populate their store
   {% endcomment %}
-  {% unless onboardingLoaded %}
-    {% comment %}
-      Only load onboarding styles if they have not already been loaded.
-    {% endcomment %}
-    {{ 'theme-onboarding.css' | global_asset_url | stylesheet_tag }}
-    {%- assign onboardingLoaded = true -%}
-  {% endunless %}
-
-  <div class="helper-section">
-    <div class="helper-note">
-      <span class="helper-icon"></span>
-      <h3>{{ 'homepage.onboarding.modal_title' | t }}</h3>
-      <p>{{ 'homepage.onboarding.no_products_html' | t }}</p>
-      <p><a class="admin-btn-primary" href="/admin/collections?tutorial=Frontpage">{{ 'homepage.onboarding.add_product' | t }}</a></p>
+  {% for i in (1..5) %}
+    <div>
+      <a href="/admin/products">
+        {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ i }}.png{% endcapture %}
+        {{ imageUrl | img_tag }}
+      </a>
+      <p><a href="/admin/products">{{ 'homepage.onboarding.product_title' | t }}</a></p>
+      <p>$19.99</p>
     </div>
-
-    <div class="helper-content">
-      {% for i in (1..5) %}
-        <div>
-          <a href="/admin/products">
-            {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ i }}.png{% endcapture %}
-            {{ imageUrl | img_tag }}
-          </a>
-          <p><a href="/admin/products">{{ 'homepage.onboarding.product_title' | t }}</a></p>
-          <p>$19.99</p>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
+  {% endfor %}
 {% endfor %}
 
 {% if settings.home_page_content != blank %}

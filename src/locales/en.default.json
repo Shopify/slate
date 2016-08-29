@@ -100,11 +100,6 @@
         "one": "{{ count }} item",
         "other": "{{ count }} items"
       }
-    },
-     "onboarding": {
-      "modal_title": "This page will show all of your store's products",
-      "no_products_html": "There are no products yet, but once you begin adding them they will show up here regardless if they are in a collection.",
-      "add_product": "Add Product"
     }
   },
   "contact": {
@@ -225,12 +220,7 @@
       "featured_title": "Featured Collections"
     },
     "onboarding": {
-      "modal_title": "Almost there...",
-      "no_products_html": "You have no products in your Frontpage collection. This placeholder will appear until you <a href=\"/admin/collections?tutorial=Frontpage\">add a product to this collection</a>.",
-      "add_product": "Add a Product",
       "product_title": "Example Product Title",
-      "no_collections_html": "You don't have any collections to show here. <a href=\"/admin/custom_collections\">Add some collections</a> to go along with the default Frontpage.",
-      "add_collection": "Add a Collection",
       "collection_title": "Example Collection Title"
     }
   },
