@@ -1,3 +1,6 @@
+var $ = require('jquery');
+var _ = require('lodash/core');
+
 $(document).ready(function() {
   // GLOBAL SCRIPTS
   require('./global/global.js');
