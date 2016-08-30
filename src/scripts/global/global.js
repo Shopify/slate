@@ -1,3 +1,4 @@
+var $ = require('jquery');
 var a11y = require('./../slate/a11y.js');
 var rte = require('./../slate/rte.js');
 
