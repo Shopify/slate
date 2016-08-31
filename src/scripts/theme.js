@@ -1,3 +1,6 @@
+require('modernizr');
+var $ = require('jquery');
+
 $(document).ready(function() {
   // GLOBAL SCRIPTS
   require('./global/global.js');

@@ -16,11 +16,11 @@
     "watch-nosync": "gulp watch --nosync",
     "zip": "gulp zip"
   },
-  "dependencies": {
+  "devDependencies": {
     "bluebird": "3.4.0",
     "browser-sync": "2.13.0",
     "browserify": "13.1.0",
-    "browserify-shim": "^3.8.12",
+    "browserify-shim": "3.8.12",
     "chokidar": "1.5.2",
     "del": "2.2.0",
     "eslint": "3.2.2",
@@ -50,8 +50,18 @@
     "watchify": "3.7.0",
     "yargs": "4.7.1"
   },
-  "devDependencies": {
-    "eslint": "3.2.2",
-    "eslint-plugin-shopify": "13.0.0"
+  "dependencies": {
+    "jquery": "2.2.3",
+    "modernizr": "3.3.1"
+  },
+  "browser": {
+    "jquery": "./src/scripts/vendor/jquery-2.2.3.min.js",
+    "modernizr": "./src/scripts/vendor/modernizr.min.js"
+  },
+  "browserify": {
+    "transform": [ "browserify-shim" ]
+  },
+  "browserify-shim": {
+    "jquery": "$"
   }
 }
