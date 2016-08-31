@@ -1,5 +1,5 @@
+require('modernizr');
 var $ = require('jquery');
-var _ = require('lodash/core');
 
 $(document).ready(function() {
   // GLOBAL SCRIPTS
