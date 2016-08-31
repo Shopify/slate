@@ -3,3 +3,4 @@ src/scripts/**/*.js.liquid
 node_modules/
 docs/
 ci/
+tasks/

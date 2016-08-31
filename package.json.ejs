@@ -16,11 +16,11 @@
     "watch-nosync": "gulp watch --nosync",
     "zip": "gulp zip"
   },
-  "dependencies": {
+  "devDependencies": {
     "bluebird": "3.4.0",
     "browser-sync": "2.13.0",
     "browserify": "13.1.0",
-    "browserify-shim": "^3.8.12",
+    "browserify-shim": "3.8.12",
     "chokidar": "1.5.2",
     "del": "2.2.0",
     "eslint": "3.2.2",
@@ -39,10 +39,8 @@
     "gulp-svgmin": "1.2.2",
     "gulp-util": "3.0.7",
     "gulp-zip": "3.2.0",
-    "jquery": "2.2.3",
     "js-yaml": "3.6.1",
     "lodash": "4.13.1",
-    "modernizr": "3.3.1",
     "open": "0.0.5",
     "require-dir": "0.3.0",
     "run-sequence": "1.2.1",
@@ -52,8 +50,18 @@
     "watchify": "3.7.0",
     "yargs": "4.7.1"
   },
+  "dependencies": {
+    "jquery": "2.2.3",
+    "modernizr": "3.3.1"
+  },
   "browser": {
     "jquery": "./src/scripts/vendor/jquery-2.2.3.min.js",
     "modernizr": "./src/scripts/vendor/modernizr.min.js"
+  },
+  "browserify": {
+    "transform": [ "browserify-shim" ]
+  },
+  "browserify-shim": {
+    "jquery": "$"
   }
 }
