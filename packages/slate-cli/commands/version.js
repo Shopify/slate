@@ -1,9 +1,13 @@
 var msg = require('../includes/messages.js');
 var utils = require('../includes/utils.js');
+var themekit = require('../includes/themekit.js');
 
 module.exports = {
   command: function() {
-    process.stdout.write(msg.versionInfo());
+    return themekit.commands(['version'])
+      .then(function() {
+        process.stdout.write(msg.versionInfo());
+      });
   },
   help: function() {
     utils.logHelpMsg([

@@ -2,7 +2,7 @@ var pkg = require('../package.json');
 
 module.exports = {
   versionInfo: function() {
-    return 'slate-cli: version ' + pkg.version + ' - Shopify Theme Development Framework  \n';
+    return 'slate-cli v' + pkg.version + ' - Shopify Theme Development Toolkit  \n';
   },
 
   noFiles: function() {
