@@ -1,12 +1,13 @@
-$(document).ready(function() {
-  // GLOBAL SCRIPTS
-  require('./global/global.js');
+window.theme = window.theme || {};
 
+// =require global/global.js
+
+$(document).ready(function() {
   // TEMPLATE SCRIPTS
-  require('./templates/customers-addresses.js');
-  require('./templates/giftcard.js');
-  require('./templates/customers-login.js');
-  require('./templates/product.js');
+  // =require templates/customers-addresses.js
+  // =require templates/customers-login.js
+  // =require templates/giftcard.js
+  // =require templates/product.js
 
   // Custom theme script
   // ---------------------------------------------------------------------------

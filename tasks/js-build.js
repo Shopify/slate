@@ -1,12 +1,8 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
+var include = require('gulp-include');
 var plumber = require('gulp-plumber');
 var chokidar = require('chokidar');
-var size = require('gulp-size');
-var stream = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
-var browserify = require('browserify');
-var watchify = require('watchify');
 
 var config = require('./includes/config.js');
 var messages = require('./includes/messages.js');
@@ -50,42 +46,21 @@ function processVendorJs() {
 
 
 gulp.task('build:js', lintTask, function() {
-  var bundler = browserify(config.roots.js, {
-    extensions: ['.js', '.js.liquid'],
-    debug: false
-  });
-
-  return bundle(bundler);
+  processThemeJs();
 });
 
 gulp.task('watch:js', function() {
-
-  var bundler = browserify({
-    entries: [config.roots.js],
-    extensions: ['.js', '.js.liquid'],
-    debug: false,
-    plugin: [watchify],
-    cache: {},
-    packageCache: {}
-  }).on('update', function() {
-    bundle(bundler);
+  chokidar.watch(config.src.js, {ignoreInitial: true})
+  .on('all', function(event, path) {
+    messages.logFileEvent(event, path);
+    processThemeJs();
   });
-
-  return bundle(bundler);
 });
 
-/**
- * Concatenate js via browserify and copys to the `/dist` folder
- *
- * @returns {Stream}
- * @private
- */
-function bundle(bundler) {
-  messages.logBundleJs();
-  return bundler.bundle()
-    .on('error', utils.errorHandler)
-    .pipe(stream('theme.js.liquid'))
-    .pipe(buffer())
-    .pipe(size({showFiles: true, pretty: true}))
+function processThemeJs() {
+  messages.logProcessFiles('build:js');
+  return gulp.src(config.roots.js)
+    .pipe(plumber(utils.errorHandler))
+    .pipe(include())
     .pipe(gulp.dest(config.dist.assets));
 }
