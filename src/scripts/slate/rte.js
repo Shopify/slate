@@ -6,7 +6,7 @@
  * @namespace rte
  */
 
-module.exports = {
+slate.rte = {
 
   wrapTable: function() {
     $('.rte table').wrap('<div class="rte__table-wrapper"></div>');

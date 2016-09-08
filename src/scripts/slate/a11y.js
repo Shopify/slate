@@ -8,7 +8,7 @@
  * @namespace a11y
  */
 
-module.exports = {
+slate.a11y = {
 
   /**
    * For use when focus shifts to a container rather than a link

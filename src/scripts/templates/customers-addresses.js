@@ -7,9 +7,13 @@
  * @namespace customerAddresses
  */
 
-var $newAddressForm = $('#AddressNewForm');
+theme.customerAddresses = (function() {
+  var $newAddressForm = $('#AddressNewForm');
 
-if ($newAddressForm.length) {
+  if (!$newAddressForm.length) {
+    return;
+  }
+
   // Initialize observers on address selectors, defined in shopify_common.js
   if (Shopify) {
     // eslint-disable-next-line no-new
@@ -18,7 +22,7 @@ if ($newAddressForm.length) {
     });
   }
 
-// Initialize each edit form's country/province selector
+  // Initialize each edit form's country/province selector
   $('.address-country-option').each(function() {
     var formId = $(this).data('form-id');
     var countrySelector = 'AddressCountry_' + formId;
@@ -31,7 +35,7 @@ if ($newAddressForm.length) {
     });
   });
 
-// Toggle new/edit address forms
+  // Toggle new/edit address forms
   $('.address-new-toggle').on('click', function() {
     $newAddressForm.toggleClass('hide');
   });
@@ -50,4 +54,4 @@ if ($newAddressForm.length) {
       Shopify.postLink('/account/addresses/' + formId, {parameters: {_method: 'delete'}});
     }
   });
-}
+})();

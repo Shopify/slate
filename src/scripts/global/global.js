@@ -1,13 +1,16 @@
-var a11y = require('./../slate/a11y.js');
-var rte = require('./../slate/rte.js');
+window.slate = window.slate || {};
+// =require ../slate/a11y.js
+// =require ../slate/rte.js
 
-// Common a11y fixes
-a11y.pageLinkFocus($(window.location.hash));
+$(document).ready(function() {
+  // Common a11y fixes
+  slate.a11y.pageLinkFocus($(window.location.hash));
 
-$('.in-page-link').on('click', function(evt) {
-  a11y.pageLinkFocus($(evt.currentTarget.hash));
+  $('.in-page-link').on('click', function(evt) {
+    slate.a11y.pageLinkFocus($(evt.currentTarget.hash));
+  });
+
+  // Wrap videos in div to force responsive layout.
+  slate.rte.wrapTable();
+  slate.rte.iframeReset();
 });
-
-// Wrap videos in div to force responsive layout.
-rte.wrapTable();
-rte.iframeReset();
