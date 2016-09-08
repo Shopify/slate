@@ -12,7 +12,18 @@
     <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png">
   {% endif %}
 
-  {% include 'seo-title' %}
+  {% capture seo_title %}
+    {{ page_title }}
+    {% if current_tags %}
+      {%- assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+    {% endif %}
+    {% if current_page != 1 %}
+      &ndash; {{ 'general.meta.page' | t: page: current_page }}
+    {% endif %}
+    {% unless page_title contains shop.name %}
+      &ndash; {{ shop.name }}
+    {% endunless %}
+  {% endcapture %}
   <title>{{ seo_title }}</title>
 
   {% if page_description %}
