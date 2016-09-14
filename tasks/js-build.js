@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var concat = require('gulp-concat');
+var uglify = require('gulp-uglifyjs');
 var include = require('gulp-include');
 var plumber = require('gulp-plumber');
 var chokidar = require('chokidar');
@@ -38,9 +38,13 @@ gulp.task('watch:vendor-js', function() {
 
 function processVendorJs() {
   messages.logProcessFiles('build:vendor-js');
-  return gulp.src(config.src.vendorJs)
+  return gulp.src(config.roots.vendorJs)
     .pipe(plumber(utils.errorHandler))
-    .pipe(concat('vendor.js'))
+    .pipe(include())
+    .pipe(uglify({
+      mangle: true,
+      compress: true
+    }))
     .pipe(gulp.dest(config.dist.assets));
 }
 
