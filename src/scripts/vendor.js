@@ -13,5 +13,5 @@
 //
 // 1. The comment is in the *first* line of a file
 // 2. A regular expression matches the string of the comment.
-// 		For example: `MIT`, `@license`, or `Copyright`.
+//    For example: `MIT`, `@license`, or `Copyright`.
 // 3. There is a comment at the *previous* line, and it matches 1, 2, or 3.
