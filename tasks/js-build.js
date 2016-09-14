@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var uglify = require('gulp-uglifyjs');
+var uglify = require('gulp-uglify');
 var include = require('gulp-include');
 var plumber = require('gulp-plumber');
 var chokidar = require('chokidar');
@@ -10,24 +10,10 @@ var utils = require('./includes/utilities.js');
 
 var lintTask = config.enableLinting ? ['lint:js'] : [];
 
-/**
- * Concatenate JS together into a single file for use in the theme
- *
- * @function build:js
- * @memberof slate-cli.tasks.build
- * @static
- */
 gulp.task('build:vendor-js', function() {
   processVendorJs();
 });
 
-/**
- * watches js in src dir ...
- *
- * @function watch:js
- * @memberof slate-cli.tasks.watch
- * @static
- */
 gulp.task('watch:vendor-js', function() {
   chokidar.watch(config.roots.vendorJs, {ignoreInitial: true})
   .on('all', function(event, path) {
@@ -43,11 +29,11 @@ function processVendorJs() {
     .pipe(include())
     .pipe(uglify({
       mangle: true,
-      compress: true
+      compress: true,
+      preserveComments: 'license'
     }))
     .pipe(gulp.dest(config.dist.assets));
 }
-
 
 gulp.task('build:js', lintTask, function() {
   processThemeJs();
