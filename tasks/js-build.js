@@ -29,7 +29,7 @@ gulp.task('build:vendor-js', function() {
  * @static
  */
 gulp.task('watch:vendor-js', function() {
-  chokidar.watch(config.src.vendorJs, {ignoreInitial: true})
+  chokidar.watch(config.roots.vendorJs, {ignoreInitial: true})
   .on('all', function(event, path) {
     messages.logFileEvent(event, path);
     processVendorJs();
