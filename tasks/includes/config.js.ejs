@@ -36,7 +36,6 @@ var config = {
     root: 'src/',
     js: 'src/scripts/**/*.js',
     jsSections: 'src/sections/**/*.js',
-    vendorJs: 'src/scripts/vendor/*.js',
     json: 'src/**/*.json',
     css: 'src/styles/**/*.{scss,scss.liquid}',
     cssLint: 'src/styles/**/*.scss',
@@ -63,7 +62,8 @@ var config = {
   },
 
   roots: {
-    js: 'src/scripts/theme.js',
+    js: 'src/scripts/*.js',
+    vendorJs: 'src/scripts/vendor.js',
     css: 'src/styles/*.scss'
   },
 
