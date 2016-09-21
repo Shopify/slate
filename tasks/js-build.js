@@ -40,7 +40,7 @@ gulp.task('build:js', lintTask, function() {
 });
 
 gulp.task('watch:js', function() {
-  chokidar.watch(config.src.js, {ignoreInitial: true})
+  chokidar.watch([config.src.js, '!' + config.roots.vendorJs], {ignoreInitial: true})
   .on('all', function(event, path) {
     messages.logFileEvent(event, path);
     processThemeJs();
@@ -49,7 +49,7 @@ gulp.task('watch:js', function() {
 
 function processThemeJs() {
   messages.logProcessFiles('build:js');
-  return gulp.src(config.roots.js)
+  return gulp.src([config.roots.js, '!' + config.roots.vendorJs])
     .pipe(plumber(utils.errorHandler))
     .pipe(include())
     .pipe(gulp.dest(config.dist.assets));
