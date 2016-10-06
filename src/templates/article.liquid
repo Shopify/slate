@@ -17,7 +17,7 @@
 
   <header role="banner">
     <h1>{{ article.title }}</h1>
-    {% include 'date', date_time: article.published_at %}
+    {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
     <p>{{ 'blogs.article.author_on_date_html' | t: author: article.author, date: date }}</p>
   </header>
 
@@ -67,7 +67,7 @@
               <div class="rte">
                 {{ comment.content }}
               </div>
-              {% include 'date', date_time: comment.created_at %}
+              {% capture date %}{{ comment.created_at | time_tag: format: 'month_day_year' }}{% endcapture %}
               <p>{{ 'blogs.article.comment_meta_html' | t: author: comment.author, date: date }}</p>
             </li>
 
@@ -78,14 +78,16 @@
               <div class="rte">
                 {{ comment.content }}
               </div>
-              {% include 'date', date_time: comment.created_at %}
+              {% capture date %}{{ comment.created_at | time_tag: format: 'month_day_year' }}{% endcapture %}
               <p>{{ 'blogs.article.comment_meta_html' | t: author: comment.author, date: date }}</p>
             </li>
 
           {% endfor %}
         </ul>
 
-        {% include 'pagination' %}
+        {% if paginate.pages > 1 %}
+          {% include 'pagination' %}
+        {% endif %}
       {% endif %}
     </div>
 
