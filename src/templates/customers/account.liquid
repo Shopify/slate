@@ -30,12 +30,14 @@
     <p>{{ 'customer.orders.none' | t }}</p>
   {% endif %}
 
-  {% include 'pagination' %}
+  {% if paginate.pages > 1 %}
+    {% include 'pagination' %}
+  {% endif %}
 
 {% endpaginate %}
 
 <h2>{{ 'customer.account.details' | t }}</h2>
 
-{% include 'address' with customer.default_address %}
+{{ customer.default_address | format_address }}
 
 <a href="/account/addresses">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a>

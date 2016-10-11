@@ -79,7 +79,9 @@
     {% endfor %}
     </ul>
 
-    {% include 'pagination' %}
+    {% if paginate.pages > 1 %}
+      {% include 'pagination' %}
+    {% endif %}
   {% endif %}
 
 {% endpaginate %}

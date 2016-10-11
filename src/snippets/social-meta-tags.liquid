@@ -7,7 +7,6 @@
 {%- if settings.logo_use_image -%}
   {%- capture og_image_tags -%}<meta property="og:image" content="http:{{ 'logo.png' | asset_img_url: '600x600' }}">{%- endcapture -%}
   {%- capture og_image_secure_url_tags -%}<meta property="og:image:secure_url" content="https:{{ 'logo.png' | asset_img_url: '600x600' }}">{%- endcapture -%}
-  {%- capture twitter_image_tag -%}<meta name="twitter:image" content="http:{{ 'logo.png' | asset_img_url: '600x600' }}">{% endcapture -%}
 {%- endif -%}
 
 {% comment %}
@@ -31,7 +30,6 @@
       <meta property="og:image:secure_url" content="https:{{ image.src | product_img_url: '1024x1024' }}">
     {%- endfor -%}
   {%- endcapture -%}
-  {%- capture twitter_image_tag -%}<meta name="twitter:image" content="http:{{ product.featured_image.src | product_img_url: '1024x1024' }}">{%- endcapture -%}
 
 {%- elsif template_base == 'article' -%}
   {%- assign og_title = article.title | strip_html -%}
@@ -40,7 +38,6 @@
   {%- if article.image -%}
     {%- capture og_image_tags -%}<meta property="og:image" content="http:{{ article.image | img_url: '1024x1024' }}">{%- endcapture -%}
     {%- capture og_image_secure_url_tags -%}<meta property="og:image:secure_url" content="https:{{ article.image | img_url: '1024x1024' }}">{%- endcapture -%}
-    {%- capture twitter_image_tag -%}<meta name="twitter:image" content="http:{{ article.image | img_url: '1024x1024' }}">{%- endcapture -%}
   {%- endif -%}
 
 {%- elsif template_base == 'password' -%}
@@ -65,6 +62,3 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ og_title }}">
 <meta name="twitter:description" content="{{ og_description }}">
-<meta name="twitter:image:width" content="480">
-<meta name="twitter:image:height" content="480">
-{{ twitter_image_tag }}

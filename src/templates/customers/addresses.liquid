@@ -123,7 +123,11 @@
   <h2>{{ 'customer.addresses.title' | t }}</h2>
 
   {% for address in customer.addresses %}
-    {% include 'address' with address %}
+
+    {% if address == customer.default_address %}
+      <p><strong>{{ 'customer.addresses.default' | t }}</strong></p>
+    {% endif %}
+    {{ address | format_address }}
 
     <button type="button" class="address-edit-toggle" data-form-id="{{ address.id }}">
       {{ 'customer.addresses.edit' | t }}
@@ -247,6 +251,8 @@
     </div>
   {% endfor %}
 
-  {% include 'pagination' %}
+  {% if paginate.pages > 1 %}
+    {% include 'pagination' %}
+  {% endif %}
 
 {% endpaginate %}

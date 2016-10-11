@@ -36,7 +36,7 @@
       <a href="{{ article.url }}">{{ article.title }}</a>
     </h3>
 
-    {% include 'date', date_time: article.published_at %}
+    {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
 
     <p>
       {{ 'blogs.article.author_on_date_html' | t: author: article.author, date: date }}
@@ -85,6 +85,8 @@
 
   {% endfor %}
 
-  {% include 'pagination' %}
+  {% if paginate.pages > 1 %}
+    {% include 'pagination' %}
+  {% endif %}
 
 {% endpaginate %}
