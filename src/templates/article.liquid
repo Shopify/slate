@@ -35,16 +35,11 @@
     </ul>
   {% endif %}
 
-  {% include 'social-sharing' %}
+  {% if settings.social_sharing_blog %}
+    {% include 'social-sharing', share_title: article.title, share_permalink: article.url, share_image: article.image %}
+  {% endif %}
 
   {% if blog.comments_enabled? %}
-
-    {% comment %}
-
-    Comments (List)
-    =======================
-    {% endcomment %}
-
     <h3>{{ 'blogs.comments.with_count' | t: count: number_of_comments }}</h3>
 
     {% paginate article.comments by 5 %}
@@ -92,13 +87,6 @@
     </div>
 
     {% endpaginate %}
-
-
-    {% comment %}
-
-    Create new comment
-    =======================
-    {% endcomment %}
 
     {% form 'new_comment', article %}
       <h3>{{ 'blogs.comments.title' | t }}</h3>

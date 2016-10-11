@@ -8,8 +8,8 @@
   <meta name="theme-color" content="{{ settings.color_primary }}">
   <link rel="canonical" href="{{ canonical_url }}">
 
-  {% if settings.favicon_enable %}
-    <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png">
+  {% if settings.favicon != blank %}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
   {% endif %}
 
   {% capture seo_title %}
@@ -71,154 +71,13 @@
 
   <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
 
-  <header role="banner">
-    {% if template == 'index' %}
-      <h1 itemscope itemtype="http://schema.org/Organization">
-        {% else %}
-        <div class="h1" itemscope itemtype="http://schema.org/Organization">
-          {% endif %}
-          <a href="/" itemprop="url" class="site-logo{% if settings.logo_use_image %} site-logo--has-image{% endif %}">
-            {% if settings.logo_use_image %}
-              <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
-            {% else %}
-              {{ shop.name }}
-            {% endif %}
-          </a>
-          {% if template == 'index' %}
-      </h1>
-    {% else %}
-      </div>
-    {% endif %}
-
-    <a href="/cart">
-      {% include 'icon-cart' %}
-      {{ 'layout.cart.title' | t }}
-      ({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
-    </a>
-
-    {% if shop.customer_accounts_enabled %}
-      <ul>
-        {% if customer %}
-          <li>
-            {% if customer.first_name != blank %}
-              {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
-              {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
-            {% else %}
-              <a href="/account">{{ 'layout.customer.account' | t }}</a>
-            {% endif %}
-          </li>
-          <li>
-            {{ 'layout.customer.log_out' | t | customer_logout_link }}
-          </li>
-        {% else %}
-          <li>
-            {{ 'layout.customer.log_in' | t | customer_login_link }}
-          </li>
-          <li>
-            {{ 'layout.customer.create_account' | t | customer_register_link }}
-          </li>
-        {% endif %}
-      </ul>
-    {% endif %}
-
-    <form action="/search" method="get" role="search">
-      <label for="Search" class="label-hidden">
-        {{ 'general.search.placeholder' | t }}
-      </label>
-      <input type="search"
-             name="q"
-             id="Search"
-             value="{{ search.terms | escape }}"
-             placeholder="{{ 'general.search.placeholder' | t }}">
-      <button type="submit" class="btn">
-        {% include 'icon-search' %}
-        <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
-      </button>
-    </form>
-
-  </header>
-
-  <nav role="navigation">
-    <ul class="site-nav">
-      {% for link in menus.main-menu.links %}
-        {%- assign child_list_handle = link.title | handleize -%}
-        {% if menus[child_list_handle].links != blank %}
-          <li class="site-nav--has-submenu{% if link.active %} site-nav--active{% endif %}">
-            <a href="{{ link.url }}" class="site-nav__link">
-              {{ link.title }}
-              {% include 'icon-arrow-down' %}
-            </a>
-            <ul class="site-nav__submenu">
-              {% for childlink in menus[child_list_handle].links %}
-                <li {% if childlink.active %}class="site-nav--active"{% endif %}>
-                  <a href="{{ childlink.url }}" class="site-nav__link">{{ childlink.title | escape }}</a>
-                </li>
-              {% endfor %}
-            </ul>
-          </li>
-        {% else %}
-          <li {% if link.active %}class="site-nav--active"{% endif %}>
-            <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
-          </li>
-        {% endif %}
-      {% endfor %}
-    </ul>
-  </nav>
-
+  {% section 'header' %}
 
   <main role="main" id="MainContent">
     {{ content_for_layout }}
   </main>
 
-  <footer>
-
-    {%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo, Fancy, Google Plus' | split: ', ' -%}
-    <ul>
-      {% for social in social_accounts %}
-
-        {%- assign social_handle = social | handleize -%}
-        {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
-        {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
-
-        {% if settings[social_link] != blank %}
-          <li>
-            <a href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
-              {% include social_icon %}
-              <span class="icon-fallback-text">{{ social }}</span>
-            </a>
-          </li>
-        {% endif %}
-
-      {% endfor %}
-    </ul>
-
-    {% unless shop.enabled_payment_types == empty %}
-    {%- assign payment_icons_available = 'amazon_payments,american_express,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,visa' | split: ',' -%}
-
-    <ul class="payment-icons">
-      {% for type in shop.enabled_payment_types %}
-        {% if payment_icons_available contains type %}
-          <li>
-            {%- assign icon_name = type | prepend: 'icon-' -%}
-            {% include icon_name %}
-          </li>
-        {% endif %}
-      {% endfor %}
-    </ul>
-    {% endunless %}
-
-    {% if menus.footer.links.size > 0 %}
-      <ul>
-        {% for link in menus.footer.links %}
-          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-
-    <div>
-      <small>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}. {{ powered_by_link }}</small>
-    </div>
-  </footer>
+  {% section 'footer' %}
 
 </body>
 </html>

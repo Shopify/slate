@@ -1,24 +1,8 @@
-{% capture permalinkURL %}{{ shop.url }}{% endcapture %}
-{% capture shareTitle %}{{ page_description | url_param_escape }}{% endcapture %}
-
-{% comment %}
-  Template specific overrides
-{% endcomment %}
-{% if template contains 'article' or template contains 'blog' %}
-  {% capture permalinkURL %}{{ shop.url }}{{ article.url }}{% endcapture %}
-  {% capture shareTitle %}{{ article.title | url_param_escape }}{% endcapture %}
-{% elsif template contains 'product' %}
-  {% capture permalinkURL %}{{ shop.url }}{{ product.url }}{% endcapture %}
-  {% capture shareTitle %}{{ product.title | url_param_escape }}{% endcapture %}
-{% elsif template == 'password' %}
-  {% capture permalinkURL %}{{ shop.url }}{% endcapture %}
-  {% capture shareTitle %}{% unless shop.description == blank %}{{ shop.description | url_param_escape }}{% else %}{{ shop.name | url_param_escape }}{% endunless %}{% endcapture %}
-{% endif %}
-
-<div class="social-sharing" data-permalink="{{ permalinkURL }}">
+<!-- /snippets/social-sharing.liquid -->
+<div class="social-sharing">
 
   {% if settings.share_facebook %}
-    <a target="_blank" href="//www.facebook.com/sharer.php?u={{ permalinkURL }}">
+    <a target="_blank" href="//www.facebook.com/sharer.php?u={{ shop.url | append: share_permalink }}">
       {% include 'icon-facebook' %}
       <span aria-hidden="true">{{ 'general.social.share_on_facebook' | t }}</span>
       <span class="visually-hidden">{{ 'general.social.alt_text.share_on_facebook' | t }}</span>
@@ -26,38 +10,18 @@
   {% endif %}
 
   {% if settings.share_twitter %}
-    <a target="_blank" href="//twitter.com/share?text={{ shareTitle }}&amp;url={{ permalinkURL }}">
+    <a target="_blank" href="//twitter.com/share?text={{ share_title | url_param_escape }}&amp;url={{ shop.url | append: share_permalink }}">
       {% include 'icon-twitter' %}
       <span aria-hidden="true">{{ 'general.social.share_on_twitter' | t }}</span>
       <span class="visually-hidden">{{ 'general.social.alt_text.share_on_twitter' | t }}</span>
     </a>
   {% endif %}
 
-  {% if template contains 'product' %}
-
-    {% if settings.share_pinterest %}
-      <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media={{ product | img_url: '1024x1024' }}&amp;description={{ shareTitle }}">
-        {% include 'icon-pinterest' %}
-        <span aria-hidden="true">{{ 'general.social.share_on_pinterest' | t }}</span>
-        <span class="visually-hidden">{{ 'general.social.alt_text.share_on_pinterest' | t }}</span>
-      </a>
-    {% endif %}
-
-    {% if settings.share_fancy %}
-      <a target="_blank" href="//fancy.com/fancyit?ItemURL={{ permalinkURL }}&amp;Title={{ shareTitle }}&amp;Category=Other&amp;ImageURL={{ product | img_url: '1024x1024' }}">
-        {% include 'icon-fancy' %}
-        <span aria-hidden="true">{{ 'general.social.share_on_fancy' | t }}</span>
-        <span class="visually-hidden">{{ 'general.social.alt_text.share_on_fancy' | t }}</span>
-      </a>
-    {% endif %}
-
-  {% endif %}
-
-  {% if settings.share_google %}
-    <a target="_blank" href="//plus.google.com/share?url={{ permalinkURL }}">
-      {% include 'icon-google-plus' %}
-      <span aria-hidden="true">+1</span>
-      <span class="visually-hidden">{{ 'general.social.alt_text.share_on_google' | t }}</span>
+  {% if settings.share_pinterest %}
+    <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ shop.url | append: share_permalink }}&amp;media={{ share_image | img_url: '1024x1024' }}&amp;description={{ share_title | url_param_escape }}">
+      {% include 'icon-pinterest' %}
+      <span aria-hidden="true">{{ 'general.social.share_on_pinterest' | t }}</span>
+      <span class="visually-hidden">{{ 'general.social.alt_text.share_on_pinterest' | t }}</span>
     </a>
   {% endif %}
 

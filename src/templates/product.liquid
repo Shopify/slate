@@ -89,5 +89,7 @@
     {{ product.description }}
   </div>
 
-  {% include 'social-sharing' %}
+  {% if settings.social_sharing_products %}
+    {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
+  {% endif %}
 </div>

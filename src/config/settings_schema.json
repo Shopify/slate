@@ -60,51 +60,6 @@
     ]
   },
   {
-    "name": "Header",
-    "settings": [
-      {
-        "type": "header",
-        "content": "Logo"
-      },
-      {
-        "type": "checkbox",
-        "id": "logo_use_image",
-        "label": "Use custom logo"
-      },
-      {
-        "type": "image",
-        "id": "logo.png",
-        "label": "Logo image",
-        "max-width": 450,
-        "max-height": 200,
-        "info": "Maximum logo dimensions are 450px wide by 200px high. The uploaded file will be resized to fit within those constraints."
-      },
-      {
-        "type": "text",
-        "id": "logo_max_width",
-        "label": "Custom logo width (in pixels)",
-        "default": "450"
-      },
-      {
-        "type": "header",
-        "content": "Favicon"
-      },
-      {
-        "type": "checkbox",
-        "id": "favicon_enable",
-        "label": "Use custom icon"
-      },
-      {
-        "type": "image",
-        "id": "favicon.png",
-        "label": "Favicon image",
-        "info": "32 x 32px .png",
-        "max-width": 32,
-        "max-height": 32
-      }
-    ]
-  },
-  {
     "name": "Home page",
     "settings": [
       {
@@ -128,37 +83,32 @@
       {
         "type": "checkbox",
         "id": "social_sharing_products",
-        "label": "Enable sharing for products"
+        "label": "Enable sharing for products",
+        "default": true
       },
       {
         "type": "checkbox",
         "id": "social_sharing_blog",
-        "label": "Enable sharing for blog articles"
+        "label": "Enable sharing for blog articles",
+        "default": true
       },
       {
         "type": "checkbox",
         "id": "share_facebook",
-        "label": "Share on Facebook"
+        "label": "Share on Facebook",
+        "default": true
       },
       {
         "type": "checkbox",
         "id": "share_twitter",
-        "label": "Tweet on Twitter"
+        "label": "Tweet on Twitter",
+        "default": true
       },
       {
         "type": "checkbox",
         "id": "share_pinterest",
-        "label": "Pin on Pinterest"
-      },
-      {
-        "type": "checkbox",
-        "id": "share_fancy",
-        "label": "Add to Fancy"
-      },
-      {
-        "type": "checkbox",
-        "id": "share_google",
-        "label": "+1 on Google Plus"
+        "label": "Pin on Pinterest",
+        "default": true
       },
       {
         "type": "header",
@@ -178,11 +128,6 @@
         "type": "text",
         "id": "social_pinterest_link",
         "label": "Pinterest link"
-      },
-      {
-        "type": "text",
-        "id": "social_google-plus_link",
-        "label": "Google Plus link"
       },
       {
         "type": "text",
@@ -208,11 +153,28 @@
         "type": "text",
         "id": "social_vimeo_link",
         "label": "Vimeo link"
-      },
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
       {
-        "type": "text",
-        "id": "social_fancy_link",
-        "label": "Fancy link"
+        "type": "checkbox",
+        "id": "cart_notes_enable",
+        "label": "Enable cart notes",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "Will be scaled down to 32 x 32px"
       }
     ]
   }

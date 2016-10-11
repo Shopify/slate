@@ -31,13 +31,10 @@
       "share_on_facebook": "Compartilhar",
       "share_on_twitter": "Tweetar",
       "share_on_pinterest": "Pin it",
-      "share_on_fancy": "Adicione no Fancy",
       "alt_text": {
         "share_on_facebook": "Compartilhe no Facebook",
         "share_on_twitter": "Tuite no Twitter",
-        "share_on_pinterest": "Adicione no Pinterest",
-        "share_on_fancy": "Adicione no Fancy",
-        "share_on_google": "+1 no Google Plus"
+        "share_on_pinterest": "Adicione no Pinterest"
       }
     },
     "search": {
