@@ -8,12 +8,8 @@
 
 <header role="banner">
   <div itemscope itemtype="http://schema.org/Organization">
-    <a href="{{ shop.url }}" itemprop="url" class="site-logo{% if settings.logo_use_image %} site-logo--has-image{% endif %}">
-      {% if settings.logo_use_image %}
-        <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
-      {% else %}
-        {{ shop.name }}
-      {% endif %}
+    <a href="{{ shop.url }}" itemprop="url" class="site-logo">
+      {{ shop.name }}
     </a>
   </div>
   <div>{{ shop.url | escape }}</div>
