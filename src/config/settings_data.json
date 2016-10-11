@@ -1,8 +1,6 @@
 {
   "current": "Default",
   "presets": {
-    "Default": {
-      "logo_use_image": false
-    }
+    "Default": {}
   }
 }
