@@ -128,37 +128,32 @@
       {
         "type": "checkbox",
         "id": "social_sharing_products",
-        "label": "Enable sharing for products"
+        "label": "Enable sharing for products",
+        "default": true
       },
       {
         "type": "checkbox",
         "id": "social_sharing_blog",
-        "label": "Enable sharing for blog articles"
+        "label": "Enable sharing for blog articles",
+        "default": true
       },
       {
         "type": "checkbox",
         "id": "share_facebook",
-        "label": "Share on Facebook"
+        "label": "Share on Facebook",
+        "default": true
       },
       {
         "type": "checkbox",
         "id": "share_twitter",
-        "label": "Tweet on Twitter"
+        "label": "Tweet on Twitter",
+        "default": true
       },
       {
         "type": "checkbox",
         "id": "share_pinterest",
-        "label": "Pin on Pinterest"
-      },
-      {
-        "type": "checkbox",
-        "id": "share_fancy",
-        "label": "Add to Fancy"
-      },
-      {
-        "type": "checkbox",
-        "id": "share_google",
-        "label": "+1 on Google Plus"
+        "label": "Pin on Pinterest",
+        "default": true
       },
       {
         "type": "header",
@@ -178,11 +173,6 @@
         "type": "text",
         "id": "social_pinterest_link",
         "label": "Pinterest link"
-      },
-      {
-        "type": "text",
-        "id": "social_google-plus_link",
-        "label": "Google Plus link"
       },
       {
         "type": "text",
@@ -208,11 +198,17 @@
         "type": "text",
         "id": "social_vimeo_link",
         "label": "Vimeo link"
-      },
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
       {
-        "type": "text",
-        "id": "social_fancy_link",
-        "label": "Fancy link"
+        "type": "checkbox",
+        "id": "cart_notes_enable",
+        "label": "Enable cart notes",
+        "default": true
       }
     ]
   }
