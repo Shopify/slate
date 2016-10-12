@@ -1,11 +1,31 @@
-var themekit = require('../includes/themekit.js');
+var command = require('@shopify/themekit').command;
 
 module.exports = {
   command: function(args, options) {
     if (options.environment) {
-      return themekit.commands(['replace', '-env', options.environment].concat(args));
+      return new Promise(function(resolve, reject) {
+        command({
+          args: ['replace', '-env', options.environment].concat(args)
+        }, function(err) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        });
+      });
     } else {
-      return themekit.commands(['replace'].concat(args));
+      return new Promise(function(resolve, reject) {
+        command({
+          args: ['replace'].concat(args)
+        }, function(err) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        });
+      });
     }
   }
 };

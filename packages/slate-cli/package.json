@@ -22,22 +22,19 @@
     "generate-section": "yo --no-insight --no-update-notifier ./generators/new-section/section.js"
   },
   "dependencies": {
+    "@shopify/themekit": "0.4.3",
     "Slate": "git+ssh://git@github.com/shopify/slate.git#e1ab032b596ddfb5e7722efb6a9792eb1bce5adf",
-    "bin-wrapper": "3.0.2",
-    "bluebird": "3.4.1",
-    "feedparser": "1.1.4",
     "find-root": "1.0.0",
     "global-npm": "0.3.0",
-    "lodash": "4.13.1",
+    "lodash": "4.16.4",
     "nopt": "3.0.6",
     "open": "0.0.5",
-    "request": "2.74.0",
-    "yeoman-generator": "0.23.3",
-    "yo": "1.8.4"
+    "yeoman-generator": "0.24.1",
+    "yo": "1.8.5"
   },
   "devDependencies": {
-    "eslint": "3.2.2",
-    "eslint-plugin-node": "2.0.0",
-    "eslint-plugin-shopify": "13.0.0"
+    "eslint": "3.3.1",
+    "eslint-plugin-node": "2.1.2",
+    "eslint-plugin-shopify": "14.0.2"
   }
 }

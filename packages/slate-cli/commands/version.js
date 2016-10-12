@@ -1,13 +1,23 @@
 var msg = require('../includes/messages.js');
 var utils = require('../includes/utils.js');
-var themekit = require('../includes/themekit.js');
+var command = require('@shopify/themekit').command;
 
 module.exports = {
   command: function() {
-    return themekit.commands(['version'])
-      .then(function() {
-        process.stdout.write(msg.versionInfo());
+    return new Promise(function(resolve, reject) {
+      command({
+        args: ['version']
+      }, function(err) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
       });
+    })
+    .then(function() {
+      process.stdout.write(msg.versionInfo());
+    });
   },
   help: function() {
     utils.logHelpMsg([

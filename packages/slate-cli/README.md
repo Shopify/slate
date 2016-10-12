@@ -23,8 +23,6 @@ Clone the latest version of Slate CLI to your local machine using SSH
 git clone git@github.com:Shopify/slate-cli.git
 ```
 
-
-
 #### 2. Run npm link
 ```shell
 cd slate-cli
@@ -37,14 +35,6 @@ a symbolic link to your global npm directory.
 
 You should now be able to run slate from your terminal. Try running `slate -v` to verify that everything worked
 (if this didn't work, see [Troubleshooting](#troubleshooting) for guidance).
-
-#### 3. Run slate setup
-
-```shell
-slate setup
-```
-
-This command installs [ThemeKit](http://themekit.cat) and other non-node dependencies. More details [here](#setup).
 
 ## Getting started
 
@@ -101,8 +91,7 @@ You're ready to start developing with Slate.  To get started, run the following 
 
 1. Pull the latest version from GitHub - Make sure that your current branch is master and that your master branch is up-to-date.
 2. Run `npm update` - This will update all project dependencies and developer tools listed in the [package.json](package.json) file.
-3. Run `slate setup` - This installs project-specific dependencies and developer tools. More details [here](#setup).
-4. Run `npm prune` and `npm install` (optional) - After major changes, it may be necessary to clean out your `node_modules` and
+3. Run `npm prune` and `npm install` (optional) - After major changes, it may be necessary to clean out your `node_modules` and
 make sure that new modules have been correctly installed.
 
    This will remove any unused dependencies from `node_modules` and install all new dependencies.
@@ -111,18 +100,10 @@ make sure that new modules have been correctly installed.
 
 Command                      | Usage
 ---                          | ---
-[setup](#setup)              | `slate setup`
 [new theme](#new-theme)      | `slate new theme [name]`
 [new section](#new-section)  | `slate new section [name]`
 [help](#help)                | `slate -h`
 [version](#version)          | `slate -v`
-
-### setup
-```
-slate setup
-```
-
-Installs [Theme Kit](http://themekit.cat/), a cross-platform tool which provides utilities that allow you to interact with Shopify themes.
 
 ### new theme
 ```
@@ -239,7 +220,6 @@ If you encounter any issues, here are some preliminary steps to take:
 
 - `git pull` latest version of Slate CLI.
 - `npm install` to make sure you have all the dependencies.
-- `slate setup` to make sure all Slate CLI dependencies are installed.
 - `npm link` to make sure that the symlink exists and Slate CLI is globally installed.
 
 ## License

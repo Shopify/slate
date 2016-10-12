@@ -13,14 +13,6 @@ module.exports = {
     return 'Unknown command, please refer to help. \n';
   },
 
-  fetchingDependencies: function() {
-    return 'Fetching dependencies...\n';
-  },
-
-  missingDependencies: function() {
-    return 'Dependencies missing. Please run slate setup\n';
-  },
-
   noGenerator: function() {
     return 'No generator specified, please use one of the following commands:\n' + this.generatorsList();
   },
@@ -39,25 +31,5 @@ module.exports = {
 
   scaffoldsList: function() {
     return ' slate\n';
-  },
-
-  unknownInstaller: function() {
-    return 'Unknown installer, please use one of the following commands:\n' + this.installersList();
-  },
-
-  installersList: function() {
-    return ' slate setup themekit\n';
-  },
-
-  installerPath: function(name, path) {
-    return name + ': ' + path + '\n';
-  },
-
-  installerFailed: function(name, error) {
-    return name + ' failed to install\n ' + error + '\n';
-  },
-
-  installerSuccess: function(name) {
-    return name + ' successfully installed\n';
   }
 };

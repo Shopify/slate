@@ -10,3 +10,5 @@ rules:
   spaced-comment: 0
   no-process-env: 0
   indent: ["error", 2, {"SwitchCase": 1}]
+globals:
+  Promise: 1

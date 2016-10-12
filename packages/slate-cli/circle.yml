@@ -9,4 +9,3 @@ dependencies:
 test:
   override:
     - npm run lint
-    - slate setup

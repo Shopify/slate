@@ -1,5 +1,5 @@
 var msg = require('../includes/messages.js');
-var themekit = require('../includes/themekit.js');
+var command = require('@shopify/themekit').command;
 
 module.exports = {
   command: function(args, options) {
@@ -7,9 +7,29 @@ module.exports = {
       return process.stdout.write(msg.noFiles());
     } else {
       if (options.environment) {
-        return themekit.commands(['remove', '-env', options.environment].concat(args));
+        return new Promise(function(resolve, reject) {
+          command({
+            args: ['remove', '-env', options.environment].concat(args)
+          }, function(err) {
+            if (err) {
+              reject(err);
+            } else {
+              resolve();
+            }
+          });
+        });
       } else {
-        return themekit.commands(['remove'].concat(args));
+        return new Promise(function(resolve, reject) {
+          command({
+            args: ['remove'].concat(args)
+          }, function(err) {
+            if (err) {
+              reject(err);
+            } else {
+              resolve();
+            }
+          });
+        });
       }
     }
   }

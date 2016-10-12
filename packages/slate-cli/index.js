@@ -3,7 +3,6 @@ module.exports = {
   // global/install tasks
   help: require('./commands/help'),
   version: require('./commands/version'),
-  setup: require('./commands/setup'),
   upload: require('./commands/upload'),
   remove: require('./commands/remove'),
   replace: require('./commands/replace'),
