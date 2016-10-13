@@ -1,57 +1,11 @@
-/**
- * ## A set of command line tasks for automating deploys, processing files and
- * watching for local changes. To get started:
- * ```javascript
- *   gulp [--sync]
- * ```
- *
- * @namespace slate-cli
- */
-var gulp = require('gulp');
-var argv = require('yargs').argv;
-
-// this is a temporary hack, and will be deprecated when gulp 4.0 is released
-var runSequence = require('run-sequence');
+const gulp = require('gulp');
+const argv = require('yargs').argv;
+const runSequence = require('run-sequence');
 
 // imports gulp tasks from the `tasks` directory
 require('require-dir')('./tasks');
 
-/**
- * @summary a series of gulp tasks automating various aspects of theme
- *   development
- * @namespace tasks
- * @memberof slate-cli
- */
-/**
- * @summary Tasks used to process or organize files prior to deployment to a
- *   Shopify store
- * @namespace build
- * @memberof slate-cli.tasks
- */
-/**
- * @summary Tasks required for deploying assets to a Shopify store
- * @namespace deploy
- * @memberof slate-cli.tasks
- */
-/**
- * @summary Watch tasks monitoring for file changes, and delegating to other
- *   tasks appropriately
- * @namespace watch
- * @memberof slate-cli.tasks
- */
-
-/**
- * __dependencies:__  `[build:scss, build:js, build:assets, build:config,
- * build:svg]` Does a full (re)build of the `dist` directory, based on the
- * state of files from the `src` directory
- *
- * @summary Build/Rebuild your source files to match the structural
- *   requirements for a Shopify Theme
- * @function build
- * @memberof slate-cli.tasks.build
- * @static
- */
-gulp.task('build', function(done) {
+gulp.task('build', (done) => {
   runSequence(
     ['clean'],
     ['build:js', 'build:vendor-js', 'build:css', 'build:assets', 'build:sections', 'build:config', 'build:svg'],

@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var pkg = require('../package.json');
+// var pkg = require('../package.json');
 var del = require('del');
 var zip = require('gulp-zip');
 var size = require('gulp-size');
@@ -32,7 +32,8 @@ gulp.task('compress', function() {
 
   return gulp.src([distFiles, ignoreConfig])
     .pipe(plumber(utils.errorHandler))
-    .pipe(zip(pkg.name + '.zip'))
+    // .pipe(zip(pkg.name + '.zip'))
+    .pipe(zip('theme.zip'))
     .pipe(size({showFiles: true, pretty: true}))
     .pipe(gulp.dest('./upload/'));
 });

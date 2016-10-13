@@ -2,6 +2,9 @@
   "name": "slate-tools",
   "version": "0.0.0",
   "description": "Tooling for Shopify themes",
+  "bin": {
+    "slate-tools": "lib/index.js"
+  },
   "main": "lib/index.js",
   "license": "MIT",
   "author": "Shopify Inc.",
@@ -9,9 +12,11 @@
     "bluebird": "3.4.0",
     "browser-sync": "2.13.0",
     "chokidar": "1.5.2",
+    "commander": "2.9.0",
     "del": "2.2.0",
     "eslint": "3.2.2",
     "eslint-plugin-shopify": "13.0.0",
+    "find-root": "1.0.0",
     "gulp": "3.9.1",
     "gulp-cheerio": "0.6.2",
     "gulp-cssimport": "3.0.2",
@@ -47,6 +52,7 @@
     "mocha": "^3.0.2"
   },
   "scripts": {
+    "start": "babel -w -d lib/ src/",
     "test": "npm run lint-allow-warning && mocha --compilers js:babel-register -u tdd test/index.js",
     "prepublish": "babel -d lib/ src/",
     "lint": "eslint --max-warnings 0 -c .eslintrc.json src/ test/",
