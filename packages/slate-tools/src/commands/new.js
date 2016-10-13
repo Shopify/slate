@@ -1,8 +1,4 @@
-const spawn = require('child_process').spawn;
-const config = require('./includes/config');
-
 module.exports = function(program) {
-
   program
     .command('new <generator>')
     .alias('n')

@@ -13,6 +13,7 @@
     "browser-sync": "2.13.0",
     "chokidar": "1.5.2",
     "commander": "2.9.0",
+    "debug": "2.2.0",
     "del": "2.2.0",
     "eslint": "3.2.2",
     "eslint-plugin-shopify": "13.0.0",

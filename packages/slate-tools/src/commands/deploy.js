@@ -1,7 +1,7 @@
 const spawn = require('child_process').spawn;
-const config = require('./includes/config');
+const config = require('../includes/config');
 
-module.exports = function(program) {
+module.exports = function(program, debug) {
 
   program
     .command('deploy')
@@ -10,27 +10,10 @@ module.exports = function(program) {
     .option('-e, --environment', 'deploy to a comma-separated list of environments')
     .option('-m, --manual', 'disable auto-deployment of the theme files')
     .action(() => {
-      const gulp = spawn('gulp', ['deploy', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot]);
-      let errors = '';
+      debug(JSON.stringify(config, 0, 2));
 
-      gulp.stdout.setEncoding('utf8');
-      gulp.stdout.on('data', (data) => {
-        process.stdout.write(data);
-      });
-
-      gulp.stderr.setEncoding('utf8');
-      gulp.stderr.on('data', (data) => {
-        errors += data;
-      });
-
-      gulp.on('error', (err) => {
-        process.stderr.write(err);
-      });
-
-      gulp.on('close', () => {
-        if (errors) {
-          process.stderr.write(errors);
-        }
+      spawn('gulp', ['build', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot], {
+        stdio: 'inherit'
       });
     });
 };
