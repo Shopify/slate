@@ -24,7 +24,7 @@
  *  @prop {Object} plugins - configuration objects passed to various plugins used in the task interface
  */
 var config = {
-  environment: '<%= env %>',
+  environment: 'development',
   enableLinting: false,
 
   tasks: 'tasks/**/*.js',
@@ -77,34 +77,3 @@ var config = {
   }
 };
 module.exports = config;
-
-/**
- * ## File Paths
- *
- * It's a big description written in `markdown`
- *
- * Example:
- *
- * ```javascript
- * $('something')
- *   .something(else);
- * ```
- *
- * @member {Object}
- * @memberof slate-cli.config
- */
-
-/**
- * ## Plugin Configuration
- *
- * It's a big description written in `markdown`
- *
- * Example:
- *
- * ```javascript
- * $('something')
- *   .something(else);
- * ```
- * @member {Object} plugins
- * @memberof slate-cli.config
- */
