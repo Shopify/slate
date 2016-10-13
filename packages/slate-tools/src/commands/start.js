@@ -12,7 +12,7 @@ module.exports = function(program, debug) {
     .action(() => {
       debug(JSON.stringify(config, 0, 2));
 
-      spawn('gulp', ['build', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot], {
+      spawn('gulp', ['start', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot], {
         stdio: 'inherit'
       });
     });
