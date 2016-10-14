@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/Shopify/slate.git"
   },
-  "dependencies": {
+  "devDependencies": {
     "slate-tools": "file:///Users/ryanmacdonald/Shopify/slate-tools"
   }
 }

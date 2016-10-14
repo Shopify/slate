@@ -12,7 +12,11 @@
 ---
 
 development:
-  password:
-  theme_id: "live"
-  store: your-shop.myshopify.com
-  ignore_files:
+  password: 5e6d345d3a656e00e04f08bae4189ebd
+  theme_id: 132364355
+  store: ryderp.myshopify.com
+
+production:
+  password: 4004ea367940567c35bf937fd5bda4b4
+  theme_id: 124006337
+  store: ryderp-only-https.myshopify.com
