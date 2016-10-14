@@ -47,3 +47,4 @@ assets/logo.png
 /.idea
 deploy.log
 /docs/js
+config.yml
