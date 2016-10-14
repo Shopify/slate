@@ -1,16 +1,17 @@
-/* eslint-disable no-sync */
+/* eslint-disable no-sync,no-process-env */
 
-var gulp = require('gulp');
-var spawn = require('child_process').spawn;
-var Promise = require('bluebird');
-var fs = require('fs');
-var open = Promise.promisify(require('open'));
-var yaml = require('js-yaml');
+const gulp = require('gulp');
+const Promise = require('bluebird');
+const fs = require('fs');
+const debug = require('debug')('slate-tools:deploy');
+const open = Promise.promisify(require('open'));
+const argv = require('yargs').argv;
+const yaml = require('js-yaml');
+const themekit = require('@shopify/themekit');
 
-var config = require('./includes/config.js');
-var messages = require('./includes/messages.js');
-var utils = require('./includes/utilities.js');
-
+const config = require('./includes/config.js');
+const messages = require('./includes/messages.js');
+const utils = require('./includes/utilities.js');
 
 /**
  * Replace your existing theme using ThemeKit.
@@ -19,24 +20,26 @@ var utils = require('./includes/utilities.js');
  * @memberof slate-cli.tasks.deploy
  * @static
  */
-gulp.task('deploy:replace', function() {
-  if (process.env.tkEnvironments) {
-    var environments = process.env.tkEnvironments.split(/\s*,\s*|\s+/);
-    var promises = [];
+gulp.task('deploy:replace', () => {
+  debug(`gulp environment ${argv.environment}`);
 
-    environments.forEach(function(environment) {
+  if (argv.environment) {
+    const environments = argv.environment.split(/\s*,\s*|\s+/);
+    const promises = [];
+
+    environments.forEach((environment) => {
       function factory() {
         messages.deployTo(environment);
         return deploy(environment);
       }
+
       promises.push(factory);
     });
 
     return utils.promiseSeries(promises)
-      .then(function() {
-        messages.allDeploysComplete();
+      .then(() => {
+        return messages.allDeploysComplete();
       });
-
   } else {
     messages.deployTo(config.environment);
     return deploy(config.environment);
@@ -50,19 +53,19 @@ gulp.task('deploy:replace', function() {
  * @memberof slate-cli.tasks.deploy
  * @static
  */
-gulp.task('open:admin', function() {
-  var file = fs.readFileSync(config.tkConfig, 'utf8');
-  var tkConfig = yaml.safeLoad(file);
-  var envObj;
+gulp.task('open:admin', () => {
+  const file = fs.readFileSync(config.tkConfig, 'utf8');
+  const tkConfig = yaml.safeLoad(file);
+  let envObj;
 
-  if (process.env.tkEnvironments) {
-    var environments = process.env.tkEnvironments.split(/\s*,\s*|\s+/);
-    var promises = [];
+  if (argv.environment) {
+    const environments = argv.environment.split(/\s*,\s*|\s+/);
+    const promises = [];
 
-    environments.forEach(function(environment) {
+    environments.forEach((environment) => {
       function factory() {
         envObj = tkConfig[environment];
-        return open('https://' + envObj.store + '/admin/themes');
+        return open(`https://${envObj.store}/admin/themes`);
       }
       promises.push(factory);
     });
@@ -70,7 +73,7 @@ gulp.task('open:admin', function() {
     return utils.promiseSeries(promises);
   } else {
     envObj = tkConfig[config.environment];
-    return open('https://' + envObj.store + '/admin/themes');
+    return open(`https://${envObj.store}/admin/themes`);
   }
 });
 
@@ -81,7 +84,7 @@ gulp.task('open:admin', function() {
  * @memberof slate-cli.tasks.deploy
  * @static
  */
-gulp.task('open:zip', function() {
+gulp.task('open:zip', () => {
   return open('./upload/');
 });
 
@@ -92,7 +95,22 @@ gulp.task('open:zip', function() {
  * @private
  */
 function deploy(env) {
-  return utils.resolveShell(
-    spawn('slate', ['replace', '--environment', env], {cwd: config.dist.root})
-  );
+  return new Promise((resolve, reject) => {
+    const cwd = process.cwd();
+
+    process.chdir(config.dist.root);
+    debug(`Changing cwd to: ${process.cwd()}`);
+    debug(`Deploying to ${env}`);
+
+    return themekit.command({
+      args: ['replace', '-env', env]
+    }, (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        process.chdir(cwd);
+        resolve();
+      }
+    });
+  });
 }

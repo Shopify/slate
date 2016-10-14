@@ -1,30 +1,31 @@
-var gutil = require('gulp-util');
+const gutil = require('gulp-util');
 
-var messages = {
-  logFileEvent: function(event, path) {
-    path = separatePath(path);
+const messages = {
+  logFileEvent: (event, path) => {
+    const pathObject = separatePath(path);
+
     gutil.log('change in',
-      gutil.colors.magenta(path.dir),
+      gutil.colors.magenta(pathObject.dir),
       gutil.colors.white('-'),
       gutil.colors.cyan(event),
-      gutil.colors.yellow(path.file)
+      gutil.colors.yellow(pathObject.file)
     );
   },
 
-  logTransferDone: function() {
+  logTransferDone: () => {
     gutil.log('Transfer Complete:',
       gutil.colors.green('File changes successfully synced to store')
     );
   },
 
-  logProcessFiles: function(processName) {
+  logProcessFiles: (processName) => {
     gutil.log('running task',
       gutil.colors.white('-'),
       gutil.colors.cyan(processName)
     );
   },
 
-  logChildProcess: function(cmd) {
+  logChildProcess: (cmd) => {
     gutil.log('running task',
       gutil.colors.bold('[child process]'),
       gutil.colors.white('-'),
@@ -32,29 +33,29 @@ var messages = {
     );
   },
 
-  logDeploys: function(cmd, files) {
-    var timestamp = 'Deploy complete @ ' + new Date() + '. ';
-    var action = cmd === 'upload' ? 'added/changed ' : 'removed ';
-    var amount = files.length + ' file(s): ';
-    var fileList = files.join(', ') + '.\n';
+  logDeploys: (cmd, files) => {
+    const timestamp = `Deploy complete @ ${new Date()}. `;
+    const action = cmd === 'upload' ? 'added/changed ' : 'removed ';
+    const amount = `${files.length} file(s): `;
+    const fileList = `${files.join(', ')}.\n`;
 
     return timestamp + action + amount + fileList;
   },
 
-  logBundleJs: function() {
+  logBundleJs: () => {
     gutil.log('Updating JS Bundle...');
   },
 
-  configChange: function() {
+  configChange: () => {
     return 'Changes to ThemeKit Config Detected: You may need to quit <slate watch>' +
       ' and run a full <slate deploy> as a result.';
   },
 
-  deployTo: function(environment) {
+  deployTo: (environment) => {
     gutil.log('Initiating deploy to', gutil.colors.bold(environment));
   },
 
-  allDeploysComplete: function() {
+  allDeploysComplete: () => {
     gutil.log('Multiple environments:',
       gutil.colors.green('Deploy completed for all environments in series')
     );
@@ -71,7 +72,8 @@ module.exports = messages;
  * @private
  */
 function separatePath(path) {
-  var tmp = path.split('/');
+  const tmp = path.split('/');
+
   return {
     file: tmp.pop(),
     dir: tmp.join('/')

@@ -1,19 +1,27 @@
 const spawn = require('child_process').spawn;
-const config = require('../includes/config');
+const debug = require('debug')('slate-tools:deploy');
+const config = require('../config');
 
-module.exports = function(program, debug) {
+module.exports = function(program) {
 
   program
     .command('deploy')
     .alias('d')
     .description('Build theme and replace theme files on specified environment(s).')
-    .option('-e, --environment', 'deploy to a comma-separated list of environments')
+    .option('-e, --environment [environment]', 'deploy to a comma-separated list of environments', 'development')
     .option('-m, --manual', 'disable auto-deployment of the theme files')
-    .action(() => {
-      debug(JSON.stringify(config, 0, 2));
+    .action((options = {}) => {
+      debug(`--gulpfile ${config.gulpFile}`);
+      debug(`--cwd ${config.themeRoot}`);
 
-      spawn('gulp', ['deploy', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot], {
-        stdio: 'inherit'
-      });
+      if (options.manual) {
+        spawn('gulp', ['deploy:manual', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot], {
+          stdio: 'inherit'
+        });
+      } else {
+        spawn('gulp', ['deploy', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot, '--environment', options.environment], {
+          stdio: 'inherit'
+        });
+      }
     });
 };

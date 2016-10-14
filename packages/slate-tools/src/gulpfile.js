@@ -21,7 +21,7 @@ gulp.task('build', (done) => {
  * @memberof slate-cli.tasks
  * @static
  */
-gulp.task('zip', function(done) {
+gulp.task('zip', (done) => {
   runSequence('build', 'compress', done);
 });
 
@@ -32,7 +32,7 @@ gulp.task('zip', function(done) {
  * @memberof slate-cli.tasks
  * @static
  */
-gulp.task('test', function(done) {
+gulp.task('test', (done) => {
   runSequence('lint:js', 'lint:css', 'lint:json', done);
 });
 
@@ -45,12 +45,12 @@ gulp.task('test', function(done) {
  * @memberof slate-cli.tasks.watch
  * @static
  */
-gulp.task('watch', function() {
+gulp.task('watch', () => {
   runSequence('build:config', defineWatchTasks());
 });
 
 function defineWatchTasks() {
-  var tasks = ['watch:src', 'watch:dist', 'watch:dist-config'];
+  const tasks = ['watch:src', 'watch:dist', 'watch:dist-config'];
 
   // unless --nosync flag is set, start browser-sync
   if (!argv.nosync) {
@@ -71,7 +71,7 @@ function defineWatchTasks() {
  * @memberof slate-cli.tasks.deploy
  * @static
  */
-gulp.task('deploy', function(done) {
+gulp.task('deploy', (done) => {
   runSequence('build', 'deploy:replace', done);
 });
 
@@ -83,7 +83,7 @@ gulp.task('deploy', function(done) {
  * @memberof slate-cli.tasks.deploy
  * @static
  */
-gulp.task('deploy:manual', function(done) {
+gulp.task('deploy:manual', (done) => {
   runSequence('zip', 'open:admin', 'open:zip', done);
 });
 
@@ -96,6 +96,6 @@ gulp.task('deploy:manual', function(done) {
  * @memberof slate-cli.tasks
  * @static
  */
-gulp.task('default', function(done) {
+gulp.task('default', (done) => {
   runSequence('deploy', 'watch', done);
 });

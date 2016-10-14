@@ -1,3 +1,6 @@
+BENCHMARK: Oct 14, 2016 | local install | npm install ../slate-tools  30.45s user 8.30s system 51% cpu 1:15.11 total
+
+
 # slate-tools
 
 Tooling for Shopify themes

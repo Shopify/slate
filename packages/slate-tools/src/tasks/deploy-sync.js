@@ -1,10 +1,11 @@
-var gulp = require('gulp');
-var browserSync = require('browser-sync').create();
-var fs = require('fs');
-var yaml = require('js-yaml');
+const gulp = require('gulp');
+const browserSync = require('browser-sync').create();
+const fs = require('fs');
+const yaml = require('js-yaml');
+const argv = require('yargs').argv;
 
-var config = require('./includes/config.js');
-var messages = require('./includes/messages.js');
+const config = require('./includes/config.js');
+const messages = require('./includes/messages.js');
 
 /**
  * Starts a [browserSync]{@link https://www.browsersync.io/} session proxying your
@@ -14,32 +15,33 @@ var messages = require('./includes/messages.js');
  * @memberof slate-cli.tasks.deploy
  * @static
  */
-gulp.task('deploy:sync-init', function() {
+gulp.task('deploy:sync-init', () => {
   if (browserSync.active) {
     browserSync.exit();
   } else {
     fs.writeFile(config.deployLog, '');
   }
 
-  var file = fs.readFileSync(config.tkConfig, 'utf8'); // eslint-disable-line no-sync
-  var tkConfig = yaml.safeLoad(file);
-  var envObj;
-  var environment;
-  var proxyTarget = '';
-  var queryStringComponents = [];
+  const file = fs.readFileSync(config.tkConfig, 'utf8'); // eslint-disable-line no-sync
+  const tkConfig = yaml.safeLoad(file);
+  const queryStringComponents = [];
 
-  if (process.env.tkEnvironments) {
-    var environments = process.env.tkEnvironments.split(/\s*,\s*|\s+/);
+  let envObj = {};
+  let environment = '';
+  let proxyTarget = '';
+
+  if (argv.environment) {
+    const environments = argv.environment.split(/\s*,\s*|\s+/);
     environment = environments[0];
   } else {
     environment = config.environment;
   }
 
   envObj = tkConfig[environment];
-  proxyTarget = 'https://' + envObj.store;
+  proxyTarget = `https://${envObj.store}`;
 
   if (envObj.theme_id && (envObj.theme_id === parseInt(envObj.theme_id, 10))) {
-    proxyTarget += '?preview_theme_id=' + envObj.theme_id;
+    proxyTarget += `?preview_theme_id=${envObj.theme_id}`;
   }
 
   /**
@@ -51,8 +53,8 @@ gulp.task('deploy:sync-init', function() {
   browserSync.init({
     proxy: {
       target: proxyTarget,
-      middleware: function(req, res, next) {
-        var prefix = req.url.indexOf('?') > -1 ? '&' : '?';
+      middleware: (req, res, next) => {
+        const prefix = req.url.indexOf('?') > -1 ? '&' : '?';
         req.url += prefix + queryStringComponents.join('&');
         next();
       }
@@ -68,9 +70,9 @@ gulp.task('deploy:sync-init', function() {
  * @memberof slate-cli.tasks.watch
  * @static
  */
-gulp.task('deploy:sync-reload', ['deploy:sync-init'], function() {
+gulp.task('deploy:sync-reload', ['deploy:sync-init'], () => {
   gulp.watch(config.tkConfig, ['deploy:sync-init']);
-  gulp.watch(config.deployLog, function() {
+  gulp.watch(config.deployLog, () => {
     messages.logTransferDone();
     browserSync.reload();
   });

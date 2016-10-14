@@ -1,18 +1,26 @@
 const spawn = require('child_process').spawn;
-const config = require('../includes/config');
+const debug = require('debug')('slate-tools:start');
+const config = require('../config');
 
-module.exports = function(program, debug) {
+module.exports = function(program) {
 
   program
     .command('start')
     .alias('s')
     .description('Deploy theme, launch Browsersync in a new browser tab at http://localhost:3000 and watch for file changes.')
-    .option('-e, --environment', 'deploy to a comma-separated list of environments')
+    .option('-e, --environment', 'deploy to a comma-separated list of environments', 'development')
     .option('-n, --nosync', 'watch for changes without using Browsersync')
-    .action(() => {
-      debug(JSON.stringify(config, 0, 2));
+    .action((options = {}) => {
+      debug(`--gulpfile ${config.gulpFile}`);
+      debug(`--cwd ${config.themeRoot}`);
 
-      spawn('gulp', ['start', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot], {
+      const args = ['start', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot, '--environment', options.environment];
+
+      if (options.nosync) {
+        args.push('--nosync');
+      }
+
+      spawn('gulp', args, {
         stdio: 'inherit'
       });
     });

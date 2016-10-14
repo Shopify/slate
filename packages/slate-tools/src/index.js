@@ -1,16 +1,15 @@
 #!/usr/bin/env node
 
-const debug = require('debug')('slate-tools');
 const program = require('commander');
 
-require('./commands/build')(program, debug);
-require('./commands/deploy')(program, debug);
-require('./commands/start')(program, debug);
-require('./commands/test')(program, debug);
-require('./commands/watch')(program, debug);
-require('./commands/zip')(program, debug);
+require('./commands/build')(program);
+require('./commands/deploy')(program);
+require('./commands/start')(program);
+require('./commands/test')(program);
+require('./commands/watch')(program);
+require('./commands/zip')(program);
 
-require('./commands/new')(program, debug);
+require('./commands/new')(program);
 
 program.on('--help', () => {
   console.log('  Troubleshooting:');

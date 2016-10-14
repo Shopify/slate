@@ -1,13 +1,15 @@
 const spawn = require('child_process').spawn;
-const config = require('../includes/config');
+const debug = require('debug')('slate-tools:build');
+const config = require('../config');
 
-module.exports = function(program, debug) {
+module.exports = function(program) {
   program
     .command('build')
     .alias('b')
     .description('Compile theme files and assets into a Shopify theme.')
     .action(() => {
-      debug(JSON.stringify(config, 0, 2));
+      debug(`--gulpfile ${config.gulpFile}`);
+      debug(`--cwd ${config.themeRoot}`);
 
       spawn('gulp', ['build', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot], {
         stdio: 'inherit'

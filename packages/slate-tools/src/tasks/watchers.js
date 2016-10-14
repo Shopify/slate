@@ -1,17 +1,20 @@
-var gulp = require('gulp');
-var _ = require('lodash');
-var spawn = require('child_process').spawn;
-var chokidar = require('chokidar');
-var fs = require('fs');
+const gulp = require('gulp');
+const _ = require('lodash');
+const debug = require('debug')('slate-tools:watchers');
+const chokidar = require('chokidar');
+const fs = require('fs');
+const argv = require('yargs').argv;
+const themekit = require('@shopify/themekit');
 
-var config = require('./includes/config.js');
-var utils = require('./includes/utilities.js');
-var messages = require('./includes/messages.js');
+const config = require('./includes/config.js');
+const utils = require('./includes/utilities.js');
+const messages = require('./includes/messages.js');
 
-var activeDeploy = false;
-var cache = utils.createEventCache();
-var debouncedDeployStatus = _.debounce(checkDeployStatus, 320); // prevent early execution on multi-file events
-var lintTasks = config.enableLinting ? ['watch:css-lint', 'watch:js-lint', 'watch:json-lint'] : [];
+const cache = utils.createEventCache();
+const debouncedDeployStatus = _.debounce(checkDeployStatus, 320); // prevent early execution on multi-file events
+const lintTasks = config.enableLinting ? ['watch:css-lint', 'watch:js-lint', 'watch:json-lint'] : [];
+
+let activeDeploy = false;
 
 /**
  * Aggregate task watching for file changes in `src` and
@@ -42,13 +45,13 @@ gulp.task('watch:src', [
  * @memberof slate-cli.tasks.watch
  * @static
  */
-gulp.task('watch:dist', function() {
-  var watcher = chokidar.watch(['./', '!config.yml'], {
+gulp.task('watch:dist', () => {
+  const watcher = chokidar.watch(['./', '!config.yml'], {
     cwd: config.dist.root,
     ignoreInitial: true
   });
 
-  watcher.on('all', function(event, path) {
+  watcher.on('all', (event, path) => {
     messages.logFileEvent(event, path);
     cache.addEvent(event, path);
     debouncedDeployStatus();
@@ -64,10 +67,10 @@ function checkDeployStatus() {
   if (activeDeploy) {
     return;
   } else {
-    var environment;
+    let environment;
 
-    if (process.env.tkEnvironments) {
-      environment = process.env.tkEnvironments;
+    if (argv.environment) {
+      environment = argv.environment;
     } else {
       environment = config.environment;
     }
@@ -98,10 +101,27 @@ function deploy(cmd, files, env) {
   messages.logChildProcess(cmd);
   activeDeploy = true;
 
-  utils.resolveShell(spawn('slate', [cmd, '--environment', env].concat(files), {cwd: config.dist.root}))
-    .then(function() {
-      activeDeploy = false;
-      fs.appendFile(config.deployLog, messages.logDeploys(cmd, files));
-      checkDeployStatus();
+  return new Promise((resolve, reject) => {
+    const cwd = process.cwd();
+
+    process.chdir(config.dist.root);
+    debug(`Changing cwd to: ${process.cwd()}`);
+    debug(`Deploying to ${env}`);
+
+    return themekit.command({
+      args: [cmd, '-env', env].concat(files)
+    }, (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        process.chdir(cwd);
+        resolve();
+      }
     });
+  })
+  .then(() => {
+    activeDeploy = false;
+    fs.appendFile(config.deployLog, messages.logDeploys(cmd, files));
+    return checkDeployStatus();
+  });
 }

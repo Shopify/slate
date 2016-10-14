@@ -23,7 +23,7 @@
  *  @prop {Object} roots - array of "root" (entry point) JS & CSS files
  *  @prop {Object} plugins - configuration objects passed to various plugins used in the task interface
  */
-var config = {
+const config = {
   environment: 'development',
   enableLinting: false,
 
