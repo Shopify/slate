@@ -39,7 +39,6 @@ Thumbs.db
 # Custom #
 ######################
 *.sass-cache*
-config.yml
 assets/logo.png
 *.zip
 /node_modules
@@ -48,4 +47,3 @@ assets/logo.png
 /.idea
 deploy.log
 /docs/js
-tasks/includes/config.js

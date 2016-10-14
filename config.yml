@@ -9,12 +9,10 @@
 #
 # For more information on configuration variables, go to http://themekit.cat/docs/#config-variables.
 
-<% environments.forEach(function(env) { %>
-<%= env %>:
-  theme_id: (if set to "live", it will write to the published theme)
-  password: XXXXXXXXXX
-  store: my-store-name.myshopify.com
-  # ignore_files:
-    # - config/settings_data.json
-    # - "*.log"
-<% }); %>
+---
+
+development:
+  password:
+  theme_id: "live"
+  store: your-shop.myshopify.com
+  ignore_files:
