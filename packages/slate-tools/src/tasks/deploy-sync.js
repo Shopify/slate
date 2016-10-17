@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const browserSync = require('browser-sync').create();
 const fs = require('fs');
 const yaml = require('js-yaml');
+const debug = require('debug')('slate-tools:deploy');
 const argv = require('yargs').argv;
 
 const config = require('./includes/config.js');
@@ -26,23 +27,23 @@ gulp.task('deploy:sync-init', () => {
   const tkConfig = yaml.safeLoad(file);
   const queryStringComponents = [];
 
-  let envObj = {};
   let environment = '';
-  let proxyTarget = '';
 
-  if (argv.environment) {
+  if (argv.environment && argv.environment !== 'undefined') {
     const environments = argv.environment.split(/\s*,\s*|\s+/);
     environment = environments[0];
   } else {
     environment = config.environment;
   }
 
-  envObj = tkConfig[environment];
-  proxyTarget = `https://${envObj.store}`;
+  const envObj = tkConfig[environment];
+  let proxyTarget = `https://${envObj.store}`;
 
   if (envObj.theme_id && (envObj.theme_id === parseInt(envObj.theme_id, 10))) {
     proxyTarget += `?preview_theme_id=${envObj.theme_id}`;
   }
+
+  debug(proxyTarget);
 
   /**
    * Shopify sites with redirection enabled for custom domains force redirection

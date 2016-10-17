@@ -61,7 +61,7 @@ const utilities = {
    * @memberof slate-cli.utilities
    * @param {Error} err
    */
-  errorHandler: (err) => {
+  errorHandler: function(err) { // eslint-disable-line babel/object-shorthand
     gutil.log(gutil.colors.red(err));
     this.emit('end');
   },
@@ -186,7 +186,7 @@ const utilities = {
        * @param {String} event - chokidar event type - only cares about `(add|change|unlink)`
        * @param {String} path - relative path to file passed via event
        */
-      addEvent: (event, path) => {
+      addEvent: function(event, path) { // eslint-disable-line babel/object-shorthand
         _.each(options.changeEvents, (eventType) => {
           if (event === eventType) {
             this.change.push(path);
