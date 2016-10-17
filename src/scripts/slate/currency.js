@@ -14,6 +14,13 @@
 slate.Currency = (function() {
   var moneyFormat = '${{amount}}'; // eslint-disable-line camelcase
 
+  /**
+   * Format money values based on your shop currency settings
+   * @param  {Number|string} cents - value in cents or dollar amount e.g. 300 cents
+   * or 3.00 dollars
+   * @param  {String} format - shop money_format setting
+   * @return {String} value - formatted value
+   */
   function formatMoney(cents, format) {
     if (typeof cents === 'string') {
       cents = cents.replace('.', '');

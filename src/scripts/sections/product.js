@@ -7,6 +7,12 @@
  */
 
 theme.Product = (function() {
+
+  /**
+   * Product section constructor.  Runs on page load as well as Theme Editor
+   * `section:load` events.
+   * @param {string} container - selector for the section container DOM element
+   */
   function Product(container) {
     var $container = this.$container = $(container);
 
@@ -40,6 +46,10 @@ theme.Product = (function() {
   }
 
   Product.prototype = _.assignIn({}, Product.prototype, {
+
+    /**
+     * Handles change events from the variant inputs
+     */
     initVariants: function() {
       var options = {
         $container: this.$container,
@@ -63,7 +73,7 @@ theme.Product = (function() {
      * Updates the product page once a varient is selected. Changes button
      * status, text feedback, varient image, and prices.
      *
-     * @param {Object} variant - Product object
+     * @param {Object} evt - variantChange event from Variant.js
      */
     updateVariantSelection: function(evt) {
       var variant = evt.variant;
@@ -121,12 +131,12 @@ theme.Product = (function() {
     },
 
     /**
-     *  Adjust option_selection.js labels based on variant default values
+     * Adjust product form labels based on variant default values to improve on
+     * Shopify defaults
+     *
+     * @param {object} product - Product object
      */
     simplifyVariantLabels: function(product) {
-      // option_selection.js does not add a label if there is only one variant
-      // option. Add one as long as it is not 'Title' (Shopify's default), add
-      // one.
       if (product.options.length === 1 && product.options[0] !== 'Title') {
         $('.selector-wrapper:eq(0)').prepend('<label for="ProductSelect-option-0">' + product.options[0] + '</label>');
       }
@@ -141,6 +151,13 @@ theme.Product = (function() {
       var sizedImgUrl = slate.Image.getSizedImageUrl(src, this.settings.imageSize);
 
       $(this.selectors.productFeaturedImage).attr('src', sizedImgUrl);
+    },
+
+    /**
+     * Event callback for Theme Editor `section:unload` event
+     */
+    onUnload: function() {
+      this.$container.off(this.settings.eventNamespace);
     }
   });
 
