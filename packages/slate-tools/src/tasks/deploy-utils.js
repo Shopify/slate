@@ -1,6 +1,7 @@
 /* eslint-disable no-sync,no-process-env */
 
 const gulp = require('gulp');
+const gutil = require('gulp-util');
 const Promise = require('bluebird');
 const fs = require('fs');
 const debug = require('debug')('slate-tools:deploy');
@@ -47,29 +48,24 @@ function deploy(env) {
  * @static
  */
 gulp.task('deploy:replace', () => {
-  debug(`gulp environment ${process.env.tkEnvironments}`);
+  debug(`environments ${config.environment}`);
 
-  if (process.env.tkEnvironments) {
-    const environments = process.env.tkEnvironments.split(/\s*,\s*|\s+/);
-    const promises = [];
+  const environments = config.environment.split(/\s*,\s*|\s+/);
+  const promises = [];
 
-    environments.forEach((environment) => {
-      function factory() {
-        messages.deployTo(environment);
-        return deploy(environment);
-      }
+  environments.forEach((environment) => {
+    function factory() {
+      messages.deployTo(environment);
+      return deploy(environment);
+    }
 
-      promises.push(factory);
+    promises.push(factory);
+  });
+
+  return utils.promiseSeries(promises)
+    .then(() => {
+      return messages.allDeploysComplete();
     });
-
-    return utils.promiseSeries(promises)
-      .then(() => {
-        return messages.allDeploysComplete();
-      });
-  } else {
-    messages.deployTo(config.environment);
-    return deploy(config.environment);
-  }
 });
 
 /**
@@ -84,8 +80,8 @@ gulp.task('open:admin', () => {
   const tkConfig = yaml.safeLoad(file);
   let envObj;
 
-  if (process.env.tkEnvironments) {
-    const environments = process.env.tkEnvironments.split(/\s*,\s*|\s+/);
+  if (gutil.env.tkEnvironments) {
+    const environments = gutil.env.tkEnvironments.split(/\s*,\s*|\s+/);
     const promises = [];
 
     environments.forEach((environment) => {

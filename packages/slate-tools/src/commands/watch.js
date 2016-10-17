@@ -7,7 +7,7 @@ module.exports = function(program) {
     .command('watch')
     .alias('w')
     .description('Start a server to watch for changes in the theme, using Browsersync at localhost:3000 to auto-refresh the browser when files change.')
-    .option('-e, --environment', 'deploy to a comma-separated list of environments', 'development')
+    .option('-e, --environment [environment]', 'deploy to a comma-separated list of environments', 'development')
     .option('-n, --nosync', 'watch for changes without using Browsersync')
     .action((options = {}) => {
       debug(`--gulpfile ${config.gulpFile}`);
@@ -18,6 +18,8 @@ module.exports = function(program) {
       if (options.nosync) {
         args.push('--nosync');
       }
+
+      debug(`args ${args}`);
 
       spawn('gulp', args, {
         stdio: 'inherit'

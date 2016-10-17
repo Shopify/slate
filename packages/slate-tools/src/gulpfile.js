@@ -1,9 +1,14 @@
 const gulp = require('gulp');
+const gutil = require('gulp-util');
+const debug = require('debug')('slate-tools');
 const argv = require('yargs').argv;
 const runSequence = require('run-sequence');
 
+debug(argv.environment);
+
 if (argv.environment && argv.environment !== 'undefined') {
-  process.env.tkEnvironments = argv.environment;
+  debug(`setting tkEnvironments to ${argv.environment}`);
+  gutil.env.tkEnvironments = argv.environment;
 }
 
 // imports gulp tasks from the `tasks` directory

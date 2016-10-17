@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const gutil = require('gulp-util');
 const _ = require('lodash');
 const debug = require('debug')('slate-tools:watchers');
 const chokidar = require('chokidar');
@@ -24,13 +25,7 @@ function checkDeployStatus() {
   if (activeDeploy) {
     return;
   } else {
-    let environment;
-
-    if (process.env.tkEnvironments) {
-      environment = process.env.tkEnvironments;
-    } else {
-      environment = config.environment;
-    }
+    const environment = config.environment.split(/\s*,\s*|\s+/)[0];
 
     messages.deployTo(environment);
 

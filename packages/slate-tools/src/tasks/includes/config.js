@@ -1,3 +1,5 @@
+const gutil = require('gulp-util');
+
 /**
  * slate-cli configuration object
  * ## Markdown stuff
@@ -24,7 +26,7 @@
  *  @prop {Object} plugins - configuration objects passed to various plugins used in the task interface
  */
 const config = {
-  environment: 'development',
+  environment: gutil.env.tkEnvironments || 'development',
   enableLinting: false,
 
   tasks: 'tasks/**/*.js',

@@ -7,7 +7,7 @@ module.exports = function(program) {
     .command('start')
     .alias('s')
     .description('Deploy theme, launch Browsersync in a new browser tab at http://localhost:3000 and watch for file changes.')
-    .option('-e, --environment', 'deploy to a comma-separated list of environments', 'development')
+    .option('-e, --environment [environment]', 'deploy to a comma-separated list of environments', 'development')
     .option('-n, --nosync', 'watch for changes without using Browsersync')
     .action((options = {}) => {
       debug(`--gulpfile ${config.gulpFile}`);

@@ -25,15 +25,7 @@ gulp.task('deploy:sync-init', () => {
   const file = fs.readFileSync(config.tkConfig, 'utf8'); // eslint-disable-line no-sync
   const tkConfig = yaml.safeLoad(file);
   const queryStringComponents = [];
-
-  let environment = '';
-
-  if (process.env.tkEnvironments) {
-    const environments = process.env.tkEnvironments.split(/\s*,\s*|\s+/);
-    environment = environments[0];
-  } else {
-    environment = config.environment;
-  }
+  const environment = config.environment.split(/\s*,\s*|\s+/)[0];
 
   const envObj = tkConfig[environment];
   let proxyTarget = `https://${envObj.store}`;
