@@ -1,6 +1,6 @@
 const spawn = require('child_process').spawn;
 const debug = require('debug')('slate-tools:build');
-const config = require('../config');
+const config = require('./includes/config');
 
 module.exports = function(program) {
   program
@@ -12,6 +12,7 @@ module.exports = function(program) {
       debug(`--cwd ${config.themeRoot}`);
 
       spawn('gulp', ['build', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot], {
+        detached: false,
         stdio: 'inherit'
       });
     });

@@ -1,6 +1,6 @@
 const spawn = require('child_process').spawn;
 const debug = require('debug')('slate-tools:deploy');
-const config = require('../config');
+const config = require('./includes/config');
 
 module.exports = function(program) {
   program
@@ -15,10 +15,12 @@ module.exports = function(program) {
 
       if (options.manual) {
         spawn('gulp', ['deploy:manual', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot], {
+          detached: false,
           stdio: 'inherit'
         });
       } else {
         spawn('gulp', ['deploy', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot, '--environment', options.environment], {
+          detached: false,
           stdio: 'inherit'
         });
       }

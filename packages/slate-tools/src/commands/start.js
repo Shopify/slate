@@ -1,6 +1,6 @@
 const spawn = require('child_process').spawn;
 const debug = require('debug')('slate-tools:start');
-const config = require('../config');
+const config = require('./includes/config');
 
 module.exports = function(program) {
   program
@@ -20,6 +20,7 @@ module.exports = function(program) {
       }
 
       spawn('gulp', args, {
+        detached: false,
         stdio: 'inherit'
       });
     });

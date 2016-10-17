@@ -4,8 +4,6 @@ const debug = require('debug')('slate-tools');
 const argv = require('yargs').argv;
 const runSequence = require('run-sequence');
 
-debug(argv.environment);
-
 if (argv.environment && argv.environment !== 'undefined') {
   debug(`setting tkEnvironments to ${argv.environment}`);
   gutil.env.environments = argv.environment;
