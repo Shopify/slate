@@ -8,7 +8,7 @@ debug(argv.environment);
 
 if (argv.environment && argv.environment !== 'undefined') {
   debug(`setting tkEnvironments to ${argv.environment}`);
-  gutil.env.tkEnvironments = argv.environment;
+  gutil.env.environments = argv.environment;
 }
 
 // imports gulp tasks from the `tasks` directory

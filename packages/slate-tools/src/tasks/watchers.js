@@ -1,5 +1,4 @@
 const gulp = require('gulp');
-const gutil = require('gulp-util');
 const _ = require('lodash');
 const debug = require('debug')('slate-tools:watchers');
 const chokidar = require('chokidar');

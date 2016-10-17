@@ -26,7 +26,7 @@ const gutil = require('gulp-util');
  *  @prop {Object} plugins - configuration objects passed to various plugins used in the task interface
  */
 const config = {
-  environment: gutil.env.tkEnvironments || 'development',
+  environment: gutil.env.environments || 'development',
   enableLinting: false,
 
   tasks: 'tasks/**/*.js',

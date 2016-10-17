@@ -1,7 +1,6 @@
 /* eslint-disable no-sync,no-process-env */
 
 const gulp = require('gulp');
-const gutil = require('gulp-util');
 const Promise = require('bluebird');
 const fs = require('fs');
 const debug = require('debug')('slate-tools:deploy');
@@ -80,23 +79,18 @@ gulp.task('open:admin', () => {
   const tkConfig = yaml.safeLoad(file);
   let envObj;
 
-  if (gutil.env.tkEnvironments) {
-    const environments = gutil.env.tkEnvironments.split(/\s*,\s*|\s+/);
-    const promises = [];
+  const environments = config.environment.split(/\s*,\s*|\s+/);
+  const promises = [];
 
-    environments.forEach((environment) => {
-      function factory() {
-        envObj = tkConfig[environment];
-        return open(`https://${envObj.store}/admin/themes`);
-      }
-      promises.push(factory);
-    });
+  environments.forEach((environment) => {
+    function factory() {
+      envObj = tkConfig[environment];
+      return open(`https://${envObj.store}/admin/themes`);
+    }
+    promises.push(factory);
+  });
 
-    return utils.promiseSeries(promises);
-  } else {
-    envObj = tkConfig[config.environment];
-    return open(`https://${envObj.store}/admin/themes`);
-  }
+  return utils.promiseSeries(promises);
 });
 
 /**
