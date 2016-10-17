@@ -3,7 +3,6 @@ const _ = require('lodash');
 const debug = require('debug')('slate-tools:watchers');
 const chokidar = require('chokidar');
 const fs = require('fs');
-const argv = require('yargs').argv;
 const themekit = require('@shopify/themekit');
 
 const config = require('./includes/config.js');
@@ -27,8 +26,8 @@ function checkDeployStatus() {
   } else {
     let environment;
 
-    if (argv.environment) {
-      environment = argv.environment;
+    if (process.env.tkEnvironments) {
+      environment = process.env.tkEnvironments;
     } else {
       environment = config.environment;
     }

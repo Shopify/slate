@@ -3,7 +3,6 @@ const browserSync = require('browser-sync').create();
 const fs = require('fs');
 const yaml = require('js-yaml');
 const debug = require('debug')('slate-tools:deploy');
-const argv = require('yargs').argv;
 
 const config = require('./includes/config.js');
 const messages = require('./includes/messages.js');
@@ -29,8 +28,8 @@ gulp.task('deploy:sync-init', () => {
 
   let environment = '';
 
-  if (argv.environment && argv.environment !== 'undefined') {
-    const environments = argv.environment.split(/\s*,\s*|\s+/);
+  if (process.env.tkEnvironments) {
+    const environments = process.env.tkEnvironments.split(/\s*,\s*|\s+/);
     environment = environments[0];
   } else {
     environment = config.environment;

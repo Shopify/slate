@@ -2,6 +2,10 @@ const gulp = require('gulp');
 const argv = require('yargs').argv;
 const runSequence = require('run-sequence');
 
+if (argv.environment && argv.environment !== 'undefined') {
+  process.env.tkEnvironments = argv.environment;
+}
+
 // imports gulp tasks from the `tasks` directory
 require('require-dir')('./tasks');
 

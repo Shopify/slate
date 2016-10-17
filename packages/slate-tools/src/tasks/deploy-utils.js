@@ -5,7 +5,6 @@ const Promise = require('bluebird');
 const fs = require('fs');
 const debug = require('debug')('slate-tools:deploy');
 const open = Promise.promisify(require('open'));
-const argv = require('yargs').argv;
 const yaml = require('js-yaml');
 const themekit = require('@shopify/themekit');
 
@@ -48,10 +47,10 @@ function deploy(env) {
  * @static
  */
 gulp.task('deploy:replace', () => {
-  debug(`gulp environment ${argv.environment}`);
+  debug(`gulp environment ${process.env.tkEnvironments}`);
 
-  if (argv.environment) {
-    const environments = argv.environment.split(/\s*,\s*|\s+/);
+  if (process.env.tkEnvironments) {
+    const environments = process.env.tkEnvironments.split(/\s*,\s*|\s+/);
     const promises = [];
 
     environments.forEach((environment) => {
@@ -85,8 +84,8 @@ gulp.task('open:admin', () => {
   const tkConfig = yaml.safeLoad(file);
   let envObj;
 
-  if (argv.environment) {
-    const environments = argv.environment.split(/\s*,\s*|\s+/);
+  if (process.env.tkEnvironments) {
+    const environments = process.env.tkEnvironments.split(/\s*,\s*|\s+/);
     const promises = [];
 
     environments.forEach((environment) => {

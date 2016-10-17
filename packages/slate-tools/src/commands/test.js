@@ -3,7 +3,6 @@ const debug = require('debug')('slate-tools:test');
 const config = require('../config');
 
 module.exports = function(program) {
-
   program
     .command('test')
     .alias('t')

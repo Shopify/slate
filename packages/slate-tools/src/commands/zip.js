@@ -3,7 +3,6 @@ const debug = require('debug')('slate-tools:zip');
 const config = require('../config');
 
 module.exports = function(program) {
-
   program
     .command('zip')
     .alias('z')

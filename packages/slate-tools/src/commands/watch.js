@@ -3,7 +3,6 @@ const debug = require('debug')('slate-tools:watch');
 const config = require('../config');
 
 module.exports = function(program) {
-
   program
     .command('watch')
     .alias('w')
