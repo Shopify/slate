@@ -14,6 +14,33 @@ const messages = require('./includes/messages.js');
 const utils = require('./includes/utilities.js');
 
 /**
+ * simple promise factory wrapper for deploys
+ * @param env - the environment to deploy to
+ * @returns {Promise}
+ * @private
+ */
+function deploy(env) {
+  return new Promise((resolve, reject) => {
+    const cwd = process.cwd();
+
+    process.chdir(config.dist.root);
+    debug(`Changing cwd to: ${process.cwd()}`);
+    debug(`Deploying to ${env}`);
+
+    return themekit.command({
+      args: ['replace', '-env', env]
+    }, (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        process.chdir(cwd);
+        resolve();
+      }
+    });
+  });
+}
+
+/**
  * Replace your existing theme using ThemeKit.
  *
  * @function deploy:replace
@@ -87,30 +114,3 @@ gulp.task('open:admin', () => {
 gulp.task('open:zip', () => {
   return open('./upload/');
 });
-
-/**
- * simple promise factory wrapper for deploys
- * @param env - the environment to deploy to
- * @returns {Promise}
- * @private
- */
-function deploy(env) {
-  return new Promise((resolve, reject) => {
-    const cwd = process.cwd();
-
-    process.chdir(config.dist.root);
-    debug(`Changing cwd to: ${process.cwd()}`);
-    debug(`Deploying to ${env}`);
-
-    return themekit.command({
-      args: ['replace', '-env', env]
-    }, (err) => {
-      if (err) {
-        reject(err);
-      } else {
-        process.chdir(cwd);
-        resolve();
-      }
-    });
-  });
-}

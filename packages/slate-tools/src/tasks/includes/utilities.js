@@ -1,7 +1,50 @@
-var gutil = require('gulp-util');
-var fs = require('fs');
-var _ = require('lodash');
-var Promise = require('bluebird');
+const gutil = require('gulp-util');
+const fs = require('fs');
+const _ = require('lodash');
+const Promise = require('bluebird');
+
+/**
+ * Maps process exit code to more informative explanations of the exit used by {@link resolveShell}
+ * see {@link https://nodejs.org/api/process.html#process_exit_codes} for more info
+ *
+ * @param {Number} code - child_process exit code
+ * @returns {String}
+ * @private
+ */
+function mapCode(code) {
+  let exitType;
+
+  switch (code) {
+  case 0: exitType = 'All Async Processes Complete';
+    break;
+  case 1: exitType = 'Uncaught Fatal Exception';
+    break;
+  case 2: exitType = 'Shell Error - Missing Keyword/Command/Parameter or Permission Problem';
+    break;
+  case 3: exitType = 'Internal JavaScript Parse Error';
+    break;
+  case 4: exitType = 'Internal JavaScript Evaluation Failure';
+    break;
+  case 5: exitType = 'Fatal Error';
+    break;
+  case 6: exitType = 'Non-Function Internal Exception Handler';
+    break;
+  case 7: exitType = 'Internal Exception Handler Run-Time Failure';
+    break;
+  case 8: exitType = 'Uncaught Exception';
+    break;
+  case 9: exitType = 'Invalid Argument';
+    break;
+  case 10: exitType = 'Internal JavaScript Run-Time Failure';
+    break;
+  case 12: exitType = 'Invalid Debug Argument';
+    break;
+  default: exitType = 'Signal Event or Unknown Error';
+  }
+
+  return exitType;
+}
+
 
 /**
  * Utility and reusable functions used by our Gulp Tasks
@@ -10,7 +53,7 @@ var Promise = require('bluebird');
  * @namespace slate-cli.utilities
  * @memberof slate-cli
  */
-var utilities = {
+const utilities = {
 
   /**
    * Generic error handler for streams called in `watch` tasks (used by gulp-plumber)
@@ -18,7 +61,7 @@ var utilities = {
    * @memberof slate-cli.utilities
    * @param {Error} err
    */
-  errorHandler: function(err) {
+  errorHandler: (err) => {
     gutil.log(gutil.colors.red(err));
     this.emit('end');
   },
@@ -29,11 +72,11 @@ var utilities = {
    * @param promiseArrayFactory {Function} - an array of promise factories
    * @returns {Promise} - promise.all() style array of results from each promise
    */
-  promiseSeries: function(promiseArrayFactory) {
-    var results = [];
+  promiseSeries: (promiseArrayFactory) => {
+    const results = [];
 
-    return Promise.each(promiseArrayFactory, function(factory) {
-      var result = factory();
+    return Promise.each(promiseArrayFactory, (factory) => {
+      const result = factory();
       results.push(result);
       return result;
     }).thenReturn(results).all();
@@ -45,11 +88,11 @@ var utilities = {
    * @memberof slate-cli.utilities
    * @param {fs} file - current file being linted
    */
-  scssLintReporter: function(file) {
+  scssLintReporter: (file) => {
     if (file.scsslint.success) {
       return;
     }
-    var errorMsg = file.scsslint.issues.length + ' issues found in ' + file.path;
+    const errorMsg = `${file.scsslint.issues.length} issues found in ${file.path}`;
     gutil.log(gutil.colors.yellow(errorMsg));
   },
 
@@ -59,7 +102,7 @@ var utilities = {
    * @param path {String} - a string representing the path to a file
    * @returns {boolean}
    */
-  isDirectory: function(path) {
+  isDirectory: (path) => {
     try {
       // eslint-disable-next-line no-sync
       return fs.statSync(path).isDirectory();
@@ -76,17 +119,17 @@ var utilities = {
    * @param {Function} $ - jQuery reference
    * @param {fs} file - reference to current icon file?
    */
-  processSvg: function($, file) {
-    var $svg = $('svg');
-    var $newSvg = $('<svg aria-hidden="true" focusable="false" role="presentation" class="icon" />');
-    var fileName = file.relative.replace('.svg', '');
-    var viewBoxAttr = $svg.attr('viewbox');
+  processSvg: ($, file) => {
+    var $svg = $('svg'); // eslint-disable-line no-var
+    var $newSvg = $('<svg aria-hidden="true" focusable="false" role="presentation" class="icon" />'); // eslint-disable-line no-var
+    var fileName = file.relative.replace('.svg', ''); // eslint-disable-line no-var
+    var viewBoxAttr = $svg.attr('viewbox'); // eslint-disable-line no-var
 
     // Add necessary attributes
     if (viewBoxAttr) {
-      var width = parseInt(viewBoxAttr.split(' ')[2], 10);
-      var height = parseInt(viewBoxAttr.split(' ')[3], 10);
-      var widthToHeightRatio = width / height;
+      var width = parseInt(viewBoxAttr.split(' ')[2], 10); // eslint-disable-line no-var
+      var height = parseInt(viewBoxAttr.split(' ')[3], 10); // eslint-disable-line no-var
+      var widthToHeightRatio = width / height; // eslint-disable-line no-var
       if (widthToHeightRatio >= 1.5) {
         $newSvg.addClass('icon--wide');
       }
@@ -115,8 +158,8 @@ var utilities = {
    * @param {Object} options
    * @returns {eventCache} see type definition for more robust documentation
    */
-  createEventCache: function(options) {
-    _.defaults(options = options || {}, {
+  createEventCache: (options) => {
+    _.defaults(options = options || {}, { // eslint-disable-line no-param-reassign
       changeEvents: ['add', 'change'],
       unlinkEvents: ['unlink']
     });
@@ -143,18 +186,18 @@ var utilities = {
        * @param {String} event - chokidar event type - only cares about `(add|change|unlink)`
        * @param {String} path - relative path to file passed via event
        */
-      addEvent: function(event, path) {
-        _.each(options.changeEvents, function(eventType) {
+      addEvent: (event, path) => {
+        _.each(options.changeEvents, (eventType) => {
           if (event === eventType) {
             this.change.push(path);
           }
-        }.bind(this));
+        });
 
-        _.each(options.unlinkEvents, function(eventType) {
+        _.each(options.unlinkEvents, (eventType) => {
           if (event === eventType) {
             this.unlink.push(path);
           }
-        }.bind(this));
+        });
       }
     };
   },
@@ -176,7 +219,7 @@ var utilities = {
    * @param {Function} changeFn - a custom function to process the set of files that have changed
    * @param {Function} delFn - a custom function to remove the set of files that have changed from the `dist` directory
    */
-  processCache: _.debounce(function(cache, changeFn, delFn) {
+  processCache: _.debounce((cache, changeFn, delFn) => {
     if (cache.change.length) {
       changeFn(cache.change);
       cache.change = [];
@@ -197,27 +240,27 @@ var utilities = {
    * @param {child_process.spawn()} childProcess
    * @returns {Promise}
    */
-  resolveShell: function(childProcess) {
-    var error = ''; // stores errors from stderr events, if any occur
+  resolveShell: (childProcess) => {
+    let error = ''; // stores errors from stderr events, if any occur
 
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
       childProcess.stdout.setEncoding('utf8');
-      childProcess.stdout.on('data', function(data) {
+      childProcess.stdout.on('data', (data) => {
         gutil.log(gutil.colors.white(data));
       });
 
       childProcess.stderr.setEncoding('utf8');
-      childProcess.stderr.on('data', function(data) {
+      childProcess.stderr.on('data', (data) => {
         gutil.log(gutil.colors.red(data));
         error += data;
       });
 
-      childProcess.on('error', function(err) {
+      childProcess.on('error', (err) => {
         gutil.log(gutil.colors.red('Child process failed', err));
         reject(err);
       });
 
-      childProcess.on('close', function(code) {
+      childProcess.on('close', (code) => {
         if (error) {
           gutil.log('Process closed with error:',
             gutil.colors.red(mapCode(code), '\n'),
@@ -236,45 +279,3 @@ var utilities = {
 };
 
 module.exports = utilities;
-
-/**
- * Maps process exit code to more informative explanations of the exit used by {@link resolveShell}
- * see {@link https://nodejs.org/api/process.html#process_exit_codes} for more info
- *
- * @param {Number} code - child_process exit code
- * @returns {String}
- * @private
- */
-function mapCode(code) {
-  var exitType;
-
-  switch (code) {
-    case 0: exitType = 'All Async Processes Complete';
-      break;
-    case 1: exitType = 'Uncaught Fatal Exception';
-      break;
-    case 2: exitType = 'Shell Error - Missing Keyword/Command/Parameter or Permission Problem';
-      break;
-    case 3: exitType = 'Internal JavaScript Parse Error';
-      break;
-    case 4: exitType = 'Internal JavaScript Evaluation Failure';
-      break;
-    case 5: exitType = 'Fatal Error';
-      break;
-    case 6: exitType = 'Non-Function Internal Exception Handler';
-      break;
-    case 7: exitType = 'Internal Exception Handler Run-Time Failure';
-      break;
-    case 8: exitType = 'Uncaught Exception';
-      break;
-    case 9: exitType = 'Invalid Argument';
-      break;
-    case 10: exitType = 'Internal JavaScript Run-Time Failure';
-      break;
-    case 12: exitType = 'Invalid Debug Argument';
-      break;
-    default: exitType = 'Signal Event or Unknown Error';
-  }
-
-  return exitType;
-}

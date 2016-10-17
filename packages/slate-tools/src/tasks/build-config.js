@@ -1,12 +1,23 @@
-var gulp = require('gulp');
-var plumber = require('gulp-plumber');
-var size = require('gulp-size');
-var chokidar = require('chokidar');
+const gulp = require('gulp');
+const plumber = require('gulp-plumber');
+const size = require('gulp-size');
+const chokidar = require('chokidar');
 
-var config = require('./includes/config.js');
-var utils = require('./includes/utilities.js');
-var messages = require('./includes/messages.js');
+const config = require('./includes/config.js');
+const utils = require('./includes/utilities.js');
+const messages = require('./includes/messages.js');
 
+function processConfig(file) {
+  messages.logProcessFiles('build:config');
+
+  return gulp.src(file)
+    .pipe(plumber(utils.errorHandler))
+    .pipe(size({
+      showFiles: true,
+      pretty: true
+    }))
+    .pipe(gulp.dest(config.dist.root));
+}
 
 /**
  * ThemeKit requires the config file to be in the `root` directory for files it
@@ -17,7 +28,7 @@ var messages = require('./includes/messages.js');
  * @memberof slate-cli.tasks.build
  * @static
  */
-gulp.task('build:config', function() {
+gulp.task('build:config', () => {
   return processConfig(config.tkConfig);
 });
 
@@ -31,12 +42,14 @@ gulp.task('build:config', function() {
  * @memberof slate-cli.tasks.watch
  * @static
  */
-gulp.task('watch:config', function() {
-  chokidar.watch(config.tkConfig, {ignoreInitial: true})
-    .on('all', function(event, path) {
-      messages.logFileEvent(event, path);
-      processConfig(path);
-    });
+gulp.task('watch:config', () => {
+  chokidar.watch(config.tkConfig, {
+    ignoreInitial: true
+  })
+  .on('all', (event, path) => {
+    messages.logFileEvent(event, path);
+    processConfig(path);
+  });
 });
 
 /**
@@ -48,20 +61,13 @@ gulp.task('watch:config', function() {
  * @memberof slate-cli.tasks.watch
  * @static
  */
-gulp.task('watch:dist-config', function() {
-  chokidar.watch(config.dist.root + config.tkConfig, {ignoreInitial: true})
-    .on('all', function(event, path) {
-      messages.logFileEvent(event, path);
+gulp.task('watch:dist-config', () => {
+  chokidar.watch(config.dist.root + config.tkConfig, {
+    ignoreInitial: true
+  })
+  .on('all', (event, path) => {
+    messages.logFileEvent(event, path);
 
-      throw new Error(messages.configChange());
-    });
+    throw new Error(messages.configChange());
+  });
 });
-
-function processConfig(file) {
-  messages.logProcessFiles('build:config');
-
-  return gulp.src(file)
-    .pipe(plumber(utils.errorHandler))
-    .pipe(size({showFiles: true, pretty: true}))
-    .pipe(gulp.dest(config.dist.root));
-}

@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "description": "Tooling for Shopify themes",
   "bin": {
-    "slate-tools": "lib/index.js"
+    "slate-tools": "lib/program.js"
   },
-  "main": "lib/index.js",
+  "main": "lib/program.js",
   "license": "MIT",
   "author": "Shopify Inc.",
   "dependencies": {

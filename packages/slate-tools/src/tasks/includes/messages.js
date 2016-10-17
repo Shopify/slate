@@ -1,5 +1,21 @@
 const gutil = require('gulp-util');
 
+/**
+ * Separates filename and directory from a path string. Returns an object containing both.
+ *
+ * @param path {String} - a string representing the path to a file
+ * @returns {Object} - an object with separated `file` (the filename) and `dir` (path minus filename) properties
+ * @private
+ */
+function separatePath(path) {
+  const tmp = path.split('/');
+
+  return {
+    file: tmp.pop(),
+    dir: tmp.join('/')
+  };
+}
+
 const messages = {
   logFileEvent: (event, path) => {
     const pathObject = separatePath(path);
@@ -63,19 +79,3 @@ const messages = {
 };
 
 module.exports = messages;
-
-/**
- * Separates filename and directory from a path string. Returns an object containing both.
- *
- * @param path {String} - a string representing the path to a file
- * @returns {Object} - an object with separated `file` (the filename) and `dir` (path minus filename) properties
- * @private
- */
-function separatePath(path) {
-  const tmp = path.split('/');
-
-  return {
-    file: tmp.pop(),
-    dir: tmp.join('/')
-  };
-}
