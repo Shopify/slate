@@ -1,8 +1,16 @@
 window.slate = window.slate || {};
 // =require ../slate/a11y.js
 // =require ../slate/rte.js
+// =require ../slate/sections.js
+// =require ../slate/currency.js
+// =require ../slate/images.js
+// =require ../slate/variants.js
 
 $(document).ready(function() {
+  var sections = new theme.Sections();
+
+  sections.register('product', theme.Product);
+
   // Common a11y fixes
   slate.a11y.pageLinkFocus($(window.location.hash));
 
