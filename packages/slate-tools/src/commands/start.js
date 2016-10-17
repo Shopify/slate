@@ -13,7 +13,7 @@ module.exports = function(program) {
       debug(`--gulpfile ${config.gulpFile}`);
       debug(`--cwd ${config.themeRoot}`);
 
-      const args = ['start', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot, '--environment', options.environment];
+      const args = ['--gulpfile', config.gulpFile, '--cwd', config.themeRoot, '--environment', options.environment];
 
       if (options.nosync) {
         args.push('--nosync');
