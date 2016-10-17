@@ -1,8 +1,3 @@
-{% comment %}
-  Note: if you use option_selection.js, your `select` tag will be overwritten, meaning what you
-  have inside `option` will not reflect what you coded below.
-{% endcomment %}
-
 <div id="ProductSection-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="product" itemscope itemtype="http://schema.org/Product">
 
   {%- assign current_variant = product.selected_or_first_available_variant -%}
