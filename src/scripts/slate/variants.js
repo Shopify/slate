@@ -1,21 +1,19 @@
-theme.Variants = (function() {
-  function Variants($container, settings, product) {
-    this.product = product;
-    this.settings = settings;
-    this.$container = $container;
+slate.Variants = (function() {
+  function Variants(options) {
+    this.$container = options.$container;
+    this.product = options.product;
+    this.selectors = options.selectors;
+    this.settings = options.settings;
+
     var options = this._getCurrentOptions();
     this.currentVariant = this._getVariantFromOptions(options);
 
-    $(this.settings.selectors.singleOptionSelector).on('change', this._onSelectChange.bind(this));
-
-    if (this.settings.preloadImages) {
-      this._preloadVariantImages();
-    }
+    $(this.selectors.singleOptionSelector).on('change', this._onSelectChange.bind(this));
   }
 
   Variants.prototype = _.assignIn({}, Variants.prototype, {
     _getCurrentOptions: function() {
-      var options = _.map($(this.settings.selectors.singleOptionSelector, this.$container), function(element) {
+      var options = _.map($(this.selectors.singleOptionSelector, this.$container), function(element) {
         var $element = $(element);
         var type = $element.attr('type');
 
@@ -105,26 +103,14 @@ theme.Variants = (function() {
     },
 
     _updateMasterSelect: function(variant) {
+      var $originalSelector = $(this.selectors.originalSelectorId);
+
       if (!variant) {
         return;
       }
 
-      $(this.settings.selectors.originalSelectorId).find('[selected]').removeAttr('selected');
-      $(this.settings.selectors.originalSelectorId).find('[value=' + variant.id + ']').attr('selected', 'selected');
-    },
-
-    _preloadVariantImages: function() {
-      var variants = this.product.variants;
-      var imageSize = this.settings.imageSize;
-
-      variants.forEach(function(variant) {
-        if (!variant.featured_image) {
-          return;
-        }
-
-        theme.Images.preload(variant.featured_image.src, imageSize);
-      });
-
+      $originalSelector.find('[selected]').removeAttr('selected');
+      $originalSelector.find('[value=' + variant.id + ']').attr('selected', 'selected');
     }
   });
 

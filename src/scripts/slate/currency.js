@@ -11,7 +11,7 @@
  *
  */
 
-theme.Currency = (function() {
+slate.Currency = (function() {
   var moneyFormat = '${{amount}}'; // eslint-disable-line camelcase
 
   function formatMoney(cents, format) {

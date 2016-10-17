@@ -6,118 +6,143 @@
    * @namespace product
  */
 
-theme.product = (function() {
-  if (!theme.productSingleObject) { return; }
+theme.Product = (function() {
+  function Product(container) {
+    var $container = this.$container = $(container);
 
-  var cache = {
-    $addToCart: $('#AddToCart'),
-    $productPrice: $('#ProductPrice'),
-    $comparePrice: $('#ComparePrice'),
-    $addToCartText: $('#AddToCartText'),
-    $productFeaturedImage: $('#ProductPhotoImg'),
-    $productThumbs: $('#ProductThumbs').find('.product-single__thumbnail')
-  };
+    this.settings = {
+      enableHistoryState: $container.data('enable-history-state'),
+      eventNamespace: '.product'
+    };
 
-  var productImageSize = Shopify.Image.imageSize(cache.$productFeaturedImage.attr('src'));
-  Shopify.Image.preload(theme.productSingleObject.images, productImageSize);
+    this.selectors = {
+      addToCart: '#AddToCart',
+      productPrice: '#ProductPrice',
+      comparePrice: '#ComparePrice',
+      addToCartText: '#AddToCartText',
+      productFeaturedImage: '#ProductPhotoImg',
+      productThumbs: '#ProductThumbs .product-single__thumbnail',
+      originalSelectorId: '#ProductSelect',
+      singleOptionSelector: '.single-option-selector'
+    };
 
-  // eslint-disable-next-line no-new
-  new Shopify.OptionSelectors('ProductSelect', {
-    product: theme.productSingleObject,
-    onVariantSelected: updateVariantSelection,
-    enableHistoryState: true
-  });
-
-
-  // Clean up variant labels if the Shopify-defined
-  // defaults are the only ones left
-  simplifyVariantLabels(theme.productSingleObject);
-
-  /**
-   * Updates the product page once a varient is selected. Changes button
-   * status, text feedback, varient image, and prices.
-   *
-   * @param {Object} variant - Product object
-   */
-  function updateVariantSelection(variant) {
-    // Update cart button and text status
-    if (!variant) {
-      updateAddToCartState(false, theme.strings.unavailable);
+    // Stop parsing if we don't have the product json script tag when loading
+    // section in the Theme Editor
+    if (!$('#ProductJson').html()) {
       return;
     }
+    this.productSingleObject = JSON.parse(document.getElementById('ProductJson').innerHTML);
+    this.settings.imageSize = slate.Image.imageSize($(this.selectors.productFeaturedImage).attr('src'));
 
-    if (variant.available) {
-      updateAddToCartState(true, theme.strings.addToCart);
-    } else {
-      updateAddToCartState(false, theme.strings.soldOut);
-    }
+    slate.Image.preload(this.productSingleObject.images, this.settings.imageSize);
 
-    // Update variant image, if one is set
-    if (variant.featured_image) {
-      updateProductImage(variant.featured_image.src);
-    }
-
-    // Update the product prices
-    updateProductPrices(variant.price, variant.compare_at_price);
+    this.initVariants();
   }
 
-  /**
-   * Updates the DOM state of the cart
-   *
-   * @param {boolean} enabeled - Decides whether cart is enabled or disabled
-   * @param {string} text - Updates the text notification content of the cart
-   */
-  function updateAddToCartState(enabeled, text) {
-    cache.$addToCart.prop('disabled', !enabeled);
-    cache.$addToCartText.html(text);
-  }
+  Product.prototype = _.assignIn({}, Product.prototype, {
+    initVariants: function() {
+      var options = {
+        $container: this.$container,
+        settings: this.settings,
+        selectors: this.selectors,
+        product: this.productSingleObject
+      };
 
-  /**
-   * Updates the DOM with specified prices
-   *
-   * @param {string} productPrice - The current price of the product
-   * @param {string} comparePrice - The original price of the product
-   */
-  function updateProductPrices(productPrice, comparePrice) {
-    cache.$productPrice
-      .html(Shopify.formatMoney(productPrice, theme.moneyFormat));
+      // eslint-disable-next-line no-new
+      this.variants = new slate.Variants(options);
 
-    if (comparePrice > productPrice) {
-      cache.$comparePrice
-        .html(Shopify.formatMoney(comparePrice, theme.moneyFormat))
-        .removeClass('hide');
-    } else {
-      cache.$comparePrice
-        .addClass('hide');
+      this.$container.on('variantChange' + this.settings.eventNamespace, this.updateVariantSelection.bind(this));
+
+
+      // Clean up variant labels if the Shopify-defined
+      // defaults are the only ones left
+      this.simplifyVariantLabels(this.productSingleObject);
+    },
+
+    /**
+     * Updates the product page once a varient is selected. Changes button
+     * status, text feedback, varient image, and prices.
+     *
+     * @param {Object} variant - Product object
+     */
+    updateVariantSelection: function(evt) {
+      var variant = evt.variant;
+      console.log(variant);
+      // Update cart button and text status
+      if (!variant) {
+        this.updateAddToCartState(false, theme.strings.unavailable);
+        return;
+      }
+
+      if (variant.available) {
+        this.updateAddToCartState(true, theme.strings.addToCart);
+      } else {
+        this.updateAddToCartState(false, theme.strings.soldOut);
+      }
+
+      // Update variant image, if one is set
+      if (variant.featured_image) {
+        this.updateProductImage(variant.featured_image.src);
+      }
+
+      // Update the product prices
+      this.updateProductPrices(variant.price, variant.compare_at_price);
+    },
+
+    /**
+     * Updates the DOM state of the cart
+     *
+     * @param {boolean} enabeled - Decides whether cart is enabled or disabled
+     * @param {string} text - Updates the text notification content of the cart
+     */
+    updateAddToCartState: function(enabeled, text) {
+      $(this.selectors.addToCart).prop('disabled', !enabeled);
+      $(this.selectors.addToCartText).html(text);
+    },
+
+    /**
+     * Updates the DOM with specified prices
+     *
+     * @param {string} productPrice - The current price of the product
+     * @param {string} comparePrice - The original price of the product
+     */
+    updateProductPrices: function(productPrice, comparePrice) {
+      $(this.selectors.productPrice)
+        .html(slate.Currency.formatMoney(productPrice, theme.moneyFormat));
+
+      if (comparePrice > productPrice) {
+        $(this.selectors.comparePrice)
+          .html(slate.Currency.formatMoney(comparePrice, theme.moneyFormat))
+          .removeClass('hide');
+      } else {
+        $(this.selectors.comparePrice)
+          .addClass('hide');
+      }
+    },
+
+    /**
+     *  Adjust option_selection.js labels based on variant default values
+     */
+    simplifyVariantLabels: function(product) {
+      // option_selection.js does not add a label if there is only one variant
+      // option. Add one as long as it is not 'Title' (Shopify's default), add
+      // one.
+      if (product.options.length === 1 && product.options[0] !== 'Title') {
+        $('.selector-wrapper:eq(0)').prepend('<label for="ProductSelect-option-0">' + product.options[0] + '</label>');
+      }
+    },
+
+    /**
+     * Updates the DOM with the specified image URL
+     *
+     * @param {string} src - Image src URL
+     */
+    updateProductImage: function(src) {
+      var sizedImgUrl = slate.Image.getSizedImageUrl(src, this.settings.imageSize);
+
+      $(this.selectors.productFeaturedImage).attr('src', sizedImgUrl);
     }
-  }
+  });
 
-  /**
-   *  Adjust option_selection.js labels based on variant default values
-   */
-  function simplifyVariantLabels(product) {
-    // option_selection.js does not add a label if there is only one variant
-    // option. Add one as long as it is not 'Title' (Shopify's default), add
-    // one.
-    if (product.options.length === 1 && product.options[0] !== 'Title') {
-      $('.selector-wrapper:eq(0)').prepend('<label for="ProductSelect-option-0">' + product.options[0] + '</label>');
-    }
-
-    // Hide variant dropdown if only one exists and title contains 'Default'
-    if (product.variants.length && product.variants[0].title.indexOf('Default') >= 0) {
-      $('.selector-wrapper').hide();
-    }
-  }
-
-  /**
-   * Updates the DOM with the specified image URL
-   *
-   * @param {string} src - Image src URL
-   */
-  function updateProductImage(src) {
-    var size = Shopify.Image.imageSize(cache.$productFeaturedImage.attr('src'));
-    var sizedImgUrl = Shopify.Image.getSizedImageUrl(src, size);
-
-    $('#ProductPhotoImg').attr('src', sizedImgUrl);
-  }
+  return Product;
 })();

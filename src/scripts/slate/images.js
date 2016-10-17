@@ -5,7 +5,7 @@
  *
  */
 
-theme.Images = (function() {
+slate.Image = (function() {
 
   /**
    * Preloads an image in memory and uses the browsers cache to store it until needed.

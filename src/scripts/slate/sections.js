@@ -1,6 +1,4 @@
-window.theme = window.theme || {};
-
-theme.Sections = function Sections() {
+slate.Sections = function Sections() {
   this.constructors = {};
   this.instances = [];
 
@@ -13,7 +11,7 @@ theme.Sections = function Sections() {
     .on('shopify:block:deselect', this._onBlockDeselect.bind(this));
 };
 
-theme.Sections.prototype = _.assignIn({}, theme.Sections.prototype, {
+slate.Sections.prototype = _.assignIn({}, slate.Sections.prototype, {
   _createInstance: function(container, constructor) {
     var $container = $(container);
     var id = $container.attr('data-section-id');

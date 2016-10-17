@@ -44,28 +44,32 @@
     <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
 
     <form action="/cart/add" method="post" enctype="multipart/form-data">
-      <select name="id" id="ProductSelect">
+      {% unless product.options.size == 1 and product.variants[0].title == 'Default Title' %}
+        {% for option in product.options_with_values %}
+          <div class="selector-wrapper js">
+            <label {% if option.name == 'default' %}class="label-hidden" {% endif %}for="SingleOptionSelector-{{ forloop.index0 }}">{{ option.name }}</label>
+            <select class="single-option-selector" id="SingleOptionSelector-{{ forloop.index0 }}" data-name="{{ option.name }}" data-option-index="{{ forloop.index0 }}">
+              {% for value in option.values %}
+                <option value="{{ value }}"{% if option.selected_value == value %} selected="selected"{% endif %}>{{ value }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        {% endfor %}
+      {% endunless %}
+
+      <select class="no-js" name="id" id="ProductSelect" data-section="{{ section.id }}">
         {% for variant in product.variants %}
-
-          <option
-            {% unless variant.available %}disabled="disabled"{% endunless %}
-            {% if variant == current_variant %}selected="selected"{% endif %}
-            data-sku="{{ variant.sku }}"
-            value="{{ variant.id }}">
-            {{ variant.title }} -
-            {% if variant.available %}
-              {{ variant.price | money_with_currency }}
-            {% else %}
-              {{ 'products.product.sold_out' | t }}
-            {% endif %}
-          </option>
-
+          {% if variant.available %}
+            <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }}</option>
+          {% else %}
+            <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
+          {% endif %}
         {% endfor %}
       </select>
 
-    <span id="ProductPrice">
-      {{ current_variant.price | money }}
-    </span>
+      <span id="ProductPrice">
+        {{ current_variant.price | money }}
+      </span>
 
       {% if product.compare_at_price_max > product.price %}
         <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
@@ -93,3 +97,9 @@
     {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
   {% endif %}
 </div>
+
+{% unless product.empty? %}
+  <script type="application/json" id="ProductJson">
+    {{ product | json }}
+  </script>
+{% endunless %}
