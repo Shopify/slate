@@ -29,7 +29,6 @@ const config = {
   environment: gutil.env.environments || 'development',
   enableLinting: false,
 
-  tasks: 'tasks/**/*.js',
   tkConfig: 'config.yml',
   scssLintConfig: '.scss-lint.yml',
   deployLog: 'deploy.log',
