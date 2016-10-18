@@ -34,7 +34,8 @@ var config = {
 
   src: {
     root: 'src/',
-    js: 'src/scripts/**/*.js',
+    js: 'src/scripts/**/*.{js,js.liquid}',
+    vendorJs: 'src/scripts/vendor/*.js',
     jsSections: 'src/sections/**/*.js',
     json: 'src/**/*.json',
     css: 'src/styles/**/*.{scss,scss.liquid}',
@@ -62,7 +63,7 @@ var config = {
   },
 
   roots: {
-    js: 'src/scripts/*.js',
+    js: 'src/scripts/*.{js,js.liquid}',
     vendorJs: 'src/scripts/vendor.js',
     css: 'src/styles/*.scss'
   },
