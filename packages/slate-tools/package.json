@@ -58,7 +58,6 @@
     "start": "npm run clean && babel -w -d lib/ src/",
     "test": "npm run lint-allow-warning && mocha --compilers js:babel-register -u tdd test/index.js",
     "prepublish": "npm run clean && babel -d lib/ src/",
-    "preinstall": "npm run clean && babel -d lib/ src/",
     "lint": "eslint --max-warnings 0 -c .eslintrc.json src/ test/",
     "lint-allow-warning": "eslint -c .eslintrc.json src/ test/"
   },
