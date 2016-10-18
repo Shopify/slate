@@ -55,7 +55,8 @@ theme.Product = (function() {
       var options = {
         $container: this.$container,
         settings: this.settings,
-        selectors: this.selectors,
+        singleOptionSelector: this.selectors.singleOptionSelector,
+        originalSelectorId: this.selectors.originalSelectorId,
         product: this.productSingleObject
       };
 

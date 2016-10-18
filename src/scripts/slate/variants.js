@@ -20,12 +20,14 @@ slate.Variants = (function() {
     this.$container = options.$container;
     this.product = options.product;
     this.selectors = options.selectors;
+    this.singleOptionSelector = options.singleOptionSelector;
+    this.originalSelectorId = options.originalSelectorId;
     this.settings = options.settings;
 
     var currentOptions = this._getCurrentOptions();
     this.currentVariant = this._getVariantFromOptions(currentOptions);
 
-    $(this.selectors.singleOptionSelector).on('change', this._onSelectChange.bind(this));
+    $(this.singleOptionSelector).on('change', this._onSelectChange.bind(this));
   }
 
   Variants.prototype = _.assignIn({}, Variants.prototype, {
@@ -37,7 +39,7 @@ slate.Variants = (function() {
      * @return {array} options - Values of currently selected variants
      */
     _getCurrentOptions: function() {
-      var options = _.map($(this.selectors.singleOptionSelector, this.$container), function(element) {
+      var options = _.map($(this.singleOptionSelector, this.$container), function(element) {
         var $element = $(element);
         var type = $element.attr('type');
 
@@ -159,7 +161,7 @@ slate.Variants = (function() {
      * @param  {variant} variant - Currently selected variant
      */
     _updateMasterSelect: function(variant) {
-      var $originalSelector = $(this.selectors.originalSelectorId);
+      var $originalSelector = $(this.originalSelectorId);
 
       if (!variant) {
         return;
