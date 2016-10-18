@@ -28,7 +28,7 @@
     "gulp-jsonlint": "1.1.2",
     "gulp-open": "2.0.0",
     "gulp-plumber": "1.1.0",
-    "gulp-sass-lint": "git+ssh://git@github.com:Shopify/gulp-sass-lint.git#849714ccf55b0b986d9e1fe5a4d361bb0d9c7ad3",
+    "gulp-sass-lint": "github:Shopify/gulp-sass-lint",
     "gulp-size": "2.1.0",
     "gulp-svgmin": "1.2.2",
     "gulp-uglify": "2.0.0",
