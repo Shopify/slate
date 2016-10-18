@@ -10,7 +10,8 @@ var messages = require('./includes/messages.js');
 
 var activeDeploy = false;
 var cache = utils.createEventCache();
-var debouncedDeployStatus = _.debounce(checkDeployStatus, 320); // prevent early execution on multi-file events
+// prevent early execution on multi-file events
+var debouncedDeployStatus = _.debounce(checkDeployStatus, 320);
 var lintTasks = config.enableLinting ? ['watch:css-lint', 'watch:js-lint', 'watch:json-lint'] : [];
 
 /**

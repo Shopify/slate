@@ -198,7 +198,8 @@ var utilities = {
    * @returns {Promise}
    */
   resolveShell: function(childProcess) {
-    var error = ''; // stores errors from stderr events, if any occur
+    // stores errors from stderr events, if any occur
+    var error = '';
 
     return new Promise(function(resolve, reject) {
       childProcess.stdout.setEncoding('utf8');
