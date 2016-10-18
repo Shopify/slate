@@ -3,6 +3,8 @@
     "shopify/node"
   ],
   "plugins": [
-    ["add-shopify-header", {"files": [ "src/index.js" ]}]
+    ["add-shopify-header", {
+      "files": ["src/program.js", "src/gulpfile.js"]
+    }]
   ]
 }

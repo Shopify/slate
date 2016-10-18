@@ -54,9 +54,10 @@
     "mocha": "^3.0.2"
   },
   "scripts": {
-    "start": "babel -w -d lib/ src/",
+    "clean": "rm -rf lib/",
+    "start": "npm run clean && babel -w -d lib/ src/",
     "test": "npm run lint-allow-warning && mocha --compilers js:babel-register -u tdd test/index.js",
-    "prepublish": "babel -d lib/ src/",
+    "prepublish": "npm run clean && babel -d lib/ src/",
     "lint": "eslint --max-warnings 0 -c .eslintrc.json src/ test/",
     "lint-allow-warning": "eslint -c .eslintrc.json src/ test/"
   },
