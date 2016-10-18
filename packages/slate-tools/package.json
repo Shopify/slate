@@ -1,5 +1,5 @@
 {
-  "name": "slate-tools",
+  "name": "@shopify/slate-tools",
   "version": "0.0.0",
   "description": "Tooling for Shopify themes",
   "bin": {
