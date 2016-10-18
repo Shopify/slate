@@ -1,4 +1,4 @@
-<div id="ProductSection-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="product" itemscope itemtype="http://schema.org/Product">
+<div data-section-id="{{ section.id }}" data-section-type="product" data-enable-history-state="true" itemscope itemtype="http://schema.org/Product">
 
   {%- assign current_variant = product.selected_or_first_available_variant -%}
   {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
@@ -62,19 +62,21 @@
         {% endfor %}
       </select>
 
-      <span id="ProductPrice">
-        {{ current_variant.price | money }}
-      </span>
+      <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
+      <input type="number" id="Quantity" name="quantity" value="1" min="1">
 
-      {% if product.compare_at_price_max > product.price %}
+      <div class="price-wrapper">
+        <span id="ProductPrice">
+          {{ current_variant.price | money }}
+        </span>
+
+        {% if product.compare_at_price_max > product.price %}
         <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
         <s id="ComparePrice">
           {{ current_variant.compare_at_price | money }}
         </s>
-      {% endif %}
-
-      <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
-      <input type="number" id="Quantity" name="quantity" value="1" min="1">
+        {% endif %}
+      </div>
 
       <button type="submit" name="add" id="AddToCart">
         <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
@@ -82,7 +84,6 @@
     </form>
 
   </div>
-
 
   <div class="rte">
     {{ product.description }}

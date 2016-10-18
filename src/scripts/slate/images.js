@@ -51,7 +51,6 @@ slate.Image = (function() {
   }
 
   /**
-   * +++ Useful
    * Find the Shopify image attribute size
    *
    * @param {string} src
@@ -60,7 +59,7 @@ slate.Image = (function() {
   function imageSize(src) {
     var match = src.match(/.+_((?:pico|icon|thumb|small|compact|medium|large|grande)|\d{1,4}x\d{0,4}|x\d{1,4})[_\.@]/);
 
-    if (match !== null) {
+    if (match) {
       return match[1];
     } else {
       return null;
@@ -76,7 +75,7 @@ slate.Image = (function() {
    * @returns {*}
    */
   function getSizedImageUrl(src, size) {
-    if (size == null) {
+    if (size === null) {
       return src;
     }
 
@@ -86,14 +85,14 @@ slate.Image = (function() {
 
     var match = src.match(/\.(jpg|jpeg|gif|png|bmp|bitmap|tiff|tif)(\?v=\d+)?$/i);
 
-    if (match != null) {
+    if (match) {
       var prefix = src.split(match[0]);
       var suffix = match[0];
 
       return this.removeProtocol(prefix[0] + '_' + size + suffix);
+    } else {
+      return null;
     }
-
-    return null;
   }
 
   function removeProtocol(path) {
