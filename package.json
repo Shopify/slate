@@ -1,5 +1,5 @@
 {
-  "name": "Slate",
+  "name": "slate-theme",
   "version": "0.8.0",
   "license": "MIT",
   "repository": {
@@ -7,6 +7,6 @@
     "url": "https://github.com/Shopify/slate.git"
   },
   "devDependencies": {
-    "slate-tools": "file:///Users/ryanmacdonald/Shopify/slate-tools"
+    "@shopify/slate-tools": "file:///Users/ryanmacdonald/Shopify/slate-tools"
   }
 }
