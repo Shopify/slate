@@ -241,7 +241,8 @@ const utilities = {
    * @returns {Promise}
    */
   resolveShell: (childProcess) => {
-    let error = ''; // stores errors from stderr events, if any occur
+    // stores errors from stderr events, if any occur
+    let error = '';
 
     return new Promise((resolve, reject) => {
       childProcess.stdout.setEncoding('utf8');

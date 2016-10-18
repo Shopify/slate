@@ -10,7 +10,8 @@ const utils = require('./includes/utilities.js');
 const messages = require('./includes/messages.js');
 
 const cache = utils.createEventCache();
-const debouncedDeployStatus = _.debounce(checkDeployStatus, 320); // prevent early execution on multi-file events
+// prevent early execution on multi-file events
+const debouncedDeployStatus = _.debounce(checkDeployStatus, 320);
 const lintTasks = config.enableLinting ? ['watch:lint-css', 'watch:lint-js', 'watch:lint-json'] : [];
 
 let activeDeploy = false;

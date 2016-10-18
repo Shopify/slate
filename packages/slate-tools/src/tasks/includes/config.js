@@ -35,8 +35,9 @@ const config = {
 
   src: {
     root: 'src/',
-    js: 'src/scripts/**/*.js',
+    js: 'src/scripts/**/*.{js,js.liquid}',
     jsSections: 'src/sections/**/*.js',
+    vendorJs: 'src/scripts/vendor/*.js',
     json: 'src/**/*.json',
     css: 'src/styles/**/*.{scss,scss.liquid}',
     cssLint: 'src/styles/**/*.scss',
@@ -63,7 +64,7 @@ const config = {
   },
 
   roots: {
-    js: 'src/scripts/*.js',
+    js: 'src/scripts/*.{js,js.liquid}',
     vendorJs: 'src/scripts/vendor.js',
     css: 'src/styles/*.scss'
   },

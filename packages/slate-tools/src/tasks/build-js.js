@@ -36,7 +36,7 @@ gulp.task('build:js', lintTask, () => {
 });
 
 gulp.task('watch:js', () => {
-  chokidar.watch([config.src.js, `!${config.roots.vendorJs}`], {
+  chokidar.watch([config.src.js, `!${config.roots.vendorJs}`, `!${config.src.vendorJs}`], {
     ignoreInitial: true
   })
   .on('all', (event, path) => {
@@ -50,7 +50,7 @@ gulp.task('build:vendor-js', () => {
 });
 
 gulp.task('watch:vendor-js', () => {
-  chokidar.watch(config.roots.vendorJs, {
+  chokidar.watch([config.roots.vendorJs, config.src.vendorJs], {
     ignoreInitial: true
   })
   .on('all', (event, path) => {
