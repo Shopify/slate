@@ -1,11 +1,11 @@
 {
   "name": "@shopify/slate-tools",
-  "version": "0.0.0",
+  "version": "0.8.0",
   "description": "Tooling for Shopify themes",
   "bin": {
-    "slate-tools": "lib/program.js"
+    "slate-tools": "lib/index.js"
   },
-  "main": "lib/program.js",
+  "main": "lib/index.js",
   "license": "MIT",
   "author": "Shopify Inc.",
   "dependencies": {
@@ -50,14 +50,13 @@
     "babel-preset-shopify": "^13.0.0",
     "babel-register": "^6.11.6",
     "eslint": "^3.3.1",
-    "eslint-plugin-shopify": "^14.0.0",
-    "mocha": "^3.0.2"
+    "eslint-plugin-shopify": "^14.0.0"
   },
   "scripts": {
     "clean": "rm -rf lib/",
     "start": "npm run clean && babel -w -d lib/ src/",
-    "test": "npm run lint-allow-warning && mocha --compilers js:babel-register -u tdd test/index.js",
-    "prepublish": "npm run clean && babel -d lib/ src/",
+    "test": "npm run lint",
+    "prepublish": "npm test && npm run clean && babel -d lib/ src/",
     "lint": "eslint --max-warnings 0 -c .eslintrc.json src/ test/",
     "lint-allow-warning": "eslint -c .eslintrc.json src/ test/"
   },
