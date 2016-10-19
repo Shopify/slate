@@ -14,10 +14,9 @@ theme.Product = (function() {
    * @param {string} container - selector for the section container DOM element
    */
   function Product(container) {
-    var $container = this.$container = $(container);
+    this.$container = $(container);
 
     this.settings = {
-      enableHistoryState: _.isUndefined($container.data('enableHistoryState')) ? true : $container.data('enableHistoryState'),
       eventNamespace: '.product'
     };
 
@@ -30,15 +29,16 @@ theme.Product = (function() {
       productFeaturedImage: '#ProductPhotoImg',
       productThumbs: '#ProductThumbs .product-single__thumbnail',
       originalSelectorId: '#ProductSelect',
-      singleOptionSelector: '.single-option-selector'
+      singleOptionSelector: '.single-option-selector__radio',
+      productJson: '#ProductJson'
     };
 
     // Stop parsing if we don't have the product json script tag when loading
     // section in the Theme Editor
-    if (!$('#ProductJson').html()) {
+    if (!$(this.selectors.productJson).html()) {
       return;
     }
-    this.productSingleObject = JSON.parse(document.getElementById('ProductJson').innerHTML);
+    this.productSingleObject = JSON.parse($(this.selectors.productJson).html());
     this.settings.imageSize = slate.Image.imageSize($(this.selectors.productFeaturedImage).attr('src'));
 
     slate.Image.preload(this.productSingleObject.images, this.settings.imageSize);
@@ -54,7 +54,7 @@ theme.Product = (function() {
     initVariants: function() {
       var options = {
         $container: this.$container,
-        settings: this.settings,
+        enableHistoryState: _.isUndefined(this.$container.data('enableHistoryState')) ? true : this.$container.data('enableHistoryState'),
         singleOptionSelector: this.selectors.singleOptionSelector,
         originalSelectorId: this.selectors.originalSelectorId,
         product: this.productSingleObject
@@ -122,7 +122,7 @@ theme.Product = (function() {
      */
     updateProductImage: function(evt) {
       var variant = evt.variant;
-      var sizedImgUrl = slate.Image.getSizedImageUrl(variant.image.src, this.settings.imageSize);
+      var sizedImgUrl = slate.Image.getSizedImageUrl(variant.featured_image.src, this.settings.imageSize);
 
       $(this.selectors.productFeaturedImage).attr('src', sizedImgUrl);
     },

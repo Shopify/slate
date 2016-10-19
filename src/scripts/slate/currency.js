@@ -12,7 +12,8 @@
  */
 
 slate.Currency = (function() {
-  var moneyFormat = '${{amount}}'; // eslint-disable-line camelcase
+  // eslint-disable-next-line camelcase no-template-curly-in-string
+  var moneyFormat = '${{amount}}';
 
   /**
    * Format money values based on your shop currency settings

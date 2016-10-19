@@ -54,11 +54,11 @@
 
       <select class="no-js" name="id" id="ProductSelect" data-section="{{ section.id }}">
         {% for variant in product.variants %}
-          {% if variant.available %}
-            <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }}</option>
-          {% else %}
-            <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
-          {% endif %}
+          <option
+            {% if variant == current_variant.selected_or_first_available_variant %}selected="selected" {% endif %}
+            {% unless variant.available %}disabled="disabled" {% endunless %}
+            data-sku="{{ variant.sku }}"
+            value="{{ variant.id }}">{{ variant.title }}</option>
         {% endfor %}
       </select>
 
@@ -70,16 +70,22 @@
           {{ current_variant.price | money }}
         </span>
 
-        {% if product.compare_at_price_max > product.price %}
-        <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-        <s id="ComparePrice">
-          {{ current_variant.compare_at_price | money }}
-        </s>
+        {% if current_variant.compare_at_price_max > current_variant.price %}
+          <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+          <s id="ComparePrice">
+            {{ current_variant.compare_at_price | money }}
+          </s>
         {% endif %}
       </div>
 
-      <button type="submit" name="add" id="AddToCart">
-        <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
+      <button type="submit" name="add" id="AddToCart"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
+        <span id="AddToCartText">
+          {% if current_variant.available %}
+            {{ 'products.product.add_to_cart' | t }}
+          {% else %}
+            {{ 'products.product.sold_out' | t }}
+          {% endif %}
+        </span>
       </button>
     </form>
 

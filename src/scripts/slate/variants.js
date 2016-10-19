@@ -19,13 +19,10 @@ slate.Variants = (function() {
   function Variants(options) {
     this.$container = options.$container;
     this.product = options.product;
-    this.selectors = options.selectors;
     this.singleOptionSelector = options.singleOptionSelector;
     this.originalSelectorId = options.originalSelectorId;
-    this.settings = options.settings;
-
-    var currentOptions = this._getCurrentOptions();
-    this.currentVariant = this._getVariantFromOptions(currentOptions);
+    this.enableHistoryState = options.enableHistoryState;
+    this.currentVariant = this._getVariantFromOptions();
 
     $(this.singleOptionSelector).on('change', this._onSelectChange.bind(this));
   }
@@ -39,7 +36,7 @@ slate.Variants = (function() {
      * @return {array} options - Values of currently selected variants
      */
     _getCurrentOptions: function() {
-      var options = _.map($(this.singleOptionSelector, this.$container), function(element) {
+      var currentOptions = _.map($(this.singleOptionSelector, this.$container), function(element) {
         var $element = $(element);
         var type = $element.attr('type');
 
@@ -54,9 +51,10 @@ slate.Variants = (function() {
         }
       });
 
-      options = _.filter(options);
+      // remove any unchecked input values if using radio buttons or checkboxes
+      currentOptions = _.compact(currentOptions);
 
-      return options;
+      return currentOptions;
     },
 
     /**
@@ -65,7 +63,8 @@ slate.Variants = (function() {
      * @param  {array} selectedValues - Values of variant inputs
      * @return {object || undefined} found - Variant object from product.variants
      */
-    _getVariantFromOptions: function(selectedValues) {
+    _getVariantFromOptions: function() {
+      var selectedValues = this._getCurrentOptions();
       var variants = this.product.variants;
 
       var found = _.find(variants, function(variant) {
@@ -81,8 +80,7 @@ slate.Variants = (function() {
      * Event handler for when a variant input changes.
      */
     _onSelectChange: function() {
-      var options = this._getCurrentOptions();
-      var variant = this._getVariantFromOptions(options);
+      var variant = this._getVariantFromOptions();
 
       this.$container.trigger({
         type: 'variantChange',
@@ -98,7 +96,7 @@ slate.Variants = (function() {
       this._updatePrice(variant);
       this.currentVariant = variant;
 
-      if (this.settings.enableHistoryState) {
+      if (this.enableHistoryState) {
         this._updateHistoryState(variant);
       }
     },
@@ -147,7 +145,7 @@ slate.Variants = (function() {
      * @return {k}         [description]
      */
     _updateHistoryState: function(variant) {
-      if (!history.pushState || !variant) {
+      if (!history.replaceState || !variant) {
         return;
       }
 
