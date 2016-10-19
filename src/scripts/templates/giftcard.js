@@ -35,11 +35,11 @@ theme.giftCard = (function() {
     var text = document.getElementById(evt.data.element);
     var range = '';
 
-    if (document.body.createTextRange) { // ms method
+    if (document.body.createTextRange) {
       range = document.body.createTextRange();
       range.moveToElementText(text);
       range.select();
-    } else if (window.getSelection) { // moz, opera, webkit method
+    } else if (window.getSelection) {
       var selection = window.getSelection();
       range = document.createRange();
       range.selectNodeContents(text);

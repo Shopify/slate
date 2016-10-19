@@ -25,7 +25,7 @@ slate new theme my-theme
 cd my-theme
 ```
 
-#### 3. Add your store settings in `config.yml`.
+#### 3. Add your store settings in `config-sample.yml` and rename to `config.yml`.
 These settings include the theme ID, password, and store URL. See [config variables](http://themekit.cat/docs/#config-variables) for more details. Generate these credentials by creating a [private app](https://help.shopify.com/api/guides/api-credentials#generate-private-app-credentials).
 
 #### 4. Run `slate start`
