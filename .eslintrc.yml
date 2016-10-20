@@ -13,6 +13,7 @@ globals:
   Shopify: false
   slate: true
   QRCode: false
+  _: false
 rules:
   no-lonely-if: 0
   comma-dangle: 0

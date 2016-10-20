@@ -1,0 +1,107 @@
+<div data-section-id="{{ section.id }}" data-section-type="product" data-enable-history-state="true" itemscope itemtype="http://schema.org/Product">
+
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+  {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+
+  <meta itemprop="name" content="{{ product.title }}{% unless current_variant.title == 'Default Title' %} - {{ current_variant.title }}{% endunless %}">
+  <meta itemprop="url" content="{{ shop.url }}{{ current_variant.url }}">
+  <meta itemprop="brand" content="{{ product.vendor }}">
+  <meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
+  <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
+
+  <div id="ProductPhoto">
+    <img src="{{ featured_image | img_url: '480x480' }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg" data-size="480x480">
+  </div>
+  {% if product.images.size > 1 %}
+    <ul id="ProductThumbs">
+      {% for image in product.images %}
+        <li>
+          <a href="{{ image.src | img_url: '480x480' }}" class="product-single-thumbnail">
+            <img src="{{ image.src | img_url: '160x160' }}" alt="{{ image.alt | escape }}">
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+
+  <h1>{{ product.title }}</h1>
+  <p>{{ product.vendor }}</p>
+
+  {% comment %}
+
+  Product Selection Form
+  ====================
+  {% endcomment %}
+  <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+    <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+    <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
+
+    <form action="/cart/add" method="post" enctype="multipart/form-data">
+      {% unless product.options.size == 1 and product.variants[0].title == 'Default Title' %}
+        {% for option in product.options_with_values %}
+          <div class="selector-wrapper js">
+            <label {% if option.name == 'default' %}class="label-hidden" {% endif %}for="SingleOptionSelector-{{ forloop.index0 }}">{{ option.name }}</label>
+            <select class="single-option-selector" id="SingleOptionSelector-{{ forloop.index0 }}" data-name="{{ option.name }}" data-option-index="{{ forloop.index0 }}">
+              {% for value in option.values %}
+                <option value="{{ value }}"{% if option.selected_value == value %} selected="selected"{% endif %}>{{ value }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        {% endfor %}
+      {% endunless %}
+
+      <select class="no-js" name="id" id="ProductSelect" data-section="{{ section.id }}">
+        {% for variant in product.variants %}
+          <option
+            {% if variant == current_variant.selected_or_first_available_variant %}selected="selected" {% endif %}
+            {% unless variant.available %}disabled="disabled" {% endunless %}
+            data-sku="{{ variant.sku }}"
+            value="{{ variant.id }}">{{ variant.title }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
+      <input type="number" id="Quantity" name="quantity" value="1" min="1">
+
+      <div class="price-wrapper">
+        <span id="ProductPrice">
+          {{ current_variant.price | money }}
+        </span>
+
+        {% if current_variant.compare_at_price_max > current_variant.price %}
+          <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+          <s id="ComparePrice">
+            {{ current_variant.compare_at_price | money }}
+          </s>
+        {% endif %}
+      </div>
+
+      <button type="submit" name="add" id="AddToCart"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
+        <span id="AddToCartText">
+          {% if current_variant.available %}
+            {{ 'products.product.add_to_cart' | t }}
+          {% else %}
+            {{ 'products.product.sold_out' | t }}
+          {% endif %}
+        </span>
+      </button>
+    </form>
+
+  </div>
+
+  <div class="rte">
+    {{ product.description }}
+  </div>
+
+  {% if settings.social_sharing_products %}
+    {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
+  {% endif %}
+</div>
+
+{% unless product.empty? %}
+  <script type="application/json" id="ProductJson">
+    {{ product | json }}
+  </script>
+{% endunless %}
