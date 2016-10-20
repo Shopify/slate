@@ -4,11 +4,7 @@
  * A file that contains scripts highly couple code to the Gift Card template.
  */
 
-theme.giftCard = (function() {
-  if (!$('body').hasClass('template-giftcard')) {
-    return;
-  }
-
+(function() {
   var config = {
     qrCode: '#QrCode',
     printButton: '#PrintGiftCard',
