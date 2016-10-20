@@ -61,7 +61,11 @@
             </td>
             <td data-label="{{ 'cart.label.price' | t }}">
               {{ item.price | money }}
+
+              <s>{{ item.original_price | money }}
             </td>
+            {% if item.original_line_price != item.line_price %}
+            {% endif %}
             <td data-label="{{ 'cart.label.quantity' | t }}">
               <input type="number"
                      name="updates[]"
