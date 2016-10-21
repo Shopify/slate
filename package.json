@@ -7,6 +7,6 @@
     "url": "https://github.com/Shopify/slate.git"
   },
   "devDependencies": {
-    "@shopify/slate-tools": "file:///Users/ryanmacdonald/Shopify/slate-tools"
+    "@shopify/slate-tools": "^0.1.0"
   }
 }
