@@ -6,7 +6,8 @@ machine:
 
 dependencies:
   pre:
-    - npm install -g npm shopify/sass-lint eslint eslint-plugin-shopify eslint-plugin-node jsonlint
+    - 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
+    - npm set progress=false
   bundler:
     without:
       - benchmark
@@ -19,6 +20,4 @@ dependencies:
 test:
   override:
     - bundle exec rspec spec
-    - sass-lint --config '.scss-lint.yml' --max-warnings 0 --verbose
-    - eslint '**/*.js' --config '.eslintrc.yml' --ignore-path '.eslintignore' --max-warnings 0
-    - ls **/*.json | grep -v node_modules | grep -v docs | xargs -n1 jsonlint -q
+    - ./node_modules/.bin/slate-tools test

@@ -1,50 +1,12 @@
 {
-  "name": "Slate",
+  "name": "slate-theme",
   "version": "0.8.0",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/Shopify/slate.git"
   },
-  "scripts": {
-    "start": "gulp",
-    "start-nosync": "gulp --nosync",
-    "test": "gulp test",
-    "build": "gulp build",
-    "deploy": "gulp deploy",
-    "deploy-manual": "gulp deploy:manual",
-    "watch": "gulp watch",
-    "watch-nosync": "gulp watch --nosync",
-    "zip": "gulp zip"
-  },
-  "dependencies": {
-    "bluebird": "3.4.0",
-    "browser-sync": "2.13.0",
-    "chokidar": "1.5.2",
-    "del": "2.2.0",
-    "eslint": "3.2.2",
-    "eslint-plugin-shopify": "13.0.0",
-    "gulp": "3.9.1",
-    "gulp-cheerio": "0.6.2",
-    "gulp-cssimport": "3.0.2",
-    "gulp-eslint": "2.0.0",
-    "gulp-ext-replace": "0.3.0",
-    "gulp-include": "2.3.1",
-    "gulp-jsonlint": "1.1.2",
-    "gulp-open": "2.0.0",
-    "gulp-plumber": "1.1.0",
-    "gulp-sass-lint": "git+ssh://git@github.com:Shopify/gulp-sass-lint.git#8c2508e703589595f1f64a41465ad7bb03a4bad8",
-    "gulp-size": "2.1.0",
-    "gulp-svgmin": "1.2.2",
-    "gulp-uglify": "2.0.0",
-    "gulp-util": "3.0.7",
-    "gulp-zip": "3.2.0",
-    "js-yaml": "3.6.1",
-    "lodash": "4.13.1",
-    "open": "0.0.5",
-    "require-dir": "0.3.0",
-    "run-sequence": "1.2.1",
-    "vinyl-paths": "2.1.0",
-    "yargs": "4.7.1"
+  "devDependencies": {
+    "@shopify/slate-tools": "^0.1.0"
   }
 }
