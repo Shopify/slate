@@ -87,7 +87,9 @@
       "product": "Artikel",
       "price": "Preis",
       "quantity": "Menge",
-      "total": "Gesamt"
+      "total": "Gesamt",
+      "discounted_price": "ermäßigter Preis",
+      "original_price": "Originalpreis"
     }
   },
   "collections": {

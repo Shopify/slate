@@ -61,9 +61,9 @@
             </td>
             <td data-label="{{ 'cart.label.price' | t }}">
               {% if item.original_line_price != item.line_price %}
-                <span class="visually-hidden">{{ cart.label.discounted_price | t }}</span>
+                <span class="visually-hidden">{{ 'cart.label.discounted_price' | t }}</span>
                 {{ item.price | money }}
-                <span class="visually-hidden">{{ cart.label.original_price | t }}</span>
+                <span class="visually-hidden">{{ 'cart.label.original_price' | t }}</span>
                 <s>{{ item.original_price | money }}</s>
               {% else %}
                 {{ item.price | money }}
