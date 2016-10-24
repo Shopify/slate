@@ -80,7 +80,8 @@
       "checkout": "Finalizar pedido",
       "empty": "Su carrito actualmente está vacío.",
       "continue_browsing_html": "Continúe explorando <a href=\"/collections/all\">aquí</a>.",
-      "item_quantity": "Cantidad de artículo"
+      "item_quantity": "Cantidad de artículo",
+      "savings": "Está ahorrando"
     },
     "label": {
       "product": "Producto",
