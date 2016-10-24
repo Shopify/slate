@@ -1,0 +1,75 @@
+{% if section.settings.title != blank %}
+  <h2>{{ section.settings.title | escape }}</h2>
+{% endif %}
+
+{%- assign collection = collections[section.settings.collection] -%}
+
+{% for product in collection.products limit: 6 %}
+  <a href="{{ product.url | within: collection }}">
+    {{ product.featured_image.src | img_url: '480x480' | img_tag: product.title }}
+    <p>{{ product.title }}</p>
+  </a>
+
+  <p>
+    {% if product.compare_at_price > product.price %}
+
+      {% if product.price_varies %}
+        {%- assign sale_price = product.price | money -%}
+        {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+      {% else %}
+        {{ 'products.product.on_sale' | t }}
+        {{ product.price | money }}
+      {% endif %}
+
+    {% else %}
+
+      {% if product.price_varies %}
+        {%- assign price = product.price | money -%}
+        {{ 'products.product.from_text_html' | t: price: price }}
+      {% else %}
+        {{ product.price | money }}
+      {% endif %}
+
+    {% endif %}
+  </p>
+{% else %}
+
+  {% for i in (1..6) %}
+    <a href="#">
+      {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+      {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+
+      <p>
+        {{ 'homepage.onboarding.product_title' | t }}
+      </p>
+    </a>
+
+    <p>{{ 1999 | money }}</p>
+  {% endfor %}
+{% endfor %}
+
+{% schema %}
+  {
+    "name": "Featured collection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured collection"
+      },
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": "Collection"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured collection",
+        "category": "Collection"
+      }
+    ]
+  }
+
+{% endschema %}

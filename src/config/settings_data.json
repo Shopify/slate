@@ -7,13 +7,13 @@
           "type": "collection-list",
           "blocks": {
             "collection-list-0": {
-              "type": "featured_collection"
+              "type": "collection"
             },
             "collection-list-1": {
-              "type": "featured_collection"
+              "type": "collection"
             },
             "collection-list-2": {
-              "type": "featured_collection"
+              "type": "collection"
             }
           },
           "block_order": [
@@ -21,10 +21,17 @@
             "collection-list-1",
             "collection-list-2"
           ]
+        },
+        "featured-collection": {
+          "type": "featured-collection",
+          "settings": {
+            "collection": "frontpage"
+          }
         }
       },
       "content_for_index": [
-        "collection-list"
+        "collection-list",
+        "featured-collection"
       ]
     }
   }
