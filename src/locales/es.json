@@ -92,11 +92,7 @@
   "collections": {
     "general": {
       "no_matches": "Lo sentimos, no hay productos que coincidan con su búsqueda.",
-      "link_title": "Navegue por nuestra colección {{ title }}",
-      "items_with_count": {
-        "one": "{{ count }} artículo",
-        "other": "{{ count }} artículos"
-      }
+      "link_title": "Navegue por nuestra colección {{ title }}"
     }
   },
   "contact": {
