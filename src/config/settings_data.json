@@ -1,6 +1,31 @@
 {
   "current": "Default",
   "presets": {
-    "Default": {}
+    "Default": {
+      "sections": {
+        "collection-list": {
+          "type": "collection-list",
+          "blocks": {
+            "collection-list-0": {
+              "type": "featured_collection"
+            },
+            "collection-list-1": {
+              "type": "featured_collection"
+            },
+            "collection-list-2": {
+              "type": "featured_collection"
+            }
+          },
+          "block_order": [
+            "collection-list-0",
+            "collection-list-1",
+            "collection-list-2"
+          ]
+        }
+      },
+      "content_for_index": [
+        "collection-list"
+      ]
+    }
   }
 }

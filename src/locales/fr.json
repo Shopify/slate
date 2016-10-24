@@ -212,13 +212,10 @@
     }
   },
   "homepage": {
-    "sections": {
-      "frontpage_title": "Collection Frontpage",
-      "featured_title": "Collections en vedette"
-    },
     "onboarding": {
       "product_title": "Titre du produit",
-      "collection_title": "Titre de la collection"
+      "collection_title": "Titre de la collection",
+      "no_content": "Cette section ne contient actuellement aucun contenu. Ajoutez-en en utilisant la barre latérale."
     }
   },
   "layout": {

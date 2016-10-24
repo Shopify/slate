@@ -212,13 +212,10 @@
     }
   },
   "homepage": {
-    "sections": {
-      "frontpage_title": "Colección de portada",
-      "featured_title": "Colecciones destacadas"
-    },
     "onboarding": {
       "product_title": "Ejemplo título de producto",
-      "collection_title": "Ejemplo título de colección"
+      "collection_title": "Ejemplo título de colección",
+      "no_content": "Esta secção não inclui de momento qualquer conteúdo. Adicione conteúdo a esta secção através da barra lateral."
     }
   },
   "layout": {
