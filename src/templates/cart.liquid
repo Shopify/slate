@@ -60,12 +60,15 @@
               </a>
             </td>
             <td data-label="{{ 'cart.label.price' | t }}">
-              {{ item.price | money }}
-
-              <s>{{ item.original_price | money }}
+              {% if item.original_line_price != item.line_price %}
+                <span class="visually-hidden">{{ cart.label.discounted_price | t }}</span>
+                {{ item.price | money }}
+                <span class="visually-hidden">{{ cart.label.original_price | t }}</span>
+                <s>{{ item.original_price | money }}</s>
+              {% else %}
+                {{ item.price | money }}
+              {% endif %}
             </td>
-            {% if item.original_line_price != item.line_price %}
-            {% endif %}
             <td data-label="{{ 'cart.label.quantity' | t }}">
               <input type="number"
                      name="updates[]"
@@ -90,6 +93,9 @@
 
     <p>{{ 'cart.general.subtotal' | t }}</p>
     <p>{{ cart.total_price | money }}</p>
+    {% if cart.total_discounts > 0 %}
+      <p>{{ 'cart.general.savings' | t }} {{ cart.total_discounts | money }}</p>
+    {% endif %}
     <p>{{ 'cart.general.shipping_at_checkout' | t }}</p>
     <input type="submit" name="update" value="{{ 'cart.general.update' | t }}">
     <input type="submit" name="checkout" class="btn" value="{{ 'cart.general.checkout' | t }}">
