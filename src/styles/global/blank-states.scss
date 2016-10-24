@@ -13,6 +13,10 @@ $color-blankstate-background: rgba($color-body-text, 0.1);
   border: 1px solid $color-blankstate-border;
 }
 
+.placeholder-svg--small {
+  width: 480px;
+}
+
 .placeholder-noblocks {
   padding: 40px;
   text-align: center;

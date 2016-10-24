@@ -26,13 +26,6 @@
 
   <div>
     {% for product in collection.products %}
-
-      {% comment %}
-
-      Collection Item
-      =====================
-      {% endcomment %}
-
       <div>
         <a href="{{ product.url | within: collection }}">
           <img src="{{ product.featured_image.src | img_url: '480x480' }}" alt="{{ product.featured_image.alt | escape }}">
@@ -42,7 +35,6 @@
           <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
         </p>
         <p>
-
           {% if product.compare_at_price > product.price %}
 
             {% if product.price_varies %}
@@ -70,31 +62,26 @@
           {% endif %}
 
           {% unless product.available %}
-          {{ 'products.product.sold_out' | t }}
+            {{ 'products.product.sold_out' | t }}
           {% endunless %}
-
         </p>
       </div>
 
     {% else %}
-      {% if collection.handle == 'all' %}
-        {%- assign collection_index = 1 -%}
+      {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
         {% for i in (1..8) %}
-          {% case i %}
-          {% when 7 %}
-          {%- assign collection_index = 1 -%}
-          {% when 8 %}
-          {%- assign collection_index = 2 -%}
-          {% endcase %}
-          <div>
-            <a href="/admin/products">
-              {% capture imageUrl %}//cdn.shopify.com/s/images/themes/product-{{ collection_index }}.png{% endcapture %}
-              {{ imageUrl | img_tag }}
-            </a>
-            <p><a href="/admin/products">{{ 'homepage.onboarding.product_title' | t }}</a></p>
-            <p>$19.99</p>
-          </div>
-          {%- assign collection_index = collection_index | plus: 1 -%}
+          <a href="#">
+            {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+            {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+          </a>
+
+          <p>
+            <a href="#">{{ 'homepage.onboarding.product_title' | t }}</a>
+          </p>
+
+          <p>
+            {{ 1999 | money }}
+          </p>
         {% endfor %}
       {% else %}
         <p>{{ 'collections.general.no_matches' | t }}</p>
