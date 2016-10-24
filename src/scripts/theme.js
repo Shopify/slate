@@ -12,10 +12,9 @@ window.theme = window.theme || {};
 /*================ Sections ================*/
 // =require sections/product.js
 
-/*================ Sections ================*/
+/*================ Templates ================*/
 // =require templates/customers-addresses.js
 // =require templates/customers-login.js
-// =require templates/giftcard.js
 
 $(document).ready(function() {
   var sections = new slate.Sections();
