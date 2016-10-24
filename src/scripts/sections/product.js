@@ -8,8 +8,21 @@
 
 theme.Product = (function() {
 
+  var selectors = {
+    addToCart: '.add-to-cart',
+    addToCartText: '.add-to-cart-text',
+    comparePrice: '.compare-price',
+    originalSelectorId: '.product-select',
+    priceWrapper: '.price-wrapper',
+    productFeaturedImage: '.product-image',
+    productJson: '.product-json',
+    productPrice: '.product-price',
+    productThumbs: '.product-single-thumbnail',
+    singleOptionSelector: '.single-option-selector'
+  };
+
   /**
-   * Product section constructor.  Runs on page load as well as Theme Editor
+   * Product section constructor. Runs on page load as well as Theme Editor
    * `section:load` events.
    * @param {string} container - selector for the section container DOM element
    */
@@ -17,29 +30,16 @@ theme.Product = (function() {
     this.$container = $(container);
     var sectionId = this.$container.attr('data-section-id');
 
-    this.selectors = {
-      addToCart: '.add-to-cart',
-      productPrice: '.product-price',
-      comparePrice: '.compare-price',
-      priceWrapper: '.price-wrapper',
-      addToCartText: '.add-to-cart-text',
-      productFeaturedImage: '.product-image',
-      productThumbs: '.product-single-thumbnail',
-      originalSelectorId: '.product-select',
-      singleOptionSelector: '.single-option-selector',
-      productJson: '#ProductJson-' + sectionId
-    };
-
     // Stop parsing if we don't have the product json script tag when loading
     // section in the Theme Editor
-    if (!$(this.selectors.productJson).html()) {
+    if (!$(selectors.productJson, this.$container).html()) {
       return;
     }
-    this.productSingleObject = JSON.parse($(this.selectors.productJson).html());
+    this.productSingleObject = JSON.parse($(selectors.productJson, this.$container).html());
 
     this.settings = {
       eventNamespace: '.product',
-      imageSize: slate.Image.imageSize($(this.selectors.productFeaturedImage, this.$container).attr('src'))
+      imageSize: slate.Image.imageSize($(selectors.productFeaturedImage, this.$container).attr('src'))
     };
 
     slate.Image.preload(this.productSingleObject.images, this.settings.imageSize);
@@ -55,9 +55,9 @@ theme.Product = (function() {
     initVariants: function() {
       var options = {
         $container: this.$container,
-        enableHistoryState: _.isUndefined(this.$container.data('enableHistoryState')) ? true : this.$container.data('enableHistoryState'),
-        singleOptionSelector: this.selectors.singleOptionSelector,
-        originalSelectorId: this.selectors.originalSelectorId,
+        enableHistoryState: this.$container.data('enable-history-state') || false,
+        singleOptionSelector: selectors.singleOptionSelector,
+        originalSelectorId: selectors.originalSelectorId,
         product: this.productSingleObject
       };
 
@@ -79,20 +79,20 @@ theme.Product = (function() {
       var variant = evt.variant;
 
       if (variant) {
-        $(this.selectors.priceWrapper, this.$container).removeClass('hide');
+        $(selectors.priceWrapper, this.$container).removeClass('hide');
       } else {
-        $(this.selectors.addToCart, this.$container).prop('disabled', true);
-        $(this.selectors.addToCartText, this.$container).html(theme.strings.unavailable);
-        $(this.selectors.priceWrapper, this.$container).addClass('hide');
+        $(selectors.addToCart, this.$container).prop('disabled', true);
+        $(selectors.addToCartText, this.$container).html(theme.strings.unavailable);
+        $(selectors.priceWrapper, this.$container).addClass('hide');
         return;
       }
 
       if (variant.available) {
-        $(this.selectors.addToCart, this.$container).prop('disabled', false);
-        $(this.selectors.addToCartText, this.$container).html(theme.strings.addToCart);
+        $(selectors.addToCart, this.$container).prop('disabled', false);
+        $(selectors.addToCartText, this.$container).html(theme.strings.addToCart);
       } else {
-        $(this.selectors.addToCart, this.$container).prop('disabled', true);
-        $(this.selectors.addToCartText, this.$container).html(theme.strings.soldOut);
+        $(selectors.addToCart, this.$container).prop('disabled', true);
+        $(selectors.addToCartText, this.$container).html(theme.strings.soldOut);
       }
     },
 
@@ -105,15 +105,15 @@ theme.Product = (function() {
     updateProductPrices: function(evt) {
       var variant = evt.variant;
 
-      $(this.selectors.productPrice, this.$container)
+      $(selectors.productPrice, this.$container)
         .html(slate.Currency.formatMoney(variant.price, theme.moneyFormat));
 
       if (variant.compare_at_price > variant.price) {
-        $(this.selectors.comparePrice, this.$container)
+        $(selectors.comparePrice, this.$container)
           .html(slate.Currency.formatMoney(variant.compare_at_price, theme.moneyFormat))
           .removeClass('hide');
       } else {
-        $(this.selectors.comparePrice, this.$container).addClass('hide');
+        $(selectors.comparePrice, this.$container).addClass('hide');
       }
     },
 
@@ -126,7 +126,7 @@ theme.Product = (function() {
       var variant = evt.variant;
       var sizedImgUrl = slate.Image.getSizedImageUrl(variant.featured_image.src, this.settings.imageSize);
 
-      $(this.selectors.productFeaturedImage, this.$container).attr('src', sizedImgUrl);
+      $(selectors.productFeaturedImage, this.$container).attr('src', sizedImgUrl);
     },
 
     /**

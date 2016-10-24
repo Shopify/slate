@@ -64,13 +64,7 @@
     "settings": [
       {
         "type": "header",
-        "content": "Sharing options"
-      },
-      {
-        "type": "checkbox",
-        "id": "social_sharing_products",
-        "label": "Enable sharing for products",
-        "default": true
+        "content": "Social sharing options"
       },
       {
         "type": "checkbox",
