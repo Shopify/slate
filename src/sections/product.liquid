@@ -45,7 +45,7 @@
             <label {% if option.name == 'default' %}class="label-hidden" {% endif %}for="SingleOptionSelector-{{ forloop.index0 }}">{{ option.name }}</label>
             <select class="single-option-selector" id="SingleOptionSelector-{{ forloop.index0 }}" data-name="{{ option.name }}" data-option-index="{{ forloop.index0 }}">
               {% for value in option.values %}
-                <option value="{{ value }}"{% if option.selected_value == value %} selected="selected"{% endif %}>{{ value }}</option>
+                <option value="{{ value | escape }}"{% if option.selected_value == value %} selected="selected"{% endif %}>{{ value }}</option>
               {% endfor %}
             </select>
           </div>

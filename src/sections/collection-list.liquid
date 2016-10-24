@@ -7,7 +7,6 @@
     {%- assign collection = collections[block.settings.collection] -%}
 
     <a href="{% if collection.empty? %}#{% else %}{{ collection.url }}{% endif %}">
-
       {% if collection.image != blank %}
         {{ collection | img_url: '480x480' | img_tag: collection.title }}
       {% elsif collection.products.first != blank %}
