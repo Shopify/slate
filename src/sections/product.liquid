@@ -9,11 +9,9 @@
   <meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
   <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
 
-  <div id="ProductPhoto">
-    <img src="{{ featured_image | img_url: '480x480' }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg" data-size="480x480">
-  </div>
+  <img src="{{ featured_image | img_url: '480x480' }}" alt="{{ featured_image.alt | escape }}" class="product-image">
   {% if product.images.size > 1 %}
-    <ul id="ProductThumbs">
+    <ul>
       {% for image in product.images %}
         <li>
           <a href="{{ image.src | img_url: '480x480' }}" class="product-single-thumbnail">
@@ -52,7 +50,7 @@
         {% endfor %}
       {% endunless %}
 
-      <select class="no-js" name="id" id="ProductSelect" data-section="{{ section.id }}">
+      <select class="no-js" name="id" class="product-select" data-section="{{ section.id }}">
         {% for variant in product.variants %}
           <option
             {% if variant == current_variant.selected_or_first_available_variant %}selected="selected" {% endif %}
@@ -66,20 +64,20 @@
       <input type="number" id="Quantity" name="quantity" value="1" min="1">
 
       <div class="price-wrapper">
-        <span id="ProductPrice">
+        <span class="product-price">
           {{ current_variant.price | money }}
         </span>
 
         {% if current_variant.compare_at_price_max > current_variant.price %}
           <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-          <s id="ComparePrice">
+          <s class="compare-price">
             {{ current_variant.compare_at_price | money }}
           </s>
         {% endif %}
       </div>
 
-      <button type="submit" name="add" id="AddToCart"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
-        <span id="AddToCartText">
+      <button type="submit" name="add" class="add-to-cart"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
+        <span class="add-to-cart-text">
           {% if current_variant.available %}
             {{ 'products.product.add_to_cart' | t }}
           {% else %}
@@ -101,7 +99,7 @@
 </div>
 
 {% unless product.empty? %}
-  <script type="application/json" id="ProductJson">
+  <script type="application/json" id="ProductJson-{{ section.id }}">
     {{ product | json }}
   </script>
 {% endunless %}

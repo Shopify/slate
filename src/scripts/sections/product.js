@@ -15,22 +15,19 @@ theme.Product = (function() {
    */
   function Product(container) {
     this.$container = $(container);
-
-    this.settings = {
-      eventNamespace: '.product'
-    };
+    var sectionId = this.$container.attr('data-section-id');
 
     this.selectors = {
-      addToCart: '#AddToCart',
-      productPrice: '#ProductPrice',
-      comparePrice: '#ComparePrice',
+      addToCart: '.add-to-cart',
+      productPrice: '.product-price',
+      comparePrice: '.compare-price',
       priceWrapper: '.price-wrapper',
-      addToCartText: '#AddToCartText',
-      productFeaturedImage: '#ProductPhotoImg',
-      productThumbs: '#ProductThumbs .product-single__thumbnail',
-      originalSelectorId: '#ProductSelect',
-      singleOptionSelector: '.single-option-selector__radio',
-      productJson: '#ProductJson'
+      addToCartText: '.add-to-cart-text',
+      productFeaturedImage: '.product-image',
+      productThumbs: '.product-single-thumbnail',
+      originalSelectorId: '.product-select',
+      singleOptionSelector: '.single-option-selector',
+      productJson: '#ProductJson-' + sectionId
     };
 
     // Stop parsing if we don't have the product json script tag when loading
@@ -39,7 +36,11 @@ theme.Product = (function() {
       return;
     }
     this.productSingleObject = JSON.parse($(this.selectors.productJson).html());
-    this.settings.imageSize = slate.Image.imageSize($(this.selectors.productFeaturedImage).attr('src'));
+
+    this.settings = {
+      eventNamespace: '.product',
+      imageSize: slate.Image.imageSize($(this.selectors.productFeaturedImage, this.$container).attr('src'))
+    };
 
     slate.Image.preload(this.productSingleObject.images, this.settings.imageSize);
 
@@ -78,20 +79,20 @@ theme.Product = (function() {
       var variant = evt.variant;
 
       if (variant) {
-        $(this.selectors.priceWrapper).removeClass('hide');
+        $(this.selectors.priceWrapper, this.$container).removeClass('hide');
       } else {
-        $(this.selectors.addToCart).prop('disabled', true);
-        $(this.selectors.addToCartText).html(theme.strings.unavailable);
-        $(this.selectors.priceWrapper).addClass('hide');
+        $(this.selectors.addToCart, this.$container).prop('disabled', true);
+        $(this.selectors.addToCartText, this.$container).html(theme.strings.unavailable);
+        $(this.selectors.priceWrapper, this.$container).addClass('hide');
         return;
       }
 
       if (variant.available) {
-        $(this.selectors.addToCart).prop('disabled', false);
-        $(this.selectors.addToCartText).html(theme.strings.addToCart);
+        $(this.selectors.addToCart, this.$container).prop('disabled', false);
+        $(this.selectors.addToCartText, this.$container).html(theme.strings.addToCart);
       } else {
-        $(this.selectors.addToCart).prop('disabled', true);
-        $(this.selectors.addToCartText).html(theme.strings.soldOut);
+        $(this.selectors.addToCart, this.$container).prop('disabled', true);
+        $(this.selectors.addToCartText, this.$container).html(theme.strings.soldOut);
       }
     },
 
@@ -104,14 +105,15 @@ theme.Product = (function() {
     updateProductPrices: function(evt) {
       var variant = evt.variant;
 
-      $(this.selectors.productPrice).html(slate.Currency.formatMoney(variant.price, theme.moneyFormat));
+      $(this.selectors.productPrice, this.$container)
+        .html(slate.Currency.formatMoney(variant.price, theme.moneyFormat));
 
       if (variant.compare_at_price > variant.price) {
-        $(this.selectors.comparePrice)
+        $(this.selectors.comparePrice, this.$container)
           .html(slate.Currency.formatMoney(variant.compare_at_price, theme.moneyFormat))
           .removeClass('hide');
       } else {
-        $(this.selectors.comparePrice).addClass('hide');
+        $(this.selectors.comparePrice, this.$container).addClass('hide');
       }
     },
 
@@ -124,7 +126,7 @@ theme.Product = (function() {
       var variant = evt.variant;
       var sizedImgUrl = slate.Image.getSizedImageUrl(variant.featured_image.src, this.settings.imageSize);
 
-      $(this.selectors.productFeaturedImage).attr('src', sizedImgUrl);
+      $(this.selectors.productFeaturedImage, this.$container).attr('src', sizedImgUrl);
     },
 
     /**
