@@ -80,13 +80,16 @@
       "checkout": "Fechar pedido",
       "empty": "Seu carrinho está vazio no momento.",
       "continue_browsing_html": "Continue navegando <a href=\"/collections/all\">aqui</a>.",
-      "item_quantity": "Quantidade de itens"
+      "item_quantity": "Quantidade de itens",
+      "savings": "Você está economizando"
     },
     "label": {
       "product": "Produto",
       "price": "Preço",
       "quantity": "Quantidade",
-      "total": "Total"
+      "total": "Total",
+      "discounted_price": "Preço com desconto",
+      "original_price": "Preço original"
     }
   },
   "collections": {

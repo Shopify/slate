@@ -80,13 +80,16 @@
       "checkout": "Zur Kasse",
       "empty": "Ihr Einkaufswagen ist im Moment leer.",
       "continue_browsing_html": "Mit der Suche <a href=\"/collections/all\">hier</a> fortfahren.",
-      "item_quantity": "Produktmenge"
+      "item_quantity": "Produktmenge",
+      "savings": "Sie sparen"
     },
     "label": {
       "product": "Artikel",
       "price": "Preis",
       "quantity": "Menge",
-      "total": "Gesamt"
+      "total": "Gesamt",
+      "discounted_price": "ermäßigter Preis",
+      "original_price": "Originalpreis"
     }
   },
   "collections": {
