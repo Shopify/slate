@@ -1,3 +1,19 @@
-node_modules/
-bin/theme
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Other
 .DS_Store
+bundle.js
+test/output
+lib/
