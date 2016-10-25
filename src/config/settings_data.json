@@ -27,11 +27,15 @@
           "settings": {
             "collection": "frontpage"
           }
+        },
+        "featured-product": {
+          "type": "featured-product"
         }
       },
       "content_for_index": [
         "collection-list",
-        "featured-collection"
+        "featured-collection",
+        "featured-product"
       ]
     }
   }
