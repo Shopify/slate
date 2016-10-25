@@ -60,31 +60,11 @@
     ]
   },
   {
-    "name": "Home page",
-    "settings": [
-      {
-        "type": "paragraph",
-        "content": "Select which page content is shown on the home page"
-      },
-      {
-        "type": "page",
-        "id": "home_page_content",
-        "label": "Choose page"
-      }
-    ]
-  },
-  {
     "name": "Social media",
     "settings": [
       {
         "type": "header",
-        "content": "Sharing options"
-      },
-      {
-        "type": "checkbox",
-        "id": "social_sharing_products",
-        "label": "Enable sharing for products",
-        "default": true
+        "content": "Social sharing options"
       },
       {
         "type": "checkbox",

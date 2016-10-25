@@ -95,11 +95,7 @@
   "collections": {
     "general": {
       "no_matches": "Lamentamos, mas nenhum produto corresponde à sua pesquisa.",
-      "link_title": "Explorar a nossa coleção {{ title }}",
-      "items_with_count": {
-        "one": "{{ count }} item",
-        "other": "{{ count }} itens"
-      }
+      "link_title": "Explorar a nossa coleção {{ title }}"
     }
   },
   "contact": {
@@ -215,13 +211,10 @@
     }
   },
   "homepage": {
-    "sections": {
-      "frontpage_title": "Coleção Frontpage",
-      "featured_title": "Coleções em Destaque"
-    },
     "onboarding": {
       "product_title": "Título do Produto Exemplo",
-      "collection_title": "Título da Coleção Exemplo"
+      "collection_title": "Título da Coleção Exemplo",
+      "no_content": "Esta sección actualmente no incluye ningún contenido. Añade un contenido a esta sección utilizando la barra lateral."
     }
   },
   "layout": {

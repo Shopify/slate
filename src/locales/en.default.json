@@ -95,11 +95,7 @@
   "collections": {
     "general": {
       "no_matches": "Sorry, there are no products in this collection",
-      "link_title": "Browse our {{ title }} collection",
-      "items_with_count": {
-        "one": "{{ count }} item",
-        "other": "{{ count }} items"
-      }
+      "link_title": "Browse our {{ title }} collection"
     }
   },
   "contact": {
@@ -215,13 +211,10 @@
     }
   },
   "homepage": {
-    "sections": {
-      "frontpage_title": "Frontpage Collection",
-      "featured_title": "Featured Collections"
-    },
     "onboarding": {
       "product_title": "Example Product Title",
-      "collection_title": "Example Collection Title"
+      "collection_title": "Example Collection Title",
+      "no_content": "This section doesn’t currently include any content. Add content to this section using the sidebar."
     }
   },
   "layout": {

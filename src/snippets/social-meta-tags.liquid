@@ -7,12 +7,7 @@
 {% comment %}
   Template specific overides
 {% endcomment %}
-{%- if template_base == 'index' -%}
-  {%- if settings.home_page_content != blank -%}
-    {%- assign og_description = pages[settings.home_page_content].content | strip_html -%}
-  {%- endif -%}
-
-{%- elsif template_base == 'product' -%}
+{%- if template_base == 'product' -%}
   {%- assign og_title = product.title | strip_html -%}
   {%- assign og_type = 'product' -%}
   {%- capture og_image_tags -%}

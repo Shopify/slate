@@ -24,7 +24,7 @@ slate.Variants = (function() {
     this.enableHistoryState = options.enableHistoryState;
     this.currentVariant = this._getVariantFromOptions();
 
-    $(this.singleOptionSelector).on('change', this._onSelectChange.bind(this));
+    $(this.singleOptionSelector, this.$container).on('change', this._onSelectChange.bind(this));
   }
 
   Variants.prototype = _.assignIn({}, Variants.prototype, {
@@ -159,7 +159,7 @@ slate.Variants = (function() {
      * @param  {variant} variant - Currently selected variant
      */
     _updateMasterSelect: function(variant) {
-      var $originalSelector = $(this.originalSelectorId);
+      var $originalSelector = $(this.originalSelectorId, this.$container);
 
       if (!variant) {
         return;

@@ -95,11 +95,7 @@
   "collections": {
     "general": {
       "no_matches": "Es tut uns leid, aber Ihre Suche nach Produkten hat keine Treffer ergeben.",
-      "link_title": "Durchsuchen Sie unsere {{ title }}-Zusammenstellung",
-      "items_with_count": {
-        "one": "{{ count }} Produkt",
-        "other": "{{ count }} Produkte"
-      }
+      "link_title": "Durchsuchen Sie unsere {{ title }}-Zusammenstellung"
     }
   },
   "contact": {
@@ -215,13 +211,10 @@
     }
   },
   "homepage": {
-    "sections": {
-      "frontpage_title": "Startseite-Zusammenstellung",
-      "featured_title": "Ausgewählte Zusammenstellungen"
-    },
     "onboarding": {
       "product_title": "Beispielhafter Produkttitel",
-      "collection_title": "Beispielhafter Zusammenstellungstitel"
+      "collection_title": "Beispielhafter Zusammenstellungstitel",
+      "no_content": "Dieser Bereich hat zur Zeit keinen Inhalt. Füge diesem Bereich über die Seitenleiste Inhalte hinzu."
     }
   },
   "layout": {
