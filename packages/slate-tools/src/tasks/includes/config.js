@@ -1,4 +1,17 @@
+const join = require('path').join;
+const logger = require('debug')('slate-tools');
+const findRoot = require('find-root');
 const gutil = require('gulp-util');
+
+const themeRoot = findRoot(process.cwd());
+
+let pkg = {};
+
+try {
+  pkg = require(join(themeRoot, 'package.json'));
+} catch (err) {
+  logger(err);
+}
 
 /**
  * slate-cli configuration object
@@ -27,6 +40,8 @@ const gutil = require('gulp-util');
  */
 const config = {
   environment: gutil.env.environments || 'development',
+  themeRoot,
+  packageJson: pkg,
   enableLinting: false,
 
   tkConfig: 'config.yml',
