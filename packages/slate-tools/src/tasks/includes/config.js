@@ -36,7 +36,6 @@ const config = {
   src: {
     root: 'src/',
     js: 'src/scripts/**/*.{js,js.liquid}',
-    jsSections: 'src/sections/**/*.js',
     vendorJs: 'src/scripts/vendor/*.js',
     json: 'src/**/*.json',
     css: 'src/styles/**/*.{scss,scss.liquid}',
@@ -46,8 +45,7 @@ const config = {
     icons: 'src/icons/**/*.svg',
     templates: 'src/templates/**/*',
     snippets: 'src/snippets/*',
-    sections: 'src/sections/**/*',
-    sectionsDir: 'src/sections/',
+    sections: 'src/sections/*',
     locales: 'src/locales/*',
     config: 'src/config/*',
     layout: 'src/layout/*'

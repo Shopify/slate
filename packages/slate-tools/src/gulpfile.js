@@ -15,7 +15,7 @@ require('require-dir')('./tasks');
 gulp.task('build', (done) => {
   runSequence(
     ['clean'],
-    ['build:js', 'build:vendor-js', 'build:css', 'build:assets', 'build:sections', 'build:config', 'build:svg'],
+    ['build:js', 'build:vendor-js', 'build:css', 'build:assets', 'build:config', 'build:svg'],
     done
   );
 });

@@ -94,8 +94,7 @@ gulp.task('watch:src', [
   'watch:svg',
   'watch:css',
   'watch:js',
-  'watch:vendor-js',
-  'watch:sections'
+  'watch:vendor-js'
 ].concat(lintTasks));
 
 /**

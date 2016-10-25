@@ -14,7 +14,7 @@ const utils = require('./includes/utilities.js');
  * @private
  */
 function processLint() {
-  return gulp.src([config.src.js, config.src.jsSections])
+  return gulp.src(config.src.js)
     .pipe(plumber(utils.errorHandler))
     .pipe(eslint())
     .pipe(eslint.format())
@@ -41,7 +41,7 @@ gulp.task('lint:js', () => {
  * @static
  */
 gulp.task('watch:lint-js', () => {
-  chokidar.watch([config.src.js, config.src.jsSections], {
+  chokidar.watch(config.src.js, {
     ignoreInitial: true
   })
   .on('all', () => {
