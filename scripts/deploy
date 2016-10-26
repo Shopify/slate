@@ -5,18 +5,18 @@ var fs = require('fs');
 var path = require('path');
 var mime = require('mime-types');
 var tag = require('../package.json').version;
-var DEFAULT_CONTENT_TYPE = 'application/octet-stream';
+var DEFAULT_CONTENT_TYPE = 'application/zip';
 var S3_DIR = 'slate';
 var DEFAULT_CACHE_CONTROL = 'public, max-age=86400';
-var FILENAME_FILTER = 'slate';
-var DIST_DIR = 'uploads';
+var FILENAME_FILTER = 'theme';
+var DIST_DIR = 'upload';
 
 var Secrets = function() {
   this.bucket = null;
 };
 
 Secrets.prototype.load = function () {
-  var config = fs.readFileSync('secrets.json');
+  var config = fs.readFileSync('./secrets.json');
   if (config) {
     config = JSON.parse(config);
     this.bucket = config.bucket;
@@ -55,20 +55,18 @@ Uploader.prototype.uploadFile = function(localPath, s3Path) {
 Uploader.prototype.uploadDistAssets = function () {
   this.distAssets.forEach(function (file) {
     if (file.includes(FILENAME_FILTER)) {
-      var major = /(\d+).(\d+).(\d+)/.exec(tag)[ 1 ];
 
-      this.uploadFile(path.join(DIST_DIR, file), this.s3PathForFile(file, tag));
-      this.uploadFile(path.join(DIST_DIR, file), this.s3PathForFile(file, `/v${major}/latest`));
+      this.uploadFile(path.join(DIST_DIR, file), this.s3PathForFile(file));
     }
   }.bind(this));
 };
 
-Uploader.prototype.s3PathForFile = function (localPath, tag) {
-  return path.join(S3_DIR, tag, localPath);
+Uploader.prototype.s3PathForFile = function (localPath) {
+  return path.join(S3_DIR, localPath);
 };
 
 Uploader.prototype.contentType = function(path) {
-  return mime.lookup(path) || DEFAULT_CONTENT_TYPE;
+  return mime.lookup(path) || DEFAULT_CONTENT_TYPE ;
 };
 
 new Uploader().uploadDistAssets();

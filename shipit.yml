@@ -1,0 +1,6 @@
+deploy:
+  override:
+    - npm install --no-progress
+    - ./node_modules/.bin/slate-tools zip
+    - ejson decrypt -o secrets.json secrets.ejson
+    - scripts/deploy
