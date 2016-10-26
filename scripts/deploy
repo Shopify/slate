@@ -55,14 +55,16 @@ Uploader.prototype.uploadFile = function(localPath, s3Path) {
 Uploader.prototype.uploadDistAssets = function () {
   this.distAssets.forEach(function (file) {
     if (file.includes(FILENAME_FILTER)) {
+      var major = /(\d+).(\d+).(\d+)/.exec(tag)[ 1 ];
 
-      this.uploadFile(path.join(DIST_DIR, file), this.s3PathForFile(file));
+      this.uploadFile(path.join(DIST_DIR, file), this.s3PathForFile(file, tag));
+      this.uploadFile(path.join(DIST_DIR, file), this.s3PathForFile(file, `/latest`));
     }
   }.bind(this));
 };
 
-Uploader.prototype.s3PathForFile = function (localPath) {
-  return path.join(S3_DIR, localPath);
+Uploader.prototype.s3PathForFile = function (localPath, tag) {
+  return path.join(S3_DIR, tag, localPath);
 };
 
 Uploader.prototype.contentType = function(path) {
