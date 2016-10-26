@@ -8,7 +8,7 @@ var tag = require('../package.json').version;
 var DEFAULT_CONTENT_TYPE = 'application/zip';
 var S3_DIR = 'slate';
 var DEFAULT_CACHE_CONTROL = 'public, max-age=86400';
-var FILENAME_FILTER = 'theme';
+var FILENAME_FILTER = require('../package.json').name || 'theme';
 var DIST_DIR = 'upload';
 
 var Secrets = function() {
@@ -16,7 +16,7 @@ var Secrets = function() {
 };
 
 Secrets.prototype.load = function () {
-  var config = fs.readFileSync('./secrets.json');
+  var config = fs.readFileSync('secrets.json');
   if (config) {
     config = JSON.parse(config);
     this.bucket = config.bucket;

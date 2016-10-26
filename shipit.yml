@@ -1,3 +1,6 @@
+machine:
+  node:
+    version: 6.2.2
 deploy:
   override:
     - npm install --no-progress
