@@ -7,6 +7,7 @@
     "url": "https://github.com/Shopify/slate.git"
   },
   "devDependencies": {
-    "@shopify/slate-tools": "^0.1.0"
+    "@shopify/slate-tools": "^0.1.0",
+    "gulp": "3.9.1"
   }
 }
