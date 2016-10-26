@@ -1,29 +1,31 @@
 #!/usr/bin/env node
 
-var AWS = require('aws-sdk');
-var fs = require('fs');
-var path = require('path');
-var mime = require('mime-types');
-var tag = require('../package.json').version;
-var DEFAULT_CONTENT_TYPE = 'application/zip';
-var S3_DIR = 'slate';
-var DEFAULT_CACHE_CONTROL = 'public, max-age=86400';
-var FILENAME_FILTER = require('../package.json').name || 'theme';
-var DIST_DIR = 'upload';
+const AWS = require('aws-sdk');
+const fs = require('fs');
+const path = require('path');
+const mime = require('mime-types');
+const tag = require('../package.json').version;
+const DEFAULT_CONTENT_TYPE = 'application/zip';
+const S3_DIR = 'slate';
+const DEFAULT_CACHE_CONTROL = 'public, max-age=86400';
+const FILENAME_FILTER = require('../package.json').name || 'theme';
+const DIST_DIR = 'upload';
 
 var Secrets = function() {
   this.bucket = null;
 };
 
 Secrets.prototype.load = function () {
-  var config = fs.readFileSync('secrets.json');
+  const secrets = process.argv[2] === '--staging' ? 'secrets.staging.json' : 'secrets.json';
+  let config = fs.readFileSync(secrets);
+
   if (config) {
     config = JSON.parse(config);
     this.bucket = config.bucket;
     AWS.config.credentials = new AWS.Credentials(config.access_key_id, config.secret_access_key);
     AWS.config.region = 'us-east-1';
   } else {
-    console.log('Missing AWS secrets. You must decrypt the ejson first.');
+    console.error('Missing AWS secrets. You must decrypt the ejson first.');
   }
 };
 
@@ -42,25 +44,22 @@ Uploader.prototype.uploadFile = function(localPath, s3Path) {
     CacheControl: DEFAULT_CACHE_CONTROL,
     Body: fs.readFileSync(localPath),
     ACL: 'public-read'
-  }, function (err, data) {
+  }, (err, data) => {
     if (err) {
-      console.log(err, err.stack);
-    }
-    else {
+      console.error(err, err.stack);
+    } else {
       console.log('successfully uploaded ' + s3Path);
     }
   });
 };
 
 Uploader.prototype.uploadDistAssets = function () {
-  this.distAssets.forEach(function (file) {
+  this.distAssets.forEach(file => {
     if (file.includes(FILENAME_FILTER)) {
-      var major = /(\d+).(\d+).(\d+)/.exec(tag)[ 1 ];
-
       this.uploadFile(path.join(DIST_DIR, file), this.s3PathForFile(file, tag));
       this.uploadFile(path.join(DIST_DIR, file), this.s3PathForFile(file, `/latest`));
     }
-  }.bind(this));
+  });
 };
 
 Uploader.prototype.s3PathForFile = function (localPath, tag) {
