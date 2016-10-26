@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate-tools",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Tooling for Shopify themes",
   "bin": {
     "slate-tools": "lib/index.js"

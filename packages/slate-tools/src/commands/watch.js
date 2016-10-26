@@ -21,7 +21,7 @@ module.exports = function(program) {
 
       debug(`args ${args}`);
 
-      spawn('gulp', args, {
+      spawn(config.gulp, args, {
         detached: false,
         stdio: 'inherit'
       });

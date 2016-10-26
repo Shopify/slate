@@ -14,12 +14,12 @@ module.exports = function(program) {
       debug(`--cwd ${config.themeRoot}`);
 
       if (options.manual) {
-        spawn('gulp', ['deploy:manual', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot], {
+        spawn(config.gulp, ['deploy:manual', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot], {
           detached: false,
           stdio: 'inherit'
         });
       } else {
-        spawn('gulp', ['deploy', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot, '--environment', options.environment], {
+        spawn(config.gulp, ['deploy', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot, '--environment', options.environment], {
           detached: false,
           stdio: 'inherit'
         });

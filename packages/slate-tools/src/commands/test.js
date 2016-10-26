@@ -11,7 +11,7 @@ module.exports = function(program) {
       debug(`--gulpfile ${config.gulpFile}`);
       debug(`--cwd ${config.themeRoot}`);
 
-      spawn('gulp', ['test', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot], {
+      spawn(config.gulp, ['test', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot], {
         detached: false,
         stdio: 'inherit'
       });

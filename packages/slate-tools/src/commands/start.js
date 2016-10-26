@@ -19,7 +19,7 @@ module.exports = function(program) {
         args.push('--nosync');
       }
 
-      spawn('gulp', args, {
+      spawn(config.gulp, args, {
         detached: false,
         stdio: 'inherit'
       });
