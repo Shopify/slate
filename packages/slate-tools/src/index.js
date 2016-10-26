@@ -9,8 +9,6 @@ require('./commands/test')(program);
 require('./commands/watch')(program);
 require('./commands/zip')(program);
 
-require('./commands/new')(program);
-
 program.on('--help', () => {
   console.log('  Troubleshooting:');
   console.log('');
