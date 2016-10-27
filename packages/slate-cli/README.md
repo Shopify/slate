@@ -223,4 +223,7 @@ If you encounter any issues, here are some preliminary steps to take:
 - `npm link` to make sure that the symlink exists and Slate CLI is globally installed.
 
 ## License
-This project is licensed under the terms of the [MIT license](LICENSE).
+
+MIT, see [LICENSE.md](http://github.com/Shopify/slate-tools/blob/master/LICENSE.md) for details.
+
+<img src="https://cdn.shopify.com/shopify-marketing_assets/builds/19.0.0/shopify-full-color-black.svg" width="200" />
