@@ -2,6 +2,8 @@
 
 const program = require('commander');
 
+program._name = 'slate';
+
 require('./commands/build')(program);
 require('./commands/deploy')(program);
 require('./commands/start')(program);
