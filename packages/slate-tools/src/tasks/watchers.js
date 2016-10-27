@@ -12,7 +12,6 @@ const messages = require('./includes/messages.js');
 const cache = utils.createEventCache();
 // prevent early execution on multi-file events
 const debouncedDeployStatus = _.debounce(checkDeployStatus, 320);
-const lintTasks = config.enableLinting ? ['watch:lint-css', 'watch:lint-js', 'watch:lint-json'] : [];
 
 let activeDeploy = false;
 
@@ -61,7 +60,7 @@ function deploy(cmd, files, env) {
     debug(`Deploying to ${env}`);
 
     return themekit.command({
-      args: [cmd, '-env', env].concat(files)
+      args: [cmd, '-env', env].concat(files),
     }, (err) => {
       if (err) {
         reject(err);
@@ -70,8 +69,7 @@ function deploy(cmd, files, env) {
         resolve();
       }
     });
-  })
-  .then(() => {
+  }).then(() => {
     activeDeploy = false;
     fs.appendFile(config.deployLog, messages.logDeploys(cmd, files));
     return checkDeployStatus();
@@ -94,8 +92,8 @@ gulp.task('watch:src', [
   'watch:svg',
   'watch:css',
   'watch:js',
-  'watch:vendor-js'
-].concat(lintTasks));
+  'watch:vendor-js',
+]);
 
 /**
  * Watches for changes in the `./dist` folder and passes event data to the
@@ -110,7 +108,7 @@ gulp.task('watch:src', [
 gulp.task('watch:dist', () => {
   const watcher = chokidar.watch(['./', '!config.yml'], {
     cwd: config.dist.root,
-    ignoreInitial: true
+    ignoreInitial: true,
   });
 
   watcher.on('all', (event, path) => {

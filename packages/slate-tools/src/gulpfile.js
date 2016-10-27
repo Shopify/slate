@@ -16,7 +16,7 @@ gulp.task('build', (done) => {
   runSequence(
     ['clean'],
     ['build:js', 'build:vendor-js', 'build:css', 'build:assets', 'build:config', 'build:svg'],
-    done
+    done,
   );
 });
 
@@ -30,17 +30,6 @@ gulp.task('build', (done) => {
  */
 gulp.task('zip', (done) => {
   runSequence('build', 'compress', done);
-});
-
-/**
- * Runs any testing / linting tasks that are specified within this function.
- *
- * @function test
- * @memberof slate-cli.tasks
- * @static
- */
-gulp.task('test', (done) => {
-  runSequence('lint:js', 'lint:css', 'lint:json', done);
 });
 
 /**

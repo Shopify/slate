@@ -16,12 +16,12 @@ module.exports = function(program) {
       if (options.manual) {
         spawn(config.gulp, ['deploy:manual', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot], {
           detached: false,
-          stdio: 'inherit'
+          stdio: 'inherit',
         });
       } else {
         spawn(config.gulp, ['deploy', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot, '--environment', options.environment], {
           detached: false,
-          stdio: 'inherit'
+          stdio: 'inherit',
         });
       }
     });

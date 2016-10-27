@@ -8,7 +8,7 @@ const themeRoot = findRoot(process.cwd());
 const config = {
   gulpFile: join(src, 'gulpfile.js'),
   gulp: join(themeRoot, 'node_modules/.bin/gulp'),
-  themeRoot
+  themeRoot,
 };
 
 module.exports = config;

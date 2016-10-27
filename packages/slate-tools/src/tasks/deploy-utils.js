@@ -27,7 +27,7 @@ function deploy(env) {
     debug(`Deploying to ${env}`);
 
     return themekit.command({
-      args: ['replace', '-env', env]
+      args: ['replace', '-env', env],
     }, (err) => {
       if (err) {
         reject(err);

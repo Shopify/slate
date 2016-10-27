@@ -14,7 +14,7 @@ function processConfig(file) {
     .pipe(plumber(utils.errorHandler))
     .pipe(size({
       showFiles: true,
-      pretty: true
+      pretty: true,
     }))
     .pipe(gulp.dest(config.dist.root));
 }
@@ -43,13 +43,11 @@ gulp.task('build:config', () => {
  * @static
  */
 gulp.task('watch:config', () => {
-  chokidar.watch(config.tkConfig, {
-    ignoreInitial: true
-  })
-  .on('all', (event, path) => {
-    messages.logFileEvent(event, path);
-    processConfig(path);
-  });
+  chokidar.watch(config.tkConfig, {ignoreInitial: true})
+    .on('all', (event, path) => {
+      messages.logFileEvent(event, path);
+      processConfig(path);
+    });
 });
 
 /**
@@ -62,12 +60,10 @@ gulp.task('watch:config', () => {
  * @static
  */
 gulp.task('watch:dist-config', () => {
-  chokidar.watch(config.dist.root + config.tkConfig, {
-    ignoreInitial: true
-  })
-  .on('all', (event, path) => {
-    messages.logFileEvent(event, path);
+  chokidar.watch(config.dist.root + config.tkConfig, {ignoreInitial: true})
+    .on('all', (event, path) => {
+      messages.logFileEvent(event, path);
 
-    throw new Error(messages.configChange());
-  });
+      throw new Error(messages.configChange());
+    });
 });

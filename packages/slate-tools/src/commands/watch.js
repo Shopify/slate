@@ -23,7 +23,7 @@ module.exports = function(program) {
 
       spawn(config.gulp, args, {
         detached: false,
-        stdio: 'inherit'
+        stdio: 'inherit',
       });
     });
 };

@@ -8,8 +8,6 @@ const config = require('./includes/config.js');
 const messages = require('./includes/messages.js');
 const utils = require('./includes/utilities.js');
 
-const lintTask = config.enableLinting ? ['lint:js'] : [];
-
 function processThemeJs() {
   messages.logProcessFiles('build:js');
   return gulp.src([config.roots.js, `!${config.roots.vendorJs}`])
@@ -26,23 +24,21 @@ function processVendorJs() {
     .pipe(uglify({
       mangle: true,
       compress: true,
-      preserveComments: 'license'
+      preserveComments: 'license',
     }))
     .pipe(gulp.dest(config.dist.assets));
 }
 
-gulp.task('build:js', lintTask, () => {
+gulp.task('build:js', () => {
   processThemeJs();
 });
 
 gulp.task('watch:js', () => {
-  chokidar.watch([config.src.js, `!${config.roots.vendorJs}`, `!${config.src.vendorJs}`], {
-    ignoreInitial: true
-  })
-  .on('all', (event, path) => {
-    messages.logFileEvent(event, path);
-    processThemeJs();
-  });
+  chokidar.watch([config.src.js, `!${config.roots.vendorJs}`, `!${config.src.vendorJs}`], {ignoreInitial: true})
+    .on('all', (event, path) => {
+      messages.logFileEvent(event, path);
+      processThemeJs();
+    });
 });
 
 gulp.task('build:vendor-js', () => {
@@ -50,11 +46,9 @@ gulp.task('build:vendor-js', () => {
 });
 
 gulp.task('watch:vendor-js', () => {
-  chokidar.watch([config.roots.vendorJs, config.src.vendorJs], {
-    ignoreInitial: true
-  })
-  .on('all', (event, path) => {
-    messages.logFileEvent(event, path);
-    processVendorJs();
-  });
+  chokidar.watch([config.roots.vendorJs, config.src.vendorJs], {ignoreInitial: true})
+    .on('all', (event, path) => {
+      messages.logFileEvent(event, path);
+      processVendorJs();
+    });
 });

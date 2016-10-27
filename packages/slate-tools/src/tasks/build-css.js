@@ -8,8 +8,6 @@ const config = require('./includes/config.js');
 const utils = require('./includes/utilities.js');
 const messages = require('./includes/messages.js');
 
-const lintTask = config.enableLinting ? ['lint:css'] : [];
-
 /**
  * Concatenate css via gulp-cssimport and copys to the `/dist` folder
  *
@@ -34,7 +32,7 @@ function processCss() {
  * @memberof slate-cli.tasks.build
  * @static
  */
-gulp.task('build:css', lintTask, () => {
+gulp.task('build:css', () => {
   return processCss();
 });
 
@@ -46,11 +44,9 @@ gulp.task('build:css', lintTask, () => {
  * @static
  */
 gulp.task('watch:css', () => {
-  chokidar.watch(config.src.css, {
-    ignoreInitial: true
-  })
-  .on('all', (event, path) => {
-    messages.logFileEvent(event, path);
-    processCss();
-  });
+  chokidar.watch(config.src.css, {ignoreInitial: true})
+    .on('all', (event, path) => {
+      messages.logFileEvent(event, path);
+      processCss();
+    });
 });

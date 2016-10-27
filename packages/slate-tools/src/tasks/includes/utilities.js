@@ -15,31 +15,31 @@ function mapCode(code) {
   let exitType;
 
   switch (code) {
-  case 0: exitType = 'All Async Processes Complete';
-    break;
-  case 1: exitType = 'Uncaught Fatal Exception';
-    break;
-  case 2: exitType = 'Shell Error - Missing Keyword/Command/Parameter or Permission Problem';
-    break;
-  case 3: exitType = 'Internal JavaScript Parse Error';
-    break;
-  case 4: exitType = 'Internal JavaScript Evaluation Failure';
-    break;
-  case 5: exitType = 'Fatal Error';
-    break;
-  case 6: exitType = 'Non-Function Internal Exception Handler';
-    break;
-  case 7: exitType = 'Internal Exception Handler Run-Time Failure';
-    break;
-  case 8: exitType = 'Uncaught Exception';
-    break;
-  case 9: exitType = 'Invalid Argument';
-    break;
-  case 10: exitType = 'Internal JavaScript Run-Time Failure';
-    break;
-  case 12: exitType = 'Invalid Debug Argument';
-    break;
-  default: exitType = 'Signal Event or Unknown Error';
+    case 0: exitType = 'All Async Processes Complete';
+      break;
+    case 1: exitType = 'Uncaught Fatal Exception';
+      break;
+    case 2: exitType = 'Shell Error - Missing Keyword/Command/Parameter or Permission Problem';
+      break;
+    case 3: exitType = 'Internal JavaScript Parse Error';
+      break;
+    case 4: exitType = 'Internal JavaScript Evaluation Failure';
+      break;
+    case 5: exitType = 'Fatal Error';
+      break;
+    case 6: exitType = 'Non-Function Internal Exception Handler';
+      break;
+    case 7: exitType = 'Internal Exception Handler Run-Time Failure';
+      break;
+    case 8: exitType = 'Uncaught Exception';
+      break;
+    case 9: exitType = 'Invalid Argument';
+      break;
+    case 10: exitType = 'Internal JavaScript Run-Time Failure';
+      break;
+    case 12: exitType = 'Invalid Debug Argument';
+      break;
+    default: exitType = 'Signal Event or Unknown Error';
   }
 
   return exitType;
@@ -80,20 +80,6 @@ const utilities = {
       results.push(result);
       return result;
     }).thenReturn(results).all();
-  },
-
-  /**
-   * Custom reporting function for scss-lint
-   *
-   * @memberof slate-cli.utilities
-   * @param {fs} file - current file being linted
-   */
-  scssLintReporter: (file) => {
-    if (file.scsslint.success) {
-      return;
-    }
-    const errorMsg = `${file.scsslint.issues.length} issues found in ${file.path}`;
-    gutil.log(gutil.colors.yellow(errorMsg));
   },
 
   /**
@@ -161,7 +147,7 @@ const utilities = {
   createEventCache: (options) => {
     _.defaults(options = options || {}, { // eslint-disable-line no-param-reassign
       changeEvents: ['add', 'change'],
-      unlinkEvents: ['unlink']
+      unlinkEvents: ['unlink'],
     });
 
     /**
@@ -198,7 +184,7 @@ const utilities = {
             this.unlink.push(path);
           }
         });
-      }
+      },
     };
   },
 
@@ -265,18 +251,18 @@ const utilities = {
         if (error) {
           gutil.log('Process closed with error:',
             gutil.colors.red(mapCode(code), '\n'),
-            gutil.colors.white(error)
+            gutil.colors.white(error),
           );
           reject(new Error(error));
         } else {
           gutil.log('Process closed:',
-            gutil.colors.green(mapCode(code))
+            gutil.colors.green(mapCode(code)),
           );
           resolve();
         }
       });
     });
-  }
+  },
 };
 
 module.exports = utilities;

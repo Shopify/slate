@@ -13,7 +13,7 @@ module.exports = function(program) {
 
       spawn(config.gulp, ['build', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot], {
         detached: false,
-        stdio: 'inherit'
+        stdio: 'inherit',
       });
     });
 };

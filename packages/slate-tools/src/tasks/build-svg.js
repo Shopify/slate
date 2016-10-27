@@ -29,7 +29,7 @@ function processIcons(files) {
     .pipe(extReplace('.liquid'))
     .pipe(size({
       showFiles: true,
-      pretty: true
+      pretty: true,
     }))
     .pipe(gulp.dest(config.dist.snippets));
 }
@@ -55,7 +55,7 @@ function removeIcons(files) {
     .pipe(vinylPaths(del))
     .pipe(size({
       showFiles: true,
-      pretty: true
+      pretty: true,
     }));
 }
 
@@ -80,12 +80,10 @@ gulp.task('build:svg', () => {
 gulp.task('watch:svg', () => {
   const cache = utils.createEventCache();
 
-  chokidar.watch([config.src.icons], {
-    ignoreInitial: true
-  })
-  .on('all', (event, path) => {
-    messages.logFileEvent(event, path);
-    cache.addEvent(event, path);
-    utils.processCache(cache, processIcons, removeIcons);
-  });
+  chokidar.watch([config.src.icons], {ignoreInitial: true})
+    .on('all', (event, path) => {
+      messages.logFileEvent(event, path);
+      cache.addEvent(event, path);
+      utils.processCache(cache, processIcons, removeIcons);
+    });
 });

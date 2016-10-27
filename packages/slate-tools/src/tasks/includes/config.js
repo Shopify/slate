@@ -42,10 +42,8 @@ const config = {
   environment: gutil.env.environments || 'development',
   themeRoot,
   packageJson: pkg,
-  enableLinting: false,
 
   tkConfig: 'config.yml',
-  scssLintConfig: '.scss-lint.yml',
   deployLog: 'deploy.log',
 
   src: {
@@ -63,7 +61,7 @@ const config = {
     sections: 'src/sections/*',
     locales: 'src/locales/*',
     config: 'src/config/*',
-    layout: 'src/layout/*'
+    layout: 'src/layout/*',
   },
 
   dist: {
@@ -73,23 +71,23 @@ const config = {
     sections: 'dist/sections/',
     layout: 'dist/layout/',
     templates: 'dist/templates/',
-    locales: 'dist/locales/'
+    locales: 'dist/locales/',
   },
 
   roots: {
     js: 'src/scripts/*.{js,js.liquid}',
     vendorJs: 'src/scripts/vendor.js',
-    css: 'src/styles/*.scss'
+    css: 'src/styles/*.scss',
   },
 
   plugins: {
     cheerio: {
-      run: require('./utilities.js').processSvg
+      run: require('./utilities.js').processSvg,
     },
     svgmin: {
-      plugins: [{removeTitle: true}, {removeDesc: true}]
-    }
-  }
+      plugins: [{removeTitle: true}, {removeDesc: true}],
+    },
+  },
 };
 
 module.exports = config;

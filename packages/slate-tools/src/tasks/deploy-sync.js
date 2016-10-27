@@ -49,8 +49,8 @@ gulp.task('deploy:sync-init', () => {
         const prefix = req.url.indexOf('?') > -1 ? '&' : '?';
         req.url += prefix + queryStringComponents.join('&');
         next();
-      }
-    }
+      },
+    },
   });
 });
 

@@ -5,7 +5,6 @@ const program = require('commander');
 require('./commands/build')(program);
 require('./commands/deploy')(program);
 require('./commands/start')(program);
-require('./commands/test')(program);
 require('./commands/watch')(program);
 require('./commands/zip')(program);
 

@@ -12,7 +12,7 @@ function separatePath(path) {
 
   return {
     file: tmp.pop(),
-    dir: tmp.join('/')
+    dir: tmp.join('/'),
   };
 }
 
@@ -24,20 +24,20 @@ const messages = {
       gutil.colors.magenta(pathObject.dir),
       gutil.colors.white('-'),
       gutil.colors.cyan(event),
-      gutil.colors.yellow(pathObject.file)
+      gutil.colors.yellow(pathObject.file),
     );
   },
 
   logTransferDone: () => {
     gutil.log('Transfer Complete:',
-      gutil.colors.green('File changes successfully synced to store')
+      gutil.colors.green('File changes successfully synced to store'),
     );
   },
 
   logProcessFiles: (processName) => {
     gutil.log('running task',
       gutil.colors.white('-'),
-      gutil.colors.cyan(processName)
+      gutil.colors.cyan(processName),
     );
   },
 
@@ -45,7 +45,7 @@ const messages = {
     gutil.log('running task',
       gutil.colors.bold('[child process]'),
       gutil.colors.white('-'),
-      gutil.colors.cyan('theme', cmd)
+      gutil.colors.cyan('theme', cmd),
     );
   },
 
@@ -73,9 +73,9 @@ const messages = {
 
   allDeploysComplete: () => {
     gutil.log('Multiple environments:',
-      gutil.colors.green('Deploy completed for all environments in series')
+      gutil.colors.green('Deploy completed for all environments in series'),
     );
-  }
+  },
 };
 
 module.exports = messages;
