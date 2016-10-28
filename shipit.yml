@@ -1,0 +1,9 @@
+machine:
+  node:
+    version: 6.2.2
+deploy:
+  override:
+    - npm install --no-progress
+    - ./node_modules/.bin/slate-tools zip
+    - ejson decrypt -o secrets.json secrets.ejson
+    - node scripts/deploy

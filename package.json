@@ -1,12 +1,17 @@
 {
   "name": "slate-theme",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/Shopify/slate.git"
   },
   "devDependencies": {
-    "@shopify/slate-tools": "^0.1.0"
+    "@shopify/slate-tools": "^0.1.0",
+    "aws-sdk": "^2.6.12",
+    "mime-types": "^2.1.12"
+  },
+  "optionalDependencies": {
+    "fsevents": "*"
   }
 }
