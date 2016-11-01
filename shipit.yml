@@ -6,4 +6,5 @@ deploy:
     - npm install --no-progress
     - ./node_modules/.bin/slate-tools zip
     - ejson decrypt -o secrets.json secrets.ejson
+    - node scripts/build-src
     - node scripts/deploy
