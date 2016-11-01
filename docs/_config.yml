@@ -1,0 +1,12 @@
+# Site settings
+title:  Slate
+email: slate@shopify.com
+description: > # this means to ignore newlines until "baseurl:"
+  Coming soon
+baseurl: "/slate"
+url: "https://shopify.github.io"
+sass:
+  cache: true
+
+# Build settings
+markdown: kramdown

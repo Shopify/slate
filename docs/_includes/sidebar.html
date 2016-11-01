@@ -1,0 +1,54 @@
+<div class="docs-title heading--1"><a class="site-title" href="{{ site.baseurl }}/">{{ site.title }}</a></div>
+<ul class="docs-nav">
+  <li>
+    <a class="docs-nav__link {% if page.url == '/' %}active{% endif %}" href="{{ '/' | prepend: site.baseurl }}">Getting started</a>
+  </li>
+  <li>
+    <a class="docs-nav__link {% if page.url == '/theme/' %}active{% endif %}" href="{{ '/theme' | prepend: site.baseurl }}">Theme files</a>
+    <ul class="docs-sub-nav">
+      <li>
+        <a href="{{ '/theme/#templates-and-configuration' | prepend: site.baseurl }}" class="docs-sub-nav__link">Templates and configuration</a>
+      </li>
+      <li>
+        <a href="{{ '/theme/#sections' | prepend: site.baseurl }}" class="docs-sub-nav__link">Sections</a>
+      </li>
+      <li>
+        <a href="{{ '/theme/#sass-scaffolding-and-helpers' | prepend: site.baseurl }}" class="docs-sub-nav__link">Sass scaffolding and helpers</a>
+      </li>
+      <li>
+        <a href="{{ '/theme/#javascript-helpers' | prepend: site.baseurl }}" class="docs-sub-nav__link">JavaScript helpers</a>
+      </li>
+      <li>
+        <a href="{{ '/theme/#i18n-strings' | prepend: site.baseurl }}" class="docs-sub-nav__link">i18n strings</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a class="docs-nav__link {% if page.url == '/tasks/' %}active{% endif %}" href="{{ '/tasks' | prepend: site.baseurl }}">Tasks</a>
+    <ul class="docs-sub-nav">
+      <li>
+        <a href="{{ '/tasks/#build-tasks' | prepend: site.baseurl }}" class="docs-sub-nav__link">Build tasks</a>
+      </li>
+      <li>
+        <a href="{{ '/tasks/#sync-tasks' | prepend: site.baseurl }}" class="docs-sub-nav__link">Sync tasks</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a class="docs-nav__link {% if page.url == '/examples/' %}active{% endif %}" href="{{ '/examples' | prepend: site.baseurl }}">Examples</a>
+    <ul class="docs-sub-nav">
+      <li>
+        <a href="{{ '/examples/#css' | prepend: site.baseurl }}" class="docs-sub-nav__link">CSS</a>
+      </li>
+      <li>
+        <a href="{{ '/examples/#js' | prepend: site.baseurl }}" class="docs-sub-nav__link">JS</a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<div class="docs-shopify-logo">
+  <a href="https://www.shopify.com">
+    <img src="{{ "/assets/images/shopify-logo-large.png" | prepend: site.baseurl }}" alt="Shopify" />
+  </a>
+  <p><a href="mailto:slate@shopify.com">Provide feedback</a></p>
+</div>
