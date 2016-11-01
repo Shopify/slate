@@ -16,8 +16,7 @@ var Secrets = function() {
 };
 
 Secrets.prototype.load = function () {
-  const secrets = process.argv[2] === '--staging' ? 'secrets.staging.json' : 'secrets.json';
-  let config = fs.readFileSync(secrets);
+  let config = fs.readFileSync('secrets.json');
 
   if (config) {
     config = JSON.parse(config);
