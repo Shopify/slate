@@ -6,12 +6,12 @@
     "type": "git",
     "url": "https://github.com/Shopify/slate.git"
   },
+  "dependencies": {
+    "@shopify/slate-tools": "^0.1.0"
+  },
   "devDependencies": {
-    "@shopify/slate-tools": "^0.1.0",
+    "archiver": "^1.1.0",
     "aws-sdk": "^2.6.12",
     "mime-types": "^2.1.12"
-  },
-  "optionalDependencies": {
-    "fsevents": "*"
   }
 }

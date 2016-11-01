@@ -53,7 +53,7 @@ Uploader.prototype.uploadFile = function(localPath, s3Path) {
   });
 };
 
-Uploader.prototype.uploadDistAssets = function () {
+Uploader.prototype.uploadTheme = function () {
   this.distAssets.forEach(file => {
     if (file.includes(FILENAME_FILTER)) {
       this.uploadFile(path.join(DIST_DIR, file), this.s3PathForFile(file, tag));
@@ -70,4 +70,4 @@ Uploader.prototype.contentType = function(path) {
   return mime.lookup(path) || DEFAULT_CONTENT_TYPE ;
 };
 
-new Uploader().uploadDistAssets();
+new Uploader().uploadTheme();
