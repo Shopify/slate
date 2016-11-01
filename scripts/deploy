@@ -55,10 +55,8 @@ Uploader.prototype.uploadFile = function(localPath, s3Path) {
 
 Uploader.prototype.uploadTheme = function () {
   this.distAssets.forEach(file => {
-    if (file.includes(FILENAME_FILTER)) {
-      this.uploadFile(path.join(DIST_DIR, file), this.s3PathForFile(file, tag));
-      this.uploadFile(path.join(DIST_DIR, file), this.s3PathForFile(file, `/latest`));
-    }
+    this.uploadFile(path.join(DIST_DIR, file), this.s3PathForFile(file, tag));
+    this.uploadFile(path.join(DIST_DIR, file), this.s3PathForFile(file, `/latest`));
   });
 };
 
