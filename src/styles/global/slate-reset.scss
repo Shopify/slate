@@ -18,6 +18,11 @@ a:focus {
   color: inherit;
 }
 
+img {
+  max-width: 100%;
+}
+
+/*================ Form element helpers ================*/
 form {
   margin: 0;
 }

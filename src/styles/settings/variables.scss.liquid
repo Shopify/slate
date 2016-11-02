@@ -1,8 +1,8 @@
 /*================ Color Variables ================*/
-$color-primary: $settings-color-primary;
+$color-primary: {{ settings.color_primary }};
 
 // Text colors
-$color-body-text: $settings-color-body-text;
+$color-body-text: {{ settings.color_body_text }};
 
 // Backgrounds
 $color-body: #fff;
@@ -26,7 +26,7 @@ $font-stack-header: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-se
 $font-weight-header: $font-weight-bold;
 
 $font-stack-body: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$font-size-base: $settings-font-size-base; // Henseforth known as 1em
+$font-size-base: {{ settings.type_base_size }};
 
 /*============================================================================
   Grid Breakpoints and Class Names
@@ -63,7 +63,7 @@ $breakpoints: (
   Generate breakpoint-specific column widths and push classes
     - Default column widths: $breakpoint-has-widths: ($small, $medium-up);
     - Default is no push classes
-    - Will not work if `theme/grid.scss` is removed
+    - Will not work if `styles/global/grid.scss` is removed
 ==============================================================================*/
 $breakpoint-has-widths: ($small, $medium-up);
 $breakpoint-has-push: ();
@@ -71,7 +71,6 @@ $breakpoint-has-push: ();
 /*================ Sizing Variables ================*/
 $width-site: 1180px;
 $gutter: 30px;
-$logo-max-width: $settings-logo-max-width;
 
 /*================ Z-Index ================*/
 $z-index-dropdown: 2;

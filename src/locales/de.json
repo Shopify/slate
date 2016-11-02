@@ -23,7 +23,7 @@
       "signup_form_email_placeholder": "Ihre E-Mail-Adresse",
       "signup_form_submit": "Abschicken",
       "signup_form_success": "Wir senden Ihnen eine E-Mail, kurz bevor wir eröffnen!",
-      "admin_link_html": "Sind Sie der Geschäftsinhaber? <a href=\"/admin\" class=\"text-link\">Melden Sie sich hier an</a>",
+      "admin_link_html": "Sind Sie der Geschäftsinhaber? <a href=\"/admin\">Melden Sie sich hier an</a>",
       "password_link": "Mit Passwort betreten",
       "powered_by_shopify_html": "Dieser Shop wird mit Hilfe von {{ shopify }} betrieben werden"
     },

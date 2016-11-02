@@ -18,7 +18,7 @@ slate.rte = {
 
     $iframeVideo.each(function() {
       // Add wrapper to make video responsive
-      $(this).wrap('<div class="video-wrapper"></div>');
+      $(this).wrap('<div class="rte__video-wrapper"></div>');
     });
 
     $iframeReset.each(function() {

@@ -1,12 +1,4 @@
 /*================ Links & Buttons ================*/
-.text-link {
-  display: inline;
-  border: 0 none;
-  background: none;
-  padding: 0;
-  margin: 0;
-}
-
 .btn {
   @include prefix('user-select', 'none', moz ms webkit spec);
   @include prefix(appearance, none, webkit moz spec);
