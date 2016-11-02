@@ -22,7 +22,6 @@
     "gulp-cssimport": "3.0.2",
     "gulp-ext-replace": "0.3.0",
     "gulp-include": "2.3.1",
-    "gulp-open": "2.0.0",
     "gulp-plumber": "1.1.0",
     "gulp-size": "2.1.0",
     "gulp-svgmin": "1.2.2",
