@@ -50,3 +50,9 @@ symbol {
   @include prefix('user-select', 'none', moz ms webkit spec);
   cursor: default;
 }
+
+/*================ Shopify icon on password page ================*/
+.icon-shopify-logo {
+  width: 1.5 * $font-size-base * 120 / 35;
+  height: 1.5 * $font-size-base;
+}

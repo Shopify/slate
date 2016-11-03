@@ -23,7 +23,7 @@
       "signup_form_email_placeholder": "Votre courriel",
       "signup_form_submit": "Soumettre",
       "signup_form_success": "Nous vous ferons parvenir un courriel juste avant l'ouverture!",
-      "admin_link_html": "Êtes-vous le propriétaire de la boutique? <a href=\"/admin\" class=\"text-link\">Connectez-vous ici</a>.",
+      "admin_link_html": "Êtes-vous le propriétaire de la boutique? <a href=\"/admin\">Connectez-vous ici</a>.",
       "password_link": "Entrer avec un mot de passe",
       "powered_by_shopify_html": "Cette boutique sera propulsée par {{ shopify }}"
     },

@@ -7,8 +7,7 @@
 @import url('tools/mixins.scss');
 
 /*================ SETTINGS ================*/
-@import url('settings/theme-settings.scss.liquid');
-@import url('settings/variables.scss');
+@import url('settings/variables.scss.liquid');
 
 /*================ COMMON ================*/
 @import url('global/normalize.scss');
@@ -20,11 +19,9 @@
 @import url('global/rte.scss');
 @import url('global/responsive-tables.scss');
 @import url('global/links-buttons.scss');
-@import url('global/media.scss');
 @import url('global/forms.scss');
 @import url('global/blank-states.scss');
 
 /*================ MODULES ================*/
 @import url('modules/site-header.scss');
-@import url('modules/password-template.scss');
 @import url('modules/gift-card-template.scss');

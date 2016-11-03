@@ -23,7 +23,7 @@
       "signup_form_email_placeholder": "O seu email",
       "signup_form_submit": "Submeter",
       "signup_form_success": "Iremos enviar-lhe um email imediatamente antes de abrirmos!",
-      "admin_link_html": "É o dono da loja? <a href=\"/admin\" class=\"text-link\">Inicie sessão aqui</a>",
+      "admin_link_html": "É o dono da loja? <a href=\"/admin\">Inicie sessão aqui</a>",
       "password_link": "Entre usando a palavra-passe",
       "powered_by_shopify_html": "Esta loja será movida por {{ shopify }}"
     },

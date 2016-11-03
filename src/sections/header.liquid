@@ -18,7 +18,7 @@
         {% else %}
         <div class="h1" itemscope itemtype="http://schema.org/Organization">
           {% endif %}
-          <a href="/" itemprop="url" class="site-logo{% if section.settings.logo != blank %} site-logo--has-image{% endif %}">
+          <a href="/" itemprop="url" class="site-logo{% if section.settings.logo != blank %} site-header__logo-image{% endif %}">
             {% if section.settings.logo != blank %}
               {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
               <img src="{{ section.settings.logo | img_url: image_size }}"

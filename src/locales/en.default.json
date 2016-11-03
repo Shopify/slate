@@ -23,7 +23,7 @@
       "signup_form_email_placeholder": "Your email",
       "signup_form_submit": "Submit",
       "signup_form_success": "We will send you an email right before we open!",
-      "admin_link_html": "Are you the store owner? <a href=\"/admin\" class=\"text-link\">Log in here</a>",
+      "admin_link_html": "Are you the store owner? <a href=\"/admin\">Log in here</a>",
       "password_link": "Enter using password",
       "powered_by_shopify_html": "This shop will be powered by {{ shopify }}"
     },

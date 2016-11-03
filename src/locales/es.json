@@ -23,7 +23,7 @@
       "signup_form_email_placeholder": "Tu dirección de correo electrónico",
       "signup_form_submit": "Enviar",
       "signup_form_success": "¡Te enviaremos un correo electrónico antes de inaugurar!",
-      "admin_link_html": "¿Eres el dueño de la tienda? <a href=\"/admin\" class=\"text-link\">Regístrate aquí</a>",
+      "admin_link_html": "¿Eres el dueño de la tienda? <a href=\"/admin\">Regístrate aquí</a>",
       "password_link": "Entrar usando contraseña",
       "powered_by_shopify_html": "Esta tienda estará impulsada por {{ shopify }}"
     },
