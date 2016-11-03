@@ -1,0 +1,37 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const archiver = require('archiver');
+const DIST_DIR = 'upload';
+const SRC_FILES = [
+  'config-sample.yml'
+];
+
+const SRC_DIRS = [
+  'src'
+];
+
+module.exports = (function() {
+  const output = fs.createWriteStream('upload/slate-src.zip');
+  const archive = archiver('zip');
+
+  output.on('close', () => {
+    console.log(`${archive.pointer()} total bites`);
+  });
+
+  archive.on('error', (err) => {
+    throw err;
+  });
+
+  archive.pipe(output);
+
+  for (const i in SRC_FILES) {
+    archive.file(SRC_FILES[i]);
+  }
+
+  for (const i in SRC_DIRS) {
+    archive.directory(SRC_DIRS[i]);
+  }
+
+  archive.finalize();
+})();
