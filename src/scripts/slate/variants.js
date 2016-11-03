@@ -159,14 +159,7 @@ slate.Variants = (function() {
      * @param  {variant} variant - Currently selected variant
      */
     _updateMasterSelect: function(variant) {
-      var $originalSelector = $(this.originalSelectorId, this.$container);
-
-      if (!variant) {
-        return;
-      }
-
-      $originalSelector.find('[selected]').removeAttr('selected');
-      $originalSelector.find('[value=' + variant.id + ']').attr('selected', 'selected');
+      $(this.originalSelectorId, this.$container)[0].value = variant.id;
     }
   });
 
