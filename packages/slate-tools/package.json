@@ -14,6 +14,7 @@
     "browser-sync": "2.13.0",
     "chokidar": "1.5.2",
     "commander": "2.9.0",
+    "cross-spawn": "^5.0.0",
     "debug": "2.2.0",
     "del": "2.2.0",
     "find-root": "1.0.0",

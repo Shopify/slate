@@ -1,4 +1,4 @@
-const spawn = require('child_process').spawn;
+const spawn = require('cross-spawn');
 const debug = require('debug')('slate-tools:zip');
 const config = require('./includes/config');
 
