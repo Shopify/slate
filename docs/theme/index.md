@@ -1,15 +1,13 @@
 ---
 layout: default
 ---
-# Theme files
+# What's included
 
-Slate is two separate parts. First, it's a barebones theme to develop your own styles and layouts on. Second, it's a toolkit of useful tasks to sync with your local files to your live store. [Learn more about the tasks here](/slate/tasks).
+Slate is two separate parts. First, it's a barebones theme to develop your own styles and layouts on. Second, it's a toolkit of useful commands to sync with your local files to your live store. [Learn more about the commands here](/slate/commands).
 
 ## Templates and configuration
 
-All configuration files, layouts, and liquid templates required if you are submitting your theme to the Theme Store are included. See the [full guidelines for submission here](https://help.shopify.com/themes/development/theme-store-requirements?ref=slate-docs).
-
-Standard liquid tags and logic that are likely to be used on a given template have been included with little to no markup, classes, or other code that you will need to strip out.
+All configuration files, layouts, and liquid templates required for Theme Store submissions are included. See the [full guidelines for submission here](https://help.shopify.com/themes/development/theme-store-requirements?ref=slate-docs).
 
 ```
 config/
@@ -44,6 +42,12 @@ templates/
 
 Also included is a **Styles** template (`page.styles.liquid`). This is available to help you visualize your site's layout and styles with dummy content that is common across themes. Remove this template before shipping your theme.
 
+### Intentionally blank
+
+Standard liquid tags and logic likely to be used on a given template have been included with little to no markup, classes, or other code that you will need to strip out. Below is an image of what Slate looks like out of the box.
+
+<img src="{{ "/assets/images/fresh-install.jpg" | prepend: site.baseurl }}" alt="Slate on a fresh install" class="demo-image">
+
 ## Sections
 
 Sections are a new way of letting merchants control their own layout and appearance in their themes. Read more about [their introduction here](https://www.shopify.com/partners/blog/introducing-sections-for-shopify-themes) and the [full docs here](https://help.shopify.com/themes/development/theme-editor/sections). Slate includes two types of sections.
@@ -72,8 +76,6 @@ sections/
   - featured-product
 ```
 
-> See how the JavaScript for sections and theme editor events is setup here (TO DO: ADD LINK).
-
 ## Sass scaffolding and helpers
 
 **Slate is not a CSS framework.** Instead it sets you up to start styling your own way quickly with a reset and some helper scaffolding.
@@ -94,36 +96,34 @@ A blank starting point is included with [Normalize.css](https://necolas.github.i
 Starting a fresh project should not include reinventing the wheel. Slate offers some starting structure to your project that you can choose to use or not.
 
 - Map shop settings to Sass variables
-- CSS Wizardry grid (modified). Examples (TO DO: add link)
-  - There are no grid classes in the templates so you can easily switch to your preferred method
-- Responsive tables. Examples (TO DO: add link)
-- SVG icon style helpers. Examples (TO DO: you get the idea...)
-- `.btn` class with smart defaults
-- Form elements with default, disabled, error, and focus states ready to be styled
-- Blank state SVG styles (TO DO: add example link)
+- CSS grid. [Example]({{ '/css-examples/#grid' | prepend: site.baseurl }})
+  - There are no grid classes in the templates so you can easily switch to your preferred grid
+- SVG icon style helpers. [Example]({{ '/css-examples/#svg-icons' | prepend: site.baseurl }})
+- Responsive tables. [Example]({{ '/css-examples/#responsive-tables' | prepend: site.baseurl }})
+- `.btn` class with smart defaults. [Source](https://github.com/Shopify/slate/blob/master/src/styles/global/links-buttons.scss)
+- Form elements with default, disabled, error, and focus states ready to be styled. [Source](https://github.com/Shopify/slate/blob/master/src/styles/global/forms.scss)
+- Blank state SVG styles [Example]({{ '/css-examples/#blank-states' | prepend: site.baseurl }})
 
 ### Sass mixins
 
 A few helpful Sass mixins are included in Slate to make responsive, cross-browser, and accessibility development easier.
 
-- Prefixes. Example. (TO DO.. link)
-- Media query mixin for consistent breakpoint styles
-- Responsive helpers to show/hide content and align text based on breakpoint names. Example (TO DO. link)
-- Visually hide or show content for screen reader accessibility
+- Media query mixin for consistent breakpoint styles. [Example]({{ '/css-examples/#media-query-mixin' | prepend: site.baseurl }})
+- Responsive helpers to show/hide content and align text based on breakpoint names. [Example]({{ '/css-examples/#visibility-per-breakpoint' | prepend: site.baseurl }})
+- Prefixes. [Example]({{ '/css-examples/#' | prepend: site.baseurl }})
+- Visually hide or show content for screen reader accessibility. [Example]({{ '/css-examples/#visually-hide' | prepend: site.baseurl }})
 
 
 ## JavaScript helpers
 
-** TO DO: clean this up, explain more, link to examples **
-
-- Accessibility helpers (more info link)
-- Force tables and videos to be responsive
+- Accessibility helpers. [Example]({{ '/js-examples/#trap-focus' | prepend: site.baseurl }}). [Source](https://github.com/Shopify/slate/blob/master/src/scripts/slate/a11y.js).
+- Force tables and videos to be responsive. [Example]({{ '/js-examples/#responsive-tables-and-videos' | prepend: site.baseurl }})
 - Easy handling of theme editor events (load, select, deselect or sections and their content) (need demo/example of this)
-- Format money in JS the same as Liquid allows
-- Helpers for handling images in JS, including getting size based on URL and preloading sets of images
+- Format currency in JS the same as Liquid allows. [Example]({{ '/js-examples/#format-currency' | prepend: site.baseurl }})
+- Helpers for handling images in JS, including getting size based on URL and preloading sets of images. [Examples]({{ '/js-examples/#image-helpers' | prepend: site.baseurl }})
 - Listen for product variant option changes and setup scaffolding for handling result
   - This is a replacement for `option_selection.js` that uses Liquid to generate the multiple variant `select` or `radio` markup
 
 ## i18n strings
 
-i18n is shorthand for internationalization. Slate ships with six languages — English, French (Canadian), Spanish, German, and two dialects of Portuguese (Brazilian and European). These strings can be found in the `locales` folder.
+i18n is shorthand for internationalization. Slate ships with six languages — English, French (Canadian), Spanish, German, and two dialects of Portuguese (Brazilian and European). These strings can be found in the `locales` folder. [Learn more about translating your themes here](https://help.shopify.com/manual/sell-online/online-store/translate-theme).

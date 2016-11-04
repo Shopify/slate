@@ -316,7 +316,7 @@ specific tabview, see the other sections below.
 /* Headings */
 h2, h3, h4, h5, h6 {
     border: none;
-    color: #30418C;
+    color: #333;
     font-weight: bold;
     text-decoration: none;
 }

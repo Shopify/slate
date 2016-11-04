@@ -6,9 +6,6 @@
  * Current contents
  * - formatMoney - Takes an amount in cents and returns it as a formatted dollar value.
  *
- * Alternatives
- * - Accounting.js - http://openexchangerates.github.io/accounting.js/
- *
  */
 
 slate.Currency = (function() {
