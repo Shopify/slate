@@ -42,7 +42,7 @@ You should now be able to run slate from your terminal. Try running `slate -v` t
 Run the following commands to create a new project:
 
 ```shell
-slate new theme <my-theme-name>
+slate theme <my-theme-name>
 ```
 
 You will be prompted with some questions to help configure your theme.  A new directory will be created within the
@@ -83,9 +83,7 @@ You're ready to start developing with Slate.  To get started, run the following 
 
  The `/dist` folder will be uploaded to the store / theme_id specified in your default environment.
 
- A [Browsersync](https://browsersync.io/) proxy will run when deployment is complete and automatically launch in your browser.
- Slate will begin watching your theme directory for file changes and deploy them to your store whenever you make a change.  Browsersync
- will live-reload as soon as your changes are deployed.
+ Slate will begin watching your theme directory for file changes and deploy them to your store whenever you make a change.
 
 ## Updating Slate
 
@@ -100,26 +98,16 @@ make sure that new modules have been correctly installed.
 
 Command                      | Usage
 ---                          | ---
-[new theme](#new-theme)      | `slate new theme [name]`
-[new section](#new-section)  | `slate new section [name]`
+[theme](#theme)              | `slate theme [name]`
 [help](#help)                | `slate -h`
 [version](#version)          | `slate -v`
 
-### new theme
+### theme
 ```
-slate new theme [name]
+slate theme [name]
 ```
 
 Generates a theme with build tools. The name argument is required and you will be prompted to enter it if it's not provided.
-
-### new section
-```
-slate new section [name]
-```
-
-Generates a new section folder in `src/sections` and the four files that will make up an individual section: `javascript.js`, `schema.json`, `style.liquid` and `template.liquid`. The name argument is required and you will be prompted to enter it if it's not provided.
-
-See the [Shopify liquid documentation](https://help.shopify.com/themes/development/storefront-editor/sections) for more information on section syntax.
 
 ### help
 ```
@@ -151,7 +139,7 @@ Command               | Usage
 slate build
 ```
 
-Compiles your theme files and assets into a Shopify theme, found in the `dist` folder.
+Compiles your theme files and assets into a Shopify theme, found in the `dist` folder. No files will be uploaded to your shop.
 
 ### deploy
 ```
@@ -168,42 +156,34 @@ Running `slate deploy --manual` will instead create a new zip file of your theme
 -m, --manual       disable auto-deployment of the theme files
 ```
 
+Deploy to a different environment with the `-e` flag (short for `--environment`) plus the environment name, or multiple environments at once with comma separated values
+```
+slate deploy -e staging
+slate deploy -e development,staging,production
+```
+
 ### start
 ```
 slate start [--options]
 ```
 
-Performs a full deploy of your theme (see [slate deploy](#deploy)), launches [Browsersync](https://browsersync.io/) in a new browser tab at [https://localhost:3000](https://localhost:3000) and watches for any file changes.
+Performs a full deploy of your theme (see [slate deploy](#deploy)) and starts the watchers (see [slate watch](#watch)).
 
 #### options
 ```
 -e, --environment  deploy to a comma-separated list of environments
--n, --nosync       watch for changes without using Browsersync
 ```
-
-### test
-```
-slate test
-```
-
-Runs the tests and linting tasks for a theme's JavaScript, CSS and JSON.
-
 
 ### watch
 ```
 slate watch [--options]
 ```
 
-Sets up the watchers for all theme assets.
-
-By default, [Browsersync](https://browsersync.io/) will launch a new browser tab at
-[https://localhost:3000](https://localhost:3000) and watch for any files changes. You can ignore this
-by passing the `--nosync` option to the command.
+Sets up the watchers for all theme assets and deploys the compiled versions to your shop.
 
 #### options
 ```
 -e, --environment  deploy to a specific environment
--n, --nosync       watch for changes without using Browsersync
 ```
 
 ### zip
