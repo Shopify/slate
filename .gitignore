@@ -48,3 +48,4 @@ assets/logo.png
 deploy.log
 /docs/js
 config.yml
+secrets.json
