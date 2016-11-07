@@ -26,11 +26,11 @@ module.exports = (function() {
 
   archive.pipe(output);
 
-  for (let i in SRC_FILES) {
+  for (var i in SRC_FILES) {
     archive.file(SRC_FILES[i]);
   }
 
-  for (let i in SRC_DIRS) {
+  for (var i in SRC_DIRS) {
     archive.directory(SRC_DIRS[i]);
   }
 
