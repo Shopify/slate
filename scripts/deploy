@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+'use-strict';
 
 const AWS = require('aws-sdk');
 const fs = require('fs');
