@@ -85,6 +85,7 @@ Each column — or `.grid__item` — should be a direct child of a `.grid` conta
 > No grid classes exist in the provided templates, meaning you can swap `grid.scss` from your own grid in `theme.scss` without a lot of cleanup necessary.
 
 <div class="demo-iframe">
+  {% include iframe-toggles.html %}
   <iframe width="100%" height="232" src="../css-examples/grid" frameborder="0"></iframe>
 </div>
 
@@ -152,6 +153,7 @@ $breakpoint-has-push: ($medium-up);
 ```
 
 <div class="demo-iframe">
+  {% include iframe-toggles.html %}
   <iframe width="100%" height="58" src="../css-examples/grid-push" frameborder="0"></iframe>
 </div>
 
@@ -212,6 +214,7 @@ For proper accessibility, tabular data should be build as table. Tables are noto
 > Responsive tables are build into `cart.liquid`, `customers/order.liquid`, and `customers/account.liquid` templates.
 
 <div class="demo-iframe">
+  {% include iframe-toggles.html %}
   <iframe width="100%" height="66" src="../css-examples/responsive-table" frameborder="0"></iframe>
 </div>
 
@@ -302,6 +305,7 @@ There are 6 product, 6 collection, 2 lifestyle, 1 logo, and 1 generic image avai
 `styles/global/blank-states.scss` uses your theme colors to style the SVGs with your theme.
 
 <div class="demo-iframe">
+  {% include iframe-toggles.html %}
   <iframe width="100%" height="700" src="../css-examples/blank-states" frameborder="0"></iframe>
 </div>
 
@@ -353,6 +357,7 @@ Change the text alignment based on breakpoint. Only breakpoints that have a [wid
 ```
 
 <div class="demo-iframe">
+  {% include iframe-toggles.html %}
   <iframe width="100%" height="68" src="../css-examples/text-align" frameborder="0"></iframe>
 </div>
 
@@ -368,6 +373,7 @@ Quickly show or hide content based on enabled breakpoints with the class `breakp
 ```
 
 <div class="demo-iframe">
+  {% include iframe-toggles.html %}
   <iframe width="100%" height="118" src="../css-examples/show-hide" frameborder="0"></iframe>
 </div>
 

@@ -1,5 +1,9 @@
 body {
-  padding: 1em;
+  padding: 30px;
+}
+
+p:first-child {
+  margin-top: 0;
 }
 
 /*================ General helpers ================*/

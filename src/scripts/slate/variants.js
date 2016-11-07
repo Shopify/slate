@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  *
  * Handles change events from the variant inputs in any `cart/add` forms that may
- * exist.  Also updates the master select and triggers updates when the variants
+ * exist. Also updates the master select and triggers updates when the variants
  * price or image changes.
  *
  * @namespace variants

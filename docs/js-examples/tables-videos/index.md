@@ -4,7 +4,6 @@ layout: demo
 
 <style>
   table  {
-    width: 100%;
     background-color: #f1f1f1;
   }
 
@@ -21,6 +20,7 @@ layout: demo
     <thead>
       <tr>
         <th>Product</th>
+        <th>Type</th>
         <th>Price</th>
         <th class="text-center">Quantity</th>
         <th class="text-right">Total</th>
@@ -28,25 +28,22 @@ layout: demo
     </thead>
     <tbody>
       <tr>
-        <td>
-          <p>Greta</p>
-        </td>
+        <td><p>Greta</p></td>
+        <td><p>Hat</p></td>
         <td>$104.96</td>
         <td class="text-center">1</td>
         <td class="text-right">$104.96</td>
       </tr>
       <tr>
-        <td>
-          <p>77 Ca Skis</p>
-        </td>
+        <td><p>77 Ca Skis</p></td>
+        <td><p>Skis</p></td>
         <td>$549.00</td>
         <td class="text-center">2</td>
         <td class="text-right">$1098.00</td>
       </tr>
       <tr>
-        <td>
-          <p>Aera</p>
-        </td>
+        <td><p>Aera</p></td>
+        <td><p>Hat</p></td>
         <td>$109.95</td>
         <td class="text-center">1</td>
         <td class="text-right">$109.95</td>

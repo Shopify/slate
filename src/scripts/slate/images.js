@@ -67,7 +67,6 @@ slate.Image = (function() {
   }
 
   /**
-   * +++ Useful
    * Adds a Shopify size attribute to a URL
    *
    * @param src

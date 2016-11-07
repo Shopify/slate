@@ -44,6 +44,7 @@ $('#CloseModal').on('click', function() {
 ```
 
 <div class="demo-iframe">
+  {% include iframe-toggles.html %}
   <iframe width="100%" height="233" src="../js-examples/trap-focus" frameborder="0"></iframe>
 </div>
 
@@ -63,6 +64,7 @@ $iframeVideo.each(function() {
 ```
 
 <div class="demo-iframe">
+  {% include iframe-toggles.html %}
   <iframe width="100%" height="815" src="../js-examples/tables-videos" frameborder="0"></iframe>
 </div>
 
