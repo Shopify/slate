@@ -75,18 +75,101 @@ Slate ships JavaScript to mimic [Shopify money formats](https://help.shopify.com
 Slate maps the shop's money format — defined in Liquid — to a JavaScript variable in `layouts/theme.liquid` so it can be used regardless of file type.
 
 In layouts/theme.liquid:
+
 ```
 window.theme.moneyFormat: {% raw %}{{ shop.money_format | json }}{% endraw %};
 ```
+
+| Parameters      | Type            | Description    |
+| :-------------- | :-------------- | :------------- |
+| `cents`         | string          | Price in cents |
+| `format`        | string          | shop.money_format setting |
 
 In this example, `shop.money_format` is {% raw %}`${{amount}}`{% endraw %} so 1999 cents would be formatted as $19.99.
 ```
 var itemPrice = 1999; // cents
 slate.Currency.formatMoney(itemPrice, theme.moneyFormat);
 
-Output:
-$19.99
+// Returns string
+'$19.99'
 ```
 
 ## Image helpers
 
+| Command | Usage |
+| :------ | :---- |
+| [preload](#preload) | `slate.Images.preload(images, size)` |
+| [imageSize](#imagesize) | `slate.Images.imageSize(src)` |
+| [getSizedImageUrl](#getsizedimageurl) | `slate.Images.getSizedImageUrl(src, size)` |
+| [removeProtocol](#removeprotocol) | `slate.Images.removeProtocol(path)` |
+
+### preload
+
+Preload a single image or an array of images at a given size. A common use for preloading is reducing the loading delay when enlarging a thumbnail.
+
+| Parameters         | Type            | Description   |
+| :----------------- | :-------------- | :------------ |
+| `images`           | array or string | Single image URL or list of image URLs |
+| `size`             | string          | Size of image to request |
+
+```
+slate.Image.preload(['image-url-1.jpg', 'image-url-2.jpg'], '1024x1024');
+```
+
+### imageSize
+
+Get the size of an image based on the URL.
+
+| Parameters      | Type            | Description   |
+| :-------------- | :-------------- | :------------ |
+| `src`           | string          | Image URL     |
+
+```
+slate.Image.imageSize('https://cdn.shopify.com/s/files/big-ol-image_480x480.jpeg');
+
+// Returns string
+'480x480'
+```
+
+### getSizedImageUrl
+
+Adds a Shopify size attribute to a URL
+
+| Parameters      | Type            | Description   |
+| :-------------- | :-------------- | :------------ |
+| `src`           | string          | Image URL     |
+| `size`          | string          | Custom size   |
+
+```
+slate.Image.getSizedImageUrl('https://cdn.shopify.com/s/files/big-ol-image.jpeg', '250x250');
+
+// Returns string
+'https://cdn.shopify.com/s/files/big-ol-image_250x250.jpeg'
+```
+
+### removeProtocol
+
+| Parameters      | Type            | Description   |
+| :-------------- | :-------------- | :------------ |
+| `path`          | string          | Image URL     |
+
+```
+slate.Image.removeProtocol('https://cdn.shopify.com/s/files/big-ol-image_480x480.jpeg')
+
+// Returns string
+'//cdn.shopify.com/s/files/big-ol-image_480x480.jpeg'
+```
+
+## Product variants
+
+Slate separates product variant options into multiple `<select>` elements. Each time a new variant is selected, events are triggered to handle various state changes:
+
+| Methods      | Description |
+| :-------------- | :-------------- |
+| `updateAddToCartState`        | Update the add to cart button text and enabled/disabled/sold out state |
+| `updateProductImage`          | Replace the main product image `src` with the associated variant image if it exists |
+| `updateProductPrices`         | Updates the product regular and sale price when necessary |
+
+Each function has access to the newly selected variant in `evt.variant`. Customize this section as necessary to your theme.
+
+When a variant changes, `variant.js` updated the *master select*. The master select is the default `<select>` element that contains all variant IDs needed to properly submit the form.

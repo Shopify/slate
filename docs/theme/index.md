@@ -121,8 +121,7 @@ A few helpful Sass mixins are included in Slate to make responsive, cross-browse
 - Easy handling of theme editor events (load, select, deselect or sections and their content) (need demo/example of this)
 - Format currency in JS the same as Liquid allows. [Example]({{ '/js-examples/#format-currency' | prepend: site.baseurl }})
 - Helpers for handling images in JS, including getting size based on URL and preloading sets of images. [Examples]({{ '/js-examples/#image-helpers' | prepend: site.baseurl }})
-- Listen for product variant option changes and setup scaffolding for handling result
-  - This is a replacement for `option_selection.js` that uses Liquid to generate the multiple variant `select` or `radio` markup
+- Listen for product variant option changes and setup scaffolding for handling result. [Example]({{ '/js-examples/#product-variants' | prepend: site.baseurl }})
 
 ## i18n strings
 

@@ -34,23 +34,6 @@ slate.Image = (function() {
   }
 
   /**
-   * Swaps the src of an image for another OR returns the imageURL to the callback function
-   * @param image
-   * @param element
-   * @param callback
-   */
-  function switchImage(image, element, callback) {
-    var size = this.imageSize(element.src);
-    var imageUrl = this.getSizedImageUrl(image.src, size);
-
-    if (callback) {
-      callback(imageUrl, image, element); // eslint-disable-line callback-return
-    } else {
-      element.src = imageUrl;
-    }
-  }
-
-  /**
    * Find the Shopify image attribute size
    *
    * @param {string} src
@@ -101,7 +84,6 @@ slate.Image = (function() {
   return {
     preload: preload,
     loadImage: loadImage,
-    switchImage: switchImage,
     imageSize: imageSize,
     getSizedImageUrl: getSizedImageUrl,
     removeProtocol: removeProtocol
