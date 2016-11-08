@@ -1,4 +1,4 @@
-import {createReadStream, createWriteStream, unlink, unlinkSync, writeFileSync} from 'fs';
+import {createReadStream, createWriteStream, unlinkSync, writeFileSync} from 'fs';
 import {Extract} from 'unzip2';
 import {get} from 'https';
 import spawn from 'cross-spawn';
@@ -22,7 +22,7 @@ export function downloadFromUrl(source, target) {
     });
 
     themeZipFile.on('error', (err) => {
-      unlink(target);
+      unlinkSync(target);
       reject(err);
     });
 
@@ -79,7 +79,9 @@ export function writePackageJsonSync(target, name = 'theme') {
  *
  * @param {string} command - The command to run.
  * @param {string} args - List of string arguments.
- * @param {string} args - Options object, see: https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options
+ * @param {string} args - Options object
+ *
+ * See: https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options
  */
 export function startProcess(command, args, options) {
   const defaultedOptions = options || {};
@@ -96,4 +98,24 @@ export function startProcess(command, args, options) {
       resolve(code);
     });
   });
+}
+
+/**
+ * Check for dependency name on package.json
+ *
+ * @param {string} dependencyName - The name of the dependency.
+ * @param {object} pkg - The package.json object.
+ */
+export function hasDependency(dependencyName, pkg) {
+  const depKeys = ['dependencies', 'devDependencies'];
+  let hasDependencies = false;
+
+  for (const key of depKeys) {
+    if ((key in pkg && dependencyName in pkg[key])) {
+      hasDependencies = true;
+      break;
+    }
+  }
+
+  return hasDependencies;
 }

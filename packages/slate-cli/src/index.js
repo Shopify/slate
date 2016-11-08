@@ -1,118 +1,81 @@
 #!/usr/bin/env node
 
+import {readdirSync} from 'fs';
 import {join, normalize} from 'path';
-import debug from 'debug';
-import minimist from 'minimist';
-import Theme from './theme';
-import {startProcess} from './utils';
-
-const logger = debug('slate-cli:cli');
+import {green, red} from 'chalk';
+import findRoot from 'find-root';
+import program from 'commander';
+import {hasDependency} from './utils';
 
 /**
- * A slate cli.
- * @constructor
+ * Find closest package.json to be at root of theme.
+ *
+ * @param {string} directory - A path.
  */
-class Cli {
-  constructor(cwd) {
-    logger('Instantiated Cli');
-
-    this.binName = 'slate';
-    this.argv = minimist(process.argv.slice(2));
-    this.pkg = require(join(__dirname, normalize('../package.json')));
-    this.theme = new Theme(cwd);
-
-    if (this.checkForVersionArgument()) {
-      this.outputVersion();
-
-      return;
-    }
-
-    if (this.checkForNewTheme()) {
-      this.theme.create(this.argv._[2])
-        .catch((err) => {
-          console.error(err);
-        });
-
-      return;
-    }
-
-    if (this.checkForThemeDependencies()) {
-      this.spawnThemeCommand(cwd);
-
-      return;
-    }
-
-    console.error('Please provide valid command.');
-  }
-
-  /**
-   * Checks for version argument in argv.
-   *
-   */
-  checkForVersionArgument() {
-    if (this.argv._.length === 0 && (this.argv.v || this.argv.version)) { // eslint-disable-line id-length
-      logger('Found version argument');
-      return true;
-    }
-
-    logger('No version argument');
-    return false;
-  }
-
-  /**
-   * Checks for new theme command in argv.
-   *
-   */
-  checkForNewTheme() {
-    if (this.argv._.length > 0 && this.argv._[0] === 'new' && this.argv._[1] === 'theme') {
-      logger('Found new theme command');
-      return true;
-    }
-
-    logger('No new theme command');
-    return false;
-  }
-
-  /**
-   * Checks for theme dependencies.
-   *
-   */
-  checkForThemeDependencies() {
-    if (this.theme.hasDependency(this.theme.tools.name)) {
-      logger(`Theme has required dependency: ${this.theme.tools.name}`);
-      return true;
-    }
-
-    console.error(`Theme is missing dependency ${this.theme.tools.name}. Try \`npm install ${this.theme.tools.name}\`.`);
-    return false;
-  }
-
-  /**
-   * Ouputs version info about slate-cli and slate-tools
-   *
-   */
-  outputVersion() {
-    console.log(`  ${this.binName}       ${this.pkg.version}`);
-
-    if (this.theme.hasDependency(this.theme.tools.name) && this.theme.tools.version) {
-      console.log(`  ${this.theme.tools.binName} ${this.theme.tools.version}`);
-      return;
-    }
-
-    console.log(`  ${this.theme.tools.binName} n/a - not inside a Slate theme directory`);
-  }
-
-  /**
-   * Starts theme command on local slate-tools
-   *
-   */
-  spawnThemeCommand() {
-    logger(`Spawning theme command to: ${this.theme.tools.bin}`);
-    startProcess(this.theme.tools.bin, process.argv.slice(2));
+function getThemeRoot(directory) {
+  try {
+    return normalize(findRoot(directory));
+  } catch (err) {
+    return null;
   }
 }
 
-const workingDirectory = process.cwd();
-const slate = new Cli(workingDirectory);
+/**
+ * Check package.json for slate-tools.
+ *
+ * @param {string} themeRoot - The path for the root of the theme.
+ */
+function checkForSlateTools(themeRoot) {
+  const pkgPath = join(themeRoot, 'package.json');
+  const pkg = require(pkgPath);
 
-export default slate;
+  return hasDependency('@shopify/slate-tools', pkg);
+}
+
+/**
+ * Output information if/else slate theme directory.
+ *
+ * @param {boolean} isSlateTheme - Whether in slate theme or not.
+ */
+function outputSlateThemeCheck(isSlateTheme) {
+  if (isSlateTheme) {
+    console.log(`  Slate theme: ${green('✓')} inside slate theme directory`);
+    console.log('');
+  } else {
+    console.log(`  Slate theme: ${red('✗')} switch to a slate theme directory for full list of commands`);
+    console.log('');
+  }
+}
+
+// Global commands
+require('./commands/theme').default(program);
+require('./commands/version').default(program);
+
+// Dynamically add in theme commands
+const workingDirectory = process.cwd();
+const themeRoot = getThemeRoot(workingDirectory);
+const isSlateTheme = (themeRoot && checkForSlateTools(themeRoot));
+
+if (isSlateTheme) {
+  const slateToolsCommands = join(themeRoot, normalize('/node_modules/@shopify/slate-tools/lib/commands'));
+
+  readdirSync(slateToolsCommands)
+    .filter((file) => ~file.search(/^[^\.].*\.js$/))
+    .forEach((file) => require(join(slateToolsCommands, file)).default(program));
+}
+
+// Custom help
+program.on('--help', () => {
+  outputSlateThemeCheck(isSlateTheme);
+});
+
+// Unknown command
+program.on('*', () => {
+  console.log('');
+  console.log(`  Unknown command: ${red(program.args.join(' '))}`);
+  console.log('');
+  program.help();
+  outputSlateThemeCheck(isSlateTheme);
+});
+
+program.parse(process.argv);
