@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+
 # Commands
 
 ## Global commands
@@ -50,7 +51,7 @@ Slate's source theme files are in the root `src` folder. These are the files you
 slate build
 ```
 
-Compiles your theme files and assets into a Shopify theme, found in the `dist` folder. No files will be uploaded to your shop.
+Compile theme files and assets into a Shopify theme, found in the `dist` folder. No files will be uploaded to your shop.
 
 ### zip
 
@@ -97,7 +98,7 @@ slate deploy -e development,staging,production
 slate watch [--options]
 ```
 
-Sets up the watchers for all theme assets and deploys the compiled versions to your shop.
+Set up the watchers for all theme assets and deploy the compiled versions to your specified environment (default is `development`).
 
 ##### Options
 ```

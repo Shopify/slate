@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+
 # What's included
 
 Slate is two separate parts. First, it's a barebones theme to develop your own styles and layouts on. Second, it's a toolkit of useful commands to sync with your local files to your live store. [Learn more about the commands here](/slate/commands).
