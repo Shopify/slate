@@ -11,7 +11,6 @@
   "dependencies": {
     "@shopify/themekit": "0.4.7",
     "bluebird": "3.4.0",
-    "browser-sync": "2.13.0",
     "chokidar": "1.5.2",
     "commander": "2.9.0",
     "cross-spawn": "5.0.0",
