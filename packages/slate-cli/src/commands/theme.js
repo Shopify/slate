@@ -62,7 +62,7 @@ export default function(program) {
 
           writePackageJsonSync(pkg, dirName);
 
-          return startProcess('npm', ['install', '@shopify/slate-tools', '-D'], {
+          return startProcess('npm', ['install', '@shopify/slate-tools', '--save-dev', '--save-exact'], {
             cwd: root,
           });
         })
