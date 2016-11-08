@@ -12,13 +12,13 @@ It allows you to sync local files with your live shop, deploy to multiple enviro
 
 * Install Slate with `npm install @shopify/slate`
 * Create a new theme with `slate theme theme-name` where `theme-name` will be a newly created folder
-* Rename `config-sample.yml` to `config.yml` and add your private app credentials. [How to create a private app](https://help.shopify.com/api/guides/api-credentials#generate-private-app-credentials)
+* Rename `config-sample.yml` to `config.yml` and add your private app credentials. [How to create a private app](https://help.shopify.com/api/guides/api-credentials#get-credentials-through-the-shopify-admin)
   * **store:** the shopify-specifc URL for this store/environment (ie. my-store.myshopify.com)
   * **theme_id:** the unique id for the theme you want to write to when deploying to this store/environment. Use `"live"` for the published theme
   * **password:** the password generated via a private app on this store/environment (necessary for API access)
 * From within your new project folder in your command line, use the commands below to build, sync, and watch your local files
 
-> [Node](https://nodejs.org/en/) v5.3+ is required to fully benefit from Slate. If you want the template files without the build tools, get the latest zip here (TO DO: link).
+> [Node](https://nodejs.org/en/) v5.3+ is required to fully benefit from Slate. If you want the template files without the build tools, [get the latest zip here](http://sdks-staging.shopifycdn.com/slate/latest/).
 
 ## Slate commands
 
