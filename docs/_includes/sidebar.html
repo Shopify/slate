@@ -5,23 +5,6 @@
   </li>
   <li>
     <a class="docs-nav__link {% if page.url == '/theme/' %}active{% endif %}" href="{{ '/theme' | prepend: site.baseurl }}">What's included</a>
-    <ul class="docs-sub-nav">
-      <li>
-        <a href="{{ '/theme/#templates-and-configuration' | prepend: site.baseurl }}" class="docs-sub-nav__link">Templates and configuration</a>
-      </li>
-      <li>
-        <a href="{{ '/theme/#sections' | prepend: site.baseurl }}" class="docs-sub-nav__link">Sections</a>
-      </li>
-      <li>
-        <a href="{{ '/theme/#sass-scaffolding-and-helpers' | prepend: site.baseurl }}" class="docs-sub-nav__link">Sass scaffolding and helpers</a>
-      </li>
-      <li>
-        <a href="{{ '/theme/#javascript-helpers' | prepend: site.baseurl }}" class="docs-sub-nav__link">JavaScript helpers</a>
-      </li>
-      <li>
-        <a href="{{ '/theme/#i18n-strings' | prepend: site.baseurl }}" class="docs-sub-nav__link">i18n strings</a>
-      </li>
-    </ul>
   </li>
   <li>
     <a class="docs-nav__link {% if page.url == '/commands/' %}active{% endif %}" href="{{ '/commands' | prepend: site.baseurl }}">Commands</a>
@@ -34,6 +17,26 @@
       </li>
       <li>
         <a href="{{ '/commands/#sync-commands' | prepend: site.baseurl }}" class="docs-sub-nav__link">Sync commands</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a class="docs-nav__link {% if page.url == '/theme-scaffold/' %}active{% endif %}" href="{{ '/theme-scaffold' | prepend: site.baseurl }}">Theme scaffold</a>
+    <ul class="docs-sub-nav">
+      <li>
+        <a href="{{ '/theme-scaffold/#templates-and-configuration' | prepend: site.baseurl }}" class="docs-sub-nav__link">Templates and configuration</a>
+      </li>
+      <li>
+        <a href="{{ '/theme-scaffold/#sections' | prepend: site.baseurl }}" class="docs-sub-nav__link">Sections</a>
+      </li>
+      <li>
+        <a href="{{ '/theme-scaffold/#sass-scaffolding-and-helpers' | prepend: site.baseurl }}" class="docs-sub-nav__link">Sass scaffolding and helpers</a>
+      </li>
+      <li>
+        <a href="{{ '/theme-scaffold/#javascript-helpers' | prepend: site.baseurl }}" class="docs-sub-nav__link">JavaScript helpers</a>
+      </li>
+      <li>
+        <a href="{{ '/theme-scaffold/#i18n-strings' | prepend: site.baseurl }}" class="docs-sub-nav__link">i18n strings</a>
       </li>
     </ul>
   </li>

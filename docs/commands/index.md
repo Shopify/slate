@@ -18,7 +18,7 @@ layout: default
 slate theme [name]
 ```
 
-Generates a theme with build tools. The name argument is required and you will be prompted to enter it if it's not provided.
+Generate a theme with build tools. The name argument is required and you will be prompted to enter it if it's not provided.
 
 ### help
 
@@ -75,16 +75,16 @@ Performs a fresh build of your theme and zips it into a file that's compatible w
 slate deploy [--options]
 ```
 
-##### Options
-
 Performs a fresh build followed by a full deploy; replacing existing files on the remote server and replacing them with the full set of build files, and removing remote files that are no longer in use.
 
-Running `slate deploy --manual` will instead create a new zip file of your theme (see [slate zip](#zip)) and open the admin themes page as defined by your environment where you can then manually install your theme from the zip file.
+##### Options
 
 ```
 -e, --environment  deploy to a comma-separated list of environments
 -m, --manual       disable auto-deployment of the theme files
 ```
+
+Running `slate deploy --manual` will instead create a new zip file of your theme (see [slate zip](#zip)) and open the admin themes page as defined by your environment where you can then manually install your theme from the zip file.
 
 Deploy to a different environment with the `-e` flag (short for `--environment`) plus the environment name, or multiple environments at once with comma separated values
 ```
@@ -113,7 +113,7 @@ slate start [--options]
 
 Performs a full deploy of your theme (see [slate deploy](#deploy)) and starts the watchers (see [slate watch](#watch)).
 
-#### options
+##### Options
 ```
 -e, --environment  deploy to a comma-separated list of environments
 ```

@@ -80,7 +80,7 @@ A grid as versatile as Slate's (based on [csswizardry-grids](https://github.com/
 $breakpoint-has-widths: ($small, $medium-up);
 ```
 
-Each column — or `.grid__item` — should be a direct child of a `.grid` container. Create the child element sizes with the format `breakpoint-name--one-tenth`. See the example below or look through `styles/global/grid.scss` for available sizes.
+Each column — or `.grid__item` — should be a direct child of a `.grid` container. Create the child element sizes with the format `breakpoint-name--one-tenth`. See the example below or look through `styles/global/grid.scss` for available sizes. Ideally you should not style the padding or margins of `grid` or `grid__item` classes directly or the layout may break.
 
 > No grid classes exist in the provided templates, meaning you can swap `grid.scss` from your own grid in `theme.scss` without a lot of cleanup necessary.
 
@@ -196,6 +196,8 @@ All available icons. Hover over each to get its name.
   <iframe width="100%" height="540" src="../css-examples/icons" frameborder="0"></iframe>
 </div>
 
+It is recommended to set descriptive text that also acts as a fallback for icons. See the [demo for visually hiding text and icon fallback text](#visually-hide).
+
 ### Update icons manually
 
 If you need to add an icon to a live shop without Slate's build tools, follow these steps:
@@ -209,9 +211,9 @@ If you need to add an icon to a live shop without Slate's build tools, follow th
 
 ## Responsive tables
 
-For proper accessibility, tabular data should be build as table. Tables are notoriously difficult to build responsively, and while there are a lot of ways to do it, Slate includes a basic approach of adding the column labels as data attributes. Test the demo below in mobile mode to see it in action.
+For proper accessibility, tabular data should be built as a table. Tables are notoriously difficult to build responsively, and while there are a lot of ways to do it, Slate includes a basic approach of adding the column labels as data attributes. Test the demo below in mobile mode to see it in action.
 
-> Responsive tables are build into `cart.liquid`, `customers/order.liquid`, and `customers/account.liquid` templates.
+> Responsive tables are built into `cart.liquid`, `customers/order.liquid`, and `customers/account.liquid` templates.
 
 <div class="demo-iframe">
   {% include iframe-toggles.html %}
@@ -379,13 +381,18 @@ Quickly show or hide content based on enabled breakpoints with the class `breakp
 
 ### Visually hide
 
-Sometimes it is necessary to visually hide content while keeping it accessible in the DOM. This is useful for hiding descriptive text for icons or form labels that you do not want shown. Screen readers, for example, do not read placeholder text on inputs as their label so need the `label` element.
+Sometimes it is necessary to visually hide content while keeping it accessible in the DOM. This is useful for hiding descriptive text for icons or form labels that you do not want shown. Screen readers, for example, do not read placeholder text on inputs as their label so the `label` element is required.
 
 ```
+// Visually hidden text
 <label for="test" class="visually-hidden">Email</label>
 <input type="email" name="test" id="test" placeholder="Email">
+
+// Visually hidden icon fallback text
+{% raw %}{% include 'icon-cart' %}{% endraw %}
+<span class="icon-fallback-text">Cart icon</span>
 ```
 
 <div class="demo-iframe">
-  <iframe width="100%" height="88" src="../css-examples/visually-hidden" frameborder="0"></iframe>
+  <iframe width="100%" height="274" src="../css-examples/visually-hidden" frameborder="0"></iframe>
 </div>

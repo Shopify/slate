@@ -2,12 +2,14 @@
 # requests and edit/update your remote theme files.
 #
 # 1. Set up a private app (https://help.shopify.com/api/guides/api-credentials#generate-private-app-credentials)
-#    with read and write access to theme templates and theme assets.
-# 2. Replace the appropriate variables for each environment below.
+#    with "Read and write" permissions for "Theme templates and theme assets".
+# 2. Replace the required variables for each environment below.
 #
-# theme_id, password and store variables must be kept within this file.
+# password, theme_id, and store variables are required.
 #
-# For more information on configuration variables, go to http://themekit.cat/docs/#config-variables.
+# For more information on this config file:
+#   Configuration variables | http://shopify.github.io/themekit/configuration/
+#   Ignore patterns | http://shopify.github.io/themekit/ignores/
 
 ---
 
