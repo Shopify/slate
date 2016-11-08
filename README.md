@@ -7,8 +7,17 @@ It allows you to sync local files with your live shop, deploy to multiple enviro
 
 ----------
 
-## Contributing
-Contributions are always welcome in the form of pull requests and issues.
-
 ## License
 Slate is licensed under the terms of the [MIT license](LICENSE).
+
+## Documentation
+
+For full API documentation go checkout the [API docs](http://shopify.github.io/slate/).
+
+## Contributing
+For help on setting up the repo locally, building, testing, and contributing
+please see [CONTRIBUTING.md](https://github.com/Shopify/slate/blob/master/CONTRIBUTING.md).
+
+## Code of Conduct
+All developers who wish to contribute through code or issues, take a look at the
+[CODE_OF_CONDUCT.md](https://github.com/Shopify/slate/blob/master/CODE_OF_CONDUCT.md).

@@ -7,17 +7,17 @@ layout: default
 
 | Command | Usage |
 | :------ | :---- |
-| [new theme](#new-theme) | `slate new theme [name]` |
+| [theme](#theme) | `slate theme [name]` |
 | [help](#help) | `slate -h` |
 | [version](#version) | `slate -v` |
 
-### new theme
+### theme
 
 ```
-slate new theme [name]
+slate theme [name]
 ```
 
-Generates a theme with build tools. The name argument is required and will be the name of your theme folder.
+Generates a theme with build tools. The name argument is required and you will be prompted to enter it if it's not provided.
 
 ### help
 
@@ -50,7 +50,7 @@ Slate's source theme files are in the root `src` folder. These are the files you
 slate build
 ```
 
-Compiles your theme files and assets into a Shopify theme, found in the dist folder. No files will be uploaded to your shop.
+Compiles your theme files and assets into a Shopify theme, found in the `dist` folder. No files will be uploaded to your shop.
 
 ### zip
 
@@ -76,14 +76,14 @@ slate deploy [--options]
 
 ##### Options
 
+Performs a fresh build followed by a full deploy; replacing existing files on the remote server and replacing them with the full set of build files, and removing remote files that are no longer in use.
+
+Running `slate deploy --manual` will instead create a new zip file of your theme (see [slate zip](#zip)) and open the admin themes page as defined by your environment where you can then manually install your theme from the zip file.
+
 ```
 -e, --environment  deploy to a comma-separated list of environments
 -m, --manual       disable auto-deployment of the theme files
 ```
-
-Performs a fresh build followed by a full deploy; replacing existing files on the remote server and replacing them with the full set of build files, and removing remote files that are no longer in use.
-
-Running `slate deploy --manual` will instead create a new zip file of your theme (see [slate zip](#zip)) and open the admin themes page as defined by your environment where you can then manually install your theme from the zip file.
 
 Deploy to a different environment with the `-e` flag (short for `--environment`) plus the environment name, or multiple environments at once with comma separated values
 ```
@@ -97,7 +97,7 @@ slate deploy -e development,staging,production
 slate watch [--options]
 ```
 
-Listens for changes to your local source files and deploys the compiled version to your shop.
+Sets up the watchers for all theme assets and deploys the compiled versions to your shop.
 
 ##### Options
 ```
@@ -111,3 +111,8 @@ slate start [--options]
 ```
 
 Performs a full deploy of your theme (see [slate deploy](#deploy)) and starts the watchers (see [slate watch](#watch)).
+
+#### options
+```
+-e, --environment  deploy to a comma-separated list of environments
+```
