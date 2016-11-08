@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-'use-strict';
 
 const AWS = require('aws-sdk');
 const fs = require('fs');
@@ -10,10 +9,11 @@ const DEFAULT_CONTENT_TYPE = 'application/zip';
 const S3_DIR = 'slate';
 const DEFAULT_CACHE_CONTROL = 'public, max-age=86400';
 const FILENAME_FILTER = require('../package.json').name || 'theme';
-const DIST_DIR = 'upload';
+const ZIP_DIR = 'upload';
+const DIST_DIR = 'dist';
 const DIST_FILES = [
-  'theme.js',
-  'vendor.js'
+  'assets/theme.js',
+  'assets/vendor.js'
 ];
 
 var Secrets = function() {
@@ -37,7 +37,7 @@ var Uploader = function () {
   this.secrets = new Secrets();
   this.secrets.load();
   this.s3 = new AWS.S3();
-  this.distAssets = fs.readdirSync(DIST_DIR);
+  this.themeZips = fs.readdirSync(ZIP_DIR);
 };
 
 Uploader.prototype.uploadFile = function(localPath, s3Path) {
@@ -58,15 +58,18 @@ Uploader.prototype.uploadFile = function(localPath, s3Path) {
 };
 
 Uploader.prototype.uploadTheme = function () {
-  this.distAssets.forEach(file => {
-    this.uploadFile(path.join(DIST_DIR, file), this.s3PathForFile(file, tag));
-    this.uploadFile(path.join(DIST_DIR, file), this.s3PathForFile(file, `/latest`));
+  this.themeZips.forEach(file => {
+    this.uploadFile(path.join(ZIP_DIR, file), this.s3PathForFile(file, tag));
+    this.uploadFile(path.join(ZIP_DIR, file), this.s3PathForFile(file, `/latest`));
   });
 };
 
-// Uploader.prototype.uploadFiles = function() {
-//
-// }
+Uploader.prototype.uploadAssets = function() {
+  DIST_FILES.forEach(file => {
+    this.uploadFile(path.join(DIST_DIR, file), this.s3PathForFile(file, tag));
+    this.uploadFile(path.join(DIST_DIR, file), this.s3PathForFile(file, `/latest`));
+  })
+}
 
 Uploader.prototype.s3PathForFile = function (localPath, tag) {
   return path.join(S3_DIR, tag, localPath);
@@ -77,3 +80,4 @@ Uploader.prototype.contentType = function(path) {
 };
 
 new Uploader().uploadTheme();
+new Uploader().uploadAssets();
