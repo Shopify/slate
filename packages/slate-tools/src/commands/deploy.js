@@ -10,7 +10,7 @@ export default function(program) {
     .alias('d')
     .description('Build and replace theme on specified environment(s).')
     .option('-e, --environment [environment]', 'deploy to a comma-separated list of environments', 'development')
-    .option('-m, --manual', 'disable auto-deployment of the theme files')
+    .option('-m, --manual', 'disable auto-deployment of the theme files, manually upload newly created zip file')
     .action((options = {}) => {
       logger(`--gulpfile ${config.gulpFile}`);
       logger(`--cwd ${config.themeRoot}`);
