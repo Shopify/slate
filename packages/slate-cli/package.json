@@ -18,7 +18,8 @@
     "debug": "2.2.0",
     "find-root": "1.0.0",
     "rimraf": "2.5.4",
-    "unzip2": "0.2.5"
+    "unzip2": "0.2.5",
+    "update-notifier": "1.0.2"
   },
   "devDependencies": {
     "babel": "^6.5.2",

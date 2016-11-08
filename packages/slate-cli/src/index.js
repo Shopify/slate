@@ -4,6 +4,7 @@ import {readdirSync} from 'fs';
 import {join, normalize} from 'path';
 import {green, red} from 'chalk';
 import findRoot from 'find-root';
+import updateNotifier from 'update-notifier';
 import program from 'commander';
 import {hasDependency} from './utils';
 
@@ -47,12 +48,20 @@ function outputSlateThemeCheck(isSlateTheme) {
   }
 }
 
+const currentDirectory = __dirname;
+const workingDirectory = process.cwd();
+const pkg = require(join(currentDirectory, normalize('../package.json')));
+
+updateNotifier({
+  pkg,
+  updateCheckInterval: 1000 * 60 * 60 * 24 * 7, // 1 week
+}).notify();
+
 // Global commands
 require('./commands/theme').default(program);
 require('./commands/version').default(program);
 
 // Dynamically add in theme commands
-const workingDirectory = process.cwd();
 const themeRoot = getThemeRoot(workingDirectory);
 const isSlateTheme = (themeRoot && checkForSlateTools(themeRoot));
 
