@@ -3,6 +3,7 @@
     ["shopify"]
   ],
   "plugins": [
+    ["transform-async-to-generator"],
     ["add-shopify-header", {
       "files": ["src/index.js"]
     }]

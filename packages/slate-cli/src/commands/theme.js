@@ -1,5 +1,7 @@
+import 'babel-polyfill';
 import {existsSync, mkdirSync} from 'fs'; // eslint-disable-line node/no-deprecated-api
 import {join} from 'path';
+import {prompt} from 'inquirer';
 import rimraf from 'rimraf';
 import {green, red} from 'chalk';
 import {downloadFromUrl, unzip, startProcess, writePackageJsonSync} from '../utils';
@@ -9,10 +11,32 @@ export default function(program) {
     .command('theme [name]')
     .alias('th')
     .description('Generate new theme')
-    .action((name = 'theme') => {
+    .action(async function(name) {
+      let dirName = name;
+
+      if (!dirName) {
+        const answers = await prompt({
+          type: 'input',
+          name: 'dirName',
+          message: 'What do you want to name the directory for your theme?',
+          default: 'theme',
+          validate: (value) => {
+            const validateName = value.match(/^[\w^'@{}[\],$=!#().%+~\- ]+$/);
+
+            if (validateName) {
+              return true;
+            }
+
+            return 'Please enter a directory name';
+          },
+        });
+
+        dirName = answers.dirName;
+      }
+
       const workingDirectory = process.cwd();
       const s3Url = 'https://sdks.shopifycdn.com/slate/latest/slate-src.zip';
-      const root = join(workingDirectory, name);
+      const root = join(workingDirectory, dirName);
 
       if (existsSync(root)) {
         console.log('');
@@ -36,7 +60,7 @@ export default function(program) {
 
           const pkg = join(root, 'package.json');
 
-          writePackageJsonSync(pkg, name);
+          writePackageJsonSync(pkg, dirName);
 
           return startProcess('npm', ['install', '@shopify/slate-tools', '-D'], {
             cwd: root,
@@ -44,7 +68,7 @@ export default function(program) {
         })
         .then(() => {
           console.log(`  ${green('✓')} devDependencies installed`);
-          console.log(`  ${green('✓')} ${name} theme is ready`);
+          console.log(`  ${green('✓')} ${dirName} theme is ready`);
           console.log('');
 
           return;
