@@ -1,22 +1,28 @@
-const spawn = require('cross-spawn');
-const debug = require('debug')('slate-tools:watch');
-const config = require('./includes/config');
+import spawn from 'cross-spawn';
+import debug from 'debug';
+import config from '../config';
 
-module.exports = function(program) {
+const logger = debug('slate-tools:watch');
+
+export default function(program) {
   program
     .command('watch')
     .alias('w')
-    .description('Watch for file changes and upload changed files on specified environment.')
+    .description('Watch for file changes and upload changes to specified environment.')
     .option('-e, --environment [environment]', 'deploy to a comma-separated list of environments', 'development')
     .action((options = {}) => {
-      debug(`--gulpfile ${config.gulpFile}`);
-      debug(`--cwd ${config.themeRoot}`);
+      logger(`--gulpfile ${config.gulpFile}`);
+      logger(`--cwd ${config.themeRoot}`);
 
       const args = ['watch', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot, '--environment', options.environment];
+
+      if (options.nosync) {
+        args.push('--nosync');
+      }
 
       spawn(config.gulp, args, {
         detached: false,
         stdio: 'inherit',
       });
     });
-};
+}

@@ -1,19 +1,21 @@
-const spawn = require('cross-spawn');
-const debug = require('debug')('slate-tools:build');
-const config = require('./includes/config');
+import spawn from 'cross-spawn';
+import debug from 'debug';
+import config from '../config';
 
-module.exports = function(program) {
+const logger = debug('slate-tools:build');
+
+export default function(program) {
   program
     .command('build')
     .alias('b')
     .description('Compile theme files and assets into a Shopify theme.')
     .action(() => {
-      debug(`--gulpfile ${config.gulpFile}`);
-      debug(`--cwd ${config.themeRoot}`);
+      logger(`--gulpfile ${config.gulpFile}`);
+      logger(`--cwd ${config.themeRoot}`);
 
       spawn(config.gulp, ['build', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot], {
         detached: false,
         stdio: 'inherit',
       });
     });
-};
+}

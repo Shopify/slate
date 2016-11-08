@@ -2,17 +2,13 @@
   "name": "@shopify/slate-tools",
   "version": "0.1.3",
   "description": "Tooling for Shopify themes",
-  "bin": {
-    "slate-tools": "lib/index.js"
-  },
-  "main": "lib/index.js",
+  "main": "lib/gulpfile.js",
   "license": "MIT",
   "author": "Shopify Inc.",
   "dependencies": {
     "@shopify/themekit": "0.4.7",
     "bluebird": "3.4.0",
     "chokidar": "1.5.2",
-    "commander": "2.9.0",
     "cross-spawn": "5.0.0",
     "debug": "2.2.0",
     "del": "2.2.0",

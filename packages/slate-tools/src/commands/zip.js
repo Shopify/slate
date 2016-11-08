@@ -1,19 +1,21 @@
-const spawn = require('cross-spawn');
-const debug = require('debug')('slate-tools:zip');
-const config = require('./includes/config');
+import spawn from 'cross-spawn';
+import debug from 'debug';
+import config from '../config';
 
-module.exports = function(program) {
+const logger = debug('slate-tools:zip');
+
+export default function(program) {
   program
     .command('zip')
     .alias('z')
-    .description('Build theme and zip compiled files. The zip file can be found within an upload folder that is generated within your theme project root folder.')
+    .description('Build theme and zip compiled files.')
     .action(() => {
-      debug(`--gulpfile ${config.gulpFile}`);
-      debug(`--cwd ${config.themeRoot}`);
+      logger(`--gulpfile ${config.gulpFile}`);
+      logger(`--cwd ${config.themeRoot}`);
 
       spawn(config.gulp, ['zip', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot], {
         detached: false,
         stdio: 'inherit',
       });
     });
-};
+}
