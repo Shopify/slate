@@ -60,7 +60,7 @@ function deploy(cmd, files, env) {
     debug(`Deploying to ${env}`);
 
     return themekit.command({
-      args: [cmd, '-env', env].concat(files),
+      args: [cmd, '--env', env].concat(files),
     }, (err) => {
       if (err) {
         reject(err);

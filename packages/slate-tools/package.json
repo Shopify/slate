@@ -1,12 +1,12 @@
 {
   "name": "@shopify/slate-tools",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Tooling for Shopify themes",
   "main": "lib/gulpfile.js",
   "license": "MIT",
   "author": "Shopify Inc.",
   "dependencies": {
-    "@shopify/themekit": "0.4.7",
+    "@shopify/themekit": "0.5.1",
     "bluebird": "3.4.0",
     "chokidar": "1.5.2",
     "cross-spawn": "5.0.0",
