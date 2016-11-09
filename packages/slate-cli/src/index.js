@@ -34,22 +34,6 @@ function checkForSlateTools(themeRoot) {
 }
 
 /**
- * Output version information
- *
- * @param {object} pkg - The package.json object
- */
-function outputVersion(pkg) {
-  console.log(pkg.version);
-}
-
-/**
- * Override default value undefined to true
- */
-function defaultToTrue() {
-  return true;
-}
-
-/**
  * Output information if/else slate theme directory.
  *
  * @param {boolean} isSlateTheme - Whether in slate theme or not.
@@ -75,6 +59,7 @@ updateNotifier({
 
 // Global commands
 require('./commands/theme').default(program);
+require('./commands/version').default(program);
 
 // Dynamically add in theme commands
 const themeRoot = getThemeRoot(workingDirectory);
@@ -87,10 +72,6 @@ if (isSlateTheme) {
     .filter((file) => ~file.search(/^[^\.].*\.js$/))
     .forEach((file) => require(join(slateToolsCommands, file)).default(program));
 }
-
-// custom version option
-program
-  .option('-v, --version', 'output the version number', defaultToTrue);
 
 // Custom help
 program.on('--help', () => {
@@ -107,8 +88,3 @@ program.on('*', () => {
 });
 
 program.parse(process.argv);
-
-// check for version option
-if (program.version) {
-  outputVersion(pkg);
-}
