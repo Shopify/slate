@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "dependencies": {
     "ansi-align": {
       "version": "1.1.0",
