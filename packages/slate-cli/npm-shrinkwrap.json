@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "dependencies": {
     "ansi-align": {
       "version": "1.1.0",
@@ -21,6 +21,16 @@
       "version": "2.2.1",
       "from": "ansi-styles@>=2.2.1 <3.0.0",
       "resolved": "https://registry.npmjs.org/ansi-styles/-/ansi-styles-2.2.1.tgz"
+    },
+    "babel-polyfill": {
+      "version": "6.16.0",
+      "from": "babel-polyfill@6.16.0",
+      "resolved": "https://registry.npmjs.org/babel-polyfill/-/babel-polyfill-6.16.0.tgz"
+    },
+    "babel-runtime": {
+      "version": "6.18.0",
+      "from": "babel-runtime@>=6.9.1 <7.0.0",
+      "resolved": "https://registry.npmjs.org/babel-runtime/-/babel-runtime-6.18.0.tgz"
     },
     "balanced-match": {
       "version": "0.4.2",
@@ -131,6 +141,11 @@
         }
       }
     },
+    "core-js": {
+      "version": "2.4.1",
+      "from": "core-js@>=2.4.0 <3.0.0",
+      "resolved": "https://registry.npmjs.org/core-js/-/core-js-2.4.1.tgz"
+    },
     "core-util-is": {
       "version": "1.0.2",
       "from": "core-util-is@>=1.0.0 <1.1.0",
@@ -173,7 +188,7 @@
         },
         "readable-stream": {
           "version": "2.1.5",
-          "from": "readable-stream@>=2.0.2 <3.0.0",
+          "from": "readable-stream@^2.0.2",
           "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-2.1.5.tgz"
         }
       }
@@ -240,7 +255,7 @@
       "dependencies": {
         "isarray": {
           "version": "1.0.0",
-          "from": "isarray@>=1.0.0 <1.1.0",
+          "from": "isarray@~1.0.0",
           "resolved": "https://registry.npmjs.org/isarray/-/isarray-1.0.0.tgz"
         },
         "readable-stream": {
@@ -417,7 +432,7 @@
     },
     "object-assign": {
       "version": "4.1.0",
-      "from": "object-assign@>=4.0.1 <5.0.0",
+      "from": "object-assign@>=4.1.0 <5.0.0",
       "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.0.tgz"
     },
     "once": {
@@ -442,7 +457,7 @@
     },
     "os-tmpdir": {
       "version": "1.0.2",
-      "from": "os-tmpdir@>=1.0.0 <2.0.0",
+      "from": "os-tmpdir@>=1.0.1 <2.0.0",
       "resolved": "https://registry.npmjs.org/os-tmpdir/-/os-tmpdir-1.0.2.tgz"
     },
     "osenv": {
@@ -519,12 +534,12 @@
       "dependencies": {
         "isarray": {
           "version": "1.0.0",
-          "from": "isarray@>=1.0.0 <1.1.0",
+          "from": "isarray@~1.0.0",
           "resolved": "https://registry.npmjs.org/isarray/-/isarray-1.0.0.tgz"
         },
         "readable-stream": {
           "version": "2.1.5",
-          "from": "readable-stream@>=2.0.0 <3.0.0",
+          "from": "readable-stream@^2.0.0",
           "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-2.1.5.tgz"
         }
       }
@@ -533,6 +548,11 @@
       "version": "1.0.34",
       "from": "readable-stream@>=1.0.0 <1.1.0",
       "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-1.0.34.tgz"
+    },
+    "regenerator-runtime": {
+      "version": "0.9.6",
+      "from": "regenerator-runtime@>=0.9.5 <0.10.0",
+      "resolved": "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.9.6.tgz"
     },
     "registry-auth-token": {
       "version": "3.1.0",
@@ -571,7 +591,7 @@
     },
     "semver": {
       "version": "5.3.0",
-      "from": "semver@>=5.1.0 <6.0.0",
+      "from": "semver@>=5.0.0 <6.0.0",
       "resolved": "https://registry.npmjs.org/semver/-/semver-5.3.0.tgz"
     },
     "semver-diff": {
@@ -626,7 +646,7 @@
     },
     "strip-json-comments": {
       "version": "1.0.4",
-      "from": "strip-json-comments@>=1.0.4 <1.1.0",
+      "from": "strip-json-comments@>=1.0.1 <1.1.0",
       "resolved": "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-1.0.4.tgz"
     },
     "supports-color": {
@@ -711,7 +731,7 @@
       "dependencies": {
         "graceful-fs": {
           "version": "4.1.10",
-          "from": "graceful-fs@>=4.1.2 <5.0.0",
+          "from": "graceful-fs@^4.1.2",
           "resolved": "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.1.10.tgz"
         }
       }
