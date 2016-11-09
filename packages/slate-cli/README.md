@@ -16,25 +16,14 @@ and speed up the process of developing, testing and deploying themes to Shopify 
 ## Installation
 
 #### 1. Get the latest version
-Clone the latest version of Slate CLI to your local machine using SSH
-(see [github's guide to SSH](https://help.github.com/articles/generating-an-ssh-key/) for help):
 
 ```shell
-git clone git@github.com:Shopify/slate-cli.git
+npm install -g @shopify/slate
 ```
 
-#### 2. Run npm link
-```shell
-cd slate-cli
-npm link
-```
-_note: if you get an **`EACCES`** error, you may need to run `sudo npm link` instead_
+_note: if you get an **`EACCES`** error, refer to [Fixing npm permissions](https://docs.npmjs.com/getting-started/fixing-npm-permissions)_
 
-This command installs node dependencies (equivalent to running `npm install`) and creates
-a symbolic link to your global npm directory.
-
-You should now be able to run slate from your terminal. Try running `slate -v` to verify that everything worked
-(if this didn't work, see [Troubleshooting](#troubleshooting) for guidance).
+You should now be able to run slate from your terminal. Try running `slate --version` to verify that everything worked.
 
 ## Getting started
 
@@ -87,12 +76,9 @@ You're ready to start developing with Slate.  To get started, run the following 
 
 ## Updating Slate
 
-1. Pull the latest version from GitHub - Make sure that your current branch is master and that your master branch is up-to-date.
-2. Run `npm update` - This will update all project dependencies and developer tools listed in the [package.json](package.json) file.
-3. Run `npm prune` and `npm install` (optional) - After major changes, it may be necessary to clean out your `node_modules` and
-make sure that new modules have been correctly installed.
-
-   This will remove any unused dependencies from `node_modules` and install all new dependencies.
+```shell
+npm install @shopify/slate --global
+```
 
 ## Global commands
 
@@ -130,7 +116,6 @@ Command               | Usage
 [build](#build)       | `slate build`
 [deploy](#deploy)     | `slate deploy [--options]`
 [start](#start)       | `slate start [--options]`
-[test](#test)         | `slate test`
 [watch](#watch)       | `slate watch [--options]`
 [zip](#zip)           | `slate zip`
 
@@ -194,13 +179,6 @@ slate zip
 Performs a fresh build of your theme and zips it into a file that's compatible with Shopify.
 The zip file can be found within an upload folder that is generated within your theme project root folder.
 The zip is overwritten each time you use this command and is not meant to be used for versioning.
-
-## Troubleshooting
-If you encounter any issues, here are some preliminary steps to take:
-
-- `git pull` latest version of Slate CLI.
-- `npm install` to make sure you have all the dependencies.
-- `npm link` to make sure that the symlink exists and Slate CLI is globally installed.
 
 ## License
 
