@@ -20,4 +20,3 @@ dependencies:
 test:
   override:
     - bundle exec rspec spec
-    - ./node_modules/.bin/slate-tools test
