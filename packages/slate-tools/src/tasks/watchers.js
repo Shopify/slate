@@ -53,19 +53,15 @@ function deploy(cmd, files, env) {
   activeDeploy = true;
 
   return new Promise((resolve, reject) => {
-    const cwd = process.cwd();
+    debug(`themekit cwd to: ${config.dist.root}`);
 
-    process.chdir(config.dist.root);
-    debug(`Changing cwd to: ${process.cwd()}`);
-    debug(`Deploying to ${env}`);
-
-    return themekit.command({
+    themekit.command({
       args: [cmd, '--env', env].concat(files),
+      cwd: config.dist.root,
     }, (err) => {
       if (err) {
         reject(err);
       } else {
-        process.chdir(cwd);
         resolve();
       }
     });
