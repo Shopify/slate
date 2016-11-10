@@ -5,7 +5,7 @@ import {join, normalize} from 'path';
 import {green, red} from 'chalk';
 import findRoot from 'find-root';
 import updateNotifier from 'update-notifier';
-import program from 'commander';
+import program from '@shopify/commander';
 import {hasDependency} from './utils';
 
 /**
