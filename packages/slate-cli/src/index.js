@@ -3,6 +3,7 @@
 import {readdirSync} from 'fs';
 import {join, normalize} from 'path';
 import {green, red} from 'chalk';
+import figures from 'figures';
 import findRoot from 'find-root';
 import updateNotifier from 'update-notifier';
 import program from '@shopify/commander';
@@ -40,10 +41,10 @@ function checkForSlateTools(themeRoot) {
  */
 function outputSlateThemeCheck(isSlateTheme) {
   if (isSlateTheme) {
-    console.log(`  Slate theme: ${green('✓')} inside slate theme directory`);
+    console.log(`  Slate theme: ${green(figures.tick)} inside slate theme directory`);
     console.log('');
   } else {
-    console.log(`  Slate theme: ${red('✗')} switch to a slate theme directory for full list of commands`);
+    console.log(`  Slate theme: ${red(figures.cross)} switch to a slate theme directory for full list of commands`);
     console.log('');
   }
 }
