@@ -2,7 +2,7 @@
 
 import {readdirSync} from 'fs';
 import {join, normalize} from 'path';
-import {green, red} from 'chalk';
+import {yellow, red} from 'chalk';
 import figures from 'figures';
 import findRoot from 'find-root';
 import updateNotifier from 'update-notifier';
@@ -40,13 +40,14 @@ function checkForSlateTools(themeRoot) {
  * @param {boolean} isSlateTheme - Whether in slate theme or not.
  */
 function outputSlateThemeCheck(isSlateTheme) {
-  if (isSlateTheme) {
-    console.log(`  Slate theme: ${green(figures.tick)} inside slate theme directory`);
-    console.log('');
-  } else {
-    console.log(`  Slate theme: ${red(figures.cross)} switch to a slate theme directory for full list of commands`);
-    console.log('');
+  if (!isSlateTheme) {
+    return;
   }
+
+  console.log('');
+  console.log(`  ${yellow(figures.cross)} You are not in a slate theme directory`);
+  console.log(`    For full list of commands generate a new theme or switch to an existing slate theme directory`);
+  console.log('');
 }
 
 const currentDirectory = __dirname;
@@ -75,8 +76,8 @@ if (isSlateTheme) {
 }
 
 if (!process.argv.slice(2).length) {
-  program.outputHelp();
   outputSlateThemeCheck(isSlateTheme);
+  program.help();
 }
 
 // Custom help
@@ -89,8 +90,8 @@ program.on('*', () => {
   console.log('');
   console.log(`  Unknown command: ${red(program.args.join(' '))}`);
   console.log('');
-  program.help();
   outputSlateThemeCheck(isSlateTheme);
+  program.help();
 });
 
 program.parse(process.argv);

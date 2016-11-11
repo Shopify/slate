@@ -9,7 +9,7 @@ import {downloadFromUrl, unzip, startProcess, writePackageJsonSync} from '../uti
 export default function(program) {
   program
     .command('theme <name>')
-    .alias('th')
+    .alias('t')
     .description('Generates a new theme directory containing Slate\'s theme boilerplate.')
     .action(async function(name) {
       let dirName = name;

@@ -137,11 +137,11 @@ Running `slate deploy --manual` will instead create a new zip file of your theme
 
 #### options
 ```
--e, --environment  deploy to a comma-separated list of environments
+-e, --env  deploy to a comma-separated list of environments
 -m, --manual       disable auto-deployment of the theme files
 ```
 
-Deploy to a different environment with the `-e` flag (short for `--environment`) plus the environment name, or multiple environments at once with comma separated values
+Deploy to a different environment with the `-e` flag (short for `--env`) plus the environment name, or multiple environments at once with comma separated values
 ```
 slate deploy -e staging
 slate deploy -e development,staging,production
@@ -156,7 +156,7 @@ Performs a full deploy of your theme (see [slate deploy](#deploy)) and starts th
 
 #### options
 ```
--e, --environment  deploy to a comma-separated list of environments
+-e, --env  deploy to a comma-separated list of environments
 ```
 
 ### watch
@@ -168,7 +168,7 @@ Sets up the watchers for all theme assets and deploys the compiled versions to y
 
 #### options
 ```
--e, --environment  deploy to a specific environment
+-e, --env  deploy to a specific environment
 ```
 
 ### zip
