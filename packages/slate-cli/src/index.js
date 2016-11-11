@@ -74,6 +74,11 @@ if (isSlateTheme) {
     .forEach((file) => require(join(slateToolsCommands, file)).default(program));
 }
 
+if (!process.argv.slice(2).length) {
+  program.outputHelp();
+  outputSlateThemeCheck(isSlateTheme);
+}
+
 // Custom help
 program.on('--help', () => {
   outputSlateThemeCheck(isSlateTheme);
