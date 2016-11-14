@@ -75,10 +75,6 @@ if (isSlateTheme) {
     .forEach((file) => require(join(slateToolsCommands, file)).default(program));
 }
 
-// output help if no commands or options passed
-if (!process.argv.slice(2).length) {
-  program.help();
-}
 
 // Custom help
 program.on('--helpStart', () => {
@@ -101,3 +97,8 @@ program.on('*', () => {
 });
 
 program.parse(process.argv);
+
+// output help if no commands or options passed
+if (!process.argv.slice(2).length) {
+  program.help();
+}
