@@ -75,7 +75,7 @@ if (isSlateTheme) {
     .forEach((file) => require(join(slateToolsCommands, file)).default(program));
 }
 
-// output help if no commands or options passed in
+// output help if no commands or options passed
 if (!process.argv.slice(2).length) {
   program.help();
 }
@@ -86,7 +86,10 @@ program.on('--helpStart', () => {
 });
 
 program.on('--helpEnd', () => {
-  console.log('  https://shopify.github.io/slate/');
+  console.log('  Docs:');
+  console.log('');
+  console.log('     https://shopify.github.io/slate/');
+  console.log('');
 });
 
 // Unknown command
