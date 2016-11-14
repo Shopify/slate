@@ -75,6 +75,7 @@ if (isSlateTheme) {
     .forEach((file) => require(join(slateToolsCommands, file)).default(program));
 }
 
+// output help if no commands or options passed in
 if (!process.argv.slice(2).length) {
   program.help();
 }
