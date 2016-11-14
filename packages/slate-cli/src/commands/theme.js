@@ -8,9 +8,9 @@ import {downloadFromUrl, unzip, startProcess, writePackageJsonSync} from '../uti
 
 export default function(program) {
   program
-    .command('theme [name]')
+    .command('theme <name>')
     .alias('th')
-    .description('Generate new theme')
+    .description('Generates a new theme directory containing Slate\'s theme boilerplate.')
     .action(async function(name) {
       let dirName = name;
 
@@ -18,7 +18,7 @@ export default function(program) {
         const answers = await prompt({
           type: 'input',
           name: 'dirName',
-          message: 'What do you want to name the directory for your theme?',
+          message: 'Please enter a directory name for your theme (a new folder will be created):',
           default: 'theme',
           validate: (value) => {
             const validateName = value.match(/^[\w^'@{}[\],$=!#().%+~\- ]+$/);
@@ -27,7 +27,7 @@ export default function(program) {
               return true;
             }
 
-            return 'Please enter a directory name';
+            return 'A directory name is required.';
           },
         });
 
