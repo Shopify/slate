@@ -46,7 +46,7 @@ function outputSlateThemeCheck(isSlateTheme) {
 
   console.log('');
   console.log(yellow(`  ${figures.cross} You are not in a slate theme directory`));
-  console.log('    For full list of commands generate a new theme or switch to an existing slate theme directory');
+  console.log('    For a full list of commands, generate a new theme or switch to an existing slate theme directory');
   console.log('');
 }
 
