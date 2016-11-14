@@ -45,7 +45,7 @@ function outputSlateThemeCheck(isSlateTheme) {
   }
 
   console.log('');
-  console.log(`  ${yellow(figures.cross)} ${yellow('You are not in a slate theme directory')}`);
+  console.log(yellow(`  ${figures.cross} You are not in a slate theme directory`));
   console.log('    For full list of commands generate a new theme or switch to an existing slate theme directory');
   console.log('');
 }
@@ -95,7 +95,7 @@ program.on('--helpEnd', () => {
 // Unknown command
 program.on('*', () => {
   console.log('');
-  console.log(`  ${red(figures.cross)} ${red('Unknown command:')} ${red(program.args.join(' '))}`);
+  console.log(red(`  ${figures.cross} Unknown command: ${program.args.join(' ')}`));
   console.log('');
   program.help();
 });
