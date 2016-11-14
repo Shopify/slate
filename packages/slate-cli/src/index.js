@@ -40,13 +40,13 @@ function checkForSlateTools(themeRoot) {
  * @param {boolean} isSlateTheme - Whether in slate theme or not.
  */
 function outputSlateThemeCheck(isSlateTheme) {
-  if (!isSlateTheme) {
+  if (isSlateTheme) {
     return;
   }
 
   console.log('');
-  console.log(`  ${yellow(figures.cross)} You are not in a slate theme directory`);
-  console.log(`    For full list of commands generate a new theme or switch to an existing slate theme directory`);
+  console.log(`  ${yellow(figures.cross) + ' You are not in a slate theme directory'}`);
+  console.log('    For full list of commands generate a new theme or switch to an existing slate theme directory');
   console.log('');
 }
 
@@ -76,21 +76,23 @@ if (isSlateTheme) {
 }
 
 if (!process.argv.slice(2).length) {
-  outputSlateThemeCheck(isSlateTheme);
   program.help();
 }
 
 // Custom help
-program.on('--help', () => {
+program.on('--helpStart', () => {
   outputSlateThemeCheck(isSlateTheme);
+});
+
+program.on('--helpEnd', () => {
+  console.log('  https://shopify.github.io/slate/');
 });
 
 // Unknown command
 program.on('*', () => {
   console.log('');
-  console.log(`  Unknown command: ${red(program.args.join(' '))}`);
+  console.log(`  ${red(figures.cross + ' Unknown command: ' + program.args.join(' '))}`);
   console.log('');
-  outputSlateThemeCheck(isSlateTheme);
   program.help();
 });
 
