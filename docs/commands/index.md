@@ -81,7 +81,7 @@ Performs a fresh build followed by a full deploy; replacing existing files on th
 
 ```
 -e, --env  deploy to a comma-separated list of environments
--m, --manual       disable auto-deployment of the theme files
+-m, --manual  disable auto-deployment of the theme files
 ```
 
 Running `slate deploy --manual` will instead create a new zip file of your theme (see [slate zip](#zip)) and open the admin themes page as defined by your environment where you can then manually install your theme from the zip file.
@@ -98,11 +98,12 @@ slate deploy -e development,staging,production
 slate watch [--options]
 ```
 
-Set up the watchers for all theme assets and deploy the compiled versions to your specified environment (default is `development`).
+Sets up the watchers for all theme assets and deploys the compiled versions to your specified environment (default is `development`). Also opens a [Browsersync](https://browsersync.io/) window with live reloading after changing and saving a file.
 
 ##### Options
 ```
 -e, --env  deploy to a specific environment
+-n, --nosync  disable Browsersync
 ```
 
 ### start
@@ -116,4 +117,5 @@ Performs a full deploy of your theme (see [slate deploy](#deploy)) and starts th
 ##### Options
 ```
 -e, --env  deploy to a comma-separated list of environments
+-n, --nosync  disable Browsersync
 ```
