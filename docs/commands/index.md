@@ -98,12 +98,11 @@ slate deploy -e development,staging,production
 slate watch [--options]
 ```
 
-Sets up the watchers for all theme assets and deploys the compiled versions to your specified environment (default is `development`). Also opens a [Browsersync](https://browsersync.io/) window with live reloading after changing and saving a file.
+Sets up the watchers for all theme assets and deploys the compiled versions to your specified environment (default is `development`).
 
 ##### Options
 ```
 -e, --env  deploy to a specific environment
--n, --nosync  disable Browsersync
 ```
 
 ### start
@@ -117,5 +116,4 @@ Performs a full deploy of your theme (see [slate deploy](#deploy)) and starts th
 ##### Options
 ```
 -e, --env  deploy to a comma-separated list of environments
--n, --nosync  disable Browsersync
 ```
