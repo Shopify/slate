@@ -20,6 +20,14 @@ gulp.task('build', (done) => {
   );
 });
 
+gulp.task('build:zip', (done) => {
+  runSequence(
+    ['clean'],
+    ['build:js', 'build:vendor-js', 'build:css', 'build:assets', 'build:svg'],
+    done,
+  );
+});
+
 /**
  * Does a full clean/rebuild of your theme and creates a `.zip` compatible with
  * shopify.
@@ -29,7 +37,7 @@ gulp.task('build', (done) => {
  * @static
  */
 gulp.task('zip', (done) => {
-  runSequence('build', 'compress', done);
+  runSequence('build:zip', 'compress', done);
 });
 
 /**

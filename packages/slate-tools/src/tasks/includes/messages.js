@@ -67,6 +67,10 @@ const messages = {
       ' and run a full <slate deploy> as a result.';
   },
 
+  configError: () => {
+    return '`config.yml` does not exist. You need to add a config file before you can upload your theme to Shopify.';
+  },
+
   deployTo: (environment) => {
     gutil.log('Initiating deploy to', gutil.colors.bold(environment));
   },
