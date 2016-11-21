@@ -71,7 +71,7 @@ if (isSlateTheme) {
   const slateToolsCommands = join(themeRoot, normalize('/node_modules/@shopify/slate-tools/lib/commands'));
 
   readdirSync(slateToolsCommands)
-    .filter((file) => ~file.search(/^[^\.].*\.js$/))
+    .filter((file) => ~file.search(/^[^\.].*\.js$/)) // eslint-disable-line no-useless-escape
     .forEach((file) => require(join(slateToolsCommands, file)).default(program));
 }
 

@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import 'babel-polyfill'; // eslint-disable-line
 import {existsSync, mkdirSync} from 'fs'; // eslint-disable-line node/no-deprecated-api
 import {join} from 'path';
 import {prompt} from 'inquirer';
@@ -11,7 +11,7 @@ export default function(program) {
     .command('theme [name]')
     .alias('t')
     .description('Generates a new theme directory containing Slate\'s theme boilerplate.')
-    .action(async function(name) {
+    .action(async (name) => {
       let dirName = name;
 
       if (!dirName) {
