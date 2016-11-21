@@ -8,8 +8,10 @@ export default function(program) {
   program
     .command('watch')
     .alias('w')
-    .description('Set up the watchers for all theme assets and deploy the compiled versions to your specified environment.')
-    .option('-e, --environment [environment]', 'deploy to a comma-separated list of environments', 'development')
+    .description('Watches files for code changes and immediately deploys updates to your store as they occur. ' +
+      'By default, this command also runs a live-reload proxy that refreshes your store URL in-browser when changes are successfully deployed.')
+    .option('-e, --env <environment>', 'Shopify store to deploy code to (specified in config.yml - default: development)', 'development')
+    .option('-n, --nosync', 'disable live-reload functionality')
     .action((options = {}) => {
       logger(`--gulpfile ${config.gulpFile}`);
       logger(`--cwd ${config.themeRoot}`);

@@ -8,7 +8,7 @@ export default function(program) {
   program
     .command('zip')
     .alias('z')
-    .description('Build theme and zip compiled files. The zip file can be found within the /upload folder that is generated within your theme project root folder.')
+    .description('Rebuilds the theme\'s source files and compresses the output. The compressed file is written to <theme>/upload/<theme>.zip (can be used for manual upload).')
     .action(() => {
       logger(`--gulpfile ${config.gulpFile}`);
       logger(`--cwd ${config.themeRoot}`);

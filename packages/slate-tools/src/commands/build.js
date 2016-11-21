@@ -8,7 +8,7 @@ export default function(program) {
   program
     .command('build')
     .alias('b')
-    .description('Compile theme files and assets into a Shopify theme, found in the `dist` folder. No files will be uploaded to your shop.')
+    .description('Compiles source files (<theme>/src/) into the format required for distribution to a Shopify store (<theme>/dist/).')
     .action(() => {
       logger(`--gulpfile ${config.gulpFile}`);
       logger(`--cwd ${config.themeRoot}`);
