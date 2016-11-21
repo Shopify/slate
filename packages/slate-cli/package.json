@@ -38,7 +38,7 @@
   },
   "scripts": {
     "clean": "rimraf lib/",
-    "lint": "eslint -c .eslintrc.json src/",
+    "lint": "eslint --max-warnings 0 -c .eslintrc.json src/",
     "lint-allow-warning": "eslint -c .eslintrc.json src/",
     "start": "npm run clean && babel -w -d lib/ src/",
     "test": "npm run lint",
