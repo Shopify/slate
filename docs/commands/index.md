@@ -98,12 +98,15 @@ slate deploy -e development,staging,production
 slate watch [--options]
 ```
 
-Sets up the watchers for all theme assets and deploys the compiled versions to your specified environment (default is `development`).
+Sets up the watchers for all theme assets and deploys the compiled versions to your specified environment (default is `development`). Also opens a [Browsersync](https://browsersync.io/) window with live reloading after changing and saving a file.
 
 ##### Options
 ```
 -e, --env  deploy to a specific environment
+-n, --nosync  disable Browsersync
 ```
+
+> **Note about Browsersync on HTTPS:** The first time you run `slate watch` or `start` you will get an unsafe connection browser notice. This is expected because all Shopify stores run on HTTPS but no certificate exists for your localhost. Proceed through this warning to view your store.
 
 ### start
 
@@ -116,4 +119,5 @@ Performs a full deploy of your theme (see [slate deploy](#deploy)) and starts th
 ##### Options
 ```
 -e, --env  deploy to a comma-separated list of environments
+-n, --nosync  disable Browsersync
 ```
