@@ -1,8 +1,7 @@
 {
   "extends": [
     "plugin:shopify/esnext",
-    "plugin:shopify/node",
-    "plugin:shopify/mocha"
+    "plugin:shopify/node"
   ],
   "rules": {
     "no-console": 0,
