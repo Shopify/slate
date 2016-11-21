@@ -18,7 +18,7 @@ layout: default
 slate theme [name]
 ```
 
-Generate a theme with build tools. The name argument is required and you will be prompted to enter it if it's not provided.
+Generate a new blank theme. The `name` argument is required for the new theme directory.
 
 ### help
 
