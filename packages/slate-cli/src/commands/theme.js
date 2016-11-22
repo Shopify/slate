@@ -71,7 +71,7 @@ export default function(program) {
           console.log(`  ${green('✓')} ${dirName} theme is ready`);
           console.log('');
 
-          return;
+          return null;
         })
         .catch((err) => {
           console.error(red(`  ${err}`));
