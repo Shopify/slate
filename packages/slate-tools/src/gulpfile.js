@@ -50,8 +50,20 @@ gulp.task('zip', (done) => {
  * @static
  */
 gulp.task('watch', () => {
-  runSequence('build:config', ['watch:src', 'watch:dist', 'watch:dist-config']);
+  runSequence('build:config', defineWatchTasks());
 });
+
+function defineWatchTasks() {
+  const tasks = ['watch:src', 'watch:dist', 'watch:dist-config'];
+
+  // unless --nosync flag is set, start browser-sync
+  if (!argv.nosync) {
+    tasks.push('deploy:sync-reload');
+  }
+
+  return tasks;
+}
+
 
 /**
  * Does a full (re)build followed by a full deploy, cleaning existing files on

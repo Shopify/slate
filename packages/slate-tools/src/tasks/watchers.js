@@ -67,7 +67,7 @@ function deploy(cmd, files, env) {
     });
   }).then(() => {
     activeDeploy = false;
-    fs.appendFile(config.deployLog, messages.logDeploys(cmd, files));
+    fs.appendFileSync(config.deployLog, messages.logDeploys(cmd, files)); // eslint-disable-line no-sync
     return checkDeployStatus();
   });
 }
