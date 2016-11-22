@@ -1,5 +1,5 @@
-import 'babel-polyfill'; // eslint-disable-line
-import {existsSync, mkdirSync} from 'fs'; // eslint-disable-line node/no-deprecated-api
+import 'babel-polyfill';
+import {existsSync, mkdirSync} from 'fs';
 import {join} from 'path';
 import {prompt} from 'inquirer';
 import rimraf from 'rimraf';

@@ -25,7 +25,6 @@
     "update-notifier": "1.0.2"
   },
   "devDependencies": {
-    "babel": "6.5.2",
     "babel-cli": "6.18.0",
     "babel-core": "6.18.2",
     "babel-plugin-add-shopify-header": "1.0.6",
