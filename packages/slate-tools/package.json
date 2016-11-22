@@ -8,6 +8,7 @@
   "dependencies": {
     "@shopify/themekit": "0.5.3",
     "bluebird": "3.4.6",
+    "browser-sync": "2.18.2",
     "chokidar": "1.6.1",
     "cross-spawn": "5.0.1",
     "debug": "2.3.3",
