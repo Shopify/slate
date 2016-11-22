@@ -23,18 +23,18 @@ let activeDeploy = false;
 function checkDeployStatus() {
   if (activeDeploy) {
     return;
-  } else {
-    const environment = config.environment.split(/\s*,\s*|\s+/)[0];
+  }
 
-    messages.deployTo(environment);
+  const environment = config.environment.split(/\s*,\s*|\s+/)[0];
 
-    if (cache.change.length) {
-      deploy('upload', cache.change, environment);
-      cache.change = [];
-    } else if (cache.unlink.length) {
-      deploy('remove', cache.unlink, environment);
-      cache.unlink = [];
-    }
+  messages.deployTo(environment);
+
+  if (cache.change.length) {
+    deploy('upload', cache.change, environment);
+    cache.change = [];
+  } else if (cache.unlink.length) {
+    deploy('remove', cache.unlink, environment);
+    cache.unlink = [];
   }
 }
 
