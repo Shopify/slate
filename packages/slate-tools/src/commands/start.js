@@ -16,7 +16,7 @@ export default function(program) {
       logger(`--gulpfile ${config.gulpFile}`);
       logger(`--cwd ${config.themeRoot}`);
 
-      const args = ['--gulpfile', config.gulpFile, '--cwd', config.themeRoot, '--environment', options.environment];
+      const args = ['--gulpfile', config.gulpFile, '--cwd', config.themeRoot, '--environment', options.env];
 
       if (options.nosync) {
         args.push('--nosync');

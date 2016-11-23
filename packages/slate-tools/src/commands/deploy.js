@@ -15,7 +15,7 @@ export default function(program) {
       logger(`--gulpfile ${config.gulpFile}`);
       logger(`--cwd ${config.themeRoot}`);
 
-      const args = options.manual ? ['deploy:manual'] : ['deploy', '--environment', options.environment];
+      const args = options.manual ? ['deploy:manual'] : ['deploy', '--environment', options.env];
 
       spawn(config.gulp, args.concat(['--gulpfile', config.gulpFile, '--cwd', config.themeRoot]), {
         detached: false,
