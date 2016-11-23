@@ -34,6 +34,11 @@ main {
     width: 300px;
     padding: 60px 40px 0;
     position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    padding-bottom: 120px; // ~height of docs-shopify-logo
+    overflow: auto;
   }
 }
 
