@@ -1,6 +1,6 @@
 {
   "presets": [
-    "shopify/node"
+    "shopify"
   ],
   "plugins": [
     ["add-shopify-header", {
