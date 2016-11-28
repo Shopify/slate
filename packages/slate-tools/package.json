@@ -6,7 +6,7 @@
   "license": "MIT",
   "author": "Shopify Inc.",
   "dependencies": {
-    "@shopify/themekit": "0.5.3",
+    "@shopify/themekit": "0.6.0",
     "bluebird": "3.4.6",
     "browser-sync": "2.18.2",
     "chokidar": "1.6.1",
