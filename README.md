@@ -12,7 +12,7 @@ Slate is licensed under the terms of the [MIT license](LICENSE).
 
 ## Documentation
 
-For full API documentation go checkout the [API docs](http://shopify.github.io/slate/).
+For full API documentation go checkout the [API docs](https://shopify.github.io/slate/).
 
 ## Contributing
 For help on setting up the repo locally, building, testing, and contributing

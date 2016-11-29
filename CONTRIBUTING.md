@@ -30,7 +30,7 @@ slate deploy
 
 The following documents the folder structure for this project and what the purpose of each folder is:
 ```
- +-- docs/ ** API docs that live at http://shopify.github.io/slate
+ +-- docs/ ** API docs that live at https://shopify.github.io/slate
  +-- scripts/ ** Scripts used for development such as deployment and CI scripts
  +-- src/ ** Contains all theme templates and assets
  | +-- assets/
@@ -50,7 +50,7 @@ If your change affects how people use the project (i.e. adding or removing
 functionality, changing the return value of a function, etc),
 please ensure the documentation is also updated to
 reflect this. The docs live inside the `docs/` folder and are hosted
-at `http://shopify.github.io/slate`.
+at `https://shopify.github.io/slate`.
 
 To run the docs locally, first install the ruby dependencies:
 ```
