@@ -7,6 +7,7 @@ baseurl: "/slate"
 url: "https://shopify.github.io"
 sass:
   cache: true
+source: docs
 
 # Build settings
 markdown: kramdown
