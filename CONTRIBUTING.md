@@ -60,7 +60,7 @@ bundle install
 
 Generate the docs:
 ```
-jekyll serve
+jekyll serve -s docs
 ```
 If you get a permission error, try `bundle exec jekyll serve -s docs`
 
