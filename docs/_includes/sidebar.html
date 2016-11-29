@@ -1,13 +1,13 @@
 <div class="docs-title heading--1"><a class="site-title" href="{{ site.baseurl }}/">{{ site.title }}</a></div>
 <ul class="docs-nav">
   <li>
-    <a class="docs-nav__link {% if page.url == '/' %}active{% endif %}" href="{{ '/' | prepend: site.baseurl }}">Getting started</a>
+    <a class="docs-nav__link {% if page.url == '/index.html' %}active{% endif %}" href="{{ '/' | prepend: site.baseurl }}">Getting started</a>
   </li>
   <li>
-    <a class="docs-nav__link {% if page.url == '/theme/' %}active{% endif %}" href="{{ '/theme' | prepend: site.baseurl }}">What's included</a>
+    <a class="docs-nav__link {% if page.url == '/theme/index.html' %}active{% endif %}" href="{{ '/theme' | prepend: site.baseurl }}">What's included</a>
   </li>
   <li>
-    <a class="docs-nav__link {% if page.url == '/commands/' %}active{% endif %}" href="{{ '/commands' | prepend: site.baseurl }}">Commands</a>
+    <a class="docs-nav__link {% if page.url == '/commands/index.html' %}active{% endif %}" href="{{ '/commands' | prepend: site.baseurl }}">Commands</a>
     <ul class="docs-sub-nav">
       <li>
         <a href="{{ '/commands/#global-commands' | prepend: site.baseurl }}" class="docs-sub-nav__link">Global commands</a>
@@ -21,7 +21,7 @@
     </ul>
   </li>
   <li>
-    <a class="docs-nav__link {% if page.url == '/theme-scaffold/' %}active{% endif %}" href="{{ '/theme-scaffold' | prepend: site.baseurl }}">Theme scaffold</a>
+    <a class="docs-nav__link {% if page.url == '/theme-scaffold/index.html' %}active{% endif %}" href="{{ '/theme-scaffold' | prepend: site.baseurl }}">Theme scaffold</a>
     <ul class="docs-sub-nav">
       <li>
         <a href="{{ '/theme-scaffold/#templates-and-configuration' | prepend: site.baseurl }}" class="docs-sub-nav__link">Templates and configuration</a>
@@ -41,7 +41,7 @@
     </ul>
   </li>
   <li>
-    <a class="docs-nav__link {% if page.url == '/css-examples/' %}active{% endif %}" href="{{ '/css-examples' | prepend: site.baseurl }}">CSS examples</a>
+    <a class="docs-nav__link {% if page.url == '/css-examples/index.html' %}active{% endif %}" href="{{ '/css-examples' | prepend: site.baseurl }}">CSS examples</a>
     <ul class="docs-sub-nav">
       <li>
         <a href="{{ '/css-examples/#breakpoints' | prepend: site.baseurl }}" class="docs-sub-nav__link">Breakpoints and media queries</a>
@@ -64,7 +64,7 @@
     </ul>
   </li>
   <li>
-    <a class="docs-nav__link {% if page.url == '/js-examples/' %}active{% endif %}" href="{{ '/js-examples' | prepend: site.baseurl }}">JS examples</a>
+    <a class="docs-nav__link {% if page.url == '/js-examples/index.html' %}active{% endif %}" href="{{ '/js-examples' | prepend: site.baseurl }}">JS examples</a>
     <ul class="docs-sub-nav">
       <li>
         <a href="{{ '/js-examples/#trap-focus' | prepend: site.baseurl }}" class="docs-sub-nav__link">Trap focus</a>

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Jekyll docs
-gem 'jekyll'
+gem 'github-pages', group: :jekyll_plugins
 
 # CI tests
 gem 'nokogiri'
