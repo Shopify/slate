@@ -86,6 +86,7 @@ window.theme.moneyFormat: {% raw %}{{ shop.money_format | json }}{% endraw %};
 | `format`        | string          | shop.money_format setting |
 
 In this example, `shop.money_format` is {% raw %}`${{amount}}`{% endraw %} so 1999 cents would be formatted as $19.99.
+
 ```
 var itemPrice = 1999; // cents
 slate.Currency.formatMoney(itemPrice, theme.moneyFormat);
