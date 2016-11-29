@@ -39,13 +39,11 @@ Thumbs.db
 # Custom #
 ######################
 *.sass-cache*
-assets/logo.png
-*.zip
-/node_modules
-/_site
-/dist
+node_modules
+_site
+dist
 /.idea
 deploy.log
-/docs/js
 config.yml
 secrets.json
+.jekyll-metadata

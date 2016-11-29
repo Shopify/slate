@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+# Jekyll docs
+gem 'jekyll'
+
+# CI tests
 gem 'nokogiri'
 gem 'htmlentities'
 
