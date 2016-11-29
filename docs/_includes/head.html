@@ -6,6 +6,8 @@
   <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 
+  <meta name="robots" content="noindex">
+
   <link rel="stylesheet" href="https://cdn.shopify.com/shopify-marketing_assets/builds/13.0.2/marketing_assets_content.css" media="screen" title="no title" charset="utf-8">
   <link rel="stylesheet" href="{{ "/css/prettify.min.css" | prepend: site.baseurl }}">
   <link rel="stylesheet" href="{{ "/css/yuidoc.css" | prepend: site.baseurl }}">
