@@ -9,15 +9,28 @@
   "demo-variables"
 ;
 
+/*
+  GitHub pages does not allow you to import scss files outside of the `docs/`
+  folder (even though it works locally). This means we can't reference Slate's src/ folder with:
+    "../../src/styles/tools/mixins.scss".
+
+  Instead, we can use the live URL.
+  Since the repo is currently private this won't work either (yet).
+    "https://raw.githubusercontent.com/Shopify/slate/master/src/styles/tools/mixins.scss"
+
+  Until that repo is made public, I've added the contents of `/src/styles/`
+  to `/docs/_sass` in the `slate/` folder. We can switch to live URLs after that.
+*/
+
 @import
-  "../../src/styles/tools/mixins.scss",
-  "../../src/styles/global/normalize.scss",
-  "../../src/styles/global/slate-reset.scss",
-  "../../src/styles/global/helper-classes.scss",
-  "../../src/styles/global/layout.scss",
-  "../../src/styles/global/grid.scss",
-  "../../src/styles/global/icons.scss",
-  "../../src/styles/global/rte.scss",
-  "../../src/styles/global/responsive-tables.scss",
-  "../../src/styles/global/blank-states.scss"
+  "slate/tools/mixins.scss",
+  "slate/global/normalize.scss",
+  "slate/global/slate-reset.scss",
+  "slate/global/helper-classes.scss",
+  "slate/global/layout.scss",
+  "slate/global/grid.scss",
+  "slate/global/icons.scss",
+  "slate/global/rte.scss",
+  "slate/global/responsive-tables.scss",
+  "slate/global/blank-states.scss"
 ;
