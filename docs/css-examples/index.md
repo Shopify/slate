@@ -86,7 +86,7 @@ Each column — or `.grid__item` — should be a direct child of a `.grid` conta
 
 <div class="demo-iframe">
   {% include iframe-toggles.html %}
-  <iframe width="100%" height="232" src="{{ site.baseurl }}/css-examples/grid" frameborder="0"></iframe>
+  <iframe width="100%" height="232" src="{{ site.baseurl }}/css-examples/grid/" frameborder="0"></iframe>
 </div>
 
 ```
@@ -154,7 +154,7 @@ $breakpoint-has-push: ($medium-up);
 
 <div class="demo-iframe">
   {% include iframe-toggles.html %}
-  <iframe width="100%" height="58" src="{{ site.baseurl }}/css-examples/grid-push" frameborder="0"></iframe>
+  <iframe width="100%" height="58" src="{{ site.baseurl }}/css-examples/grid-push/" frameborder="0"></iframe>
 </div>
 
 ```
@@ -187,13 +187,13 @@ Style it with CSS. All icons will have an `.icon` class added along with its fil
 ```
 
 <div class="demo-iframe">
-  <iframe width="100%" height="80" src="{{ site.baseurl }}/css-examples/icon-cart" frameborder="0"></iframe>
+  <iframe width="100%" height="80" src="{{ site.baseurl }}/css-examples/icon-cart/" frameborder="0"></iframe>
 </div>
 
 All available icons. Hover over each to get its name.
 
 <div class="demo-iframe">
-  <iframe width="100%" height="540" src="{{ site.baseurl }}/css-examples/icons" frameborder="0"></iframe>
+  <iframe width="100%" height="540" src="{{ site.baseurl }}/css-examples/icons/" frameborder="0"></iframe>
 </div>
 
 It is recommended to set descriptive text that also acts as a fallback for icons. See the [demo for visually hiding text and icon fallback text](#visually-hide).
@@ -217,7 +217,7 @@ For proper accessibility, tabular data should be built as a table. Tables are no
 
 <div class="demo-iframe">
   {% include iframe-toggles.html %}
-  <iframe width="100%" height="66" src="{{ site.baseurl }}/css-examples/responsive-table" frameborder="0"></iframe>
+  <iframe width="100%" height="66" src="{{ site.baseurl }}/css-examples/responsive-table/" frameborder="0"></iframe>
 </div>
 
 ```
@@ -308,7 +308,7 @@ There are 6 product, 6 collection, 2 lifestyle, 1 logo, and 1 generic image avai
 
 <div class="demo-iframe">
   {% include iframe-toggles.html %}
-  <iframe width="100%" height="700" src="{{ site.baseurl }}/css-examples/blank-states" frameborder="0"></iframe>
+  <iframe width="100%" height="700" src="{{ site.baseurl }}/css-examples/blank-states/" frameborder="0"></iframe>
 </div>
 
 ```
@@ -360,7 +360,7 @@ Change the text alignment based on breakpoint. Only breakpoints that have a [wid
 
 <div class="demo-iframe">
   {% include iframe-toggles.html %}
-  <iframe width="100%" height="68" src="{{ site.baseurl }}/css-examples/text-align" frameborder="0"></iframe>
+  <iframe width="100%" height="68" src="{{ site.baseurl }}/css-examples/text-align/" frameborder="0"></iframe>
 </div>
 
 
@@ -376,7 +376,7 @@ Quickly show or hide content based on enabled breakpoints with the class `breakp
 
 <div class="demo-iframe">
   {% include iframe-toggles.html %}
-  <iframe width="100%" height="118" src="{{ site.baseurl }}/css-examples/show-hide" frameborder="0"></iframe>
+  <iframe width="100%" height="118" src="{{ site.baseurl }}/css-examples/show-hide/" frameborder="0"></iframe>
 </div>
 
 ### Visually hide
@@ -394,5 +394,5 @@ Sometimes it is necessary to visually hide content while keeping it accessible i
 ```
 
 <div class="demo-iframe">
-  <iframe width="100%" height="274" src="{{ site.baseurl }}/css-examples/visually-hidden" frameborder="0"></iframe>
+  <iframe width="100%" height="274" src="{{ site.baseurl }}/css-examples/visually-hidden/" frameborder="0"></iframe>
 </div>
