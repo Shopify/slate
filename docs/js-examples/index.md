@@ -45,7 +45,7 @@ $('#CloseModal').on('click', function() {
 
 <div class="demo-iframe">
   {% include iframe-toggles.html %}
-  <iframe width="100%" height="233" src="{{ site.baseurl }}/js-examples/trap-focus/" frameborder="0"></g>
+  <iframe width="100%" height="233" src="{{ site.baseurl }}/js-examples/trap-focus/" frameborder="0"></iframe>
 </div>
 
 ## Responsive tables and videos
