@@ -47,3 +47,4 @@ deploy.log
 config.yml
 secrets.json
 .jekyll-metadata
+.ruby-version
