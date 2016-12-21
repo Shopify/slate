@@ -190,7 +190,7 @@ Style it with CSS. All icons will have an `.icon` class added along with its fil
   <iframe width="100%" height="80" src="{{ site.baseurl }}/css-examples/icon-cart/" frameborder="0"></iframe>
 </div>
 
-All available icons. Hover over each to get its name.
+Below is a list of all available icons and their respective names.
 
 <div class="demo-iframe">
   <iframe width="100%" height="540" src="{{ site.baseurl }}/css-examples/icons/" frameborder="0"></iframe>
@@ -201,13 +201,14 @@ It is recommended to set descriptive text that also acts as a fallback for icons
 ### Update icons manually
 
 If you need to add an icon to a live shop without Slate's build tools, follow these steps:
-1. Create an SVG icon
+
+1. Create an SVG icon.
 2. Change the file from an `.svg` extension to `.liquid` and place it in `snippets/`. Make sure the file name starts with `icon-` for consistency.
 3. Add `aria-hidden="true"`, `focusable="false"`, and role="presentation" to the `svg` element
-5. Add `class="icon"` to the `svg` element
+5. Add `class="icon"` to the `svg` element.
 6. Add a class the same name as the file name to the `svg`. E.g. `icon-cart`
-7. Remove any unneeded elements like `DOCTYPE` and `<?xml>`
-8. Include your new icon with `{% raw %}{% include 'icon-cart' %}{% endraw %}`
+7. Remove any unneeded elements like `DOCTYPE` and `<?xml>`.
+8. Include your new icon with `{% raw %}{% include 'icon-cart' %}{% endraw %}`.
 
 ## Responsive tables
 
