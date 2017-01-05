@@ -11,6 +11,10 @@
       "title": "404 - Page non trouvée",
       "subtext_html": "Cette page n'est pas disponible. <a href=\"/collections/all\">Retourner au magasinage</a>"
     },
+    "pagination": {
+      "previous": "Précédent",
+      "next": "Suivant"
+    },
     "password_page": {
       "opening_soon": "Bientôt ouvert",
       "spread_the_word": "Passez le mot",
