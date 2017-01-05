@@ -1,3 +1,5 @@
+{%- assign page_previous = 'general.pagination.previous' | t -%}
+{%- assign page_next = 'general.pagination.next' | t -%}
 <div class="pagination">
-  {{ paginate | default_pagination: next: 'Next', previous: 'Previous' }}
+  {{ paginate | default_pagination: next: page_next, previous: page_previous }}
 </div>

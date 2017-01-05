@@ -11,6 +11,10 @@
       "title": "404 Página não encontrada",
       "subtext_html": "A página que você solicitou não existe. Clique <a href=\"/collections/all\">aqui</a> para voltar às compras."
     },
+    "pagination": {
+      "previous": "Voltar",
+      "next": "Avançar"
+    },
     "password_page": {
       "opening_soon": "Abertura em Breve",
       "spread_the_word": "Espalhe a novidade",

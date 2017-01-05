@@ -42,6 +42,7 @@ Thumbs.db
 node_modules
 _site
 dist
+upload
 /.idea
 deploy.log
 config.yml
