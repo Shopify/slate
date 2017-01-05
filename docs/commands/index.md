@@ -59,7 +59,7 @@ Compile theme files and assets into a Shopify theme, found in the `dist` folder.
 slate zip
 ```
 
-Performs a fresh build of your theme and zips it into a file that's compatible with Shopify. The zip file can be found within an upload folder that is generated within your theme project root folder. The zip is overwritten each time you use this command and is not meant to be used for versioning.
+Performs a fresh build of your theme and zips it into a file that's compatible with Shopify. The zip file can be found within an `upload` folder that is generated within your theme project root folder. The zip is overwritten each time you use this command and is not meant to be used for versioning.
 
 ## Sync commands
 
@@ -84,13 +84,9 @@ Performs a fresh build followed by a full deploy; replacing existing files on th
 -m, --manual  disable auto-deployment of the theme files
 ```
 
-Running `slate deploy --manual` will instead create a new zip file of your theme (see [slate zip](#zip)) and open the admin themes page as defined by your environment where you can then manually install your theme from the zip file.
+Deploy to a specific environment with the `-e` flag (short for `--env`) plus the environment name: `slate deploy -e staging`.  You can deploy to multiple environments at once with comma-separated values: `slate deploy -e development,staging,production`.
 
-Deploy to a different environment with the `-e` flag (short for `--env`) plus the environment name, or multiple environments at once with comma separated values
-```
-slate deploy -e staging
-slate deploy -e development,staging,production
-```
+Running `slate deploy --manual` will instead create a new zip file of your theme (see [slate zip](#zip)) and open the admin themes page as defined by your environment where you can then manually install your theme from the zip file.
 
 ### watch
 
