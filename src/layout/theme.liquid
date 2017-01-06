@@ -47,7 +47,8 @@
     };
   </script>
 
-  {% if template contains 'customers' %}
+  {%- assign template_base = template | split: '.' | first -%}
+  {% if template_base contains 'customers/' %}
     <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script><!--<![endif]-->
     <!--[if lte IE 9]><script src="{{ 'shopify_common.js' | shopify_asset_url }}"></script><![endif]-->
   {% endif %}
@@ -61,7 +62,7 @@
   {{ content_for_header }}
 </head>
 
-<body id="{{ page_title | handle }}" class="template-{{ template | split: '.' | first | handle }}">
+<body id="{{ page_title | handle }}" class="template-{{ template_base | handle }}">
 
   <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
 
