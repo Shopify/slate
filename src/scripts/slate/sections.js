@@ -11,7 +11,7 @@ slate.Sections = function Sections() {
     .on('shopify:block:deselect', this._onBlockDeselect.bind(this));
 };
 
-slate.Sections.prototype = _.assignIn({}, slate.Sections.prototype, {
+slate.Sections.prototype = $.extend({}, slate.Sections.prototype, {
   _createInstance: function(container, constructor) {
     var $container = $(container);
     var id = $container.attr('data-section-id');
@@ -19,11 +19,11 @@ slate.Sections.prototype = _.assignIn({}, slate.Sections.prototype, {
 
     constructor = constructor || this.constructors[type];
 
-    if (_.isUndefined(constructor)) {
+    if (typeof constructor === 'undefined') {
       return;
     }
 
-    var instance = _.assignIn(new constructor(container), {
+    var instance = $.extend(new constructor(container), {
       id: id,
       type: type,
       container: container
@@ -40,60 +40,54 @@ slate.Sections.prototype = _.assignIn({}, slate.Sections.prototype, {
   },
 
   _onSectionUnload: function(evt) {
-    this.instances = _.filter(this.instances, function(instance) {
-      var isEventInstance = (instance.id === evt.detail.sectionId);
+    var instances = remove(this.instances, function(instance) {
+      return instance.id === event.detail.sectionId;
+    });
 
-      if (isEventInstance) {
-        if (_.isFunction(instance.onUnload)) {
-          instance.onUnload(evt);
-        }
+    instances.forEach(function(instance) {
+      if (typeof instance.onUnload === 'function') {
+        instance.onUnload(event);
       }
-
-      return !isEventInstance;
     });
   },
 
   _onSelect: function(evt) {
-    // eslint-disable-next-line no-shadow
-    var instance = _.find(this.instances, function(instance) {
-      return instance.id === evt.detail.sectionId;
+    var instance = find(this.instances, function(instance) {
+      return instance.id === event.detail.sectionId;
     });
 
-    if (!_.isUndefined(instance) && _.isFunction(instance.onSelect)) {
-      instance.onSelect(evt);
+    if (instance && typeof instance.onSelect === 'function') {
+      instance.onSelect(event);
     }
   },
 
   _onDeselect: function(evt) {
-    // eslint-disable-next-line no-shadow
-    var instance = _.find(this.instances, function(instance) {
-      return instance.id === evt.detail.sectionId;
+    var instance = find(this.instances, function(instance) {
+      return instance.id === event.detail.sectionId;
     });
 
-    if (!_.isUndefined(instance) && _.isFunction(instance.onDeselect)) {
-      instance.onDeselect(evt);
+    if (instance && typeof instance.onDeselect === 'function') {
+      instance.onDeselect(event);
     }
   },
 
   _onBlockSelect: function(evt) {
-    // eslint-disable-next-line no-shadow
-    var instance = _.find(this.instances, function(instance) {
-      return instance.id === evt.detail.sectionId;
+    var instance = find(this.instances, function(instance) {
+      return instance.id === event.detail.sectionId;
     });
 
-    if (!_.isUndefined(instance) && _.isFunction(instance.onBlockSelect)) {
-      instance.onBlockSelect(evt);
+    if (instance && typeof instance.onBlockSelect === 'function') {
+      instance.onBlockSelect(event);
     }
   },
 
   _onBlockDeselect: function(evt) {
-    // eslint-disable-next-line no-shadow
-    var instance = _.find(this.instances, function(instance) {
-      return instance.id === evt.detail.sectionId;
+    var instance = find(this.instances, function(instance) {
+      return instance.id === event.detail.sectionId;
     });
 
-    if (!_.isUndefined(instance) && _.isFunction(instance.onBlockDeselect)) {
-      instance.onBlockDeselect(evt);
+    if (instance && typeof instance.onBlockDeselect === 'function') {
+      instance.onBlockDeselect(event);
     }
   },
 

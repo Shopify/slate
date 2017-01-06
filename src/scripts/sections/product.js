@@ -47,7 +47,7 @@ theme.Product = (function() {
     this.initVariants();
   }
 
-  Product.prototype = _.assignIn({}, Product.prototype, {
+  Product.prototype = $.extend({}, Product.prototype, {
 
     /**
      * Handles change events from the variant inputs
@@ -61,7 +61,6 @@ theme.Product = (function() {
         product: this.productSingleObject
       };
 
-      // eslint-disable-next-line no-new
       this.variants = new slate.Variants(options);
 
       this.$container.on('variantChange' + this.settings.eventNamespace, this.updateAddToCartState.bind(this));

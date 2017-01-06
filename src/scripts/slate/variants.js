@@ -27,7 +27,7 @@ slate.Variants = (function() {
     $(this.singleOptionSelector, this.$container).on('change', this._onSelectChange.bind(this));
   }
 
-  Variants.prototype = _.assignIn({}, Variants.prototype, {
+  Variants.prototype = $.extend({}, Variants.prototype, {
 
     /**
      * Get the currently selected options from add-to-cart form. Works with all
@@ -36,23 +36,30 @@ slate.Variants = (function() {
      * @return {array} options - Values of currently selected variants
      */
     _getCurrentOptions: function() {
-      var currentOptions = _.map($(this.singleOptionSelector, this.$container), function(element) {
+      var currentOptions = $.map($(this.singleOptionSelector, this.$container), function(element) {
         var $element = $(element);
         var type = $element.attr('type');
+        var currentOption = {};
 
         if (type === 'radio' || type === 'checkbox') {
           if ($element[0].checked) {
-            return $element.val();
+            currentOption.value = $element.val();
+            currentOption.index = $element.data('index');
+
+            return currentOption;
           } else {
             return false;
           }
         } else {
-          return $element.val();
+          currentOption.value = $element.val();
+          currentOption.index = $element.data('index');
+
+          return currentOption;
         }
       });
 
       // remove any unchecked input values if using radio buttons or checkboxes
-      currentOptions = _.compact(currentOptions);
+      currentOptions = this._compact(currentOptions);
 
       return currentOptions;
     },
@@ -66,14 +73,24 @@ slate.Variants = (function() {
     _getVariantFromOptions: function() {
       var selectedValues = this._getCurrentOptions();
       var variants = this.product.variants;
+      var found = false;
 
-      var found = _.find(variants, function(variant) {
-        return selectedValues.every(function(value) {
-          return (variant.options.indexOf(value) !== -1);
+      variants.forEach(function(variant) {
+        var satisfied = true;
+        var options = variant.options;
+
+        selectedValues.forEach(function(option) {
+          if (satisfied) {
+            satisfied = (option.value === variant[option.index]);
+          }
         });
+
+        if (satisfied) {
+          found = variant;
+        }
       });
 
-      return found;
+      return found || null;
     },
 
     /**
@@ -160,6 +177,28 @@ slate.Variants = (function() {
      */
     _updateMasterSelect: function(variant) {
       $(this.originalSelectorId, this.$container)[0].value = variant.id;
+    },
+
+    /**
+     * _.compact from lodash
+     * Remove empty/false items from array
+     * Source: https://github.com/lodash/lodash/blob/master/compact.js
+     *
+     * @param {array} array
+     */
+    _compact: function(array) {
+      var index = -1,
+          length = array == null ? 0 : array.length,
+          resIndex = 0,
+          result = [];
+
+      while (++index < length) {
+        var value = array[index];
+        if (value) {
+          result[resIndex++] = value;
+        }
+      }
+      return result;
     }
   });
 

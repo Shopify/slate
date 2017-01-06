@@ -16,7 +16,6 @@ theme.customerAddresses = (function() {
 
   // Initialize observers on address selectors, defined in shopify_common.js
   if (Shopify) {
-    // eslint-disable-next-line no-new
     new Shopify.CountryProvinceSelector('AddressCountryNew', 'AddressProvinceNew', {
       hideElement: 'AddressProvinceContainerNew'
     });
@@ -29,7 +28,6 @@ theme.customerAddresses = (function() {
     var provinceSelector = 'AddressProvince_' + formId;
     var containerSelector = 'AddressProvinceContainer_' + formId;
 
-    // eslint-disable-next-line no-new
     new Shopify.CountryProvinceSelector(countrySelector, provinceSelector, {
       hideElement: containerSelector
     });
@@ -49,7 +47,6 @@ theme.customerAddresses = (function() {
     var $el = $(this);
     var formId = $el.data('form-id');
     var confirmMessage = $el.data('confirm-message');
-    // eslint-disable-next-line no-alert
     if (confirm(confirmMessage || 'Are you sure you wish to delete this address?')) {
       Shopify.postLink('/account/addresses/' + formId, {parameters: {_method: 'delete'}});
     }
