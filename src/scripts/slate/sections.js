@@ -40,9 +40,7 @@ slate.Sections.prototype = $.extend({}, slate.Sections.prototype, {
   },
 
   _onSectionUnload: function(evt) {
-    var instances = remove(this.instances, function(instance) {
-      return instance.id === event.detail.sectionId;
-    });
+    var instances = this._removeInstances(evt.detail.sectionId);
 
     instances.forEach(function(instance) {
       if (typeof instance.onUnload === 'function') {
@@ -52,9 +50,7 @@ slate.Sections.prototype = $.extend({}, slate.Sections.prototype, {
   },
 
   _onSelect: function(evt) {
-    var instance = find(this.instances, function(instance) {
-      return instance.id === event.detail.sectionId;
-    });
+    var instance = this._findInstance(evt.detail.sectionId);
 
     if (instance && typeof instance.onSelect === 'function') {
       instance.onSelect(event);
@@ -62,9 +58,7 @@ slate.Sections.prototype = $.extend({}, slate.Sections.prototype, {
   },
 
   _onDeselect: function(evt) {
-    var instance = find(this.instances, function(instance) {
-      return instance.id === event.detail.sectionId;
-    });
+    var instance = this._findInstance(evt.detail.sectionId);
 
     if (instance && typeof instance.onDeselect === 'function') {
       instance.onDeselect(event);
@@ -72,9 +66,7 @@ slate.Sections.prototype = $.extend({}, slate.Sections.prototype, {
   },
 
   _onBlockSelect: function(evt) {
-    var instance = find(this.instances, function(instance) {
-      return instance.id === event.detail.sectionId;
-    });
+    var instance = this._findInstance(evt.detail.sectionId);
 
     if (instance && typeof instance.onBlockSelect === 'function') {
       instance.onBlockSelect(event);
@@ -82,13 +74,29 @@ slate.Sections.prototype = $.extend({}, slate.Sections.prototype, {
   },
 
   _onBlockDeselect: function(evt) {
-    var instance = find(this.instances, function(instance) {
-      return instance.id === event.detail.sectionId;
-    });
+    var instance = this._findInstance(evt.detail.sectionId);
 
     if (instance && typeof instance.onBlockDeselect === 'function') {
       instance.onBlockDeselect(event);
     }
+  },
+
+  _findInstance: function(id) {
+    for (var i = 0; i < this.instances.length; i++) {
+      if (this.instances[i].id === id) {
+        return this.instances[i];
+      }
+    }
+  },
+
+  _removeInstances: function(id) {
+    for (var i = 0; i < this.instances.length; i++) {
+      if (this.instances[i].id === id) {
+        this.instances.splice(i);
+      }
+    }
+
+    return this.instances;
   },
 
   register: function(type, constructor) {
