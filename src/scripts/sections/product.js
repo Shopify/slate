@@ -30,9 +30,8 @@ theme.Product = (function() {
     this.$container = $(container);
     var sectionId = this.$container.attr('data-section-id');
 
-    this.settings = {
-      eventNamespace: '.product',
-    }
+    this.settings = {};
+    this.namespace = '.product';
 
     // Stop parsing if we don't have the product json script tag when loading
     // section in the Theme Editor
@@ -64,9 +63,9 @@ theme.Product = (function() {
 
       this.variants = new slate.Variants(options);
 
-      this.$container.on('variantChange' + this.settings.eventNamespace, this.updateAddToCartState.bind(this));
-      this.$container.on('variantImageChange' + this.settings.eventNamespace, this.updateProductImage.bind(this));
-      this.$container.on('variantPriceChange' + this.settings.eventNamespace, this.updateProductPrices.bind(this));
+      this.$container.on('variantChange' + this.namespace, this.updateAddToCartState.bind(this));
+      this.$container.on('variantImageChange' + this.namespace, this.updateProductImage.bind(this));
+      this.$container.on('variantPriceChange' + this.namespace, this.updateProductPrices.bind(this));
     },
 
     /**
@@ -133,7 +132,7 @@ theme.Product = (function() {
      * Event callback for Theme Editor `section:unload` event
      */
     onUnload: function() {
-      this.$container.off(this.settings.eventNamespace);
+      this.$container.off(this.namespace);
     }
   });
 

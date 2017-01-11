@@ -187,10 +187,10 @@ slate.Variants = (function() {
      * @param {array} array
      */
     _compact: function(array) {
-      var index = -1,
-          length = array == null ? 0 : array.length,
-          resIndex = 0,
-          result = [];
+      var index = -1;
+      var length = array == null ? 0 : array.length;
+      var resIndex = 0;
+      var result = [];
 
       while (++index < length) {
         var value = array[index];

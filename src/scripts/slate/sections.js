@@ -90,9 +90,10 @@ slate.Sections.prototype = $.extend({}, slate.Sections.prototype, {
   },
 
   _removeInstances: function(id) {
-    for (var i = 0; i < this.instances.length; i++) {
+    var i = this.instances.length;
+    while(i--) {
       if (this.instances[i].id === id) {
-        this.instances.splice(i);
+        this.instances.splice(i, 1);
       }
     }
 
