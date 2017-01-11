@@ -30,17 +30,18 @@ theme.Product = (function() {
     this.$container = $(container);
     var sectionId = this.$container.attr('data-section-id');
 
+    this.settings = {
+      eventNamespace: '.product',
+    }
+
     // Stop parsing if we don't have the product json script tag when loading
     // section in the Theme Editor
     if (!$(selectors.productJson, this.$container).html()) {
       return;
     }
-    this.productSingleObject = JSON.parse($(selectors.productJson, this.$container).html());
 
-    this.settings = {
-      eventNamespace: '.product',
-      imageSize: slate.Image.imageSize($(selectors.productFeaturedImage, this.$container).attr('src'))
-    };
+    this.productSingleObject = JSON.parse($(selectors.productJson, this.$container).html());
+    this.settings.imageSize = slate.Image.imageSize($(selectors.productFeaturedImage, this.$container).attr('src'));
 
     slate.Image.preload(this.productSingleObject.images, this.settings.imageSize);
 
