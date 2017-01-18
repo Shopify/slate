@@ -69,6 +69,10 @@ function deploy(cmd, files, env) {
     activeDeploy = false;
     fs.appendFileSync(config.deployLog, messages.logDeploys(cmd, files)); // eslint-disable-line no-sync
     return checkDeployStatus();
+  }).catch((err) => {
+    activeDeploy = false;
+    messages.logTransferFailed();
+    return checkDeployStatus();
   });
 }
 

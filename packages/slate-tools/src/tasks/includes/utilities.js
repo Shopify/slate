@@ -4,49 +4,6 @@ const _ = require('lodash');
 const Promise = require('bluebird');
 
 /**
- * Maps process exit code to more informative explanations of the exit used by {@link resolveShell}
- * see {@link https://nodejs.org/api/process.html#process_exit_codes} for more info
- *
- * @param {Number} code - child_process exit code
- * @returns {String}
- * @private
- */
-function mapCode(code) {
-  let exitType;
-
-  switch (code) {
-    case 0: exitType = 'All Async Processes Complete';
-      break;
-    case 1: exitType = 'Uncaught Fatal Exception';
-      break;
-    case 2: exitType = 'Shell Error - Missing Keyword/Command/Parameter or Permission Problem';
-      break;
-    case 3: exitType = 'Internal JavaScript Parse Error';
-      break;
-    case 4: exitType = 'Internal JavaScript Evaluation Failure';
-      break;
-    case 5: exitType = 'Fatal Error';
-      break;
-    case 6: exitType = 'Non-Function Internal Exception Handler';
-      break;
-    case 7: exitType = 'Internal Exception Handler Run-Time Failure';
-      break;
-    case 8: exitType = 'Uncaught Exception';
-      break;
-    case 9: exitType = 'Invalid Argument';
-      break;
-    case 10: exitType = 'Internal JavaScript Run-Time Failure';
-      break;
-    case 12: exitType = 'Invalid Debug Argument';
-      break;
-    default: exitType = 'Signal Event or Unknown Error';
-  }
-
-  return exitType;
-}
-
-
-/**
  * Utility and reusable functions used by our Gulp Tasks
  *
  * @summary a set of utility functions used within the gulp tasks of slate-cli
@@ -216,53 +173,6 @@ const utilities = {
       cache.unlink = [];
     }
   }, 320),
-
-  /**
-   * Generic handling of child_process events used to run ThemeKit commands above
-   * returns a promise so we can reliably wait for this task to complete when
-   * used in a gulp task chain.
-   *
-   * @memberof slate-cli.utilities
-   * @param {child_process.spawn()} childProcess
-   * @returns {Promise}
-   */
-  resolveShell: (childProcess) => {
-    // stores errors from stderr events, if any occur
-    let error = '';
-
-    return new Promise((resolve, reject) => {
-      childProcess.stdout.setEncoding('utf8');
-      childProcess.stdout.on('data', (data) => {
-        gutil.log(gutil.colors.white(data));
-      });
-
-      childProcess.stderr.setEncoding('utf8');
-      childProcess.stderr.on('data', (data) => {
-        gutil.log(gutil.colors.red(data));
-        error += data;
-      });
-
-      childProcess.on('error', (err) => {
-        gutil.log(gutil.colors.red('Child process failed', err));
-        reject(err);
-      });
-
-      childProcess.on('close', (code) => {
-        if (error) {
-          gutil.log('Process closed with error:',
-            gutil.colors.red(mapCode(code), '\n'),
-            gutil.colors.white(error),
-          );
-          reject(new Error(error));
-        } else {
-          gutil.log('Process closed:',
-            gutil.colors.green(mapCode(code)),
-          );
-          resolve();
-        }
-      });
-    });
-  },
 };
 
 module.exports = utilities;
