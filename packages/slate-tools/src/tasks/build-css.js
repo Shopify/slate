@@ -21,7 +21,8 @@ function processCss() {
   return gulp.src(config.roots.css)
     .pipe(plumber(utils.errorHandler))
     .pipe(cssimport())
-    .pipe(extReplace('.scss.liquid'))
+    .pipe(extReplace('.css.liquid', '.css'))
+    .pipe(extReplace('.scss.liquid', '.scss'))
     .pipe(gulp.dest(config.dist.assets));
 }
 
