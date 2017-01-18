@@ -51,7 +51,7 @@ const config = {
     js: 'src/scripts/**/*.{js,js.liquid}',
     vendorJs: 'src/scripts/vendor/*.js',
     json: 'src/**/*.json',
-    css: 'src/styles/**/*.{scss,scss.liquid}',
+    css: 'src/styles/**/*.{css,scss,scss.liquid}',
     cssLint: 'src/styles/**/*.scss',
     vendorCss: 'src/styles/vendor/*.scss',
     assets: 'src/assets/**/*',
