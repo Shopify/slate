@@ -15,6 +15,12 @@
 
 development:
   password:
+  theme_id: 
+  store: your-shop.myshopify.com
+  ignore_files:
+
+production:
+  password:
   theme_id: "live"
   store: your-shop.myshopify.com
   ignore_files:
