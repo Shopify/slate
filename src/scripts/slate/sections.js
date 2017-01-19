@@ -44,7 +44,7 @@ slate.Sections.prototype = $.extend({}, slate.Sections.prototype, {
 
     this.instances.forEach(function(instance) {
       if (typeof instance.onUnload === 'function') {
-        instance.onUnload(event);
+        instance.onUnload(evt);
       }
     });
   },
@@ -53,7 +53,7 @@ slate.Sections.prototype = $.extend({}, slate.Sections.prototype, {
     var instance = slate.utils.findInstance(this.instances, 'id', evt.detail.sectionId);
 
     if (instance && typeof instance.onSelect === 'function') {
-      instance.onSelect(event);
+      instance.onSelect(evt);
     }
   },
 
@@ -61,7 +61,7 @@ slate.Sections.prototype = $.extend({}, slate.Sections.prototype, {
     var instance = slate.utils.findInstance(this.instances, 'id', evt.detail.sectionId);
 
     if (instance && typeof instance.onDeselect === 'function') {
-      instance.onDeselect(event);
+      instance.onDeselect(evt);
     }
   },
 
@@ -69,7 +69,7 @@ slate.Sections.prototype = $.extend({}, slate.Sections.prototype, {
     var instance = slate.utils.findInstance(this.instances, 'id', evt.detail.sectionId);
 
     if (instance && typeof instance.onBlockSelect === 'function') {
-      instance.onBlockSelect(event);
+      instance.onBlockSelect(evt);
     }
   },
 
@@ -77,19 +77,8 @@ slate.Sections.prototype = $.extend({}, slate.Sections.prototype, {
     var instance = slate.utils.findInstance(this.instances, 'id', evt.detail.sectionId);
 
     if (instance && typeof instance.onBlockDeselect === 'function') {
-      instance.onBlockDeselect(event);
+      instance.onBlockDeselect(evt);
     }
-  },
-
-  _removeInstances: function(id) {
-    var i = this.instances.length;
-    while(i--) {
-      if (this.instances[i].id === id) {
-        this.instances.splice(i, 1);
-      }
-    }
-
-    return this.instances;
   },
 
   register: function(type, constructor) {
