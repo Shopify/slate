@@ -59,7 +59,7 @@ slate.Variants = (function() {
       });
 
       // remove any unchecked input values if using radio buttons or checkboxes
-      currentOptions = this._compact(currentOptions);
+      currentOptions = slate.utils.compact(currentOptions);
 
       return currentOptions;
     },
@@ -177,28 +177,6 @@ slate.Variants = (function() {
      */
     _updateMasterSelect: function(variant) {
       $(this.originalSelectorId, this.$container)[0].value = variant.id;
-    },
-
-    /**
-     * _.compact from lodash
-     * Remove empty/false items from array
-     * Source: https://github.com/lodash/lodash/blob/master/compact.js
-     *
-     * @param {array} array
-     */
-    _compact: function(array) {
-      var index = -1;
-      var length = array == null ? 0 : array.length;
-      var resIndex = 0;
-      var result = [];
-
-      while (++index < length) {
-        var value = array[index];
-        if (value) {
-          result[resIndex++] = value;
-        }
-      }
-      return result;
     }
   });
 
