@@ -72,7 +72,6 @@ function deploy(cmd, files, env) {
   }).catch((err) => {
     activeDeploy = false;
     messages.logTransferFailed();
-    return checkDeployStatus();
   });
 }
 
