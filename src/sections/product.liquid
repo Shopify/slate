@@ -44,7 +44,7 @@
             <select
               class="single-option-selector"
               id="SingleOptionSelector-{{ forloop.index0 }}"
-              data-name="{{ option.name }}">
+              data-index="option{{ forloop.index }}">
               {% for value in option.values %}
                 <option
                   value="{{ value | escape }}"

@@ -30,24 +30,24 @@ theme.Product = (function() {
     this.$container = $(container);
     var sectionId = this.$container.attr('data-section-id');
 
+    this.settings = {};
+    this.namespace = '.product';
+
     // Stop parsing if we don't have the product json script tag when loading
     // section in the Theme Editor
     if (!$(selectors.productJson, this.$container).html()) {
       return;
     }
-    this.productSingleObject = JSON.parse($(selectors.productJson, this.$container).html());
 
-    this.settings = {
-      eventNamespace: '.product',
-      imageSize: slate.Image.imageSize($(selectors.productFeaturedImage, this.$container).attr('src'))
-    };
+    this.productSingleObject = JSON.parse($(selectors.productJson, this.$container).html());
+    this.settings.imageSize = slate.Image.imageSize($(selectors.productFeaturedImage, this.$container).attr('src'));
 
     slate.Image.preload(this.productSingleObject.images, this.settings.imageSize);
 
     this.initVariants();
   }
 
-  Product.prototype = _.assignIn({}, Product.prototype, {
+  Product.prototype = $.extend({}, Product.prototype, {
 
     /**
      * Handles change events from the variant inputs
@@ -61,12 +61,11 @@ theme.Product = (function() {
         product: this.productSingleObject
       };
 
-      // eslint-disable-next-line no-new
       this.variants = new slate.Variants(options);
 
-      this.$container.on('variantChange' + this.settings.eventNamespace, this.updateAddToCartState.bind(this));
-      this.$container.on('variantImageChange' + this.settings.eventNamespace, this.updateProductImage.bind(this));
-      this.$container.on('variantPriceChange' + this.settings.eventNamespace, this.updateProductPrices.bind(this));
+      this.$container.on('variantChange' + this.namespace, this.updateAddToCartState.bind(this));
+      this.$container.on('variantImageChange' + this.namespace, this.updateProductImage.bind(this));
+      this.$container.on('variantPriceChange' + this.namespace, this.updateProductPrices.bind(this));
     },
 
     /**
@@ -133,7 +132,7 @@ theme.Product = (function() {
      * Event callback for Theme Editor `section:unload` event
      */
     onUnload: function() {
-      this.$container.off(this.settings.eventNamespace);
+      this.$container.off(this.namespace);
     }
   });
 

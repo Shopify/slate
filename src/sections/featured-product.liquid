@@ -49,7 +49,10 @@
                 {{ option.name }}
             </label>
 
-            <select class="single-option-selector" id="SingleOptionSelector-{{ section.id }}-{{ forloop.index0 }}">
+            <select
+              class="single-option-selector"
+              id="SingleOptionSelector-{{ section.id }}-{{ forloop.index0 }}"
+              data-index="option{{ forloop.index }}">
               {% for value in option.values %}
                 <option
                   value="{{ value | escape }}"

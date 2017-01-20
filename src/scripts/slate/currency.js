@@ -9,7 +9,6 @@
  */
 
 slate.Currency = (function() {
-  // eslint-disable-next-line camelcase no-template-curly-in-string
   var moneyFormat = '${{amount}}';
 
   /**
