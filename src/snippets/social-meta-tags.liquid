@@ -1,4 +1,3 @@
-{%- assign template_base = template | split: '.' | first -%}
 {%- assign og_title = page_title -%}
 {%- assign og_url = canonical_url -%}
 {%- assign og_type = 'website' -%}
@@ -7,7 +6,7 @@
 {% comment %}
   Template specific overides
 {% endcomment %}
-{%- if template_base == 'product' -%}
+{%- if template.name == 'product' -%}
   {%- assign og_title = product.title | strip_html -%}
   {%- assign og_type = 'product' -%}
   {%- capture og_image_tags -%}
@@ -21,7 +20,7 @@
     {%- endfor -%}
   {%- endcapture -%}
 
-{%- elsif template_base == 'article' -%}
+{%- elsif template.name == 'article' -%}
   {%- assign og_title = article.title | strip_html -%}
   {%- assign og_type = 'article' -%}
   {%- assign og_description = article.excerpt_or_content | strip_html -%}
@@ -30,7 +29,7 @@
     {%- capture og_image_secure_url_tags -%}<meta property="og:image:secure_url" content="https:{{ article.image | img_url: '1024x1024' }}">{%- endcapture -%}
   {%- endif -%}
 
-{%- elsif template_base == 'password' -%}
+{%- elsif template.name == 'password' -%}
   {%- assign og_title = shop.name -%}
   {%- assign og_url = shop.url -%}
   {%- assign og_description = shop.description | default: shop.name -%}
@@ -41,7 +40,7 @@
 <meta property="og:title" content="{{ og_title }}">
 <meta property="og:type" content="{{ og_type }}">
 <meta property="og:description" content="{{ og_description }}">
-{%- if template_base == 'product' -%}
+{%- if template.name == 'product' -%}
   <meta property="og:price:amount" content="{{ product.price | money_without_currency | strip_html }}">
   <meta property="og:price:currency" content="{{ shop.currency }}">
 {%- endif -%}
