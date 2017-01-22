@@ -86,7 +86,6 @@ const messages = {
       gutil.colors.green('Deploy completed for all environments in series'),
     );
   },
-
 };
 
 module.exports = messages;
