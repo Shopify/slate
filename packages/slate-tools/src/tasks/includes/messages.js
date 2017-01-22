@@ -34,9 +34,9 @@ const messages = {
     );
   },
 
-  logTransferFailed: () => {
+  logTransferFailed: (errMsg) => {
     gutil.log('Transfer Failed:',
-      gutil.colors.red('File failed to upload to store'),
+      gutil.colors.yellow(`${typeof errMsg === 'string' ? errMsg : 'A file failed to upload to store. See log notes above.'}`),
     );
   },
 
