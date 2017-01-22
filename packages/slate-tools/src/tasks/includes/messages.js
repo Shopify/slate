@@ -33,7 +33,7 @@ const messages = {
       gutil.colors.green('File changes successfully synced to store'),
     );
   },
-  
+
   logTransferFailed: () => {
     gutil.log('Transfer Failed:',
       gutil.colors.red('File failed to upload to store'),
@@ -86,7 +86,7 @@ const messages = {
       gutil.colors.green('Deploy completed for all environments in series'),
     );
   },
-  
+
 };
 
 module.exports = messages;
