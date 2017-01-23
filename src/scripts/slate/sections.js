@@ -40,13 +40,17 @@ slate.Sections.prototype = $.extend({}, slate.Sections.prototype, {
   },
 
   _onSectionUnload: function(evt) {
-    this.instances = slate.utils.removeInstance(this.instances, 'id', evt.detail.sectionId);
+    var instance = slate.utils.findInstance(this.instances, 'id', evt.detail.sectionId);
 
-    this.instances.forEach(function(instance) {
-      if (typeof instance.onUnload === 'function') {
-        instance.onUnload(evt);
-      }
-    });
+    if (!instance) {
+      return;
+    }
+
+    if (typeof instance.onUnload === 'function') {
+      instance.onUnload(evt);
+    }
+
+    this.instances = slate.utils.removeInstance(this.instances, 'id', evt.detail.sectionId);
   },
 
   _onSelect: function(evt) {
