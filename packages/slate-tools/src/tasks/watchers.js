@@ -20,14 +20,16 @@ let activeDeploy = false;
  *
  * @private
  */
-function checkDeployStatus() {
+function checkDeployStatus({ initDeploy=true } = {}) {
   if (activeDeploy) {
     return;
   }
 
   const environment = config.environment.split(/\s*,\s*|\s+/)[0];
 
-  messages.deployTo(environment);
+  if (initDeploy) {
+    messages.deployTo(environment);    
+  }
 
   if (cache.change.length) {
     deploy('upload', cache.change, environment);
@@ -68,10 +70,11 @@ function deploy(cmd, files, env) {
   }).then(() => {
     activeDeploy = false;
     fs.appendFileSync(config.deployLog, messages.logDeploys(cmd, files)); // eslint-disable-line no-sync
-    return checkDeployStatus();
-  }).catch(() => {
+    return checkDeployStatus({initDeploy : false});
+  }).catch((err) => {
     activeDeploy = false;
-    messages.logTransferFailed();
+    messages.logTransferFailed(err);
+    return checkDeployStatus({initDeploy : false});
   });
 }
 

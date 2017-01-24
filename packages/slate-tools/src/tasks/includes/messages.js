@@ -36,7 +36,7 @@ const messages = {
 
   logTransferFailed: (errMsg) => {
     gutil.log('Transfer Failed:',
-      gutil.colors.yellow(`${typeof errMsg === 'string' ? errMsg : 'A file failed to upload to store. See log notes above.'}`),
+      gutil.colors.yellow(`${ typeof errMsg === 'string' ? errMsg : 'File(s) failed to upload to store. See log notes above.'}`),
     );
   },
 
@@ -86,6 +86,7 @@ const messages = {
       gutil.colors.green('Deploy completed for all environments in series'),
     );
   },
+
 };
 
 module.exports = messages;
