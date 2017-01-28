@@ -20,16 +20,12 @@ let activeDeploy = false;
  *
  * @private
  */
-function checkDeployStatus({ initDeploy=true } = {}) {
+function checkDeployStatus() {
   if (activeDeploy) {
     return;
   }
 
   const environment = config.environment.split(/\s*,\s*|\s+/)[0];
-
-  if (initDeploy) {
-    messages.deployTo(environment);    
-  }
 
   if (cache.change.length) {
     deploy('upload', cache.change, environment);
@@ -70,11 +66,11 @@ function deploy(cmd, files, env) {
   }).then(() => {
     activeDeploy = false;
     fs.appendFileSync(config.deployLog, messages.logDeploys(cmd, files)); // eslint-disable-line no-sync
-    return checkDeployStatus({initDeploy : false});
+    return checkDeployStatus();
   }).catch((err) => {
     activeDeploy = false;
     messages.logTransferFailed(err);
-    return checkDeployStatus({initDeploy : false});
+    return checkDeployStatus();
   });
 }
 
@@ -112,10 +108,13 @@ gulp.task('watch:dist', () => {
     cwd: config.dist.root,
     ignoreInitial: true,
   });
+  
+  const environment = config.environment.split(/\s*,\s*|\s+/)[0];
 
   watcher.on('all', (event, path) => {
     messages.logFileEvent(event, path);
     cache.addEvent(event, path);
+    messages.deployTo(environment); 
     debouncedDeployStatus();
   });
 });
