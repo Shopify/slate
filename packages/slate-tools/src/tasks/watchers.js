@@ -10,6 +10,7 @@ const utils = require('./includes/utilities.js');
 const messages = require('./includes/messages.js');
 
 const cache = utils.createEventCache();
+const environment = config.environment.split(/\s*,\s*|\s+/)[0];
 // prevent early execution on multi-file events
 const debouncedDeployStatus = _.debounce(checkDeployStatus, 320);
 
@@ -24,8 +25,6 @@ function checkDeployStatus() {
   if (activeDeploy) {
     return;
   }
-
-  const environment = config.environment.split(/\s*,\s*|\s+/)[0];
 
   if (cache.change.length) {
     deploy('upload', cache.change, environment);
@@ -108,8 +107,6 @@ gulp.task('watch:dist', () => {
     cwd: config.dist.root,
     ignoreInitial: true,
   });
-  
-  const environment = config.environment.split(/\s*,\s*|\s+/)[0];
 
   watcher.on('all', (event, path) => {
     messages.logFileEvent(event, path);
