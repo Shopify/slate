@@ -111,7 +111,7 @@ gulp.task('watch:dist', () => {
   watcher.on('all', (event, path) => {
     messages.logFileEvent(event, path);
     cache.addEvent(event, path);
-    messages.deployTo(environment); 
+    messages.deployTo(environment);
     debouncedDeployStatus();
   });
 });
