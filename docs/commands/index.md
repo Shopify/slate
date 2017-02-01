@@ -9,6 +9,7 @@ layout: default
 | Command | Usage |
 | :------ | :---- |
 | [theme](#theme) | `slate theme [name]` |
+| [migrate](#migrate) | `slate migrate` |
 | [help](#help) | `slate -h` |
 | [version](#version) | `slate -v` |
 
@@ -19,6 +20,15 @@ slate theme [name]
 ```
 
 Generate a new blank theme. The `name` argument is required for the new theme directory.
+
+### migrate
+```
+slate migrate
+```
+
+Converts an existing theme to work with Slate. Run this command from your project root to install dependencies and restructure your theme files into a `src/` directory. Empty `icons/`, `styles/`, and `scripts/` folders will also be created.
+
+Create `config.yml` in your root using [this sample file](https://github.com/Shopify/slate/blob/master/config-sample.yml), then use [theme commands](#theme-commands) to start developing.
 
 ### help
 
