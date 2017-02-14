@@ -20,6 +20,7 @@
     "figures": "2.0.0",
     "find-root": "1.0.0",
     "inquirer": "1.2.3",
+    "mv": "2.1.1",
     "rimraf": "2.5.4",
     "unzip2": "0.2.5",
     "update-notifier": "1.0.2"

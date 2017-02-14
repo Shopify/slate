@@ -1,7 +1,9 @@
-import {createReadStream, createWriteStream, unlinkSync, writeFileSync} from 'fs';
+import {createReadStream, createWriteStream, unlinkSync, writeFileSync, existsSync} from 'fs';
+import {join, normalize} from 'path';
 import {Extract} from 'unzip2';
 import {get} from 'https';
 import spawn from 'cross-spawn';
+import mv from 'mv';
 
 /**
  * Download file from url and write to target.
@@ -118,4 +120,43 @@ export function hasDependency(dependencyName, pkg) {
   }
 
   return hasDependencies;
+}
+
+/**
+ * Moves file from one location to another
+ *
+ * @param {string} oldPath - The path to the file.
+ * @param {string} newPath - The path to the new file.
+ */
+export function move(oldPath, newPath) {
+  return new Promise((resolve, reject) => {
+    mv(oldPath, newPath, (err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+
+      resolve();
+    });
+  });
+}
+
+/**
+ * Tests if directory is a Shopify theme
+ *
+ * @param {string} directory - The path to the directory.
+ */
+export function isShopifyTheme(directory) {
+  const layoutTheme = join(directory, normalize('layout/theme.liquid'));
+  return existsSync(layoutTheme);
+}
+
+/**
+ * Tests if directory belongs to Shopify themes
+ *
+ * @param {string} directory - The path to the directory.
+ */
+export function isShopifyThemeWhitelistedDir(directory) {
+  const whitelist = ['assets', 'layout', 'config', 'locales', 'sections', 'snippets', 'templates'];
+  return whitelist.indexOf(directory) > -1;
 }
