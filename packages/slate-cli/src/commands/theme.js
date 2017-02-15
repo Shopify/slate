@@ -4,6 +4,7 @@ import {join} from 'path';
 import {prompt} from 'inquirer';
 import rimraf from 'rimraf';
 import {green, red} from 'chalk';
+import figures from 'figures';
 import {downloadFromUrl, unzip, startProcess, writePackageJsonSync} from '../utils';
 
 export default function(program) {
@@ -40,7 +41,7 @@ export default function(program) {
 
       if (existsSync(root)) {
         console.log('');
-        console.error(red(`  ${root} is not an empty directory`));
+        console.error(red(`  ${figures.cross} ${root} is not an empty directory`));
         console.log('');
         return null;
       }
@@ -56,7 +57,7 @@ export default function(program) {
           return unzip(themeZipFile, root);
         })
         .then(() => {
-          console.log(`  ${green('✓')} slate-theme download completed`);
+          console.log(`  ${green(figures.tick)} slate-theme download completed`);
 
           const pkg = join(root, 'package.json');
 
@@ -67,8 +68,8 @@ export default function(program) {
           });
         })
         .then(() => {
-          console.log(`  ${green('✓')} devDependencies installed`);
-          console.log(`  ${green('✓')} ${dirName} theme is ready`);
+          console.log(`  ${green(figures.tick)} devDependencies installed`);
+          console.log(`  ${green(figures.tick)} ${dirName} theme is ready`);
           console.log('');
 
           return null;
