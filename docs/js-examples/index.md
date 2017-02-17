@@ -174,3 +174,60 @@ Slate separates product variant options into multiple `<select>` elements. Each 
 Each function has access to the newly selected variant in `evt.variant`. Customize this section as necessary to your theme.
 
 When a variant changes, `variant.js` updated the *master select*. The master select is the default `<select>` element that contains all variant IDs needed to properly submit the form.
+
+## Section events
+
+Slate comes with a `section.js` file to help Sections communicate with Shopify's [Theme editor JavaScript API](https://help.shopify.com/themes/development/theme-editor/sections#theme-editor-javascript-api).
+
+| Methods      | Description |
+| :-------------- | :-------------- |
+| `onUnload`        | A section has been deleted or is being re-rendered. |
+| `onSelect`        | User has selected the section in the sidebar. |
+| `onDeselect`          | User has deselected the section in the sidebar. |
+| `onBlockSelect`        | User has selected the block in the sidebar. |
+| `onBlockDeselect`        | User has deselected the block in the sidebar. |
+
+As an example, `product.js` uses the `onUnload` method to remove all namespaced events when the section is deleted or re-rendered.
+
+```
+Product.prototype = $.extend({}, Product.prototype, {
+  onUnload: function() {
+    this.$container.off(this.settings.eventNamespace);
+  }
+});
+```
+
+### Register sections
+
+Slate provides a `register` method to properly scope the various Sections used in a theme.
+
+```
+sections.register(type, constructor);
+```
+
+| Parameters      | Type            | Description    |
+| :-------------- | :-------------- | :------------- |
+| `type`         | string          | Unique section type defined by theme developer |
+| `constructor`        | function          | Section constructor run in Theme editor and on storefront |
+
+Slate follows a convention of wrapping the content of a Section file in an element with a `data-section-type` attribute.  The `type` is taken from this attribute's value.
+
+{% raw %}
+```
+// From sections/product.liquid
+<div data-section-id="{{ section.id }}" data-section-type="product">
+  ...
+</div>
+```
+{% endraw %}
+
+In the `theme.js` file, you must import the Section specific JavaScript with the `// =require` helper, [more information here](https://www.npmjs.com/package/gulp-include), as it will contain your `constructor`. 
+
+```
+// =require sections/product.js
+
+$(document).ready(function() {
+  var sections = new slate.Sections();
+  sections.register('product', theme.Product);
+});
+```
