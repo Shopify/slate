@@ -168,7 +168,7 @@ The Slate theme has two script files to manage the display of product variants:
 | Script      | Location            | Description   |
 | :-------------- | :-------------- | :------------ |
 | [variant.js](#variantjs)    | `scripts/slate`       | Handles variant change events in any forms that add to cart    |
-| [product.js](#productjs)    | `scripts/sections`    | Behaviour that is coupled to the code of the Product template    |
+| [product.js](#productjs)    | `scripts/sections`    | Behaviour coupled to the theme code of product-based sections     |
 
 ### variant.js
 
@@ -176,7 +176,7 @@ Slate separates product variant options into multiple `<select>` elements.  When
 
 Slate's `variant.js` also triggers a number of custom events to handle various state changes:
 
-| Event      | Trigger condition |
+| Events      | Trigger condition |
 | :-------------- | :-------------- |
 | `variantChange`        | When a variant option's `<select>` element is changed. |
 | `variantImageChange`          | When the selected variant has a featured image which is not currently displayed. |
@@ -188,8 +188,8 @@ The theme-specific script of `product.js` has a number of methods that listen fo
 
 | Methods      | Description |
 | :-------------- | :-------------- |
-| `updateAddToCartState`        | Update the add to cart button text and enabled/disabled/sold out state |
-| `updateProductImage`          | Replace the main product image `src` with the associated variant image if it exists |
-| `updateProductPrices`         | Updates the product regular and sale price when necessary |
+| `updateAddToCartState()`        | Update the add to cart button text and enabled/disabled/sold out state |
+| `updateProductImage()`          | Replace the main product image `src` with the associated variant image if it exists |
+| `updateProductPrices()`         | Updates the product regular and sale price when necessary |
 
 
