@@ -12,7 +12,7 @@
   <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
 
   {% if product.featured_image.src != blank %}
-    {{ product.featured_image.src | img_url: '480x480' | img_tag: product.featured_image.src.alt, 'product-image' }}
+    <img src="{{ product.featured_image.src | img_url: '480x480' }}" alt="{{ featured_image.alt | escape }}" data-product-featured-image>
   {% else %}
     {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
   {% endif %}
@@ -98,7 +98,7 @@
         name="add"
         {% unless product.available %}disabled="disabled"{% endunless %}
         {% if section_onboarding %}disabled="disabled"{% endif %}>
-          <span data-add-to-cart>
+          <span data-add-to-cart-text>
             {% if product.available %}
               {{ 'products.product.add_to_cart' | t }}
             {% else %}
