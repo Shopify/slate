@@ -190,6 +190,6 @@ The theme-specific script of `product.js` has a number of methods that listen fo
 | :-------------- | :-------------- |
 | `updateAddToCartState()`        | Update the add to cart button text and enabled/disabled/sold out state |
 | `updateProductImage()`          | Replace the main product image `src` with the associated variant image if it exists |
-| `updateProductPrices()`         | Updates the product regular and sale price when necessary |
+| `updateProductPrices()`         | Updates the product price and compare_at_price when necessary |
 
 
