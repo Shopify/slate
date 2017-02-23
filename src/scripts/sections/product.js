@@ -9,16 +9,16 @@
 theme.Product = (function() {
 
   var selectors = {
-    addToCart: '.add-to-cart',
-    addToCartText: '.add-to-cart-text',
-    comparePrice: '.compare-price',
-    originalSelectorId: '.product-select',
-    priceWrapper: '.price-wrapper',
-    productFeaturedImage: '.product-image',
-    productJson: '.product-json',
-    productPrice: '.product-price',
-    productThumbs: '.product-single-thumbnail',
-    singleOptionSelector: '.single-option-selector'
+    addToCart: '[data-add-to-cart]',
+    addToCartText: '[data-add-to-cart-text]',
+    comparePrice: '[data-compare-price]',
+    originalSelectorId: '[data-product-select]',
+    priceWrapper: '[data-price-wrapper]',
+    productFeaturedImage: '[data-product-featured-image]',
+    productJson: '[data-product-json]',
+    productPrice: '[data-product-price]',
+    productThumbs: '[data-product-single-thumbnail]',
+    singleOptionSelector: '[data-single-option-selector]'
   };
 
   /**

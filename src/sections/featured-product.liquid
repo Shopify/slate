@@ -21,7 +21,7 @@
     <ul>
       {% for image in product.images %}
         <li>
-          <a href="{{ image.src | img_url: '480x480' }}" class="product-single-thumbnail">
+          <a href="{{ image.src | img_url: '480x480' }}" data-product-single-thumbnail>
             <img src="{{ image.src | img_url: '160x160' }}" alt="{{ image.alt | escape }}">
           </a>
         </li>
@@ -50,7 +50,7 @@
             </label>
 
             <select
-              class="single-option-selector"
+              data-single-option-selector
               id="SingleOptionSelector-{{ section.id }}-{{ forloop.index0 }}"
               data-index="option{{ forloop.index }}">
               {% for value in option.values %}
@@ -65,7 +65,7 @@
         {% endfor %}
       {% endunless %}
 
-      <select class="no-js product-select" name="id">
+      <select data-product-select class="no-js" name="id">
         {% for variant in product.variants %}
           <option
             {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
@@ -79,26 +79,26 @@
       <label for="Quantity-{{ section.id }}">{{ 'products.product.quantity' | t }}</label>
       <input type="number" id="Quantity-{{ section.id }}" name="quantity" value="1" min="1">
 
-      <div class="price-wrapper">
-        <span class="product-price">
+      <div data-price-wrapper>
+        <span data-product-price>
           {{ product.price | default: '1999' | money }}
         </span>
 
         {% if product.compare_at_price_max > product.price %}
           <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-          <s class="compare-price">
+          <s data-compare-price>
             {{ product.compare_at_price | money }}
           </s>
         {% endif %}
       </div>
 
       <button
+        data-add-to-cart
         type="submit"
         name="add"
-        class="add-to-cart"
         {% unless product.available %}disabled="disabled"{% endunless %}
         {% if section_onboarding %}disabled="disabled"{% endif %}>
-          <span class="add-to-cart-text">
+          <span data-add-to-cart>
             {% if product.available %}
               {{ 'products.product.add_to_cart' | t }}
             {% else %}
@@ -119,7 +119,7 @@
   {% endif %}
 
   {% unless product.empty? %}
-    <script type="application/json" class="product-json">
+    <script type="application/json" data-product-json>
       {{ product | json }}
     </script>
   {% endunless %}
