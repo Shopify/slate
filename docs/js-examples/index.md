@@ -192,21 +192,17 @@ The theme-specific script of `product.js` has a number of methods that listen fo
 | `updateProductImage()`          | Replace the main product image `src` with the associated variant image if it exists |
 | `updateProductPrices()`         | Updates the product price and compare_at_price when necessary |
 
-
-<<<<<<< HEAD
-When a variant changes, `variant.js` updated the *master select*. The master select is the default `<select>` element that contains all variant IDs needed to properly submit the form.
-
 ## Section events
 
 Slate comes with a `section.js` file to help Sections communicate with Shopify's [Theme editor JavaScript API](https://help.shopify.com/themes/development/theme-editor/sections#theme-editor-javascript-api).
 
 | Methods      | Description |
 | :-------------- | :-------------- |
-| `onUnload`        | A section has been deleted or is being re-rendered. |
-| `onSelect`        | User has selected the section in the sidebar. |
-| `onDeselect`          | User has deselected the section in the sidebar. |
-| `onBlockSelect`        | User has selected the block in the sidebar. |
-| `onBlockDeselect`        | User has deselected the block in the sidebar. |
+| `onUnload()`        | A section has been deleted or is being re-rendered. |
+| `onSelect()`        | User has selected the section in the editor's sidebar. |
+| `onDeselect()`          | User has deselected the section in the editor's sidebar. |
+| `onBlockSelect()`        | User has selected the block in the editor's sidebar. |
+| `onBlockDeselect()`        | User has deselected the block in the editor's sidebar. |
 
 As an example, `product.js` uses the `onUnload` method to remove all namespaced events when the section is deleted or re-rendered.
 
@@ -252,5 +248,4 @@ $(document).ready(function() {
   sections.register('product', theme.Product);
 });
 ```
-=======
->>>>>>> master
+
