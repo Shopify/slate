@@ -79,6 +79,7 @@
       "update": "Atualizar Carrinho",
       "checkout": "Fechar pedido",
       "empty": "Seu carrinho está vazio no momento.",
+      "cookies_required": "Habilite os cookies para usar o carrinho de compras",
       "continue_browsing_html": "Continue navegando <a href=\"/collections/all\">aqui</a>.",
       "item_quantity": "Quantidade de itens",
       "savings": "Você está economizando"

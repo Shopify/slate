@@ -79,6 +79,7 @@
       "update": "Einkaufswagen aktualisieren",
       "checkout": "Zur Kasse",
       "empty": "Ihr Einkaufswagen ist im Moment leer.",
+      "cookies_required": "Aktivieren Sie Cookies, um den Einkaufswagen benutzen zu können",
       "continue_browsing_html": "Mit der Suche <a href=\"/collections/all\">hier</a> fortfahren.",
       "item_quantity": "Produktmenge",
       "savings": "Sie sparen"

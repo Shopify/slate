@@ -1,0 +1,20 @@
+/*================ Cart Template ================*/
+.cart__empty {
+  display: none;
+
+  .cart--empty & {
+    display: block;
+  }
+
+  .cart--no-cookies & {
+    display: none;
+  }
+}
+
+.cart__no-cookies {
+  display: none;
+
+  .cart--no-cookies & {
+    display: block;
+  }
+}
