@@ -12,7 +12,7 @@
   <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
 
   {% if product.featured_image.src != blank %}
-    {{ product.featured_image.src | img_url: '480x480' | img_tag: product.featured_image.src.alt, 'product-image' }}
+    <img src="{{ product.featured_image.src | img_url: '480x480' }}" alt="{{ featured_image.alt | escape }}" data-product-featured-image>
   {% else %}
     {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
   {% endif %}
@@ -21,7 +21,7 @@
     <ul>
       {% for image in product.images %}
         <li>
-          <a href="{{ image.src | img_url: '480x480' }}" class="product-single-thumbnail">
+          <a href="{{ image.src | img_url: '480x480' }}" data-product-single-thumbnail>
             <img src="{{ image.src | img_url: '160x160' }}" alt="{{ image.alt | escape }}">
           </a>
         </li>
@@ -50,8 +50,8 @@
             </label>
 
             <select
-              class="single-option-selector"
               id="SingleOptionSelector-{{ section.id }}-{{ forloop.index0 }}"
+              data-single-option-selector
               data-index="option{{ forloop.index }}">
               {% for value in option.values %}
                 <option
@@ -65,7 +65,7 @@
         {% endfor %}
       {% endunless %}
 
-      <select class="no-js product-select" name="id">
+      <select name="id" class="no-js" data-product-select>
         {% for variant in product.variants %}
           <option
             {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
@@ -79,14 +79,14 @@
       <label for="Quantity-{{ section.id }}">{{ 'products.product.quantity' | t }}</label>
       <input type="number" id="Quantity-{{ section.id }}" name="quantity" value="1" min="1">
 
-      <div class="price-wrapper">
-        <span class="product-price">
+      <div data-price-wrapper>
+        <span data-product-price>
           {{ product.price | default: '1999' | money }}
         </span>
 
         {% if product.compare_at_price_max > product.price %}
           <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-          <s class="compare-price">
+          <s data-compare-price>
             {{ product.compare_at_price | money }}
           </s>
         {% endif %}
@@ -95,10 +95,10 @@
       <button
         type="submit"
         name="add"
-        class="add-to-cart"
+        data-add-to-cart
         {% unless product.available %}disabled="disabled"{% endunless %}
         {% if section_onboarding %}disabled="disabled"{% endif %}>
-          <span class="add-to-cart-text">
+          <span data-add-to-cart-text>
             {% if product.available %}
               {{ 'products.product.add_to_cart' | t }}
             {% else %}
@@ -119,7 +119,7 @@
   {% endif %}
 
   {% unless product.empty? %}
-    <script type="application/json" class="product-json">
+    <script type="application/json" data-product-json>
       {{ product | json }}
     </script>
   {% endunless %}
