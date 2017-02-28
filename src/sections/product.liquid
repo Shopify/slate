@@ -42,8 +42,8 @@
             </label>
 
             <select
-              data-single-option-selector
               id="SingleOptionSelector-{{ forloop.index0 }}"
+              data-single-option-selector
               data-index="option{{ forloop.index }}">
               {% for value in option.values %}
                 <option
@@ -57,7 +57,7 @@
         {% endfor %}
       {% endunless %}
 
-      <select data-product-select class="no-js" name="id">
+      <select name="id" class="no-js" data-product-select>
         {% for variant in product.variants %}
           <option
             {% if variant == current_variant %}selected="selected"{% endif %}
@@ -85,9 +85,9 @@
       </div>
 
       <button
-        data-add-to-cart
         type="submit"
         name="add"
+        data-add-to-cart
         {% unless current_variant.available %}disabled="disabled"{% endunless %}>
           <span data-add-to-cart-text>
             {% if current_variant.available %}
