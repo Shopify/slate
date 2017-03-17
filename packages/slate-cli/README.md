@@ -7,11 +7,10 @@ and speed up the process of developing, testing and deploying themes to Shopify 
 ### Table of Contents
 - [Installation](#installation)
 - [Getting Started](#getting-started)
-- [Updating Slate](#updating)
+- [Updating Slate](#updating-slate)
 - [Global Commands](#global-commands)
 - [Theme Commands](#theme-commands)
-- [Troubleshooting](#troubleshooting)
-- [Licence](#license)
+- [License](#license)
 
 ## Installation
 
