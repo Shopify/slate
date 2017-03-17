@@ -4,7 +4,7 @@ just correct a typo, please feel free to do so, as long as you follow
 our [Code of Conduct](https://github.com/Shopify/slate/blob/master/CODE_OF_CONDUCT.md).
 
 The Slate theme scaffolding is [intentionally barebones](https://shopify.github.io/slate/theme/#intentionally-blank)
-to provide an unopinionated starting part.  If you're thinking of adding a big 
+to provide an unopinionated starting point.  If you're thinking of adding a  
 new feature, consider opening an issue first to discuss it to ensure it aligns to
 the direction of the project (and potentially save yourself some time!).
 
