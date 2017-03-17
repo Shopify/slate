@@ -18,5 +18,7 @@ dependencies:
     - .bundle/
 
 test:
+  pre:
+    - slate build
   override:
-    - bundle exec rspec spec
+    - npm run lint
