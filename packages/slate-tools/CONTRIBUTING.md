@@ -26,9 +26,6 @@ Add some tests and make your change. Re-run the tests with:
 npm run test
 ```
 
-## Examples
-See [here](https://github.com/Shopify/slate-tools/blob/master/examples) for our examples.
-
 ## Documentation
 If your change affects how people use the project (i.e. adding or
 changing arguments to a function, adding a new function, changing the
