@@ -191,6 +191,6 @@ The zip is overwritten each time you use this command and is not meant to be use
 
 ## License
 
-MIT, see [LICENSE.md](http://github.com/Shopify/slate-tools/blob/master/LICENSE.md) for details.
+MIT, see [LICENSE.md](http://github.com/Shopify/slate-cli/blob/master/LICENSE.md) for details.
 
 <img src="https://cdn.shopify.com/shopify-marketing_assets/builds/19.0.0/shopify-full-color-black.svg" width="200" />
