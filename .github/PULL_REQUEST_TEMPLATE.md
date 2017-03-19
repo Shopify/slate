@@ -1,19 +1,13 @@
-### Problem
+### What are you trying to accomplish with this PR?
 
-*Succinct outline of the problem or request.*
+*Please provide a link to the associated GitHub issue.*
 
-### Scope
 
-*Is this an issue with Slate's theme scaffolding or its documentation?*
+### Checklist
+For contributors:
+- [ ] I have [updated the docs](https://github.com/Shopify/slate/blob/master/CONTRIBUTING.md#documentation) to reflect these changes, if applicable.
 
-*If it is related to the `slate` commands, perhaps the [slate-cli repo](https://github.com/Shopify/slate-cli) 
-or the [slate-tools repos](https://github.com/Shopify/slate-tools) are a more appropriate spot to log your issue.*
-
-### Replication steps
-
-*How to replicate the problem. Screenshots or video?*
-
-### More Information
-
-*Any additional information which might be helpful.*
+For maintainers:
+- [ ] I have :tophat:'d these changes.
+- [ ] I have bumped the `package.json` version in a separate repo, if applicable.
 
