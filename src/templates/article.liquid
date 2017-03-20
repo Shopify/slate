@@ -1,12 +1,16 @@
 {% comment %}
-  If a valid comment is submitted, 1 is added to the number_of_comments even if awaiting moderation.
-
+  When a comment is submitted, the browser is redirected to a page that includes 
+  the new comment id in its URL.
   #comments is a required ID and is used as an anchor link by Shopify.
 {% endcomment %}
+
 {%- assign number_of_comments = article.comments_count -%}
 
-{% if comment and comment.created_at %}
-  {%- assign number_of_comments = article.comments_count | plus: 1 -%}
+{% comment %}
+  If a comment was just submitted but requires moderation, we have an extra comment to count.
+{% endcomment %}
+{% if comment and comment.status != 'published' %}
+  {% assign number_of_comments = article.comments_count | plus: 1 %}
 {% endif %}
 
 <article role="article" itemscope itemtype="http://schema.org/Article">
@@ -45,9 +49,9 @@
     {% paginate article.comments by 5 %}
 
     <div id="comments">
-      {% if comment and comment.created_at %}
+      {% if comment and comment.status and paginate.current_page == 1 %}
         <p class="form-success">
-          {% if blog.moderated? %}
+          {% if blog.moderated? and comment.status != 'published' %}
             {{ 'blogs.comments.success_moderated' | t }}
           {% else %}
             {{ 'blogs.comments.success' | t }}
@@ -57,7 +61,10 @@
 
       {% if number_of_comments > 0 %}
         <ul>
-          {% if comment and comment.created_at %}
+          {% comment %}
+            Display comment from URL parameters if it is waiting moderation
+          {% endcomment %}
+          {% if comment and comment.status != 'published' %}
             <li id="{{ comment.id }}">
               <div class="rte">
                 {{ comment.content }}
@@ -65,7 +72,6 @@
               {% capture date %}{{ comment.created_at | time_tag: format: 'month_day_year' }}{% endcapture %}
               <p>{{ 'blogs.article.comment_meta_html' | t: author: comment.author, date: date }}</p>
             </li>
-
           {% endif %}
 
           {% for comment in article.comments %}

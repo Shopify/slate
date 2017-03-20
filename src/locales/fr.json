@@ -57,7 +57,7 @@
       "email": "Courriel",
       "message": "Message",
       "post": "Publier le commentaire",
-      "moderated": "Veuillez noter que les commentaires doivent être approvés avant d'être affichés",
+      "moderated": "Veuillez noter que les commentaires doivent être approuvés avant d'être affichés",
       "success_moderated": "Votre commentaire a été soumis avec succès. Nous le publierons sous peu, suite à notre processus de modération.",
       "success": "Votre commentaire a été publié avec succès!",
       "with_count": {

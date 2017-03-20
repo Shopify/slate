@@ -1,13 +1,15 @@
 {
   "name": "slate-theme",
-  "version": "0.9.4",
+  "version": "0.9.6",
+  "author": "Shopify Inc.",
+  "description": "A theme scaffold and command line tool for developing Shopify themes.",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/Shopify/slate.git"
   },
   "devDependencies": {
-    "@shopify/slate-tools": "0.2.5",
+    "@shopify/slate-tools": "0.2.6",
     "archiver": "1.1.0",
     "aws-sdk": "2.6.12",
     "mime-types": "2.1.12"
