@@ -6,6 +6,7 @@
 
 *If it is related to the Slate theme scaffolding, the [slate repo](https://github.com/Shopify/slate)
 might be the place to log this issue.*
+
 *If it is related to the `slate` global commands, the [slate-cli repo](https://github.com/Shopify/slate-cli)
 is where you may want to go.*
 
