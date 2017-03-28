@@ -52,7 +52,7 @@
             <select
               id="SingleOptionSelector-{{ section.id }}-{{ forloop.index0 }}"
               data-single-option-selector
-              data-index="option{{ forloop.index }}">
+              data-index="option{{ option.position }}">
               {% for value in option.values %}
                 <option
                   value="{{ value | escape }}"
