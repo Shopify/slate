@@ -12,6 +12,7 @@ theme.Product = (function() {
     addToCart: '[data-add-to-cart]',
     addToCartText: '[data-add-to-cart-text]',
     comparePrice: '[data-compare-price]',
+    comparePriceText: '[data-compare-text]',
     originalSelectorId: '[data-product-select]',
     priceWrapper: '[data-price-wrapper]',
     productFeaturedImage: '[data-product-featured-image]',
@@ -103,16 +104,18 @@ theme.Product = (function() {
      */
     updateProductPrices: function(evt) {
       var variant = evt.variant;
+      var $comparePrice = $(selectors.comparePrice, this.$container);
+      var $compareEls = $comparePrice.add(selectors.comparePriceText, this.$container);
 
       $(selectors.productPrice, this.$container)
         .html(slate.Currency.formatMoney(variant.price, theme.moneyFormat));
 
       if (variant.compare_at_price > variant.price) {
-        $(selectors.comparePrice, this.$container)
-          .html(slate.Currency.formatMoney(variant.compare_at_price, theme.moneyFormat))
-          .removeClass('hide');
+        $comparePrice.html(slate.Currency.formatMoney(variant.compare_at_price, theme.moneyFormat));
+        $compareEls.removeClass('hide');
       } else {
-        $(selectors.comparePrice, this.$container).addClass('hide');
+        $comparePrice.html('');
+        $compareEls.addClass('hide');
       }
     },
 
