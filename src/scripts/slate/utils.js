@@ -62,7 +62,7 @@ slate.utils = {
       }
     }
     return result;
-  }
+  },
 
   /**
    * _.defaultTo from lodash
@@ -75,7 +75,7 @@ slate.utils = {
    * @param {*} defaultValue - Default value
    * @returns {*} - Returns the resolved value
    */
-  function defaultTo(value, defaultValue) {
+  defaultTo: function(value, defaultValue) {
     return (value == null || value !== value) ? defaultValue : value
-  }  
+  }
 };
