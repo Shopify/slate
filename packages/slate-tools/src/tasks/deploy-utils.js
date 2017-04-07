@@ -38,6 +38,67 @@ function deploy(env) {
 }
 
 /**
+ * Validate theme_id used for the environment
+ * @param {Object} - settings of theme_id and environment
+ * @returns {Promise}
+ * @private
+ */
+function validateId(settings) {
+  return new Promise((resolve, reject) => {
+    // Only string allowed is "live"
+    if (settings.themeId === 'live') {
+      resolve();
+    }
+
+    const id = Number(settings.themeId);
+
+    if (isNaN(id)) {
+      reject(settings);
+    } else {
+      resolve();
+    }
+  });
+}
+
+/**
+ * Validate the config.yml theme_id is an integer or "live"
+ * @function validate:id
+ * @memberof slate-cli.tasks.watch, slate-cli.tasks.deploy
+ * @private
+ */
+
+gulp.task('validate:id', () => {
+  const file = fs.readFileSync(config.tkConfig, 'utf8');
+  const tkConfig = yaml.safeLoad(file);
+  let envObj;
+
+  const environments = config.environment.split(/\s*,\s*|\s+/);
+  const promises = [];
+
+  environments.forEach((environment) => {
+    function factory() {
+      envObj = tkConfig[environment];
+      const envSettings = {
+        themeId: envObj.theme_id,
+        environment,
+      };
+
+      return validateId(envSettings);
+    }
+    promises.push(factory);
+  });
+
+  return utils.promiseSeries(promises)
+    .catch((result) => {
+      // stop process to prevent deploy defaulting to published theme
+      messages.invalidThemeId(result.themeId, result.environment);
+      const exitCode = 2;
+      return process.exit(exitCode);
+    });
+
+});
+
+/**
  * Replace your existing theme using ThemeKit.
  *
  * @function deploy:replace

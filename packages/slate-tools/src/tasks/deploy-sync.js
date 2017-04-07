@@ -30,9 +30,9 @@ gulp.task('deploy:sync-init', () => {
   const envObj = tkConfig[environment];
   let proxyTarget = `https://${envObj.store}`;
 
-  if (envObj.theme_id && (envObj.theme_id === parseInt(envObj.theme_id, 10))) {
-    proxyTarget += `?preview_theme_id=${envObj.theme_id}`;
-  }
+  // break theme preview cache by always setting a preview parameter
+  const previewParam = (envObj.theme_id !== 'live') ? envObj.theme_id : '';
+  proxyTarget += `?preview_theme_id=${previewParam}`;
 
   debug(proxyTarget);
 

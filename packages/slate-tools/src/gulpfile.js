@@ -50,7 +50,7 @@ gulp.task('zip', (done) => {
  * @static
  */
 gulp.task('watch', () => {
-  runSequence('build:config', defineWatchTasks());
+  runSequence('validate:id', 'build:config', defineWatchTasks());
 });
 
 function defineWatchTasks() {
@@ -77,7 +77,7 @@ function defineWatchTasks() {
  * @static
  */
 gulp.task('deploy', (done) => {
-  runSequence('build', 'deploy:replace', done);
+  runSequence('validate:id', 'build', 'deploy:replace', done);
 });
 
 /**
