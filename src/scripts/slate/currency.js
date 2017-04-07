@@ -27,9 +27,9 @@ slate.Currency = (function() {
     var formatString = (format || moneyFormat);
 
     function formatWithDelimiters(number, precision, thousands, decimal) {
-      precision = precision || 2;
-      thousands = thousands || ',';
-      decimal = decimal || '.';
+      precision = slate.utils.defaultTo(precision, 2);
+      thousands = slate.utils.defaultTo(thousands, ',');
+      decimal = slate.utils.defaultTo(decimal, '.');
 
       if (isNaN(number) || number == null) {
         return 0;
