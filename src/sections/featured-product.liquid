@@ -1,4 +1,5 @@
 {%- assign product = all_products[section.settings.product] -%}
+{%- assign current_variant = product.selected_or_first_available_variant -%}
 
 {% if product.empty? %}
   {%- assign section_onboarding = true -%}
@@ -81,13 +82,15 @@
 
       <div data-price-wrapper>
         <span data-product-price>
-          {{ product.price | default: '1999' | money }}
+          {{ current_variant.price | default: '1999' | money }}
         </span>
 
         {% if product.compare_at_price_max > product.price %}
-          <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+          <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
           <s data-compare-price>
-            {{ product.compare_at_price | money }}
+            {% if current_variant.compare_at_price > current_variant.price %}
+              {{ current_variant.compare_at_price | money }}
+            {% endif %}
           </s>
         {% endif %}
       </div>
