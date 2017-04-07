@@ -31,7 +31,7 @@ gulp.task('deploy:sync-init', () => {
   let proxyTarget = `https://${envObj.store}`;
 
   // break theme preview cache by always setting a preview parameter
-  const previewParam = (envObj.theme_id !== 'live') ? envObj.theme_id : '';
+  const previewParam = (envObj.theme_id === 'live') ? '' : envObj.theme_id;
   proxyTarget += `?preview_theme_id=${previewParam}`;
 
   debug(proxyTarget);
