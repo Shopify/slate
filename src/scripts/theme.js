@@ -34,5 +34,7 @@ $(document).ready(function() {
   slate.rte.iframeReset();
 
   // Add a message to the cart if cookies are disabled.
-  slate.cart.checkCookies();
+  if (slate.cart.cookiesEnabled()) {
+    document.documentElement.className = document.documentElement.className.replace('no-cookies', 'cookies');
+  }
 });

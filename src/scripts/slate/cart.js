@@ -7,17 +7,6 @@
  */
 
 slate.cart = {
-
-  selectors: {
-    cartEmpty: '.cart--empty',
-    cartNoCookies: 'cart--no-cookies'
-  },
-
-  checkCookies: function() {
-    if (!this.cookiesEnabled()) {
-      $(this.selectors.cartEmpty).addClass(this.selectors.cartNoCookies);
-    }
-  },
   
   /**
    * Check if cookies are enabled in the browser

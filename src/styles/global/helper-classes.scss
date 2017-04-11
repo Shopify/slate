@@ -40,6 +40,22 @@
   }
 }
 
+// Only show when cookies are not supported
+.no-cookies:not(html) {
+  display: none;
+
+  .no-cookies & {
+    display: block;
+  }
+}
+
+// Only show when cookies are supported
+.cookies {
+  .no-cookies & {
+    display: none;
+  }
+}
+
 /*============================================================================
   Skip to content button
     - Overrides .visually-hidden when focused

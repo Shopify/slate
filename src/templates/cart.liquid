@@ -101,22 +101,20 @@
     <input type="submit" name="checkout" class="btn" value="{{ 'cart.general.checkout' | t }}">
   </form>
 {% else %}
-  <div class="cart--empty">
-    <h1>{{ 'cart.general.title' | t }}</h1>
+  <h1>{{ 'cart.general.title' | t }}</h1>
 
-    {% comment %}
-    Cart no cookies state
-    {% endcomment %}
-    <div class="cart__no-cookies">
-      <p>{{ 'cart.general.cookies_required' | t }}</p>
-    </div>
+  {% comment %}
+  Cart Empty State
+  {% endcomment %}
+  <div class="cookies">
+    <p>{{ 'cart.general.empty' | t }}</p>
+    <p>{{ 'cart.general.continue_browsing_html' | t }}</p>
+  </div>
 
-    {% comment %}
-    Cart Empty State
-    {% endcomment %}
-    <div class="cart__empty">
-      <p>{{ 'cart.general.empty' | t }}</p>
-      <p>{{ 'cart.general.continue_browsing_html' | t }}</p>
-    </div>
+  {% comment %}
+  Cart no cookies state
+  {% endcomment %}
+  <div class="no-cookies">
+    <p>{{ 'cart.general.cookies_required' | t }}</p>
   </div>
 {% endif %}
