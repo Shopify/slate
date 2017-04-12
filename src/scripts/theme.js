@@ -33,8 +33,8 @@ $(document).ready(function() {
   slate.rte.wrapTable();
   slate.rte.iframeReset();
 
-  // Add a message to the cart if cookies are disabled.
+  // Apply a specific class to the html element for browser support of cookies.
   if (slate.cart.cookiesEnabled()) {
-    document.documentElement.className = document.documentElement.className.replace('no-cookies', 'cookies');
+    document.documentElement.className = document.documentElement.className.replace('supports-no-cookies', 'supports-cookies');
   }
 });

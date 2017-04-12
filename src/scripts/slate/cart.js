@@ -9,7 +9,8 @@
 slate.cart = {
   
   /**
-   * Check if cookies are enabled in the browser
+   * Browser cookies are required to use the cart. This function checks if
+   * cookies are enabled in the browser.
    */
   cookiesEnabled: function() {
     var cookieEnabled = navigator.cookieEnabled;

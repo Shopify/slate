@@ -40,18 +40,18 @@
   }
 }
 
-// Only show when cookies are not supported
-.no-cookies:not(html) {
+// Only show when browser cookies are not supported
+.supports-no-cookies:not(html) {
   display: none;
 
-  .no-cookies & {
+  html.supports-no-cookies & {
     display: block;
   }
 }
 
-// Only show when cookies are supported
-.cookies {
-  .no-cookies & {
+// Only show when browser cookies are supported
+.supports-cookies {
+  html.supports-no-cookies & {
     display: none;
   }
 }
