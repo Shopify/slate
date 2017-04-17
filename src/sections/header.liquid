@@ -13,7 +13,7 @@
 </style>
 <div data-section-id="{{ section.id }}" data-section-type="header-section">
   <header role="banner">
-    {% if template == 'index' %}
+    {% if template.name == 'index' %}
       <h1 itemscope itemtype="http://schema.org/Organization">
     {% else %}
       <div class="h1" itemscope itemtype="http://schema.org/Organization">
@@ -29,7 +29,7 @@
             {{ shop.name }}
           {% endif %}
         </a>
-    {% if template == 'index' %}
+    {% if template.name == 'index' %}
       </h1>
     {% else %}
       </div>

@@ -7,9 +7,6 @@ It allows you to sync local files with your live shop, deploy to multiple enviro
 
 ----------
 
-## License
-Slate is licensed under the terms of the [MIT license](LICENSE).
-
 ## Documentation
 
 For full API documentation go checkout the [API docs](https://shopify.github.io/slate/).
@@ -21,3 +18,9 @@ please see [CONTRIBUTING.md](https://github.com/Shopify/slate/blob/master/CONTRI
 ## Code of Conduct
 All developers who wish to contribute through code or issues, take a look at the
 [CODE_OF_CONDUCT.md](https://github.com/Shopify/slate/blob/master/CODE_OF_CONDUCT.md).
+
+## License
+
+MIT, see [LICENSE](http://github.com/Shopify/slate/blob/master/LICENSE) for details.
+
+<img src="https://cdn.shopify.com/shopify-marketing_assets/builds/19.0.0/shopify-full-color-black.svg" width="200" />

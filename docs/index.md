@@ -10,16 +10,18 @@ Slate allows you to sync local files with your live shop, deploy to multiple env
 
 ## Getting started
 
-> [Node](https://nodejs.org/en/) 4+ is supported, but 6+ is recommended to fully benefit from Slate. If you want the template files without the build tools, [get the latest zip here](https://sdks.shopifycdn.com/slate/latest/slate-src.zip).
+<blockquote>
+  <a href="https://nodejs.org/en/">Node</a> 4+ is supported, but 6+ is recommended to fully benefit from Slate. If you want the template files without the build tools, <a href="https://sdks.shopifycdn.com/slate/latest/slate-src.zip" data-ga-track="slateZip">get the latest zip here</a>.
+</blockquote>
 
 1. Install Slate with `npm install -g @shopify/slate`.
-2. Create a new theme with `slate theme theme-name`, where `theme-name` will be a newly created folder.
+2. Create a new theme with `slate theme theme-name`, where `theme-name` will be a newly created folder. If you already have a theme locally, you can use the `slate migrate` command and [follow these steps](/slate/commands/#migrate) instead.
 3. Create a private app on your development store(s).
   * Not sure how to create a private app? [Learn how here](https://help.shopify.com/api/guides/api-credentials#get-credentials-through-the-shopify-admin).
   * Set the "Theme templates and theme assets" permission to "Read and write".
   <img src="{{ "/assets/images/app-permission.jpg" | prepend: site.baseurl }}" alt="Private app permission requirements" class="demo-image demo-image--app">
 4. Rename `config-sample.yml` to `config.yml` and add your private app credentials to the `development` environment:
-  * **store:** the shopify-specifc URL for this store/environment (ie. my-store.myshopify.com)
+  * **store:** the Shopify-specifc URL for this store/environment (ie. my-store.myshopify.com)
   * **theme_id:** the unique id for the theme you want to write to when deploying to this store. You can find this information in the URL of the theme's online editor at Shopify [admin/themes](https://shopify.com/admin/themes). Alternatively, you can use `"live"` for the published theme.
   <img src="{{ "/assets/images/theme-id.png" | prepend: site.baseurl }}" alt="Private app credentials" class="demo-image demo-image--app">
   * **password:** the password generated via a private app on this store.  Access this information on your Shopify [admin/apps/private](https://shopify.com/admin/apps/private) page.
@@ -30,6 +32,7 @@ Slate allows you to sync local files with your live shop, deploy to multiple env
 
 ### Global
 * `slate theme [name]` - Generate a new blank theme
+* `slate migrate` - Convert an existing theme to work with Slate
 * `slate -h` - Options available in your current directory (differs if not in a theme)
 * `slate -v` - See your currently installed version of Slate and dependencies
 

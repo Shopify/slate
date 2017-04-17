@@ -1,9 +1,4 @@
 /*!
- * lodash.core.min.js
- */
-// =require vendor/lodash.core.min.js
-
-/*!
  * modernizr.min.js
  */
 // =require vendor/modernizr.min.js

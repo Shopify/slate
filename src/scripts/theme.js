@@ -3,6 +3,7 @@ window.theme = window.theme || {};
 
 /*================ Slate ================*/
 // =require slate/a11y.js
+// =require slate/utils.js
 // =require slate/rte.js
 // =require slate/sections.js
 // =require slate/currency.js

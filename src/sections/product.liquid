@@ -9,12 +9,12 @@
   <meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
   <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
 
-  <img src="{{ featured_image | img_url: '480x480' }}" alt="{{ featured_image.alt | escape }}" class="product-image">
+  <img src="{{ featured_image | img_url: '480x480' }}" alt="{{ featured_image.alt | escape }}" data-product-featured-image>
   {% if product.images.size > 1 %}
     <ul>
       {% for image in product.images %}
         <li>
-          <a href="{{ image.src | img_url: '480x480' }}" class="product-single-thumbnail">
+          <a href="{{ image.src | img_url: '480x480' }}" data-product-single-thumbnail>
             <img src="{{ image.src | img_url: '160x160' }}" alt="{{ image.alt | escape }}">
           </a>
         </li>
@@ -32,7 +32,7 @@
     <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
 
     <form action="/cart/add" method="post" enctype="multipart/form-data">
-      {% unless product.options.size == 1 and product.variants[0].title == 'Default Title' %}
+      {% unless product.variants.size == 1 and product.options.size == 1 and product.options.first == 'Title' and product.variants.first.title == 'Default Title' %}
         {% for option in product.options_with_values %}
           <div class="selector-wrapper js">
             <label
@@ -42,9 +42,9 @@
             </label>
 
             <select
-              class="single-option-selector"
               id="SingleOptionSelector-{{ forloop.index0 }}"
-              data-name="{{ option.name }}">
+              data-single-option-selector
+              data-index="option{{ option.position }}">
               {% for value in option.values %}
                 <option
                   value="{{ value | escape }}"
@@ -57,7 +57,7 @@
         {% endfor %}
       {% endunless %}
 
-      <select class="no-js product-select" name="id">
+      <select name="id" class="no-js" data-product-select>
         {% for variant in product.variants %}
           <option
             {% if variant == current_variant %}selected="selected"{% endif %}
@@ -71,15 +71,17 @@
       <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
       <input type="number" id="Quantity" name="quantity" value="1" min="1">
 
-      <div class="price-wrapper">
-        <span class="product-price">
+      <div data-price-wrapper>
+        <span data-product-price>
           {{ current_variant.price | money }}
         </span>
 
-        {% if current_variant.compare_at_price_max > current_variant.price %}
-          <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-          <s class="compare-price">
-            {{ current_variant.compare_at_price | money }}
+        {% if product.compare_at_price_max > product.price %}
+          <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+          <s data-compare-price>
+            {% if current_variant.compare_at_price > current_variant.price %}
+              {{ current_variant.compare_at_price | money }}
+            {% endif %}
           </s>
         {% endif %}
       </div>
@@ -87,9 +89,9 @@
       <button
         type="submit"
         name="add"
-        class="add-to-cart"
+        data-add-to-cart
         {% unless current_variant.available %}disabled="disabled"{% endunless %}>
-          <span class="add-to-cart-text">
+          <span data-add-to-cart-text>
             {% if current_variant.available %}
               {{ 'products.product.add_to_cart' | t }}
             {% else %}
@@ -110,7 +112,7 @@
   {% endif %}
 
   {% unless product.empty? %}
-    <script type="application/json" class="product-json">
+    <script type="application/json" data-product-json>
       {{ product | json }}
     </script>
   {% endunless %}
