@@ -122,7 +122,7 @@ A few helpful Sass mixins are included in Slate to make responsive, cross-browse
 
 ## JavaScript helpers
 
-Slate provides a number of helper scripts and vendor scripts. The base folder names can be changed to suit your workflow. If changing or adding folders, make sure to update the `require` statement in `theme.js` to `// =require new-folder/script.js`.
+Slate provides a number of helper scripts and vendor scripts. The base folder names can be changed to suit your workflow. If changing or adding folders, make sure to update the `require` statement in `theme.js` to `// =require new-folder/script.js`.  
 
 ```
 scripts/
@@ -131,6 +131,10 @@ scripts/
   templates/
   vendor/
 ```
+
+<blockquote>
+More information about the <code>require</code> directive can be found in the <a href="https://www.npmjs.com/package/gulp-include">NPM documentation</a> for <code>gulp-include</code>.
+</blockquote>
 
 ### Slate scripts
 
@@ -145,7 +149,7 @@ Slate provides helper scripts to promote accessibility and make working with the
 
 ### Vendor scripts
 
-Slate projects include a `vendor` folder where theme developers are encouraged to place third-party libraries.  Versions of jQuery and Modernizer are included in a new project, but you are welcome to change these as you see fit.  Be sure to update the `require` statement in `vendor.js` as you add and remove libraries.
+Slate projects include a `vendor` folder where theme developers are encouraged to place third-party libraries.  Versions of jQuery and [Modernizr](https://modernizr.com/) are included in a new project, but you are welcome to change these as you see fit.  Be sure to update the `require` statement in `vendor.js` as you add and remove libraries.
 
 ## Translation keys
 
@@ -157,6 +161,6 @@ Slate ships with six languages — English, French (Canadian), Spanish, German, 
 ```
 {% endraw %}
 
-You can learn more about using [translation keys and strings here](https://help.shopify.com/themes/development/internationalizing/translation-filter).
+You can learn more about using [translation keys and strings in our theme development documentation](https://help.shopify.com/themes/development/internationalizing/translation-filter).
 
-These translation keys allow merchants to control their store's language settings from the admin.  Merchants can set the language of their storefront as well as change the value of individual translation keys. You can [learn more about translating your storefront here](https://help.shopify.com/manual/sell-online/online-store/translate-theme).
+These translation keys allow merchants to control their store's language settings from the admin.  Merchants can set the language of their storefront as well as change the value of individual translation keys. You can learn more about [translating your storefront in our theme documentation ](https://help.shopify.com/manual/sell-online/online-store/translate-theme).
