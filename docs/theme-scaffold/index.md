@@ -122,7 +122,7 @@ A few helpful Sass mixins are included in Slate to make responsive, cross-browse
 
 ## JavaScript helpers
 
-Slate provides helper scripts to promote accessibility and make working with theme images, currencies, and product variants easier. The base folder names can be changed to suit your workflow. If changing or adding folders, make sure to update the `require` statement in `theme.js` to `// =require new-folder/script.js`.
+Slate provides a number of helper scripts and vendor scripts. The base folder names can be changed to suit your workflow. If changing or adding folders, make sure to update the `require` statement in `theme.js` to `// =require new-folder/script.js`.
 
 ```
 scripts/
@@ -132,12 +132,20 @@ scripts/
   vendor/
 ```
 
+### Slate scripts
+
+Slate provides helper scripts to promote accessibility and make working with theme images, currencies, and product variants easier.  See [JS examples]({{ '/js-examples/' | prepend: site.baseurl }}) for more details on how to use these scripts.
+
 - Accessibility helpers. [Example]({{ '/js-examples/#trap-focus' | prepend: site.baseurl }}). [Source](https://github.com/Shopify/slate/blob/master/src/scripts/slate/a11y.js).
 - Force tables and videos to be responsive. [Example]({{ '/js-examples/#responsive-tables-and-videos' | prepend: site.baseurl }})
 - Easy handling of theme editor events (load, select, deselect or sections and their content) (need demo/example of this)
 - Format currency in JS the same as Liquid allows. [Example]({{ '/js-examples/#format-currency' | prepend: site.baseurl }})
 - Helpers for handling images in JS, including getting size based on URL and preloading sets of images. [Examples]({{ '/js-examples/#image-helpers' | prepend: site.baseurl }})
 - Listen for product variant option changes and setup scaffolding for handling result. [Example]({{ '/js-examples/#product-variants' | prepend: site.baseurl }})
+
+### Vendor scripts
+
+Slate projects include a `vendor` folder where theme developers are encouraged to place third-party libraries.  Versions of jQuery and Modernizer are included in a new project, but you are welcome to change these as you see fit.  Be sure to update the `require` statement in `vendor.js` as you add and remove libraries.
 
 ## Translation keys
 
