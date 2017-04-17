@@ -69,7 +69,11 @@ sections/
   - featured-product
 ```
 
-## Sass scaffolding and helpers
+## Sass helpers
+
+<blockquote>
+Slate does not compile Sass to CSS.  Slate uploads <code>.scss</code> files to your theme's <code>/assets</code> directory and compilation is done by Shopify.  Shopify is using a forked version of Sass v3.2 which does not support importing partial Sass files with the <code>@import</code> directive.
+</blockquote>
 
 **Slate is not a CSS framework.** Instead it sets you up to start styling your way quickly with a reset and some helper scaffolding. The base folder names can be changed to suit your workflow. If changing or adding folders, make sure to update the `import` statement in `theme.scss` to `@import url('new-folder/style.scss')`.
 
@@ -118,7 +122,7 @@ A few helpful Sass mixins are included in Slate to make responsive, cross-browse
 
 ## JavaScript helpers
 
-Slate provides helper scripts to promote accessibility and make working with theme images, currencies, and product variants easier. The base folder names can be changed to suit your workflow. If changing or adding folders, make sure to update the `require` statement in `theme.js` to `// =require new-folder/script.js`.
+Slate provides a number of helper scripts and vendor scripts. The base folder names can be changed to suit your workflow. If changing or adding folders, make sure to update the `require` statement in `theme.js` to `// =require new-folder/script.js`.  
 
 ```
 scripts/
@@ -128,6 +132,14 @@ scripts/
   vendor/
 ```
 
+<blockquote>
+More information about the <code>require</code> directive can be found in the <a href="https://www.npmjs.com/package/gulp-include">NPM documentation</a> for <code>gulp-include</code>.
+</blockquote>
+
+### Slate scripts
+
+Slate provides helper scripts to promote accessibility and make working with theme images, currencies, and product variants easier.  See [JS examples]({{ '/js-examples/' | prepend: site.baseurl }}) for more details on how to use these scripts.
+
 - Accessibility helpers. [Example]({{ '/js-examples/#trap-focus' | prepend: site.baseurl }}). [Source](https://github.com/Shopify/slate/blob/master/src/scripts/slate/a11y.js).
 - Force tables and videos to be responsive. [Example]({{ '/js-examples/#responsive-tables-and-videos' | prepend: site.baseurl }})
 - Easy handling of theme editor events (load, select, deselect or sections and their content) (need demo/example of this)
@@ -135,6 +147,20 @@ scripts/
 - Helpers for handling images in JS, including getting size based on URL and preloading sets of images. [Examples]({{ '/js-examples/#image-helpers' | prepend: site.baseurl }})
 - Listen for product variant option changes and setup scaffolding for handling result. [Example]({{ '/js-examples/#product-variants' | prepend: site.baseurl }})
 
-## i18n strings
+### Vendor scripts
 
-i18n is shorthand for internationalization. Slate ships with six languages — English, French (Canadian), Spanish, German, and two dialects of Portuguese (Brazilian and European). These strings can be found in the `locales` folder. [Learn more about translating your themes here](https://help.shopify.com/manual/sell-online/online-store/translate-theme).
+Slate projects include a `vendor` folder where theme developers are encouraged to place third-party libraries.  Versions of jQuery and [Modernizr](https://modernizr.com/) are included in a new project, but you are welcome to change these as you see fit.  Be sure to update the `require` statement in `vendor.js` as you add and remove libraries.
+
+## Translation keys
+
+Slate ships with six languages — English, French (Canadian), Spanish, German, and two dialects of Portuguese (Brazilian and European).  Translation keys for these languages can be found in the `locales` folder.  In your theme files, translated strings can be retrieved with the Liquid translation filter `t`.
+
+{% raw %}
+```
+{{ 'products.product.add_to_cart' | t }}
+```
+{% endraw %}
+
+You can learn more about using [translation keys and strings in our theme development documentation](https://help.shopify.com/themes/development/internationalizing/translation-filter).
+
+These translation keys allow merchants to control their store's language settings from the admin.  Merchants can set the language of their storefront as well as change the value of individual translation keys. You can learn more about [translating your storefront in our theme documentation ](https://help.shopify.com/manual/sell-online/online-store/translate-theme).
