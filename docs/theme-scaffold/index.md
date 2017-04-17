@@ -69,7 +69,7 @@ sections/
   - featured-product
 ```
 
-## Sass scaffolding and helpers
+## Sass helpers
 
 **Slate is not a CSS framework.** Instead it sets you up to start styling your way quickly with a reset and some helper scaffolding. The base folder names can be changed to suit your workflow. If changing or adding folders, make sure to update the `import` statement in `theme.scss` to `@import url('new-folder/style.scss')`.
 
@@ -81,6 +81,8 @@ styles/
   tools/
   vendor/
 ```
+
+
 
 ### Normalize and reset
 
@@ -135,6 +137,16 @@ scripts/
 - Helpers for handling images in JS, including getting size based on URL and preloading sets of images. [Examples]({{ '/js-examples/#image-helpers' | prepend: site.baseurl }})
 - Listen for product variant option changes and setup scaffolding for handling result. [Example]({{ '/js-examples/#product-variants' | prepend: site.baseurl }})
 
-## i18n strings
+## Translation keys
 
-i18n is shorthand for internationalization. Slate ships with six languages — English, French (Canadian), Spanish, German, and two dialects of Portuguese (Brazilian and European). These strings can be found in the `locales` folder. [Learn more about translating your themes here](https://help.shopify.com/manual/sell-online/online-store/translate-theme).
+Slate ships with six languages — English, French (Canadian), Spanish, German, and two dialects of Portuguese (Brazilian and European).  Translation keys for these languages can be found in the `locales` folder.  In your theme files, translated strings can be retrieved with the Liquid translation filter `t`.
+
+{% raw %}
+```
+{{ 'products.product.add_to_cart' | t }}
+```
+{% endraw %}
+
+You can learn more about using [translation keys and strings here](https://help.shopify.com/themes/development/internationalizing/translation-filter).
+
+These translation keys allow merchants to control their store's language settings from the admin.  Merchants can set the language of their storefront as well as change the value of individual translation keys. You can [learn more about translating your storefront here](https://help.shopify.com/manual/sell-online/online-store/translate-theme).
