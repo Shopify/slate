@@ -72,7 +72,7 @@ sections/
 ## Sass helpers
 
 <blockquote>
-Slate does not compile Sass to CSS.  Slate uploads Scss files to your theme's <code>assets</code> directory and compilation is done by Shopify.  Shopify is using a forked version of Sass v3.2 which does not support importing partial Sass files with the <code>@import</code> directive.
+Slate does not compile Sass to CSS.  Slate uploads <code>.scss</code> files to your theme's <code>/assets</code> directory and compilation is done by Shopify.  Shopify is using a forked version of Sass v3.2 which does not support importing partial Sass files with the <code>@import</code> directive.
 </blockquote>
 
 **Slate is not a CSS framework.** Instead it sets you up to start styling your way quickly with a reset and some helper scaffolding. The base folder names can be changed to suit your workflow. If changing or adding folders, make sure to update the `import` statement in `theme.scss` to `@import url('new-folder/style.scss')`.
