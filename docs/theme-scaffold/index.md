@@ -146,6 +146,7 @@ Slate provides helper scripts to promote accessibility and make working with the
 - Format currency in JS the same as Liquid allows. [Example]({{ '/js-examples/#format-currency' | prepend: site.baseurl }})
 - Helpers for handling images in JS, including getting size based on URL and preloading sets of images. [Examples]({{ '/js-examples/#image-helpers' | prepend: site.baseurl }})
 - Listen for product variant option changes and setup scaffolding for handling result. [Example]({{ '/js-examples/#product-variants' | prepend: site.baseurl }})
+- Detect browser support for cookies. [Example]({{ '/js-examples/#cart-helpers' | prepend: site.baseurl }})
 
 ### Vendor scripts
 
