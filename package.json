@@ -1,6 +1,6 @@
 {
   "name": "slate-theme",
-  "version": "0.9.7",
+  "version": "0.10.0",
   "author": "Shopify Inc.",
   "description": "A theme scaffold and command line tool for developing Shopify themes.",
   "license": "MIT",
