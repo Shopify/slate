@@ -192,6 +192,22 @@ The theme-specific script of `product.js` has a number of methods that listen fo
 | `updateProductImage()`          | Replace the main product image `src` with the associated variant image if it exists |
 | `updateProductPrices()`         | Updates the product price and compare_at_price when necessary |
 
+## Cart helpers
+
+In order for customers to build a cart, their browsers must support cookies.
+
+| Methods      | Description |
+| :-------------- | :-------------- |
+| `cookiesEnabled()`        | Returns `true` if the browser supports cookies. |
+
+In the theme scaffolding, classes for `supports-cookies` and `supports-no-cookies` are toggled on the `html` element so theme developers can show/hide different content based on browser support.
+
+```
+if (slate.cart.cookiesEnabled()) {
+  document.documentElement.className = document.documentElement.className.replace('supports-no-cookies', 'supports-cookies');
+}
+```
+
 ## Section events
 
 Slate comes with a `section.js` file to help Sections communicate with Shopify's [Theme editor JavaScript API](https://help.shopify.com/themes/development/theme-editor/sections#theme-editor-javascript-api).
