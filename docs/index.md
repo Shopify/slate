@@ -20,9 +20,9 @@ Slate allows you to sync local files with your live shop, deploy to multiple env
   * Not sure how to create a private app? [Learn how here](https://help.shopify.com/api/guides/api-credentials#get-credentials-through-the-shopify-admin).
   * Set the "Theme templates and theme assets" permission to "Read and write".
   <img src="{{ "/assets/images/app-permission.jpg" | prepend: site.baseurl }}" alt="Private app permission requirements" class="demo-image demo-image--app">
-4. Rename `config-sample.yml` to `config.yml` and add your private app credentials.
+4. Rename `config-sample.yml` to `config.yml` and add your store information and private app credentials:
   * **store:** the Shopify-specific URL for this store/environment (ie. my-store.myshopify.com)
-  * **theme_id:** the unique id for the theme you want to write to when deploying to this store. You can find this information in the URL of the theme's online editor at Shopify [admin/themes](https://shopify.com/admin/themes). Alternatively, you can use `"live"` for the published theme.
+  * **theme_id:** the unique id for the theme you want to write to when deploying to this store. You can find this information in the URL of the theme's online editor at Shopify [admin/themes](https://shopify.com/admin/themes). Alternatively, you can use `"live"` as shorthand for the published theme.
   <img src="{{ "/assets/images/theme-id.png" | prepend: site.baseurl }}" alt="Private app credentials" class="demo-image demo-image--app">
   * **password:** the password generated via a private app on this store.  Access this information on your Shopify [admin/apps/private](https://shopify.com/admin/apps/private) page.
   <img src="{{ "/assets/images/app-credentials.jpg" | prepend: site.baseurl }}" alt="Private app credentials" class="demo-image demo-image--app">
