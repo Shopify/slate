@@ -172,7 +172,7 @@ The Slate theme has two script files to manage the display of product variants:
 
 ### variant.js
 
-Slate separates product variant options into multiple `<select>` elements.  When a variant changes, `variant.js` updates the *master select*.  The master select is the default `<select>` element that contains all variant IDs needed to properly submit the form. 
+Slate separates product variant options into multiple `<select>` elements.  When a variant changes, `variant.js` updates the *master select*.  The master select is the default `<select>` element that contains all variant IDs needed to properly submit the form.
 
 Slate's `variant.js` also triggers a number of custom events to handle various state changes:
 
@@ -201,6 +201,7 @@ Slate comes with a `section.js` file to help Sections communicate with Shopify's
 | `onUnload()`        | A section has been deleted or is being re-rendered. |
 | `onSelect()`        | User has selected the section in the editor's sidebar. |
 | `onDeselect()`          | User has deselected the section in the editor's sidebar. |
+| `onReorder()`          | User has changed the section's order in the editor's sidebar. |
 | `onBlockSelect()`        | User has selected the block in the editor's sidebar. |
 | `onBlockDeselect()`        | User has deselected the block in the editor's sidebar. |
 
@@ -238,7 +239,7 @@ Slate follows a convention of wrapping the content of a Section file in an eleme
 ```
 {% endraw %}
 
-In the `theme.js` file, you must import the Section specific JavaScript with the `// =require` helper, [more information here](https://www.npmjs.com/package/gulp-include), as it will contain your `constructor`. 
+In the `theme.js` file, you must import the Section specific JavaScript with the `// =require` helper, [more information here](https://www.npmjs.com/package/gulp-include), as it will contain your `constructor`.
 
 ```
 // =require sections/product.js
@@ -248,4 +249,3 @@ $(document).ready(function() {
   sections.register('product', theme.Product);
 });
 ```
-

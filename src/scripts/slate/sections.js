@@ -7,6 +7,7 @@ slate.Sections = function Sections() {
     .on('shopify:section:unload', this._onSectionUnload.bind(this))
     .on('shopify:section:select', this._onSelect.bind(this))
     .on('shopify:section:deselect', this._onDeselect.bind(this))
+    .on('shopify:section:reorder', this._onReorder.bind(this))
     .on('shopify:block:select', this._onBlockSelect.bind(this))
     .on('shopify:block:deselect', this._onBlockDeselect.bind(this));
 };
@@ -66,6 +67,14 @@ slate.Sections.prototype = $.extend({}, slate.Sections.prototype, {
 
     if (instance && typeof instance.onDeselect === 'function') {
       instance.onDeselect(evt);
+    }
+  },
+
+  _onReorder: function(evt) {
+    var instance = slate.utils.findInstance(this.instances, 'id', evt.detail.sectionId);
+
+    if (instance && typeof instance.onReorder === 'function') {
+      instance.onReorder(evt);
     }
   },
 
