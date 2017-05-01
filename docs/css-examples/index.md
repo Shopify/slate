@@ -34,7 +34,7 @@ Pass a media query name (above) to the media query mixin to generate media queri
 Define an element's background to pink above our large breakpoint value.
 
 ```
-@include media($medium-up) {
+@include media-query($medium-up) {
   .foo {
     background: pink;
   }
@@ -56,7 +56,7 @@ Define an element's background to blue, unless between the medium and large brea
 .foo {
   background: blue;
 
-  @include media($medium) {
+  @include media-query($medium) {
     background: pink;
   }
 }
