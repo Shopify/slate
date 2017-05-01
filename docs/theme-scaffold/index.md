@@ -116,7 +116,7 @@ A few helpful Sass mixins are included in Slate to make responsive, cross-browse
 
 - Media query mixin for consistent breakpoint styles. [Example]({{ '/css-examples/#media-query-mixin' | prepend: site.baseurl }})
 - Responsive helpers to show/hide content and align text based on breakpoint names. [Example]({{ '/css-examples/#visibility-per-breakpoint' | prepend: site.baseurl }})
-- Prefixes. [Example]({{ '/css-examples/#' | prepend: site.baseurl }})
+- Prefixes. [Example]({{ '/css-examples/#prefix' | prepend: site.baseurl }})
 - Visually hide or show content for screen reader accessibility. [Example]({{ '/css-examples/#visually-hide' | prepend: site.baseurl }})
 
 
@@ -142,7 +142,7 @@ Slate provides helper scripts to promote accessibility and make working with the
 
 - Accessibility helpers. [Example]({{ '/js-examples/#trap-focus' | prepend: site.baseurl }}). [Source](https://github.com/Shopify/slate/blob/master/src/scripts/slate/a11y.js).
 - Force tables and videos to be responsive. [Example]({{ '/js-examples/#responsive-tables-and-videos' | prepend: site.baseurl }})
-- Easy handling of theme editor events (load, select, deselect or sections and their content) (need demo/example of this)
+- Easy handling of theme editor events. [Example]({{ '/js-examples/#section-events' | prepend: site.baseurl }})
 - Format currency in JS the same as Liquid allows. [Example]({{ '/js-examples/#format-currency' | prepend: site.baseurl }})
 - Helpers for handling images in JS, including getting size based on URL and preloading sets of images. [Examples]({{ '/js-examples/#image-helpers' | prepend: site.baseurl }})
 - Listen for product variant option changes and setup scaffolding for handling result. [Example]({{ '/js-examples/#product-variants' | prepend: site.baseurl }})
