@@ -72,7 +72,7 @@ theme.Product = (function() {
     /**
      * Updates the DOM state of the add to cart button
      *
-     * @param {boolean} enabeled - Decides whether cart is enabled or disabled
+     * @param {boolean} enabled - Decides whether cart is enabled or disabled
      * @param {string} text - Updates the text notification content of the cart
      */
     updateAddToCartState: function(evt) {
