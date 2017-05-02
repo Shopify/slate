@@ -77,7 +77,6 @@ slate.Variants = (function() {
 
       variants.forEach(function(variant) {
         var satisfied = true;
-        var options = variant.options;
 
         selectedValues.forEach(function(option) {
           if (satisfied) {
