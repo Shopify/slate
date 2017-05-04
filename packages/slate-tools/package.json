@@ -48,8 +48,8 @@
     "start": "npm run clean && babel -w -d lib/ src/",
     "test": "npm run lint",
     "prepublish": "npm test && npm run clean && babel -d lib/ src/",
-    "lint": "eslint --max-warnings 0 -c .eslintrc.json src/ test/",
-    "lint-allow-warning": "eslint -c .eslintrc.json src/ test/"
+    "lint": "eslint --max-warnings 0 -c .eslintrc.json src/",
+    "lint-allow-warning": "eslint -c .eslintrc.json src/"
   },
   "keywords": [
     "shopify",

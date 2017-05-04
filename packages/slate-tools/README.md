@@ -1,4 +1,5 @@
 # @shopify/slate-tools
+[![CircleCI](https://circleci.com/gh/Shopify/slate-tools.svg?style=svg&circle-token=0b8147527ef88134b4238064a563ceaaae98f06a)](https://circleci.com/gh/Shopify/slate-tools)
 
 Tooling for Shopify themes using [Slate](https://github.com/Shopify/slate).
 
