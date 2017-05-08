@@ -70,7 +70,7 @@ Compile theme files and assets into a Shopify theme, found in the `dist` folder.
 slate test
 ```
 
-Uses the [@shopify/theme-lint](https://github.com/Shopify/theme-lint) package to run translations tests on your locales found in the `/src/locales` folder. The package checks for untranslated keys inside of your Liquid templates, missing translation keys in specific locale files, and translation key HTML validity.
+Uses the [@shopify/theme-lint](https://github.com/Shopify/theme-lint) package to run translation tests on your locales found in the `/src/locales` folder. The package checks for untranslated keys inside of your Liquid templates, missing translation keys in specific locale files, and translation key HTML validity.
 
 ### zip
 
