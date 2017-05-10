@@ -125,6 +125,7 @@ Command               | Usage
 [build](#build)       | `slate build`
 [deploy](#deploy)     | `slate deploy [--options]`
 [start](#start)       | `slate start [--options]`
+[test](#test)         | `state test`
 [watch](#watch)       | `slate watch [--options]`
 [zip](#zip)           | `slate zip`
 
@@ -167,6 +168,13 @@ Performs a full deploy of your theme (see [slate deploy](#deploy)) and starts th
 ```
 -e, --env  deploy to a comma-separated list of environments
 ```
+
+### test
+```
+slate test
+```
+
+Uses the [@shopify/theme-lint](https://github.com/Shopify/theme-lint) package to run translation tests on your locales found in the `/src/locales` folder. The package checks for untranslated keys inside of your Liquid templates, missing translation keys in specific locale files, and translation key HTML validity.
 
 ### watch
 ```
