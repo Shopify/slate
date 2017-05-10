@@ -29,6 +29,17 @@ gulp.task('build:zip', (done) => {
 });
 
 /**
+ * Runs translation tests on each file using @shopify/theme-lint
+ *
+ * @function test
+ * @memberof slate-cli.tasks
+ * @static
+ */
+gulp.task('test', (done) => {
+  runSequence('lint:locales', done);
+});
+
+/**
  * Does a full clean/rebuild of your theme and creates a `.zip` compatible with
  * shopify.
  *
