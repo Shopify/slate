@@ -53,6 +53,7 @@ Slate's source theme files are in the root `src` folder. These are the files you
 | Command | Usage |
 | :------ | :---- |
 | [build](#build) | `slate build` |
+| [test](#test) | `slate test` |
 | [zip](#zip) | `slate zip` |
 
 ### build
@@ -62,6 +63,14 @@ slate build
 ```
 
 Compile theme files and assets into a Shopify theme, found in the `dist` folder. No files will be uploaded to your shop.
+
+### test
+
+```
+slate test
+```
+
+Uses the [@shopify/theme-lint](https://github.com/Shopify/theme-lint) package to run translation tests on your locales found in the `/src/locales` folder. The package checks for untranslated keys inside of your Liquid templates, missing translation keys in specific locale files, and translation key HTML validity.
 
 ### zip
 
