@@ -81,7 +81,9 @@ const messages = {
   },
 
   configError: () => {
-    return '`config.yml` does not exist. You need to add a config file before you can upload your theme to Shopify.';
+    gutil.log('File missing:',
+      gutil.colors.yellow('`config.yml` does not exist. You need to add a config file before you can make changes to your Shopify store.'),
+    );
   },
 
   deployTo: (environment) => {

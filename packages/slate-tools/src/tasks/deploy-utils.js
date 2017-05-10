@@ -66,9 +66,22 @@ function validateId(settings) {
  * @memberof slate-cli.tasks.watch, slate-cli.tasks.deploy
  * @private
  */
-
 gulp.task('validate:id', () => {
-  const file = fs.readFileSync(config.tkConfig, 'utf8');
+  let file;
+
+  try {
+    file = fs.readFileSync(config.tkConfig, 'utf8');
+  } catch (err) {
+    if (err.code !== 'ENOENT') {
+      throw new Error(err);
+    }
+
+    messages.configError();
+
+    const exitCode = 2;
+    return process.exit(exitCode);
+  }
+
   const tkConfig = yaml.safeLoad(file);
   let envObj;
 
@@ -95,7 +108,6 @@ gulp.task('validate:id', () => {
       const exitCode = 2;
       return process.exit(exitCode);
     });
-
 });
 
 /**
