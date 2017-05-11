@@ -4,7 +4,7 @@ layout: default
 
 # What's included
 
-Slate is made up of two two parts. The first part is a theme scaffold consisting of templates, sections, starter styles, and helper scripts to develop your theme on. The second part is a toolkit of useful commands to sync your local files to your live store.
+Slate is made up of two parts. The first part is a theme scaffold consisting of templates, sections, starter styles, and helper scripts to develop your theme on. The second part is a toolkit of useful commands to sync your local files to your live store.
 
 Learn more about the [theme scaffold](/slate/theme-scaffold) and [commands](/slate/commands).
 
