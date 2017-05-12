@@ -8,8 +8,8 @@ layout: default
 
 | Command | Usage |
 | :------ | :---- |
-| [theme](#theme) | `slate theme [name]` |
-| [migrate](#migrate) | `slate migrate` |
+| [theme](#theme) | `slate theme [name] [--options]` |
+| [migrate](#migrate) | `slate migrate [--options]` |
 | [help](#help) | `slate -h` |
 | [version](#version) | `slate -v` |
 
@@ -21,6 +21,13 @@ slate theme [name]
 
 Generate a new blank theme. The `name` argument is required for the new theme directory.
 
+##### Options
+```
+--yarn  install theme dependencies with yarn instead of npm
+```
+
+> **Note about Yarn:** While Yarn is not the default installer for dependencies, it is worth noting that Yarn has significant performance improvements and we do recommend installing dependencies via `--yarn`. [Read more about installing Yarn](https://yarnpkg.com/en/docs/install).
+
 ### migrate
 ```
 slate migrate
@@ -29,6 +36,11 @@ slate migrate
 Converts an existing theme to work with Slate. Run this command from your project root to install dependencies and restructure your theme files into a `src/` directory. Empty `icons/`, `styles/`, and `scripts/` folders will also be created.
 
 Create `config.yml` in your root using [this sample file](https://github.com/Shopify/slate/blob/master/config-sample.yml), then use [theme commands](#theme-commands) to start developing.
+
+##### Options
+```
+--yarn  install theme dependencies with yarn instead of npm
+```
 
 ### help
 
