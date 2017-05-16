@@ -7,5 +7,5 @@ deploy:
     - npm install @shopify/slate --no-progress
     - ./node_modules/.bin/slate zip
     - ejson decrypt -o secrets.json secrets.ejson
-    - node scripts/build-src
+    - node scripts/build
     - node scripts/deploy

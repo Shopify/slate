@@ -1,0 +1,34 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const archiver = require('archiver');
+
+module.exports = (
+  buildZip('slate-dist', ['dist']),
+  buildZip('slate-src', ['src'], ['config-sample.yml'])
+);
+
+function buildZip(name, directories = [], files = []) {
+  const output = fs.createWriteStream(`upload/${name}.zip`);
+  const archive = archiver('zip');
+
+  output.on('close', () => {
+    console.log(`${name}.zip: ${archive.pointer()} total bytes`);
+  });
+
+  archive.on('error', (err) => {
+    throw err;
+  });
+
+  archive.pipe(output);
+
+  for (var i = 0; i < directories.length; i++) {
+    archive.directory(directories[i]);
+  }
+
+  for (var i = 0; i < files.length; i++) {
+    archive.file(files[i]);
+  }
+
+  archive.finalize();
+}

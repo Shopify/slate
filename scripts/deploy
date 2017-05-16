@@ -8,7 +8,6 @@ const tag = require('../package.json').version;
 const DEFAULT_CONTENT_TYPE = 'application/zip';
 const S3_DIR = 'slate';
 const DEFAULT_CACHE_CONTROL = 'public, max-age=86400';
-const FILENAME_FILTER = require('../package.json').name || 'theme';
 const ZIP_DIR = 'upload';
 const DIST_DIR = 'dist';
 const DIST_FILES = [
