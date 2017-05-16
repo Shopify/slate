@@ -22,4 +22,4 @@ test:
   pre:
     - slate build
   override:
-    - npm run lint
+    - slate test
