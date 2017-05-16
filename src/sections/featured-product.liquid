@@ -1,7 +1,7 @@
 {%- assign product = all_products[section.settings.product] -%}
 {%- assign current_variant = product.selected_or_first_available_variant -%}
 
-{% if product.empty? %}
+{% if product == empty %}
   {%- assign section_onboarding = true -%}
   {%- assign onboarding_title = 'homepage.onboarding.product_title' | t -%}
 {% endif %}
@@ -121,7 +121,7 @@
     {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
   {% endif %}
 
-  {% unless product.empty? %}
+  {% unless product == empty %}
     <script type="application/json" data-product-json>
       {{ product | json }}
     </script>
