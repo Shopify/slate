@@ -29,6 +29,7 @@
             <li>
               {%- assign icon_name = type | prepend: 'icon-' -%}
               {% include icon_name %}
+              <span class="visually-hidden">{{ type | capitalize | replace: '_', ' ' }}</span>
             </li>
           {% endif %}
         {% endfor %}
