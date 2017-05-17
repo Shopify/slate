@@ -4,7 +4,7 @@ import {join} from 'path';
 import {prompt} from 'inquirer';
 import {green, red, yellow} from 'chalk';
 import figures from 'figures';
-import {startProcess, writePackageJsonSync, move, isShopifyTheme, isShopifyThemeWhitelistedDir} from '../utils';
+import {downloadFromUrl, startProcess, writePackageJsonSync, move, isShopifyTheme, isShopifyThemeWhitelistedDir} from '../utils';
 
 export default function(program) {
   program
@@ -90,8 +90,12 @@ export default function(program) {
         console.log('');
 
         if (!existsSync(configYml)) {
-          console.error(yellow('  Your theme is missing config.yml in the root directory. Please add before using Slate commands'));
-          console.error(yellow('  Example config.yml here: https://github.com/Shopify/slate/blob/master/config-sample.yml'));
+          const configUrl = 'https://raw.githubusercontent.com/Shopify/slate/master/config-sample.yml';
+
+          await downloadFromUrl(configUrl, join(workingDirectory, 'config.yml'));
+
+          console.error(`  ${green(figures.tick)} Configuration file generated`);
+          console.error(yellow('  Your theme was missing config.yml in the root directory. Please open and edit it before using Slate commands'));
           console.log('');
         }
 

@@ -15,20 +15,20 @@ import mv from 'mv';
  */
 export function downloadFromUrl(source, target) {
   return new Promise((resolve, reject) => {
-    const themeZipFile = createWriteStream(target);
+    const targetFile = createWriteStream(target);
 
-    themeZipFile.on('open', () => {
+    targetFile.on('open', () => {
       get(source, (response) => {
-        response.pipe(themeZipFile);
+        response.pipe(targetFile);
       });
     });
 
-    themeZipFile.on('error', (err) => {
+    targetFile.on('error', (err) => {
       unlinkSync(target);
       reject(err);
     });
 
-    themeZipFile.on('close', () => {
+    targetFile.on('close', () => {
       resolve(target);
     });
   });
