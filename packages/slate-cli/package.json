@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate",
-  "version": "0.9.1",
+  "version": "0.10.0",
   "description": "Slate CLI tools",
   "bin": {
     "slate": "lib/index.js"
