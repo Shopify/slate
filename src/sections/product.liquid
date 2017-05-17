@@ -111,7 +111,7 @@
     {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
   {% endif %}
 
-  {% unless product.empty? %}
+  {% unless product == empty %}
     <script type="application/json" data-product-json>
       {{ product | json }}
     </script>
