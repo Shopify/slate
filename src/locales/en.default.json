@@ -235,7 +235,8 @@
     },
     "footer": {
       "social_platform": "{{ name }} on {{ platform }}",
-      "copyright": "Copyright"
+      "copyright": "Copyright",
+      "payment_methods": "Payment methods accepted"
     }
   },
   "products": {
