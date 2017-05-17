@@ -12,7 +12,8 @@ export default function(program) {
     .command('theme [name]')
     .alias('t')
     .description('Generates a new theme directory containing Slate\'s theme boilerplate.')
-    .action(async (name) => {
+    .option('--yarn', 'installs theme dependencies with yarn instead of npm')
+    .action(async (name, options = {}) => {
       let dirName = name;
 
       if (!dirName) {
@@ -63,9 +64,15 @@ export default function(program) {
 
           writePackageJsonSync(pkg, dirName);
 
-          return startProcess('npm', ['install', '@shopify/slate-tools', '--save-dev', '--save-exact'], {
-            cwd: root,
-          });
+          if (options.yarn) {
+            return startProcess('yarn', ['add', '@shopify/slate-tools', '--dev', '--exact'], {
+              cwd: root,
+            });
+          } else {
+            return startProcess('npm', ['install', '@shopify/slate-tools', '--save-dev', '--save-exact'], {
+              cwd: root,
+            });
+          }
         })
         .then(() => {
           console.log(`  ${green(figures.tick)} devDependencies installed`);

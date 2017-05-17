@@ -10,7 +10,8 @@ export default function(program) {
   program
     .command('migrate')
     .description('Converts an existing theme to work with Slate.')
-    .action(async () => {
+    .option('--yarn', 'installs theme dependencies with yarn instead of npm')
+    .action(async (options = {}) => {
       const workingDirectory = process.cwd();
       const answers = await prompt({
         type: 'confirm',
@@ -83,7 +84,15 @@ export default function(program) {
         console.log('  Installing Slate dependencies...');
         console.log('');
 
-        await startProcess('npm', ['install', '@shopify/slate-tools', '--save-dev', '--save-exact'], {cwd: workingDirectory});
+        if (options.yarn) {
+          await startProcess('yarn', ['add', '@shopify/slate-tools', '--dev', '--exact'], {
+            cwd: workingDirectory,
+          });
+        } else {
+          await startProcess('npm', ['install', '@shopify/slate-tools', '--save-dev', '--save-exact'], {
+            cwd: workingDirectory,
+          });
+        }
 
         console.log('');
         console.log(`  ${green(figures.tick)} Slate dependencies installed`);
