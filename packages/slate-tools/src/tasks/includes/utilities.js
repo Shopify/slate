@@ -3,6 +3,8 @@ const fs = require('fs');
 const _ = require('lodash');
 const Promise = require('bluebird');
 
+let errors = [];
+
 /**
  * Utility and reusable functions used by our Gulp Tasks
  *
@@ -13,13 +15,36 @@ const Promise = require('bluebird');
 const utilities = {
 
   /**
-   * Generic error handler for streams called in `watch` tasks (used by gulp-plumber)
+   * Handles the output for any errors that might have been captured
+   * during the build and zip Gulp tasks.
+   *
+   * @memberof slate-cli.utilities
+   */
+  outputErrors: () => {
+    if (!errors.length) {
+      return;
+    }
+
+    gutil.log(gutil.colors.red(`There were errors during the build:\n`));
+
+    errors.forEach((err) => {
+      gutil.log(gutil.colors.red(err));
+    });
+
+    errors = [];
+  },
+
+  /**
+   * Generic error handler for streams called in `watch` tasks (used by gulp-plumber).
+   * Any error that is thrown inside of a task is added to the errors array.
    *
    * @memberof slate-cli.utilities
    * @param {Error} err
    */
-  errorHandler: function(err) { // eslint-disable-line babel/object-shorthand
+  errorHandler: (err) => {
     gutil.log(gutil.colors.red(err));
+    errors.push(err);
+
     this.emit('end');
   },
 

@@ -4,6 +4,8 @@ const debug = require('debug')('slate-tools');
 const argv = require('yargs').argv;
 const runSequence = require('run-sequence');
 
+const utils = require('./tasks/includes/utilities.js');
+
 if (argv.environment && argv.environment !== 'undefined') {
   debug(`setting tkEnvironments to ${argv.environment}`);
   gutil.env.environments = argv.environment;
@@ -16,6 +18,7 @@ gulp.task('build', (done) => {
   runSequence(
     ['clean'],
     ['build:js', 'build:vendor-js', 'build:css', 'build:assets', 'build:config', 'build:svg'],
+    ['output:errors'],
     done,
   );
 });
@@ -48,7 +51,7 @@ gulp.task('test', (done) => {
  * @static
  */
 gulp.task('zip', (done) => {
-  runSequence('build:zip', 'compress', done);
+  runSequence('build:zip', 'compress', 'output:errors', done);
 });
 
 /**
@@ -114,4 +117,12 @@ gulp.task('deploy:manual', (done) => {
  */
 gulp.task('default', (done) => {
   runSequence('deploy', 'watch', done);
+});
+
+/**
+ * Handles the error summary at the end if there are errors to output.
+ * This task will only be run for the build and zip tasks.
+ */
+gulp.task('output:errors', () => {
+  utils.outputErrors();
 });
