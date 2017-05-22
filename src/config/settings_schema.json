@@ -2,10 +2,10 @@
   {
     "name": "theme_info",
     "theme_name": "Slate",
-    "theme_version": "1.0.0",
+    "theme_version": "0.10.0",
     "theme_author": "Shopify",
     "theme_documentation_url": "https://github.com/Shopify/slate",
-    "theme_support_email": "theme-support@shopify.com"
+    "theme_support_url": "https://shopify.github.io/slate/"
   },
   {
     "name": "Typography",
