@@ -4,8 +4,8 @@
     "theme_name": "Slate",
     "theme_version": "0.10.0",
     "theme_author": "Shopify",
-    "theme_documentation_url": "https://github.com/Shopify/slate",
-    "theme_support_url": "https://shopify.github.io/slate/"
+    "theme_documentation_url": "https://shopify.github.io/slate/",
+    "theme_support_url": "https://github.com/Shopify/slate"
   },
   {
     "name": "Typography",
