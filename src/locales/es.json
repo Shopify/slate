@@ -235,7 +235,8 @@
     },
     "footer": {
       "social_platform": "{{ name }} en {{ platform }}",
-      "copyright": "Derechos de autor"
+      "copyright": "Derechos de autor",
+      "payment_methods": "Medios de pago aceptados"
     }
   },
   "products": {
