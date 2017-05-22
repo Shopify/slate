@@ -46,6 +46,7 @@ bower_components
 
 # Other
 .DS_Store
+.ruby-version
 bundle.js
 test/output
 lib/
