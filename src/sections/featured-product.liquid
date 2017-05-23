@@ -41,13 +41,11 @@
     <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
 
     <form action="/cart/add" method="post" enctype="multipart/form-data">
-      {% unless product.variants.size == 1 and product.options.size == 1 and product.options.first == 'Title' and product.variants.first.title == 'Default Title' %}
+      {% unless product.has_only_default_variant %}
         {% for option in product.options_with_values %}
           <div class="selector-wrapper js">
-            <label
-              {% if option.name == 'default' %}class="label-hidden"{% endif %}
-              for="SingleOptionSelector-{{ section.id }}-{{ forloop.index0 }}">
-                {{ option.name }}
+            <label for="SingleOptionSelector-{{ section.id }}-{{ forloop.index0 }}">
+              {{ option.name }}
             </label>
 
             <select
