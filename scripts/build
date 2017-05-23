@@ -21,13 +21,13 @@ function buildZip(name, directories = [], files = []) {
 
   archive.pipe(output);
 
-  for (var i = 0; i < directories.length; i++) {
-    archive.directory(directories[i]);
-  }
+  directories.forEach((directory) => {
+    archive.directory(directory);
+  });
 
-  for (var i = 0; i < files.length; i++) {
-    archive.file(files[i]);
-  }
+  files.forEach((file) => {
+    archive.file(file);
+  });
 
   archive.finalize();
 }
