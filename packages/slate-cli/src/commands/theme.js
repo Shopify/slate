@@ -42,7 +42,7 @@ export default function(program) {
 
       if (existsSync(root)) {
         console.log('');
-        console.error(red(`  ${figures.cross} ${root} is not an empty directory`));
+        console.error(red(`  ${figures.cross} The ${root} directory already exists`));
         console.log('');
         return null;
       }
