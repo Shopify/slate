@@ -32,8 +32,8 @@
             <td>
               <a href="{{ item.url }}">{{ item.product.title }}</a>
 
-              {% unless item.variant.title contains 'Default' %}
-              <p>{{ item.variant.title }}</p>
+              {% unless item.product.has_only_default_variant %}
+                <p>{{ item.variant.title }}</p>
               {% endunless %}
 
               <p>{{ item.vendor }}</p>
