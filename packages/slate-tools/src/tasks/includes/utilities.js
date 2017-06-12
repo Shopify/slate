@@ -1,5 +1,4 @@
 const gutil = require('gulp-util');
-const fs = require('fs');
 const _ = require('lodash');
 const Promise = require('bluebird');
 
@@ -62,21 +61,6 @@ const utilities = {
       results.push(result);
       return result;
     }).thenReturn(results).all();
-  },
-
-  /**
-   * Checks whether the path is a directory
-   *
-   * @param path {String} - a string representing the path to a file
-   * @returns {boolean}
-   */
-  isDirectory: (path) => {
-    try {
-      // eslint-disable-next-line no-sync
-      return fs.statSync(path).isDirectory();
-    } catch (error) {
-      return false;
-    }
   },
 
   /**
