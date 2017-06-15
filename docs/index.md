@@ -11,8 +11,10 @@ Slate allows you to sync local files with your live shop, deploy to multiple env
 ## Getting started
 
 <blockquote>
-  The steps below walk through installing Slate globally and configuring your development theme to sync with your store. If you want the theme files without the build tools dependency, <a href="https://sdks.shopifycdn.com/slate/latest/slate-theme.zip" data-ga-track="slateZip">get the latest zip here</a>.
+Slate works with <a href="https://nodejs.org/en/">Node version 6.x</a>, the current LTS (long-term support) release.  This version is recommended over older versions of Node.
 </blockquote>
+
+The steps below walk through installing Slate globally and configuring your development theme to sync with your store. If you want the theme files without the build tools dependency, <a href="https://sdks.shopifycdn.com/slate/latest/slate-theme.zip" data-ga-track="slateZip">get the latest zip here</a>.
 
 1. Install Slate with `npm install -g @shopify/slate`.
 2. Create a new theme with `slate theme theme-name`, where `theme-name` will be a newly created folder. If you already have a theme locally, you can use the `slate migrate` command and [follow these steps](/slate/commands/#migrate) instead.
