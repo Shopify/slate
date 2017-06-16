@@ -1,11 +1,14 @@
 # Change Log
 
-## [Unreleased](https://github.com/Shopify/slate/tree/HEAD)
-
-[Full Changelog](https://github.com/Shopify/slate/compare/v0.10.1...HEAD)
+## [v0.10.2](https://github.com/Shopify/slate/tree/v0.10.2) (2017-06-16)
+[Full Changelog](https://github.com/Shopify/slate/compare/v0.10.1...v0.10.2)
 
 **Merged pull requests:**
 
+- add a sample gitignore [\#179](https://github.com/Shopify/slate/pull/179) ([NathanPJF](https://github.com/NathanPJF))
+- Flushing cache [\#178](https://github.com/Shopify/slate/pull/178) ([NathanPJF](https://github.com/NathanPJF))
+- Node version statement [\#175](https://github.com/Shopify/slate/pull/175) ([NathanPJF](https://github.com/NathanPJF))
+- use product drop for detecting default variant [\#164](https://github.com/Shopify/slate/pull/164) ([NathanPJF](https://github.com/NathanPJF))
 - Fix build tools doc [\#161](https://github.com/Shopify/slate/pull/161) ([chrisberthe](https://github.com/chrisberthe))
 
 ## [v0.10.1](https://github.com/Shopify/slate/tree/v0.10.1) (2017-05-26)
