@@ -9,3 +9,7 @@ deploy:
     - ejson decrypt -o secrets.json secrets.ejson
     - node scripts/build
     - node scripts/deploy
+
+  post:
+    - curl -X PURGE https://sdks.shopifycdn.com/slate/latest/slate-theme.zip
+    - curl -X PURGE https://sdks.shopifycdn.com/slate/latest/slate-src.zip
