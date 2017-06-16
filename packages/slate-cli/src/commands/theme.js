@@ -5,7 +5,7 @@ import {prompt} from 'inquirer';
 import rimraf from 'rimraf';
 import {green, red} from 'chalk';
 import figures from 'figures';
-import {downloadFromUrl, unzip, startProcess, writePackageJsonSync} from '../utils';
+import {downloadFromUrl, unzip, renameFile, startProcess, writePackageJsonSync} from '../utils';
 
 export default function(program) {
   program
@@ -78,6 +78,12 @@ export default function(program) {
           console.log(`  ${green(figures.tick)} devDependencies installed`);
           console.log(`  ${green(figures.tick)} ${dirName} theme is ready`);
           console.log('');
+
+          return null;
+        })
+        .then(() => {
+          renameFile(join(root, 'config-sample.yml'), join(root, 'config.yml'));
+          renameFile(join(root, '.gitignore-sample', join(root, '.gitignore');
 
           return null;
         })
