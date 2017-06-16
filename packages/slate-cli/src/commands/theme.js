@@ -89,7 +89,6 @@ export default function(program) {
           ];
 
           function renamePromiseFactory({oldFile, newFile, dir}) {
-            console.log(`  Renaming ${oldFile} to ${newFile}...`);
             return renameFile(join(dir, oldFile), join(dir, newFile));
           }
 
