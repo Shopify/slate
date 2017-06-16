@@ -1,3 +1,18 @@
+# This file contains a list of files and folders to be ignored when
+# committing to a git repository.  Ignored files are both Slate project
+# specific files as well as commonly ignored files on any project.
+
+# For more information on this .gitignore files, see GitHub's
+# documentation: https://help.github.com/articles/ignoring-files/
+
+# Project #
+###################
+node_modules
+dist
+upload
+deploy.log
+config.yml
+
 # Compiled source #
 ###################
 *.com
@@ -39,13 +54,8 @@ Thumbs.db
 # Custom #
 ######################
 *.sass-cache*
-node_modules
 _site
-dist
-upload
 /.idea
-deploy.log
-config.yml
 secrets.json
 .jekyll-metadata
 .ruby-version

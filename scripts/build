@@ -36,4 +36,4 @@ function _buildZip(name, directories = [], files = []) {
   archive.finalize();
 }
 
-_buildZip('slate-src', ['src'], ['config-sample.yml']);
+_buildZip('slate-src', ['src'], ['config-sample.yml', '.gitignore-sample']);
