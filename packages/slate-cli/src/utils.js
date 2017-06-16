@@ -79,14 +79,18 @@ export function writePackageJsonSync(target, name = 'theme') {
 /**
  * Rename a file path
  *
- * @param {string} current - The path to the file currently.
- * @param {string} target - The renamed path of the file.
+ * @param {string} oldPath - The path to the file.
+ * @param {string} newPath - The path to the new file.
  */
-export function renameFile(current, target) {
-  rename(current, target, (err) => {
-    if (err) {
-      throw err;
-    }
+export function renameFile(oldPath, newPath) {
+  return new Promise((resolve, reject) => {
+    rename(oldPath, newPath, (err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve();
+    });
   });
 }
 

@@ -81,11 +81,28 @@ export default function(program) {
 
           return null;
         })
-        .then(() => {
-          renameFile(join(root, 'config-sample.yml'), join(root, 'config.yml'));
-          renameFile(join(root, '.gitignore-sample', join(root, '.gitignore');
+        .then(async () => {
+
+          const sampleFiles = [
+            {oldFile: 'config-sample.yml', newFile: 'config.yml', dir: root},
+            {oldFile: '.gitignore-sample', newFile: '.gitignore', dir: root},
+          ];
+
+          function renamePromiseFactory({oldFile, newFile, dir}) {
+            console.log(`  Renaming ${oldFile} to ${newFile}...`);
+            return renameFile(join(dir, oldFile), join(dir, newFile));
+          }
+
+          const promises = sampleFiles.map(renamePromiseFactory);
+
+          try {
+            await Promise.all(promises);
+          } catch (err) {
+            console.error(red(`  ${err}`));
+          }
 
           return null;
+
         })
         .catch((err) => {
           console.error(red(`  ${err}`));
