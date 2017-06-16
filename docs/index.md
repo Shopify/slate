@@ -46,3 +46,9 @@ The steps below walk through installing Slate globally and configuring your deve
 * `slate zip` — Builds and compresses your `dist` to a zip file for easy manual upload
 
 > Learn more about [all commands and descriptions](/slate/commands/) or how to [deploy to multiple environments](/slate/commands/#sync-commands).
+
+## Working with `git`
+
+A new Slate project comes with a `.gitignore-sample` file.  This file is meant to be a starting point for your own `.gitignore` file if you will be using `git` for version control. The sample files contains a list of files and folders to be ignored when committing to a git repository.  Ignored files are both Slate project specific files as well as commonly ignored files on any project.
+
+For more information on this `.gitignore` files, see GitHub's documentation: https://help.github.com/articles/ignoring-files/
