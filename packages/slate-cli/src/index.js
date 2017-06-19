@@ -54,9 +54,10 @@ const currentDirectory = __dirname;
 const workingDirectory = process.cwd();
 const pkg = require(join(currentDirectory, normalize('../package.json')));
 
+// Notify for updates every 1 week
 updateNotifier({
   pkg,
-  updateCheckInterval: 1000 * 60 * 60 * 24 * 7, // 1 week
+  updateCheckInterval: 1000 * 60 * 60 * 24 * 7,
 }).notify();
 
 // Global commands
