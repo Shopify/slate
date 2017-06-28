@@ -16,10 +16,19 @@
     "type": "git",
     "url": "https://github.com/Shopify/slate.git"
   },
+  "scripts": {
+    "test": "./node_modules/karma/bin/karma start"
+  },
   "devDependencies": {
     "@shopify/slate-tools": "0.3.1",
     "archiver": "1.1.0",
     "aws-sdk": "2.6.12",
-    "mime-types": "2.1.12"
+    "chai": "4.0.2",
+    "karma": "^1.7.0",
+    "karma-chai": "^0.1.0",
+    "karma-mocha": "^1.3.0",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "mime-types": "2.1.12",
+    "mocha": "3.4.2"
   }
 }
