@@ -63,8 +63,8 @@ slate.a11y = {
    * @param {string} options.namespace - Namespace used for new focus event handler
    */
   trapFocus: function(options) {
-    var eventName = options.eventNamespace
-      ? 'focusin.' + options.eventNamespace
+    var eventName = options.namespace
+      ? 'focusin.' + options.namespace
       : 'focusin';
 
     if (!options.$elementToFocus) {
