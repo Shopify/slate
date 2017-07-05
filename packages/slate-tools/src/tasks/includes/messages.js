@@ -73,6 +73,10 @@ const messages = {
       ' and run a full <slate deploy> as a result.';
   },
 
+  translationsFailed: () => {
+    return 'Translation errors detected.';
+  },
+
   invalidThemeId: (themeId, env) => {
     gutil.log('Invalid theme id for',
       gutil.colors.cyan(`${env}: ${themeId}`),

@@ -1,6 +1,8 @@
 const gutil = require('gulp-util');
 const _ = require('lodash');
 
+const messages = require('./messages.js');
+
 /** Class representing a custom reporter for @shopify/theme-lint */
 export default class Reporter {
   constructor() {
@@ -53,6 +55,8 @@ export default class Reporter {
           return gutil.log(failure[0]);
         });
       });
+
+      throw new Error(messages.translationsFailed());
     }
 
     this.successes = this.failures = [];
