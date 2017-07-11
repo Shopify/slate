@@ -49,3 +49,5 @@ config.yml
 secrets.json
 .jekyll-metadata
 .ruby-version
+npm-shrinkwrap.json
+package-lock.json
