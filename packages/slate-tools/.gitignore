@@ -50,3 +50,5 @@ bower_components
 bundle.js
 test/output
 lib/
+npm-shrinkwrap.json
+package-lock.json

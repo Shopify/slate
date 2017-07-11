@@ -78,8 +78,7 @@ gulp.task('validate:id', () => {
 
     messages.configError();
 
-    const exitCode = 2;
-    return process.exit(exitCode);
+    return process.exit(2);
   }
 
   const tkConfig = yaml.safeLoad(file);
@@ -105,8 +104,7 @@ gulp.task('validate:id', () => {
     .catch((result) => {
       // stop process to prevent deploy defaulting to published theme
       messages.invalidThemeId(result.themeId, result.environment);
-      const exitCode = 2;
-      return process.exit(exitCode);
+      return process.exit(2);
     });
 });
 
