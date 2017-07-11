@@ -21,5 +21,5 @@ dependencies:
 test:
   pre:
     - slate build
-  override:
+  post:
     - slate test
