@@ -4,12 +4,6 @@
       max-width: {{ section.settings.logo_max_width }}px;
     }
   {% endif %}
-
-  {% if section.settings.align_logo == 'left' %}
-    .site-header__logo-image {
-      margin: 0;
-    }
-  {% endif %}
 </style>
 <div data-section-id="{{ section.id }}" data-section-type="header-section">
   <header role="banner">
@@ -121,10 +115,14 @@
         "label": "Logo image"
       },
       {
-        "type": "text",
+        "type": "range",
         "id": "logo_max_width",
+        "min": 50,
+        "max": 450,
+        "step": 8,
+        "unit": "px",
         "label": "Custom logo width (in pixels)",
-        "default": "250"
+        "default": 250
       },
       {
         "type": "link_list",
