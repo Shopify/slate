@@ -1,31 +1,20 @@
 # Change Log
 
-## [Unreleased](https://github.com/Shopify/slate-cli/tree/HEAD)
+## [v0.11.0](https://github.com/Shopify/slate-cli/tree/v0.11.0) (2017-07-18)
+[Full Changelog](https://github.com/Shopify/slate-cli/compare/v0.10.0...v0.11.0)
 
-[Full Changelog](https://github.com/Shopify/slate-cli/compare/v0.10.0...HEAD)
+**Merged pull requests:**
 
-**Closed issues:**
-
-- Support yarn when installing dependencies [\#123](https://github.com/Shopify/slate-cli/issues/123)
-- `slate help` should alias `slate --help` \(atm it says "Unknown command: help"\) [\#107](https://github.com/Shopify/slate-cli/issues/107)
+- rename sample files once unzipped [\#132](https://github.com/Shopify/slate-cli/pull/132) ([NathanPJF](https://github.com/NathanPJF))
+- Update directory exists error message [\#128](https://github.com/Shopify/slate-cli/pull/128) ([chrisberthe](https://github.com/chrisberthe))
+- add changelog and config file [\#127](https://github.com/Shopify/slate-cli/pull/127) ([NathanPJF](https://github.com/NathanPJF))
 
 ## [v0.10.0](https://github.com/Shopify/slate-cli/tree/v0.10.0) (2017-05-17)
 [Full Changelog](https://github.com/Shopify/slate-cli/compare/v0.9.1...v0.10.0)
 
-**Implemented enhancements:**
-
-- Migrate should generate template config.yml if missing [\#122](https://github.com/Shopify/slate-cli/issues/122)
-- Error when config.yml isn't there [\#118](https://github.com/Shopify/slate-cli/issues/118)
-- Generate config.yml during migration if none available [\#125](https://github.com/Shopify/slate-cli/pull/125) ([chrisberthe](https://github.com/chrisberthe))
-
-**Closed issues:**
-
-- Transfer failed: File\(s\) failed to upload to store. [\#116](https://github.com/Shopify/slate-cli/issues/116)
-- Sync Commands open browser window with published theme, not Development theme. [\#115](https://github.com/Shopify/slate-cli/issues/115)
-- Update / Upgrade npm package dependencies [\#71](https://github.com/Shopify/slate-cli/issues/71)
-
 **Merged pull requests:**
 
+- Generate config.yml during migration if none available [\#125](https://github.com/Shopify/slate-cli/pull/125) ([chrisberthe](https://github.com/chrisberthe))
 - Add install deps with yarn option [\#124](https://github.com/Shopify/slate-cli/pull/124) ([macdonaldr93](https://github.com/macdonaldr93))
 - Add test command to README [\#120](https://github.com/Shopify/slate-cli/pull/120) ([chrisberthe](https://github.com/chrisberthe))
 - Templates issues prs [\#114](https://github.com/Shopify/slate-cli/pull/114) ([NathanPJF](https://github.com/NathanPJF))
@@ -35,14 +24,6 @@
 ## [v0.9.1](https://github.com/Shopify/slate-cli/tree/v0.9.1) (2017-03-06)
 [Full Changelog](https://github.com/Shopify/slate-cli/compare/v0.9.0...v0.9.1)
 
-**Fixed bugs:**
-
-- slate theme utf8 figures [\#109](https://github.com/Shopify/slate-cli/issues/109)
-
-**Closed issues:**
-
-- `slate th` claims npm commands are a success despite them failing [\#104](https://github.com/Shopify/slate-cli/issues/104)
-
 **Merged pull requests:**
 
 - Upgrade to 0.9.1 for cross-OS support for figures [\#111](https://github.com/Shopify/slate-cli/pull/111) ([NathanPJF](https://github.com/NathanPJF))
@@ -51,45 +32,12 @@
 ## [v0.9.0](https://github.com/Shopify/slate-cli/tree/v0.9.0) (2017-02-14)
 [Full Changelog](https://github.com/Shopify/slate-cli/compare/v0.8.5...v0.9.0)
 
-**Implemented enhancements:**
-
-- Migrate task [\#108](https://github.com/Shopify/slate-cli/pull/108) ([cshold](https://github.com/cshold))
-
 **Merged pull requests:**
 
+- Migrate task [\#108](https://github.com/Shopify/slate-cli/pull/108) ([cshold](https://github.com/cshold))
 - Bump commander version for alias spacing [\#106](https://github.com/Shopify/slate-cli/pull/106) ([macdonaldr93](https://github.com/macdonaldr93))
 
 ## [v0.8.5](https://github.com/Shopify/slate-cli/tree/v0.8.5) (2016-11-22)
-**Implemented enhancements:**
-
-- Cleaner error when you run a slate command from a non-slate folder [\#13](https://github.com/Shopify/slate-cli/issues/13)
-
-**Fixed bugs:**
-
-- Windows 10 UTF-8 Characters \(check mark, times\) [\#88](https://github.com/Shopify/slate-cli/issues/88)
-- Unsecure connection on localhost [\#63](https://github.com/Shopify/slate-cli/issues/63)
-- A few commands log "\[\]" when they're done [\#45](https://github.com/Shopify/slate-cli/issues/45)
-
-**Closed issues:**
-
-- Link in `config-sample.yml` leads to 404 [\#99](https://github.com/Shopify/slate-cli/issues/99)
-- unclear messaging around "Slate theme directory" [\#98](https://github.com/Shopify/slate-cli/issues/98)
-- Slate help:  Commands should not have shortforms, or formatting should be changed [\#97](https://github.com/Shopify/slate-cli/issues/97)
-- Verbose ThemeKit output - no context through Slate [\#96](https://github.com/Shopify/slate-cli/issues/96)
-- Cleaner / More clear error for missing `config.yml` [\#95](https://github.com/Shopify/slate-cli/issues/95)
-- setup / publish as npm package [\#73](https://github.com/Shopify/slate-cli/issues/73)
-- Windows Support [\#72](https://github.com/Shopify/slate-cli/issues/72)
-- Add npm module for https tunnelling \(to get around "warning" page\) [\#70](https://github.com/Shopify/slate-cli/issues/70)
-- expose themekit version via command / option [\#69](https://github.com/Shopify/slate-cli/issues/69)
-- GH Readme: Requirements Section [\#68](https://github.com/Shopify/slate-cli/issues/68)
-- GH Readme: Contributing & Code of Conduct [\#67](https://github.com/Shopify/slate-cli/issues/67)
-- Should the default behaviour be to replace the active theme? [\#43](https://github.com/Shopify/slate-cli/issues/43)
-- Default license uses "2016 Shopify Inc" [\#42](https://github.com/Shopify/slate-cli/issues/42)
-- Should we `git remote add origin`? [\#41](https://github.com/Shopify/slate-cli/issues/41)
-- `slate new theme` includes repodb.yml in target directory [\#40](https://github.com/Shopify/slate-cli/issues/40)
-- Hanging when choosing to overwrite active theme [\#36](https://github.com/Shopify/slate-cli/issues/36)
-- slate new theme breaks when not tracking in git [\#15](https://github.com/Shopify/slate-cli/issues/15)
-
 **Merged pull requests:**
 
 - Strict dev deps and updated packages [\#103](https://github.com/Shopify/slate-cli/pull/103) ([stevebosworth](https://github.com/stevebosworth))
