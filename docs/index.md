@@ -22,13 +22,13 @@ The steps below walk through installing Slate globally and configuring your deve
   * Not sure how to create a private app? [Learn how here](https://help.shopify.com/api/guides/api-credentials#get-credentials-through-the-shopify-admin).
   * Set the "Theme templates and theme assets" permission to "Read and write".
   <img src="{{ "/assets/images/app-permission.jpg" | prepend: site.baseurl }}" alt="Private app permission requirements" class="demo-image demo-image--app">
-4. Rename `config-sample.yml` to `config.yml` and add your store information and private app credentials:
+4. Edit the `config.yml` by adding your store information and private app credentials:
   * **store:** the Shopify-specific URL for this store/environment (ie. my-store.myshopify.com)
   * **theme_id:** the unique id for the theme you want to write to when deploying to this store. You can find this information in the URL of the theme's online editor at Shopify [admin/themes](https://shopify.com/admin/themes). Alternatively, you can use `"live"` as shorthand for the published theme.
   <img src="{{ "/assets/images/theme-id.png" | prepend: site.baseurl }}" alt="Private app credentials" class="demo-image demo-image--app">
   * **password:** the password generated via a private app on this store.  Access this information on your Shopify [admin/apps/private](https://shopify.com/admin/apps/private) page.
   <img src="{{ "/assets/images/app-credentials.jpg" | prepend: site.baseurl }}" alt="Private app credentials" class="demo-image demo-image--app">
-5. From within your new project folder in your command line, use the commands below to build, sync, and watch your local files.
+5. From within your new project folder in your command line, use the [Slate commands](#slate-commands) below to build, sync, and watch your local files.
 
 ## Slate commands
 
@@ -47,8 +47,8 @@ The steps below walk through installing Slate globally and configuring your deve
 
 > Learn more about [all commands and descriptions](/slate/commands/) or how to [deploy to multiple environments](/slate/commands/#sync-commands).
 
-## Working with `git`
+## Working with git repositories
 
-A new Slate project comes with a `.gitignore-sample` file.  This file is meant to be a starting point for your own `.gitignore` file if you will be using `git` for version control. The sample files contains a list of files and folders to be ignored when committing to a git repository. Ignored files are both Slate project specific files as well as commonly ignored files on any project.
+A new Slate project comes with a `.gitignore` file.  This file is useful if you plan on using `git` for version control as it contains a list of files and folders to be ignored when committing to a git repository. Ignored files are both Slate project specific files as well as commonly ignored files on any project.
 
 For more information on `.gitignore` files, see GitHub's documentation: https://help.github.com/articles/ignoring-files/
