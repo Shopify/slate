@@ -69,8 +69,8 @@ The steps below walk through installing Slate globally and configuring your deve
 
 > Learn more about [all commands and descriptions](/slate/commands/) or how to [deploy to multiple environments](/slate/commands/#sync-commands).
 
-## Working with git repositories
+## Working with Git repositories
 
-A new Slate project comes with a `.gitignore` file.  This file is useful if you plan on using `git` for version control as it contains a list of files and folders to be ignored when committing to a git repository. Ignored files are both Slate project specific files as well as commonly ignored files on any project.
+A new Slate project comes with a `.gitignore` file.  This file is useful if you plan on using Git for version control as it contains a list of files and folders to be ignored when committing to a git repository. Ignored files are both Slate project specific files as well as commonly ignored files on any project.
 
 For more information on `.gitignore` files, see GitHub's documentation: https://help.github.com/articles/ignoring-files/
