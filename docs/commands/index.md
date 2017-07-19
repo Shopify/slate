@@ -33,9 +33,9 @@ Generate a new blank theme. The `name` argument is required for the new theme di
 slate migrate
 ```
 
-Converts an existing theme to work with Slate. Run this command from your project root to install dependencies and restructure your theme files into a `src/` directory. Empty `icons/`, `styles/`, and `scripts/` folders will also be created.
+Converts an existing theme to work with Slate. Run this command from your project root to install dependencies and restructure your theme files into a `src/` directory. Empty `icons/`, `styles/`, and `scripts/` folders will also be created.  
 
-Create `config.yml` in your root using [this sample file](https://github.com/Shopify/slate/blob/master/config-sample.yml), then use [theme commands](#theme-commands) to start developing.
+A `config.yml` will also be created in your root directory which is required for [build commands](#build-commands) and [sync commands](#sync-commands).
 
 ##### Options
 ```
