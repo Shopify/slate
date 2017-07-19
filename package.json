@@ -20,7 +20,7 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@shopify/slate-tools": "0.3.1",
+    "@shopify/slate-tools": "0.3.3",
     "archiver": "1.1.0",
     "aws-sdk": "2.6.12",
     "jest": "^20.0.4",
