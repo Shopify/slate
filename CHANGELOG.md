@@ -1,5 +1,19 @@
 # Change Log
 
+## [v0.11.0](https://github.com/Shopify/slate/tree/v0.11.0) (2017-07-19)
+[Full Changelog](https://github.com/Shopify/slate/compare/v0.10.2...v0.11.0)
+
+**Merged pull requests:**
+
+- Docs new getting started [\#205](https://github.com/Shopify/slate/pull/205) ([NathanPJF](https://github.com/NathanPJF))
+- Use @shopify/slate-tools v0.3.3 [\#203](https://github.com/Shopify/slate/pull/203) ([NathanPJF](https://github.com/NathanPJF))
+- 0.11.0 [\#202](https://github.com/Shopify/slate/pull/202) ([NathanPJF](https://github.com/NathanPJF))
+- Help users avoid resetting their theme data [\#201](https://github.com/Shopify/slate/pull/201) ([t-kelly](https://github.com/t-kelly))
+- Update settings for header section [\#198](https://github.com/Shopify/slate/pull/198) ([t-kelly](https://github.com/t-kelly))
+- Update normalize scss to v7 [\#194](https://github.com/Shopify/slate/pull/194) ([t-kelly](https://github.com/t-kelly))
+- Add Jest for testing [\#193](https://github.com/Shopify/slate/pull/193) ([t-kelly](https://github.com/t-kelly))
+- trapFocus\(\) - Replace eventNameSpace with namespace [\#187](https://github.com/Shopify/slate/pull/187) ([huguestennier](https://github.com/huguestennier))
+
 ## [v0.10.2](https://github.com/Shopify/slate/tree/v0.10.2) (2017-06-16)
 [Full Changelog](https://github.com/Shopify/slate/compare/v0.10.1...v0.10.2)
 
