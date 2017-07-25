@@ -38,8 +38,8 @@
       }
     },
     "search": {
-      "no_results_html": "Din søgnig for \"{{ terms }}\" fandt ikke nogle resultater.",
-      "results_for_html": "Din søgnig for \"{{ terms }}\" fandt følgende:",
+      "no_results_html": "Din søgning for \"{{ terms }}\" fandt ikke nogle resultater.",
+      "results_for_html": "Din søgning for \"{{ terms }}\" fandt følgende:",
       "title": "Søg efter produkter på vores site",
       "placeholder": "Søg på vores butik",
       "submit": "Søg"
