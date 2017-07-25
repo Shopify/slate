@@ -154,7 +154,7 @@ Slate projects include a `vendor` folder where theme developers are encouraged t
 
 ## Translation keys
 
-Slate ships with six languages — English, French (Canadian), Spanish, German, Danish, and two dialects of Portuguese (Brazilian and European).  Translation keys for these languages can be found in the `locales` folder.  In your theme files, translated strings can be retrieved with the Liquid translation filter `t`.
+Slate ships with seven languages — English, French (Canadian), Spanish, German, Danish, and two dialects of Portuguese (Brazilian and European).  Translation keys for these languages can be found in the `locales` folder.  In your theme files, translated strings can be retrieved with the Liquid translation filter `t`.
 
 {% raw %}
 ```
