@@ -1,10 +1,5 @@
 {
   "presets": [
     "shopify"
-  ],
-  "plugins": [
-    ["add-shopify-header", {
-      "files": ["src/index.js", "src/gulpfile.js"]
-    }]
   ]
 }

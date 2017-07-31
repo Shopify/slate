@@ -13,7 +13,7 @@ _Note: [ThemeKit](http://shopify.github.io/themekit/) is the tool that powers Sl
 
 ### Finding your theme_id
 
-_**warning:** some commands ([`start`](https://github.com/Shopify/slate-cli#start), [`deploy`](https://github.com/Shopify/slate-cli#deploy)) will overwrite the existing code on this `theme_id` with empty boilerplate.
+_**warning:** some commands ([`start`](https://github.com/Shopify/slate/blob/master/packages/slate-cli#start), [`deploy`](https://github.com/Shopify/slate/blob/master/packages/slate-cli#deploy)) will overwrite the existing code on this `theme_id` with empty boilerplate.
 To avoid losing work, we suggest you go to [/admin/themes](https://my-store.myshopify.com/admin/themes) and duplicate
 an existing theme to work from._
 
