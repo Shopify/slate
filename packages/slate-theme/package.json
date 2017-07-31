@@ -1,6 +1,7 @@
 {
   "name": "slate-theme",
   "version": "0.11.0",
+  "private": true,
   "author": "Shopify Inc.",
   "description": "A theme scaffold and command line tool for developing Shopify themes.",
   "keywords": [
@@ -17,17 +18,11 @@
     "url": "https://github.com/Shopify/slate.git"
   },
   "scripts": {
-    "test": "node_modules/.bin/lerna run test",
-    "lint": "node_modules/.bin/lerna run lint",
-    "bootstrap": "npm install && node_modules/.bin/lerna bootstrap",
-    "publish": "git pull origin master && node_modules/.bin/lerna publish",
-    "changelog": "node_modules/.bin/lerna-changelog"
+    "test": "jest"
   },
   "devDependencies": {
-    "archiver": "1.1.0",
-    "aws-sdk": "2.6.12",
-    "lerna": "^2.0.0",
-    "lerna-changelog": "^0.6.0",
-    "mime-types": "2.1.12"
+    "@shopify/slate-tools": "^0.11.0",
+    "@shopify/slate": "^0.11.0",
+    "jest": "^20.0.4"
   }
 }

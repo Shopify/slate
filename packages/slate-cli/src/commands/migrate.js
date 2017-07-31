@@ -99,7 +99,7 @@ export default function(program) {
         console.log('');
 
         if (!existsSync(configYml)) {
-          const configUrl = 'https://raw.githubusercontent.com/Shopify/slate/master/config-sample.yml';
+          const configUrl = 'https://raw.githubusercontent.com/Shopify/slate//master/packages/slate-theme/config-sample.yml';
 
           await downloadFromUrl(configUrl, join(workingDirectory, 'config.yml'));
 

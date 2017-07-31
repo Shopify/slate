@@ -106,8 +106,8 @@ Starting a fresh project should not include reinventing the wheel. Slate offers 
   - There are no grid classes in the templates so you can easily switch to your preferred grid
 - SVG icon style helpers. [Example]({{ '/css-examples/#svg-icons' | prepend: site.baseurl }})
 - Responsive tables. [Example]({{ '/css-examples/#responsive-tables' | prepend: site.baseurl }})
-- `.btn` class with smart defaults. [Source](https://github.com/Shopify/slate/blob/master/src/styles/global/links-buttons.scss)
-- Form elements with default, disabled, error, and focus states ready to be styled. [Source](https://github.com/Shopify/slate/blob/master/src/styles/global/forms.scss)
+- `.btn` class with smart defaults. [Source](https://github.com/Shopify/slate/blob/master/packages/slate-theme/src/styles/global/links-buttons.scss)
+- Form elements with default, disabled, error, and focus states ready to be styled. [Source](https://github.com/Shopify/slate/blob/master/packages/slate-theme/src/styles/global/forms.scss)
 - Blank state SVG styles [Example]({{ '/css-examples/#blank-states' | prepend: site.baseurl }})
 
 ### Sass mixins
@@ -122,7 +122,7 @@ A few helpful Sass mixins are included in Slate to make responsive, cross-browse
 
 ## JavaScript helpers
 
-Slate provides a number of helper scripts and vendor scripts. The base folder names can be changed to suit your workflow. If changing or adding folders, make sure to update the `require` statement in `theme.js` to `// =require new-folder/script.js`.  
+Slate provides a number of helper scripts and vendor scripts. The base folder names can be changed to suit your workflow. If changing or adding folders, make sure to update the `require` statement in `theme.js` to `// =require new-folder/script.js`.
 
 ```
 scripts/
@@ -140,7 +140,7 @@ More information about the <code>require</code> directive can be found in the <a
 
 Slate provides helper scripts to promote accessibility and make working with theme images, currencies, and product variants easier.  See [JS examples]({{ '/js-examples/' | prepend: site.baseurl }}) for more details on how to use these scripts.
 
-- Accessibility helpers. [Example]({{ '/js-examples/#trap-focus' | prepend: site.baseurl }}). [Source](https://github.com/Shopify/slate/blob/master/src/scripts/slate/a11y.js).
+- Accessibility helpers. [Example]({{ '/js-examples/#trap-focus' | prepend: site.baseurl }}). [Source](https://github.com/Shopify/slate/blob/master/packages/slate-theme/src/scripts/slate/a11y.js).
 - Force tables and videos to be responsive. [Example]({{ '/js-examples/#responsive-tables-and-videos' | prepend: site.baseurl }})
 - Easy handling of theme editor events. [Example]({{ '/js-examples/#section-events' | prepend: site.baseurl }})
 - Format currency in JS the same as Liquid allows. [Example]({{ '/js-examples/#format-currency' | prepend: site.baseurl }})

@@ -38,8 +38,8 @@
   },
   "scripts": {
     "clean": "rimraf lib/",
-    "lint": "eslint --max-warnings 0 -c .eslintrc.json src/",
-    "lint-allow-warning": "eslint -c .eslintrc.json src/",
+    "lint": "eslint --max-warnings 0 src/",
+    "lint-allow-warning": "eslint src/",
     "start": "npm run clean && babel -w -d lib/ src/",
     "test": "npm run lint",
     "prepublish": "npm test && npm run clean && babel -d lib/ src/"
@@ -51,10 +51,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/Shopify/slate-cli.git"
+    "url": "git://github.com/Shopify/slate.git"
   },
-  "homepage": "https://github.com/Shopify/slate-cli#readme",
+  "homepage": "https://github.com/Shopify/slate#readme",
   "bugs": {
-    "url": "https://github.com/Shopify/slate-cli/issues"
+    "url": "https://github.com/Shopify/slate/issues"
   }
 }

@@ -1,5 +1,4 @@
 # Slate CLI
-[![CircleCI](https://circleci.com/gh/Shopify/slate-cli.svg?style=svg&circle-token=83ed3f203115767f7bc4e6f3be07cb93788f4bd2)](https://circleci.com/gh/Shopify/slate-cli)
 
 Slate is a command line tool for Shopify Theme development.  It's designed to assist your development workflow
 and speed up the process of developing, testing and deploying themes to Shopify stores.
@@ -43,7 +42,7 @@ When the theme generator has finished, the theme's `config.yml` file will open a
 You will need to fill in the required fields for each store / environment. Comment out any environments that you want to set up later or Theme Kit will throw an error.
 
 > _For more details on configuring your environments please see our
-**[Store configuration guide](https://github.com/Shopify/slate-cli/blob/master/store-configuration.md)**._
+**[Store configuration guide](https://github.com/Shopify/slate/blob/master/packages/slate-cli/store-configuration.md)**._
 
 #### 3. Navigating the codebase
 
@@ -107,7 +106,7 @@ slate migrate [--options]
 
 Converts an existing theme to work with Slate. Run this command from your project root to install dependencies and restructure your theme files into a `src/` directory.  Empty `icons/`, `styles/` and `scripts/` folders will also be created.
 
-Create `config.yml` in your root using [this sample file](https://github.com/Shopify/slate/blob/master/config-sample.yml), then use [theme commands](#theme-commands) to start developing.
+Create `config.yml` in your root using [this sample file](https://github.com/Shopify/slate/blob//master/packages/slate-theme/config-sample.yml), then use [theme commands](#theme-commands) to start developing.
 
 #### options
 ```
@@ -209,6 +208,6 @@ The zip is overwritten each time you use this command and is not meant to be use
 
 ## License
 
-MIT, see [LICENSE.md](http://github.com/Shopify/slate-cli/blob/master/LICENSE.md) for details.
+MIT, see [LICENSE.md](http://github.com/Shopify/slate/LICENSE.md) for details.
 
 <img src="https://cdn.shopify.com/shopify-marketing_assets/builds/19.0.0/shopify-full-color-black.svg" width="200" />

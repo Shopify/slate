@@ -49,3 +49,7 @@ config.yml
 secrets.json
 .jekyll-metadata
 .ruby-version
+lerna-debug.log
+/packages/slate-cli/lib/
+/packages/slate-tools/lib/
+.changelog/
