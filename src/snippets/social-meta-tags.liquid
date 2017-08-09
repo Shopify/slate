@@ -11,7 +11,7 @@
   {%- assign og_type = 'product' -%}
   {%- capture og_image_tags -%}
     {%- for image in product.images limit: 3 -%}
-      <meta property="og:image" content="http:{{ image.src | product_img_url: '1024x1024' }}">
+      <meta property="og:image:url" content="http:{{ image.src | product_img_url: '1024x1024' }}">
     {%- endfor -%}
   {%- endcapture -%}
   {%- capture og_image_secure_url_tags -%}
@@ -25,7 +25,7 @@
   {%- assign og_type = 'article' -%}
   {%- assign og_description = article.excerpt_or_content | strip_html -%}
   {%- if article.image -%}
-    {%- capture og_image_tags -%}<meta property="og:image" content="http:{{ article.image | img_url: '1024x1024' }}">{%- endcapture -%}
+    {%- capture og_image_tags -%}<meta property="og:image:url" content="http:{{ article.image | img_url: '1024x1024' }}">{%- endcapture -%}
     {%- capture og_image_secure_url_tags -%}<meta property="og:image:secure_url" content="https:{{ article.image | img_url: '1024x1024' }}">{%- endcapture -%}
   {%- endif -%}
 
