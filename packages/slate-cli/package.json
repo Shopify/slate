@@ -1,0 +1,60 @@
+{
+  "name": "@shopify/slate",
+  "version": "0.11.0",
+  "description": "Slate CLI tools",
+  "bin": {
+    "slate": "lib/index.js"
+  },
+  "main": "lib/index.js",
+  "engines": {
+    "node": ">=4"
+  },
+  "license": "MIT",
+  "author": "Shopify Inc.",
+  "dependencies": {
+    "@shopify/commander": "2.9.2",
+    "babel-polyfill": "6.16.0",
+    "chalk": "1.1.3",
+    "cross-spawn": "5.0.1",
+    "debug": "2.3.3",
+    "figures": "2.0.0",
+    "find-root": "1.0.0",
+    "inquirer": "1.2.3",
+    "mv": "2.1.1",
+    "rimraf": "2.5.4",
+    "unzip2": "0.2.5",
+    "update-notifier": "1.0.2"
+  },
+  "devDependencies": {
+    "babel-cli": "6.18.0",
+    "babel-core": "6.18.2",
+    "babel-plugin-add-shopify-header": "1.0.6",
+    "babel-plugin-transform-async-to-generator": "6.16.0",
+    "babel-preset-shopify": "15.0.1",
+    "babel-register": "6.18.0",
+    "eslint": "3.10.2",
+    "eslint-plugin-node": "3.0.4",
+    "eslint-plugin-shopify": "15.1.0"
+  },
+  "scripts": {
+    "clean": "rimraf lib/",
+    "lint": "eslint --max-warnings 0 src/",
+    "lint-allow-warning": "eslint src/",
+    "start": "npm run clean && babel -w -d lib/ src/",
+    "test": "npm run lint",
+    "prepublish": "npm test && npm run clean && babel -d lib/ src/"
+  },
+  "keywords": [
+    "shopify",
+    "slate",
+    "themekit"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Shopify/slate.git"
+  },
+  "homepage": "https://github.com/Shopify/slate#readme",
+  "bugs": {
+    "url": "https://github.com/Shopify/slate/issues"
+  }
+}

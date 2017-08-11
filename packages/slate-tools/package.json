@@ -1,0 +1,68 @@
+{
+  "name": "@shopify/slate-tools",
+  "version": "0.11.0",
+  "description": "Tooling for Shopify themes",
+  "main": "lib/gulpfile.js",
+  "license": "MIT",
+  "author": "Shopify Inc.",
+  "dependencies": {
+    "@shopify/theme-lint": "1.0.3",
+    "@shopify/themekit": "0.6.6",
+    "bluebird": "3.4.6",
+    "browser-sync": "2.18.2",
+    "chokidar": "1.6.1",
+    "cross-spawn": "5.0.1",
+    "debug": "2.3.3",
+    "del": "2.2.2",
+    "find-root": "1.0.0",
+    "gulp": "3.9.1",
+    "gulp-cheerio": "0.6.2",
+    "gulp-cssimport": "5.0.0",
+    "gulp-ext-replace": "0.3.0",
+    "gulp-include": "2.3.1",
+    "gulp-plumber": "1.1.0",
+    "gulp-size": "2.1.0",
+    "gulp-svgmin": "1.2.3",
+    "gulp-uglify": "2.0.0",
+    "gulp-util": "3.0.7",
+    "gulp-zip": "3.2.0",
+    "js-yaml": "3.7.0",
+    "lodash": "4.17.2",
+    "open": "0.0.5",
+    "require-dir": "0.3.2",
+    "run-sequence": "1.2.2",
+    "vinyl-paths": "2.1.0",
+    "yargs": "6.4.0"
+  },
+  "devDependencies": {
+    "babel-cli": "6.18.0",
+    "babel-core": "6.18.2",
+    "babel-plugin-add-shopify-header": "1.0.6",
+    "babel-preset-shopify": "15.0.1",
+    "babel-register": "6.18.0",
+    "eslint": "3.10.2",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-node": "3.0.4",
+    "eslint-plugin-shopify": "15.1.0"
+  },
+  "scripts": {
+    "clean": "rm -rf lib/",
+    "start": "npm run clean && babel -w -d lib/ src/",
+    "test": "npm run lint",
+    "prepublish": "npm test && npm run clean && babel -d lib/ src/",
+    "lint": "eslint --max-warnings 0 src/",
+    "lint-allow-warning": "eslint src/"
+  },
+  "keywords": [
+    "shopify",
+    "themekit"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Shopify/slate.git"
+  },
+  "homepage": "https://github.com/Shopify/slate",
+  "bugs": {
+    "url": "https://github.com/Shopify/slate/issues"
+  }
+}

@@ -4,12 +4,12 @@ const AWS = require('aws-sdk');
 const fs = require('fs');
 const path = require('path');
 const mime = require('mime-types');
-const tag = require('../package.json').version;
+const tag = require('../lerna.json').version;
 const DEFAULT_CONTENT_TYPE = 'application/zip';
 const S3_DIR = 'slate';
 const DEFAULT_CACHE_CONTROL = 'public, max-age=86400';
-const ZIP_DIR = 'upload';
-const DIST_DIR = 'dist';
+const ZIP_DIR = 'packages/slate-theme/upload';
+const DIST_DIR = 'packages/slate-theme/dist';
 const DIST_FILES = [
   'assets/theme.js',
   'assets/vendor.js'
@@ -20,16 +20,9 @@ var Secrets = function() {
 };
 
 Secrets.prototype.load = function () {
-  var config = fs.readFileSync('secrets.json');
-
-  if (config) {
-    config = JSON.parse(config);
-    this.bucket = config.bucket;
-    AWS.config.credentials = new AWS.Credentials(config.access_key_id, config.secret_access_key);
-    AWS.config.region = 'us-east-1';
-  } else {
-    console.error('Missing AWS secrets. You must decrypt the ejson first.');
-  }
+  this.bucket = process.env.AWS_BUCKET;
+  AWS.config.credentials = new AWS.Credentials(process.env.AWS_ACCESS_KEY_ID, process.env.AWS_SECRET_ACCESS_KEY);
+  AWS.config.region = 'us-east-1';
 };
 
 var Uploader = function () {
