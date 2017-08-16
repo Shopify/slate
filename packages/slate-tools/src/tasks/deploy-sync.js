@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const path = require('path');
 const browserSync = require('browser-sync').create();
 const fs = require('fs');
 const yaml = require('js-yaml');
@@ -23,6 +24,7 @@ gulp.task('deploy:sync-init', () => {
   }
 
   const file = fs.readFileSync(config.tkConfig, 'utf8'); // eslint-disable-line no-sync
+  const devScript = fs.readFileSync(path.join(__dirname, '/includes/dev-script.js'));
   const tkConfig = yaml.safeLoad(file);
   const queryStringComponents = [];
   const environment = config.environment.split(/\s*,\s*|\s+/)[0];
@@ -49,6 +51,17 @@ gulp.task('deploy:sync-init', () => {
         const prefix = req.url.indexOf('?') > -1 ? '&' : '?';
         req.url += prefix + queryStringComponents.join('&');
         next();
+      },
+    },
+    snippetOptions: {
+      // Provide a custom Regex for inserting the snippet.
+      rule: {
+        match: /<\/body>/i,
+        fn: (snippet, match) => {
+          return `<script defer="defer">${devScript}</script>
+                  ${snippet}
+                  ${match}`;
+        },
       },
     },
   });
