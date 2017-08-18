@@ -105,6 +105,7 @@ gulp.task('watch:src', [
 gulp.task('watch:dist', () => {
   const watcher = chokidar.watch(['./', '!config.yml'], {
     cwd: config.dist.root,
+    ignored: /(^|[/\\])\../,
     ignoreInitial: true,
   });
 
