@@ -29,10 +29,6 @@ theme.Product = (function() {
    */
   function Product(container) {
     this.$container = $(container);
-    var sectionId = this.$container.attr('data-section-id');
-
-    this.settings = {};
-    this.namespace = '.product';
 
     // Stop parsing if we don't have the product json script tag when loading
     // section in the Theme Editor
@@ -40,34 +36,33 @@ theme.Product = (function() {
       return;
     }
 
+    var sectionId = this.$container.attr('data-section-id');
+    var $featuredImage = $(selectors.productFeaturedImage, this.$container);
+    var options = {
+      $container: this.$container,
+      enableHistoryState: this.$container.data('enable-history-state') || false,
+      singleOptionSelector: selectors.singleOptionSelector,
+      originalSelectorId: selectors.originalSelectorId,
+      product: this.productSingleObject
+    };
+
+    this.settings = {};
+    this.namespace = '.product';
+    this.variants = new slate.Variants(options);
     this.productSingleObject = JSON.parse($(selectors.productJson, this.$container).html());
-    this.settings.imageSize = slate.Image.imageSize($(selectors.productFeaturedImage, this.$container).attr('src'));
 
-    slate.Image.preload(this.productSingleObject.images, this.settings.imageSize);
+    this.$container.on('variantChange' + this.namespace, this.updateAddToCartState.bind(this));
+    this.$container.on('variantPriceChange' + this.namespace, this.updateProductPrices.bind(this));
 
-    this.initVariants();
+    if ($featuredImage.length > 0) {
+      this.settings.imageSize = slate.Image.imageSize($(selectors.productFeaturedImage, this.$container).attr('src'));
+      slate.Image.preload(this.productSingleObject.images, this.settings.imageSize);
+
+      this.$container.on('variantImageChange' + this.namespace, this.updateProductImage.bind(this));
+    }
   }
 
   Product.prototype = $.extend({}, Product.prototype, {
-
-    /**
-     * Handles change events from the variant inputs
-     */
-    initVariants: function() {
-      var options = {
-        $container: this.$container,
-        enableHistoryState: this.$container.data('enable-history-state') || false,
-        singleOptionSelector: selectors.singleOptionSelector,
-        originalSelectorId: selectors.originalSelectorId,
-        product: this.productSingleObject
-      };
-
-      this.variants = new slate.Variants(options);
-
-      this.$container.on('variantChange' + this.namespace, this.updateAddToCartState.bind(this));
-      this.$container.on('variantImageChange' + this.namespace, this.updateProductImage.bind(this));
-      this.$container.on('variantPriceChange' + this.namespace, this.updateProductPrices.bind(this));
-    },
 
     /**
      * Updates the DOM state of the add to cart button
@@ -127,6 +122,7 @@ theme.Product = (function() {
     updateProductImage: function(evt) {
       var variant = evt.variant;
       var sizedImgUrl = slate.Image.getSizedImageUrl(variant.featured_image.src, this.settings.imageSize);
+      var $image = $(selectors.productFeaturedImage, this.$container);
 
       $(selectors.productFeaturedImage, this.$container).attr('src', sizedImgUrl);
     },
