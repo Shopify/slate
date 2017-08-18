@@ -9,7 +9,10 @@
   <meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
   <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
 
-  <img src="{{ featured_image | img_url: '480x480' }}" alt="{{ featured_image.alt | escape }}" data-product-featured-image>
+  {% if featured_image != blank %}
+    <img src="{{ featured_image | img_url: '480x480' }}" alt="{{ featured_image.alt | escape }}" data-product-featured-image>
+  {% endif %}
+
   {% if product.images.size > 1 %}
     <ul>
       {% for image in product.images %}
@@ -21,7 +24,6 @@
       {% endfor %}
     </ul>
   {% endif %}
-
 
   <h1>{{ product.title }}</h1>
   <p>{{ product.vendor }}</p>
