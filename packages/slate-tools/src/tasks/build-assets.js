@@ -82,10 +82,12 @@ gulp.task('build:assets', () => {
 gulp.task('watch:assets', () => {
   const eventCache = utils.createEventCache();
 
-  chokidar.watch(assetsPaths, {ignoreInitial: true})
-    .on('all', (event, path) => {
-      messages.logFileEvent(event, path);
-      eventCache.addEvent(event, path);
-      utils.processCache(eventCache, processAssets, removeAssets);
-    });
+  chokidar.watch(assetsPaths, {
+    ignored: /(^|[/\\])\../,
+    ignoreInitial: true,
+  }).on('all', (event, path) => {
+    messages.logFileEvent(event, path);
+    eventCache.addEvent(event, path);
+    utils.processCache(eventCache, processAssets, removeAssets);
+  });
 });
