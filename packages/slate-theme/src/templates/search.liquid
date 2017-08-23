@@ -32,9 +32,9 @@
     <ul>
       {% for item in search.results %}
         <li>
-          {% if item.featured_image %}
+          {% if item.image != blank %}
             <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-              {{ item.featured_image.src | img_url: '240x240' | img_tag: item.featured_image.alt }}
+              {{ item | img_url: '240x240' | img_tag: item.featured_image.alt }}
             </a>
           {% endif %}
 

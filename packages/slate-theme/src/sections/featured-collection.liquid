@@ -6,7 +6,11 @@
 
 {% for product in collection.products limit: 6 %}
   <a href="{{ product.url | within: collection }}">
-    {{ product.featured_image.src | img_url: '480x480' | img_tag: product.title }}
+
+    {% if product.featured_image != blank %}
+      {{ product.featured_image.src | img_url: '480x480' | img_tag: product.title }}
+    {% endif %}
+
     <p>{{ product.title }}</p>
   </a>
 

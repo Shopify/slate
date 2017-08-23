@@ -24,10 +24,15 @@
         {% endcomment %}
 
           <tr class="responsive-table-row">
+
             <td data-label="{{ 'customer.order.product' | t }}">
-              <a href="{{ item.url | within: collections.all }}">
-                <img src="{{ item | img_url: '240x240' }}" alt="{{ item.title | escape }}">
-              </a>
+
+              {% if item.image != blank %}
+                <a href="{{ item.url | within: collections.all }}">
+                  <img src="{{ item | img_url: '240x240' }}" alt="{{ item.title | escape }}">
+                </a>
+              {% endif %}
+
             </td>
             <td>
               <a href="{{ item.url }}">{{ item.product.title }}</a>

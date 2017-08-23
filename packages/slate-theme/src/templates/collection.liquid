@@ -27,9 +27,11 @@
   <div>
     {% for product in collection.products %}
       <div>
-        <a href="{{ product.url | within: collection }}">
-          <img src="{{ product.featured_image.src | img_url: '480x480' }}" alt="{{ product.featured_image.alt | escape }}">
-        </a>
+        {% if product.featured_image != blank %}
+          <a href="{{ product.url | within: collection }}">
+            <img src="{{ product.featured_image.src | img_url: '480x480' }}" alt="{{ product.featured_image.alt | escape }}">
+          </a>
+        {% endif %}
 
         <p>
           <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
