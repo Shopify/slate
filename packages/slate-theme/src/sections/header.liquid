@@ -78,31 +78,41 @@
   </header>
 
   <nav role="navigation">
-    <ul class="site-nav">
+    <ul>
       {% for link in linklists[section.settings.main_linklist].links %}
-        {%- assign child_list_handle = link.title | handleize -%}
-        {% if menus[child_list_handle].links != blank %}
-          <li class="site-nav--has-submenu{% if link.active %} site-nav--active{% endif %}">
-            <a href="{{ link.url }}" class="site-nav__link">
-              {{ link.title }}
-              {% include 'icon-arrow-down' %}
-            </a>
-            <ul class="site-nav__submenu">
-              {% for childlink in menus[child_list_handle].links %}
-                <li {% if childlink.active %}class="site-nav--active"{% endif %}>
-                  <a href="{{ childlink.url }}" class="site-nav__link">{{ childlink.title | escape }}</a>
-                </li>
+        {% if link.links != blank %}
+          <li>
+            <a href="{{ link.url }}">{{ link.title | escape }}</a>
+            <ul>
+              {% for childlink in link.links %}
+                {% if childlink.links != blank %}
+                  <li>
+                    <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+                    <ul>
+                      {% for grandchildlink in childlink.links %}
+                        <li>
+                          <a href="{{ grandchildlink.url }}">{{ grandchildlink.title | escape }}</a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </li>
+                {% else %}
+                  <li>
+                    <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+                  </li>
+                {% endif %}
               {% endfor %}
             </ul>
           </li>
         {% else %}
-          <li {% if link.active %}class="site-nav--active"{% endif %}>
-            <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
+          <li>
+            <a href="{{ link.url }}">{{ link.title | escape }}</a>
           </li>
         {% endif %}
       {% endfor %}
     </ul>
   </nav>
+
 </div>
 
 {% schema %}
