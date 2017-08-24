@@ -29,7 +29,7 @@
 
               {% if item.image != blank %}
                 <a href="{{ item.url | within: collections.all }}">
-                  <img src="{{ item | img_url: '240x240' }}" alt="{{ item.title | escape }}">
+                  {{ item | img_url: '240x240' | img_tag: item.title }}
                 </a>
               {% endif %}
 
