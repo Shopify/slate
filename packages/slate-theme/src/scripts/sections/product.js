@@ -37,7 +37,6 @@ theme.Product = (function() {
     }
 
     var sectionId = this.$container.attr('data-section-id');
-    var $featuredImage = $(selectors.productFeaturedImage, this.$container);
     var options = {
       $container: this.$container,
       enableHistoryState: this.$container.data('enable-history-state') || false,
@@ -49,13 +48,14 @@ theme.Product = (function() {
     this.settings = {};
     this.namespace = '.product';
     this.variants = new slate.Variants(options);
+    this.$featuredImage = $(selectors.productFeaturedImage, this.$container);
     this.productSingleObject = JSON.parse($(selectors.productJson, this.$container).html());
 
     this.$container.on('variantChange' + this.namespace, this.updateAddToCartState.bind(this));
     this.$container.on('variantPriceChange' + this.namespace, this.updateProductPrices.bind(this));
 
-    if ($featuredImage.length > 0) {
-      this.settings.imageSize = slate.Image.imageSize($(selectors.productFeaturedImage, this.$container).attr('src'));
+    if (this.$featuredImage.length > 0) {
+      this.settings.imageSize = slate.Image.imageSize(this.$featured_image.attr('src'));
       slate.Image.preload(this.productSingleObject.images, this.settings.imageSize);
 
       this.$container.on('variantImageChange' + this.namespace, this.updateProductImage.bind(this));
@@ -122,9 +122,8 @@ theme.Product = (function() {
     updateProductImage: function(evt) {
       var variant = evt.variant;
       var sizedImgUrl = slate.Image.getSizedImageUrl(variant.featured_image.src, this.settings.imageSize);
-      var $image = $(selectors.productFeaturedImage, this.$container);
 
-      $(selectors.productFeaturedImage, this.$container).attr('src', sizedImgUrl);
+      this.$featured_image.attr('src', sizedImgUrl);
     },
 
     /**
