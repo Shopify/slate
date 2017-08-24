@@ -1,5 +1,14 @@
 # Change Log
 
+## v0.12.1 (2017-08-24)
+
+#### :bug: Bug Fix
+* Other
+  * [#247](https://github.com/Shopify/slate/pull/247) Fix the output of slate-src.zip. ([@t-kelly](https://github.com/t-kelly))
+
+#### Committers: 1
+- Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
 ## v0.12.0 (2017-08-24)
 
 #### :rocket: Enhancement
