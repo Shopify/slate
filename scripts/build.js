@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const path = require('path');
 const archiver = require('archiver');
 
 /**
@@ -26,11 +27,11 @@ function _buildZip(name, directories = [], files = []) {
   archive.pipe(output);
 
   directories.forEach((directory) => {
-    archive.directory(directory);
+    archive.directory(directory, '/src');
   });
 
   files.forEach((file) => {
-    archive.file(file);
+    archive.file(file, { name: path.join('/', path.basename(file)) });
   });
 
   archive.finalize();
