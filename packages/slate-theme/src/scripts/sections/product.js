@@ -37,6 +37,8 @@ theme.Product = (function() {
     }
 
     var sectionId = this.$container.attr('data-section-id');
+    this.productSingleObject = JSON.parse($(selectors.productJson, this.$container).html());
+
     var options = {
       $container: this.$container,
       enableHistoryState: this.$container.data('enable-history-state') || false,
@@ -49,13 +51,12 @@ theme.Product = (function() {
     this.namespace = '.product';
     this.variants = new slate.Variants(options);
     this.$featuredImage = $(selectors.productFeaturedImage, this.$container);
-    this.productSingleObject = JSON.parse($(selectors.productJson, this.$container).html());
 
     this.$container.on('variantChange' + this.namespace, this.updateAddToCartState.bind(this));
     this.$container.on('variantPriceChange' + this.namespace, this.updateProductPrices.bind(this));
 
     if (this.$featuredImage.length > 0) {
-      this.settings.imageSize = slate.Image.imageSize(this.$featured_image.attr('src'));
+      this.settings.imageSize = slate.Image.imageSize(this.$featuredImage.attr('src'));
       slate.Image.preload(this.productSingleObject.images, this.settings.imageSize);
 
       this.$container.on('variantImageChange' + this.namespace, this.updateProductImage.bind(this));
