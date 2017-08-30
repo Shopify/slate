@@ -1,5 +1,14 @@
 # Change Log
 
+## v0.12.2 (2017-08-30)
+
+#### :bug: Bug Fix
+* `slate-theme`
+  * [#264](https://github.com/Shopify/slate/pull/264) Fix typo and variable declaration order in product.js. ([@saudslm](https://github.com/saudslm))
+
+#### Committers: 1
+- [saudslm](https://github.com/saudslm)
+
 ## v0.12.1 (2017-08-24)
 
 #### :bug: Bug Fix
