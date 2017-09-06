@@ -1,5 +1,14 @@
 # Change Log
 
+## v0.12.3 (2017-09-06)
+
+#### :bug: Bug Fix
+* `slate-theme`
+  * [#272](https://github.com/Shopify/slate/pull/272) Fix a variable declaration typo in product.js. ([@t-kelly](https://github.com/t-kelly))
+
+#### Committers: 1
+- Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
 ## v0.12.2 (2017-08-30)
 
 #### :bug: Bug Fix
