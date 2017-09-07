@@ -1,6 +1,6 @@
 {
   "name": "slate-theme",
-  "version": "0.12.3",
+  "version": "0.12.4",
   "private": true,
   "author": "Shopify Inc.",
   "description": "A theme scaffold and command line tool for developing Shopify themes.",
