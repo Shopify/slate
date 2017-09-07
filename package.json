@@ -26,8 +26,10 @@
   "devDependencies": {
     "archiver": "1.1.0",
     "aws-sdk": "2.6.12",
+    "github": "^11.0.0",
     "lerna": "^2.0.0",
     "lerna-changelog": "^0.6.0",
-    "mime-types": "2.1.12"
+    "mime-types": "2.1.12",
+    "promise": "^8.0.1"
   }
 }

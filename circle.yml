@@ -17,8 +17,9 @@ deployment:
     commands:
       - npm run bootstrap
       - cd packages/slate-theme && ./node_modules/.bin/slate zip
-      - node scripts/build
-      - node scripts/deploy
+      - node scripts/zip_src
+      - node scripts/aws_upload
+      - node scripts/github_release
       - curl -X PURGE https://sdks.shopifycdn.com/slate/latest/slate-theme.zip
       - curl -X PURGE https://sdks.shopifycdn.com/slate/latest/slate-src.zip
 
