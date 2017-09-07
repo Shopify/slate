@@ -46,6 +46,7 @@ upload
 /.idea
 deploy.log
 config.yml
+!.circleci/config.yml
 secrets.json
 .jekyll-metadata
 .ruby-version
