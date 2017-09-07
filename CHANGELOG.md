@@ -1,5 +1,14 @@
 # Change Log
 
+## v0.12.4 (2017-09-07)
+
+#### :bug: Bug Fix
+* `slate-theme`
+  * [#275](https://github.com/Shopify/slate/pull/275) Fix search result item image liquid reference. ([@t-kelly](https://github.com/t-kelly))
+
+#### Committers: 1
+- Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
 ## v0.12.3 (2017-09-06)
 
 #### :bug: Bug Fix
