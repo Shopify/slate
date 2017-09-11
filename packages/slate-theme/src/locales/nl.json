@@ -13,8 +13,8 @@
     },
     "password_page": {
       "opening_soon": "Binnenkort open",
-      "spread_the_word": "Vertel het rond",
-      "login_form_heading": "Bekijk de shop door een wachtwoord in te geven",
+      "spread_the_word": "Vertel het verder",
+      "login_form_heading": "Login met wachtwoord",
       "login_form_password_label": "Wachtwoord",
       "login_form_password_placeholder": "Uw wachtwoord",
       "login_form_submit": "Bevestig",
@@ -24,7 +24,7 @@
       "signup_form_submit": "Bevestig",
       "signup_form_success": "We zullen u een e-mail sturen net voor we open gaan!",
       "admin_link_html": "Ben u de eigenaar van deze shop? <a href=\"/admin\">hier inloggen</a>",
-      "password_link": "Ga verder aan de hand van een wachtwoord",
+      "password_link": "Login met wachtwoord",
       "powered_by_shopify_html": "Deze shop zal worden ondersteund door {{ shopify }}"
     },
     "social": {
@@ -57,8 +57,8 @@
       "email": "E-mail",
       "message": "Bericht",
       "post": "Plaats reactie",
-      "moderated": "Merk op, reacties moeten worden goedgekeurd alvorens deze geplaatst worden.",
-      "success_moderated": "Uw reactie is succesvol geplaatst. Deze zal binnenkort worden geplaatst, aangezien onze blog gemodereerd wordt.",
+      "moderated": "Reacties moeten worden goedgekeurd alvorens deze geplaatst worden.",
+      "success_moderated": "Uw reactie is succesvol geplaatst. Deze zal binnenkort worden gepubliceerd na moderatie.",
       "success": "Uw reactie is succesvol geplaatst! Bedankt!",
       "with_count": {
         "one": "{{ count }} reactie",
@@ -75,7 +75,7 @@
       "remove": "Verwijder",
       "note": "Eventuele opmerkingen",
       "subtotal": "Subtotaal",
-      "shipping_at_checkout": "Leveringskosten worden tijdens de checkout berekent.",
+      "shipping_at_checkout": "Leveringskosten worden tijdens de checkout berekend.",
       "update": "Update Cart",
       "checkout": "Plaats bestelling",
       "empty": "Uw winkelmandje is momenteel leeg.",
@@ -215,7 +215,7 @@
     "onboarding": {
       "product_title": "Product Titel Voorbeeld",
       "collection_title": "Collectie Titel Voorbeeld",
-      "no_content": "Deze sectie heeft momenteel geen inhoud. Voeg inhoud toe aan deze sectie aan de hand van de zijbalk."
+      "no_content": "Dit onderdeel heeft momenteel geen inhoud. Voeg inhoud toe aan dit onderdeel aan de hand van de zijbalk."
     }
   },
   "layout": {
@@ -245,7 +245,7 @@
       "sold_out": "Uitverkocht",
       "unavailable": "Niet beschikbaar",
       "on_sale": "Sale",
-      "on_sale_from_html": "In afslag van {{ price }}",
+      "on_sale_from_html": "In sale van {{ price }}",
       "from_text_html": "Vanaf {{ price }}",
       "quantity": "Aantal",
       "add_to_cart": "In winkelmandje",
