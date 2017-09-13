@@ -35,10 +35,20 @@
           {% if line_item.fulfillment %}
             <div>
               {%- assign created_at = line_item.fulfillment.created_at | date: format: 'month_day_year' -%}
-              {{ 'customer.order.fulfilled_at' | t: date: created_at }}
-              {% if line_item.fulfillment.tracking_number %}
-                <a href="{{ line_item.fulfillment.tracking_url }}">{{ line_item.fulfillment.tracking_company }} #{{ line_item.fulfillment.tracking_number}}</a>
-              {% endif %}
+              <ul>
+                <li>{{ 'customer.order.fulfilled_at' | t: date: created_at }}</li>
+                {% if line_item.fulfillment.tracking_url %}
+                  <li>
+                    <a href="{{ line_item.fulfillment.tracking_url }}">
+                      {{ 'customer.order.track_shipment' | t }}
+                    </a>
+                  </li>
+                {% endif %}
+              <li>Company: {{ line_item.fulfillment.tracking_company }}</li>
+              {%- if line_item.fulfillment.tracking_number -%}
+                <li>Tracking number: {{ line_item.fulfillment.tracking_number }}</li>
+              {%- endif -%}
+              </ul>
             </div>
           {% endif %}
         </td>
