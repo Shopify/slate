@@ -184,6 +184,9 @@
       "quantity": "Menge",
       "total": "Gesamt",
       "fulfilled_at": "Geliefert am {{ date }}",
+      "track_shipment": "Sendung verfolgen",
+      "tracking_company": "Unternehmen",
+      "tracking_number": "Sendungscode",
       "subtotal": "Zwischensumme"
     },
     "recover_password": {

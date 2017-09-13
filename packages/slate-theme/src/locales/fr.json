@@ -184,6 +184,9 @@
       "quantity": "Quantité",
       "total": "Total",
       "fulfilled_at": "Traitée le {{ date }}",
+      "track_shipment": "Retracer l'envoi",
+      "tracking_company": "Compagnie",
+      "tracking_number": "Numéro de suivi",
       "subtotal": "Sous-total"
     },
     "recover_password": {
