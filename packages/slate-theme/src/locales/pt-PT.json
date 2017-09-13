@@ -186,7 +186,7 @@
       "fulfilled_at": "Concluído em {{ date }}",
       "track_shipment": "Acompanhar envio",
       "tracking_company": "Empresa",
-      "tracking_number": "Numero de rastreio",
+      "tracking_number": "Numero de acompanhamento",
       "subtotal": "Subtotal"
     },
     "recover_password": {

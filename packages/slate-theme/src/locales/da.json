@@ -184,6 +184,9 @@
       "quantity": "Antal",
       "total": "Total",
       "fulfilled_at": "Opfyldt {{ date }}",
+      "track_shipment": "Spor forsendelse",
+      "tracking_company": "Selskab",
+      "tracking_number": "Sporingsnummer",
       "subtotal": "Sub total"
     },
     "recover_password": {

@@ -184,6 +184,9 @@
       "quantity": "Hoeveelheid",
       "total": "Totaal",
       "fulfilled_at": "Verzonden op {{ date }}",
+      "track_shipment": "Track verzending",
+      "tracking_company": "Bedrijf",
+      "tracking_number": "Volgnummer",
       "subtotal": "Subtotaal"
     },
     "recover_password": {
