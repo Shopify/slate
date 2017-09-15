@@ -53,13 +53,22 @@ $('#CloseModal').on('click', function() {
 Tables and video embeds do not natively scale well on smaller screens. Slate adds a wrapper class to tables and video embeds that are loaded in from a rich text editor.
 
 ```
-// Wrap RTE tables
-$('.rte table').wrap('<div class="rte__table-wrapper"></div>');
+// Wrap RTE tables to make them scrollable
+var tableSelectors = '.rte table';
 
-// Wrap RTE videos
-var $iframeVideo = $('.rte iframe[src*="youtube.com/embed"], .rte iframe[src*="player.vimeo"]');
-$iframeVideo.each(function() {
-  $(this).wrap('<div class="rte__video-wrapper"></div>');
+slate.rte.wrapTable({
+  $tables: $(tableSelectors),
+  tableWrapperClass: 'rte__table-wrapper',
+});
+
+// Wrap RTE videos to make them responsive
+var videoSelectors =
+  '.rte iframe[src*="youtube.com/embed"],' +
+  '.rte iframe[src*="player.vimeo"]';
+
+slate.rte.wrapIframe({
+  $iframes: $(videoSelectors),
+  iframeWrapperClass: 'rte__video-wrapper'
 });
 ```
 
