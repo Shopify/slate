@@ -183,9 +183,10 @@
       "price": "Pris",
       "quantity": "Antal",
       "total": "Total",
-      "fulfilled_at": "Opfyldt {{ date }}",
+      "fulfilled_at": "Dato opfyldt",
       "track_shipment": "Spor forsendelse",
-      "tracking_company": "Selskab",
+      "tracking_url": "Tracking link",
+      "tracking_company": "Bedrijf",
       "tracking_number": "Sporingsnummer",
       "subtotal": "Sub total"
     },

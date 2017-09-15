@@ -183,8 +183,9 @@
       "price": "Prijs",
       "quantity": "Hoeveelheid",
       "total": "Totaal",
-      "fulfilled_at": "Verzonden op {{ date }}",
+      "fulfilled_at": "Datum vervuld",
       "track_shipment": "Track verzending",
+      "tracking_url": "Tracking link",
       "tracking_company": "Bedrijf",
       "tracking_number": "Volgnummer",
       "subtotal": "Subtotaal"

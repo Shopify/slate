@@ -183,8 +183,9 @@
       "price": "Preço",
       "quantity": "Quantidade",
       "total": "Total",
-      "fulfilled_at": "Processado em {{ date }}",
+      "fulfilled_at": "Fecha de procesamiento",
       "track_shipment": "Rastreie o pacote",
+      "tracking_url": "Link de rastreio",
       "tracking_company": "Empresa",
       "tracking_number": "Numero de rastreio",
       "subtotal": "Subtotal"
