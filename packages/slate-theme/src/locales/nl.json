@@ -96,7 +96,7 @@
   "collections": {
     "general": {
       "no_matches": "Sorry, er bevinden zich geen producten in deze collectie",
-      "link_title": "Bekijk onze {{ title }} collectie",
+      "link_title": "Bekijk onze {{ title }} collectie"
     }
   },
   "contact": {
@@ -183,7 +183,11 @@
       "price": "Prijs",
       "quantity": "Hoeveelheid",
       "total": "Totaal",
-      "fulfilled_at": "Verzonden op {{ date }}",
+      "fulfilled_at": "Datum vervuld",
+      "track_shipment": "Track verzending",
+      "tracking_url": "Tracking link",
+      "tracking_company": "Bedrijf",
+      "tracking_number": "Volgnummer",
       "subtotal": "Subtotaal"
     },
     "recover_password": {
@@ -248,7 +252,7 @@
       "on_sale_from_html": "In sale van {{ price }}",
       "from_text_html": "Vanaf {{ price }}",
       "quantity": "Aantal",
-      "add_to_cart": "In winkelmandje",
+      "add_to_cart": "In winkelmandje"
     }
   },
   "gift_cards": {

@@ -183,7 +183,11 @@
       "price": "Preis",
       "quantity": "Menge",
       "total": "Gesamt",
-      "fulfilled_at": "Geliefert am {{ date }}",
+      "fulfilled_at": "Datum abgeschlossen",
+      "track_shipment": "Sendung verfolgen",
+      "tracking_url": "Tracking link",
+      "tracking_company": "Unternehmen",
+      "tracking_number": "Sendungscode",
       "subtotal": "Zwischensumme"
     },
     "recover_password": {
