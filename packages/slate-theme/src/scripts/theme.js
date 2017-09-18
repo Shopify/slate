@@ -29,9 +29,23 @@ $(document).ready(function() {
     slate.a11y.pageLinkFocus($(evt.currentTarget.hash));
   });
 
-  // Wrap videos in div to force responsive layout.
-  slate.rte.wrapTable();
-  slate.rte.iframeReset();
+  // Target tables to make them scrollable
+  var tableSelectors = '.rte table';
+
+  slate.rte.wrapTable({
+    $tables: $(tableSelectors),
+    tableWrapperClass: 'rte__table-wrapper',
+  });
+
+  // Target iframes to make them responsive
+  var iframeSelectors =
+    '.rte iframe[src*="youtube.com/embed"],' +
+    '.rte iframe[src*="player.vimeo"]';
+
+  slate.rte.wrapIframe({
+    $iframes: $(iframeSelectors),
+    iframeWrapperClass: 'rte__video-wrapper'
+  });
 
   // Apply a specific class to the html element for browser support of cookies.
   if (slate.cart.cookiesEnabled()) {
