@@ -266,7 +266,8 @@
       "shop_link": "Empezar a comprar",
       "print": "Imprimir",
       "remaining_html": "{{ balance }} restante",
-      "add_to_apple_wallet": "Añadir a Apple Wallet"
+      "add_to_apple_wallet": "Añadir a Apple Wallet",
+      "initial_value": "Valor de la tarjeta de regalo: {{ value }}"
     }
   },
   "date_formats":{

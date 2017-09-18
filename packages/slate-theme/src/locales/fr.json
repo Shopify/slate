@@ -266,7 +266,8 @@
       "shop_link": "Boutique",
       "print": "Imprimer",
       "remaining_html": "{{ balance }} restant",
-      "add_to_apple_wallet": "Ajouter à Apple Wallet"
+      "add_to_apple_wallet": "Ajouter à Apple Wallet",
+      "initial_value": "Valeur de la carte-cadeau : {{ value }}"
     }
   },
   "date_formats":{

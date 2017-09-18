@@ -266,7 +266,8 @@
       "shop_link": "Begin te shoppen",
       "print": "Printen",
       "remaining_html": "{{ balance }} over",
-      "add_to_apple_wallet": "Voeg toe aan Apple Wallet"
+      "add_to_apple_wallet": "Voeg toe aan Apple Wallet",
+      "initial_value": "Waarde cadeaukaart: {{ value }}"
     }
   },
   "date_formats":{

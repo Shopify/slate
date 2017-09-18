@@ -36,10 +36,12 @@
 
   {% assign formatted_initial_value = gift_card.initial_value | money_without_trailing_zeros: gift_card.currency %}
 
-  <h2>Gift card value: {{ formatted_initial_value }}</h2>
+  <h2>{{ 'gift_cards.issued.initial_value' | t: value: formatted_initial_value }}</h2>
+
+  {% assign formatted_current_balance = gift_card.balance | money %}  
 
   {% if gift_card.balance != gift_card.initial_value %}
-    <p>Current balance: {{ 'gift_cards.issued.remaining_html' | t: balance: gift_card.balance | money }}</p>
+    <p>{{ 'gift_cards.issued.remaining_html' | t: balance: formatted_current_balance }}</p>
   {% endif %}
 
   {%- assign code_size = gift_card.code | format_code | size -%}
