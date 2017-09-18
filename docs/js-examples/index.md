@@ -55,9 +55,9 @@ Tables and video embeds do not natively scale well on smaller screens. Slate add
 | Parameters           | Type          | Description   |
 | :------------------- | :------------ | :------------ |
 | `$tables`            | jQuery object | `<table>` elements to be made responsive |
-| `tableWrapperClass`  | string        | CSS class to apply on the `<div>` that will wrap each targetted `<table>` element |
+| `tableWrapperClass`  | string        | CSS class to apply on the `<div>` that will wrap each targeted `<table>` element |
 | `$iframes`           | jQuery object | `<iframe>` elements to be made responsive |
-| `iframeWrapperClass` | string        | CSS class to apply on the `<div>` that will wrap each targetted `<iframe>` element |
+| `iframeWrapperClass` | string        | CSS class to apply on the `<div>` that will wrap each targeted `<iframe>` element |
 
 ```
 // Wrap RTE tables to make them scrollable
