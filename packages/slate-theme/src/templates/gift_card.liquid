@@ -42,7 +42,7 @@
   {% endif %}
 
   {%- assign code_size = gift_card.code | format_code | size -%}
-  <span id="GiftCardDigits">{{ gift_card.code | format_code }}</span>
+  <span id="GiftCardDigits" class="giftcard__code">{{ gift_card.code | format_code }}</span>
 
   <p>{{ 'gift_cards.issued.redeem' | t }}</p>
 
