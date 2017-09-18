@@ -52,6 +52,13 @@ $('#CloseModal').on('click', function() {
 
 Tables and video embeds do not natively scale well on smaller screens. Slate adds a wrapper class to tables and video embeds that are loaded in from a rich text editor.
 
+| Parameters           | Type          | Description   |
+| :------------------- | :------------ | :------------ |
+| `$tables`            | jQuery object | `<table>` elements to be made responsive |
+| `tableWrapperClass`  | string        | CSS class to apply on the `<div>` that will wrap each targetted `<table>` element |
+| `$iframes`           | jQuery object | `<iframe>` elements to be made responsive |
+| `iframeWrapperClass` | string        | CSS class to apply on the `<div>` that will wrap each targetted `<iframe>` element |
+
 ```
 // Wrap RTE tables to make them scrollable
 var tableSelectors = '.rte table';
