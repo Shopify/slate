@@ -266,7 +266,8 @@
       "shop_link": "Start med at handle",
       "print": "Print",
       "remaining_html": "{{ balance }} tilbage",
-      "add_to_apple_wallet": "Tilføj til Apple Wallet"
+      "add_to_apple_wallet": "Tilføj til Apple Wallet",
+      "initial_value": "Gavekortets værdi: {{ value }}"
     }
   },
   "date_formats":{

@@ -266,7 +266,8 @@
       "shop_link": "Einkauf beginnen",
       "print": "Drucken",
       "remaining_html": "{{ balance }} übrig",
-      "add_to_apple_wallet": "Hinzufügen zu Apple Wallet"
+      "add_to_apple_wallet": "Hinzufügen zu Apple Wallet",
+      "initial_value": "Geschenkkarten-Betrag: {{ value }}"
     }
   },
   "date_formats":{
