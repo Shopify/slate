@@ -15,7 +15,9 @@ slate.rte = {
    * @param {string} options.tableWrapperClass - table wrapper class name
    */
   wrapTable: function(options) {
-    options.$tables.wrap('<div class="' + options.tableWrapperClass + '"></div>');
+    var tableWrapperClass = typeof options.tableWrapperClass === "undefined" ? '' : options.tableWrapperClass;
+
+    options.$tables.wrap('<div class="' + tableWrapperClass + '"></div>');
   },
 
   /**
@@ -26,9 +28,11 @@ slate.rte = {
    * @param {string} options.iframeWrapperClass - class name used on the wrapping div
    */
   wrapIframe: function(options) {
+    var iframeWrapperClass = typeof options.iframeWrapperClass === "undefined" ? '' : options.iframeWrapperClass;
+
     options.$iframes.each(function() {
       // Add wrapper to make video responsive
-      $(this).wrap('<div class="' + options.iframeWrapperClass + '"></div>');
+      $(this).wrap('<div class="' + iframeWrapperClass + '"></div>');
       
       // Re-set the src attribute on each iframe after page load
       // for Chrome's "incorrect iFrame content on 'back'" bug.
