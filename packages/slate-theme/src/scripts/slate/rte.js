@@ -15,7 +15,7 @@ slate.rte = {
    * @param {string} options.tableWrapperClass - table wrapper class name
    */
   wrapTable: function(options) {
-    var tableWrapperClass = typeof options.tableWrapperClass === "undefined" ? '' : options.tableWrapperClass;
+    var tableWrapperClass = typeof options.tableWrapperClass !== 'string' ? '' : options.tableWrapperClass;
 
     options.$tables.wrap('<div class="' + tableWrapperClass + '"></div>');
   },
@@ -28,7 +28,7 @@ slate.rte = {
    * @param {string} options.iframeWrapperClass - class name used on the wrapping div
    */
   wrapIframe: function(options) {
-    var iframeWrapperClass = typeof options.iframeWrapperClass === "undefined" ? '' : options.iframeWrapperClass;
+    var iframeWrapperClass = typeof options.iframeWrapperClass !== 'string' ? '' : options.iframeWrapperClass;
 
     options.$iframes.each(function() {
       // Add wrapper to make video responsive
