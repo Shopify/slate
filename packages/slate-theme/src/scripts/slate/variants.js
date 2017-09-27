@@ -157,8 +157,7 @@ slate.Variants = (function() {
     /**
      * Update history state for product deeplinking
      *
-     * @param  {variant} variant - Currently selected variant
-     * @return {k}         [description]
+     * @param {object} variant - Currently selected variant
      */
     _updateHistoryState: function(variant) {
       if (!history.replaceState || !variant) {
@@ -172,7 +171,7 @@ slate.Variants = (function() {
     /**
      * Update hidden master select of variant change
      *
-     * @param  {variant} variant - Currently selected variant
+     * @param {object} variant - Currently selected variant
      */
     _updateMasterSelect: function(variant) {
       $(this.originalSelectorId, this.$container)[0].value = variant.id;
