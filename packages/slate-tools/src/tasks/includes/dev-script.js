@@ -21,7 +21,11 @@
   if (!isSessionStorageSupported()) { return; }
 
   window.addEventListener('DOMContentLoaded', function() {
-    document.addEventListener('click', onButtonClick);
+    var previewBarMinimizeElement = document.getElementsByClassName('shopify-preview-bar__minimize');
+
+    if (previewBarMinimizeElement.length > 0) {
+      previewBarMinimizeElement[0].addEventListener('click', onButtonClick);
+    }
 
     if (window.sessionStorage.getItem('preview-bar-hidden')) {
       hidePreviewBar();
@@ -30,8 +34,6 @@
 
   function onButtonClick(event) {
     var element = event.target;
-
-    if (element.className.indexOf('shopify-preview-bar__minimize') === -1) { return; }
 
     window.sessionStorage.setItem('preview-bar-hidden', 'true');
     hidePreviewBar();
