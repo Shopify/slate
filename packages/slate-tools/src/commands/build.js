@@ -10,10 +10,7 @@ export default function(program) {
     .alias('b')
     .description('Compiles source files (<theme>/src/) into the format required for distribution to a Shopify store (<theme>/dist/).')
     .action(() => {
-      logger(`--gulpfile ${config.gulpFile}`);
-      logger(`--cwd ${config.themeRoot}`);
-
-      spawn(config.gulp, ['build', '--gulpfile', config.gulpFile, '--cwd', config.themeRoot], {
+      spawn(config.webpack, ['--config', config.webpackConfig, '--display-error-details'], {
         detached: false,
         stdio: 'inherit',
       });

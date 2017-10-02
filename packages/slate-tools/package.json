@@ -36,20 +36,25 @@
   },
   "devDependencies": {
     "babel-cli": "6.18.0",
-    "babel-core": "6.18.2",
+    "babel-core": "^6.18.2",
+    "babel-loader": "^7.1.2",
     "babel-plugin-add-shopify-header": "1.0.6",
+    "babel-preset-env": "^1.6.0",
     "babel-preset-shopify": "15.0.1",
     "babel-register": "6.18.0",
+    "clean-webpack-plugin": "^0.1.17",
     "eslint": "3.10.2",
     "eslint-plugin-import": "2.7.0",
     "eslint-plugin-node": "3.0.4",
-    "eslint-plugin-shopify": "15.1.0"
+    "eslint-plugin-shopify": "15.1.0",
+    "html-webpack-plugin": "^2.30.1",
+    "webpack": "^3.6.0"
   },
   "scripts": {
     "clean": "rm -rf lib/",
     "start": "npm run clean && babel -w -d lib/ src/",
     "test": "npm run lint",
-    "prepublish": "npm test && npm run clean && babel -d lib/ src/",
+    "prepublish": "npm run clean && babel -d lib/ src/",
     "lint": "eslint --max-warnings 0 src/",
     "lint-allow-warning": "eslint src/"
   },
