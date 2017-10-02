@@ -5,7 +5,7 @@
  *
  */
 
-slate.Image = (function() {
+export default {
 
   /**
    * Preloads an image in memory and uses the browsers cache to store it until needed.
@@ -14,7 +14,7 @@ slate.Image = (function() {
    * @param {String} size - A shopify image size attribute
    */
 
-  function preload(images, size) {
+  preload: function(images, size) {
     if (typeof images === 'string') {
       images = [images];
     }
@@ -23,15 +23,15 @@ slate.Image = (function() {
       var image = images[i];
       this.loadImage(this.getSizedImageUrl(image, size));
     }
-  }
+  },
 
   /**
    * Loads and caches an image in the browsers cache.
    * @param {string} path - An image url
    */
-  function loadImage(path) {
+  loadImage: function(path) {
     new Image().src = path;
-  }
+  },
 
   /**
    * Find the Shopify image attribute size
@@ -39,7 +39,7 @@ slate.Image = (function() {
    * @param {string} src
    * @returns {null}
    */
-  function imageSize(src) {
+  imageSize: function(src) {
     var match = src.match(/.+_((?:pico|icon|thumb|small|compact|medium|large|grande)|\d{1,4}x\d{0,4}|x\d{1,4})[_\.@]/);
 
     if (match) {
@@ -47,7 +47,7 @@ slate.Image = (function() {
     } else {
       return null;
     }
-  }
+  },
 
   /**
    * Adds a Shopify size attribute to a URL
@@ -56,7 +56,7 @@ slate.Image = (function() {
    * @param size
    * @returns {*}
    */
-  function getSizedImageUrl(src, size) {
+  getSizedImageUrl: function(src, size) {
     if (size === null) {
       return src;
     }
@@ -75,17 +75,9 @@ slate.Image = (function() {
     } else {
       return null;
     }
-  }
+  },
 
-  function removeProtocol(path) {
+  removeProtocol: function(path) {
     return path.replace(/http(s)?:/, '');
   }
-
-  return {
-    preload: preload,
-    loadImage: loadImage,
-    imageSize: imageSize,
-    getSizedImageUrl: getSizedImageUrl,
-    removeProtocol: removeProtocol
-  };
-})();
+}

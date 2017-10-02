@@ -24,5 +24,8 @@
     "@shopify/slate": "^0.13.0",
     "@shopify/slate-tools": "^0.13.0",
     "jest": "^20.0.4"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1"
   }
 }

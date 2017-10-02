@@ -1,38 +1,33 @@
 window.slate = window.slate || {};
 window.theme = window.theme || {};
 
-/*================ Slate ================*/
-// =require slate/a11y.js
-// =require slate/cart.js
-// =require slate/utils.js
-// =require slate/rte.js
-// =require slate/sections.js
-// =require slate/currency.js
-// =require slate/images.js
-// =require slate/variants.js
+import a11y from './slate/a11y';
+import cart from './slate/cart';
+import rte from './slate/rte';
+import Sections from './slate/sections';
 
 /*================ Sections ================*/
-// =require sections/product.js
+import productSection from './sections/product'
 
 /*================ Templates ================*/
-// =require templates/customers-addresses.js
-// =require templates/customers-login.js
+import './templates/customers-addresses'
+import './templates/customers-login.js'
 
 $(document).ready(function() {
-  var sections = new slate.Sections();
+  var sections = new Sections();
   sections.register('product', theme.Product);
 
   // Common a11y fixes
-  slate.a11y.pageLinkFocus($(window.location.hash));
+ a11y.pageLinkFocus($(window.location.hash));
 
   $('.in-page-link').on('click', function(evt) {
-    slate.a11y.pageLinkFocus($(evt.currentTarget.hash));
+   a11y.pageLinkFocus($(evt.currentTarget.hash));
   });
 
   // Target tables to make them scrollable
   var tableSelectors = '.rte table';
 
-  slate.rte.wrapTable({
+  rte.wrapTable({
     $tables: $(tableSelectors),
     tableWrapperClass: 'rte__table-wrapper',
   });
@@ -42,13 +37,13 @@ $(document).ready(function() {
     '.rte iframe[src*="youtube.com/embed"],' +
     '.rte iframe[src*="player.vimeo"]';
 
-  slate.rte.wrapIframe({
+  rte.wrapIframe({
     $iframes: $(iframeSelectors),
     iframeWrapperClass: 'rte__video-wrapper'
   });
 
   // Apply a specific class to the html element for browser support of cookies.
-  if (slate.cart.cookiesEnabled()) {
+  if (cart.cookiesEnabled()) {
     document.documentElement.className = document.documentElement.className.replace('supports-no-cookies', 'supports-cookies');
   }
 });

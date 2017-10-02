@@ -6,7 +6,7 @@
  * @namespace rte
  */
 
-slate.rte = {
+export default {
   /**
    * Wrap tables in a container div to make them scrollable when needed
    *
@@ -33,7 +33,7 @@ slate.rte = {
     options.$iframes.each(function() {
       // Add wrapper to make video responsive
       $(this).wrap('<div class="' + iframeWrapperClass + '"></div>');
-      
+
       // Re-set the src attribute on each iframe after page load
       // for Chrome's "incorrect iFrame content on 'back'" bug.
       // https://code.google.com/p/chromium/issues/detail?id=395791

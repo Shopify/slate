@@ -6,7 +6,7 @@
  * @namespace utils
  */
 
-slate.utils = {
+export default {
 
   /**
    * Return an object from an array of objects that matches the provided key and value

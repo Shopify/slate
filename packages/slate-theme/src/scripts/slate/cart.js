@@ -6,8 +6,8 @@
  * @namespace cart
  */
 
-slate.cart = {
-  
+export default {
+
   /**
    * Browser cookies are required to use the cart. This function checks if
    * cookies are enabled in the browser.

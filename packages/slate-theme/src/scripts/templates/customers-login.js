@@ -6,16 +6,14 @@
  * @namespace password
  */
 
-theme.customerLogin = (function() {
-  var config = {
-    recoverPasswordForm: '#RecoverPassword',
-    hideRecoverPasswordLink: '#HideRecoverPasswordLink'
-  };
+import $ from 'jquery';
 
-  if (!$(config.recoverPasswordForm).length) {
-    return;
-  }
+var config = {
+  recoverPasswordForm: '#RecoverPassword',
+  hideRecoverPasswordLink: '#HideRecoverPasswordLink'
+};
 
+if ($(config.recoverPasswordForm).length) {
   checkUrlHash();
   resetPasswordSuccess();
 
@@ -58,4 +56,4 @@ theme.customerLogin = (function() {
     // show success message
     $('#ResetSuccess').removeClass('hide');
   }
-})();
+}

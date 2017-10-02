@@ -7,13 +7,11 @@
  * @namespace customerAddresses
  */
 
-theme.customerAddresses = (function() {
-  var $newAddressForm = $('#AddressNewForm');
+import $ from 'jquery';
 
-  if (!$newAddressForm.length) {
-    return;
-  }
+var $newAddressForm = $('#AddressNewForm');
 
+if ($newAddressForm.length) {
   // Initialize observers on address selectors, defined in shopify_common.js
   if (Shopify) {
     new Shopify.CountryProvinceSelector('AddressCountryNew', 'AddressProvinceNew', {
@@ -51,4 +49,4 @@ theme.customerAddresses = (function() {
       Shopify.postLink('/account/addresses/' + formId, {parameters: {_method: 'delete'}});
     }
   });
-})();
+}

@@ -8,7 +8,9 @@
  * @namespace a11y
  */
 
-slate.a11y = {
+import $ from 'jquery';
+
+export default {
 
   /**
    * For use when focus shifts to a container rather than a link

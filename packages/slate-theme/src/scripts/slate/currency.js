@@ -8,9 +8,9 @@
  *
  */
 
-slate.Currency = (function() {
-  var moneyFormat = '${{amount}}';
+var moneyFormat = '${{amount}}';
 
+export default {
   /**
    * Format money values based on your shop currency settings
    * @param  {Number|string} cents - value in cents or dollar amount e.g. 300 cents
@@ -18,7 +18,7 @@ slate.Currency = (function() {
    * @param  {String} format - shop money_format setting
    * @return {String} value - formatted value
    */
-  function formatMoney(cents, format) {
+  formatMoney: function(cents, format) {
     if (typeof cents === 'string') {
       cents = cents.replace('.', '');
     }
@@ -64,8 +64,5 @@ slate.Currency = (function() {
 
     return formatString.replace(placeholderRegex, value);
   }
+}
 
-  return {
-    formatMoney: formatMoney
-  };
-})();

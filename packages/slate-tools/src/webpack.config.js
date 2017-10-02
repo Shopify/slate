@@ -8,7 +8,7 @@ console.log(config.themeRoot);
 module.exports = {
   entry: path.resolve(config.themeRoot, "src/scripts/theme.js"),
   plugins: [
-    new CleanWebpackPlugin('dist', {root: config.themeRoot,})
+    new CleanWebpackPlugin('dist', {root: config.themeRoot,}),
   ],
   output: {
     filename: 'bundle.js',

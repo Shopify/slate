@@ -1,4 +1,6 @@
-slate.Sections = function Sections() {
+import $ from 'jquery';
+
+const Sections = function Sections() {
   this.constructors = {};
   this.instances = [];
 
@@ -12,7 +14,7 @@ slate.Sections = function Sections() {
     .on('shopify:block:deselect', this._onBlockDeselect.bind(this));
 };
 
-slate.Sections.prototype = $.extend({}, slate.Sections.prototype, {
+Sections.prototype = $.extend({}, slate.Sections.prototype, {
   _createInstance: function(container, constructor) {
     var $container = $(container);
     var id = $container.attr('data-section-id');
@@ -102,3 +104,5 @@ slate.Sections.prototype = $.extend({}, slate.Sections.prototype, {
     }.bind(this));
   }
 });
+
+export default Sections;
