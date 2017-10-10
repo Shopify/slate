@@ -170,5 +170,5 @@ gulp.task('open:admin', () => {
  * @static
  */
 gulp.task('open:zip', () => {
-  return open('./upload/');
+  return open('upload');
 });
