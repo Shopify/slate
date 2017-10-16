@@ -1,4 +1,4 @@
-import {createReadStream, createWriteStream, rename, unlinkSync, writeFileSync, existsSync} from 'fs';
+import {createReadStream, createWriteStream, rename, unlinkSync, readFileSync, writeFileSync, existsSync} from 'fs';
 import {join, normalize} from 'path';
 import {Extract} from 'unzip2';
 import {get} from 'https';
@@ -140,6 +140,25 @@ export function hasDependency(dependencyName, pkg) {
   return hasDependencies;
 }
 
+
+/**
+ * Beautify a JSON file
+ *
+ * @param {string} file - The path to the file.
+ */
+export function beautifyJson(file) {
+  return new Promise((resolve, reject) => {
+    try {
+      const jsonString = readFileSync(file);
+      const beautifiedJsonString = JSON.stringify(JSON.parse(jsonString), null, 2);
+      writeFileSync(file, beautifiedJsonString);
+      resolve();
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
 /**
  * Moves file from one location to another
  *
@@ -177,4 +196,14 @@ export function isShopifyTheme(directory) {
 export function isShopifyThemeWhitelistedDir(directory) {
   const whitelist = ['assets', 'layout', 'config', 'locales', 'sections', 'snippets', 'templates'];
   return whitelist.indexOf(directory) > -1;
+}
+
+/**
+ * Tests if file is a Shopify theme settings file (settings_*.json)
+ *
+ * @param {string} directory - The path to the directory.
+ */
+export function isShopifyThemeSettingsFile(file) {
+  const whitelist = ['settings_schema.json', 'settings_data.json'];
+  return whitelist.indexOf(file) > -1;
 }

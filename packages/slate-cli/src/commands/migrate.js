@@ -4,7 +4,7 @@ import {join} from 'path';
 import {prompt} from 'inquirer';
 import {green, red, yellow} from 'chalk';
 import figures from 'figures';
-import {downloadFromUrl, startProcess, writePackageJsonSync, move, isShopifyTheme, isShopifyThemeWhitelistedDir} from '../utils';
+import {downloadFromUrl, startProcess, writePackageJsonSync, move, beautifyJson, isShopifyTheme, isShopifyThemeSettingsFile, isShopifyThemeWhitelistedDir} from '../utils';
 
 export default function(program) {
   program
@@ -35,6 +35,7 @@ export default function(program) {
       const configYml = join(workingDirectory, 'config.yml');
       const pkgJson = join(workingDirectory, 'package.json');
       const srcDir = join(workingDirectory, 'src');
+      const srcConfigDir = join(workingDirectory, 'src/config');
       const iconsDir = join(srcDir, 'icons');
       const stylesDir = join(srcDir, 'styles');
       const scriptsDir = join(srcDir, 'scripts');
@@ -73,14 +74,29 @@ export default function(program) {
 
       const files = readdirSync(workingDirectory);
       const whitelistFiles = files.filter(isShopifyThemeWhitelistedDir);
-      const promises = whitelistFiles.map(movePromiseFactory);
+      const movePromises = whitelistFiles.map(movePromiseFactory);
+
+      function beautifyJsonPromiseFactory(file) {
+        console.log(`  Beautifying ${file}...`);
+        return beautifyJson(join(srcConfigDir, file));
+      }
+
+      const configDirFiles = readdirSync(srcConfigDir);
+      const themeSettingsFiles = configDirFiles.filter(isShopifyThemeSettingsFile);
+      const beautifyPromises = themeSettingsFiles.map(beautifyJsonPromiseFactory);
 
       try {
-        await Promise.all(promises);
+        await Promise.all(movePromises);
 
         console.log('');
         console.log(`  ${green(figures.tick)} Migration to src/ completed`);
         console.log('');
+
+        await Promise.all(beautifyPromises);
+
+        console.log(`  ${green(figures.tick)} Beautification of settings files completed`);
+        console.log('');
+
         console.log('  Installing Slate dependencies...');
         console.log('');
 
