@@ -201,7 +201,7 @@ export function isShopifyThemeWhitelistedDir(directory) {
 /**
  * Tests if file is a Shopify theme settings file (settings_*.json)
  *
- * @param {string} directory - The path to the directory.
+ * @param {string} file - The path to the file.
  */
 export function isShopifyThemeSettingsFile(file) {
   const whitelist = ['settings_schema.json', 'settings_data.json'];
