@@ -142,16 +142,16 @@ export function hasDependency(dependencyName, pkg) {
 
 
 /**
- * Beautify a JSON file
+ * Umminify a JSON file
  *
- * @param {string} file - The path to the file.
+ * @param {string} file - The path to the file to unminify
  */
-export function beautifyJson(file) {
+export function unminifyJson(file) {
   return new Promise((resolve, reject) => {
     try {
       const jsonString = readFileSync(file);
-      const beautifiedJsonString = JSON.stringify(JSON.parse(jsonString), null, 2);
-      writeFileSync(file, beautifiedJsonString);
+      const unminifiedJsonString = JSON.stringify(JSON.parse(jsonString), null, 2);
+      writeFileSync(file, unminifiedJsonString);
       resolve();
     } catch (err) {
       reject(err);
@@ -204,6 +204,5 @@ export function isShopifyThemeWhitelistedDir(directory) {
  * @param {string} file - The path to the file.
  */
 export function isShopifyThemeSettingsFile(file) {
-  const whitelist = ['settings_schema.json', 'settings_data.json'];
-  return whitelist.indexOf(file) > -1;
+  return /^settings_.+\.json/.test(file);
 }
