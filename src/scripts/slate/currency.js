@@ -60,6 +60,9 @@ slate.Currency = (function() {
       case 'amount_no_decimals_with_space_separator':
         value = formatWithDelimiters(cents, 0, ' ');
         break;
+      case 'amount_with_comma_separator':
+        value = formatWithDelimiters(cents, 2, '.', ',');
+        break;
     }
 
     return formatString.replace(placeholderRegex, value);

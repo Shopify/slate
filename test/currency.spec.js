@@ -38,4 +38,9 @@ describe('currency.formatMoney', () => {
     var value = formatMoney(1000001, '${{amount_no_decimals_with_space_separator}}');
     expect(value).toBe('$10 000');
   });
+
+  test('Formats a number of 1000001 to a string of "$10.000,01"', () => {
+    var value = formatMoney(1000001, '${{amount_with_comma_separator}}');
+    expect(value).toBe('$10.000,01');
+  });
 });
