@@ -1,0 +1,28 @@
+{
+  "name": "slate-theme",
+  "version": "0.12.4",
+  "private": true,
+  "author": "Shopify Inc.",
+  "description": "A theme scaffold and command line tool for developing Shopify themes.",
+  "keywords": [
+    "slate",
+    "shopify",
+    "theme",
+    "CLI"
+  ],
+  "homepage": "https://shopify.github.io/slate/",
+  "bugs": "https://github.com/Shopify/slate/issues",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Shopify/slate.git"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@shopify/slate": "^0.12.1",
+    "@shopify/slate-tools": "^0.12.1",
+    "jest": "^20.0.4"
+  }
+}

@@ -52,14 +52,30 @@ $('#CloseModal').on('click', function() {
 
 Tables and video embeds do not natively scale well on smaller screens. Slate adds a wrapper class to tables and video embeds that are loaded in from a rich text editor.
 
-```
-// Wrap RTE tables
-$('.rte table').wrap('<div class="rte__table-wrapper"></div>');
+| Parameters           | Type          | Description   |
+| :------------------- | :------------ | :------------ |
+| `$tables`            | jQuery object | `<table>` elements to be made responsive |
+| `tableWrapperClass`  | string        | CSS class to apply on the `<div>` that will wrap each targeted `<table>` element |
+| `$iframes`           | jQuery object | `<iframe>` elements to be made responsive |
+| `iframeWrapperClass` | string        | CSS class to apply on the `<div>` that will wrap each targeted `<iframe>` element |
 
-// Wrap RTE videos
-var $iframeVideo = $('.rte iframe[src*="youtube.com/embed"], .rte iframe[src*="player.vimeo"]');
-$iframeVideo.each(function() {
-  $(this).wrap('<div class="rte__video-wrapper"></div>');
+```
+// Wrap RTE tables to make them scrollable
+var tableSelectors = '.rte table';
+
+slate.rte.wrapTable({
+  $tables: $(tableSelectors),
+  tableWrapperClass: 'rte__table-wrapper',
+});
+
+// Wrap RTE videos to make them responsive
+var videoSelectors =
+  '.rte iframe[src*="youtube.com/embed"],' +
+  '.rte iframe[src*="player.vimeo"]';
+
+slate.rte.wrapIframe({
+  $iframes: $(videoSelectors),
+  iframeWrapperClass: 'rte__video-wrapper'
 });
 ```
 
@@ -70,7 +86,7 @@ $iframeVideo.each(function() {
 
 ## Format currency
 
-Slate ships JavaScript to mimic [Shopify money formats](https://help.shopify.com/manual/payment-settings/currency-formatting#currency-formatting-options). This makes handling product prices and cart items in JS simple. ([View currency.js source](https://github.com/Shopify/slate/blob/master/src/scripts/slate/currency.js)).
+Slate ships JavaScript to mimic [Shopify money formats](https://help.shopify.com/manual/payment-settings/currency-formatting#currency-formatting-options). This makes handling product prices and cart items in JS simple. ([View currency.js source](https://github.com/Shopify/slate/blob/master/packages/slate-theme/src/scripts/slate/currency.js)).
 
 Slate maps the shop's money format — defined in Liquid — to a JavaScript variable in `layouts/theme.liquid` so it can be used regardless of file type.
 

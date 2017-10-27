@@ -1,0 +1,17 @@
+{
+  "lerna": "2.0.0",
+  "version": "0.12.4",
+  "packages": [
+    "packages/*"
+  ],
+  "changelog": {
+    "repo": "shopify/slate",
+    "labels": {
+      "enhancement": ":rocket: Enhancement",
+      "bug": ":bug: Bug Fix",
+      "documentation": ":memo: Documentation",
+      "internal": ":house: Internal"
+    },
+    "cacheDir": ".changelog"
+  }
+}

@@ -1,5 +1,64 @@
 # Change Log
 
+## v0.12.4 (2017-09-07)
+
+#### :bug: Bug Fix
+* `slate-theme`
+  * [#275](https://github.com/Shopify/slate/pull/275) Fix search result item image liquid reference. ([@t-kelly](https://github.com/t-kelly))
+
+#### Committers: 1
+- Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
+## v0.12.3 (2017-09-06)
+
+#### :bug: Bug Fix
+* `slate-theme`
+  * [#272](https://github.com/Shopify/slate/pull/272) Fix a variable declaration typo in product.js. ([@t-kelly](https://github.com/t-kelly))
+
+#### Committers: 1
+- Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
+## v0.12.2 (2017-08-30)
+
+#### :bug: Bug Fix
+* `slate-theme`
+  * [#264](https://github.com/Shopify/slate/pull/264) Fix typo and variable declaration order in product.js. ([@saudslm](https://github.com/saudslm))
+
+#### Committers: 1
+- [saudslm](https://github.com/saudslm)
+
+## v0.12.1 (2017-08-24)
+
+#### :bug: Bug Fix
+* Other
+  * [#247](https://github.com/Shopify/slate/pull/247) Fix the output of slate-src.zip. ([@t-kelly](https://github.com/t-kelly))
+
+#### Committers: 1
+- Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
+## v0.12.0 (2017-08-24)
+
+#### :rocket: Enhancement
+* `slate-theme`
+  * [#242](https://github.com/Shopify/slate/pull/242) add charset to stylesheet. ([@NathanPJF](https://github.com/NathanPJF))
+  * [#207](https://github.com/Shopify/slate/pull/207) Adding danish translation. ([@madsobel](https://github.com/madsobel))
+* `slate-tools`
+  * [#236](https://github.com/Shopify/slate/pull/236) Persist theme preview bar minimize. ([@t-kelly](https://github.com/t-kelly))
+
+#### :bug: Bug Fix
+* `slate-theme`
+  * [#239](https://github.com/Shopify/slate/pull/239) Fix behaviour and errors when no productimage. ([@t-kelly](https://github.com/t-kelly))
+* `slate-tools`
+  * [#240](https://github.com/Shopify/slate/pull/240) Ignore watching dot files in dist/ directory. ([@t-kelly](https://github.com/t-kelly))
+
+#### :house: Internal
+* `slate-cli`, `slate-theme`, `slate-tools`
+  * [#212](https://github.com/Shopify/slate/pull/212) Combine all Slate repos into a single monorepo. ([@t-kelly](https://github.com/t-kelly))
+
+#### Committers: 2
+- Mads Obel ([madsobel](https://github.com/madsobel))
+- Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
 ## [v0.11.0](https://github.com/Shopify/slate/tree/v0.11.0) (2017-07-19)
 [Full Changelog](https://github.com/Shopify/slate/compare/v0.10.2...v0.11.0)
 

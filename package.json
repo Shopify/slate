@@ -17,13 +17,19 @@
     "url": "https://github.com/Shopify/slate.git"
   },
   "scripts": {
-    "test": "jest"
+    "test": "node_modules/.bin/lerna run test",
+    "lint": "node_modules/.bin/lerna run lint",
+    "bootstrap": "npm install && node_modules/.bin/lerna bootstrap",
+    "publish": "git pull origin master && node_modules/.bin/lerna publish",
+    "changelog": "node_modules/.bin/lerna-changelog"
   },
   "devDependencies": {
-    "@shopify/slate-tools": "0.3.3",
     "archiver": "1.1.0",
     "aws-sdk": "2.6.12",
-    "jest": "^20.0.4",
-    "mime-types": "2.1.12"
+    "github": "^11.0.0",
+    "lerna": "^2.0.0",
+    "lerna-changelog": "^0.6.0",
+    "mime-types": "2.1.12",
+    "promise": "^8.0.1"
   }
 }

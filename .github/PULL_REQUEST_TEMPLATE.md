@@ -9,5 +9,4 @@ For contributors:
 
 For maintainers:
 - [ ] I have :tophat:'d these changes.
-- [ ] I have bumped the `package.json` version in a separate PR, if applicable.
 
