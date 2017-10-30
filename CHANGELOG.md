@@ -1,5 +1,45 @@
 # Change Log
 
+## v0.13.0 (2017-10-30)
+
+#### :rocket: Enhancement
+* `slate-theme`
+  * [#319](https://github.com/Shopify/slate/pull/319) Translation - customer.order.shipping_company updated to carrier. ([@paulmason](https://github.com/paulmason))
+  * [#294](https://github.com/Shopify/slate/pull/294) Rte helpers fallback class. ([@NathanPJF](https://github.com/NathanPJF))
+  * [#288](https://github.com/Shopify/slate/pull/288) Display the gift card's initial value. ([@maximevaillancourt](https://github.com/maximevaillancourt))
+  * [#284](https://github.com/Shopify/slate/pull/284) Add parameters to RTE wrapper methods. ([@maximevaillancourt](https://github.com/maximevaillancourt))
+  * [#281](https://github.com/Shopify/slate/pull/281) Tracking information for order page. ([@NathanPJF](https://github.com/NathanPJF))
+  * [#280](https://github.com/Shopify/slate/pull/280) Add dutch locale. ([@driespieters](https://github.com/driespieters))
+
+#### :bug: Bug Fix
+* `slate-cli`
+  * [#323](https://github.com/Shopify/slate/pull/323) Beautify settings files on migration. ([@maximevaillancourt](https://github.com/maximevaillancourt))
+* `slate-tools`
+  * [#318](https://github.com/Shopify/slate/pull/318) Fix Upload folder path in 'open:zip' gulp task. ([@maximevaillancourt](https://github.com/maximevaillancourt))
+* `slate-theme`
+  * [#313](https://github.com/Shopify/slate/pull/313) Update slate-theme with PT-pt. ([@gabrielajungblut](https://github.com/gabrielajungblut))
+  * [#312](https://github.com/Shopify/slate/pull/312) Update slate-theme with reviewed copy for PT-br. ([@gabrielajungblut](https://github.com/gabrielajungblut))
+  * [#287](https://github.com/Shopify/slate/pull/287) Auto-select the gift card's code on click. ([@maximevaillancourt](https://github.com/maximevaillancourt))
+
+#### :house: Internal
+* `slate-tools`
+  * [#303](https://github.com/Shopify/slate/pull/303) Change dev script click event target from document to minimize button.([@Investopedia](https://github.com/Investopedia))
+* `slate-theme`
+  * [#300](https://github.com/Shopify/slate/pull/300) Correct some function comments. ([@Jore](https://github.com/Jore))
+* Other
+  * [#276](https://github.com/Shopify/slate/pull/276) Migrate to CircleCI 2. ([@t-kelly](https://github.com/t-kelly))
+
+#### Committers: 9
+- Adrian Humphreys ([adrhumphreys](https://github.com/adrhumphreys))
+- DriesP ([driespieters](https://github.com/driespieters))
+- Joe Refoy ([Jore](https://github.com/Jore))
+- Maxime Vaillancourt ([maximevaillancourt](https://github.com/maximevaillancourt))
+- Nathan Ferguson ([NathanPJF](https://github.com/NathanPJF))
+- Paul Mason ([paulmason](https://github.com/paulmason))
+- Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+- [Investopedia](https://github.com/Investopedia)
+- [gabrielajungblut](https://github.com/gabrielajungblut)
+
 ## v0.12.4 (2017-09-07)
 
 #### :bug: Bug Fix
