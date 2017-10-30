@@ -103,6 +103,9 @@ jobs:
             - slate-cli-cache-{{ checksum "./packages/slate-cli/package-lock.json" }}
             - slate-cli-cache
       - run:
+          name: Bootstrap packages
+          command: npm run bootstrap
+      - run:
           name: Create slate-theme.zip
           command: cd packages/slate-theme && ./node_modules/.bin/slate zip
       - run:
