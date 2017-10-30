@@ -4,7 +4,7 @@ import {join} from 'path';
 import {prompt} from 'inquirer';
 import {green, red, yellow} from 'chalk';
 import figures from 'figures';
-import {downloadFromUrl, startProcess, writePackageJsonSync, move, isShopifyTheme, isShopifyThemeWhitelistedDir} from '../utils';
+import * as utils from '../utils';
 
 export default function(program) {
   program
@@ -23,7 +23,7 @@ export default function(program) {
         return;
       }
 
-      if (!isShopifyTheme(workingDirectory)) {
+      if (!utils.isShopifyTheme(workingDirectory)) {
         console.log('');
         console.error(yellow('  The current directory doesn\'t have /layout/theme.liquid. We have to assume this isn\'t a Shopify theme'));
         console.log('');
@@ -35,6 +35,7 @@ export default function(program) {
       const configYml = join(workingDirectory, 'config.yml');
       const pkgJson = join(workingDirectory, 'package.json');
       const srcDir = join(workingDirectory, 'src');
+      const configDir = join(workingDirectory, 'src/config');
       const iconsDir = join(srcDir, 'icons');
       const stylesDir = join(srcDir, 'styles');
       const scriptsDir = join(srcDir, 'scripts');
@@ -63,33 +64,44 @@ export default function(program) {
       mkdirSync(scriptsDir);
 
       if (!existsSync(pkgJson)) {
-        writePackageJsonSync(pkgJson);
+        utils.writePackageJsonSync(pkgJson);
       }
 
       function movePromiseFactory(file) {
         console.log(`  Migrating ${file} to src/...`);
-        return move(join(workingDirectory, file), join(srcDir, file));
+        return utils.move(join(workingDirectory, file), join(srcDir, file));
       }
 
       const files = readdirSync(workingDirectory);
-      const whitelistFiles = files.filter(isShopifyThemeWhitelistedDir);
-      const promises = whitelistFiles.map(movePromiseFactory);
+      const whitelistFiles = files.filter(utils.isShopifyThemeWhitelistedDir);
+      const movePromises = whitelistFiles.map(movePromiseFactory);
+
+      function unminifyJsonPromiseFactory(file) {
+        return utils.unminifyJson(join(configDir, file));
+      }
+
+      const configDirFiles = readdirSync(configDir);
+      const themeSettingsFiles = configDirFiles.filter(utils.isShopifyThemeSettingsFile);
+      const unminifyPromises = themeSettingsFiles.map(unminifyJsonPromiseFactory);
 
       try {
-        await Promise.all(promises);
+        await Promise.all(movePromises);
 
         console.log('');
         console.log(`  ${green(figures.tick)} Migration to src/ completed`);
         console.log('');
+
+        await Promise.all(unminifyPromises);
+
         console.log('  Installing Slate dependencies...');
         console.log('');
 
         if (options.yarn) {
-          await startProcess('yarn', ['add', '@shopify/slate-tools', '--dev', '--exact'], {
+          await utils.startProcess('yarn', ['add', '@shopify/slate-tools', '--dev', '--exact'], {
             cwd: workingDirectory,
           });
         } else {
-          await startProcess('npm', ['install', '@shopify/slate-tools', '--save-dev', '--save-exact'], {
+          await utils.startProcess('npm', ['install', '@shopify/slate-tools', '--save-dev', '--save-exact'], {
             cwd: workingDirectory,
           });
         }
@@ -101,7 +113,7 @@ export default function(program) {
         if (!existsSync(configYml)) {
           const configUrl = 'https://raw.githubusercontent.com/Shopify/slate//master/packages/slate-theme/config-sample.yml';
 
-          await downloadFromUrl(configUrl, join(workingDirectory, 'config.yml'));
+          await utils.downloadFromUrl(configUrl, join(workingDirectory, 'config.yml'));
 
           console.error(`  ${green(figures.tick)} Configuration file generated`);
           console.error(yellow('  Your theme was missing config.yml in the root directory. Please open and edit it before using Slate commands'));

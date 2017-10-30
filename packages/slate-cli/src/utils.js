@@ -1,4 +1,4 @@
-import {createReadStream, createWriteStream, rename, unlinkSync, writeFileSync, existsSync} from 'fs';
+import {createReadStream, createWriteStream, rename, unlinkSync, readFileSync, writeFileSync, existsSync} from 'fs';
 import {join, normalize} from 'path';
 import {Extract} from 'unzip2';
 import {get} from 'https';
@@ -140,6 +140,25 @@ export function hasDependency(dependencyName, pkg) {
   return hasDependencies;
 }
 
+
+/**
+ * Umminify a JSON file
+ *
+ * @param {string} file - The path to the file to unminify
+ */
+export function unminifyJson(file) {
+  return new Promise((resolve, reject) => {
+    try {
+      const jsonString = readFileSync(file);
+      const unminifiedJsonString = JSON.stringify(JSON.parse(jsonString), null, 2);
+      writeFileSync(file, unminifiedJsonString);
+      resolve();
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
 /**
  * Moves file from one location to another
  *
@@ -177,4 +196,13 @@ export function isShopifyTheme(directory) {
 export function isShopifyThemeWhitelistedDir(directory) {
   const whitelist = ['assets', 'layout', 'config', 'locales', 'sections', 'snippets', 'templates'];
   return whitelist.indexOf(directory) > -1;
+}
+
+/**
+ * Tests if file is a Shopify theme settings file (settings_*.json)
+ *
+ * @param {string} file - The path to the file.
+ */
+export function isShopifyThemeSettingsFile(file) {
+  return /^settings_.+\.json/.test(file);
 }
