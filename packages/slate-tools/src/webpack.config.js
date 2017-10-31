@@ -4,9 +4,50 @@ import webpack from 'webpack';
 
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+
+const extractSass = new ExtractTextPlugin({
+  filename: "theme.css"
+});
 
 module.exports = {
-  entry: path.resolve(config.themeRoot, "src/scripts/theme.js"),
+  entry: {
+    theme: [
+      path.resolve(config.themeRoot, "src/scripts/theme.js"),
+      path.resolve(config.themeRoot, "src/styles/theme.scss")
+    ]
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: extractSass.extract({
+          use: [{
+            loader: "css-loader" // translates CSS into CommonJS
+          }, {
+              loader: "sass-loader" // compiles Sass to CSS
+          }]
+        })
+      },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: path.resolve(config.themeRoot, './node_modules/@shopify/slate-tools/node_modules/babel-preset-env')
+          }
+        }
+      },
+    ]
+  },
+
+  resolveLoader: {
+    modules: [
+      "./node_modules/@shopify/slate-tools/node_modules"
+    ],
+  },
 
   plugins: [
     new CleanWebpackPlugin('dist', {root: config.themeRoot,}),
@@ -36,32 +77,13 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       name: "manifest",
       minChunks: Infinity
-    })
+    }),
+
+    extractSass
   ],
 
   output: {
     filename: '[name].js',
     path: path.resolve(config.themeRoot, "dist/assets")
   },
-
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: path.resolve(config.themeRoot, './node_modules/@shopify/slate-tools/node_modules/babel-preset-env')
-          }
-        }
-      }
-    ]
-  },
-
-  resolveLoader: {
-    modules: [
-      "./node_modules/@shopify/slate-tools/node_modules"
-    ],
-  }
 }
