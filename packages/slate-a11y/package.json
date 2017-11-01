@@ -3,9 +3,6 @@
   "version": "1.0.0-alpha.1",
   "description": "A library of useful functions that help make your theme more accessible.",
   "main": "a11y.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Shopify/slate.git"

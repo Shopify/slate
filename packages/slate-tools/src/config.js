@@ -6,18 +6,28 @@ const workingDirectory = process.cwd();
 const currentDirectory = __dirname;
 const themeRoot = findRoot(workingDirectory);
 const defaultGulpPath = join(themeRoot, normalize('node_modules/.bin/gulp'));
-const defaultWebpackPath = join(themeRoot, normalize('node_modules/.bin/webpack'));
+const defaultWebpackPath = join(
+  themeRoot,
+  normalize('node_modules/.bin/webpack')
+);
 // Legacy path for older versions of Node.
-const legacyGulpPath = join(themeRoot, normalize('node_modules/@shopify/slate-tools/node_modules/.bin/gulp'));
-const legacyWebpackPath = join(themeRoot, normalize('node_modules/@shopify/slate-tools/node_modules/.bin/webpack'));
+const legacyGulpPath = join(
+  themeRoot,
+  normalize('node_modules/@shopify/slate-tools/node_modules/.bin/gulp')
+);
+const legacyWebpackPath = join(
+  themeRoot,
+  normalize('node_modules/@shopify/slate-tools/node_modules/.bin/webpack')
+);
 
 const config = {
   gulpFile: join(currentDirectory, 'gulpfile.js'),
   gulp: existsSync(defaultGulpPath) ? defaultGulpPath : legacyGulpPath,
   webpackConfig: join(currentDirectory, 'webpack.config.js'),
-  webpack: existsSync(defaultWebpackPath) ? defaultWebpackPath : legacyWebpackPath,
-  themeRoot
+  webpack: existsSync(defaultWebpackPath)
+    ? defaultWebpackPath
+    : legacyWebpackPath,
+  themeRoot,
 };
-
 
 export default config;

@@ -24,7 +24,7 @@ const utilities = {
       return;
     }
 
-    gutil.log(gutil.colors.red(`There were errors during the build:\n`));
+    gutil.log(gutil.colors.red('There were errors during the build:\n'));
 
     errors.forEach((err) => {
       gutil.log(gutil.colors.red(err));
@@ -60,7 +60,9 @@ const utilities = {
       const result = factory();
       results.push(result);
       return result;
-    }).thenReturn(results).all();
+    })
+      .thenReturn(results)
+      .all();
   },
 
   /**
@@ -73,7 +75,9 @@ const utilities = {
    */
   processSvg: ($, file) => {
     var $svg = $('svg'); // eslint-disable-line no-var
-    var $newSvg = $('<svg aria-hidden="true" focusable="false" role="presentation" class="icon" />'); // eslint-disable-line no-var
+    const $newSvg = $(
+      '<svg aria-hidden="true" focusable="false" role="presentation" class="icon" />'
+    ); // eslint-disable-line no-var
     var fileName = file.relative.replace('.svg', ''); // eslint-disable-line no-var
     var viewBoxAttr = $svg.attr('viewbox'); // eslint-disable-line no-var
 
@@ -93,9 +97,7 @@ const utilities = {
       $newSvg.addClass('icon--full-color');
     }
 
-    $newSvg
-      .addClass(fileName)
-      .append($svg.contents());
+    $newSvg.addClass(fileName).append($svg.contents());
 
     $newSvg.append($svg.contents());
     $svg.after($newSvg);
@@ -111,7 +113,8 @@ const utilities = {
    * @returns {eventCache} see type definition for more robust documentation
    */
   createEventCache: (options) => {
-    _.defaults(options = options || {}, { // eslint-disable-line no-param-reassign
+    _.defaults((options = options || {}), {
+      // eslint-disable-line no-param-reassign
       changeEvents: ['add', 'change'],
       unlinkEvents: ['unlink'],
     });
@@ -138,7 +141,8 @@ const utilities = {
        * @param {String} event - chokidar event type - only cares about `(add|change|unlink)`
        * @param {String} path - relative path to file passed via event
        */
-      addEvent: function(event, path) { // eslint-disable-line babel/object-shorthand
+      addEvent: (event, path) => {
+        // eslint-disable-line babel/object-shorthand
         _.each(options.changeEvents, (eventType) => {
           if (event === eventType) {
             this.change.push(path);

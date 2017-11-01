@@ -1,4 +1,12 @@
-import {createReadStream, createWriteStream, rename, unlinkSync, readFileSync, writeFileSync, existsSync} from 'fs';
+import {
+  createReadStream,
+  createWriteStream,
+  rename,
+  unlinkSync,
+  readFileSync,
+  writeFileSync,
+  existsSync,
+} from 'fs';
 import {join, normalize} from 'path';
 import {Extract} from 'unzip2';
 import {get} from 'https';
@@ -53,9 +61,11 @@ export function unzip(source, target) {
       resolve(target);
     });
 
-    zipFile.pipe(Extract({
-      path: target,
-    }));
+    zipFile.pipe(
+      Extract({
+        path: target,
+      })
+    );
   });
 }
 
@@ -131,7 +141,7 @@ export function hasDependency(dependencyName, pkg) {
   let hasDependencies = false;
 
   for (const key of depKeys) {
-    if ((key in pkg && dependencyName in pkg[key])) {
+    if (key in pkg && dependencyName in pkg[key]) {
       hasDependencies = true;
       break;
     }
@@ -139,7 +149,6 @@ export function hasDependency(dependencyName, pkg) {
 
   return hasDependencies;
 }
-
 
 /**
  * Umminify a JSON file
@@ -150,7 +159,11 @@ export function unminifyJson(file) {
   return new Promise((resolve, reject) => {
     try {
       const jsonString = readFileSync(file);
-      const unminifiedJsonString = JSON.stringify(JSON.parse(jsonString), null, 2);
+      const unminifiedJsonString = JSON.stringify(
+        JSON.parse(jsonString),
+        null,
+        2
+      );
       writeFileSync(file, unminifiedJsonString);
       resolve();
     } catch (err) {
@@ -194,7 +207,15 @@ export function isShopifyTheme(directory) {
  * @param {string} directory - The path to the directory.
  */
 export function isShopifyThemeWhitelistedDir(directory) {
-  const whitelist = ['assets', 'layout', 'config', 'locales', 'sections', 'snippets', 'templates'];
+  const whitelist = [
+    'assets',
+    'layout',
+    'config',
+    'locales',
+    'sections',
+    'snippets',
+    'templates',
+  ];
   return whitelist.indexOf(directory) > -1;
 }
 

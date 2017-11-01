@@ -3,9 +3,6 @@
   "version": "1.0.0-alpha.1",
   "description": "A library that helps developers work with the RTE sections in Shopify Themes",
   "main": "rte.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Shopify/slate.git"

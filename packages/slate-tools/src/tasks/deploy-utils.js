@@ -22,16 +22,19 @@ function deploy(env) {
   return new Promise((resolve, reject) => {
     debug(`themekit cwd to: ${config.dist.root}`);
 
-    themekit.command({
-      args: ['replace', '--env', env],
-      cwd: config.dist.root,
-    }, (err) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve();
+    themekit.command(
+      {
+        args: ['replace', '--env', env],
+        cwd: config.dist.root,
+      },
+      (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
       }
-    });
+    );
   }).catch((err) => {
     messages.logTransferFailed(err);
   });
@@ -100,12 +103,11 @@ gulp.task('validate:id', () => {
     promises.push(factory);
   });
 
-  return utils.promiseSeries(promises)
-    .catch((result) => {
-      // stop process to prevent deploy defaulting to published theme
-      messages.invalidThemeId(result.themeId, result.environment);
-      return process.exit(2);
-    });
+  return utils.promiseSeries(promises).catch((result) => {
+    // stop process to prevent deploy defaulting to published theme
+    messages.invalidThemeId(result.themeId, result.environment);
+    return process.exit(2);
+  });
 });
 
 /**
@@ -130,10 +132,9 @@ gulp.task('deploy:replace', () => {
     promises.push(factory);
   });
 
-  return utils.promiseSeries(promises)
-    .then(() => {
-      return messages.allDeploysComplete();
-    });
+  return utils.promiseSeries(promises).then(() => {
+    return messages.allDeploysComplete();
+  });
 });
 
 /**

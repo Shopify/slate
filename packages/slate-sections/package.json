@@ -3,9 +3,6 @@
   "version": "1.0.0-alpha.1",
   "description": "A framework that helps developers build Shopify Theme sections that play well with the Shopify Theme Editor",
   "main": "sections.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Shopify/slate.git"

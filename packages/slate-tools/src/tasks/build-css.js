@@ -18,7 +18,8 @@ const messages = require('./includes/messages.js');
 function processCss() {
   messages.logProcessFiles('build:css');
 
-  return gulp.src(config.roots.css)
+  return gulp
+    .src(config.roots.css)
     .pipe(plumber(utils.errorHandler))
     .pipe(cssimport())
     .pipe(extReplace('.css.liquid', '.css'))
@@ -45,7 +46,8 @@ gulp.task('build:css', () => {
  * @static
  */
 gulp.task('watch:css', () => {
-  chokidar.watch(config.src.css, {ignoreInitial: true})
+  chokidar
+    .watch(config.src.css, {ignoreInitial: true})
     .on('all', (event, path) => {
       messages.logFileEvent(event, path);
       processCss();

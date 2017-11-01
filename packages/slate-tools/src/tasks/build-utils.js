@@ -29,7 +29,8 @@ gulp.task('compress', () => {
   const distFiles = `${config.dist.root}**/*`;
   const ignoreConfig = `!${config.dist.root}config.yml`;
 
-  return gulp.src([distFiles, ignoreConfig])
+  return gulp
+    .src([distFiles, ignoreConfig])
     .pipe(plumber(utils.errorHandler))
     .pipe(zip(`${config.packageJson.name}.zip` || 'theme.zip'))
     .pipe(size({showFiles: true, pretty: true}))

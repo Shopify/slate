@@ -11,7 +11,7 @@ export function validate(product) {
 }
 
 export function getVariant(product, value) {
-  var variant;
+  let variant;
 
   if (typeof value === 'string' || typeof value === 'number') {
     // If value is an id
@@ -34,21 +34,25 @@ export function getVariant(product, value) {
 }
 
 export function optionArrayFromOptionCollection(product, collection) {
-  var optionArray = [];
+  const optionArray = [];
 
-  collection.forEach(function(option) {
-    var index;
+  collection.forEach((option) => {
+    let index;
 
     if (typeof option.name !== 'string') {
-      throw Error('Invalid value type passed for name of option ' + index + '. Value should be string.');
+      throw Error(
+        `Invalid value type passed for name of option ${
+          index
+          }. Value should be string.`
+      );
     }
 
-    index = findIndex(product.options, function(name) {
+    index = findIndex(product.options, (name) => {
       return name.toLowerCase() === option.name.toLowerCase();
     });
 
     if (index === -1) {
-      throw Error('Invalid option name, ' + option.name);
+      throw Error(`Invalid option name, ${option.name}`);
     }
 
     optionArray[index] = option.value;
@@ -58,20 +62,19 @@ export function optionArrayFromOptionCollection(product, collection) {
 }
 
 function _getVariantFromId(product, id) {
-  return find(product.variants, {id: id});
+  return find(product.variants, {id});
 }
 
 function _getVariantFromOptionCollection(product, collection, closest) {
-  var optionArray = this.optionArrayFromOptionCollection(product, collection);
+  const optionArray = this.optionArrayFromOptionCollection(product, collection);
 
   return this._getVariantFromOptionArray(product, optionArray, closest);
 }
 
 function _getVariantFromOptionArray(product, options) {
-  return find(product.variants, function(variant) {
-    return options.every(function(option, index) {
+  return find(product.variants, (variant) => {
+    return options.every((option, index) => {
       return variant.options[index] === option;
     });
   });
 }
-

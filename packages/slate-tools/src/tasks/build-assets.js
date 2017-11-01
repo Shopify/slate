@@ -28,12 +28,15 @@ const assetsPaths = [
  */
 function processAssets(files) {
   messages.logProcessFiles('build:assets');
-  return gulp.src(files, {base: config.src.root})
+  return gulp
+    .src(files, {base: config.src.root})
     .pipe(plumber(utils.errorHandler))
-    .pipe(size({
-      showFiles: true,
-      pretty: true,
-    }))
+    .pipe(
+      size({
+        showFiles: true,
+        pretty: true,
+      })
+    )
     .pipe(gulp.dest(config.dist.root));
 }
 
@@ -52,13 +55,16 @@ function removeAssets(files) {
     return distFile;
   });
 
-  return gulp.src(mapFiles)
+  return gulp
+    .src(mapFiles)
     .pipe(plumber(utils.errorHandler))
     .pipe(vinylPaths(del))
-    .pipe(size({
-      showFiles: true,
-      pretty: true,
-    }));
+    .pipe(
+      size({
+        showFiles: true,
+        pretty: true,
+      })
+    );
 }
 
 /**
@@ -82,12 +88,14 @@ gulp.task('build:assets', () => {
 gulp.task('watch:assets', () => {
   const eventCache = utils.createEventCache();
 
-  chokidar.watch(assetsPaths, {
-    ignored: /(^|[/\\])\../,
-    ignoreInitial: true,
-  }).on('all', (event, path) => {
-    messages.logFileEvent(event, path);
-    eventCache.addEvent(event, path);
-    utils.processCache(eventCache, processAssets, removeAssets);
-  });
+  chokidar
+    .watch(assetsPaths, {
+      ignored: /(^|[/\\])\../,
+      ignoreInitial: true,
+    })
+    .on('all', (event, path) => {
+      messages.logFileEvent(event, path);
+      eventCache.addEvent(event, path);
+      utils.processCache(eventCache, processAssets, removeAssets);
+    });
 });

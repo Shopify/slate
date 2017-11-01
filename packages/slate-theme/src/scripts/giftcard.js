@@ -5,13 +5,13 @@
  */
 
 (function() {
-  var config = {
+  const config = {
     qrCode: '#QrCode',
     printButton: '#PrintGiftCard',
     giftCardCode: '.giftcard__code'
   };
 
-  var $qrCode = $(config.qrCode);
+  const $qrCode = $(config.qrCode);
 
   new QRCode($qrCode[0], {
     text: $qrCode.attr('data-identifier'),
@@ -19,7 +19,7 @@
     height: 120
   });
 
-  $(config.printButton).on('click', function() {
+  $(config.printButton).on('click', () => {
     window.print();
   });
 
@@ -27,15 +27,15 @@
   $(config.giftCardCode).on('click', {element: 'GiftCardDigits'}, selectText);
 
   function selectText(evt) {
-    var text = document.getElementById(evt.data.element);
-    var range = '';
+    const text = document.getElementById(evt.data.element);
+    let range = '';
 
     if (document.body.createTextRange) {
       range = document.body.createTextRange();
       range.moveToElementText(text);
       range.select();
     } else if (window.getSelection) {
-      var selection = window.getSelection();
+      const selection = window.getSelection();
       range = document.createRange();
       range.selectNodeContents(text);
       selection.removeAllRanges();

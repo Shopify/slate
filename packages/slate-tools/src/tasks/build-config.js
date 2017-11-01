@@ -10,12 +10,15 @@ const messages = require('./includes/messages.js');
 function processConfig(file) {
   messages.logProcessFiles('build:config');
 
-  return gulp.src(file)
+  return gulp
+    .src(file)
     .pipe(plumber(utils.errorHandler))
-    .pipe(size({
-      showFiles: true,
-      pretty: true,
-    }))
+    .pipe(
+      size({
+        showFiles: true,
+        pretty: true,
+      })
+    )
     .pipe(gulp.dest(config.dist.root));
 }
 
@@ -43,7 +46,8 @@ gulp.task('build:config', () => {
  * @static
  */
 gulp.task('watch:config', () => {
-  chokidar.watch(config.tkConfig, {ignoreInitial: true})
+  chokidar
+    .watch(config.tkConfig, {ignoreInitial: true})
     .on('all', (event, path) => {
       messages.logFileEvent(event, path);
       processConfig(path);
@@ -60,7 +64,8 @@ gulp.task('watch:config', () => {
  * @static
  */
 gulp.task('watch:dist-config', () => {
-  chokidar.watch(config.dist.root + config.tkConfig, {ignoreInitial: true})
+  chokidar
+    .watch(config.dist.root + config.tkConfig, {ignoreInitial: true})
     .on('all', (event, path) => {
       messages.logFileEvent(event, path);
 

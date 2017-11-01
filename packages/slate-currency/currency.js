@@ -8,7 +8,7 @@
  *
  */
 
-var moneyFormat = '${{amount}}';
+const moneyFormat = '${{amount}}';
 
 /**
  * Format money values based on your shop currency settings
@@ -21,20 +21,28 @@ export function formatMoney(cents, format) {
   if (typeof cents === 'string') {
     cents = cents.replace('.', '');
   }
-  var value = '';
-  var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
-  var formatString = (format || moneyFormat);
+  let value = '';
+  const placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+  const formatString = format || moneyFormat;
 
-  function formatWithDelimiters(number, precision = 2, thousands = ',', decimal = '.') {
+  function formatWithDelimiters(
+    number,
+    precision = 2,
+    thousands = ',',
+    decimal = '.'
+  ) {
     if (isNaN(number) || number == null) {
       return 0;
     }
 
     number = (number / 100.0).toFixed(precision);
 
-    var parts = number.split('.');
-    var dollarsAmount = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands);
-    var centsAmount = parts[1] ? (decimal + parts[1]) : '';
+    const parts = number.split('.');
+    const dollarsAmount = parts[0].replace(
+      /(\d)(?=(\d\d\d)+(?!\d))/g,
+      `$1${thousands}`
+    );
+    const centsAmount = parts[1] ? decimal + parts[1] : '';
 
     return dollarsAmount + centsAmount;
   }
@@ -59,4 +67,3 @@ export function formatMoney(cents, format) {
 
   return formatString.replace(placeholderRegex, value);
 }
-

@@ -15,16 +15,18 @@ import $ from 'jquery';
  * @param {JQuery} $element - The element to be acted upon
  */
 export function pageLinkFocus($element) {
-  var focusClass = 'js-focus-hidden';
+  const focusClass = 'js-focus-hidden';
 
-  $element.first()
+  $element
+    .first()
     .attr('tabIndex', '-1')
     .focus()
     .addClass(focusClass)
     .one('blur', callback);
 
   function callback() {
-    $element.first()
+    $element
+      .first()
       .removeClass(focusClass)
       .removeAttr('tabindex');
   }
@@ -34,7 +36,7 @@ export function pageLinkFocus($element) {
  * If there's a hash in the url, focus the appropriate element
  */
 export function focusHash() {
-  var hash = window.location.hash;
+  const hash = window.location.hash;
 
   // is there a hash in the url? is it an element on the page?
   if (hash && document.getElementById(hash.slice(1))) {
@@ -46,9 +48,12 @@ export function focusHash() {
  * When an in-page (url w/hash) link is clicked, focus the appropriate element
  */
 export function bindInPageLinks() {
-  $('a[href*=#]').on('click', function(evt) {
-    this.pageLinkFocus($(evt.currentTarget.hash));
-  }.bind(this));
+  $('a[href*=#]').on(
+    'click',
+    (evt) => {
+      this.pageLinkFocus($(evt.currentTarget.hash));
+    }
+  );
 }
 
 /**
@@ -60,8 +65,8 @@ export function bindInPageLinks() {
  * @param {string} options.namespace - Namespace used for new focus event handler
  */
 export function trapFocus(options) {
-  var eventName = options.namespace
-    ? 'focusin.' + options.namespace
+  const eventName = options.namespace
+    ? `focusin.${options.namespace}`
     : 'focusin';
 
   if (!options.$elementToFocus) {
@@ -71,8 +76,11 @@ export function trapFocus(options) {
   options.$container.attr('tabindex', '-1');
   options.$elementToFocus.focus();
 
-  $(document).on(eventName, function(evt) {
-    if (options.$container[0] !== evt.target && !options.$container.has(evt.target).length) {
+  $(document).on(eventName, (evt) => {
+    if (
+      options.$container[0] !== evt.target &&
+      !options.$container.has(evt.target).length
+    ) {
       options.$container.focus();
     }
   });
@@ -86,8 +94,8 @@ export function trapFocus(options) {
  * @param {string} options.namespace - Namespace used for new focus event handler
  */
 export function removeTrapFocus(options) {
-  var eventName = options.namespace
-    ? 'focusin.' + options.namespace
+  const eventName = options.namespace
+    ? `focusin.${options.namespace}`
     : 'focusin';
 
   if (options.$container && options.$container.length) {

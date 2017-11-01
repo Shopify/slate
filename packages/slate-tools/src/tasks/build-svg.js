@@ -22,15 +22,18 @@ const messages = require('./includes/messages.js');
  */
 function processIcons(files) {
   messages.logProcessFiles('build:svg');
-  return gulp.src(files)
+  return gulp
+    .src(files)
     .pipe(plumber(utils.errorHandler))
     .pipe(svgmin(config.plugins.svgmin))
     .pipe(cheerio(config.plugins.cheerio))
     .pipe(extReplace('.liquid'))
-    .pipe(size({
-      showFiles: true,
-      pretty: true,
-    }))
+    .pipe(
+      size({
+        showFiles: true,
+        pretty: true,
+      })
+    )
     .pipe(gulp.dest(config.dist.snippets));
 }
 
@@ -50,13 +53,16 @@ function removeIcons(files) {
     return snippetFile;
   });
 
-  return gulp.src(mapFiles)
+  return gulp
+    .src(mapFiles)
     .pipe(plumber(utils.errorHandler))
     .pipe(vinylPaths(del))
-    .pipe(size({
-      showFiles: true,
-      pretty: true,
-    }));
+    .pipe(
+      size({
+        showFiles: true,
+        pretty: true,
+      })
+    );
 }
 
 /**
@@ -80,7 +86,8 @@ gulp.task('build:svg', () => {
 gulp.task('watch:svg', () => {
   const cache = utils.createEventCache();
 
-  chokidar.watch([config.src.icons], {ignoreInitial: true})
+  chokidar
+    .watch([config.src.icons], {ignoreInitial: true})
     .on('all', (event, path) => {
       messages.logFileEvent(event, path);
       cache.addEvent(event, path);

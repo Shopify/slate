@@ -5,13 +5,21 @@ import {prompt} from 'inquirer';
 import rimraf from 'rimraf';
 import {green, red} from 'chalk';
 import figures from 'figures';
-import {downloadFromUrl, unzip, renameFile, startProcess, writePackageJsonSync} from '../utils';
+import {
+  downloadFromUrl,
+  unzip,
+  renameFile,
+  startProcess,
+  writePackageJsonSync,
+} from '../utils';
 
 export default function(program) {
   program
     .command('theme [name]')
     .alias('t')
-    .description('Generates a new theme directory containing Slate\'s theme boilerplate.')
+    .description(
+      "Generates a new theme directory containing Slate's theme boilerplate."
+    )
     .option('--yarn', 'installs theme dependencies with yarn instead of npm')
     .action(async (name, options = {}) => {
       let dirName = name;
@@ -20,7 +28,8 @@ export default function(program) {
         const answers = await prompt({
           type: 'input',
           name: 'dirName',
-          message: 'Please enter a directory name for your theme (a new folder will be created):',
+          message:
+            'Please enter a directory name for your theme (a new folder will be created):',
           default: 'theme',
           validate: (value) => {
             const validateName = value.match(/^[\w^'@{}[\],$=!#().%+~\- ]+$/);
@@ -42,7 +51,9 @@ export default function(program) {
 
       if (existsSync(root)) {
         console.log('');
-        console.error(red(`  ${figures.cross} The ${root} directory already exists`));
+        console.error(
+          red(`  ${figures.cross} The ${root} directory already exists`)
+        );
         console.log('');
         return null;
       }
@@ -58,20 +69,30 @@ export default function(program) {
           return unzip(themeZipFile, root);
         })
         .then(() => {
-          console.log(`  ${green(figures.tick)} slate-theme download completed`);
+          console.log(
+            `  ${green(figures.tick)} slate-theme download completed`
+          );
 
           const pkg = join(root, 'package.json');
 
           writePackageJsonSync(pkg, dirName);
 
           if (options.yarn) {
-            return startProcess('yarn', ['add', '@shopify/slate-tools', '--dev', '--exact'], {
-              cwd: root,
-            });
+            return startProcess(
+              'yarn',
+              ['add', '@shopify/slate-tools', '--dev', '--exact'],
+              {
+                cwd: root,
+              }
+            );
           } else {
-            return startProcess('npm', ['install', '@shopify/slate-tools', '--save-dev', '--save-exact'], {
-              cwd: root,
-            });
+            return startProcess(
+              'npm',
+              ['install', '@shopify/slate-tools', '--save-dev', '--save-exact'],
+              {
+                cwd: root,
+              }
+            );
           }
         })
         .then(() => {
@@ -82,7 +103,6 @@ export default function(program) {
           return null;
         })
         .then(async () => {
-
           const sampleFiles = [
             {oldFile: 'config-sample.yml', newFile: 'config.yml', dir: root},
             {oldFile: '.gitignore-sample', newFile: '.gitignore', dir: root},
@@ -101,7 +121,6 @@ export default function(program) {
           }
 
           return null;
-
         })
         .catch((err) => {
           console.error(red(`  ${err}`));

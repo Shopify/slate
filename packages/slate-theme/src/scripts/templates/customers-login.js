@@ -8,7 +8,7 @@
 
 import $ from 'jquery';
 
-var config = {
+const config = {
   recoverPasswordForm: '#RecoverPassword',
   hideRecoverPasswordLink: '#HideRecoverPasswordLink'
 };
@@ -26,7 +26,7 @@ if ($(config.recoverPasswordForm).length) {
   }
 
   function checkUrlHash() {
-    var hash = window.location.hash;
+    const hash = window.location.hash;
 
     // Allow deep linking to recover password form
     if (hash === '#recover') {
@@ -46,7 +46,7 @@ if ($(config.recoverPasswordForm).length) {
    *  Show reset password success message
    */
   function resetPasswordSuccess() {
-    var $formState = $('.reset-password-success');
+    const $formState = $('.reset-password-success');
 
     // check if reset password form was successfully submited.
     if (!$formState.length) {

@@ -3,13 +3,6 @@
   "version": "1.0.0-alpha.1",
   "description": "A library that helps with managing currencies in Shopify Themes",
   "main": "currency.js",
-  "scripts": {
-    "test": "jest"
-  },
-  "devDependencies": {
-    "babel-jest": "^21.2.0",
-    "jest": "^21.2.1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Shopify/slate.git"

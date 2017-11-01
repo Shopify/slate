@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "plugin:shopify/esnext",
+    "plugin:shopify/node",
+    "plugin:shopify/jquery"
+  ],
+  "env": {
+    "jest": true
+  },
+  "rules": {
+    "no-console": 0,
+    "node/shebang": 0
+  },
+  "globals": {
+    "document": true,
+    "window": true,
+    "Shopify": true
+  }
+}

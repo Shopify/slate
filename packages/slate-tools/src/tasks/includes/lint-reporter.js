@@ -38,12 +38,14 @@ export default class Reporter {
     const testsRun = this.failures.length + this.successes.length;
 
     if (this.failures.length === 0) {
-      gutil.log('Translation tests complete:',
-        gutil.colors.green(`Success (${testsRun} checks run)`),
+      gutil.log(
+        'Translation tests complete:',
+        gutil.colors.green(`Success (${testsRun} checks run)`)
       );
     } else {
-      gutil.log('Translation tests complete:',
-        gutil.colors.red(`Failed (${testsRun} checks run)`),
+      gutil.log(
+        'Translation tests complete:',
+        gutil.colors.red(`Failed (${testsRun} checks run)`)
       );
 
       const failureGroups = _.groupBy(this.failures, (failure) => failure[1]);

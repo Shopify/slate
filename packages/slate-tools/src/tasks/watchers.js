@@ -52,27 +52,31 @@ function deploy(cmd, files, env) {
   return new Promise((resolve, reject) => {
     debug(`themekit cwd to: ${config.dist.root}`);
 
-    themekit.command({
-      args: [cmd, '--env', env].concat(files),
-      cwd: config.dist.root,
-    }, (err) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve();
+    themekit.command(
+      {
+        args: [cmd, '--env', env].concat(files),
+        cwd: config.dist.root,
+      },
+      (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
       }
+    );
+  })
+    .then(() => {
+      activeDeploy = false;
+      fs.appendFileSync(config.deployLog, messages.logDeploys(cmd, files)); // eslint-disable-line no-sync
+      return checkDeployStatus();
+    })
+    .catch((err) => {
+      activeDeploy = false;
+      messages.logTransferFailed(err);
+      return checkDeployStatus();
     });
-  }).then(() => {
-    activeDeploy = false;
-    fs.appendFileSync(config.deployLog, messages.logDeploys(cmd, files)); // eslint-disable-line no-sync
-    return checkDeployStatus();
-  }).catch((err) => {
-    activeDeploy = false;
-    messages.logTransferFailed(err);
-    return checkDeployStatus();
-  });
 }
-
 
 /**
  * Aggregate task watching for file changes in `src` and

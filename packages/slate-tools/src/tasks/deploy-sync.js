@@ -24,7 +24,9 @@ gulp.task('deploy:sync-init', () => {
   }
 
   const file = fs.readFileSync(config.tkConfig, 'utf8'); // eslint-disable-line no-sync
-  const devScript = fs.readFileSync(path.join(__dirname, '/includes/dev-script.js'));
+  const devScript = fs.readFileSync(
+    path.join(__dirname, '/includes/dev-script.js')
+  );
   const tkConfig = yaml.safeLoad(file);
   const queryStringComponents = [];
   const environment = config.environment.split(/\s*,\s*|\s+/)[0];
@@ -33,7 +35,7 @@ gulp.task('deploy:sync-init', () => {
   let proxyTarget = `https://${envObj.store}`;
 
   // break theme preview cache by always setting a preview parameter
-  const previewParam = (envObj.theme_id === 'live') ? '' : envObj.theme_id;
+  const previewParam = envObj.theme_id === 'live' ? '' : envObj.theme_id;
   proxyTarget += `?preview_theme_id=${previewParam}`;
 
   debug(proxyTarget);

@@ -17,9 +17,16 @@ require('require-dir')('./tasks');
 gulp.task('build', (done) => {
   runSequence(
     ['clean'],
-    ['build:js', 'build:vendor-js', 'build:css', 'build:assets', 'build:config', 'build:svg'],
+    [
+      'build:js',
+      'build:vendor-js',
+      'build:css',
+      'build:assets',
+      'build:config',
+      'build:svg',
+    ],
     ['output:errors'],
-    done,
+    done
   );
 });
 
@@ -27,7 +34,7 @@ gulp.task('build:zip', (done) => {
   runSequence(
     ['clean'],
     ['build:js', 'build:vendor-js', 'build:css', 'build:assets', 'build:svg'],
-    done,
+    done
   );
 });
 
@@ -77,7 +84,6 @@ function defineWatchTasks() {
 
   return tasks;
 }
-
 
 /**
  * Does a full (re)build followed by a full deploy, cleaning existing files on

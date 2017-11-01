@@ -15,9 +15,12 @@ import $ from 'jquery';
  * @param {string} options.tableWrapperClass - table wrapper class name
  */
 export function wrapTable(options) {
-  var tableWrapperClass = typeof options.tableWrapperClass === "undefined" ? '' : options.tableWrapperClass;
+  const tableWrapperClass =
+    typeof options.tableWrapperClass === 'undefined'
+      ? ''
+      : options.tableWrapperClass;
 
-  options.$tables.wrap('<div class="' + tableWrapperClass + '"></div>');
+  options.$tables.wrap(`<div class="${tableWrapperClass}"></div>`);
 }
 
 /**
@@ -28,11 +31,14 @@ export function wrapTable(options) {
  * @param {string} options.iframeWrapperClass - class name used on the wrapping div
  */
 export function wrapIframe(options) {
-  var iframeWrapperClass = typeof options.iframeWrapperClass === "undefined" ? '' : options.iframeWrapperClass;
+  const iframeWrapperClass =
+    typeof options.iframeWrapperClass === 'undefined'
+      ? ''
+      : options.iframeWrapperClass;
 
   options.$iframes.each(function() {
     // Add wrapper to make video responsive
-    $(this).wrap('<div class="' + iframeWrapperClass + '"></div>');
+    $(this).wrap(`<div class="${iframeWrapperClass}"></div>`);
 
     // Re-set the src attribute on each iframe after page load
     // for Chrome's "incorrect iFrame content on 'back'" bug.

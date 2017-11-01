@@ -8,13 +8,18 @@ function Sections() {
   this.$document = $(document);
   this.namespace = '.section-js-events';
 
-  document.addEventListener('shopify:section:load', function(evt) {
-    var id = evt.detail.sectionId;
-    var container = evt.target.querySelector('[data-section-id="' + id + '"]');
-    var type = container.getAttribute('data-section-type');
+  document.addEventListener(
+    'shopify:section:load',
+    (evt) => {
+      const id = evt.detail.sectionId;
+      const container = evt.target.querySelector(
+        `[data-section-id="${id}"]`
+      );
+      const type = container.getAttribute('data-section-type');
 
-    this.load(type, container);
-  }.bind(this));
+      this.load(type, container);
+    }
+  );
 }
 
 $.extend(Sections.prototype, {
@@ -33,7 +38,7 @@ $.extend(Sections.prototype, {
    * Indexed list of all registered global extensions
    */
   extensions: {
-    '*': []
+    '*': [],
   },
 
   /**
@@ -43,7 +48,7 @@ $.extend(Sections.prototype, {
    * @param {string} type
    * @param {object} properties
    */
-  register: function(type, properties) {
+  register(type, properties) {
     function Section(data) {
       this.type = type;
       Master.call(this, data);
@@ -56,83 +61,102 @@ $.extend(Sections.prototype, {
     this.registered[type] = Section;
   },
 
-
   /**
    * Loads all or the specified section types
    */
-  load: function(types, containers) {
+  load(types, containers) {
     types = this._normalizeTypeParam(types);
     containers = this._normalizeContainersParam(containers);
 
-    types.forEach(function(type) {
-      var Section = this.registered[type];
-      var selection = containers;
+    types.forEach(
+      (type) => {
+        const Section = this.registered[type];
+        let selection = containers;
 
-      if (typeof Section === 'undefined') { return; }
+        if (typeof Section === 'undefined') {
+          return;
+        }
 
-      if (typeof selection === 'undefined') {
-        selection = document.querySelectorAll('[data-section-type="' + type + '"]');
+        if (typeof selection === 'undefined') {
+          selection = document.querySelectorAll(
+            `[data-section-type="${type}"]`
+          );
+        }
+
+        // Convert selection NodeList into an array
+        selection = Array.prototype.slice.call(selection);
+
+        selection.forEach(
+          (container) => {
+            if (this._instanceExists(container)) {
+              return;
+            }
+
+            const extensions = this.extensions['*'].concat(
+              this.extensions[type] || []
+            );
+            const instance = new Section({
+              container,
+              extensions,
+              id: container.getAttribute('data-section-id'),
+            });
+
+            instance.trigger('section_load');
+
+            this.instances.push(instance);
+          }
+        );
       }
-
-      // Convert selection NodeList into an array
-      selection = Array.prototype.slice.call(selection);
-
-      selection.forEach(function(container) {
-        if (this._instanceExists(container)) { return; }
-
-        var extensions = this.extensions['*'].concat(this.extensions[type] || []);
-        var instance = new Section({
-          container: container,
-          extensions: extensions,
-          id: container.getAttribute('data-section-id')
-        });
-
-        instance.trigger('section_load');
-
-        this.instances.push(instance);
-      }.bind(this));
-    }.bind(this));
+    );
   },
 
   /**
    * Extend single, multiple, or all sections with additional functionality.
    */
-  extend: function(types, extension) {
+  extend(types, extension) {
     types = this._normalizeTypeParam(types);
 
-    types.forEach(function(type) {
-      this.extensions[type] = this.extensions[type] || [];
-      this.extensions[type].push(extension);
+    types.forEach(
+      (type) => {
+        this.extensions[type] = this.extensions[type] || [];
+        this.extensions[type].push(extension);
 
-      if (typeof this.registered[type] === 'undefined') { return; }
+        if (typeof this.registered[type] === 'undefined') {
+          return;
+        }
 
-      this.instances.forEach(function(instance) {
-        if (instance.type !== type) { return; }
-        instance.extend(extension);
-      });
-    }.bind(this));
+        this.instances.forEach((instance) => {
+          if (instance.type !== type) {
+            return;
+          }
+          instance.extend(extension);
+        });
+      }
+    );
   },
 
   /**
    * Checks if a particular section type has been loaded on the page.
    */
-  isInstance: function(type) {
-    return typeof find(this.instances, {type: type}) === 'object';
+  isInstance(type) {
+    return typeof find(this.instances, {type}) === 'object';
   },
 
   /**
    * Returns all instances of a section type on the page.
    */
-  getInstances: function(type) {
-    return $.Deferred(function(defer) {
-      var instances = filter(this.instances, {type: type});
+  getInstances(type) {
+    return $.Deferred(
+      (defer) => {
+        const instances = filter(this.instances, {type});
 
-      if (instances.length === 0) {
-        defer.reject();
-      } else {
-        defer.resolve(instances);
+        if (instances.length === 0) {
+          defer.reject();
+        } else {
+          defer.resolve(instances);
+        }
       }
-    }.bind(this));
+    );
   },
 
   /**
@@ -140,9 +164,9 @@ $.extend(Sections.prototype, {
    * instance triggers an event of specified type. Automatically adds a namespace
    * for easy removal with `sections.off('event')`
    */
-  on: function() {
+  on() {
     // Convert arguments object into an array
-    var args = Array.prototype.slice.call(arguments);
+    const args = Array.prototype.slice.call(arguments);
 
     // Apply the section namespace to any event handler created by this section
     args[0] = args[0].concat(this.namespace);
@@ -153,9 +177,9 @@ $.extend(Sections.prototype, {
   /**
    * Removes an event handler attached using `sections.on()`.
    */
-  off: function() {
-     // Convert arguments object into an array
-    var args = Array.prototype.slice.call(arguments);
+  off() {
+    // Convert arguments object into an array
+    const args = Array.prototype.slice.call(arguments);
 
     // Apply the section namespace to any event handler created by this section
     args[0] = args[0].concat(this.namespace);
@@ -166,32 +190,32 @@ $.extend(Sections.prototype, {
   /**
    * Triggers and event in every section instance
    */
-  trigger: function() {
-    var triggerArgs = arguments;
-    this.instances.forEach(function(instance) {
-      instance.trigger.apply(instance, triggerArgs);
+  trigger() {
+    const triggerArgs = arguments;
+    this.instances.forEach((instance) => {
+      instance.trigger(...triggerArgs);
     });
   },
 
-  _sectionTrigger: function() {
+  _sectionTrigger() {
     this.$document.trigger.apply(this.$document, arguments);
   },
 
-  _normalizeTypeParam: function(types) {
+  _normalizeTypeParam(types) {
     if (types === '*') {
       types = Object.keys(this.registered);
     } else if (typeof types === 'string') {
       types = [types];
     }
 
-    types = types.map(function(type) {
+    types = types.map((type) => {
       return type.toLowerCase();
     });
 
     return types;
   },
 
-  _normalizeContainersParam: function(containers) {
+  _normalizeContainersParam(containers) {
     if (!Array.isArray(containers) && typeof containers === 'object') {
       // If a single container object is specified not inside a function
       containers = [containers];
@@ -199,15 +223,15 @@ $.extend(Sections.prototype, {
     return containers;
   },
 
-  _instanceExists: function(container) {
-    var instance = find(this.instances, {
-      id: container.getAttribute('data-section-id')
+  _instanceExists(container) {
+    const instance = find(this.instances, {
+      id: container.getAttribute('data-section-id'),
     });
     return typeof instance !== 'undefined';
-  }
+  },
 });
 
-var sections = new Sections();
+const sections = new Sections();
 export default sections;
 
 /**
@@ -219,7 +243,7 @@ function Master(data) {
   this.container = data.container;
   this.$container = $(this.container);
   this.id = data.id;
-  this.namespace = '.' + data.id;
+  this.namespace = `.${data.id}`;
   this.extensions = data.extensions || [];
   this.$eventBinder = this.$container;
 
@@ -229,14 +253,13 @@ function Master(data) {
 }
 
 Master.prototype = {
-
   /* eslint-disable no-empty-function */
-  onLoad: function() {},
-  onUnload: function() {},
-  onSelect: function() {},
-  onDeselect: function() {},
-  onBlockSelect: function() {},
-  onBlockDeselect: function() {},
+  onLoad() {},
+  onUnload() {},
+  onSelect() {},
+  onDeselect() {},
+  onBlockSelect() {},
+  onBlockDeselect() {},
 
   /* eslint-enable no-empty-function */
 
@@ -244,9 +267,9 @@ Master.prototype = {
    * Attaches an event handler to an instance of a section. Only listens to
    * events triggered by that section instance.
    */
-  on: function() {
+  on() {
     // Convert arguments object into an array
-    var args = Array.prototype.slice.call(arguments);
+    const args = Array.prototype.slice.call(arguments);
 
     // Apply the section namespace to any event handler created by this section
     args[0] = args[0].concat(this.namespace);
@@ -259,9 +282,9 @@ Master.prototype = {
    * Attaches an event handler to an instance of a section that is removed after
    * being called once. Only listens to events triggered by that section instance.
    */
-  one: function() {
+  one() {
     // Convert arguments object into an array
-    var args = Array.prototype.slice.call(arguments);
+    const args = Array.prototype.slice.call(arguments);
 
     // Apply the section namespace to any event handler created by this section
     args[0] = args[0].concat(this.namespace);
@@ -273,9 +296,9 @@ Master.prototype = {
   /**
    * Removes an event handler that was attached using the `this.on()` method
    */
-  off: function() {
-     // Convert arguments object into an array
-    var args = Array.prototype.slice.call(arguments);
+  off() {
+    // Convert arguments object into an array
+    const args = Array.prototype.slice.call(arguments);
 
     // Apply the section namespace to any event handler created by this section
     args[0] = args[0] || '';
@@ -290,9 +313,9 @@ Master.prototype = {
   * so that any event handlers attached using `sections.on()` will be also
   * triggered.
   */
-  trigger: function() {
+  trigger() {
     // Convert arguments object into an array
-    var args = Array.prototype.slice.call(arguments);
+    const args = Array.prototype.slice.call(arguments);
 
     // Check what the second argument is. If there is already an array keep it.
     args[1] = args[1] || [];
@@ -308,8 +331,8 @@ Master.prototype = {
   /**
    * Extends this section instance with additional functionality.
    */
-  extend: function(extension) {
-    var init = extension.init;
+  extend(extension) {
+    const init = extension.init;
     this.extensions.push(extension);
 
     $.extend(this, omit(extension, 'init'));
@@ -317,7 +340,7 @@ Master.prototype = {
     if ($.isFunction(init)) {
       init.apply(this);
     }
-  }
+  },
 };
 
 /**
@@ -325,21 +348,21 @@ Master.prototype = {
  * $(document).on('event' + this.namespace);
  */
 Master.prototype.document = function() {
-  var $document = $(document);
-  var self = this;
+  const $document = $(document);
+  const self = this;
   return {
-    on: function() {
+    on() {
       self.$eventBinder = $document;
-      self.on.apply(self, arguments);
+      self.on(...arguments);
     },
-    off: function() {
+    off() {
       self.$eventBinder = $document;
-      self.off.apply(self, arguments);
+      self.off(...arguments);
     },
-    trigger: function() {
+    trigger() {
       self.$eventBinder = $document;
-      self.trigger.apply(self, arguments);
-    }
+      self.trigger(...arguments);
+    },
   };
 };
 
@@ -348,37 +371,39 @@ Master.prototype.document = function() {
  * $(window).on('event' + this.namespace);
  */
 Master.prototype.window = function() {
-  var $window = $(window);
-  var self = this;
+  const $window = $(window);
+  const self = this;
   return {
-    on: function() {
+    on() {
       self.$eventBinder = $window;
-      self.on.apply(self, arguments);
+      self.on(...arguments);
     },
-    off: function() {
+    off() {
       self.$eventBinder = $window;
-      self.off.apply(self, arguments);
+      self.off(...arguments);
     },
-    trigger: function() {
+    trigger() {
       self.$eventBinder = $window;
-      self.trigger.apply(self, arguments);
-    }
+      self.trigger(...arguments);
+    },
   };
 };
 
 function _applyExtensions() {
-  this.extensions.forEach(function(extension) {
-    this.extend(extension);
-  }.bind(this));
+  this.extensions.forEach(
+    (extension) => {
+      this.extend(extension);
+    }
+  );
 }
 
 function _applyEditorHandlers() {
   $(document)
-    .on('shopify:section:unload' + this.namespace, _onSectionUnload.bind(this))
-    .on('shopify:section:select' + this.namespace, _onSelect.bind(this))
-    .on('shopify:section:deselect' + this.namespace, _onDeselect.bind(this))
-    .on('shopify:block:select' + this.namespace, _onBlockSelect.bind(this))
-    .on('shopify:block:deselect' + this.namespace, _onBlockDeselect.bind(this));
+    .on(`shopify:section:unload${this.namespace}`, _onSectionUnload.bind(this))
+    .on(`shopify:section:select${this.namespace}`, _onSelect.bind(this))
+    .on(`shopify:section:deselect${this.namespace}`, _onDeselect.bind(this))
+    .on(`shopify:block:select${this.namespace}`, _onBlockSelect.bind(this))
+    .on(`shopify:block:deselect${this.namespace}`, _onBlockDeselect.bind(this));
 }
 
 function _applyDefaultHandlers() {
@@ -391,7 +416,9 @@ function _applyDefaultHandlers() {
 }
 
 function _onSectionUnload(event) {
-  if (this.id !== event.detail.sectionId) { return; }
+  if (this.id !== event.detail.sectionId) {
+    return;
+  }
 
   event.type = 'section_unload';
   this.trigger(event);
@@ -405,28 +432,36 @@ function _onSectionUnload(event) {
 }
 
 function _onSelect(event) {
-  if (this.id !== event.detail.sectionId) { return; }
+  if (this.id !== event.detail.sectionId) {
+    return;
+  }
 
   event.type = 'section_select';
   this.trigger(event);
 }
 
 function _onDeselect(event) {
-  if (this.id !== event.detail.sectionId) { return; }
+  if (this.id !== event.detail.sectionId) {
+    return;
+  }
 
   event.type = 'section_deselect';
   this.trigger(event);
 }
 
 function _onBlockSelect(event) {
-  if (this.id !== event.detail.sectionId) { return; }
+  if (this.id !== event.detail.sectionId) {
+    return;
+  }
 
   event.type = 'block_select';
   this.trigger(event);
 }
 
 function _onBlockDeselect(event) {
-  if (this.id !== event.detail.sectionId) { return; }
+  if (this.id !== event.detail.sectionId) {
+    return;
+  }
 
   event.type = 'block_deselect';
   this.trigger(event);

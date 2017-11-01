@@ -1,5 +1,5 @@
 {
-  "name": "slate-theme",
+  "name": "slate",
   "version": "0.11.0",
   "author": "Shopify Inc.",
   "description": "A theme scaffold and command line tool for developing Shopify themes.",
@@ -17,8 +17,8 @@
     "url": "https://github.com/Shopify/slate.git"
   },
   "scripts": {
-    "test": "node_modules/.bin/lerna run test",
-    "lint": "node_modules/.bin/lerna run lint",
+    "test": "jest && npm run lint",
+    "lint": "eslint packages/",
     "bootstrap": "npm install && node_modules/.bin/lerna bootstrap",
     "publish": "git pull origin master && node_modules/.bin/lerna publish",
     "changelog": "node_modules/.bin/lerna-changelog"
@@ -26,11 +26,19 @@
   "devDependencies": {
     "archiver": "1.1.0",
     "aws-sdk": "2.6.12",
+    "babel-jest": "^21.2.0",
     "babel-preset-shopify": "^16.2.0",
+    "eslint": "^4.10.0",
+    "eslint-config-prettier": "^2.7.0",
+    "eslint-plugin-jest": "^21.2.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-shopify": "^18.0.0",
     "github": "^11.0.0",
+    "jest": "^21.2.1",
     "lerna": "^2.0.0",
     "lerna-changelog": "^0.6.0",
     "mime-types": "2.1.12",
+    "prettier": "^1.7.4",
     "promise": "^8.0.1"
   }
 }

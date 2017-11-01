@@ -3,9 +3,6 @@
   "version": "1.0.0-alpha.1",
   "description": "A library that helps developers work with the Product object within Shopify Themes",
   "main": "product.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Shopify/slate.git"

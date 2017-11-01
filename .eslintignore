@@ -1,8 +1,7 @@
-packages/slate-theme/src/scripts/vendor/
-
+packages/slate-theme/dist
 packages/slate-theme/src/scripts/**/*.js.liquid
-package/slate-cli/lib
-package/slate-tools/
-node_modules/
+packages/slate-cli/lib
+packages/slate-tools/lib
+**/node_modules/
 docs/
 ci/
