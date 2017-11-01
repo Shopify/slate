@@ -1,27 +1,21 @@
 window.slate = window.slate || {};
 window.theme = window.theme || {};
 
-import a11y from './slate/a11y';
-import cart from './slate/cart';
-import rte from './slate/rte';
-import Sections from './slate/sections';
-
-/*================ Sections ================*/
-import productSection from './sections/product'
+import { pageLinkFocus } from '@shopify/slate-a11y';
+import { cookiesEnabled } from '@shopify/slate-cart';
+import { wrapTable, wrapIframe } from '@shopify/slate-rte';
+import sections from '@shopify/slate-sections';
 
 /*================ Templates ================*/
 import './templates/customers-addresses'
 import './templates/customers-login.js'
 
 $(document).ready(function() {
-  var sections = new Sections();
-  sections.register('product', theme.Product);
-
   // Common a11y fixes
- a11y.pageLinkFocus($(window.location.hash));
+ pageLinkFocus($(window.location.hash));
 
   $('.in-page-link').on('click', function(evt) {
-   a11y.pageLinkFocus($(evt.currentTarget.hash));
+    pageLinkFocus($(evt.currentTarget.hash));
   });
 
   // Target tables to make them scrollable
@@ -43,7 +37,7 @@ $(document).ready(function() {
   });
 
   // Apply a specific class to the html element for browser support of cookies.
-  if (cart.cookiesEnabled()) {
+  if (cookiesEnabled()) {
     document.documentElement.className = document.documentElement.className.replace('supports-no-cookies', 'supports-cookies');
   }
 });

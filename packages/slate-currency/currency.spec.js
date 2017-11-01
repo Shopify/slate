@@ -1,7 +1,4 @@
-require('../src/scripts/slate/utils');
-require('../src/scripts/slate/currency');
-
-var formatMoney = slate.Currency.formatMoney;
+import { formatMoney } from './currency.js';
 
 describe('currency.formatMoney', () => {
   test('Formats a string of "10001" to a string of "$100.01"', () => {

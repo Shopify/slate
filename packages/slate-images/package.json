@@ -1,0 +1,22 @@
+{
+  "name": "@shopify/slate-images",
+  "version": "1.0.0-alpha.1",
+  "description": "A library that helps with basic image operations within Shopify Themes",
+  "main": "images.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shopify/slate.git"
+  },
+  "keywords": [
+    "slate"
+  ],
+  "author": "Shopify Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Shopify/slate/issues"
+  },
+  "homepage": "https://github.com/Shopify/slate#readme"
+}

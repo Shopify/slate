@@ -26,6 +26,7 @@
   "devDependencies": {
     "archiver": "1.1.0",
     "aws-sdk": "2.6.12",
+    "babel-preset-shopify": "^16.2.0",
     "github": "^11.0.0",
     "lerna": "^2.0.0",
     "lerna-changelog": "^0.6.0",

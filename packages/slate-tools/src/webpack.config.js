@@ -43,6 +43,13 @@ module.exports = {
     ]
   },
 
+  resolve: {
+    alias: {
+      'jquery': path.resolve('./node_modules/jquery'),
+      'lodash-es': path.resolve('./node_modules/lodash-es'),
+    },
+  },
+
   resolveLoader: {
     modules: [
       "./node_modules/@shopify/slate-tools/node_modules"
