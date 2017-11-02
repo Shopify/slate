@@ -3,13 +3,9 @@
   "version": "0.13.0",
   "private": true,
   "author": "Shopify Inc.",
-  "description": "A theme scaffold and command line tool for developing Shopify themes.",
-  "keywords": [
-    "slate",
-    "shopify",
-    "theme",
-    "CLI"
-  ],
+  "description":
+    "A theme scaffold and command line tool for developing Shopify themes.",
+  "keywords": ["slate", "shopify", "theme", "CLI"],
   "homepage": "https://shopify.github.io/slate/",
   "bugs": "https://github.com/Shopify/slate/issues",
   "license": "MIT",
@@ -19,7 +15,7 @@
   },
   "devDependencies": {
     "@shopify/slate": "^0.13.0",
-    "@shopify/slate-tools": "^0.13.0",
+    "@shopify/slate-tools": ">1.0.0-alpha.0",
     "jest": "^20.0.4"
   },
   "dependencies": {
@@ -29,5 +25,9 @@
     "@shopify/slate-cart": ">1.0.0-alpha.0",
     "@shopify/slate-rte": ">1.0.0-alpha.0",
     "@shopify/slate-sections": ">1.0.0-alpha.0"
+  },
+  "scripts": {
+    "server": "slate-tools serve",
+    "build": "slate-tools build"
   }
 }
