@@ -19,7 +19,7 @@ development:
   theme_id:
   store:
   ignore_files:
-    # - settings_data.json # Uncomment this line to avoid resetting theme settings
+    #- settings_data.json # Uncomment this line to avoid resetting theme settings
 
 production:
   api_key:

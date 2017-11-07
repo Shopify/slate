@@ -39,6 +39,7 @@
     "lerna-changelog": "^0.6.0",
     "mime-types": "2.1.12",
     "prettier": "^1.7.4",
-    "promise": "^8.0.1"
+    "promise": "^8.0.1",
+    "stylelint-config-shopify": "^2.2.0"
   }
 }

@@ -43,11 +43,13 @@
     "loader-utils": "1.1.0",
     "minimist": "1.2.0",
     "node-sass": "4.5.3",
+    "postcss-import": "^11.0.0",
     "postcss-loader": "2.0.5",
     "raw-loader": "^0.5.1",
     "react-dev-utils": "0.5.2",
     "sass-loader": "6.0.5",
     "style-loader": "0.17.0",
+    "stylelint": "^8.2.0",
     "webpack": "2.5.1",
     "webpack-dev-middleware": "1.10.2",
     "webpack-hot-middleware": "2.18.0",
@@ -56,8 +58,13 @@
     "write-file-webpack-plugin": "4.0.2",
     "yamljs": "0.2.10"
   },
-  "browserslist": ["last 2 versions", "safari >= 7"],
+  "browserslist": [
+    "last 2 versions",
+    "safari >= 7"
+  ],
   "babel": {
-    "presets": ["env"]
+    "presets": [
+      "env"
+    ]
   }
 }

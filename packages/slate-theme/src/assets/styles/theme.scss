@@ -1,28 +1,30 @@
-@charset "UTF-8";
-/*============================================================================
+@charset 'UTF-8';
+
+/* ============================================================================
   [replace with theme name] | Built with Slate
     - You cannot use native CSS/Sass @imports in this file without a build script
-==============================================================================*/
+============================================================================== */
 
-/*================ UTILS ================*/
-// @import url('tools/mixins.scss');
+/* ================ UTILS ================ */
+@import './tools/mixins';
 
-/*================ SETTINGS ================*/
-@import url('settings/variables.scss');
+/* ================ SETTINGS ================ */
+@import './settings/variables';
 
-/*================ COMMON ================*/
-@import url('global/normalize.scss');
-@import url('global/slate-reset.scss');
-@import url('global/helper-classes.scss');
+/* ================ COMMON ================ */
+@import './global/normalize';
+@import './global/slate-reset';
+@import './global/helper-classes';
+
 // @import url('global/grid.scss');
-@import url('global/layout.scss');
-@import url('global/icons.scss');
-@import url('global/rte.scss');
-@import url('global/responsive-tables.scss');
-@import url('global/links-buttons.scss');
-@import url('global/forms.scss');
-@import url('global/blank-states.scss');
+@import './global/layout';
+@import './global/icons';
+@import './global/rte';
+@import './global/responsive-tables';
+@import './global/links-buttons';
+@import './global/forms';
+@import './global/blank-states';
 
-/*================ MODULES ================*/
-@import 'modules/site-header.scss';
-@import 'modules/gift-card-template.scss';
+/* ================ MODULES ================ */
+@import './modules/site-header';
+@import './modules/gift-card-template';
