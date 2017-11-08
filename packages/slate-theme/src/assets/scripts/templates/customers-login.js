@@ -10,7 +10,7 @@ import $ from 'jquery';
 
 const config = {
   recoverPasswordForm: '#RecoverPassword',
-  hideRecoverPasswordLink: '#HideRecoverPasswordLink'
+  hideRecoverPasswordLink: '#HideRecoverPasswordLink',
 };
 
 if ($(config.recoverPasswordForm).length) {

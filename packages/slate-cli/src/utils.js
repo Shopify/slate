@@ -26,12 +26,12 @@ export function downloadFromUrl(source, target) {
     const targetFile = createWriteStream(target);
 
     targetFile.on('open', () => {
-      get(source, (response) => {
+      get(source, response => {
         response.pipe(targetFile);
       });
     });
 
-    targetFile.on('error', (err) => {
+    targetFile.on('error', err => {
       unlinkSync(target);
       reject(err);
     });
@@ -52,7 +52,7 @@ export function unzip(source, target) {
   return new Promise((resolve, reject) => {
     const zipFile = createReadStream(source);
 
-    zipFile.on('error', (err) => {
+    zipFile.on('error', err => {
       reject(err);
     });
 
@@ -94,7 +94,7 @@ export function writePackageJsonSync(target, name = 'theme') {
  */
 export function renameFile(oldPath, newPath) {
   return new Promise((resolve, reject) => {
-    rename(oldPath, newPath, (err) => {
+    rename(oldPath, newPath, err => {
       if (err) {
         reject(err);
         return;
@@ -120,11 +120,11 @@ export function startProcess(command, args, options) {
   return new Promise((resolve, reject) => {
     const child = spawn(command, args, defaultedOptions);
 
-    child.on('error', (err) => {
+    child.on('error', err => {
       reject(err);
     });
 
-    child.on('close', (code) => {
+    child.on('close', code => {
       resolve(code);
     });
   });
@@ -180,7 +180,7 @@ export function unminifyJson(file) {
  */
 export function move(oldPath, newPath) {
   return new Promise((resolve, reject) => {
-    mv(oldPath, newPath, (err) => {
+    mv(oldPath, newPath, err => {
       if (err) {
         reject(err);
         return;

@@ -7,7 +7,7 @@ import {wrapTable, wrapIframe} from '@shopify/slate-rte';
 window.slate = window.slate || {};
 window.theme = window.theme || {};
 
-/*= =============== Templates ================*/
+/* = =============== Templates ================ */
 // import './templates/customers-addresses';
 // import './templates/customers-login.js';
 
@@ -15,7 +15,7 @@ $(document).ready(() => {
   // Common a11y fixes
   pageLinkFocus($(window.location.hash));
 
-  $('.in-page-link').on('click', (evt) => {
+  $('.in-page-link').on('click', evt => {
     pageLinkFocus($(evt.currentTarget.hash));
   });
 

@@ -16,15 +16,18 @@
   "devDependencies": {
     "@shopify/slate": "^0.13.0",
     "@shopify/slate-tools": ">1.0.0-alpha.0",
-    "jest": "^20.0.4"
+    "jest": "^20.0.4",
+    "stylelint": "^8.1.1",
+    "stylelint-config-shopify": "^3.0.0-beta.5"
   },
   "dependencies": {
-    "jquery": "^3.2.1",
-    "lodash-es": "^4.17.4",
     "@shopify/slate-a11y": ">1.0.0-alpha.0",
     "@shopify/slate-cart": ">1.0.0-alpha.0",
     "@shopify/slate-rte": ">1.0.0-alpha.0",
-    "@shopify/slate-sections": ">1.0.0-alpha.0"
+    "@shopify/slate-sections": ">1.0.0-alpha.0",
+    "jquery": "^3.2.1",
+    "lodash-es": "^4.17.4",
+    "normalize.css": "^7.0.0"
   },
   "scripts": {
     "server": "slate-tools serve",

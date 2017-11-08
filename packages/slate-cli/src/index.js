@@ -78,8 +78,8 @@ if (isSlateTheme) {
   );
 
   readdirSync(slateToolsCommands)
-    .filter((file) => ~file.search(/^[^\.].*\.js$/)) // eslint-disable-line no-useless-escape
-    .forEach((file) => require(join(slateToolsCommands, file)).default(program));
+    .filter(file => ~file.search(/^[^\.].*\.js$/)) // eslint-disable-line no-useless-escape
+    .forEach(file => require(join(slateToolsCommands, file)).default(program));
 }
 
 // Custom help

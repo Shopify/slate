@@ -1,12 +1,13 @@
-const fs = require("fs");
-const webpack = require("webpack");
-const config = require("../config");
-const WriteFileWebpackPlugin = require("write-file-webpack-plugin");
-const SvgStore = require("webpack-svgstore-plugin");
-const paths = require("../config/paths");
-const commonExcludes = require("../lib/common-excludes");
+const fs = require('fs');
+const webpack = require('webpack');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
+const SvgStore = require('webpack-svgstore-plugin');
+const config = require('../config');
+const paths = require('../config/paths');
+const commonExcludes = require('../lib/common-excludes');
 
-const isDevServer = process.argv.find(v => v.includes("serve"));
+const isDevServer = process.argv.find(command => command.includes('serve'));
 
 /**
  * Return an array of ContextReplacementPlugin to use.
@@ -17,13 +18,13 @@ const isDevServer = process.argv.find(v => v.includes("serve"));
 const contextReplacementPlugins = () => {
   // Given a request path, return a function that accepts a context and modify it's request.
   const replaceCtxRequest = request => context =>
-    Object.assign(context, { request });
+    Object.assign(context, {request});
 
   const plugins = [
     new webpack.ContextReplacementPlugin(
       /__appsrc__/,
       replaceCtxRequest(paths.src)
-    )
+    ),
   ];
 
   if (fs.existsSync(paths.vendors)) {
@@ -32,7 +33,7 @@ const contextReplacementPlugins = () => {
       new webpack.ContextReplacementPlugin(
         /__appvendors__/,
         replaceCtxRequest(paths.vendors)
-      )
+      ),
     ];
   }
 
@@ -45,19 +46,29 @@ const lintingLoaders = () => {
 
   if (fs.existsSync(config.paths.eslintrc)) {
     rules.push({
-      enforce: "pre",
+      enforce: 'pre',
       test: /\.js$/,
       exclude: commonExcludes(),
-      loader: "eslint-loader",
+      loader: 'eslint-loader',
       options: {
         configFile: config.paths.eslintrc,
-        emitWarning: isDevServer
-      }
+        emitWarning: isDevServer,
+      },
     });
   }
 
   return rules;
 };
+
+function stylelintLoader() {
+  return fs.existsSync(config.paths.stylelintrc)
+    ? [
+        new StyleLintPlugin({
+          configFile: config.paths.stylelintrc,
+        }),
+      ]
+    : [];
+}
 
 module.exports = {
   context: paths.src,
@@ -65,12 +76,12 @@ module.exports = {
   entry: config.paths.entrypoints,
 
   output: {
-    filename: "[name].[hash].js",
-    path: config.paths.assetsOutput
+    filename: '[name].[hash].js',
+    path: config.paths.assetsOutput,
   },
 
   resolveLoader: {
-    modules: [config.paths.nodeModules, config.paths.lib]
+    modules: [config.paths.nodeModules, config.paths.lib],
   },
 
   module: {
@@ -80,90 +91,92 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: commonExcludes(),
-        loader: "babel-loader",
+        loader: 'babel-loader',
         options: {
           presets: [
             [
-              "env",
+              'env',
               {
                 targets: {
-                  browsers: ["last 2 versions", "safari >= 7"]
+                  browsers: ['last 2 versions', 'safari >= 7'],
                 },
-                modules: false
-              }
-            ]
-          ]
-        }
+                modules: false,
+              },
+            ],
+          ],
+        },
       },
       {
         test: /\.js$/,
         exclude: commonExcludes(),
-        loader: "hmr-alamo-loader"
+        loader: 'hmr-alamo-loader',
       },
       {
         test: /fonts\/.*\.(eot|svg|ttf|woff|woff2)$/,
         exclude: /node_modules/,
-        loader: "file-loader"
+        loader: 'file-loader',
       },
       {
         test: config.regex.images,
         exclude: commonExcludes(),
         use: [
-          { loader: "file-loader", options: { name: "[name].[hash].[ext]" } },
-          { loader: "img-loader" }
-        ]
+          {loader: 'file-loader', options: {name: '[name].[hash].[ext]'}},
+          {loader: 'img-loader'},
+        ],
       },
       {
         test: config.regex.static,
         // excluding layout/theme.liquid as it's also being emitted by the HtmlWebpackPlugin
-        exclude: commonExcludes("layout/theme.liquid"),
-        loader: "file-loader",
+        exclude: commonExcludes('layout/theme.liquid'),
+        loader: 'file-loader',
         options: {
-          name: "../[path][name].[ext]"
-        }
+          name: '../[path][name].[ext]',
+        },
       },
       {
         test: /assets\/vendors\//,
         exclude: /node_modules/,
-        loader: "file-loader",
+        loader: 'file-loader',
         options: {
-          name: "[name].[ext]"
-        }
+          name: '[name].[ext]',
+        },
       },
       {
         test: /layout\/theme\.liquid$/,
         exclude: commonExcludes(),
-        loader: "raw-loader"
+        loader: 'raw-loader',
       },
       {
         test: /\.liquid$/,
         exclude: commonExcludes(),
-        loader: `extract-loader!liquid-loader?dev-server=${isDevServer
-          ? "true"
-          : "false"}`
-      }
-    ]
+        loader: `extract-loader!liquid-loader?dev-server=${
+          isDevServer ? 'true' : 'false'
+        }`,
+      },
+    ],
   },
 
   plugins: [
     ...contextReplacementPlugins(),
 
+    ...stylelintLoader(),
+
     new WriteFileWebpackPlugin({
       test: /\.(png|svg|jpg|gif|scss)/,
       useHashIndex: true,
-      log: false
+      log: false,
     }),
 
     new WriteFileWebpackPlugin({
       test: /^(?:(?!hot-update.json$).)*\.(liquid|json)$/,
       useHashIndex: true,
-      log: false
+      log: false,
     }),
 
     new SvgStore({
       svgoOptions: {
-        plugins: [{ removeTitle: true }]
-      }
-    })
-  ]
+        plugins: [{removeTitle: true}],
+      },
+    }),
+  ],
 };

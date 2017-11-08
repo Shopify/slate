@@ -65,7 +65,9 @@ export function getSizedImageUrl(src, size) {
     return this.removeProtocol(src);
   }
 
-  const match = src.match(/\.(jpg|jpeg|gif|png|bmp|bitmap|tiff|tif)(\?v=\d+)?$/i);
+  const match = src.match(
+    /\.(jpg|jpeg|gif|png|bmp|bitmap|tiff|tif)(\?v=\d+)?$/i
+  );
 
   if (match) {
     const prefix = src.split(match[0]);

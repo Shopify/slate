@@ -36,18 +36,18 @@ export function getVariant(product, value) {
 export function optionArrayFromOptionCollection(product, collection) {
   const optionArray = [];
 
-  collection.forEach((option) => {
+  collection.forEach(option => {
     let index;
 
     if (typeof option.name !== 'string') {
       throw Error(
         `Invalid value type passed for name of option ${
           index
-          }. Value should be string.`
+        }. Value should be string.`
       );
     }
 
-    index = findIndex(product.options, (name) => {
+    index = findIndex(product.options, name => {
       return name.toLowerCase() === option.name.toLowerCase();
     });
 
@@ -72,7 +72,7 @@ function _getVariantFromOptionCollection(product, collection, closest) {
 }
 
 function _getVariantFromOptionArray(product, options) {
-  return find(product.variants, (variant) => {
+  return find(product.variants, variant => {
     return options.every((option, index) => {
       return variant.options[index] === option;
     });

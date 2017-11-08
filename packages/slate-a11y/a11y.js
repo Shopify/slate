@@ -40,7 +40,7 @@ export function focusHash() {
 
   // is there a hash in the url? is it an element on the page?
   if (hash && document.getElementById(hash.slice(1))) {
-    this.pageLinkFocus($(hash));
+    pageLinkFocus($(hash));
   }
 }
 
@@ -48,12 +48,9 @@ export function focusHash() {
  * When an in-page (url w/hash) link is clicked, focus the appropriate element
  */
 export function bindInPageLinks() {
-  $('a[href*=#]').on(
-    'click',
-    (evt) => {
-      this.pageLinkFocus($(evt.currentTarget.hash));
-    }
-  );
+  $('a[href*=#]').on('click', evt => {
+    pageLinkFocus($(evt.currentTarget.hash));
+  });
 }
 
 /**
@@ -76,7 +73,7 @@ export function trapFocus(options) {
   options.$container.attr('tabindex', '-1');
   options.$elementToFocus.focus();
 
-  $(document).on(eventName, (evt) => {
+  $(document).on(eventName, evt => {
     if (
       options.$container[0] !== evt.target &&
       !options.$container.has(evt.target).length

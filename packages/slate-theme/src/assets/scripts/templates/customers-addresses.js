@@ -18,7 +18,7 @@ if ($newAddressForm.length) {
       'AddressCountryNew',
       'AddressProvinceNew',
       {
-        hideElement: 'AddressProvinceContainerNew'
+        hideElement: 'AddressProvinceContainerNew',
       }
     );
   }
@@ -31,7 +31,7 @@ if ($newAddressForm.length) {
     const containerSelector = `AddressProvinceContainer_${formId}`;
 
     new Shopify.CountryProvinceSelector(countrySelector, provinceSelector, {
-      hideElement: containerSelector
+      hideElement: containerSelector,
     });
   });
 
@@ -53,7 +53,7 @@ if ($newAddressForm.length) {
       confirm(confirmMessage || 'Are you sure you wish to delete this address?')
     ) {
       Shopify.postLink(`/account/addresses/${formId}`, {
-        parameters: {_method: 'delete'}
+        parameters: {_method: 'delete'},
       });
     }
   });

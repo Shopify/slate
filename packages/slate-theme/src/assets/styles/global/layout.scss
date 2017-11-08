@@ -1,12 +1,12 @@
-/*================ General layout styles ================*/
+/* ================ General layout styles ================ */
 body,
 html {
   background-color: $color-body;
 }
 
 .page-width {
-  @include clearfix();
-  max-width: $width-site;
-  padding: 0 $gutter;
+  @include clearfix;
   margin: 0 auto;
+  padding: 0 $gutter;
+  max-width: $width-site;
 }

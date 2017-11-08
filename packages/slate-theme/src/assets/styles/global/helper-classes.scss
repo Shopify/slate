@@ -1,10 +1,10 @@
-/*================ Helper Classes ================*/
+/* ================ Helper Classes ================ */
 .clearfix {
-  @include clearfix();
+  @include clearfix;
 }
 
 .visually-hidden {
-  @include visually-hidden();
+  @include visually-hidden;
 }
 
 .js-focus-hidden:focus {
@@ -12,16 +12,16 @@
 }
 
 .label-hidden {
-  @include visually-hidden();
+  @include visually-hidden;
 
   // No placeholders, so force show labels
   .no-placeholder & {
-    @include visually-shown();
+    @include visually-shown;
   }
 }
 
 .visually-shown {
-  @include visually-shown();
+  @include visually-shown;
 }
 
 // Only show when JS is not supported
@@ -56,15 +56,15 @@
   }
 }
 
-/*============================================================================
+/* ============================================================================
   Skip to content button
     - Overrides .visually-hidden when focused
-==============================================================================*/
+============================================================================== */
 .skip-link:focus {
   @include visually-shown(absolute);
-  color: $color-body-text;
-  background-color: $color-body;
-  padding: $gutter / 2;
   z-index: $z-index-skip-to-content;
+  padding: $gutter / 2;
+  background-color: $color-body;
+  color: $color-body-text;
   transition: none;
 }

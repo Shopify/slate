@@ -55,3 +55,4 @@ lerna-debug.log
 /packages/slate-tools/lib/
 .changelog/
 packages/slate-theme/config/shopify.yml
+.vscode/

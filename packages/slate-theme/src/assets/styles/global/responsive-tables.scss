@@ -1,6 +1,6 @@
-/*============================================================================
+/* ============================================================================
   Responsive tables, defined with .responsive-table on table element.
-==============================================================================*/
+============================================================================== */
 @include media-query($small) {
   .responsive-table {
     width: 100%;
@@ -16,24 +16,24 @@
     // IE9 table layout fixes
     tr,
     td {
+      width: 100%;
       float: left;
       clear: both;
-      width: 100%;
     }
 
     th,
     td {
       display: block;
-      text-align: right;
-      padding: $gutter / 2;
       margin: 0;
+      padding: $gutter / 2;
+      text-align: right;
     }
 
     td::before {
       content: attr(data-label);
-      float: left;
-      text-align: center;
       padding-right: 10px;
+      text-align: center;
+      float: left;
     }
   }
 
@@ -46,11 +46,11 @@
 
     &::after {
       content: '';
-      display: block;
       position: absolute;
       top: 0;
-      left: $gutter / 2;
       right: $gutter / 2;
+      left: $gutter / 2;
+      display: block;
       border-bottom: 1px solid $color-border;
     }
   }

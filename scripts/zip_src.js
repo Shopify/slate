@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const fs = require('fs');
 const path = require('path');
 const archiver = require('archiver');
@@ -13,28 +11,37 @@ const archiver = require('archiver');
  * @param files Files to include as part of the zip
  */
 function _buildZip(name, directories = [], files = []) {
-  const output = fs.createWriteStream(`packages/slate-theme/upload/${name}.zip`);
+  const output = fs.createWriteStream(
+    `packages/slate-theme/upload/${name}.zip`
+  );
   const archive = archiver('zip');
 
   output.on('close', () => {
     console.log(`${name}.zip: ${archive.pointer()} total bytes`);
   });
 
-  archive.on('error', (err) => {
+  archive.on('error', err => {
     throw err;
   });
 
   archive.pipe(output);
 
-  directories.forEach((directory) => {
+  directories.forEach(directory => {
     archive.directory(directory, '/src');
   });
 
-  files.forEach((file) => {
-    archive.file(file, { name: path.join('/', path.basename(file)) });
+  files.forEach(file => {
+    archive.file(file, {name: path.join('/', path.basename(file))});
   });
 
   archive.finalize();
 }
 
-_buildZip('slate-src', ['packages/slate-theme/src'], ['packages/slate-theme/config-sample.yml', 'packages/slate-theme/.gitignore-sample']);
+_buildZip(
+  'slate-src',
+  ['packages/slate-theme/src'],
+  [
+    'packages/slate-theme/config-sample.yml',
+    'packages/slate-theme/.gitignore-sample',
+  ]
+);

@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * A file that contains scripts highly couple code to the Product template.
  *
-   * @namespace product
+ * @namespace product
  */
 
 import $ from 'jquery';
@@ -22,7 +22,7 @@ const selectors = {
   productJson: '[data-product-json]',
   productPrice: '[data-product-price]',
   productThumbs: '[data-product-single-thumbnail]',
-  singleOptionSelector: '[data-single-option-selector]'
+  singleOptionSelector: '[data-single-option-selector]',
 };
 
 /**
@@ -49,7 +49,7 @@ export default function Product(container) {
     enableHistoryState: this.$container.data('enable-history-state') || false,
     singleOptionSelector: selectors.singleOptionSelector,
     originalSelectorId: selectors.originalSelectorId,
-    product: this.productSingleObject
+    product: this.productSingleObject,
   };
 
   this.settings = {};
@@ -157,5 +157,5 @@ Product.prototype = $.extend({}, Product.prototype, {
    */
   onUnload() {
     this.$container.off(this.namespace);
-  }
+  },
 });

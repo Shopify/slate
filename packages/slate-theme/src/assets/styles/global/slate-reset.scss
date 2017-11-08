@@ -1,4 +1,4 @@
-/*================ Slate specific reset ================*/
+/* ================ Slate specific reset ================ */
 *,
 *::before,
 *::after {
@@ -11,7 +11,7 @@ textarea,
 button,
 select {
   -webkit-font-smoothing: antialiased;
-  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 a:focus {
@@ -22,7 +22,7 @@ img {
   max-width: 100%;
 }
 
-/*================ Form element helpers ================*/
+/* ================ Form element helpers ================ */
 form {
   margin: 0;
 }
@@ -37,7 +37,7 @@ form {
 }
 
 button,
-input[type="submit"],
+input[type='submit'],
 label[for] {
   cursor: pointer;
 }
@@ -48,8 +48,8 @@ optgroup {
 
 // Force option color (affects IE only)
 option {
-  color: $color-body-text;
   background-color: $color-body;
+  color: $color-body-text;
 }
 
 // hide outline on focus for elements which are given focus by JS
@@ -57,13 +57,13 @@ option {
   outline: none;
 }
 
-/*============================================================================
+/* ============================================================================
   Fast Tap
   enables no-delay taps (FastClick-esque) on supporting browsers
-==============================================================================*/
+============================================================================== */
 a,
 button,
-[role="button"],
+[role='button'],
 input,
 label,
 select,

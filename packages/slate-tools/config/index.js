@@ -1,5 +1,5 @@
-const paths = require('./paths')
-const YAML = require('yamljs')
+const paths = require('./paths');
+const YAML = require('yamljs');
 
 module.exports = {
   paths,
@@ -7,7 +7,7 @@ module.exports = {
   port: 8080,
   regex: {
     images: /\.(png|svg|jpg|gif)$/,
-    static: /\.(liquid|json)$/
+    static: /\.(liquid|json)$/,
   },
-  shopify: YAML.load(paths.userShopifyConfig)
-}
+  shopify: YAML.load(paths.userShopifyConfig),
+};

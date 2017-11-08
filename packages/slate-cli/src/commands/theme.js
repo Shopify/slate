@@ -31,7 +31,7 @@ export default function(program) {
           message:
             'Please enter a directory name for your theme (a new folder will be created):',
           default: 'theme',
-          validate: (value) => {
+          validate: value => {
             const validateName = value.match(/^[\w^'@{}[\],$=!#().%+~\- ]+$/);
 
             if (validateName) {
@@ -65,7 +65,7 @@ export default function(program) {
       mkdirSync(root);
 
       return downloadFromUrl(s3Url, join(root, 'slate-theme.zip'))
-        .then((themeZipFile) => {
+        .then(themeZipFile => {
           return unzip(themeZipFile, root);
         })
         .then(() => {
@@ -122,7 +122,7 @@ export default function(program) {
 
           return null;
         })
-        .catch((err) => {
+        .catch(err => {
           console.error(red(`  ${err}`));
 
           rimraf(root, () => {

@@ -1,6 +1,6 @@
 {
   "extends": [
-    "plugin:shopify/esnext",
+    "plugin:shopify/prettier",
     "plugin:shopify/node",
     "plugin:shopify/jquery"
   ],
@@ -8,12 +8,14 @@
     "jest": true
   },
   "rules": {
-    "no-console": 0,
-    "node/shebang": 0
+    "import/no-anonymous-default-export": 0,
+    "func-style": ["warn", "declaration", {"allowArrowFunctions": true}],
+    "import/no-unresolved": ["error", {"ignore": ["^jquery$"]}]
   },
   "globals": {
     "document": true,
-    "window": true,
-    "Shopify": true
+    "theme": true,
+    "Shopify": true,
+    "window": true
   }
 }

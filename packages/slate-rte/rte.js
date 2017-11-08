@@ -36,14 +36,14 @@ export function wrapIframe(options) {
       ? ''
       : options.iframeWrapperClass;
 
-  options.$iframes.each(function() {
+  options.$iframes.each((index, element) => {
     // Add wrapper to make video responsive
-    $(this).wrap(`<div class="${iframeWrapperClass}"></div>`);
+    $(element).wrap(`<div class="${iframeWrapperClass}"></div>`);
 
     // Re-set the src attribute on each iframe after page load
     // for Chrome's "incorrect iFrame content on 'back'" bug.
     // https://code.google.com/p/chromium/issues/detail?id=395791
     // Need to specifically target video and admin bar
-    this.src = this.src;
+    element.src = element.src;
   });
 }

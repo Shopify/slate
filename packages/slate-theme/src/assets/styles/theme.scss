@@ -4,6 +4,7 @@
   [replace with theme name] | Built with Slate
     - You cannot use native CSS/Sass @imports in this file without a build script
 ============================================================================== */
+@import '~normalize.css/normalize';
 
 /* ================ UTILS ================ */
 @import './tools/mixins';
@@ -12,11 +13,9 @@
 @import './settings/variables';
 
 /* ================ COMMON ================ */
-@import './global/normalize';
 @import './global/slate-reset';
 @import './global/helper-classes';
-
-// @import url('global/grid.scss');
+@import './global/grid';
 @import './global/layout';
 @import './global/icons';
 @import './global/rte';

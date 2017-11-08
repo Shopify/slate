@@ -8,22 +8,16 @@ function Sections() {
   this.$document = $(document);
   this.namespace = '.section-js-events';
 
-  document.addEventListener(
-    'shopify:section:load',
-    (evt) => {
-      const id = evt.detail.sectionId;
-      const container = evt.target.querySelector(
-        `[data-section-id="${id}"]`
-      );
-      const type = container.getAttribute('data-section-type');
+  document.addEventListener('shopify:section:load', evt => {
+    const id = evt.detail.sectionId;
+    const container = evt.target.querySelector(`[data-section-id="${id}"]`);
+    const type = container.getAttribute('data-section-type');
 
-      this.load(type, container);
-    }
-  );
+    this.load(type, container);
+  });
 }
 
 $.extend(Sections.prototype, {
-
   /**
    * Indexed list of all registered section types
    */
@@ -68,46 +62,40 @@ $.extend(Sections.prototype, {
     types = this._normalizeTypeParam(types);
     containers = this._normalizeContainersParam(containers);
 
-    types.forEach(
-      (type) => {
-        const Section = this.registered[type];
-        let selection = containers;
+    types.forEach(type => {
+      const Section = this.registered[type];
+      let selection = containers;
 
-        if (typeof Section === 'undefined') {
+      if (typeof Section === 'undefined') {
+        return;
+      }
+
+      if (typeof selection === 'undefined') {
+        selection = document.querySelectorAll(`[data-section-type="${type}"]`);
+      }
+
+      // Convert selection NodeList into an array
+      selection = Array.prototype.slice.call(selection);
+
+      selection.forEach(container => {
+        if (this._instanceExists(container)) {
           return;
         }
 
-        if (typeof selection === 'undefined') {
-          selection = document.querySelectorAll(
-            `[data-section-type="${type}"]`
-          );
-        }
-
-        // Convert selection NodeList into an array
-        selection = Array.prototype.slice.call(selection);
-
-        selection.forEach(
-          (container) => {
-            if (this._instanceExists(container)) {
-              return;
-            }
-
-            const extensions = this.extensions['*'].concat(
-              this.extensions[type] || []
-            );
-            const instance = new Section({
-              container,
-              extensions,
-              id: container.getAttribute('data-section-id'),
-            });
-
-            instance.trigger('section_load');
-
-            this.instances.push(instance);
-          }
+        const extensions = this.extensions['*'].concat(
+          this.extensions[type] || []
         );
-      }
-    );
+        const instance = new Section({
+          container,
+          extensions,
+          id: container.getAttribute('data-section-id'),
+        });
+
+        instance.trigger('section_load');
+
+        this.instances.push(instance);
+      });
+    });
   },
 
   /**
@@ -116,23 +104,21 @@ $.extend(Sections.prototype, {
   extend(types, extension) {
     types = this._normalizeTypeParam(types);
 
-    types.forEach(
-      (type) => {
-        this.extensions[type] = this.extensions[type] || [];
-        this.extensions[type].push(extension);
+    types.forEach(type => {
+      this.extensions[type] = this.extensions[type] || [];
+      this.extensions[type].push(extension);
 
-        if (typeof this.registered[type] === 'undefined') {
+      if (typeof this.registered[type] === 'undefined') {
+        return;
+      }
+
+      this.instances.forEach(instance => {
+        if (instance.type !== type) {
           return;
         }
-
-        this.instances.forEach((instance) => {
-          if (instance.type !== type) {
-            return;
-          }
-          instance.extend(extension);
-        });
-      }
-    );
+        instance.extend(extension);
+      });
+    });
   },
 
   /**
@@ -146,17 +132,15 @@ $.extend(Sections.prototype, {
    * Returns all instances of a section type on the page.
    */
   getInstances(type) {
-    return $.Deferred(
-      (defer) => {
-        const instances = filter(this.instances, {type});
+    return $.Deferred(defer => {
+      const instances = filter(this.instances, {type});
 
-        if (instances.length === 0) {
-          defer.reject();
-        } else {
-          defer.resolve(instances);
-        }
+      if (instances.length === 0) {
+        defer.reject();
+      } else {
+        defer.resolve(instances);
       }
-    );
+    });
   },
 
   /**
@@ -192,7 +176,7 @@ $.extend(Sections.prototype, {
    */
   trigger() {
     const triggerArgs = arguments;
-    this.instances.forEach((instance) => {
+    this.instances.forEach(instance => {
       instance.trigger(...triggerArgs);
     });
   },
@@ -208,7 +192,7 @@ $.extend(Sections.prototype, {
       types = [types];
     }
 
-    types = types.map((type) => {
+    types = types.map(type => {
       return type.toLowerCase();
     });
 
@@ -390,11 +374,9 @@ Master.prototype.window = function() {
 };
 
 function _applyExtensions() {
-  this.extensions.forEach(
-    (extension) => {
-      this.extend(extension);
-    }
-  );
+  this.extensions.forEach(extension => {
+    this.extend(extension);
+  });
 }
 
 function _applyEditorHandlers() {

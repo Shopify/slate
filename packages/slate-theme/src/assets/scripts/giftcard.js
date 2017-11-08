@@ -8,7 +8,7 @@
   const config = {
     qrCode: '#QrCode',
     printButton: '#PrintGiftCard',
-    giftCardCode: '.giftcard__code'
+    giftCardCode: '.giftcard__code',
   };
 
   const $qrCode = $(config.qrCode);
@@ -16,7 +16,7 @@
   new QRCode($qrCode[0], {
     text: $qrCode.attr('data-identifier'),
     width: 120,
-    height: 120
+    height: 120,
   });
 
   $(config.printButton).on('click', () => {

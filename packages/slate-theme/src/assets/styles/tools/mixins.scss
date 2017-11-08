@@ -1,4 +1,6 @@
-/*================ Mixins ================*/
+/* stylelint-disable declaration-no-important */
+
+/* ================ Mixins ================ */
 @mixin clearfix() {
   &::after {
     content: '';
@@ -10,7 +12,7 @@
   *zoom: 1;
 }
 
-/*============================================================================
+/* ============================================================================
   Prefix mixin for generating vendor prefixes.
   Based on https://github.com/thoughtbot/bourbon/blob/v4-stable/app/assets/stylesheets/addons/_prefixer.scss
 
@@ -26,7 +28,7 @@
       -webkit-transform: scale(1);
       transform: scale(1);
     }
-==============================================================================*/
+============================================================================== */
 @mixin prefix($property, $value, $prefixes) {
   @each $prefix in $prefixes {
     @if $prefix == webkit {
@@ -39,13 +41,13 @@
       -o-#{$property}: $value;
     } @else if $prefix == spec {
       #{$property}: $value;
-    } @else  {
+    } @else {
       @warn 'Unrecognized prefix: #{$prefix}';
     }
   }
 }
 
-/*================ Media Query Mixin ================*/
+/* ================ Media Query Mixin ================ */
 @mixin media-query($media-query) {
   $breakpoint-found: false;
 
@@ -63,13 +65,12 @@
   }
 
   @if $breakpoint-found == false {
-    @warn 'Breakpoint "#{$media-query}" does not exist';
+    @warn 'Breakpoint '#{$media-query}' does not exist';
   }
 }
 
-/*================ Responsive Show/Hide Helper ================*/
+/* ================ Responsive Show/Hide Helper ================ */
 @mixin responsive-display-helper($breakpoint: '') {
-  // sass-lint:disable no-important
   .#{$breakpoint}show {
     display: block !important;
   }
@@ -79,10 +80,9 @@
   }
 }
 
-
-/*================ Responsive Text Alignment Helper ================*/
+/* ================ Responsive Text Alignment Helper ================ */
 @mixin responsive-text-align-helper($breakpoint: '') {
-  // sass-lint:disable no-important
+  // stylelint:disable no-important
   .#{$breakpoint}text-left {
     text-align: left !important;
   }
@@ -100,20 +100,20 @@
   // sass-lint:disable no-important
   position: absolute !important;
   overflow: hidden;
-  clip: rect(0 0 0 0);
   height: 1px;
   width: 1px;
   margin: -1px;
   padding: 0;
   border: 0;
+  clip: rect(0 0 0 0);
 }
 
 @mixin visually-shown($position: inherit) {
   // sass-lint:disable no-important
   position: $position !important;
   overflow: auto;
-  clip: auto;
-  width: auto;
   height: auto;
+  width: auto;
   margin: 0;
+  clip: auto;
 }

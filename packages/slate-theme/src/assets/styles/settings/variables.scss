@@ -1,37 +1,41 @@
-/*================ Color Variables ================*/
-$color-primary: red;
+/* stylelint-disable color-no-hex */
+
+/* ================ Color Variables ================ */
+$color-primary: peachpuff;
 
 // Text colors
-$color-body-text: #444;
+$color-body-text: #444444;
 
 // Backgrounds
-$color-body: #fff;
+$color-body: #ffffff;
 
 // Border colors
 $color-border: #f6f6f6;
 
 // Helper colors for form error states
-$color-disabled: #000;
-$color-disabled-border: #000;
-$color-error: #000;
-$color-error-bg: #000;
-$color-success: #000;
-$color-success-bg: #000;
+$color-disabled: #000000;
+$color-disabled-border: #000000;
+$color-error: #000000;
+$color-error-bg: #000000;
+$color-success: #000000;
+$color-success-bg: #000000;
 
-/*================ Typography Variables ================*/
+/* ================ Typography Variables ================ */
 $font-weight-normal: 400;
 $font-weight-bold: 700;
 
-$font-stack-header: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-stack-header: 'HelveticaNeue', 'Helvetica Neue', helvetica, arial,
+  sans-serif;
 $font-weight-header: $font-weight-bold;
 
-$font-stack-body: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-stack-body: 'HelveticaNeue', 'Helvetica Neue', helvetica, arial,
+  sans-serif;
 $font-size-base: 16px;
 
-/*============================================================================
+/* ============================================================================
   Grid Breakpoints and Class Names
     - Do not change the variable names
-==============================================================================*/
+============================================================================== */
 $grid-medium: 750px;
 $grid-large: 990px;
 $grid-widescreen: 1400px;
@@ -59,20 +63,24 @@ $breakpoints: (
   $widescreen '(min-width: #{$grid-widescreen})'
 );
 
-/*============================================================================
+/* ============================================================================
   Generate breakpoint-specific column widths and push classes
     - Default column widths: $breakpoint-has-widths: ($small, $medium-up);
     - Default is no push classes
     - Will not work if `styles/global/grid.scss` is removed
-==============================================================================*/
-$breakpoint-has-widths: ($small, $medium-up);
+============================================================================== */
+$breakpoint-has-widths: (
+  $small,
+  $medium-up
+);
 $breakpoint-has-push: ();
 
-/*================ Sizing Variables ================*/
+/* ================ Sizing Variables ================ */
 $width-site: 1180px;
 $gutter: 30px;
 
-/*================ Z-Index ================*/
+/* ================ Z-Index ================ */
 $z-index-dropdown: 2;
+
 // really high to be safe of app markup
 $z-index-skip-to-content: 10000;
