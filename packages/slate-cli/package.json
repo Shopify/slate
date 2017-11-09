@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate",
-  "version": "0.13.0",
+  "version": "1.0.0-alpha.1",
   "description": "Slate CLI tools",
   "bin": {
     "slate": "lib/index.js"
@@ -41,7 +41,11 @@
     "test": "npm run lint",
     "prepublish": "npm run clean && babel -d lib/ src/"
   },
-  "keywords": ["shopify", "slate", "themekit"],
+  "keywords": [
+    "shopify",
+    "slate",
+    "themekit"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/Shopify/slate.git"

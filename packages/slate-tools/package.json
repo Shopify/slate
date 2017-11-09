@@ -56,8 +56,13 @@
     "write-file-webpack-plugin": "4.0.2",
     "yamljs": "0.2.10"
   },
-  "browserslist": ["last 2 versions", "safari >= 7"],
+  "browserslist": [
+    "last 2 versions",
+    "safari >= 7"
+  ],
   "babel": {
-    "presets": ["env"]
+    "presets": [
+      "env"
+    ]
   }
 }
