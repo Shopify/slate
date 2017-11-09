@@ -80,50 +80,9 @@ jobs:
       - run:
           name: Test packages
           command: npm test
-
-  deploy:
-    docker:
-        - image: circleci/node:latest
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - root-cache-{{ checksum "package-lock.json" }}
-            - root-cache
-      - restore_cache:
-          keys:
-            - slate-tools-cache-{{ checksum "./packages/slate-tools/package-lock.json" }}
-            - slate-tools-cache
-      - restore_cache:
-          keys:
-            - slate-theme-cache-{{ checksum "./packages/slate-theme/package-lock.json" }}
-            - slate-theme-cache
-      - restore_cache:
-          keys:
-            - slate-cli-cache-{{ checksum "./packages/slate-cli/package-lock.json" }}
-            - slate-cli-cache
-      - run:
-          name: Bootstrap packages
-          command: npm run bootstrap
-      - run:
-          name: Create slate-theme.zip
-          command: cd packages/slate-theme && ./node_modules/.bin/slate zip
-      - run:
-          name: Create slate-src.zip
-          command: node scripts/zip_src
-      - run:
-          name: Upload zips to AWS
-          command: node scripts/aws_upload
-      - run:
-          name: Upload zips to the Github release
-          command: node scripts/github_release
-      - run:
-          name: Purge Fastly cache
-          command: curl -X PURGE https://sdks.shopifycdn.com/slate/latest/slate-theme.zip && curl -X PURGE https://sdks.shopifycdn.com/slate/latest/slate-src.zip
-
 workflows:
   version: 2
-  build-n-test-n-maybe-deploy:
+  build-n-test:
       jobs:
         - build:
             filters:
@@ -135,12 +94,4 @@ workflows:
             filters:
               tags:
                 only: /.*/
-        - deploy:
-            requires:
-              - test
-            filters:
-              tags:
-                only: /v[0-9]+(\.[0-9]+)*/
-              branches:
-                ignore: /.*/
 

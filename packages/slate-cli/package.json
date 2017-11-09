@@ -31,10 +31,7 @@
     "babel-plugin-add-shopify-header": "1.0.6",
     "babel-plugin-transform-async-to-generator": "6.16.0",
     "babel-preset-shopify": "15.0.1",
-    "babel-register": "6.18.0",
-    "eslint": "3.10.2",
-    "eslint-plugin-node": "3.0.4",
-    "eslint-plugin-shopify": "15.1.0"
+    "babel-register": "6.18.0"
   },
   "scripts": {
     "clean": "rimraf lib/",
@@ -42,7 +39,7 @@
     "lint-allow-warning": "eslint src/",
     "start": "npm run clean && babel -w -d lib/ src/",
     "test": "npm run lint",
-    "prepublish": "npm test && npm run clean && babel -d lib/ src/"
+    "prepublish": "npm run clean && babel -d lib/ src/"
   },
   "keywords": ["shopify", "slate", "themekit"],
   "repository": {

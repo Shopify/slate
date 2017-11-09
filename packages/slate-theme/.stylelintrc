@@ -1,8 +1,0 @@
-{
-  "extends": "stylelint-config-shopify/prettier",
-  "rules": {
-    "selector-class-pattern": null,
-    "selector-no-qualifying-type": null,
-    "selector-max-type": null
-  }
-}
