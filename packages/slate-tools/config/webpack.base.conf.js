@@ -81,7 +81,7 @@ module.exports = {
   },
 
   resolveLoader: {
-    modules: [config.paths.nodeModules, config.paths.lib],
+    modules: ['node_modules', config.paths.lib],
   },
 
   module: {
