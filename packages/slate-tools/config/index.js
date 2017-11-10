@@ -1,5 +1,5 @@
-const paths = require('./paths');
 const YAML = require('yamljs');
+const paths = require('./paths');
 
 module.exports = {
   paths,

@@ -159,7 +159,7 @@ compiler.plugin('done', stats => {
       }
 
       // Notify the HMR client that we finished uploading files to Shopify
-      hotMiddleware.publish({
+      return hotMiddleware.publish({
         action: 'shopify_upload_finished',
         // don't force a reload if only theme.liquid has been updated, has it get's
         // updated even when we change scritps/styles

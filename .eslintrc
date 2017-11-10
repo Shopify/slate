@@ -1,13 +1,10 @@
 {
-  "extends": [
-    "plugin:shopify/prettier",
-    "plugin:shopify/node",
-    "plugin:shopify/jquery"
-  ],
+  "extends": ["plugin:shopify/prettier", "plugin:shopify/node"],
   "env": {
     "jest": true
   },
   "rules": {
+    "no-console": "off",
     "import/no-anonymous-default-export": 0,
     "func-style": ["warn", "declaration", {"allowArrowFunctions": true}],
     "import/no-unresolved": ["error", {"ignore": ["^jquery$"]}]
