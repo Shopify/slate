@@ -9,6 +9,7 @@ const cssnano = require('cssnano');
 const webpackConfig = require('./webpack.base.conf');
 const commonExcludes = require('../lib/common-excludes');
 const userWebpackConfig = require('../lib/get-user-webpack-config')('prod');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const AssetTagToShopifyLiquid = require('../lib/asset-tag-to-shopify-liquid');
 const config = require('../config');
 
@@ -49,11 +50,8 @@ module.exports = merge(
         'process.env': {NODE_ENV: '"production"'},
       }),
 
-      new webpack.optimize.UglifyJsPlugin({
+      new UglifyJSPlugin({
         sourceMap: true,
-        compress: {
-          warnings: false,
-        },
       }),
 
       // extract css into its own file
