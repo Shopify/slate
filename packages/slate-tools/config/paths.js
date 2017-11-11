@@ -27,7 +27,6 @@ module.exports = {
   src: resolveApp('src'),
   vendors: resolveApp('src/assets/vendors'),
   lib: resolveSelf('lib'),
-  nodeModules: resolveSelf('node_modules'),
   entrypoints: {
     scripts: resolveApp('src/assets/scripts/theme.js'),
     static: resolveSelf('lib/static-files-glob.js'),
