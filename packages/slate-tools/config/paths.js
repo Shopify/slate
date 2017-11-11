@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 
 const appDirectory = fs.realpathSync(process.cwd());
 
@@ -35,4 +36,6 @@ module.exports = {
   userShopifyConfig: resolveApp('config/shopify.yml'),
   eslintrc: resolveApp('./.eslintrc'),
   stylelintrc: resolveApp('./.stylelintrc'),
+  sslCert: path.resolve(os.homedir(), '.localhost_ssl/server.crt'),
+  sslKey: path.resolve(os.homedir(), '.localhost_ssl/server.key'),
 };

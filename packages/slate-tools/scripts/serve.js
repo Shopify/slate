@@ -22,10 +22,17 @@ const webpackConfig = require('../config/webpack.dev.conf');
 const shopify = require('../lib/shopify-deploy');
 const env = require('../lib/get-shopify-env-or-die')(argv.env, config.shopify);
 
-const fakeCert = fs.readFileSync(path.join(__dirname, '../ssl/server.pem'));
+const sslCert = fs.existsSync(config.paths.sslCert)
+  ? fs.readFileSync(config.paths.sslCert)
+  : fs.readFileSync(path.join(__dirname, '../ssl/server.pem'));
+
+const sslKey = fs.existsSync(config.paths.sslKey)
+  ? fs.readFileSync(config.paths.sslKey)
+  : fs.readFileSync(path.join(__dirname, '../ssl/server.pem'));
+
 const sslOptions = {
-  key: fakeCert,
-  cert: fakeCert,
+  key: sslKey,
+  cert: sslCert,
 };
 
 const app = express();
