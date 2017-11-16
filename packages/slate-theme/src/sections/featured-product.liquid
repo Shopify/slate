@@ -12,6 +12,7 @@
   <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
   <meta itemprop="image" content="{{ featured_image | img_url: '800x' }}">
   <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
+  <meta itemprop="itemCondition" itemtype="http://schema.org/OfferItemCondition" content="http://schema.org/NewCondition">
 
   {% if featured_image.src != blank %}
     <img src="{{ featured_image | img_url: '480x480' }}" alt="{{ featured_image.alt | escape }}" data-product-featured-image>
