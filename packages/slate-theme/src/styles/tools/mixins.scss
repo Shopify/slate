@@ -31,16 +31,18 @@
   @each $prefix in $prefixes {
     @if $prefix == webkit {
       -webkit-#{$property}: $value;
-    } @else if $prefix == moz {
+    }
+    @if $prefix == moz {
       -moz-#{$property}: $value;
-    } @else if $prefix == ms {
+    }
+    @if $prefix == ms {
       -ms-#{$property}: $value;
-    } @else if $prefix == o {
+    }
+    @if $prefix == o {
       -o-#{$property}: $value;
-    } @else if $prefix == spec {
+    }
+    @if $prefix == spec {
       #{$property}: $value;
-    } @else  {
-      @warn 'Unrecognized prefix: #{$prefix}';
     }
   }
 }
