@@ -34,7 +34,14 @@ module.exports = {
   },
   assetsOutput: resolveApp('dist/assets'),
   userShopifyConfig: resolveApp('config/shopify.yml'),
-  eslintrc: resolveApp('./.eslintrc'),
+  eslint: {
+    rc: resolveApp('./.eslintrc'),
+    bin: resolveSelf('node_modules/.bin/eslint'),
+  },
+  nodeModules: {
+    app: resolveApp('node_modules'),
+    self: resolveSelf('node_modules'),
+  },
   babelrc: resolveApp('./.babelrc'),
   stylelintrc: resolveApp('./.stylelintrc'),
   sslCert: path.resolve(os.homedir(), '.localhost_ssl/server.crt'),

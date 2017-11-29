@@ -44,14 +44,15 @@ const contextReplacementPlugins = () => {
 const lintingLoaders = () => {
   const rules = [];
 
-  if (fs.existsSync(config.paths.eslintrc)) {
+  if (fs.existsSync(config.paths.eslint.rc)) {
     rules.push({
       enforce: 'pre',
       test: /\.js$/,
       exclude: commonExcludes(),
       loader: 'eslint-loader',
       options: {
-        configFile: config.paths.eslintrc,
+        eslintPath: config.paths.eslint.bin,
+        configFile: config.paths.eslint.rc,
         emitWarning: isDevServer,
       },
     });
@@ -99,7 +100,11 @@ module.exports = {
   },
 
   resolveLoader: {
-    modules: ['node_modules', config.paths.lib],
+    modules: [
+      config.paths.nodeModules.app,
+      config.paths.nodeModules.self,
+      config.paths.lib,
+    ],
   },
 
   module: {
