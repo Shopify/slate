@@ -7,7 +7,7 @@ const config = require('../config');
 const paths = require('../config/paths');
 const commonExcludes = require('../lib/common-excludes');
 
-const isDevServer = process.argv.find(command => command.includes('serve'));
+const isDevServer = process.argv.find(command => command.includes('start'));
 
 /**
  * Return an array of ContextReplacementPlugin to use.
@@ -42,51 +42,64 @@ const contextReplacementPlugins = () => {
 
 // add eslint-loader if .eslintrc is present
 const lintingLoaders = () => {
-  const rules = [];
+  if (!fs.existsSync(config.paths.eslint.rc)) {
+    return [];
+  }
 
-  if (fs.existsSync(config.paths.eslint.rc)) {
-    rules.push({
+  const ignorePath = fs.existsSync(config.paths.eslint.ignore)
+    ? config.paths.eslint.ignore
+    : null;
+
+  return [
+    {
       enforce: 'pre',
       test: /\.js$/,
       exclude: commonExcludes(),
       loader: 'eslint-loader',
       options: {
+        ignorePath,
         eslintPath: config.paths.eslint.bin,
         configFile: config.paths.eslint.rc,
         emitWarning: isDevServer,
       },
-    });
-  }
-
-  return rules;
+    },
+  ];
 };
 
 // add babel-loader if .babelrc is present
 const babelLoader = () => {
-  const rules = [];
+  if (!fs.existsSync(config.paths.babel.rc)) {
+    return [];
+  }
 
-  if (fs.existsSync(config.paths.babelrc)) {
-    rules.push({
+  return [
+    {
       test: /\.js$/,
       exclude: commonExcludes(),
       loader: 'babel-loader',
       options: {
-        extends: config.paths.babelrc,
+        extends: config.paths.babel.rc,
       },
-    });
-  }
-
-  return rules;
+    },
+  ];
 };
 
 function stylelintLoader() {
-  return fs.existsSync(config.paths.stylelintrc)
-    ? [
-        new StyleLintPlugin({
-          configFile: config.paths.stylelintrc,
-        }),
-      ]
-    : [];
+  if (!fs.existsSync(config.paths.stylelint.rc)) {
+    return [];
+  }
+
+  const ignorePath = fs.existsSync(config.paths.stylelint.ignore)
+    ? config.paths.stylelint.ignore
+    : null;
+
+  return [
+    new StyleLintPlugin({
+      configFile: config.paths.stylelint.rc,
+      emitErrors: !isDevServer,
+      ignorePath,
+    }),
+  ];
 }
 
 module.exports = {

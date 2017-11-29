@@ -35,15 +35,23 @@ module.exports = {
   assetsOutput: resolveApp('dist/assets'),
   userShopifyConfig: resolveApp('config/shopify.yml'),
   eslint: {
-    rc: resolveApp('./.eslintrc'),
+    rc: resolveApp('.eslintrc'),
     bin: resolveSelf('node_modules/.bin/eslint'),
+    ignore: resolveApp('.eslintignore'),
   },
   nodeModules: {
     app: resolveApp('node_modules'),
     self: resolveSelf('node_modules'),
   },
-  babelrc: resolveApp('./.babelrc'),
-  stylelintrc: resolveApp('./.stylelintrc'),
-  sslCert: path.resolve(os.homedir(), '.localhost_ssl/server.crt'),
-  sslKey: path.resolve(os.homedir(), '.localhost_ssl/server.key'),
+  babel: {
+    rc: resolveApp('.babelrc'),
+  },
+  stylelint: {
+    rc: resolveApp('.stylelintrc'),
+    ignore: resolveApp('.stylelintignore'),
+  },
+  ssl: {
+    cert: path.resolve(os.homedir(), '.localhost_ssl/server.crt'),
+    key: path.resolve(os.homedir(), '.localhost_ssl/server.key'),
+  },
 };
