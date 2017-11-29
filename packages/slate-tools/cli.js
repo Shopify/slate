@@ -8,7 +8,7 @@ let result;
 
 switch (script) {
   case 'build':
-  case 'serve':
+  case 'start':
     result = spawn.sync(
       'node',
       [require.resolve(`./scripts/${script}`)].concat(args),
