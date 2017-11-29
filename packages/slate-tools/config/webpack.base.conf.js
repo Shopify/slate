@@ -60,6 +60,24 @@ const lintingLoaders = () => {
   return rules;
 };
 
+// add babel-loader if .babelrc is present
+const babelLoader = () => {
+  const rules = [];
+
+  if (fs.existsSync(config.paths.babelrc)) {
+    rules.push({
+      test: /\.js$/,
+      exclude: commonExcludes(),
+      loader: 'babel-loader',
+      options: {
+        extends: config.paths.babelrc,
+      },
+    });
+  }
+
+  return rules;
+};
+
 function stylelintLoader() {
   return fs.existsSync(config.paths.stylelintrc)
     ? [
@@ -87,25 +105,8 @@ module.exports = {
   module: {
     rules: [
       ...lintingLoaders(),
+      ...babelLoader(),
 
-      {
-        test: /\.js$/,
-        exclude: commonExcludes(),
-        loader: 'babel-loader',
-        options: {
-          presets: [
-            [
-              'env',
-              {
-                targets: {
-                  browsers: ['last 2 versions', 'safari >= 7'],
-                },
-                modules: false,
-              },
-            ],
-          ],
-        },
-      },
       {
         test: /\.js$/,
         exclude: commonExcludes(),
