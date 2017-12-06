@@ -27,12 +27,14 @@ module.exports = {
   dist: resolveApp('dist'),
   src: resolveApp('src'),
   vendors: resolveApp('src/assets/vendors'),
+  svgs: resolveApp('src/assets/svg'),
   lib: resolveSelf('lib'),
   entrypoints: {
     scripts: resolveApp('src/assets/scripts/theme.js'),
     static: resolveSelf('lib/static-files-glob.js'),
   },
   assetsOutput: resolveApp('dist/assets'),
+  snippetsOutput: resolveApp('dist/snippets'),
   userShopifyConfig: resolveApp('config/shopify.yml'),
   eslint: {
     rc: resolveApp('.eslintrc'),

@@ -2,7 +2,7 @@ const fs = require('fs');
 const webpack = require('webpack');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
-const SvgStore = require('webpack-svgstore-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const config = require('../config');
 const paths = require('../config/paths');
 const commonExcludes = require('../lib/common-excludes');
@@ -180,6 +180,13 @@ module.exports = {
 
     ...stylelintLoader(),
 
+    new CopyWebpackPlugin([
+      {
+        from: config.paths.svgs,
+        to: `${config.paths.snippetsOutput}/[name].liquid`,
+      },
+    ]),
+
     new WriteFileWebpackPlugin({
       test: /\.(png|svg|jpg|gif|scss)/,
       useHashIndex: true,
@@ -190,12 +197,6 @@ module.exports = {
       test: /^(?:(?!hot-update.json$).)*\.(liquid|json)$/,
       useHashIndex: true,
       log: false,
-    }),
-
-    new SvgStore({
-      svgoOptions: {
-        plugins: [{removeTitle: true}],
-      },
     }),
   ],
 };
