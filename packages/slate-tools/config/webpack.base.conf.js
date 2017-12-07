@@ -78,6 +78,7 @@ const babelLoader = () => {
       exclude: commonExcludes(),
       loader: 'babel-loader',
       options: {
+        babelrc: false,
         extends: config.paths.babel.rc,
       },
     },
