@@ -36,7 +36,7 @@ const messages = {
 
   logTransferFailed: (errMsg) => {
     gutil.log('Transfer Failed:',
-      gutil.colors.yellow(`${typeof errMsg === 'string' ? errMsg : 'File(s) failed to upload to store. See log notes above.'}`),
+      gutil.colors.yellow(`${typeof errMsg === 'string' ? errMsg : 'File(s) failed to upload to store. See log notes in deploy.log'}`),
     );
   },
 
@@ -62,6 +62,16 @@ const messages = {
     const fileList = `${files.join(', ')}.\n`;
 
     return timestamp + action + amount + fileList;
+  },
+
+  logDeployErrors: (cmd, files, err) => {
+    const timestamp = `Deploy error @ ${new Date()}. `;
+    const action = cmd === 'upload' ? 'added/changed ' : 'removed ';
+    const amount = `${files.length} file(s): `;
+    const fileList = `${files.join(', ')}.\n`;
+    const errMsg = `${err} \n`;
+
+    return timestamp + action + amount + fileList + errMsg;
   },
 
   logBundleJs: () => {
