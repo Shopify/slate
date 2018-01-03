@@ -1,0 +1,28 @@
+# This file contains the information needed for Shopify to authenticate
+# requests and edit/update your remote theme files.
+#
+# 1. Set up a private app (https://help.shopify.com/api/guides/api-credentials#generate-private-app-credentials)
+#    with "Read and write" permissions for "Theme templates and theme assets".
+# 2. Replace the required variables for each environment below.
+#
+# password, theme_id, and store variables are required.
+#
+# For more information on this config file:
+#   Configuration variables | http://shopify.github.io/themekit/configuration/
+#   Ignore patterns | http://shopify.github.io/themekit/ignores/
+
+---
+
+development:
+  password:
+  theme_id:
+  store: your-shop.myshopify.com
+  ignore_files:
+    #- settings_data.json # Uncomment this line to avoid resetting theme settings
+
+production:
+  password:
+  theme_id: "live"
+  store: your-shop.myshopify.com
+  ignore_files:
+    #- settings_data.json # Uncomment this line to avoid resetting theme settings
