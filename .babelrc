@@ -1,8 +1,4 @@
 {
-  "presets": [
-    ["shopify"]
-  ],
-  "plugins": [
-    ["transform-async-to-generator"]
-  ]
+  "presets": ["shopify/node"],
+  "plugins": ["transform-async-to-generator", "syntax-trailing-function-commas"]
 }

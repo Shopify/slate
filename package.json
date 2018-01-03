@@ -2,9 +2,13 @@
   "name": "slate",
   "version": "0.11.0",
   "author": "Shopify Inc.",
-  "description":
-    "A theme scaffold and command line tool for developing Shopify themes.",
-  "keywords": ["slate", "shopify", "theme", "CLI"],
+  "description": "A theme scaffold and command line tool for developing Shopify themes.",
+  "keywords": [
+    "slate",
+    "shopify",
+    "theme",
+    "CLI"
+  ],
   "homepage": "https://shopify.github.io/slate/",
   "bugs": "https://github.com/Shopify/slate/issues",
   "license": "MIT",
@@ -13,7 +17,7 @@
     "url": "https://github.com/Shopify/slate.git"
   },
   "scripts": {
-    "test": "jest && npm run lint",
+    "test": "jest",
     "lint": "eslint --max-warnings 10 ./ && stylelint './**/*.[s]css'",
     "lint:styles": "stylelint '**/*.[s]css'",
     "lint:fix": "eslint ./ --fix && prettier-stylelint **/*.scss",
@@ -26,7 +30,8 @@
   "devDependencies": {
     "archiver": "1.1.0",
     "aws-sdk": "2.6.12",
-    "babel-jest": "^21.2.0",
+    "babel-jest": "^22.0.4",
+    "babel-plugin-syntax-trailing-function-commas": "^6.22.0",
     "babel-preset-shopify": "^16.2.0",
     "eslint": "^4.10.0",
     "eslint-config-prettier": "^2.7.0",
@@ -34,7 +39,7 @@
     "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-shopify": "^18.0.0",
     "github": "^11.0.0",
-    "jest": "^21.2.1",
+    "jest": "^22.0.4",
     "lerna": "^2.0.0",
     "lerna-changelog": "^0.6.0",
     "mime-types": "2.1.12",
