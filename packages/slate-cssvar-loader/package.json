@@ -1,0 +1,28 @@
+{
+  "name": "@shopify/slate-cssvar-loader",
+  "version": "1.0.0-alpha.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shopify/slate.git"
+  },
+  "author": "Shopify Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Shopify/slate/issues"
+  },
+  "homepage": "https://github.com/Shopify/slate#readme",
+  "dependencies": {
+    "loader-utils": "^1.1.0"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.8",
+    "jest": "^22.0.5",
+    "memory-fs": "^0.4.1",
+    "webpack": "^3.8.1"
+  }
+}

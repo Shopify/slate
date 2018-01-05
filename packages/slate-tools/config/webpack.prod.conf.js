@@ -28,6 +28,12 @@ module.exports = merge(
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
             use: [
+              {
+                loader: '@shopify/slate-cssvar-loader',
+                options: {
+                  cssVariablesPath: config.paths.slateCssLoader.cssVariables,
+                }
+              },
               {loader: 'css-loader', options: {importLoaders: 2, sourceMap: true}},
               {
                 loader: 'postcss-loader',
@@ -38,7 +44,7 @@ module.exports = merge(
                     ...stylelint(),
                     autoprefixer,
                     cssnano,
-                    postcssReporter({clearReportedMessages: true, throwError: true}),
+                    postcssReporter({clearReportedMessages: true, throwError: false}),
                   ],
                 },
               },
@@ -63,7 +69,7 @@ module.exports = merge(
       }),
 
       // extract css into its own file
-      new ExtractTextPlugin('styles.[contenthash].css'),
+      new ExtractTextPlugin('styles.[contenthash].css.liquid'),
 
       // generate dist/layout/theme.liquid with correct paths to assets
       new HtmlWebpackPlugin({
@@ -102,6 +108,7 @@ module.exports = merge(
         name: 'manifest',
         chunks: ['vendor'],
       }),
+
     ],
   },
   userWebpackConfig

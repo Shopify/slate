@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate-tools",
-  "version": "1.0.0-alpha.9",
+  "version": "1.0.0-alpha.10",
   "description": "A modern pipeline for Shopify theme development",
   "repository": "Shopify/slate",
   "license": "MIT",
@@ -17,6 +17,7 @@
   "engine": ">= 6.4.0",
   "dependencies": {
     "@shopify/themekit": "0.6.11",
+    "@shopify/slate-cssvar-loader": "1.0.0-alpha.1",
     "autoprefixer": "6.7.7",
     "babel-cli": "6.24.1",
     "babel-jest": "20.0.3",
@@ -39,7 +40,6 @@
     "html-webpack-plugin": "2.28.0",
     "img-loader": "2.0.0",
     "jest": "20.0.3",
-    "loader-utils": "1.1.0",
     "minimist": "1.2.0",
     "node-sass": "4.5.3",
     "postcss-loader": "2.0.5",

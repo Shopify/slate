@@ -59,7 +59,7 @@ const lintingLoaders = () => {
         ignorePath,
         eslintPath: config.paths.eslint.bin,
         configFile: config.paths.eslint.rc,
-        emitWarning: isDevServer,
+        emitWarning: true,
       },
     },
   ];
