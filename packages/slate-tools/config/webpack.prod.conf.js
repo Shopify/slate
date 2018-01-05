@@ -6,6 +6,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
+const postcssReporter = require('postcss-reporter');
+const stylelint = require('../lib/postcss-stylelint');
 const webpackConfig = require('./webpack.base.conf');
 const commonExcludes = require('../lib/common-excludes');
 const userWebpackConfig = require('../lib/get-user-webpack-config')('prod');
@@ -26,15 +28,21 @@ module.exports = merge(
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
             use: [
-              {
-                loader: 'css-loader',
-                options: {importLoaders: 2},
-              },
+              {loader: 'css-loader', options: {importLoaders: 2, sourceMap: true}},
               {
                 loader: 'postcss-loader',
-                options: {plugins: [autoprefixer, cssnano]},
+                options: {
+                  ident: 'postcss',
+                  sourceMap: true,
+                  plugins: loader => [
+                    ...stylelint(),
+                    autoprefixer,
+                    cssnano,
+                    postcssReporter({clearReportedMessages: true, throwError: true}),
+                  ],
+                },
               },
-              'sass-loader',
+              {loader: 'sass-loader', options: {sourceMap: true}},
             ],
           }),
         },
