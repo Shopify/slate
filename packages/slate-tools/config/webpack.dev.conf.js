@@ -3,6 +3,8 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const postcssReporter = require('postcss-reporter');
+const stylelint = require('../lib/postcss-stylelint');
 const webpackConfig = require('./webpack.base.conf');
 const commonExcludes = require('../lib/common-excludes');
 const userWebpackConfig = require('../lib/get-user-webpack-config')('dev');
@@ -29,6 +31,7 @@ module.exports = merge(
           test: /\.s[ac]ss$/,
           exclude: commonExcludes(),
           use: [
+            ...stylelint(),
             'style-loader',
             {
               loader: 'css-loader',
@@ -36,7 +39,13 @@ module.exports = merge(
             },
             {
               loader: 'postcss-loader',
-              options: {plugins: [autoprefixer]},
+              options: {
+                plugins: [
+                  autoprefixer,
+                  ...stylelint(),
+                  postcssReporter({clearReportedMessages: true}),
+                ],
+              },
             },
             'sass-loader',
           ],
