@@ -1,7 +1,5 @@
-packages/slate-theme/dist
-packages/slate-theme/src/scripts/**/*.js.liquid
+
 packages/slate-cli/lib
-packages/create-slate-theme/index.js
 **/node_modules/
 docs/
 ci/
