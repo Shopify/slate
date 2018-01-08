@@ -43,6 +43,7 @@
     "minimist": "1.2.0",
     "node-sass": "4.5.3",
     "postcss-loader": "2.0.5",
+    "postcss-reporter": "^5.0.0",
     "raw-loader": "^0.5.1",
     "react-dev-utils": "0.5.2",
     "sass-loader": "6.0.5",

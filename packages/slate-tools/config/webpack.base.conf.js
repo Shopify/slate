@@ -1,6 +1,5 @@
 const fs = require('fs');
 const webpack = require('webpack');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
 const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const config = require('../config');
@@ -85,24 +84,6 @@ const babelLoader = () => {
   ];
 };
 
-function stylelintLoader() {
-  if (!fs.existsSync(config.paths.stylelint.rc)) {
-    return [];
-  }
-
-  const ignorePath = fs.existsSync(config.paths.stylelint.ignore)
-    ? config.paths.stylelint.ignore
-    : null;
-
-  return [
-    new StyleLintPlugin({
-      configFile: config.paths.stylelint.rc,
-      emitErrors: !isDevServer,
-      ignorePath,
-    }),
-  ];
-}
-
 module.exports = {
   context: paths.src,
 
@@ -178,8 +159,6 @@ module.exports = {
 
   plugins: [
     ...contextReplacementPlugins(),
-
-    ...stylelintLoader(),
 
     new CopyWebpackPlugin([
       {
