@@ -1,6 +1,6 @@
 {
   "name": "create-slate-theme",
-  "version": "1.0.0-alpha.12",
+  "version": "1.0.0-alpha.13",
   "description": "Create a new slate project from an existing slate theme repo",
   "main": "index.js",
   "scripts": {
@@ -21,8 +21,10 @@
   "homepage": "https://github.com/shopify/slate#readme",
   "dependencies": {
     "chalk": "^2.3.0",
+    "commander": "^2.12.2",
     "execa": "^0.8.0",
     "fs-extra": "^5.0.0",
-    "hosted-git-info": "^2.5.0"
+    "hosted-git-info": "^2.5.0",
+    "validate-npm-package-name": "^3.0.0"
   }
 }

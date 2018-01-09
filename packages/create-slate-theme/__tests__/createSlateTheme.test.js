@@ -1,12 +1,28 @@
 const fs = require('fs-extra');
+const path = require('path');
 const execa = require('execa');
 const createSlateTheme = require('../createSlateTheme');
 const config = require('../config');
 
-const CLONE_COMMAND =
-  'git clone git@github.com:shopify/test-repo.git test-project --single-branch';
-const CLONE_BRANCH_COMMAND =
-  'git clone -b 123456 git@github.com:shopify/test-repo.git test-project --single-branch';
+const TEST_PROJECT = 'test-project';
+const TEST_STARTER = 'test-repo';
+const TEST_COMMITTISH = '123456';
+const CLONE_COMMAND = `git clone
+  git@github.com:shopify/${TEST_STARTER}.git
+  ${path.resolve(TEST_PROJECT)}
+  --single-branch`;
+const CLONE_BRANCH_COMMAND = `git clone
+  -b ${TEST_COMMITTISH}
+  git@github.com:shopify/${TEST_STARTER}.git
+  ${path.resolve(TEST_PROJECT)}
+  --single-branch`;
+
+beforeAll(() => {
+  // Mock process.exit since it terminates the test runner
+  process.exit = jest.fn(code => {
+    throw new Error(`Process exit with code: ${code}`);
+  });
+});
 
 beforeEach(() => {
   fs.__resetMockFiles();
@@ -41,7 +57,7 @@ test('can copy a theme from a local directory', async () => {
   await createSlateTheme('test-project', 'old-project');
   expect(fs.existsSync('test-project/package.json')).toBeTruthy();
   expect(
-    fs.existsSync('test-project/node_modules/some-package/index.js'),
+    fs.existsSync('test-project/node_modules/some-package/index.js')
   ).toBeFalsy();
   expect(fs.existsSync('test-project/.git/index')).toBeFalsy();
 });
@@ -57,6 +73,36 @@ test('copys shopify.yml to the config directory', async () => {
     jest.requireActual('fs-extra').existsSync(config.shopifyConfig.src);
   }).toBeTruthy();
   expect(fs.existsSync('test-project/config/shopify.yml')).toBeTruthy();
+});
+
+test('can skip installing theme dependencies', async () => {
+  await createSlateTheme(
+    'test-project',
+    'shopify/test-repo',
+    Object.assign({}, config.defaultOptions, {skipInstall: true})
+  );
+  expect(execa()).not.toHaveBeenCalledWith('yarnpkg', [], {stdio: 'inherit'});
+  expect(execa()).not.toHaveBeenCalledWith('npm', ['install'], {
+    stdio: 'inherit',
+  });
+});
+
+test('fails if theme name does not adhere to NPM naming restrictions', () => {
+  expect(() => {
+    createSlateTheme('test project', config.defaultStarter);
+  }).toThrow();
+  expect(process.exit).toHaveBeenCalled();
+});
+
+test('fails if the a conflicting file already exists in the theme directory', () => {
+  require('fs-extra').__addMockFiles({
+    'test-project/package.json': '{ "name": "test-repo" }',
+  });
+
+  expect(() => {
+    createSlateTheme('test-project', config.defaultStarter);
+  }).toThrow();
+  expect(process.exit).toHaveBeenCalled();
 });
 
 test('throws an error when copying from a local directory that does not exist', async () => {

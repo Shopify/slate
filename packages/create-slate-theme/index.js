@@ -1,37 +1,67 @@
 #!/usr/bin/env node
 
-const fs = require('fs-extra');
-const chalk = require('chalk');
+var chalk = require('chalk');
+var program = require('commander');
+var createSlateTheme = require('./createSlateTheme');
+var packageJson = require('./package.json');
+var config = require('./config');
 
-const config = require('./config');
-const createSlateTheme = require('./createSlateTheme');
+var currentNodeVersion = process.versions.node;
+var semver = currentNodeVersion.split('.');
+var major = semver[0];
 
-const args = process.argv.slice(2);
-const root = args[0];
-const starter = args[1] || config.defaultStarter;
+if (major < 6) {
+  console.log(
+    chalk.red(
+      'You are running Node ' +
+        currentNodeVersion +
+        '.\n`' +
+        'Create Slate Theme requires Node 6 or higher. \n' +
+        'Please update your version of Node.'
+    )
+  );
 
-const currentNodeVersion = process.versions.node;
-const semver = currentNodeVersion.split('.');
-const major = semver[0];
-
-if (major < 4) {
-  const nodeError =
-    // eslint-disable-next-line prefer-template
-    'You are running Node ' +
-    currentNodeVersion +
-    '.\n`' +
-    'Create Slate Theme requires Node 4 or higher. \n' +
-    'Please update your version of Node.';
-
-  throw new Error(chalk.red(nodeError));
+  process.exit(1);
 }
 
-if (typeof root === 'undefined') {
-  throw new Error(chalk.red('A project name is required.'));
+var themeName;
+var themeStarter;
+
+program
+  .version(packageJson.version)
+  .usage(`${chalk.green('<theme-directory>')} [starter-theme] [options]`)
+  .arguments('<name> [repo]')
+  .option('--skipInstall', 'skip installing theme dependencies')
+  .option('--verbose', 'print additional logs')
+  .action((name, starter = config.defaultStarter) => {
+    themeName = name;
+    themeStarter = starter;
+  })
+  .parse(process.argv);
+
+if (typeof themeName === 'undefined') {
+  console.error('Please specify the theme directory:');
+  console.log(
+    chalk.cyan(program.name()) + ' ' + chalk.green('<theme-directory>')
+  );
+  console.log();
+  console.log('For example:');
+  console.log(chalk.cyan(program.name()) + ' ' + chalk.green('my-theme'));
+  console.log();
+  console.log(
+    'Run' + chalk.cyan(program.name() + ' --help') + ' to see all options.'
+  );
+  process.exit(1);
 }
 
-if (fs.existsSync(root)) {
-  throw new Error(chalk.red(`The ${root} directory already exists`));
+function assignOption(key) {
+  return typeof program[key] === 'undefined'
+    ? config.defaultOptions[key]
+    : program[key];
 }
 
-createSlateTheme(root, starter);
+var options = {
+  skipInstall: assignOption('skipInstall'),
+};
+
+createSlateTheme(themeName, themeStarter, options);

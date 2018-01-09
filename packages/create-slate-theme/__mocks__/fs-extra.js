@@ -45,6 +45,10 @@ function remove(dir) {
   delete __mockFiles[dir];
 }
 
+function readdirSync(dir) {
+  return __mockFiles[path.resolve(dir)] || [];
+}
+
 function existsSync(file) {
   const resolvedPath = path.resolve(file);
   const dir = path.dirname(resolvedPath);
@@ -58,13 +62,13 @@ function existsSync(file) {
 }
 
 function chdir(dir) {
-  if (dir !== 'test-project') {
+  if (dir !== path.resolve('test-project')) {
     process.__chdir(dir);
   }
 }
 
 function mkdirp(dir) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     __mockFiles[path.resolve(dir)] = __mockFiles[path.resolve(dir)] || [];
     resolve();
   });
@@ -81,5 +85,6 @@ fs.copy = copy;
 fs.existsSync = existsSync;
 fs.remove = remove;
 fs.mkdirp = mkdirp;
+fs.readdirSync = readdirSync;
 
 module.exports = fs;

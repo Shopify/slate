@@ -1,9 +1,9 @@
 const {execSync} = require('child_process');
 const execa = require('execa');
 
-function spawn(cmd) {
+function spawn(cmd, options = {stdio: 'inherit'}) {
   const [file, ...args] = cmd.split(/\s+/);
-  return execa(file, args, {stdio: 'inherit'});
+  return execa(file, args, options);
 }
 
 // Checks the existence of yarn package
