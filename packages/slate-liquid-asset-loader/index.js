@@ -16,10 +16,11 @@ const escapeStringRegexp = require('escape-string-regexp');
  * so that the assets are served from the local dev-server.
  */
 let uniqueKey = 0;
-const getUniqueKey = () => {
+
+function getUniqueKey() {
   uniqueKey += 1;
   return uniqueKey;
-};
+}
 
 module.exports = function liquidLoader(content) {
   // make this loader cacheable, unless it's dependencies have changed, given
