@@ -9,6 +9,7 @@ let result;
 switch (script) {
   case 'build':
   case 'start':
+  case 'zip':
     result = spawn.sync(
       'node',
       [require.resolve(`./scripts/${script}`)].concat(args),
@@ -24,6 +25,6 @@ switch (script) {
     break;
   default:
     console.log(`Unknown script "${script}".`);
-    console.log('Perhaps you need to update shopify-pipeline ?');
+    console.log('Perhaps you need to update slate-tools?');
     break;
 }

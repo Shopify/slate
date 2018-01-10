@@ -58,5 +58,6 @@ module.exports = {
   },
   slateCssLoader: {
     cssVariables: resolveApp('src/snippets/css-variables.liquid'),
-  }
+  },
+  packageJson: resolveApp('package.json'),
 };
