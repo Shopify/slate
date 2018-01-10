@@ -13,6 +13,7 @@ const commonExcludes = require('../lib/common-excludes');
 const userWebpackConfig = require('../lib/get-user-webpack-config')('prod');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const AssetTagToShopifyLiquid = require('../lib/asset-tag-to-shopify-liquid');
+const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const config = require('../config');
 
 module.exports = merge(
@@ -32,9 +33,12 @@ module.exports = merge(
                 loader: '@shopify/slate-cssvar-loader',
                 options: {
                   cssVariablesPath: config.paths.slateCssLoader.cssVariables,
-                }
+                },
               },
-              {loader: 'css-loader', options: {importLoaders: 2, sourceMap: true}},
+              {
+                loader: 'css-loader',
+                options: {importLoaders: 2, sourceMap: true},
+              },
               {
                 loader: 'postcss-loader',
                 options: {
@@ -44,7 +48,10 @@ module.exports = merge(
                     ...stylelint(),
                     autoprefixer,
                     cssnano,
-                    postcssReporter({clearReportedMessages: true, throwError: false}),
+                    postcssReporter({
+                      clearReportedMessages: true,
+                      throwError: false,
+                    }),
                   ],
                 },
               },
@@ -69,7 +76,7 @@ module.exports = merge(
       }),
 
       // extract css into its own file
-      new ExtractTextPlugin('styles.[contenthash].css.liquid'),
+      new ExtractTextPlugin('styles.css.liquid'),
 
       // generate dist/layout/theme.liquid with correct paths to assets
       new HtmlWebpackPlugin({
@@ -87,6 +94,11 @@ module.exports = merge(
         },
         // necessary to consistently work with multiple chunks via CommonsChunkPlugin
         chunksSortMode: 'dependency',
+      }),
+
+      new HtmlWebpackIncludeAssetsPlugin({
+        assets: ['styles.css'],
+        append: true,
       }),
 
       new AssetTagToShopifyLiquid(),
@@ -108,7 +120,6 @@ module.exports = merge(
         name: 'manifest',
         chunks: ['vendor'],
       }),
-
     ],
   },
   userWebpackConfig

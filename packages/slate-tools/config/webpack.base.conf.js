@@ -90,7 +90,7 @@ module.exports = {
   entry: config.paths.entrypoints,
 
   output: {
-    filename: '[name].[hash].js',
+    filename: '[name].js',
     path: config.paths.assetsOutput,
   },
 
@@ -121,7 +121,7 @@ module.exports = {
         test: config.regex.images,
         exclude: commonExcludes(),
         use: [
-          {loader: 'file-loader', options: {name: '[name].[hash].[ext]'}},
+          {loader: 'file-loader', options: {name: '[name].[ext]'}},
           {loader: 'img-loader'},
         ],
       },
