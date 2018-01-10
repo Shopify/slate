@@ -5,6 +5,7 @@
  */
 const path = require('path');
 
+// eslint-disable-next-line no-empty-function
 function AssetTagToShopifyLiquid() {}
 
 AssetTagToShopifyLiquid.prototype.apply = compiler => {

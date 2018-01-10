@@ -12,7 +12,7 @@ const webpackConfig = require('./webpack.base.conf');
 const commonExcludes = require('../lib/common-excludes');
 const userWebpackConfig = require('../lib/get-user-webpack-config')('prod');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const AssetTagToShopifyLiquid = require('../lib/asset-tag-to-shopify-liquid');
+const SlateLiquidAssetsPlugin = require('@shopify/html-webpack-liquid-asset-tags-plugin');
 const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const config = require('../config');
 
@@ -101,7 +101,7 @@ module.exports = merge(
         append: true,
       }),
 
-      new AssetTagToShopifyLiquid(),
+      new SlateLiquidAssetsPlugin(),
 
       // split node_modules/vendors into their own file
       new webpack.optimize.CommonsChunkPlugin({

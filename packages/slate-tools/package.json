@@ -16,7 +16,8 @@
   },
   "engine": ">= 6.4.0",
   "dependencies": {
-    "@shopify/slate-cssvar-loader": "1.0.0-alpha.1",
+    "@shopify/html-webpack-liquid-asset-tags-plugin": ">1.0.0-alpha.0",
+    "@shopify/slate-cssvar-loader": ">1.0.0-alpha.0",
     "@shopify/themekit": "0.6.11",
     "archiver": "^2.1.0",
     "autoprefixer": "6.7.7",

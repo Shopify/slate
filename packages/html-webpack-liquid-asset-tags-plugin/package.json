@@ -1,0 +1,20 @@
+{
+  "name": "@shopify/html-webpack-liquid-asset-tags-plugin",
+  "version": "1.0.0-alpha.1",
+  "description":
+    "Finds static asset references and turns them into liquid tags with the 'asset_url' filter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shopify/slate.git"
+  },
+  "author": "Shopify Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Shopify/slate/issues"
+  },
+  "homepage": "https://github.com/Shopify/slate#readme"
+}
