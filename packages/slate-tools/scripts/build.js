@@ -9,7 +9,6 @@ const webpack = require('webpack');
 const webpackConfig = require('../config/webpack.prod.conf');
 const config = require('../config');
 const shopify = require('../lib/shopify-deploy');
-const env = require('../lib/get-shopify-env-or-die')(argv.env, config.shopify);
 
 webpack(webpackConfig, (err, stats) => {
   if (err) throw err;
@@ -25,6 +24,11 @@ webpack(webpackConfig, (err, stats) => {
   );
 
   if (argv.deploy) {
+    const env = require('../lib/get-shopify-env-or-die')(
+      argv.env,
+      config.shopify
+    );
+
     shopify
       .overwrite(env)
       .then(() => {
