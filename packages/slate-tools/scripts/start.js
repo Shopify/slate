@@ -149,33 +149,41 @@ compiler.plugin('done', stats => {
     return;
   }
 
-  console.log(chalk.cyan('\nUploading files to Shopify...\n'));
-  files.forEach(file => {
-    console.log(`\t${file}`);
-  });
-  console.log('\n');
+  if (isFirstCompilation && argv.skipFirstDeploy) {
+    isFirstCompilation = false;
+    openBrowser(previewUrl);
 
-  shopify
-    .sync(env, files)
-    .then(() => {
-      console.log(chalk.green('\nFiles uploaded successfully!\n'));
-
-      if (isFirstCompilation) {
-        isFirstCompilation = false;
-        openBrowser(previewUrl);
-      }
-
-      // Notify the HMR client that we finished uploading files to Shopify
-      return hotMiddleware.publish({
-        action: 'shopify_upload_finished',
-        // don't force a reload if only theme.liquid has been updated, has it get's
-        // updated even when we change scritps/styles
-        force: !(files.length === 1 && files[0] === '/layout/theme.liquid'),
-      });
-    })
-    .catch(err => {
-      console.log(chalk.red(err));
+    console.log(chalk.cyan('\nSkipping first file deployment...\n'));
+    console.log('\n');
+  } else {
+    console.log(chalk.cyan('\nUploading files to Shopify...\n'));
+    files.forEach(file => {
+      console.log(`\t${file}`);
     });
+    console.log('\n');
+
+    shopify
+      .sync(env, files)
+      .then(() => {
+        console.log(chalk.green('\nFiles uploaded successfully!\n'));
+
+        if (isFirstCompilation) {
+          isFirstCompilation = false;
+          openBrowser(previewUrl);
+        }
+
+        // Notify the HMR client that we finished uploading files to Shopify
+        return hotMiddleware.publish({
+          action: 'shopify_upload_finished',
+          // don't force a reload if only theme.liquid has been updated, has it get's
+          // updated even when we change scritps/styles
+          force: !(files.length === 1 && files[0] === '/layout/theme.liquid'),
+        });
+      })
+      .catch(err => {
+        console.log(chalk.red(err));
+      });
+  }
 });
 
 server.listen(config.port);
