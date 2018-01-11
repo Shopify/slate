@@ -2,6 +2,7 @@ const chalk = require('chalk');
 const prompt = require('react-dev-utils/prompt');
 const https = require('https');
 const config = require('../config');
+const YAML = require('yamljs');
 
 let mainThemeId;
 
@@ -13,13 +14,14 @@ let mainThemeId;
  */
 function fetchMainThemeId(env) {
   return new Promise((resolve, reject) => {
-    const c = config.shopify[env];
+    const shopifyConfigFile = YAML.load(config.paths.userShopifyConfig);
+    const envConfig = shopifyConfigFile[env];
 
     https.get(
       {
-        hostname: c.store,
+        hostname: envConfig.store,
         path: '/admin/themes.json',
-        auth: `${c.api_key}:${c.password}`,
+        auth: `${envConfig.api_key}:${envConfig.password}`,
         agent: false,
       },
       res => {
@@ -70,14 +72,13 @@ function fetchMainThemeId(env) {
  */
 function promptIfMainTheme(env) {
   return new Promise((resolve, reject) => {
-    const c = config.shopify[env];
+    const shopifyConfigFile = YAML.load(config.paths.userShopifyConfig);
+    const envConfig = shopifyConfigFile[env];
 
-    if (!c.api_key) {
+    if (!envConfig.api_key) {
       console.log(
         chalk.yellow(
-          `The "${
-            env
-          }" environment in config/shopify.yml does not specify an "api_key". Skipping check for if is main theme.`
+          `The "${env}" environment in config/shopify.yml does not specify an "api_key". Skipping check for if is main theme.`
         )
       );
       resolve();
@@ -85,7 +86,10 @@ function promptIfMainTheme(env) {
     }
 
     // c.theme_id is live or equal to mainThemeId
-    if (c.theme_id === 'live' || (mainThemeId && mainThemeId === c.theme_id)) {
+    if (
+      envConfig.theme_id === 'live' ||
+      (mainThemeId && mainThemeId === envConfig.theme_id)
+    ) {
       const question = 'You are about to deploy to the main theme. Continue ?';
 
       prompt(question, false).then(isYes => {
@@ -101,7 +105,7 @@ function promptIfMainTheme(env) {
     }
 
     // we already have a mainThemeId and it's not c.theme_id
-    if (mainThemeId && mainThemeId !== c.theme_id) {
+    if (mainThemeId && mainThemeId !== envConfig.theme_id) {
       resolve();
       return;
     }

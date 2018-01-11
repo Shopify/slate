@@ -9,7 +9,7 @@ const webpack = require('webpack');
 const webpackConfig = require('../config/webpack.prod.conf');
 const config = require('../config');
 const shopify = require('../lib/shopify-deploy');
-const env = require('../lib/get-shopify-env-or-die')(argv.env, config.shopify);
+const YAML = require('yamljs');
 
 webpack(webpackConfig, (err, stats) => {
   if (err) throw err;
@@ -25,6 +25,11 @@ webpack(webpackConfig, (err, stats) => {
   );
 
   if (argv.deploy) {
+    const env = require('../lib/get-shopify-env-or-die')(
+      argv.env,
+      YAML.load(config.paths.userShopifyConfig)
+    );
+
     shopify
       .overwrite(env)
       .then(() => {

@@ -1,4 +1,3 @@
-const YAML = require('yamljs');
 const paths = require('./paths');
 
 module.exports = {
@@ -9,5 +8,4 @@ module.exports = {
     images: /\.(png|svg|jpg|gif)$/,
     static: /\.(liquid|json)$/,
   },
-  shopify: YAML.load(paths.userShopifyConfig),
 };

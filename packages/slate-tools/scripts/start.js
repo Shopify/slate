@@ -16,11 +16,16 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const openBrowser = require('react-dev-utils/openBrowser');
 const clearConsole = require('react-dev-utils/clearConsole');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
+const YAML = require('yamljs');
 
 const config = require('../config');
+const shopifyConfigFile = YAML.load(config.paths.userShopifyConfig);
 const webpackConfig = require('../config/webpack.dev.conf');
 const shopify = require('../lib/shopify-deploy');
-const env = require('../lib/get-shopify-env-or-die')(argv.env, config.shopify);
+const env = require('../lib/get-shopify-env-or-die')(
+  argv.env,
+  shopifyConfigFile
+);
 
 const sslCert = fs.existsSync(config.paths.ssl.cert)
   ? fs.readFileSync(config.paths.ssl.cert)
@@ -39,9 +44,9 @@ const app = express();
 const server = https.createServer(sslOptions, app);
 const compiler = webpack(webpackConfig);
 
-const shopifyUrl = `https://${config.shopify[env].store}`;
+const shopifyUrl = `https://${shopifyConfigFile[env].store}`;
 const previewUrl = `${shopifyUrl}?preview_theme_id=${
-  config.shopify[env].theme_id
+  shopifyConfigFile[env].theme_id
 }`;
 
 let isFirstCompilation = true;
