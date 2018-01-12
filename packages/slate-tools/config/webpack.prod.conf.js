@@ -82,7 +82,6 @@ module.exports = merge(
       new HtmlWebpackPlugin({
         excludeChunks: ['static'],
         filename: '../layout/theme.liquid',
-        // filename: '../index.html',
         template: './layout/theme.liquid',
         inject: true,
         minify: {

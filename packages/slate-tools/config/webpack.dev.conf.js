@@ -31,20 +31,32 @@ module.exports = merge(
           test: /\.s[ac]ss$/,
           exclude: commonExcludes(),
           use: [
-            'style-loader',
+            {
+              loader: 'style-loader',
+              options: {
+                hmr: true,
+              },
+            },
             {
               loader: 'css-loader',
-              options: {importLoaders: 2, sourceMap: true},
+              // Enabling sourcemaps in styles causes style-loader to inject
+              // styles using a <link> tag instead of <style> tag. This causes
+              // a FOUC content, which can cause issues with JS that is reading
+              // the DOM for styles (width, height, visibility) on page load.
+              options: {importLoaders: 2, sourceMap: false},
             },
             {
               loader: 'postcss-loader',
               options: {
                 ident: 'postcss',
                 sourceMap: true,
-                plugins: loader => [
+                plugins: () => [
                   ...stylelint(),
                   autoprefixer,
-                  postcssReporter({clearReportedMessages: true, throwError: false}),
+                  postcssReporter({
+                    clearReportedMessages: true,
+                    throwError: false,
+                  }),
                 ],
               },
             },
