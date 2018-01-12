@@ -1,0 +1,24 @@
+{
+  "name": "@shopify/slate-push",
+  "version": "1.0.0-alpha.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shopify/slate.git"
+  },
+  "author": "Shopify Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Shopify/slate/issues"
+  },
+  "homepage": "https://github.com/Shopify/slate#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^22.0.5",
+    "nock": "^9.1.6"
+  }
+}
