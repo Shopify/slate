@@ -4,5 +4,6 @@ module.exports = {
     '/lib/',
     'packages/slate-tools/src/commands/test.js',
     '__tests__/fixtures/',
+    '__tests__/helpers',
   ],
 };
