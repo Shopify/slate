@@ -6,7 +6,7 @@ const autoprefixer = require('autoprefixer');
 const postcssReporter = require('postcss-reporter');
 const stylelint = require('../lib/postcss-stylelint');
 const webpackConfig = require('./webpack.base.conf');
-const commonExcludes = require('../lib/common-excludes');
+const commonExcludes = require('@shopify/slate-common-excludes');
 const userWebpackConfig = require('../lib/get-user-webpack-config')('dev');
 const config = require('./index');
 

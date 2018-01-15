@@ -6,6 +6,7 @@ const mockFunction = jest.fn(() => {
 });
 
 module.exports = function(file, args, options) {
+  console.log(file, args, options);
   if (file === 'git' && args[0] === 'clone') {
     fs.__addMockFiles({
       'test-project/.git/index': 'A git repo duck typing file',

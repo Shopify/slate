@@ -1,0 +1,23 @@
+{
+  "name": "@shopify/slate-babel",
+  "version": "1.0.0-alpha.15",
+  "description": "Slate's webpack babel loader configurable via slaterc",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shopify/slate.git"
+  },
+  "author": "Shopify Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shopify/slate/issues"
+  },
+  "homepage": "https://github.com/shopify/slate#readme",
+  "dependencies": {
+    "@shopify/slate-common-excludes": "^1.0.0-alpha.15",
+    "@shopify/slate-config": "^1.0.0-alpha.15"
+  }
+}

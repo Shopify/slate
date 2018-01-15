@@ -35,7 +35,7 @@ test('can clone a theme from a Github repo', async () => {
   await createSlateTheme('test-project', 'shopify/test-repo');
 
   expect(fs.existsSync('test-project/package.json')).toBeTruthy();
-  expect(execa()).toHaveBeenCalledWith(file, args, {stdio: 'inherit'});
+  expect(execa()).toHaveBeenCalledWith(file, args, {stdio: 'pipe'});
 });
 
 test('can clone a theme from a Github repo with a specified commitish (branch)', async () => {
@@ -44,7 +44,7 @@ test('can clone a theme from a Github repo with a specified commitish (branch)',
   await createSlateTheme('test-project', 'shopify/test-repo#123456');
 
   expect(fs.existsSync('test-project/package.json')).toBeTruthy();
-  expect(execa()).toHaveBeenCalledWith(file, args, {stdio: 'inherit'});
+  expect(execa()).toHaveBeenCalledWith(file, args, {stdio: 'pipe'});
 });
 
 test('can copy a theme from a local directory', async () => {

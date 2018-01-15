@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate-liquid-asset-loader",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.15",
   "description": "Parses liquid files, searching for assets that are piped to `asset_url` and transforming them into `require()` call so that images are run through the correct loader and their name are fingerprinted.",
   "main": "index.js",
   "scripts": {

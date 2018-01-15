@@ -4,7 +4,8 @@ const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const config = require('../config');
 const paths = require('../config/paths');
-const commonExcludes = require('../lib/common-excludes');
+const commonExcludes = require('@shopify/slate-common-excludes');
+const babelLoader = require('@shopify/slate-babel');
 
 const isDevServer = process.argv.find(command => command.includes('start'));
 
@@ -60,25 +61,6 @@ const lintingLoaders = () => {
         eslintPath: config.paths.eslint.bin,
         configFile: config.paths.eslint.rc,
         emitWarning: true,
-      },
-    },
-  ];
-};
-
-// add babel-loader if .babelrc is present
-const babelLoader = () => {
-  if (!fs.existsSync(config.paths.babel.rc)) {
-    return [];
-  }
-
-  return [
-    {
-      test: /\.js$/,
-      exclude: commonExcludes(),
-      loader: 'babel-loader',
-      options: {
-        babelrc: false,
-        extends: config.paths.babel.rc,
       },
     },
   ];

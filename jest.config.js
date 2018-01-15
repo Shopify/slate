@@ -3,5 +3,6 @@ module.exports = {
     '/node_modules/',
     '/lib/',
     'packages/slate-tools/src/commands/test.js',
+    '__tests__/fixtures/',
   ],
 };
