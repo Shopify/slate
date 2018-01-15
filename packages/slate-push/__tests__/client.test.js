@@ -4,7 +4,7 @@ const nock = require('nock');
 const http = require('http');
 
 const Client = require('../client');
-const {expectRejection} = require('../testHelpers');
+const {expectRejection} = require('./helpers/testHelpers');
 
 function authBasicHeader(user, pass) {
   const credentials = [user, pass].join(':');

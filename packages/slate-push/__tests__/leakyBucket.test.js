@@ -1,7 +1,7 @@
 'use strict';
 
 const leakyBucket = require('../leakyBucket');
-const {expectRejection} = require('../testHelpers');
+const {expectRejection} = require('./helpers/testHelpers');
 
 describe('leakyBucket()', () => {
   it('returns a function that returns promises', () => {
