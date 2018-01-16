@@ -1,6 +1,6 @@
 {
   "name": "create-slate-theme",
-  "version": "1.0.0-alpha.15",
+  "version": "1.0.0-alpha.16",
   "description": "Create a new slate project from an existing slate theme repo",
   "main": "index.js",
   "scripts": {
