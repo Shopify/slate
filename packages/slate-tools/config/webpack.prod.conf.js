@@ -6,8 +6,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
-const postcssReporter = require('postcss-reporter');
-const stylelint = require('../lib/postcss-stylelint');
 const webpackConfig = require('./webpack.base.conf');
 const commonExcludes = require('@shopify/slate-common-excludes');
 const userWebpackConfig = require('../lib/get-user-webpack-config')('prod');
@@ -44,15 +42,7 @@ module.exports = merge(
                 options: {
                   ident: 'postcss',
                   sourceMap: true,
-                  plugins: loader => [
-                    ...stylelint(),
-                    autoprefixer,
-                    cssnano,
-                    postcssReporter({
-                      clearReportedMessages: true,
-                      throwError: false,
-                    }),
-                  ],
+                  plugins: [autoprefixer, cssnano],
                 },
               },
               {loader: 'sass-loader', options: {sourceMap: true}},

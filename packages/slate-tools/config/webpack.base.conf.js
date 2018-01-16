@@ -6,6 +6,7 @@ const config = require('../config');
 const paths = require('../config/paths');
 const commonExcludes = require('@shopify/slate-common-excludes');
 const babelLoader = require('@shopify/slate-babel');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 const isDevServer = process.argv.find(command => command.includes('start'));
 
@@ -65,6 +66,25 @@ const lintingLoaders = () => {
     },
   ];
 };
+
+function stylelintLoader() {
+  if (!fs.existsSync(config.paths.stylelint.rc)) {
+    return [];
+  }
+
+  const ignorePath = fs.existsSync(config.paths.stylelint.ignore)
+    ? config.paths.stylelint.ignore
+    : null;
+
+  return [
+    new StyleLintPlugin({
+      configFile: config.paths.stylelint.rc,
+      emitErrors: !isDevServer,
+      ignorePath,
+      lintDirtyModulesOnly: isDevServer,
+    }),
+  ];
+}
 
 module.exports = {
   context: paths.src,
@@ -141,6 +161,7 @@ module.exports = {
 
   plugins: [
     ...contextReplacementPlugins(),
+    ...stylelintLoader(),
 
     new CopyWebpackPlugin([
       {

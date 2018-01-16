@@ -3,8 +3,6 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
-const postcssReporter = require('postcss-reporter');
-const stylelint = require('../lib/postcss-stylelint');
 const webpackConfig = require('./webpack.base.conf');
 const commonExcludes = require('@shopify/slate-common-excludes');
 const userWebpackConfig = require('../lib/get-user-webpack-config')('dev');
@@ -50,14 +48,7 @@ module.exports = merge(
               options: {
                 ident: 'postcss',
                 sourceMap: true,
-                plugins: () => [
-                  ...stylelint(),
-                  autoprefixer,
-                  postcssReporter({
-                    clearReportedMessages: true,
-                    throwError: false,
-                  }),
-                ],
+                plugins: () => [autoprefixer],
               },
             },
             {loader: 'sass-loader', options: {sourceMap: true}},
