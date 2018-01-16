@@ -51,7 +51,6 @@ secrets.json
 .jekyll-metadata
 .ruby-version
 lerna-debug.log
-/packages/slate-cli/lib/
 .changelog/
 packages/slate-theme/config/shopify.yml
 .vscode/
