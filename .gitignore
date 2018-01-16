@@ -23,6 +23,7 @@
 # Logs and databases #
 ######################
 *.log
+*.log.*
 *.sql
 *.sqlite
 
@@ -54,3 +55,4 @@ lerna-debug.log
 .changelog/
 packages/slate-theme/config/shopify.yml
 .vscode/
+package-lock.json

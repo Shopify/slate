@@ -1,10 +1,14 @@
 {
   "name": "slate",
-  "version": "0.11.0",
+  "private": true,
   "author": "Shopify Inc.",
-  "description":
-    "A theme scaffold and command line tool for developing Shopify themes.",
-  "keywords": ["slate", "shopify", "theme", "CLI"],
+  "description": "A theme scaffold and command line tool for developing Shopify themes.",
+  "keywords": [
+    "slate",
+    "shopify",
+    "theme",
+    "CLI"
+  ],
   "homepage": "https://shopify.github.io/slate/",
   "bugs": "https://github.com/Shopify/slate/issues",
   "license": "MIT",
@@ -13,13 +17,13 @@
     "url": "https://github.com/Shopify/slate.git"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --silent",
     "lint": "eslint --max-warnings 10 ./ && stylelint './**/*.[s]css'",
     "lint:styles": "stylelint '**/*.[s]css'",
     "lint:fix": "eslint ./ --fix && prettier-stylelint **/*.scss",
     "lint:fix-js": "eslint ./ --fix",
     "lint:fix-styles": "prettier-stylelint --write",
-    "bootstrap": "npm install && node_modules/.bin/lerna bootstrap",
+    "bootstrap": "yarn && node_modules/.bin/lerna bootstrap",
     "publish": "node_modules/.bin/lerna publish",
     "changelog": "node_modules/.bin/lerna-changelog"
   },
@@ -35,7 +39,7 @@
     "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-shopify": "^18.0.0",
     "github": "^11.0.0",
-    "jest": "^22.0.4",
+    "jest": "^21.0.0",
     "lerna": "^2.0.0",
     "lerna-changelog": "^0.6.0",
     "mime-types": "2.1.12",
@@ -49,5 +53,8 @@
     "singleQuote": true,
     "trailingComma": "es5",
     "bracketSpacing": false
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }
