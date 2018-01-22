@@ -86,7 +86,7 @@ function promptIfMainTheme(env) {
       return;
     }
 
-    // c.theme_id is live or equal to mainThemeId
+    // envConfig.theme_id is live or equal to mainThemeId
     if (
       envConfig.theme_id === 'live' ||
       (mainThemeId && mainThemeId === envConfig.theme_id)
@@ -105,7 +105,7 @@ function promptIfMainTheme(env) {
       return;
     }
 
-    // we already have a mainThemeId and it's not c.theme_id
+    // we already have a mainThemeId and it's not envConfig.theme_id
     if (mainThemeId && mainThemeId !== envConfig.theme_id) {
       resolve();
       return;
