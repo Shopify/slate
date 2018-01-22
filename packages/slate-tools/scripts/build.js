@@ -6,10 +6,10 @@
 const argv = require('minimist')(process.argv.slice(2));
 const chalk = require('chalk');
 const webpack = require('webpack');
+const YAML = require('yamljs');
 const webpackConfig = require('../config/webpack.prod.conf');
 const config = require('../config');
 const shopify = require('../lib/shopify-deploy');
-const YAML = require('yamljs');
 
 webpack(webpackConfig, (err, stats) => {
   if (err) throw err;
@@ -21,13 +21,13 @@ webpack(webpackConfig, (err, stats) => {
       children: false,
       chunks: false,
       chunkModules: false,
-    })}`
+    })}`,
   );
 
   if (argv.deploy) {
     const env = require('../lib/get-shopify-env-or-die')(
       argv.env,
-      YAML.load(config.paths.userShopifyConfig)
+      YAML.load(config.paths.userShopifyConfig),
     );
 
     shopify

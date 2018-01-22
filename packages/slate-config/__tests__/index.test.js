@@ -1,5 +1,5 @@
-const slateConfig = require('../index');
 const fs = require('fs');
+const slateConfig = require('../index');
 const schema = require('./fixtures/schema');
 const slaterc = require('./fixtures/slaterc.json');
 
@@ -10,7 +10,7 @@ describe('.generate()', () => {
 
       expect(config).toHaveProperty(
         schema.items[0].id,
-        schema.items[0].default
+        schema.items[0].default,
       );
     });
 
@@ -23,7 +23,7 @@ describe('.generate()', () => {
 
       expect(slateConfig.generate(schema)).toHaveProperty(
         schema.items[0].id,
-        'override-value'
+        'override-value',
       );
 
       fs.readFileSync = oldReadFileSync;

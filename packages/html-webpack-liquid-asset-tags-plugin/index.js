@@ -15,13 +15,13 @@ AssetTagToShopifyLiquid.prototype.apply = compiler => {
       function fixTag(tag) {
         if (tag.tagName === 'script') {
           tag.attributes.src = `{{ '${path.basename(
-            tag.attributes.src
+            tag.attributes.src,
           )}' | asset_url  }}`;
         }
 
         if (tag.tagName === 'link') {
           tag.attributes.href = `{{ '${path.basename(
-            tag.attributes.href
+            tag.attributes.href,
           )}' | asset_url  }}`;
         }
 

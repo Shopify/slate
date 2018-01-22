@@ -2,11 +2,11 @@ const fs = require('fs');
 const webpack = require('webpack');
 const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const config = require('../config');
-const paths = require('../config/paths');
 const commonExcludes = require('@shopify/slate-common-excludes');
 const babelLoader = require('@shopify/slate-babel');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
+const config = require('../config');
+const paths = require('../config/paths');
 
 const isDevServer = process.argv.find(command => command.includes('start'));
 
@@ -16,15 +16,18 @@ const isDevServer = process.argv.find(command => command.includes('start'));
  *
  * @see https://webpack.js.org/plugins/context-replacement-plugin/#newcontentcallback
  */
-const contextReplacementPlugins = () => {
+
+function replaceCtxRequest(request) {
+  return context => Object.assign(context, {request});
+}
+
+function contextReplacementPlugins() {
   // Given a request path, return a function that accepts a context and modify it's request.
-  const replaceCtxRequest = request => context =>
-    Object.assign(context, {request});
 
   const plugins = [
     new webpack.ContextReplacementPlugin(
       /__appsrc__/,
-      replaceCtxRequest(paths.src)
+      replaceCtxRequest(paths.src),
     ),
   ];
 
@@ -33,16 +36,16 @@ const contextReplacementPlugins = () => {
       ...plugins,
       new webpack.ContextReplacementPlugin(
         /__appvendors__/,
-        replaceCtxRequest(paths.vendors)
+        replaceCtxRequest(paths.vendors),
       ),
     ];
   }
 
   return plugins;
-};
+}
 
 // add eslint-loader if .eslintrc is present
-const lintingLoaders = () => {
+function lintingLoaders() {
   if (!fs.existsSync(config.paths.eslint.rc)) {
     return [];
   }
@@ -65,7 +68,7 @@ const lintingLoaders = () => {
       },
     },
   ];
-};
+}
 
 function stylelintLoader() {
   if (!fs.existsSync(config.paths.stylelint.rc)) {

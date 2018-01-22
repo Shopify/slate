@@ -30,7 +30,7 @@ function isValidType(schema, slaterc) {
         errors.push(
           `Setting ${key}: Expected type '${
             item.type
-          }' but received type '${type}'`
+          }' but received type '${type}'`,
         );
       }
     }

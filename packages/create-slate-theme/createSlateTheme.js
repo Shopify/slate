@@ -6,10 +6,9 @@ const chalk = require('chalk');
 const utils = require('./utils');
 const config = require('./config');
 
-module.exports = function createSlateTheme(name, starter, options) {
+module.exports = function createSlateTheme(name, starter, flags) {
   const root = path.resolve(name);
-
-  options = Object.assign(config.defaultOptions, options);
+  const options = Object.assign(config.defaultOptions, flags);
 
   checkAppName(name);
 
@@ -28,8 +27,8 @@ function checkAppName(name) {
   if (!validationResult.validForNewPackages) {
     console.error(
       `Could not create a project called ${chalk.red(
-        `"${name}"`
-      )} because of npm naming restrictions:`
+        `"${name}"`,
+      )} because of npm naming restrictions:`,
     );
     printValidationResults(validationResult.errors);
     printValidationResults(validationResult.warnings);
@@ -56,7 +55,7 @@ function checkDirForConflicts(root) {
   if (conflicts.length > 0) {
     console.log();
     console.log(
-      `The directory ${chalk.green(root)} contains files that could conflict:`
+      `The directory ${chalk.green(root)} contains files that could conflict:`,
     );
     console.log();
     for (const file of conflicts) {
@@ -64,7 +63,7 @@ function checkDirForConflicts(root) {
     }
     console.log();
     console.log(
-      'Either try using a new directory name, or remove the files listed above.'
+      'Either try using a new directory name, or remove the files listed above.',
     );
 
     process.exit(1);
@@ -106,7 +105,7 @@ function copyFromDir(starter, root) {
   // 493 = parseInt('755', 8)
   return fs.mkdirp(root, {mode: 493}).then(() => {
     console.log(
-      `Creating new theme from local starter: ${chalk.green(starter)}`
+      `Creating new theme from local starter: ${chalk.green(starter)}`,
     );
     return fs.copy(starter, root, {
       filter: file =>

@@ -4,7 +4,7 @@ const config = require('../config');
 const jsEntries = Object.keys(config.paths.entrypoints).reduce((carry, key) => {
   const entry = config.paths.entrypoints[key];
   const entryArray = Array.isArray(entry) ? entry : [entry];
-  const jsEntryArray = entryArray.filter(v => v.endsWith('.js'));
+  const jsEntryArray = entryArray.filter(version => version.endsWith('.js'));
 
   return [...carry, ...jsEntryArray];
 }, []);

@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const archiver = require('archiver');
-const config = require('../config');
 const chalk = require('chalk');
+const config = require('../config');
 
 /**
  * Builds a zip based on an array of directories and files. This
@@ -20,8 +20,8 @@ if (!fs.existsSync(config.paths.dist)) {
   console.log(
     chalk.red(
       `${config.paths.dist} was not found. \n` +
-        'Please run the Slate Build script before running Slate Zip'
-    )
+        'Please run the Slate Build script before running Slate Zip',
+    ),
   );
 
   process.exit();
@@ -31,7 +31,7 @@ output.on('close', () => {
   console.log(`${path.basename(zipPath)}: ${archive.pointer()} total bytes`);
 });
 
-archive.on('warning', function(err) {
+archive.on('warning', err => {
   if (err.code === 'ENOENT') {
     console.log(err);
   } else {
@@ -54,7 +54,7 @@ function getZipPath(dir, name, ext) {
   }
 
   for (let i = 1; ; i++) {
-    let tryPath = path.resolve(dir, `${name} (${i}).${ext}`);
+    const tryPath = path.resolve(dir, `${name} (${i}).${ext}`);
 
     if (!fs.existsSync(tryPath)) {
       return tryPath;

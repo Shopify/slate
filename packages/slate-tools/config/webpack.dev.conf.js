@@ -3,8 +3,8 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
-const webpackConfig = require('./webpack.base.conf');
 const commonExcludes = require('@shopify/slate-common-excludes');
+const webpackConfig = require('./webpack.base.conf');
 const userWebpackConfig = require('../lib/get-user-webpack-config')('dev');
 const config = require('./index');
 
@@ -74,5 +74,5 @@ module.exports = merge(
       }),
     ],
   },
-  userWebpackConfig
+  userWebpackConfig,
 );

@@ -1,4 +1,4 @@
-/* eslint-disable no-use-before-define */
+/* eslint-disable */
 const prompt = require('react-dev-utils/prompt');
 const themekit = require('@shopify/themekit').command;
 const config = require('../config');

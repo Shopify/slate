@@ -57,7 +57,7 @@ test('can copy a theme from a local directory', async () => {
   await createSlateTheme('test-project', 'old-project');
   expect(fs.existsSync('test-project/package.json')).toBeTruthy();
   expect(
-    fs.existsSync('test-project/node_modules/some-package/index.js')
+    fs.existsSync('test-project/node_modules/some-package/index.js'),
   ).toBeFalsy();
   expect(fs.existsSync('test-project/.git/index')).toBeFalsy();
 });
@@ -79,7 +79,7 @@ test('can skip installing theme dependencies', async () => {
   await createSlateTheme(
     'test-project',
     'shopify/test-repo',
-    Object.assign({}, config.defaultOptions, {skipInstall: true})
+    Object.assign({}, config.defaultOptions, {skipInstall: true}),
   );
   expect(execa()).not.toHaveBeenCalledWith('yarnpkg', [], {stdio: 'inherit'});
   expect(execa()).not.toHaveBeenCalledWith('npm', ['install'], {
@@ -111,7 +111,7 @@ test('throws an error when copying from a local directory that does not exist', 
   }).toThrow();
 });
 
-test('throws an error if a project already exists', async () => {
+test('throws an error if a project already exists', () => {
   fs.__addMockFiles({
     'test-project/package.json': '{ "name": "test-repo" }',
   });

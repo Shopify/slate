@@ -3,6 +3,7 @@
   "version": "1.0.0-alpha.16",
   "description": "Create a new slate project from an existing slate theme repo",
   "main": "index.js",
+  "engine": ">=8.9.4",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,6 +26,7 @@
     "execa": "^0.8.0",
     "fs-extra": "^5.0.0",
     "hosted-git-info": "^2.5.0",
+    "semver": "^5.5.0",
     "validate-npm-package-name": "^3.0.0"
   }
 }

@@ -26,7 +26,7 @@ test('Calls createSlateTheme with process.argv[2] and, if provided, process.argv
   expect(require('../createSlateTheme')).toHaveBeenCalledWith(
     mockArgs[2],
     mockArgs[3],
-    config.defaultOptions
+    config.defaultOptions,
   );
 
   process.argv = args;
@@ -41,15 +41,15 @@ test('Calls createSlateTheme with the default repo if process.argv[3] is undefin
   expect(require('../createSlateTheme')).toHaveBeenCalledWith(
     mockArgs[2],
     config.defaultStarter,
-    config.defaultOptions
+    config.defaultOptions,
   );
 
   process.argv = args;
 });
 
-test('Exits if Node version is lower than 6', () => {
+test('Exits if Node version is lower than 8.9.4', () => {
   Object.defineProperty(process.versions, 'node', {
-    value: '5.0.0',
+    value: '8.9.3',
   });
 
   expect(() => {

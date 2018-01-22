@@ -1,8 +1,9 @@
+/* eslint-disable */
 const chalk = require('chalk');
 const prompt = require('react-dev-utils/prompt');
 const https = require('https');
-const config = require('../config');
 const YAML = require('yamljs');
+const config = require('../config');
 
 let mainThemeId;
 

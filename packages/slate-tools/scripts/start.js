@@ -19,12 +19,13 @@ const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const YAML = require('yamljs');
 
 const config = require('../config');
+
 const shopifyConfigFile = YAML.load(config.paths.userShopifyConfig);
 const webpackConfig = require('../config/webpack.dev.conf');
 const shopify = require('../lib/shopify-deploy');
 const env = require('../lib/get-shopify-env-or-die')(
   argv.env,
-  shopifyConfigFile
+  shopifyConfigFile,
 );
 
 const sslCert = fs.existsSync(config.paths.ssl.cert)
@@ -95,7 +96,7 @@ app.use(
   webpackDevMiddleware(compiler, {
     quiet: true,
     reload: false,
-  })
+  }),
 );
 
 const hotMiddleware = webpackHotMiddleware(compiler);
@@ -131,13 +132,13 @@ compiler.plugin('done', stats => {
     console.log('You may use special comments to disable some warnings.');
     console.log(
       `Use ${chalk.yellow(
-        '// eslint-disable-next-line'
-      )} to ignore the next line.`
+        '// eslint-disable-next-line',
+      )} to ignore the next line.`,
     );
     console.log(
       `Use ${chalk.yellow(
-        '/* eslint-disable */'
-      )} to ignore all warnings in a file.`
+        '/* eslint-disable */',
+      )} to ignore all warnings in a file.`,
     );
   }
 

@@ -1,31 +1,28 @@
 #!/usr/bin/env node
 
-var chalk = require('chalk');
-var program = require('commander');
-var createSlateTheme = require('./createSlateTheme');
-var packageJson = require('./package.json');
-var config = require('./config');
+const chalk = require('chalk');
+const program = require('commander');
+const semver = require('semver');
+const createSlateTheme = require('./createSlateTheme');
+const packageJson = require('./package.json');
+const config = require('./config');
 
-var currentNodeVersion = process.versions.node;
-var semver = currentNodeVersion.split('.');
-var major = semver[0];
+const currentNodeVersion = process.versions.node;
 
-if (major < 6) {
+if (!semver.satisfies(currentNodeVersion, '>=8.9.4')) {
   console.log(
     chalk.red(
-      'You are running Node ' +
-        currentNodeVersion +
-        '.\n`' +
-        'Create Slate Theme requires Node 6 or higher. \n' +
-        'Please update your version of Node.'
-    )
+      `You are running Node ${currentNodeVersion}\n\`` +
+        `Create Slate Theme requires Node 8.9.4 or higher. \n` +
+        `Please update your version of Node.`,
+    ),
   );
 
   process.exit(1);
 }
 
-var themeName;
-var themeStarter;
+let themeName;
+let themeStarter;
 
 program
   .version(packageJson.version)
@@ -42,14 +39,14 @@ program
 if (typeof themeName === 'undefined') {
   console.error('Please specify the theme directory:');
   console.log(
-    chalk.cyan(program.name()) + ' ' + chalk.green('<theme-directory>')
+    `${chalk.cyan(program.name())} ${chalk.green('<theme-directory>')}`,
   );
   console.log();
   console.log('For example:');
-  console.log(chalk.cyan(program.name()) + ' ' + chalk.green('my-theme'));
+  console.log(`${chalk.cyan(program.name())} ${chalk.green('my-theme')}`);
   console.log();
   console.log(
-    'Run' + chalk.cyan(program.name() + ' --help') + ' to see all options.'
+    `Run${chalk.cyan(`${program.name()} --help`)} to see all options.`,
   );
   process.exit(1);
 }
@@ -60,7 +57,7 @@ function assignOption(key) {
     : program[key];
 }
 
-var options = {
+const options = {
   skipInstall: assignOption('skipInstall'),
 };
 

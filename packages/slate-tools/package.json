@@ -14,7 +14,7 @@
   "bin": {
     "slate-tools": "./cli.js"
   },
-  "engine": ">= 6.4.0",
+  "engine": ">=8.9.4",
   "dependencies": {
     "@shopify/html-webpack-liquid-asset-tags-plugin": "^1.0.0-alpha.16",
     "@shopify/slate-babel": "^1.0.0-alpha.16",
@@ -47,7 +47,7 @@
     "img-loader": "2.0.0",
     "jest": "20.0.3",
     "minimist": "1.2.0",
-    "node-sass": "4.5.3",
+    "node-sass": "^4.7.2",
     "postcss-loader": "2.0.5",
     "postcss-reporter": "^5.0.0",
     "raw-loader": "^0.5.1",

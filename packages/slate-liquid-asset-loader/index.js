@@ -73,6 +73,6 @@ module.exports = function liquidLoader(content) {
 
       // Double quotes are used to "escape" from the JSON.stringify()'ed content
       return `" + require(${path}) +"`;
-    }
+    },
   )};`;
 };

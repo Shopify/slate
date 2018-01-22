@@ -11,13 +11,15 @@ export default function test(fixture, options = {}) {
       path: path.resolve(__dirname),
     },
     module: {
-      rules: [{
-        test: /\.css$/,
-        use: [
-          {loader: path.resolve(__dirname, '../index.js'), options},
-          {loader: 'css-loader'},
-        ],
-      }],
+      rules: [
+        {
+          test: /\.css$/,
+          use: [
+            {loader: path.resolve(__dirname, '../index.js'), options},
+            {loader: 'css-loader'},
+          ],
+        },
+      ],
     },
   });
 

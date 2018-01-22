@@ -6,12 +6,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
-const webpackConfig = require('./webpack.base.conf');
-const commonExcludes = require('@shopify/slate-common-excludes');
-const userWebpackConfig = require('../lib/get-user-webpack-config')('prod');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const SlateLiquidAssetsPlugin = require('@shopify/html-webpack-liquid-asset-tags-plugin');
 const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
+const commonExcludes = require('@shopify/slate-common-excludes');
+const SlateLiquidAssetsPlugin = require('@shopify/html-webpack-liquid-asset-tags-plugin');
+const webpackConfig = require('./webpack.base.conf');
+const userWebpackConfig = require('../lib/get-user-webpack-config')('prod');
 const config = require('../config');
 
 module.exports = merge(
@@ -99,7 +99,7 @@ module.exports = merge(
           module.resource &&
           /\.js$/.test(module.resource) &&
           module.resource.indexOf(
-            path.join(config.paths.root, 'node_modules')
+            path.join(config.paths.root, 'node_modules'),
           ) === 0,
       }),
 
@@ -111,5 +111,5 @@ module.exports = merge(
       }),
     ],
   },
-  userWebpackConfig
+  userWebpackConfig,
 );
