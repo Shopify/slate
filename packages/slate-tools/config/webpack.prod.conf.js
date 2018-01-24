@@ -27,12 +27,7 @@ module.exports = merge(
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
             use: [
-              {
-                loader: '@shopify/slate-cssvar-loader',
-                options: {
-                  cssVariablesPath: config.paths.slateCssLoader.cssVariables,
-                },
-              },
+              {loader: '@shopify/slate-cssvar-loader'},
               {
                 loader: 'css-loader',
                 options: {importLoaders: 2, sourceMap: true},

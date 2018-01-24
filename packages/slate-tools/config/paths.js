@@ -56,8 +56,5 @@ module.exports = {
     cert: path.resolve(os.homedir(), '.localhost_ssl/server.crt'),
     key: path.resolve(os.homedir(), '.localhost_ssl/server.key'),
   },
-  slateCssLoader: {
-    cssVariables: resolveApp('src/snippets/css-variables.liquid'),
-  },
   packageJson: resolveApp('package.json'),
 };

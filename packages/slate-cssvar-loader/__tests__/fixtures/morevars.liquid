@@ -1,0 +1,11 @@
+{% if settings.type_header_family contains 'Google' %}
+  {% assign type_header_parts = settings.type_header_family | split: '_' %}
+{% else %}
+  {% assign header_family = settings.type_header_family %}
+{% endif %}
+
+<style>
+  :root {
+    --extra_variable: {{ settings.extra_variable }};
+  }
+</style>
