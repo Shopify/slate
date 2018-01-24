@@ -10,7 +10,7 @@ npm install --save-dev @shopify/slate-cssvar-loader
 
 ## Usage
 
-**webpack.config.js**
+### webpack.config.js example
 
 ```
 module.exports = {
@@ -21,9 +21,6 @@ module.exports = {
         use: [
           {
             loader: '@shopify/slate-cssvar-loader',
-            options: {
-              cssVariablesPath: config.paths.slateCssLoader.cssVariables,
-            }
           },
           {loader: 'css-loader'},
           {loader: 'sass-loader'},
@@ -33,3 +30,20 @@ module.exports = {
   }
 }
 ```
+
+## Configuration
+
+The `slate-cssvar-loader` can be configured via the theme's `.slaterc` file.
+
+### .slaterc example
+
+```json
+{
+  "cssVarLoaderEnable": true,
+  "cssVarLoaderLiquidPath": ["src/snippets/css-variables.liquid"]
+}
+```
+
+- `cssVarLoaderEnable`: Enable/disable cssvar loader plugin
+- `cssVarLoaderLiquidPath`: An array of string paths to liquid files that associate css variables to liquid variables
+

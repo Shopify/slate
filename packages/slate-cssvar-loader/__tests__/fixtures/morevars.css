@@ -1,0 +1,13 @@
+.heading {
+  color: var(--headings_color);
+  background-color: '#FF00FF';
+}
+
+.title {
+  color: var(--headings_color);
+}
+
+body {
+  background-color: var(--body_color);
+  color: var(--extra_variable);
+}
