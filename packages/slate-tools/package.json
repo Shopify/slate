@@ -20,6 +20,7 @@
     "@shopify/slate-babel": "^1.0.0-alpha.16",
     "@shopify/slate-common-excludes": "^1.0.0-alpha.16",
     "@shopify/slate-cssvar-loader": "^1.0.0-alpha.16",
+    "@shopify/slate-env": "^1.0.0-alpha.16",
     "@shopify/slate-liquid-asset-loader": "^1.0.0-alpha.16",
     "@shopify/themekit": "0.6.11",
     "archiver": "^2.1.0",
