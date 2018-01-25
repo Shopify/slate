@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/shopify/slate#readme",
   "dependencies": {
+    "@shopify/slate-env": "^1.0.0-alpha.16",
     "chalk": "^2.3.0",
     "commander": "^2.12.2",
     "execa": "^0.8.0",

@@ -3,13 +3,8 @@
  *
  * If the `deploy` argument has been passed, deploy to Shopify when the compilation is done.
  */
-const argv = require('minimist')(process.argv.slice(2));
-const chalk = require('chalk');
 const webpack = require('webpack');
-const YAML = require('yamljs');
 const webpackConfig = require('../config/webpack.prod.conf');
-const config = require('../config');
-const shopify = require('../lib/shopify-deploy');
 
 webpack(webpackConfig, (err, stats) => {
   if (err) throw err;
@@ -23,20 +18,4 @@ webpack(webpackConfig, (err, stats) => {
       chunkModules: false,
     })}`,
   );
-
-  if (argv.deploy) {
-    const env = require('../lib/get-shopify-env-or-die')(
-      argv.env,
-      YAML.load(config.paths.userShopifyConfig),
-    );
-
-    shopify
-      .overwrite(env)
-      .then(() => {
-        return console.log(chalk.green('\nFiles overwritten successfully!\n'));
-      })
-      .catch(error => {
-        console.log(`\n${chalk.red(error)}\n`);
-      });
-  }
 });

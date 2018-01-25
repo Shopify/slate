@@ -16,17 +16,14 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const openBrowser = require('react-dev-utils/openBrowser');
 const clearConsole = require('react-dev-utils/clearConsole');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
-const YAML = require('yamljs');
+const slateEnv = require('@shopify/slate-env');
 
 const config = require('../config');
-
-const shopifyConfigFile = YAML.load(config.paths.userShopifyConfig);
 const webpackConfig = require('../config/webpack.dev.conf');
 const shopify = require('../lib/shopify-deploy');
-const env = require('../lib/get-shopify-env-or-die')(
-  argv.env,
-  shopifyConfigFile,
-);
+const setEnvironment = require('../lib/set-slate-env');
+
+setEnvironment(argv.env);
 
 const sslCert = fs.existsSync(config.paths.ssl.cert)
   ? fs.readFileSync(config.paths.ssl.cert)
@@ -45,10 +42,8 @@ const app = express();
 const server = https.createServer(sslOptions, app);
 const compiler = webpack(webpackConfig);
 
-const shopifyUrl = `https://${shopifyConfigFile[env].store}`;
-const previewUrl = `${shopifyUrl}?preview_theme_id=${
-  shopifyConfigFile[env].theme_id
-}`;
+const shopifyUrl = `https://${slateEnv.getStoreValue()}`;
+const previewUrl = `${shopifyUrl}?preview_theme_id=${slateEnv.getThemeIdValue()}`;
 
 let isFirstCompilation = true;
 
@@ -169,7 +164,7 @@ compiler.plugin('done', stats => {
     console.log('\n');
 
     shopify
-      .sync(env, files)
+      .sync(files)
       .then(() => {
         console.log(chalk.green('\nFiles uploaded successfully!\n'));
 

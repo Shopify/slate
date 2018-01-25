@@ -1,18 +1,9 @@
 /* eslint-disable */
 const prompt = require('react-dev-utils/prompt');
 const themekit = require('@shopify/themekit').command;
+const slateEnv = require('@shopify/slate-env');
 const config = require('../config');
 const promptIfMainTheme = require('./prompt-if-main-theme');
-
-const settings = {
-  env: 'development',
-  deployRoot: config.paths.dist,
-  defaultArgs: [
-    '--no-update-notifier',
-    '--config',
-    config.paths.userShopifyConfig,
-  ],
-};
 
 let deploying = false;
 let filesToDeploy = [];
@@ -25,10 +16,34 @@ function maybeDeploy() {
   if (filesToDeploy.length) {
     const files = [...filesToDeploy];
     filesToDeploy = [];
-    return deploy('upload', files, settings.env);
+    return deploy('upload', files);
   }
 
   return Promise.resolve();
+}
+
+function _generateConfigFlags() {
+  const ignoreFiles = slateEnv.getIgnoreFilesValue();
+  const flags = {
+    '--password': slateEnv.getPasswordValue(),
+    '--themeid': slateEnv.getThemeIdValue(),
+    '--store': slateEnv.getStoreValue(),
+  };
+
+  // Convert object to key value pairs and flatten the array
+  return Array.prototype.concat(...Object.entries(flags));
+}
+
+function _generateIgnoreFlags() {
+  const ignoreFiles = slateEnv.getIgnoreFilesValue().split(':');
+  const flags = [];
+
+  ignoreFiles.forEach(pattern => {
+    flags.push('--ignored-file');
+    flags.push(pattern);
+  });
+
+  return flags;
 }
 
 /**
@@ -50,17 +65,34 @@ function deploy(cmd = '', files = []) {
   return new Promise((resolve, reject) => {
     themekit(
       {
-        args: [cmd, '--env', settings.env, ...settings.defaultArgs, ...files],
-        cwd: settings.deployRoot,
+        args: [
+          'configure',
+          ..._generateConfigFlags(),
+          ..._generateIgnoreFlags(),
+        ],
+        cwd: config.paths.dist,
       },
-      err => {
-        deploying = false;
+      () => {
+        themekit(
+          {
+            args: [
+              cmd,
+              '--no-update-notifier',
+              ..._generateConfigFlags(),
+              ...files,
+            ],
+            cwd: config.paths.dist,
+          },
+          err => {
+            deploying = false;
 
-        if (err) {
-          reject(err);
-        } else {
-          resolve();
-        }
+            if (err) {
+              reject(err);
+            } else {
+              resolve();
+            }
+          }
+        );
       }
     );
   })
@@ -76,15 +108,13 @@ function deploy(cmd = '', files = []) {
 }
 
 module.exports = {
-  sync(env, files = []) {
+  sync(files = []) {
     if (!files.length) {
       return Promise.reject('No files to deploy.');
     }
 
-    settings.env = env;
-
     return new Promise((resolve, reject) => {
-      promptIfMainTheme(settings.env)
+      promptIfMainTheme()
         .then(() => {
           // remove duplicate
           filesToDeploy = [...new Set([...filesToDeploy, ...files])];
@@ -98,16 +128,12 @@ module.exports = {
   },
 
   overwrite(env) {
-    settings.env = env;
-
     return new Promise((resolve, reject) => {
-      const message = `Environment is ${
-        settings.env
-      }. Go ahead with "replace" ?`;
+      const message = `\nEnvironment is ${slateEnv.getEnvNameValue()}. Go ahead with "replace" ?`;
 
       prompt(message, false).then(isYes => {
         if (isYes) {
-          promptIfMainTheme(settings.env)
+          promptIfMainTheme()
             .then(() => {
               deploy('replace')
                 .then(resolve)

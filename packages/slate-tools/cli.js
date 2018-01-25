@@ -8,6 +8,7 @@ let result;
 
 switch (script) {
   case 'build':
+  case 'deploy':
   case 'start':
   case 'zip':
     result = spawn.sync(

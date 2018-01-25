@@ -1,5 +1,6 @@
 const hostedGitInfo = require('hosted-git-info');
 const validateProjectName = require('validate-npm-package-name');
+const slateEnv = require('@shopify/slate-env');
 const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
@@ -18,7 +19,7 @@ module.exports = function createSlateTheme(name, starter, flags) {
   console.log(`Creating a new Slate theme in: ${chalk.green(root)}.`);
 
   return getStarterTheme(root, starter, options.verbose)
-    .then(() => copyShopifyYml(root))
+    .then(() => slateEnv.create({root}))
     .then(() => installThemeDeps(root, options));
 };
 
@@ -87,12 +88,6 @@ function installThemeDeps(root, options) {
     : utils.spawn('npm install');
 
   return cmd.then(() => process.chdir(prevDir));
-}
-
-function copyShopifyYml(root) {
-  const src = config.shopifyConfig.src;
-  const dest = path.join(root, config.shopifyConfig.dest);
-  return fs.copy(src, dest);
 }
 
 // Copy starter from file system.
