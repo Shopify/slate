@@ -11,6 +11,15 @@ describe('validate()', () => {
 
   describe('checks .slaterc with the following tests', () => {
     describe('test: isValidType', () => {
+      test('validates item of type array when read from json', () => {
+        const json = '{"test-array": ["item1", "item2", "item3"]}';
+        const slatercWithArray = JSON.parse(json);
+
+        const results = validate(schema, slatercWithArray);
+        expect(results).toHaveProperty('isValid');
+        expect(results.isValid).toEqual(true);
+      });
+
       test('returns error if invalid type is provided', () => {
         const invalidSlateRc = Object.assign({}, slaterc, {
           'test-item': [],

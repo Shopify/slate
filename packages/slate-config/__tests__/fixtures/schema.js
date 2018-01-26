@@ -5,5 +5,10 @@ module.exports = {
       default: 'default-value',
       type: 'string',
     },
+    {
+      id: 'test-array',
+      default: ['item1', 'item2'],
+      type: 'array',
+    },
   ],
 };
