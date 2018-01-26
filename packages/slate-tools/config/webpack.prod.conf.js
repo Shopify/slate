@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
@@ -63,21 +64,23 @@ module.exports = merge(
       // extract css into its own file
       new ExtractTextPlugin('styles.css.liquid'),
 
-      // generate dist/layout/theme.liquid with correct paths to assets
-      new HtmlWebpackPlugin({
-        excludeChunks: ['static'],
-        filename: '../layout/theme.liquid',
-        template: './layout/theme.liquid',
-        inject: true,
-        minify: {
-          removeComments: true,
-          collapseWhitespace: true,
-          removeAttributeQuotes: true,
-          // more options:
-          // https://github.com/kangax/html-minifier#options-quick-reference
-        },
-        // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-        chunksSortMode: 'dependency',
+      // generate dist/layout/*.liquid for all layout files with correct paths to assets
+      ...fs.readdirSync(config.paths.layouts).map(filename => {
+        return new HtmlWebpackPlugin({
+          excludeChunks: ['static'],
+          filename: `../layout/${filename}`,
+          template: `./layout/${filename}`,
+          inject: true,
+          minify: {
+            removeComments: true,
+            collapseWhitespace: true,
+            removeAttributeQuotes: true,
+            // more options:
+            // https://github.com/kangax/html-minifier#options-quick-reference
+          },
+          // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+          chunksSortMode: 'dependency',
+        });
       }),
 
       new HtmlWebpackIncludeAssetsPlugin({
