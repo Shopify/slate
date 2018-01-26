@@ -16,6 +16,14 @@ function validate(schema, slaterc) {
   };
 }
 
+function extractType(item, value) {
+  if (item.type === `array` && Array.isArray(value)) {
+    return item.type;
+  }
+
+  return typeof value;
+}
+
 function isValidType(schema, slaterc) {
   const errors = [];
   const warnings = [];
@@ -23,7 +31,7 @@ function isValidType(schema, slaterc) {
   schema.items.forEach(item => {
     const key = item.id;
     const value = slaterc[key];
-    const type = typeof value;
+    const type = extractType(item, value);
 
     if (type !== 'undefined') {
       if (type !== item.type) {
