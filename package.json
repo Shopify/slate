@@ -2,9 +2,13 @@
   "name": "slate",
   "private": true,
   "author": "Shopify Inc.",
-  "description":
-    "A theme scaffold and command line tool for developing Shopify themes.",
-  "keywords": ["slate", "shopify", "theme", "CLI"],
+  "description": "A theme scaffold and command line tool for developing Shopify themes.",
+  "keywords": [
+    "slate",
+    "shopify",
+    "theme",
+    "CLI"
+  ],
   "engine": ">=8.9.4",
   "homepage": "https://shopify.github.io/slate/",
   "bugs": "https://github.com/Shopify/slate/issues",
@@ -22,7 +26,8 @@
     "lint:fix-styles": "prettier-stylelint --write",
     "bootstrap": "yarn && node_modules/.bin/lerna bootstrap",
     "publish": "node_modules/.bin/lerna publish",
-    "changelog": "node_modules/.bin/lerna-changelog"
+    "changelog": "node_modules/.bin/lerna-changelog",
+    "clean": "node_modules/.bin/lerna clean"
   },
   "devDependencies": {
     "archiver": "1.1.0",
@@ -51,5 +56,7 @@
     "trailingComma": "es5",
     "bracketSpacing": false
   },
-  "workspaces": ["packages/*"]
+  "workspaces": [
+    "packages/*"
+  ]
 }

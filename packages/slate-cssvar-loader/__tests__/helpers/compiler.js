@@ -15,7 +15,7 @@ export default function test(fixture, options = {}) {
         {
           test: /\.css$/,
           use: [
-            {loader: path.resolve(__dirname, '../index.js'), options},
+            {loader: path.resolve(__dirname, '../../index.js'), options},
             {loader: 'css-loader'},
           ],
         },
