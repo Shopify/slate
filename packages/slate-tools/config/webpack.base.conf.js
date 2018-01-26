@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const webpack = require('webpack');
 const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -132,8 +133,12 @@ module.exports = {
       },
       {
         test: config.regex.static,
-        // excluding layout/theme.liquid as it's also being emitted by the HtmlWebpackPlugin
-        exclude: commonExcludes('layout/theme.liquid'),
+        // excluding layout/*.liquid files as they are also being emitted by the HtmlWebpackPlugin
+        exclude: commonExcludes(
+          ...fs
+            .readdirSync(config.paths.layouts)
+            .map(filename => `layout/${filename}`),
+        ),
         loader: 'file-loader',
         options: {
           name: '../[path][name].[ext]',
@@ -148,7 +153,7 @@ module.exports = {
         },
       },
       {
-        test: /layout\/theme\.liquid$/,
+        test: /layout\/.*?\.liquid$/,
         exclude: commonExcludes(),
         loader: 'raw-loader',
       },
