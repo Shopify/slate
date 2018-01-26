@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
@@ -66,11 +67,13 @@ module.exports = merge(
 
       new webpack.NoEmitOnErrorsPlugin(),
 
-      new HtmlWebpackPlugin({
-        excludeChunks: ['static'],
-        filename: '../layout/theme.liquid',
-        template: './layout/theme.liquid',
-        inject: true,
+      ...fs.readdirSync(config.paths.layouts).map(filename => {
+        return new HtmlWebpackPlugin({
+          excludeChunks: ['static'],
+          filename: `../layout/${filename}`,
+          template: `./layout/${filename}`,
+          inject: true,
+        });
       }),
     ],
   },

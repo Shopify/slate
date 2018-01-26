@@ -29,6 +29,7 @@ module.exports = {
   vendors: resolveApp('src/assets/vendors'),
   svgs: resolveApp('src/assets/svg'),
   lib: resolveSelf('lib'),
+  layouts: resolveApp('src/layout'),
   entrypoints: {
     scripts: resolveApp('src/assets/scripts/theme.js'),
     static: resolveSelf('lib/static-files-glob.js'),
