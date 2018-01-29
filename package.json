@@ -42,7 +42,7 @@
     "eslint-plugin-shopify": "^18.0.0",
     "github": "^11.0.0",
     "jest": "^21.0.0",
-    "lerna": "^2.0.0",
+    "lerna": "^2.8.0",
     "lerna-changelog": "^0.6.0",
     "mime-types": "2.1.12",
     "prettier": "^1.7.4",
