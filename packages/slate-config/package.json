@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate-config",
-  "version": "1.0.0-alpha.18",
+  "version": "1.0.0-alpha.19",
   "description": "Generate Slate config files",
   "main": "index.js",
   "scripts": {

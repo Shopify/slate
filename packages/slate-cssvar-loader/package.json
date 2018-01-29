@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate-cssvar-loader",
-  "version": "1.0.0-alpha.18",
+  "version": "1.0.0-alpha.19",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/Shopify/slate#readme",
   "dependencies": {
-    "@shopify/slate-config": "^1.0.0-alpha.18",
+    "@shopify/slate-config": "^1.0.0-alpha.19",
     "loader-utils": "^1.1.0"
   },
   "devDependencies": {
