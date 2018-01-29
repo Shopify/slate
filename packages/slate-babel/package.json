@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate-babel",
-  "version": "1.0.0-alpha.16",
+  "version": "1.0.0-alpha.17",
   "description": "Slate's webpack babel loader configurable via slaterc",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/shopify/slate#readme",
   "dependencies": {
-    "@shopify/slate-common-excludes": "^1.0.0-alpha.16",
-    "@shopify/slate-config": "^1.0.0-alpha.16"
+    "@shopify/slate-common-excludes": "^1.0.0-alpha.17",
+    "@shopify/slate-config": "^1.0.0-alpha.17"
   }
 }
