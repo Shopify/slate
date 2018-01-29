@@ -99,8 +99,8 @@ function promptIfMainTheme(env) {
             );
             reject();
           });
-
-          return;
+        } else {
+          resolve();
         }
       })
       .catch(reject);
