@@ -17,6 +17,10 @@ const CLONE_BRANCH_COMMAND = `git clone
   ${path.resolve(TEST_PROJECT)}
   --single-branch`;
 
+jest.mock('@shopify/slate-env', () => {
+  return {create: jest.fn()};
+});
+
 beforeAll(() => {
   // Mock process.exit since it terminates the test runner
   process.exit = jest.fn(code => {
@@ -65,14 +69,6 @@ test('can copy a theme from a local directory', async () => {
 test('installs theme dependencies after cloning or copying', async () => {
   await createSlateTheme('test-project', 'shopify/test-repo');
   expect(execa()).toHaveBeenCalledWith('yarnpkg', [], {stdio: 'inherit'});
-});
-
-test('copys shopify.yml to the config directory', async () => {
-  await createSlateTheme('test-project', 'shopify/test-repo');
-  expect(() => {
-    jest.requireActual('fs-extra').existsSync(config.shopifyConfig.src);
-  }).toBeTruthy();
-  expect(fs.existsSync('test-project/config/shopify.yml')).toBeTruthy();
 });
 
 test('can skip installing theme dependencies', async () => {
