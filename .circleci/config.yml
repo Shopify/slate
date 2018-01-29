@@ -1,61 +1,5 @@
 version: 2
 jobs:
-  build:
-    docker:
-      - image: circleci/node:latest
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - root-cache-{{ checksum "package-lock.json" }}
-            - root-cache
-      - restore_cache:
-          keys:
-            - slate-tools-cache-{{ checksum "./packages/slate-tools/package-lock.json" }}
-            - slate-tools-cache
-      - restore_cache:
-          keys:
-            - slate-theme-cache-{{ checksum "./packages/slate-theme/package-lock.json" }}
-            - slate-theme-cache
-      - restore_cache:
-          keys:
-            - slate-cli-cache-{{ checksum "./packages/slate-cli/package-lock.json" }}
-            - slate-cli-cache
-      - run:
-          name: Bootstrap packages
-          command: npm run bootstrap
-      - save-cache:
-          key: root-cache-{{ checksum "package-lock.json" }}
-          paths:
-            - ./node_modules
-      - save-cache:
-          key: root-cache
-          paths:
-            - ./node_modules
-      - save-cache:
-          key: slate-tools-cache-{{ checksum "./packages/slate-tools/package-lock.json" }}
-          paths:
-            - ./packages/slate-tools/node_modules
-      - save-cache:
-          key: slate-tools-cache
-          paths:
-            - ./packages/slate-tools/node_modules
-      - save-cache:
-          key: slate-theme-cache-{{ checksum "./packages/slate-theme/package-lock.json" }}
-          paths:
-            - ./packages/slate-theme/node_modules
-      - save-cache:
-          key: slate-theme-cache
-          paths:
-            - ./packages/slate-theme/node_modules
-      - save-cache:
-          key: slate-cli-cache-{{ checksum "./packages/slate-cli/package-lock.json" }}
-          paths:
-            - ./packages/slate-cli/node_modules
-      - save-cache:
-          key: slate-cli-cache
-          paths:
-            - ./packages/slate-cli/node_modules
   test:
     docker:
       - image: circleci/node:latest
@@ -63,34 +7,27 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - root-cache-{{ checksum "package-lock.json" }}
-            - root-cache
-      - restore_cache:
-          keys:
-            - slate-tools-cache-{{ checksum "./packages/slate-tools/package-lock.json" }}
-            - slate-tools-cache
-      - restore_cache:
-          keys:
-            - slate-theme-cache-{{ checksum "./packages/slate-theme/package-lock.json" }}
-            - slate-theme-cache
-      - restore_cache:
-          keys:
-            - slate-cli-cache-{{ checksum "./packages/slate-cli/package-lock.json" }}
-            - slate-cli-cache
+            - v1-yarn-cache-{{ checksum "package.json" }}
+            - v1-yarn-cache
+      - run:
+          name: Bootstrap packages
+          command: yarn run bootstrap
       - run:
           name: Test packages
-          command: npm test
+          command: yarn test
+      - save-cache:
+          key: v1-yarn-cache-{{ checksum "package.json" }}
+          paths:
+            - ~/.cache/yarn
+      - save-cache:
+          key: v1-yarn-cache
+          paths:
+            - ~/.cache/yarn
 workflows:
   version: 2
-  build-n-test:
+  test:
       jobs:
-        - build:
-            filters:
-              tags:
-                only: /.*/
         - test:
-            requires:
-              - build
             filters:
               tags:
                 only: /.*/
