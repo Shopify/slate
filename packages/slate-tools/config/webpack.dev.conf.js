@@ -48,11 +48,11 @@ module.exports = merge(
               loader: 'postcss-loader',
               options: {
                 ident: 'postcss',
-                sourceMap: true,
+                sourceMap: false,
                 plugins: () => [autoprefixer],
               },
             },
-            {loader: 'sass-loader', options: {sourceMap: true}},
+            {loader: 'sass-loader', options: {sourceMap: false}},
           ],
         },
       ],

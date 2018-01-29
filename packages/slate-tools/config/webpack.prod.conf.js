@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const fs = require('fs');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -9,11 +10,55 @@ const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 const commonExcludes = require('@shopify/slate-common-excludes');
 const SlateLiquidAssetsPlugin = require('@shopify/html-webpack-liquid-asset-tags-plugin');
 const webpackConfig = require('./webpack.base.conf');
 const userWebpackConfig = require('../lib/get-user-webpack-config')('prod');
 const config = require('../config');
+
+function eslintLoader() {
+  if (!fs.existsSync(config.paths.eslint.rc)) {
+    return [];
+  }
+
+  const ignorePath = fs.existsSync(config.paths.eslint.ignore)
+    ? config.paths.eslint.ignore
+    : null;
+
+  return [
+    {
+      enforce: 'pre',
+      test: /\.js$/,
+      exclude: commonExcludes(),
+      loader: 'eslint-loader',
+      options: {
+        ignorePath,
+        eslintPath: config.paths.eslint.bin,
+        configFile: config.paths.eslint.rc,
+        emitWarning: true,
+      },
+    },
+  ];
+}
+
+function stylelintLoader() {
+  if (!fs.existsSync(config.paths.stylelint.rc)) {
+    return [];
+  }
+
+  const ignorePath = fs.existsSync(config.paths.stylelint.ignore)
+    ? config.paths.stylelint.ignore
+    : null;
+
+  return [
+    new StyleLintPlugin({
+      configFile: config.paths.stylelint.rc,
+      emitErrors: true,
+      ignorePath,
+    }),
+  ];
+}
 
 module.exports = merge(
   webpackConfig,
@@ -22,6 +67,8 @@ module.exports = merge(
 
     module: {
       rules: [
+        ...eslintLoader(),
+
         {
           test: /\.s[ac]ss$/,
           exclude: commonExcludes(),
@@ -49,6 +96,8 @@ module.exports = merge(
     },
 
     plugins: [
+      ...stylelintLoader(),
+
       new CleanWebpackPlugin(['dist'], {
         root: config.paths.root,
       }),

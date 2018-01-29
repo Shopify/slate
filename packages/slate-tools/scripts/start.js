@@ -3,7 +3,9 @@
  *
  * After successful compilation, uploads modified files (written to disk) to Shopify.
  */
+
 const argv = require('minimist')(process.argv.slice(2));
+const figures = require('figures');
 const chalk = require('chalk');
 const createHash = require('crypto').createHash;
 const express = require('express');
@@ -11,6 +13,8 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 const webpack = require('webpack');
+const ora = require('ora');
+const consoleControl = require('console-control-strings');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const openBrowser = require('react-dev-utils/openBrowser');
@@ -22,8 +26,12 @@ const config = require('../config');
 const webpackConfig = require('../config/webpack.dev.conf');
 const shopify = require('../lib/shopify-deploy');
 const setEnvironment = require('../lib/set-slate-env');
+const promptIfMainTheme = require('../lib/prompt-if-main-theme');
 
 setEnvironment(argv.env);
+
+clearConsole();
+let spinner = ora(chalk.magenta(' Compiling...')).start();
 
 const sslCert = fs.existsSync(config.paths.ssl.cert)
   ? fs.readFileSync(config.paths.ssl.cert)
@@ -97,16 +105,19 @@ app.use(
 const hotMiddleware = webpackHotMiddleware(compiler);
 app.use(hotMiddleware);
 
-compiler.plugin('invalid', () => {
+compiler.plugin('compile', () => {
   clearConsole();
-  console.log('Compiling...');
+  spinner = ora(chalk.magenta(' Compiling...')).start();
 });
 
-compiler.plugin('done', stats => {
+compiler.plugin('done', async stats => {
+  spinner.stop();
   clearConsole();
 
   // webpack messages massaging and logging gracioulsy provided by create-react-app.
-  const messages = formatWebpackMessages(stats.toJson({}, true));
+  const statsJson = stats.toJson({}, true);
+  const time = statsJson.time / 1000;
+  const messages = formatWebpackMessages(statsJson);
 
   if (messages.errors.length) {
     console.log(chalk.red('Failed to compile.\n'));
@@ -123,24 +134,12 @@ compiler.plugin('done', stats => {
     messages.warnings.forEach(message => {
       console.log(`${message}\n`);
     });
-    // Teach some ESLint tricks.
-    console.log('You may use special comments to disable some warnings.');
-    console.log(
-      `Use ${chalk.yellow(
-        '// eslint-disable-next-line',
-      )} to ignore the next line.`,
-    );
-    console.log(
-      `Use ${chalk.yellow(
-        '/* eslint-disable */',
-      )} to ignore all warnings in a file.`,
-    );
   }
 
   if (!messages.errors.length && !messages.warnings.length) {
-    console.log(chalk.green('Compiled successfully!'));
-    console.log('\nThe app is running at:\n');
-    console.log(`  ${chalk.cyan(previewUrl)}`);
+    console.log(
+      `${chalk.green(figures.tick)}  Compiled successfully in ${time}s!`,
+    );
   }
 
   // files we'll upload
@@ -154,19 +153,38 @@ compiler.plugin('done', stats => {
     isFirstCompilation = false;
     openBrowser(previewUrl);
 
-    console.log(chalk.cyan('\nSkipping first file deployment...\n'));
-    console.log('\n');
+    console.log(
+      `\n${chalk.blue(
+        figures.info,
+      )}  Skipping first deployment because --skipFirstDeploy flag`,
+    );
+
+    console.log(chalk.magenta('\nWatching for changes...'));
   } else {
-    console.log(chalk.cyan('\nUploading files to Shopify...\n'));
-    files.forEach(file => {
-      console.log(`\t${file}`);
-    });
-    console.log('\n');
+    await promptIfMainTheme().catch(() => process.exit(0));
+
+    console.log(
+      chalk.magenta(`\n${figures.arrowUp}  Uploading to Shopify...\n`),
+    );
+
+    // files.forEach(file => {
+    //   console.log(`\t${file}`);
+    // });
+    // console.log('\n');
 
     shopify
       .sync(files)
       .then(() => {
-        console.log(chalk.green('\nFiles uploaded successfully!\n'));
+        process.stdout.write(consoleControl.previousLine(4));
+        process.stdout.write(consoleControl.eraseData());
+        console.log(
+          `\n${chalk.green(
+            figures.tick,
+          )}  Files uploaded successfully! Your theme is running at:\n`,
+        );
+        console.log(`      ${chalk.cyan(previewUrl)}`);
+
+        console.log(chalk.magenta('\nWatching for changes...'));
 
         if (isFirstCompilation) {
           isFirstCompilation = false;

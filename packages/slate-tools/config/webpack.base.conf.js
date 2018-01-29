@@ -5,7 +5,6 @@ const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const commonExcludes = require('@shopify/slate-common-excludes');
 const babelLoader = require('@shopify/slate-babel');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
 const config = require('../config');
 const paths = require('../config/paths');
 
@@ -45,51 +44,6 @@ function contextReplacementPlugins() {
   return plugins;
 }
 
-// add eslint-loader if .eslintrc is present
-function lintingLoaders() {
-  if (!fs.existsSync(config.paths.eslint.rc)) {
-    return [];
-  }
-
-  const ignorePath = fs.existsSync(config.paths.eslint.ignore)
-    ? config.paths.eslint.ignore
-    : null;
-
-  return [
-    {
-      enforce: 'pre',
-      test: /\.js$/,
-      exclude: commonExcludes(),
-      loader: 'eslint-loader',
-      options: {
-        ignorePath,
-        eslintPath: config.paths.eslint.bin,
-        configFile: config.paths.eslint.rc,
-        emitWarning: true,
-      },
-    },
-  ];
-}
-
-function stylelintLoader() {
-  if (!fs.existsSync(config.paths.stylelint.rc)) {
-    return [];
-  }
-
-  const ignorePath = fs.existsSync(config.paths.stylelint.ignore)
-    ? config.paths.stylelint.ignore
-    : null;
-
-  return [
-    new StyleLintPlugin({
-      configFile: config.paths.stylelint.rc,
-      emitErrors: !isDevServer,
-      ignorePath,
-      lintDirtyModulesOnly: isDevServer,
-    }),
-  ];
-}
-
 module.exports = {
   context: paths.src,
 
@@ -110,7 +64,6 @@ module.exports = {
 
   module: {
     rules: [
-      ...lintingLoaders(),
       ...babelLoader(),
 
       {
@@ -169,7 +122,6 @@ module.exports = {
 
   plugins: [
     ...contextReplacementPlugins(),
-    ...stylelintLoader(),
 
     new CopyWebpackPlugin([
       {

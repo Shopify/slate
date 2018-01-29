@@ -1,10 +1,11 @@
 /* eslint-disable */
 const chalk = require('chalk');
-const prompt = require('react-dev-utils/prompt');
+const inquirer = require('inquirer');
 const https = require('https');
 const YAML = require('yamljs');
 const slateEnv = require('@shopify/slate-env');
 const config = require('../config');
+const figures = require('figures');
 
 /**
  * Fetch the main theme ID from Shopify
@@ -39,10 +40,10 @@ function fetchMainThemeId() {
 
           if (!Array.isArray(parsed.themes)) {
             reject(`
-            Shopify response for /admin/themes.json is not an array.
+              Shopify response for /admin/themes.json is not an array.
 
-            ${JSON.stringify(parsed, null, '\t')}
-          `);
+              ${JSON.stringify(parsed, null, '\t')}
+            `);
             return;
           }
 
@@ -77,16 +78,26 @@ function promptIfMainTheme(env) {
         const themeId = slateEnv.getThemeIdValue();
         // c.theme_id is live or equal to mainThemeId
         if (themeId === 'live' || themeId === id.toString()) {
-          const question =
-            'You are about to deploy to the main theme. Continue?';
+          const question = {
+            type: 'confirm',
+            name: 'abortMainDeploy',
+            message: 'You are about to deploy to the main theme. Continue?',
+            default: false,
+            prefix: chalk.yellow(`${figures.warning} `),
+          };
 
-          prompt(question, false).then(isYes => {
-            if (isYes) {
-              resolve();
-              return;
+          console.log('');
+          inquirer.prompt([question]).then(answer => {
+            if (answer.abortMainDeploy) {
+              return resolve();
             }
 
-            reject('Aborting. You aborted the deploy.');
+            console.log(
+              chalk.red(
+                `\n${figures.cross}  Aborting. You aborted the deploy.\n`
+              )
+            );
+            reject();
           });
 
           return;

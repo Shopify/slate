@@ -3,7 +3,6 @@ const prompt = require('react-dev-utils/prompt');
 const themekit = require('@shopify/themekit').command;
 const slateEnv = require('@shopify/slate-env');
 const config = require('../config');
-const promptIfMainTheme = require('./prompt-if-main-theme');
 
 let deploying = false;
 let filesToDeploy = [];
@@ -114,16 +113,12 @@ module.exports = {
     }
 
     return new Promise((resolve, reject) => {
-      promptIfMainTheme()
-        .then(() => {
-          // remove duplicate
-          filesToDeploy = [...new Set([...filesToDeploy, ...files])];
+      // remove duplicate
+      filesToDeploy = [...new Set([...filesToDeploy, ...files])];
 
-          maybeDeploy()
-            .then(resolve)
-            .catch(reject);
-        })
-        .catch(reject); // user aborted deploy
+      maybeDeploy()
+        .then(resolve)
+        .catch(reject);
     });
   },
 
@@ -133,13 +128,9 @@ module.exports = {
 
       prompt(message, false).then(isYes => {
         if (isYes) {
-          promptIfMainTheme()
-            .then(() => {
-              deploy('replace')
-                .then(resolve)
-                .catch(reject);
-            })
-            .catch(reject); // user aborted deploy
+          deploy('replace')
+            .then(resolve)
+            .catch(reject);
         } else {
           reject('Aborting. You aborted the deploy.');
         }
