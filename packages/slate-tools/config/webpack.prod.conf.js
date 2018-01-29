@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const fs = require('fs');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
