@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate-env",
-  "version": "1.0.0-alpha.17",
+  "version": "1.0.0-alpha.18",
   "description": "Creates and reads environment variable files for Slate",
   "main": "index.js",
   "repository": {
@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/shopify/slate#readme",
   "dependencies": {
-    "@shopify/slate-config": "^1.0.0-alpha.17",
+    "@shopify/slate-config": "^1.0.0-alpha.18",
     "dotenv": "^4.0.0"
   },
   "devDependencies": {
