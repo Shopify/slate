@@ -97,9 +97,12 @@ function _validateStore() {
 
   if (store.length === 0) {
     errors.push(new Error(`${config.envStoreVar} must not be empty`));
-  } else if (store.indexOf('.myshopify.com') < 1) {
+  } else if (
+    store.indexOf('.myshopify.com') < 1 &&
+    store.indexOf('.myshopify.io') < 1
+  ) {
     errors.push(
-      new Error(`${config.envStoreVar} must not be a valid .myshopify.com URL`),
+      new Error(`${config.envStoreVar} must be a valid .myshopify.com URL`),
     );
   }
 

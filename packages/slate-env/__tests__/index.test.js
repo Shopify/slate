@@ -283,14 +283,18 @@ describe('Slate Env', () => {
         expect(result.errors).toHaveLength(1);
       });
 
-      test('the store URL environment variable is not a .myshopify.com URL', () => {
-        setVars(
-          Object.assign({}, TEST_ENV, {
-            [config.envStoreVar]: 'someValue',
-          }),
+      test('the store URL environment variable is not a .myshopify.com or myshopify.io URL', () => {
+        ['shop1.myshopify.com', 'shop1.myshopify.io', 'shop1'].forEach(
+          value => {
+            setVars(
+              Object.assign({}, TEST_ENV, {
+                [config.envStoreVar]: value,
+              }),
+            );
+            const result = slateEnv.validate();
+            expect(result.errors).toHaveLength(value === 'shop1' ? 1 : 0);
+          },
         );
-        const result = slateEnv.validate();
-        expect(result.errors).toHaveLength(1);
       });
 
       test('the store API password environment variable is empty', () => {
