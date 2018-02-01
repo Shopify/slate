@@ -71,7 +71,7 @@ function fetchMainThemeId() {
  * @param   env   String  The environment to check against
  * @return        Promise Reason for abort or empty resolve
  */
-function promptIfMainTheme(env) {
+function promptIfPublishedTheme(env) {
   return new Promise((resolve, reject) => {
     fetchMainThemeId()
       .then(id => {
@@ -81,7 +81,8 @@ function promptIfMainTheme(env) {
           const question = {
             type: 'confirm',
             name: 'abortMainDeploy',
-            message: 'You are about to deploy to the main theme. Continue?',
+            message:
+              'You are about to deploy to the published theme. Continue?',
             default: false,
             prefix: chalk.yellow(`${figures.warning} `),
           };
@@ -107,4 +108,4 @@ function promptIfMainTheme(env) {
   });
 }
 
-module.exports = promptIfMainTheme;
+module.exports = promptIfPublishedTheme;

@@ -26,7 +26,7 @@ const config = require('../config');
 const webpackConfig = require('../config/webpack.dev.conf');
 const shopify = require('../lib/shopify-deploy');
 const setEnvironment = require('../lib/set-slate-env');
-const promptIfMainTheme = require('../lib/prompt-if-main-theme');
+const promptIfPublishedTheme = require('../lib/prompt-if-published-theme');
 
 setEnvironment(argv.env);
 
@@ -54,6 +54,7 @@ const shopifyUrl = `https://${slateEnv.getStoreValue()}`;
 const previewUrl = `${shopifyUrl}?preview_theme_id=${slateEnv.getThemeIdValue()}`;
 
 let isFirstCompilation = true;
+let isFirstDeploy = true;
 
 const assetsHash = {};
 
@@ -161,7 +162,10 @@ compiler.plugin('done', async stats => {
 
     console.log(chalk.magenta('\nWatching for changes...'));
   } else {
-    await promptIfMainTheme().catch(() => process.exit(0));
+    if (isFirstDeploy) {
+      await promptIfPublishedTheme().catch(() => process.exit(0));
+      isFirstDeploy = false;
+    }
 
     console.log(
       chalk.magenta(`\n${figures.arrowUp}  Uploading to Shopify...\n`),
