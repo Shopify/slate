@@ -1,0 +1,27 @@
+{
+  "name": "@shopify/slate-rc",
+  "version": "1.0.0-alpha.19",
+  "description": "Slate's global configuration file manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shopify/slate.git"
+  },
+  "author": "Shopify Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shopify/slate/issues"
+  },
+  "homepage": "https://github.com/shopify/slate#readme",
+  "dependencies": {
+    "@shopify/slate-config": "^1.0.0-alpha.19",
+    "@shopify/slate-errors": "^1.0.0-alpha.19",
+    "fs-extra": "^5.0.0",
+    "mock-fs": "^4.4.2",
+    "semver": "^5.5.0",
+    "uuid": "^3.2.1"
+  }
+}
