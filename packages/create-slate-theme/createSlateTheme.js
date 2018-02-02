@@ -1,26 +1,41 @@
 const hostedGitInfo = require('hosted-git-info');
 const validateProjectName = require('validate-npm-package-name');
-const slateEnv = require('@shopify/slate-env');
+const env = require('@shopify/slate-env');
+const analytics = require('@shopify/slate-analytics');
 const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
+const uuidGenerator = require('uuid/v4');
 const utils = require('./utils');
 const config = require('./config');
 
-module.exports = function createSlateTheme(name, starter, flags) {
+const build = uuidGenerator();
+
+module.exports = async function createSlateTheme(name, starter, flags) {
   const root = path.resolve(name);
   const options = Object.assign(config.defaultOptions, flags);
 
-  checkAppName(name);
+  await analytics.init();
+  analytics.event('create-slate-theme:start', {
+    build,
+    starter,
+    skipInstall: options.skipInstall,
+    verbose: options.verbose,
+  });
 
+  checkAppName(name);
   fs.ensureDirSync(root);
   checkDirForConflicts(root);
 
   console.log(`Creating a new Slate theme in: ${chalk.green(root)}.`);
 
-  return getStarterTheme(root, starter, options.verbose)
-    .then(() => slateEnv.create({root}))
-    .then(() => installThemeDeps(root, options));
+  await getStarterTheme(root, starter, options.verbose);
+  await env.create({root});
+  await installThemeDeps(root, options);
+
+  analytics.event('create-slate-theme:success', {
+    build,
+  });
 };
 
 function checkAppName(name) {

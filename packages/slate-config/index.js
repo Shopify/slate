@@ -5,9 +5,10 @@ const validate = require('./validate');
 let errors = [];
 let warnings = [];
 
-function getSlateRc(slatePath) {
+function getSlateRc() {
   try {
-    const json = fs.readFileSync(slatePath, 'utf8');
+    const slateRcPath = resolveTheme('.slaterc');
+    const json = fs.readFileSync(slateRcPath, 'utf8');
     return typeof json === 'object' ? json : JSON.parse(json);
   } catch (error) {
     return {};
@@ -15,8 +16,7 @@ function getSlateRc(slatePath) {
 }
 
 function generate(schema) {
-  const slateRcPath = resolveTheme('.slaterc');
-  const slaterc = getSlateRc(slateRcPath);
+  const slaterc = getSlateRc();
   const items = schema.items || [];
   const config = {};
 

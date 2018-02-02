@@ -1,0 +1,30 @@
+{
+  "name": "@shopify/slate-analytics",
+  "version": "1.0.0-alpha.19",
+  "trackingVersion": 1,
+  "description": "Slate's analytics controller and event emitter",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shopify/slate.git"
+  },
+  "author": "Shopify Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shopify/slate/issues"
+  },
+  "homepage": "https://github.com/shopify/slate#readme",
+  "dependencies": {
+    "@shopify/slate-rc": "^1.0.0-alpha.19",
+    "@shopify/slate-errors": "^1.0.0-alpha.19",
+    "axios": "^0.17.1",
+    "inquirer": "^5.0.1"
+  },
+  "devDependencies": {
+    "mock-fs": "^4.4.2",
+    "mute-stream": "^0.0.7"
+  }
+}

@@ -2,7 +2,6 @@ jest.mock('../config');
 
 const MOCK_VALID_SLATE_RC = {
   uuid: '9a983jf94jk42',
-  version: '1.0.0-pre-alpha.19',
 };
 
 beforeEach(() => jest.resetModules());
@@ -56,7 +55,7 @@ describe('get()', () => {
 });
 
 describe('generate()', () => {
-  test('creates a .slaterc file in the `~/` directory', () => {
+  test('creates a .slaterc file in the `~/` directory and returns its contents', () => {
     const slateRc = require('../index');
     const config = require('../config');
     const mock = require('mock-fs');
@@ -64,51 +63,39 @@ describe('generate()', () => {
 
     mock();
 
-    slateRc.generate('1.0.0');
+    const content = slateRc.generate();
 
     expect(fs.existsSync(config.slateRcPath)).toBeTruthy();
-
-    const content = JSON.parse(fs.readFileSync(config.slateRcPath));
-
     expect(content.uuid).toBeDefined();
-    expect(content.version).toBeDefined();
   });
 
   describe('throws an error if', () => {
-    test('empty version string is passed', () => {
+    test('.slaterc file already exists', () => {
       const slateRc = require('../index');
       const SlateRcError = require('../slate-rc-error');
       const mock = require('mock-fs');
 
       mock();
+
+      slateRc.generate();
 
       expect(() => {
         slateRc.generate();
       }).toThrowError(SlateRcError);
     });
+  });
+});
 
-    test('invalid version string is passed', () => {
-      const slateRc = require('../index');
-      const SlateRcError = require('../slate-rc-error');
-      const mock = require('mock-fs');
+describe('update()', () => {
+  test('applies any changes to the .slaterc file', () => {
+    const rc = require('../index');
+    const mock = require('mock-fs');
+    const config = require('../config');
 
-      mock();
+    mock({[config.slateRcPath]: JSON.stringify(MOCK_VALID_SLATE_RC)});
 
-      expect(() => {
-        slateRc.generate('100');
-      }).toThrowError(SlateRcError);
-    });
+    rc.update({someChange: 'value'});
 
-    test('empty uuid string is passed', () => {
-      const slateRc = require('../index');
-      const SlateRcError = require('../slate-rc-error');
-      const mock = require('mock-fs');
-
-      mock();
-
-      expect(() => {
-        slateRc.generate('1.0.0', ' ');
-      }).toThrowError(SlateRcError);
-    });
+    expect(rc.get().someChange).toBeDefined();
   });
 });

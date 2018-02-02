@@ -1,6 +1,5 @@
 const fs = require('fs');
 const uuidGenerator = require('uuid/v4');
-const semver = require('semver');
 const config = require('./config');
 const SlateRcError = require('./slate-rc-error');
 
@@ -26,29 +25,30 @@ function get() {
   }
 }
 
-function generate(version, uuid) {
-  if (semver.valid(version) === null) {
+function generate() {
+  if (fs.existsSync(config.slateRcPath)) {
     throw new SlateRcError(
-      'Invalid version string used to generate .slaterc file',
+      '.slaterc file already exists. Use the update() method to update its values.',
     );
   }
 
-  if (typeof uuid === 'string' && uuid.trim() === '') {
-    throw new SlateRcError(
-      'Invalid UUID string used to generate .slaterc file',
-    );
-  }
+  const content = {
+    uuid: uuidGenerator(),
+  };
 
-  fs.writeFileSync(
-    config.slateRcPath,
-    JSON.stringify({
-      uuid: uuidGenerator(),
-      version,
-    }),
-  );
+  fs.writeFileSync(config.slateRcPath, JSON.stringify(content));
+
+  return content;
+}
+
+function update(updates) {
+  const content = Object.assign({}, get(), updates);
+  fs.writeFileSync(config.slateRcPath, JSON.stringify(content));
+  return content;
 }
 
 module.exports = {
   get,
   generate,
+  update,
 };
