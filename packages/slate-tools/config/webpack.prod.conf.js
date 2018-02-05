@@ -12,9 +12,11 @@ const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plug
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const commonExcludes = require('@shopify/slate-common-excludes');
 const SlateLiquidAssetsPlugin = require('@shopify/html-webpack-liquid-asset-tags-plugin');
+const SlateTagPlugin = require('@shopify/slate-tag-webpack-plugin');
 const webpackConfig = require('./webpack.base.conf');
 const userWebpackConfig = require('../lib/get-user-webpack-config')('prod');
 const config = require('../config');
+const packageJson = require('../package.json');
 
 function eslintLoader() {
   if (!fs.existsSync(config.paths.eslint.rc)) {
@@ -137,6 +139,7 @@ module.exports = merge(
       }),
 
       new SlateLiquidAssetsPlugin(),
+      new SlateTagPlugin(packageJson.version),
 
       // split node_modules/vendors into their own file
       new webpack.optimize.CommonsChunkPlugin({

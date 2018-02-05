@@ -22,6 +22,7 @@
     "@shopify/slate-cssvar-loader": "^1.0.0-alpha.19",
     "@shopify/slate-env": "^1.0.0-alpha.19",
     "@shopify/slate-liquid-asset-loader": "^1.0.0-alpha.19",
+    "@shopify/slate-tag-webpack-plugin": "^1.0.0-alpha.19",
     "@shopify/themekit": "0.6.11",
     "archiver": "^2.1.0",
     "autoprefixer": "6.7.7",
