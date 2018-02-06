@@ -55,13 +55,29 @@ function event(name, payload = {}) {
   performance.mark(name);
   const mark = performance.getEntriesByName(name).pop();
 
-  return axios('https://v.shopify.com/slate/track', {
+  const axiosConfig = {
     params: Object.assign({}, payload, {
       event: name,
       uuid: config.uuid,
       performance: mark,
     }),
-  });
+  };
+
+  if (process.env.NODE_ENV === 'test') {
+    axiosConfig.adaptor = settings => {
+      return new Promise(resolve => {
+        return resolve({
+          data: {},
+          status: 200,
+          statusText: 'Sucess',
+          headers: {},
+          settings,
+        });
+      });
+    };
+  }
+
+  return axios('https://v.shopify.com/slate/track', axiosConfig);
 }
 
 module.exports = {
