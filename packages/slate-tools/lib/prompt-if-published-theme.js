@@ -4,6 +4,7 @@ const inquirer = require('inquirer');
 const https = require('https');
 const YAML = require('yamljs');
 const slateEnv = require('@shopify/slate-env');
+const {event} = require('@shopify/slate-analytics');
 const config = require('../config');
 const figures = require('figures');
 

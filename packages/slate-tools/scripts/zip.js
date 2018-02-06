@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const archiver = require('archiver');
 const chalk = require('chalk');
+const uuidGenerator = require('uuid/v4');
+const {event} = require('@shopify/slate-analytics');
 const config = require('../config');
 
 /**
@@ -9,12 +11,15 @@ const config = require('../config');
  * script is used for shipit and should not be called explicitly.
  */
 
+const id = uuidGenerator();
 const zipName = fs.existsSync(config.paths.packageJson)
   ? require(config.paths.packageJson).name
   : 'theme-zip';
 const zipPath = getZipPath(config.paths.root, zipName, 'zip');
 const output = fs.createWriteStream(zipPath);
 const archive = archiver('zip');
+
+event('slate-tools:zip:start', {id});
 
 if (!fs.existsSync(config.paths.dist)) {
   console.log(
@@ -28,6 +33,7 @@ if (!fs.existsSync(config.paths.dist)) {
 }
 
 output.on('close', () => {
+  event('slate-tools:zip:end', {id, size: archive.pointer()});
   console.log(`${path.basename(zipPath)}: ${archive.pointer()} total bytes`);
 });
 

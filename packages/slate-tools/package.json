@@ -17,6 +17,7 @@
   "engine": ">=8.9.4",
   "dependencies": {
     "@shopify/html-webpack-liquid-asset-tags-plugin": "^1.0.0-alpha.19",
+    "@shopify/slate-analytics": "^1.0.0-alpha.19",
     "@shopify/slate-babel": "^1.0.0-alpha.19",
     "@shopify/slate-common-excludes": "^1.0.0-alpha.19",
     "@shopify/slate-cssvar-loader": "^1.0.0-alpha.19",
@@ -63,6 +64,7 @@
     "stylelint": "^8.2.0",
     "stylelint-webpack-plugin": "^0.10.1",
     "uglifyjs-webpack-plugin": "^1.0.1",
+    "uuid": "^3.2.1",
     "webpack": "^3.8.1",
     "webpack-dev-middleware": "1.10.2",
     "webpack-hot-middleware": "2.18.0",
