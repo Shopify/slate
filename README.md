@@ -6,6 +6,19 @@
 
 Slate empowers developers of all skill levels to build quality Shopify themes. Slate guides developers by providing a tested workflow and opinionated development toolkit, while also accommodating more established developers through advanced configuration.
 
+Slate introduces a number of new features and concepts to improve theme development experiences, including:
+
+* Dependency management via [Webpack](https://webpack.js.org/)
+* ES6+ support via [Babel](https://babeljs.io/)
+* [Local Development Assets Server](#local-development-assets-server)
+* [SASS compilation with vendor prefixing and Liquid](#sass-compilation-with-vendor-prefixing-and-liquid)
+* [Theme Linting](#theme-linting)
+* [Custom Starting Points](#custom-starting-points)
+* [Multiple API Credentials](#multiple-api-credentials)
+* [Safe watch and deploy](#safe-watch-and-deploy)
+* [Optimized production build pipeline](#optimized-production-build)
+* [Configuration via slate.config.js](#configuration-via-slate.config.js)
+
 ## Table of Contents
 
 * [System Requirements](#system-requirements)
@@ -26,7 +39,7 @@ We recommend using Yarn for faster theme development. Checkout the [Yarn install
 
 ### Create a new project
 
-To get started with a new project, run the following command in your terminal.
+To get started with a new project, run the following command in your terminal:
 
 ```
 $ yarn create slate-theme my-new-theme
@@ -38,9 +51,9 @@ By default, `create-slate-theme` creates a fresh copy of [`Shopify/starter-theme
 
 ### Connect to your store
 
-Follow the [connect your project with your Shopify store](https://shopify.github.io/slate/#connect-your-project-with-your-shopify-store) instructions in the Slate v0 docs to create a Private App in your store and gather API credentials.
+Once you have bootstraped your development app, you will need to setup your `.env` file with the right information provided by Shopify.
 
-Instead of inserting API values into `config.yml`, insert your API values into `.env`. For more information about `.env` files and how they work, see the [`slate-env` README](https://github.com/Shopify/slate/tree/v1.0.0-pre-alpha/packages/slate-env)
+Check out the [@shopify/slate-env documentation]() on how to give API access and where to find the `password`, `theme_id`, `store URL` necessary for the CLI to interact with the Shopify servers.
 
 ### Start developing
 
@@ -55,19 +68,6 @@ This will boot up a local express server and serve most of your assets from `htt
 > ⚠️ Because we are running localhost on `https` you will need to visit this URL at least once and tell your browser to trust it, otherwise local assets will be blocked. Alternatively, you could [create a trusted SSL certificate for localhost](#how-to-create-a-trusted-local-ssl-certificate).
 
 ## Features & Concepts
-
-Slate introduces a number of new features and concepts to improve theme development experiences, including:
-
-* Dependency management via [Webpack](https://webpack.js.org/)
-* ES6+ support via [Babel](https://babeljs.io/)
-* [Local Development Assets Server](#local-development-assets-server)
-* [SASS compilation with vendor prefixing and Liquid](#sass-compilation-with-vendor-prefixing-and-liquid)
-* [Theme Linting](#theme-linting)
-* [Custom Starting Points](#custom-starting-points)
-* [Multiple API Credentials](#multiple-api-credentials)
-* [Safe watch and deploy](#safe-watch-and-deploy)
-* [Optimized production build pipeline](#optimized-production-build)
-* Configuration via slate.config.js
 
 #### Local Development Assets Server
 
@@ -102,13 +102,13 @@ Stylesheet linting is made possible via Styelint and is enabled automatically wh
 Instead of using [shopify/starter-theme](https://github.com/Shopify/starter-theme), you can alternatively specify your own Github repo or local folder to copy as a starting point:
 
 ```
-$ yarn create slate-theme my-new-theme shopify/skeleton-theme
+yarn create slate-theme my-new-theme shopify/skeleton-theme
 ```
 
 or
 
 ```
-$ yarn create slate-theme my-new-theme my-old-theme/
+yarn create slate-theme my-new-theme my-old-theme/
 ```
 
 You can share your starting point with the community by publishing your own starter theme to Github. For example, I could publish my own starter theme in the t-kelly/custom-starter-theme repo and then start a new project with it by calling:
@@ -123,7 +123,7 @@ Slate uses environment variables and `.env` files to manage API credentials for 
 
 #### Safe Watch and Deploy
 
-Shopify Pipeline has a set of flags and warnings baked in to prevent you from pushing code to the main live theme (unless you explicitly want to). This minimizes the risks of deploying changes to the live site while developing.
+Slate has a set of flags and warnings baked in to prevent you from pushing code to the main live theme (unless you explicitly want to). This minimizes the risks of deploying changes to the live site while developing.
 
 #### Optimized production build
 
@@ -201,3 +201,10 @@ All developers who wish to contribute through code or issues, take a look at the
 MIT, see [LICENSE](http://github.com/Shopify/slate/blob/master/LICENSE) for details.
 
 <img src="https://cdn.shopify.com/shopify-marketing_assets/builds/19.0.0/shopify-full-color-black.svg" width="200" />
+
+## Thanks
+
+We would like to specifically thank the following projects, for the inspiration and help in regards to the creation of Slate:
+
+* [create-react-app](https://github.com/facebookincubator/create-react-app)
+* [Dynamo's Shopify Pipeline](https://github.com/DynamoMTL/shopify-pipeline)

@@ -1,15 +1,11 @@
 {
   "name": "@shopify/slate-common-excludes",
   "version": "1.0.0-alpha.19",
-  "description": "Slate's webpack babel loader configurable via slaterc",
+  "description":
+    "Common file exclusions used accross the Webpack build config.",
   "main": "index.js",
-  "scripts": {
-    "test": "jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/shopify/slate.git"
-  },
+  "repository":
+    "https://github.com/Shopify/slate/tree/1.x/packages/slate-common-excludes",
   "author": "Shopify Inc.",
   "license": "MIT",
   "bugs": {

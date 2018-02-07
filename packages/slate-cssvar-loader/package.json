@@ -1,15 +1,11 @@
 {
   "name": "@shopify/slate-cssvar-loader",
   "version": "1.0.0-alpha.19",
-  "description": "",
+  "description":
+    "Finds CSS custom properties (variables) in your stylesheets and replaces them with their corresponding liquid variable",
   "main": "index.js",
-  "scripts": {
-    "test": "jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Shopify/slate.git"
-  },
+  "repository":
+    "https://github.com/Shopify/slate/tree/1.x/packages/slate-cssvar-loader",
   "author": "Shopify Inc.",
   "license": "MIT",
   "bugs": {
@@ -22,7 +18,6 @@
   },
   "devDependencies": {
     "css-loader": "^0.28.8",
-    "jest": "^22.0.5",
     "memory-fs": "^0.4.1",
     "webpack": "^3.8.1"
   }

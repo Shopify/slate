@@ -26,7 +26,7 @@ module.exports = function hmrAlamoLoader(content) {
       // On first load, module.hot.data is undefined since it is not an update...
       // So if we do have a data object, it means we've been HMR'ed.
       if (module.hot.data) {
-        window.__shopify_pipeline_should_reload__ = true;
+        window.__slate_should_reload__ = true;
       }
     }
   `;

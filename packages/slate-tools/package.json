@@ -1,12 +1,10 @@
 {
   "name": "@shopify/slate-tools",
   "version": "1.0.0-alpha.19",
-  "description": "A modern pipeline for Shopify theme development",
-  "repository": "Shopify/slate",
+  "description": "A modern development toolkit for Shopify themes",
+  "repository":
+    "https://github.com/Shopify/slate/tree/1.x/packages/slate-tools",
   "license": "MIT",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Shopify",
   "bugs": {
     "url": "https://github.com/Shopify/slate/issues"
