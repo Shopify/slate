@@ -1,21 +1,22 @@
 const argv = require('minimist')(process.argv.slice(2));
 const chalk = require('chalk');
-const uuidGenerator = require('uuid/v4');
 const {event} = require('@shopify/slate-analytics');
 const shopify = require('../lib/shopify-deploy');
 const setEnvironment = require('../lib/set-slate-env');
+const packageJson = require('../package.json');
 
-const id = uuidGenerator();
-
-event('slate-tools:deploy:start', {id});
+event('slate-tools:deploy:start', {version: packageJson.version});
 setEnvironment(argv.env);
 shopify
   .overwrite()
   .then(() => {
-    event('slate-tools:deploy:end', {id});
+    event('slate-tools:deploy:end', {version: packageJson.version});
     return console.log(chalk.green('\nFiles overwritten successfully!\n'));
   })
   .catch(error => {
-    event('slate-tools:deploy:error', {id, error});
+    event('slate-tools:deploy:error', {
+      version: packageJson.version,
+      error,
+    });
     console.log(`\n${chalk.red(error)}\n`);
   });

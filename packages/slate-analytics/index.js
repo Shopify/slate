@@ -1,5 +1,8 @@
-const rc = require('@shopify/slate-rc');
+/* eslint-disable no-process-env */
+
+const uuidGenerator = require('uuid/v4');
 const {performance} = require('perf_hooks');
+const rc = require('@shopify/slate-rc');
 const axios = require('axios');
 const prompt = require('./prompt');
 const packageJson = require('./package.json');
@@ -7,7 +10,6 @@ const packageJson = require('./package.json');
 async function init() {
   let config = rc.get() || rc.generate();
 
-  // eslint-disable-next-line no-process-env
   if (process.env.NODE_ENV === 'test') {
     return config;
   }
@@ -52,9 +54,13 @@ function event(name, payload = {}) {
   performance.mark(name);
   const mark = performance.getEntriesByName(name).pop();
 
+  process.env.SLATE_PROCESS_ID =
+    process.env.SLATE_PROCESS_ID || uuidGenerator();
+
   const axiosConfig = {
     params: Object.assign({}, payload, {
       event: name,
+      id: process.env.SLATE_PROCESS_ID,
       uuid: config.uuid,
       performance: mark,
     }),

@@ -20,7 +20,6 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const openBrowser = require('react-dev-utils/openBrowser');
 const clearConsole = require('react-dev-utils/clearConsole');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
-const uuidGenerator = require('uuid/v4');
 const {event} = require('@shopify/slate-analytics');
 const slateEnv = require('@shopify/slate-env');
 
@@ -29,9 +28,9 @@ const webpackConfig = require('../config/webpack.dev.conf');
 const shopify = require('../lib/shopify-deploy');
 const setEnvironment = require('../lib/set-slate-env');
 const promptIfPublishedTheme = require('../lib/prompt-if-published-theme');
+const packageJson = require('../package.json');
 
-const id = uuidGenerator();
-event('slate-tools:start:start', {id});
+event('slate-tools:start:start', {version: packageJson.version});
 
 setEnvironment(argv.env);
 
@@ -127,8 +126,8 @@ compiler.plugin('done', async stats => {
 
   if (messages.errors.length) {
     event('slate-tools:start:compile-errors', {
-      id,
       errors: messages.errors,
+      version: packageJson.version,
     });
     console.log(chalk.red('Failed to compile.\n'));
     console.log(config.paths.lib);
@@ -141,9 +140,9 @@ compiler.plugin('done', async stats => {
 
   if (messages.warnings.length) {
     event('slate-tools:start:compile-warnings', {
-      id,
       duration: statsJson.time,
-      errors: messages.warnings,
+      warnings: messages.warnings,
+      version: packageJson.version,
     });
     console.log(chalk.yellow('Compiled with warnings.\n'));
     messages.warnings.forEach(message => {
@@ -153,8 +152,8 @@ compiler.plugin('done', async stats => {
 
   if (!messages.errors.length && !messages.warnings.length) {
     event('slate-tools:start:compile-success', {
-      id,
       duration: statsJson.time,
+      version: packageJson.version,
     });
     console.log(
       `${chalk.green(figures.tick)}  Compiled successfully in ${time}s!`,
@@ -172,7 +171,9 @@ compiler.plugin('done', async stats => {
     isFirstCompilation = false;
     openBrowser(previewUrl);
 
-    event('slate-tools:start:skip-first-deploy', {id});
+    event('slate-tools:start:skip-first-deploy', {
+      version: packageJson.version,
+    });
 
     console.log(
       `\n${chalk.blue(
@@ -191,12 +192,12 @@ compiler.plugin('done', async stats => {
       chalk.magenta(`\n${figures.arrowUp}  Uploading to Shopify...\n`),
     );
 
-    event('slate-tools:start:sync-start', {id});
+    event('slate-tools:start:sync-start', {version: packageJson.version});
 
     shopify
       .sync(files)
       .then(() => {
-        event('slate-tools:start:sync-end', {id});
+        event('slate-tools:start:sync-end', {version: packageJson.version});
 
         process.stdout.write(consoleControl.previousLine(4));
         process.stdout.write(consoleControl.eraseData());
@@ -222,9 +223,12 @@ compiler.plugin('done', async stats => {
           force: !(files.length === 1 && files[0] === '/layout/theme.liquid'),
         });
       })
-      .catch(err => {
-        event('slate-tools:start:sync-error', {id});
-        console.log(chalk.red(err));
+      .catch(error => {
+        event('slate-tools:start:sync-error', {
+          error,
+          version: packageJson.version,
+        });
+        console.log(chalk.red(error));
       });
   }
 });

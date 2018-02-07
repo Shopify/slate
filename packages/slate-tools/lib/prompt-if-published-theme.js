@@ -91,6 +91,7 @@ function promptIfPublishedTheme(env) {
           console.log('');
           inquirer.prompt([question]).then(answer => {
             if (answer.abortMainDeploy) {
+              event('slate-tools:deploy:main-theme');
               return resolve();
             }
 

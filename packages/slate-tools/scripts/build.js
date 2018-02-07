@@ -4,18 +4,22 @@
  * If the `deploy` argument has been passed, deploy to Shopify when the compilation is done.
  */
 const webpack = require('webpack');
-const uuidGenerator = require('uuid/v4');
 const {event} = require('@shopify/slate-analytics');
 const webpackConfig = require('../config/webpack.prod.conf');
+const packageJson = require('../package.json');
 
-const id = uuidGenerator();
-
-event('slate-tools:build:start', {id, webpackConfig});
+event('slate-tools:build:start', {
+  webpackConfig,
+  version: packageJson.version,
+});
 
 webpack(webpackConfig, (err, stats) => {
   if (err) throw err;
 
-  event('slate-tools:build:end', {id, webpackConfig});
+  event('slate-tools:build:end', {
+    webpackConfig,
+    version: packageJson.version,
+  });
 
   process.stdout.write(
     `${stats.toString({

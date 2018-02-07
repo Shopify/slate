@@ -5,11 +5,9 @@ const analytics = require('@shopify/slate-analytics');
 const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
-const uuidGenerator = require('uuid/v4');
 const utils = require('./utils');
 const config = require('./create-slate-theme.config');
-
-const build = uuidGenerator();
+const packageJson = require('./package.json');
 
 module.exports = async function createSlateTheme(name, starter, flags) {
   const root = path.resolve(name);
@@ -21,7 +19,7 @@ module.exports = async function createSlateTheme(name, starter, flags) {
 
   await analytics.init();
   analytics.event('create-slate-theme:start', {
-    build,
+    version: packageJson,
     starter,
     skipInstall: options.skipInstall,
     verbose: options.verbose,
@@ -34,7 +32,7 @@ module.exports = async function createSlateTheme(name, starter, flags) {
   await installThemeDeps(root, options);
 
   analytics.event('create-slate-theme:success', {
-    build,
+    version: packageJson,
   });
 };
 
