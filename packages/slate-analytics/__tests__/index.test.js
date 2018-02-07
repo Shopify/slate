@@ -2,7 +2,9 @@ jest.mock('../prompt');
 jest.mock('axios');
 
 beforeEach(() => jest.resetModules());
+beforeEach(() => (process.env.NODE_ENV = 'test-slate-analytics'));
 afterEach(() => require('mock-fs').restore());
+afterEach(() => (process.env.NODE_ENV = 'test'));
 
 test('has a trackingVersion field in package.json', () => {
   const packageJson = require('../package.json');

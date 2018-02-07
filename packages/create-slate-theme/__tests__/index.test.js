@@ -2,7 +2,7 @@ const args = process.argv;
 const node = Object.getOwnPropertyDescriptor(process.versions, 'node');
 
 beforeAll(() => {
-  jest.mock('../createSlateTheme', () => {
+  jest.mock('../create-slate-theme', () => {
     return jest.fn();
   });
 
@@ -14,16 +14,16 @@ beforeAll(() => {
 
 beforeEach(() => {
   jest.resetModules();
-  require('../createSlateTheme').mockClear();
+  require('../create-slate-theme').mockClear();
 });
 
 test('Calls createSlateTheme with process.argv[2] and, if provided, process.argv[3]', () => {
-  const config = require('../config');
+  const config = require('../create-slate-theme.config');
   const mockArgs = ['node', 'index.js', 'test-project', 'shopify/test-repo'];
   process.argv = mockArgs;
 
   require('./../index.js');
-  expect(require('../createSlateTheme')).toHaveBeenCalledWith(
+  expect(require('../create-slate-theme')).toHaveBeenCalledWith(
     mockArgs[2],
     mockArgs[3],
     config.defaultOptions,
@@ -33,12 +33,12 @@ test('Calls createSlateTheme with process.argv[2] and, if provided, process.argv
 });
 
 test('Calls createSlateTheme with the default repo if process.argv[3] is undefined', () => {
-  const config = require('../config');
+  const config = require('../create-slate-theme.config');
   const mockArgs = ['node', 'index.js', 'test-project'];
   process.argv = mockArgs;
 
   require('./../index.js');
-  expect(require('../createSlateTheme')).toHaveBeenCalledWith(
+  expect(require('../create-slate-theme')).toHaveBeenCalledWith(
     mockArgs[2],
     config.defaultStarter,
     config.defaultOptions,
@@ -56,7 +56,7 @@ test('Exits if Node version is lower than 8.9.4', () => {
     require('../index');
   }).toThrow();
   expect(process.exit).toHaveBeenCalled();
-  expect(require('../createSlateTheme')).not.toHaveBeenCalled();
+  expect(require('../create-slate-theme')).not.toHaveBeenCalled();
 
   Object.defineProperty(process.versions, 'node', node);
 });
@@ -69,7 +69,7 @@ test('Exits if a project name is not given as the first argument', () => {
     require('./../index.js');
   }).toThrow();
   expect(process.exit).toHaveBeenCalled();
-  expect(require('../createSlateTheme')).not.toHaveBeenCalled();
+  expect(require('../create-slate-theme')).not.toHaveBeenCalled();
 
   process.argv = args;
 });

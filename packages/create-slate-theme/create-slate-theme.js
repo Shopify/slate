@@ -7,13 +7,17 @@ const path = require('path');
 const chalk = require('chalk');
 const uuidGenerator = require('uuid/v4');
 const utils = require('./utils');
-const config = require('./config');
+const config = require('./create-slate-theme.config');
 
 const build = uuidGenerator();
 
 module.exports = async function createSlateTheme(name, starter, flags) {
   const root = path.resolve(name);
   const options = Object.assign(config.defaultOptions, flags);
+
+  checkAppName(name);
+  fs.ensureDirSync(root);
+  checkDirForConflicts(root);
 
   await analytics.init();
   analytics.event('create-slate-theme:start', {
@@ -22,10 +26,6 @@ module.exports = async function createSlateTheme(name, starter, flags) {
     skipInstall: options.skipInstall,
     verbose: options.verbose,
   });
-
-  checkAppName(name);
-  fs.ensureDirSync(root);
-  checkDirForConflicts(root);
 
   console.log(`Creating a new Slate theme in: ${chalk.green(root)}.`);
 

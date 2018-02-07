@@ -8,7 +8,7 @@ describe('slate-cssvar-loader ', () => {
   });
 
   test('replaces CSS custom properties with liquid variables', async () => {
-    jest.mock('../config');
+    jest.mock('../slate-cssvar-loader.config');
     const stats = await compiler('../fixtures/test.css');
     const output = stats.toJson().modules[0].source;
 
@@ -20,7 +20,7 @@ describe('slate-cssvar-loader ', () => {
   });
 
   test('missing liquid variable', async () => {
-    jest.mock('../config');
+    jest.mock('../slate-cssvar-loader.config');
     const stats = await compiler('../fixtures/invalid.css');
     const output = stats.toJson().modules[0].source;
 
@@ -30,7 +30,7 @@ describe('slate-cssvar-loader ', () => {
   });
 
   test('loader does not run when disabled', async () => {
-    jest.mock('../config', () => {
+    jest.mock('../slate-cssvar-loader.config', () => {
       return {
         cssVarLoaderEnable: false,
       };
@@ -46,7 +46,7 @@ describe('slate-cssvar-loader ', () => {
   });
 
   test('loads from multiple css variable liquid files', async () => {
-    jest.mock('../config', () => {
+    jest.mock('../slate-cssvar-loader.config', () => {
       const _path = require('path');
       const currentDir = _path.dirname(require.resolve('./index.test.js'));
       return {

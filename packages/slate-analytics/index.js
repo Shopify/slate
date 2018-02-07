@@ -13,6 +13,11 @@ async function init() {
 
   initialized = true;
 
+  // eslint-disable-next-line no-process-env
+  if (process.env.NODE_ENV === 'test') {
+    return config;
+  }
+
   // Check if we need to ask for consent
   if (
     typeof config.tracking === 'undefined' ||
@@ -63,6 +68,7 @@ function event(name, payload = {}) {
     }),
   };
 
+  // eslint-disable-next-line no-process-env
   if (process.env.NODE_ENV === 'test') {
     axiosConfig.adaptor = settings => {
       return new Promise(resolve => {

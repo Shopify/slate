@@ -1,4 +1,4 @@
-jest.mock('../config');
+jest.mock('../slate-rc.config');
 
 const MOCK_VALID_SLATE_RC = {
   uuid: '9a983jf94jk42',
@@ -13,7 +13,7 @@ describe('get()', () => {
     test('returns its parsed JSON contents', () => {
       const slateRc = require('../index');
       const mock = require('mock-fs');
-      const config = require('../config');
+      const config = require('../slate-rc.config');
 
       mock({[config.slateRcPath]: JSON.stringify(MOCK_VALID_SLATE_RC)});
 
@@ -23,7 +23,7 @@ describe('get()', () => {
     test('throws an error if the JSON file is invalid', () => {
       const slateRc = require('../index');
       const SlateRcError = require('../slate-rc-error');
-      const config = require('../config');
+      const config = require('../slate-rc.config');
       const mock = require('mock-fs');
 
       mock({[config.slateRcPath]: 'some invalid JSON'});
@@ -35,7 +35,7 @@ describe('get()', () => {
 
     test('returns null if file is empty', () => {
       const slateRc = require('../index');
-      const config = require('../config');
+      const config = require('../slate-rc.config');
       const mock = require('mock-fs');
 
       mock({[config.slateRcPath]: ''});
@@ -57,7 +57,7 @@ describe('get()', () => {
 describe('generate()', () => {
   test('creates a .slaterc file in the `~/` directory and returns its contents', () => {
     const slateRc = require('../index');
-    const config = require('../config');
+    const config = require('../slate-rc.config');
     const mock = require('mock-fs');
     const fs = require('fs');
 
@@ -90,7 +90,7 @@ describe('update()', () => {
   test('applies any changes to the .slaterc file', () => {
     const rc = require('../index');
     const mock = require('mock-fs');
-    const config = require('../config');
+    const config = require('../slate-rc.config');
 
     mock({[config.slateRcPath]: JSON.stringify(MOCK_VALID_SLATE_RC)});
 

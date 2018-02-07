@@ -3,9 +3,9 @@
 const chalk = require('chalk');
 const program = require('commander');
 const semver = require('semver');
-const createSlateTheme = require('./createSlateTheme');
+const createSlateTheme = require('./create-slate-theme');
 const packageJson = require('./package.json');
-const config = require('./config');
+const config = require('./create-slate-theme.config');
 
 const currentNodeVersion = process.versions.node;
 

@@ -1,6 +1,6 @@
 const fs = require('fs');
 const uuidGenerator = require('uuid/v4');
-const config = require('./config');
+const config = require('./slate-rc.config');
 const SlateRcError = require('./slate-rc-error');
 
 function get() {

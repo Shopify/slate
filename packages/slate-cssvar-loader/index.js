@@ -1,7 +1,7 @@
 const fs = require('fs');
 const slateConfig = require('@shopify/slate-config');
 
-const config = require('./config');
+const config = require('./slate-cssvar-loader.config');
 
 const STYLE_BLOCK_REGEX = /(?:<style>|\{% style %\})([\S\s]*?)(?:<\/style>|\{% endstyle %\})/g;
 const CSS_VAR_FUNC_REGEX = /var\(--(.*?)\)/g;

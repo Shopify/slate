@@ -1,8 +1,8 @@
 const fs = require('fs-extra');
 const path = require('path');
 const execa = require('execa');
-const createSlateTheme = require('../createSlateTheme');
-const config = require('../config');
+const createSlateTheme = require('../create-slate-theme');
+const config = require('../create-slate-theme.config');
 
 const TEST_PROJECT = 'test-project';
 const TEST_STARTER = 'test-repo';
@@ -83,28 +83,28 @@ test('can skip installing theme dependencies', async () => {
   });
 });
 
-test('fails if theme name does not adhere to NPM naming restrictions', () => {
-  expect(() => {
-    createSlateTheme('test project', config.defaultStarter);
-  }).toThrow();
+test('fails if theme name does not adhere to NPM naming restrictions', async () => {
+  await expect(
+    createSlateTheme('test project', config.defaultStarter),
+  ).rejects.toBeInstanceOf(Error);
   expect(process.exit).toHaveBeenCalled();
 });
 
-test('fails if the a conflicting file already exists in the theme directory', () => {
+test('fails if the a conflicting file already exists in the theme directory', async () => {
   require('fs-extra').__addMockFiles({
     'test-project/package.json': '{ "name": "test-repo" }',
   });
 
-  expect(() => {
-    createSlateTheme('test-project', config.defaultStarter);
-  }).toThrow();
+  await expect(
+    createSlateTheme('test-project', config.defaultStarter),
+  ).rejects.toBeInstanceOf(Error);
   expect(process.exit).toHaveBeenCalled();
 });
 
 test('throws an error when copying from a local directory that does not exist', async () => {
-  await expect(() => {
-    return createSlateTheme('test-project', 'old-project');
-  }).toThrow();
+  await expect(
+    createSlateTheme('test-project', 'old-project'),
+  ).rejects.toBeInstanceOf(Error);
 });
 
 test('throws an error if a project already exists', () => {
@@ -112,7 +112,7 @@ test('throws an error if a project already exists', () => {
     'test-project/package.json': '{ "name": "test-repo" }',
   });
 
-  expect(() => {
-    return createSlateTheme('test-project', 'shopify/test-repo');
-  }).toThrow();
+  expect(
+    createSlateTheme('test-project', 'shopify/test-repo'),
+  ).rejects.toBeInstanceOf(Error);
 });

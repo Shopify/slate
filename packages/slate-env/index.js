@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const dotenv = require('dotenv');
-const config = require('./config');
+const config = require('./slate-env.config');
 
 const SLATE_ENV_VARS = [
   config.envNameVar,

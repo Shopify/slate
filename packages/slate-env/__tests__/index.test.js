@@ -4,7 +4,7 @@ const path = require('path');
 const glob = require('glob');
 const dotenv = require('dotenv');
 const slateEnv = require('../index');
-const config = require('../config');
+const config = require('../slate-env.config');
 
 const envPath = path.resolve(config.envRootDir, config.envDefaultFileName);
 
