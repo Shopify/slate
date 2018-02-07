@@ -218,9 +218,6 @@ compiler.plugin('done', async stats => {
         // Notify the HMR client that we finished uploading files to Shopify
         return hotMiddleware.publish({
           action: 'shopify_upload_finished',
-          // don't force a reload if only theme.liquid has been updated, has it get's
-          // updated even when we change scritps/styles
-          force: !(files.length === 1 && files[0] === '/layout/theme.liquid'),
         });
       })
       .catch(error => {
