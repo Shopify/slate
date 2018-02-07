@@ -7,16 +7,14 @@ let warnings = [];
 
 function getSlateRc() {
   try {
-    const slateRcPath = resolveTheme('.slaterc');
-    const json = fs.readFileSync(slateRcPath, 'utf8');
-    return typeof json === 'object' ? json : JSON.parse(json);
+    const slateRcPath = resolveTheme('slate.config.js');
+    return require(slateRcPath);
   } catch (error) {
     return {};
   }
 }
 
-function generate(schema) {
-  const slaterc = getSlateRc();
+function generate(schema, slaterc = getSlateRc()) {
   const items = schema.items || [];
   const config = {};
 

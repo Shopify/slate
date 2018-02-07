@@ -1,7 +1,5 @@
-const fs = require('fs');
 const slateConfig = require('../index');
 const schema = require('./fixtures/schema');
-const slaterc = require('./fixtures/slaterc.json');
 
 describe('.generate()', () => {
   describe('can generate a config object', () => {
@@ -15,18 +13,12 @@ describe('.generate()', () => {
     });
 
     test('with slaterc overrides', () => {
-      const oldReadFileSync = fs.readFileSync;
+      const mockSlateRc = require('./fixtures/slate.config.js');
 
-      fs.readFileSync = jest.fn(() => {
-        return slaterc;
-      });
-
-      expect(slateConfig.generate(schema)).toHaveProperty(
+      expect(slateConfig.generate(schema, mockSlateRc)).toHaveProperty(
         schema.items[0].id,
         'override-value',
       );
-
-      fs.readFileSync = oldReadFileSync;
     });
   });
 });
