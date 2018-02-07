@@ -1,24 +1,40 @@
 const inquirer = require('inquirer');
-const questions = require('./questions');
+
+const question = {
+  type: 'input',
+  name: 'email',
+  message: 'To continue, please enter your email address:',
+  validate: input => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(input).toLowerCase())
+      ? true
+      : 'Email not valid. Please try again.';
+  },
+};
 
 function forNewConsent() {
   console.log(
-    'Welcome to Slate! In order to improve Slate, we would like to gather usage statistics, such as interactions with Slate commands, performance reports, and error occurances. The data does not include any sensitive information. The detailed list of data we gather can be found at:',
+    'Welcome to Slate! During the alpha, we would like to gather usage statistics, such as interactions with Slate commands, performance reports, and error occurances. The data does not include any sensitive information. The detailed list of data we gather can be found at:',
   );
   console.log('\n  https://slate.shopify.com/analytics');
   console.log();
 
-  return inquirer.prompt(questions);
+  question.message = 'To continue, please enter your email address:';
+
+  return inquirer.prompt(question);
 }
 
-function forUpdatedConsent() {
+function forUpdatedConsent(email) {
   console.log(
-    'Thanks for upgrading Slate! This new version has some changes to tracking and we need to get your updated consent decision before proceed. The list of updates can be found at:',
+    "It looks like you've recently upgraded Slate and this new version has some changes to tracking and we need to get your updated consent decision before proceed. The list of updates can be found at:",
   );
   console.log('\n  https://slate.shopify.com/analytics');
   console.log();
 
-  return inquirer.prompt(questions.slice(0, 1));
+  question.message = 'To continue, please confirm your email address:';
+  question.default = email;
+
+  return inquirer.prompt(question);
 }
 
 module.exports = {forNewConsent, forUpdatedConsent};

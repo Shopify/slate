@@ -1,10 +1,17 @@
 jest.mock('../prompt');
 jest.mock('axios');
 
-beforeEach(() => jest.resetModules());
-beforeEach(() => (process.env.NODE_ENV = 'test-slate-analytics'));
-afterEach(() => require('mock-fs').restore());
-afterEach(() => (process.env.NODE_ENV = 'test'));
+beforeEach(() => {
+  // eslint-disable-next-line no-process-env
+  process.env.NODE_ENV = 'test-slate-analytics';
+  jest.resetModules();
+});
+
+afterEach(() => {
+  // eslint-disable-next-line no-process-env
+  process.env.NODE_ENV = 'test';
+  require('mock-fs').restore();
+});
 
 test('has a trackingVersion field in package.json', () => {
   const packageJson = require('../package.json');
@@ -53,7 +60,6 @@ describe('init()', () => {
 
       mock();
       prompt.__setNewConsentAnswer({
-        tracking: true,
         email: 'tobi@shopify.com',
       });
       const config = await analytics.init();
@@ -84,7 +90,7 @@ describe('init()', () => {
           trackingVersion: 0,
         }),
       });
-      prompt.__setUpdatedConsentAnswer({tracking: true});
+      prompt.__setUpdatedConsentAnswer({email: 'tobi@shopify.com'});
 
       const config = await analytics.init();
 
@@ -136,15 +142,6 @@ describe('event()', () => {
       await event('test');
 
       expect(axios).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('throws an error', () => {
-    test('if slate-analytics was not initialized', async () => {
-      const {event} = require('../index');
-      const SlateAnalyticsError = require('../slate-analytics-error');
-
-      await expect(() => event('test')).toThrow(SlateAnalyticsError);
     });
   });
 });

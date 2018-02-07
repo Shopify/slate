@@ -2,16 +2,10 @@ const rc = require('@shopify/slate-rc');
 const {performance} = require('perf_hooks');
 const axios = require('axios');
 const prompt = require('./prompt');
-const SlateAnalyticsError = require('./slate-analytics-error');
 const packageJson = require('./package.json');
 
-let config;
-let initialized = false;
-
 async function init() {
-  config = rc.get() || rc.generate();
-
-  initialized = true;
+  let config = rc.get() || rc.generate();
 
   // eslint-disable-next-line no-process-env
   if (process.env.NODE_ENV === 'test') {
@@ -27,6 +21,7 @@ async function init() {
       // If new user
       const answers = await prompt.forNewConsent();
       config = Object.assign({}, config, answers, {
+        tracking: true,
         trackingVersion: packageJson.trackingVersion,
       });
       event('slate-analytics:new-user', config);
@@ -35,6 +30,7 @@ async function init() {
       event('slate-analytics:renew-consent-prompt', config);
       const answers = await prompt.forUpdatedConsent();
       config = Object.assign({}, config, answers, {
+        tracking: true,
         trackingVersion: packageJson.trackingVersion,
       });
       event('slate-analytics:renew-consent-true', config);
@@ -47,11 +43,7 @@ async function init() {
 }
 
 function event(name, payload = {}) {
-  if (!initialized) {
-    throw new SlateAnalyticsError(
-      'Slate Analytics must be initialized before events can be emmited',
-    );
-  }
+  const config = rc.get();
 
   if (!config.tracking) {
     return Promise.resolve();
