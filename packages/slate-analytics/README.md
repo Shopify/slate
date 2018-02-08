@@ -29,13 +29,14 @@ We will be continually iterating Slate Analytics to catch as many errors as poss
 
 | Name                                | Payload                                     |
 | ----------------------------------- | ------------------------------------------- |
+| slate-tools:cli:start               | slate.config.js, slate-tools version        |
 | slate-tools:build:start             | Webpack config, slate-tools version         |
 | slate-tools:build:end               | Webpack config, slate-tools version         |
 | slate-tools:deploy:start            | slate-tools version                         |
 | slate-tools:deploy:end              | slate-tools version                         |
 | slate-tools:deploy:error            | slate-tools version, error                  |
 | slate-tools:deploy:main-theme       |                                             |
-| slate-tools:start:start             | slate-tools version                         |
+| slate-tools:start:start             | Webpack config, slate-tools version         |
 | slate-tools:start:compile-errors    | slate-tools version, errors                 |
 | slate-tools:start:compile-warnings  | slate-tools version, warnings, compile time |
 | slate-tools:start:compile-success   | slate-tools version, compile time           |

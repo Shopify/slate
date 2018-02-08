@@ -30,7 +30,7 @@ const setEnvironment = require('../lib/set-slate-env');
 const promptIfPublishedTheme = require('../lib/prompt-if-published-theme');
 const packageJson = require('../package.json');
 
-event('slate-tools:start:start', {version: packageJson.version});
+event('slate-tools:start:start', {version: packageJson.version, webpackConfig});
 
 setEnvironment(argv.env);
 
