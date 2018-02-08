@@ -1,4 +1,4 @@
-#@shopify/slate-env
+# @shopify/slate-env
 
 Manages the environment variables which are needed by Slate to interact with Shopify servers. Can create and run `.env` files used to store Slate environment variables for development.
 

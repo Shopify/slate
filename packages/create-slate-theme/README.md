@@ -1,4 +1,4 @@
-# create-slate-theme
+# Create Slate Theme
 
 Start a new Slate project with a single command. Defaults to creating a fresh copy of [`Shopify/starter-theme`](https://github.com/Shopify/starter-theme):
 

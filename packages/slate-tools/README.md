@@ -4,16 +4,16 @@
 
 ### Not Global
 
-There are [various compelling reasons](https://www.smashingmagazine.com/2016/01/issue-with-global-node-npm-packages/) why we should not rely on global npm packages. And as such, we advise you to not do so when using Shopify Pipeline.
+There are [various compelling reasons](https://www.smashingmagazine.com/2016/01/issue-with-global-node-npm-packages/) why we should not rely on global npm packages.
 
-To have access to Shopify Pipeline's CLI commands, you then have two options:
+To have access to Slate's CLI commands, you then have two options:
 
-* In the terminal, append the path to your local package to the command like so: `./node_modules/.bin/shopify-pipeline command`
+* In the terminal, append the path to your local package to the command like so: `./node_modules/.bin/slate-tools command`
 * In the `package.json` file, you can create yarn/npm scripts to proxy the commands, like this:
 
   ```
   scripts: {
-    xxx: 'shopify-pipeline command',
+    xxx: 'slate-tools command',
     ...
   }
 
@@ -21,26 +21,24 @@ To have access to Shopify Pipeline's CLI commands, you then have two options:
   // yarn xxx --someflag
   ```
 
-  Note that Shopify Pipeline will create those for you on project creation.
-
 ### API Commands
 
-Here are the available API commands for Shopify Pipeline:
+Here are the available API commands for Slate:
 
-`start [--env=development]`
+`start [--env=my-custom-env-name]`
 
 * Starts the webpack-dev-server, deploys a first build to Shopify and launches the theme preview site
 * Will serve assets on `https://localhost:8080`
-* (Optional) You can pass it one of the `shopify.yml`'s environments as a flag; it will default to `development` environment
+* (Optional) You can pass it an environment as a flag; e.g. `--env=my-custom-env-name` would look for `.env.my-custom-env-name` file
 
 `build`
 
 * Builds a production-ready version of the theme and outputs it to the `dist` folder
 
-`deploy [--env=development]`
+`deploy [--env=my-custom-env-name]`
 
 * Push the compiled theme from the `dist` folder to Shopify
-* (Optional) You can pass it an environment as a flag; it will default to `.env` environment
+* (Optional) You can pass it an environment as a flag; e.g. `--env=my-custom-env-name` would look for `.env.my-custom-env-name` file
 
 `zip`
 
