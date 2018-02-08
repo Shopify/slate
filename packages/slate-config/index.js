@@ -5,7 +5,7 @@ const validate = require('./validate');
 let errors = [];
 let warnings = [];
 
-function getSlateRc() {
+function getSlateConfig() {
   try {
     const slateRcPath = resolveTheme('slate.config.js');
     return require(slateRcPath);
@@ -14,7 +14,7 @@ function getSlateRc() {
   }
 }
 
-function generate(schema, slaterc = getSlateRc()) {
+function generate(schema, slaterc = getSlateConfig()) {
   const items = schema.items || [];
   const config = {};
 
@@ -50,5 +50,5 @@ function resolveTheme(relativePath) {
 module.exports = {
   generate,
   resolveTheme,
-  getSlateRc,
+  getSlateConfig,
 };
