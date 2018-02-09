@@ -1,6 +1,6 @@
 const validate = require('../validate');
 const schema = require('./fixtures/schema');
-const slaterc = require('./fixtures/slaterc.json');
+const slaterc = require('./fixtures/slate.config.js');
 
 describe('validate()', () => {
   test('returns an validation results', () => {
