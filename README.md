@@ -121,7 +121,7 @@ yarn create slate-theme my-new-theme t-kelly/custom-starter-theme
 
 #### Multiple API Credentials
 
-Slate uses environment variables and `.env` files to manage API credentials for connecting to Shopify stores. For more inflormation, take a look at the [`slate-env` README](https://github.com/Shopify/slate/tree/v1.0.0-pre-alpha/packages/slate-env).
+Slate uses environment variables and `.env` files to manage API credentials for connecting to Shopify stores. For more inflormation, take a look at the [`slate-env` README](https://github.com/Shopify/slate/tree/1.x/packages/slate-env).
 
 #### Safe Watch and Deploy
 
