@@ -1,11 +1,9 @@
 {
   "name": "@shopify/slate-common-excludes",
-  "version": "1.0.0-alpha.19",
-  "description":
-    "Common file exclusions used accross the Webpack build config.",
+  "version": "1.0.0-alpha.20",
+  "description": "Common file exclusions used accross the Webpack build config.",
   "main": "index.js",
-  "repository":
-    "https://github.com/Shopify/slate/tree/1.x/packages/slate-common-excludes",
+  "repository": "https://github.com/Shopify/slate/tree/1.x/packages/slate-common-excludes",
   "author": "Shopify Inc.",
   "license": "MIT",
   "bugs": {
@@ -13,6 +11,6 @@
   },
   "homepage": "https://github.com/shopify/slate#readme",
   "dependencies": {
-    "@shopify/slate-config": "^1.0.0-alpha.19"
+    "@shopify/slate-config": "^1.0.0-alpha.20"
   }
 }

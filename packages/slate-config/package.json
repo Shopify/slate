@@ -1,8 +1,7 @@
 {
   "name": "@shopify/slate-config",
-  "version": "1.0.0-alpha.19",
-  "description":
-    "Generate configurations for Slate packages by applying values from slate.config.js to override default values",
+  "version": "1.0.0-alpha.20",
+  "description": "Generate configurations for Slate packages by applying values from slate.config.js to override default values",
   "main": "index.js",
   "repository": "https://github.com/Shopify/slate/tree/1.x/packages/slate-config",
   "author": "Shopify Inc.",

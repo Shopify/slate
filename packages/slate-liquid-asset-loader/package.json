@@ -1,11 +1,9 @@
 {
   "name": "@shopify/slate-liquid-asset-loader",
-  "version": "1.0.0-alpha.19",
-  "description":
-    "Parses liquid files, searching for assets that are piped to `asset_url` and transforming them into `require()` call so that images are run through the correct loader and their name are fingerprinted.",
+  "version": "1.0.0-alpha.20",
+  "description": "Parses liquid files, searching for assets that are piped to `asset_url` and transforming them into `require()` call so that images are run through the correct loader and their name are fingerprinted.",
   "main": "index.js",
-  "repository":
-    "https://github.com/Shopify/slate/tree/1.x/packages/slate-liquid-asset-loader",
+  "repository": "https://github.com/Shopify/slate/tree/1.x/packages/slate-liquid-asset-loader",
   "author": "Shopify Inc.",
   "license": "MIT",
   "bugs": {

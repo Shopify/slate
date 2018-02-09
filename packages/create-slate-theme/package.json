@@ -1,13 +1,12 @@
 {
   "name": "create-slate-theme",
-  "version": "1.0.0-alpha.19",
+  "version": "1.0.0-alpha.20",
   "description": "Create a new slate project from an existing slate theme repo",
   "main": "index.js",
   "author": "Shopify Inc.",
   "homepage": "https://github.com/shopify/slate",
   "engine": ">=8.9.4",
-  "repository":
-    "https://github.com/Shopify/slate/tree/1.x/packages/create-slate-theme",
+  "repository": "https://github.com/Shopify/slate/tree/1.x/packages/create-slate-theme",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/shopify/slate/issues"
@@ -16,8 +15,8 @@
     "create-slate-theme": "./index.js"
   },
   "dependencies": {
-    "@shopify/slate-analytics": "^1.0.0-alpha.19",
-    "@shopify/slate-env": "^1.0.0-alpha.19",
+    "@shopify/slate-analytics": "^1.0.0-alpha.20",
+    "@shopify/slate-env": "^1.0.0-alpha.20",
     "chalk": "^2.3.0",
     "commander": "^2.12.2",
     "execa": "^0.8.0",
