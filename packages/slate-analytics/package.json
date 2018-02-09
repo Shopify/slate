@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate-analytics",
-  "version": "1.0.0-alpha.20",
+  "version": "1.0.0-alpha.21",
   "description": "Slate's analytics controller and event emitter",
   "main": "index.js",
   "scripts": {
@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/shopify/slate#readme",
   "dependencies": {
-    "@shopify/slate-error": "^1.0.0-alpha.20",
-    "@shopify/slate-rc": "^1.0.0-alpha.20",
+    "@shopify/slate-error": "^1.0.0-alpha.21",
+    "@shopify/slate-rc": "^1.0.0-alpha.21",
     "axios": "^0.17.1",
     "chalk": "^2.3.0",
     "inquirer": "^5.0.1",
