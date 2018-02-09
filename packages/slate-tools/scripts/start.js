@@ -71,23 +71,37 @@ const assetsHash = {};
  * @param   assets  Object   Assets obejct from webpack stats.compilation object
  * @return          Array
  */
-function getFilesFromAssets(assets) {
+function getFilesFromAssets(stats) {
+  const assets = stats.compilation.assets;
   let files = [];
 
   Object.keys(assets).forEach(key => {
+    if (key === 'static.js') {
+      return;
+    }
+
     const asset = assets[key];
 
     if (asset.emitted && fs.existsSync(asset.existsAt)) {
-      const source = asset.source();
-      const assetSource = Array.isArray(source) ? source.join('\n') : source;
-      const assetHash = createHash('sha256')
-        .update(assetSource)
-        .digest('hex');
+      if (key === 'scripts.js') {
+        const assetHash = stats.compilation.chunks[0].hash;
 
-      // new file, or existing one that changed
-      if (!assetsHash[key] || assetsHash[key] !== assetHash) {
-        files = [...files, asset.existsAt.replace(config.paths.dist, '')];
-        assetsHash[key] = assetHash;
+        if (!assetsHash[key] || assetsHash[key] !== assetHash) {
+          files = [...files, asset.existsAt.replace(config.paths.dist, '')];
+          assetsHash[key] = assetHash;
+        }
+      } else {
+        const source = asset.source();
+        const assetSource = Array.isArray(source) ? source.join('\n') : source;
+        const assetHash = createHash('sha256')
+          .update(assetSource)
+          .digest('hex');
+
+        // new file, or existing one that changed
+        if (!assetsHash[key] || assetsHash[key] !== assetHash) {
+          files = [...files, asset.existsAt.replace(config.paths.dist, '')];
+          assetsHash[key] = assetHash;
+        }
       }
     }
   });
@@ -161,11 +175,18 @@ compiler.plugin('done', async stats => {
   }
 
   // files we'll upload
-  const files = getFilesFromAssets(stats.compilation.assets);
+  const files = getFilesFromAssets(stats);
 
   if (!files.length) {
     return;
   }
+
+  // files.forEach(file => {
+  //   console.log(`\t${file}`);
+  // });
+  // console.log('\n');
+
+  const liquidFiles = files.filter(file => path.extname(file) === '.liquid');
 
   if (isFirstCompilation && argv.skipFirstDeploy) {
     isFirstCompilation = false;
@@ -218,6 +239,7 @@ compiler.plugin('done', async stats => {
         // Notify the HMR client that we finished uploading files to Shopify
         return hotMiddleware.publish({
           action: 'shopify_upload_finished',
+          force: liquidFiles.length > 0,
         });
       })
       .catch(error => {
