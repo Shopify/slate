@@ -2,6 +2,7 @@
 
 const uuidGenerator = require('uuid/v4');
 const {performance} = require('perf_hooks');
+const clearConsole = require('react-dev-utils/clearConsole');
 const rc = require('@shopify/slate-rc');
 const axios = require('axios');
 const prompt = require('./prompt');
@@ -37,6 +38,9 @@ async function init() {
       });
       event('slate-analytics:renew-consent-true', config);
     }
+
+    clearConsole();
+    console.log(`Thanks for helping improve the Slate development experience!`);
 
     rc.update(config);
   }

@@ -1,14 +1,17 @@
 # @shopify/slate-tools
 
+Slate Tools provides developers with a sophisticated development experience to build top-notch themes.
+
 ## Using the Tool
 
 ### Not Global
 
 There are [various compelling reasons](https://www.smashingmagazine.com/2016/01/issue-with-global-node-npm-packages/) why we should not rely on global npm packages.
 
-To have access to Slate's CLI commands, you then have two options:
+To have access to Slate's CLI commands, you then have three options:
 
 * In the terminal, append the path to your local package to the command like so: `./node_modules/.bin/slate-tools command`
+* Use [npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b): `npx slate-tools command`
 * In the `package.json` file, you can create yarn/npm scripts to proxy the commands, like this:
 
   ```
@@ -45,17 +48,6 @@ Here are the available API commands for Slate:
 * Zips the contents of `dist` to a archive in the root folder.
 
 ## Caveats
-
-### How to generate a local SSH certificate
-
-In order to be able to use local assets in Shopify's environment, you will need to allow your browser to use `https://localhost:8080` as a safe URL.
-
-To do so, you must:
-
-1. Launch the webpack-dev-server; it will launch the Shopify's theme preview, but will not accept assets coming from `localhost`
-2. Navigate to `https://localhost:8080` in the same browser you intend to use for development
-3. Discard the warning and proceed to the URL; you will see an error page, but it's cool
-4. Go back to the Shopify's theme preview and you should now have local assets working on the distant server
 
 ### How to prevent Webpack from parsing some liquid methods and filters
 

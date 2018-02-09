@@ -19,7 +19,7 @@ create-slate-theme my-new-theme
 
 ## Custom Starting Points
 
-Instead of using [shopify/starter-theme](https://github.com/Shopify/starter-theme), you can alternatively specify your own Github repo or local folder to copy as a starting point:
+Instead of using [shopify/starter-theme](https://github.com/Shopify/starter-theme), you can optionally specify your own Github repo or local folder to copy as a starting point:
 
 ```
 yarn create slate-theme my-new-theme shopify/skeleton-theme

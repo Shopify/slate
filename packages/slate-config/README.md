@@ -1,6 +1,6 @@
 # @shopify/slate-config
 
-Generates configurations for Slate packages by applying values from slate.config.js to override default values.
+Generates configurations for Slate packages by applying values from `slate.config.js` to override default values.
 
 An example config file from `@shopify/slate-babel`:
 

@@ -1,4 +1,7 @@
 const inquirer = require('inquirer');
+const clearConsole = require('react-dev-utils/clearConsole');
+const wrap = require('word-wrap');
+const chalk = require('chalk');
 
 const question = {
   type: 'input',
@@ -13,10 +16,18 @@ const question = {
 };
 
 function forNewConsent() {
+  clearConsole();
   console.log(
-    'Welcome to Slate! During the alpha, we would like to gather usage statistics, such as interactions with Slate commands, performance reports, and error occurances. The data does not include any sensitive information. The detailed list of data we gather can be found at:',
+    wrap(
+      '👋  Welcome to Slate! During the alpha, we would like to gather usage analytics, such as interactions with Slate commands, performance reports, and error occurances. The data does not include any sensitive information. The detailed list of data we gather can be found at:',
+      {width: 80, indent: ''},
+    ),
   );
-  console.log('\n  https://slate.shopify.com/analytics');
+  console.log(
+    chalk.cyan(
+      '\n  https://github.com/Shopify/slate/tree/1.x/packages/slate-analytics',
+    ),
+  );
   console.log();
 
   question.message = 'To continue, please enter your email address:';
@@ -26,9 +37,13 @@ function forNewConsent() {
 
 function forUpdatedConsent(email) {
   console.log(
-    "It looks like you've recently upgraded Slate and this new version has some changes to tracking and we need to get your updated consent decision before proceed. The list of updates can be found at:",
+    "It looks like you've recently upgraded Slate and this new version has some changes to tracking and we need to get your updated consent decision before proceed. During the alpha, we would like to gather usage analytics, such as interactions with Slate commands, performance reports, and error occurances. The data does not include any sensitive information. The list of updates can be found at:",
   );
-  console.log('\n  https://slate.shopify.com/analytics');
+  console.log(
+    chalk.cyan(
+      '\n  https://github.com/Shopify/slate/tree/1.x/packages/slate-analytics',
+    ),
+  );
   console.log();
 
   question.message = 'To continue, please confirm your email address:';

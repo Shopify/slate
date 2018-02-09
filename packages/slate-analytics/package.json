@@ -17,11 +17,14 @@
   },
   "homepage": "https://github.com/shopify/slate#readme",
   "dependencies": {
-    "@shopify/slate-rc": "^1.0.0-alpha.19",
     "@shopify/slate-error": "^1.0.0-alpha.19",
+    "@shopify/slate-rc": "^1.0.0-alpha.19",
     "axios": "^0.17.1",
+    "chalk": "^2.3.0",
     "inquirer": "^5.0.1",
-    "uuid": "^3.2.1"
+    "react-dev-utils": "^5.0.0",
+    "uuid": "^3.2.1",
+    "word-wrap": "^1.2.3"
   },
   "devDependencies": {
     "mock-fs": "^4.4.2",

@@ -25,7 +25,7 @@ module.exports = async function createSlateTheme(name, starter, flags) {
     verbose: options.verbose,
   });
 
-  console.log(`Creating a new Slate theme in: ${chalk.green(root)}.`);
+  console.log(`\nCreating a new Slate theme in: ${chalk.green(root)}.`);
 
   await getStarterTheme(root, starter, options.verbose);
   await env.create({root});

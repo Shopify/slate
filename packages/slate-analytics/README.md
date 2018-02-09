@@ -2,7 +2,7 @@
 
 Emits Slate usage events, performance data, and errors to Shopify analytics platform. Also manages user consent for collecting data while using Slate.
 
-Consent is always asked for new users or if the data we collect has changed and may result in a potential change in concent. The goal of Slate analytics is to collect non-sensitive, real user metrics which will be used to improve Slate's development experience.
+Consent is always asked for new users or if the data we collect has changed in a manor that requires a reconfirmation of concent. The goal of Slate analytics is to collect non-sensitive, real user metrics which will be used to improve Slate's development experience.
 
 ### Data Collected
 
