@@ -27,6 +27,7 @@ async function init() {
         tracking: true,
         trackingVersion: packageJson.trackingVersion,
       });
+      rc.update(config);
       event('slate-analytics:new-user', config);
     } else {
       // If existing user an needs to update consent
@@ -36,13 +37,12 @@ async function init() {
         tracking: true,
         trackingVersion: packageJson.trackingVersion,
       });
+      rc.update(config);
       event('slate-analytics:renew-consent-true', config);
     }
 
     clearConsole();
     console.log(`Thanks for helping improve the Slate development experience!`);
-
-    rc.update(config);
   }
 
   return config;
