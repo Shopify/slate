@@ -65,6 +65,12 @@ To start developing your theme with Slate's development pipeline, call:
 yarn start
 ```
 
+By default, Slate will look for a `.env` file with environment variables. Alternatively, users can specify `--env` with `yarn start` to use associated `.env.{env}` file. For example, the following will look for a `.env.production` file.
+
+```
+yarn start --env=production
+```
+
 This will boot up a local express server and serve most of your assets from `https://localhost:8080`.
 
 > ⓘ Because we are running localhost on `https` you will need to visit this URL at least once and tell your browser to trust it, otherwise local assets will be blocked. Alternatively, you could [create a trusted SSL certificate for localhost](#how-to-create-a-trusted-local-ssl-certificate).
