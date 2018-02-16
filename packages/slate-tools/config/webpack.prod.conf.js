@@ -76,10 +76,10 @@ module.exports = merge(
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
             use: [
-              {loader: '@shopify/slate-cssvar-loader'},
+              { loader: '@shopify/slate-cssvar-loader' },
               {
                 loader: 'css-loader',
-                options: {importLoaders: 2, sourceMap: true},
+                options: { importLoaders: 2, sourceMap: true },
               },
               {
                 loader: 'postcss-loader',
@@ -89,7 +89,7 @@ module.exports = merge(
                   plugins: [autoprefixer, cssnano],
                 },
               },
-              {loader: 'sass-loader', options: {sourceMap: true}},
+              { loader: 'sass-loader', options: { sourceMap: true } },
             ],
           }),
         },
@@ -104,7 +104,7 @@ module.exports = merge(
       }),
 
       new webpack.DefinePlugin({
-        'process.env': {NODE_ENV: '"production"'},
+        'process.env': { NODE_ENV: '"production"' },
       }),
 
       new UglifyJSPlugin({
@@ -139,7 +139,9 @@ module.exports = merge(
       }),
 
       new SlateLiquidAssetsPlugin(),
-      new SlateTagPlugin(packageJson.version),
+      // This Plugin is currently breaking settings_schema.json validation.
+      // Commenting out until its fixed.
+      // new SlateTagPlugin(packageJson.version),
 
       // split node_modules/vendors into their own file
       new webpack.optimize.CommonsChunkPlugin({
