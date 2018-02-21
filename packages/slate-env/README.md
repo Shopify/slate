@@ -15,14 +15,14 @@ will look for a `.env.production` file.
 ## Default .env file format
 
 ```bash
+# The myshopify.com URL to your Shopify store
+SLATE_STORE=
+
 # The API password generated from a Private App
 SLATE_PASSWORD=
 
-# The ID of the theme you wish to upload files too.
+# The ID of the theme you wish to upload files too
 SLATE_THEME_ID=
-
-# The myshopify.com URL to your Shopify store.
-SLATE_STORE=
 
 # A list of file patterns to ignore, with each list item seperated by ':'
 SLATE_IGNORE_FILES=

@@ -36,27 +36,27 @@ module.exports = slateConfig.generate({
     {
       id: 'envStoreVar',
       default: 'SLATE_STORE',
-      description: 'The environment variable used to reference the store URL',
+      description: 'The myshopify.com URL to your Shopify store',
       type: 'string',
     },
     {
       id: 'envPasswordVar',
       default: 'SLATE_PASSWORD',
       description:
-        'The environment variable used to reference the store API password',
+        'The API password generated from a Private App',
       type: 'string',
     },
     {
       id: 'envThemeIdVar',
       default: 'SLATE_THEME_ID',
-      description: 'The environment variable used to reference the store URL',
+      description: 'The ID of the theme you wish to upload files too',
       type: 'string',
     },
     {
       id: 'envIgnoreFilesVar',
       default: 'SLATE_IGNORE_FILES',
       description:
-        'The environment variable used to reference a list of files, seperated by ":", to ignore',
+        'A list of file patterns to ignore, with each list item seperated by \':\'',
       type: 'string',
     },
   ],

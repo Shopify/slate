@@ -39,6 +39,8 @@ function generate(schema, slaterc = getSlateConfig()) {
     }
   });
 
+  config.__schema = schema;
+
   return config;
 }
 
