@@ -20,5 +20,12 @@ describe('.generate()', () => {
         'override-value',
       );
     });
+
+    test('with the schema used to generate the config', () => {
+      const config = slateConfig.generate(schema);
+
+      expect(config).toHaveProperty('__schema');
+      expect(config.__schema).toEqual(schema);
+    })
   });
 });
