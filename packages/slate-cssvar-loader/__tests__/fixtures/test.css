@@ -1,6 +1,7 @@
 .heading {
   color: var(--headings_color);
   background-color: '#FF00FF';
+  letter-spacing: var(--letter_spacing);
 }
 
 .title {

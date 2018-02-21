@@ -5,7 +5,7 @@ const config = require('./slate-cssvar-loader.config');
 
 const STYLE_BLOCK_REGEX = /(?:<style>|\{% style %\})([\S\s]*?)(?:<\/style>|\{% endstyle %\})/g;
 const CSS_VAR_FUNC_REGEX = /var\(--(.*?)\)/g;
-const CSS_VAR_DECL_REGEX = /--(.*?):\s+(\{\{\s*.*?\s*\}\}).*?;/g;
+const CSS_VAR_DECL_REGEX = /--(.*?):\s*(\{\{\s*.*?\s*\}\}.*?);/g;
 
 class SlateException {
   constructor(message) {
