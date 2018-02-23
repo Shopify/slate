@@ -28,11 +28,11 @@ module.exports = {
   src: resolveApp('src'),
   vendors: resolveApp('src/assets/vendors'),
   svgs: resolveApp('src/assets/svg'),
-  lib: resolveSelf('lib'),
+  webpack: resolveSelf('tools/webpack'),
   layouts: resolveApp('src/layout'),
   entrypoints: {
     scripts: resolveApp('src/assets/scripts/theme.js'),
-    static: resolveSelf('lib/static-files-glob.js'),
+    static: resolveSelf('tools/webpack/static-files-glob.js'),
   },
   assetsOutput: resolveApp('dist/assets'),
   snippetsOutput: resolveApp('dist/snippets'),

@@ -4,8 +4,8 @@
  * If the `deploy` argument has been passed, deploy to Shopify when the compilation is done.
  */
 const webpack = require('webpack');
-const {event} = require('@shopify/slate-analytics');
-const webpackConfig = require('../config/webpack.prod.conf');
+const { event } = require('@shopify/slate-analytics');
+const webpackConfig = require('../tools/webpack/config/prod');
 const packageJson = require('../package.json');
 
 event('slate-tools:build:start', {

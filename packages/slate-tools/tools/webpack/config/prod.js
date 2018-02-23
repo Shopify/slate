@@ -13,10 +13,10 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 const commonExcludes = require('@shopify/slate-common-excludes');
 const SlateLiquidAssetsPlugin = require('@shopify/html-webpack-liquid-asset-tags-plugin');
 const SlateTagPlugin = require('@shopify/slate-tag-webpack-plugin');
-const webpackConfig = require('./webpack.base.conf');
-const userWebpackConfig = require('../lib/get-user-webpack-config')('prod');
-const config = require('../config');
-const packageJson = require('../package.json');
+const webpackCoreConfig = require('./core');
+const userWebpackConfig = require('../get-user-webpack-config')('prod');
+const config = require('../../../config');
+const packageJson = require('../../../package.json');
 
 function eslintLoader() {
   if (!fs.existsSync(config.paths.eslint.rc)) {
@@ -62,7 +62,7 @@ function stylelintLoader() {
 }
 
 module.exports = merge(
-  webpackConfig,
+  webpackCoreConfig,
   {
     devtool: 'hidden-source-map',
 
