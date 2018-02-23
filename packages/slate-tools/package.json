@@ -9,7 +9,7 @@
     "url": "https://github.com/Shopify/slate/issues"
   },
   "bin": {
-    "slate-tools": "./cli.js"
+    "slate-tools": "./cli/index.js"
   },
   "engine": ">=8.9.4",
   "dependencies": {
