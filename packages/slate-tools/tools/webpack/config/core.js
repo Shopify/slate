@@ -5,8 +5,9 @@ const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const commonExcludes = require('@shopify/slate-common-excludes');
 const babelLoader = require('@shopify/slate-babel');
-const config = require('../../../config');
-const paths = require('../../../config/paths');
+const config = require('../../../slate-tools.config');
+
+const paths = config.paths;
 
 const isDevServer = process.argv[3] === 'start';
 
@@ -18,7 +19,7 @@ const isDevServer = process.argv[3] === 'start';
  */
 
 function replaceCtxRequest(request) {
-  return context => Object.assign(context, { request });
+  return context => Object.assign(context, {request});
 }
 
 function contextReplacementPlugins() {
@@ -32,24 +33,30 @@ function contextReplacementPlugins() {
   ];
 
   if (fs.existsSync(paths.vendors)) {
-    plugins.push(new webpack.ContextReplacementPlugin(
-      /__appvendors__/,
-      replaceCtxRequest(paths.vendors),
-    ))
+    plugins.push(
+      new webpack.ContextReplacementPlugin(
+        /__appvendors__/,
+        replaceCtxRequest(paths.vendors),
+      ),
+    );
   }
 
   if (fs.existsSync(paths.images)) {
-    plugins.push(new webpack.ContextReplacementPlugin(
-      /__appimages__/,
-      replaceCtxRequest(paths.images),
-    ));
+    plugins.push(
+      new webpack.ContextReplacementPlugin(
+        /__appimages__/,
+        replaceCtxRequest(paths.images),
+      ),
+    );
   }
 
   if (fs.existsSync(paths.fonts)) {
-    plugins.push(new webpack.ContextReplacementPlugin(
-      /__appfonts__/,
-      replaceCtxRequest(paths.fonts),
-    ));
+    plugins.push(
+      new webpack.ContextReplacementPlugin(
+        /__appfonts__/,
+        replaceCtxRequest(paths.fonts),
+      ),
+    );
   }
 
   return plugins;
@@ -91,8 +98,8 @@ module.exports = {
         test: config.regex.images,
         exclude: commonExcludes(),
         use: [
-          { loader: 'file-loader', options: { name: '[name].[ext]' } },
-          { loader: 'img-loader' },
+          {loader: 'file-loader', options: {name: '[name].[ext]'}},
+          {loader: 'img-loader'},
         ],
       },
       {
@@ -126,7 +133,7 @@ module.exports = {
         exclude: commonExcludes(),
         loader: `extract-loader!@shopify/slate-liquid-asset-loader?dev-server=${
           isDevServer ? 'true' : 'false'
-          }`,
+        }`,
       },
     ],
   },

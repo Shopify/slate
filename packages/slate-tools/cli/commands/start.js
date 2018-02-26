@@ -20,17 +20,17 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const openBrowser = require('react-dev-utils/openBrowser');
 const clearConsole = require('react-dev-utils/clearConsole');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
-const { event } = require('@shopify/slate-analytics');
-const { sync } = require('@shopify/slate-sync');
+const {event} = require('@shopify/slate-analytics');
+const {sync} = require('@shopify/slate-sync');
 const slateEnv = require('@shopify/slate-env');
 
-const config = require('../config');
+const config = require('../../slate-tools.config');
 const webpackConfig = require('../tools/webpack/config/dev');
 const setEnvironment = require('../lib/set-slate-env');
 const promptIfPublishedTheme = require('../lib/prompt-if-published-theme');
-const packageJson = require('../package.json');
+const packageJson = require('../../package.json');
 
-event('slate-tools:start:start', { version: packageJson.version, webpackConfig });
+event('slate-tools:start:start', {version: packageJson.version, webpackConfig});
 
 setEnvironment(argv.env);
 
@@ -213,11 +213,11 @@ compiler.plugin('done', async stats => {
       chalk.magenta(`\n${figures.arrowUp}  Uploading to Shopify...\n`),
     );
 
-    event('slate-tools:start:sync-start', { version: packageJson.version });
+    event('slate-tools:start:sync-start', {version: packageJson.version});
 
     sync(files)
       .then(() => {
-        event('slate-tools:start:sync-end', { version: packageJson.version });
+        event('slate-tools:start:sync-end', {version: packageJson.version});
 
         process.stdout.write(consoleControl.previousLine(4));
         process.stdout.write(consoleControl.eraseData());

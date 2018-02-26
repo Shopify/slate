@@ -15,7 +15,7 @@ const SlateLiquidAssetsPlugin = require('@shopify/html-webpack-liquid-asset-tags
 const SlateTagPlugin = require('@shopify/slate-tag-webpack-plugin');
 const webpackCoreConfig = require('./core');
 const userWebpackConfig = require('../get-user-webpack-config')('prod');
-const config = require('../../../config');
+const config = require('../../../slate-tools.config');
 const packageJson = require('../../../package.json');
 
 function eslintLoader() {
@@ -76,10 +76,10 @@ module.exports = merge(
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
             use: [
-              { loader: '@shopify/slate-cssvar-loader' },
+              {loader: '@shopify/slate-cssvar-loader'},
               {
                 loader: 'css-loader',
-                options: { importLoaders: 2, sourceMap: true },
+                options: {importLoaders: 2, sourceMap: true},
               },
               {
                 loader: 'postcss-loader',
@@ -89,7 +89,7 @@ module.exports = merge(
                   plugins: [autoprefixer, cssnano],
                 },
               },
-              { loader: 'sass-loader', options: { sourceMap: true } },
+              {loader: 'sass-loader', options: {sourceMap: true}},
             ],
           }),
         },
@@ -104,7 +104,7 @@ module.exports = merge(
       }),
 
       new webpack.DefinePlugin({
-        'process.env': { NODE_ENV: '"production"' },
+        'process.env': {NODE_ENV: '"production"'},
       }),
 
       new UglifyJSPlugin({

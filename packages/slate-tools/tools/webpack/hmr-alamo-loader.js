@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-const config = require('../config');
+const config = require('../../slate-tools.config');
 
 const jsEntries = Object.keys(config.paths.entrypoints).reduce((carry, key) => {
   const entry = config.paths.entrypoints[key];

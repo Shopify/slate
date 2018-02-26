@@ -7,7 +7,7 @@ const autoprefixer = require('autoprefixer');
 const commonExcludes = require('@shopify/slate-common-excludes');
 const webpackCoreConfig = require('./core');
 const userWebpackConfig = require('../get-user-webpack-config')('dev');
-const config = require('../../../config');
+const config = require('../../../slate-tools.config');
 
 // so that everything is absolute
 webpackCoreConfig.output.publicPath = `${config.domain}:${config.port}/`;
@@ -42,7 +42,7 @@ module.exports = merge(
               // styles using a <link> tag instead of <style> tag. This causes
               // a FOUC content, which can cause issues with JS that is reading
               // the DOM for styles (width, height, visibility) on page load.
-              options: { importLoaders: 2, sourceMap: false },
+              options: {importLoaders: 2, sourceMap: false},
             },
             {
               loader: 'postcss-loader',
@@ -52,7 +52,7 @@ module.exports = merge(
                 plugins: () => [autoprefixer],
               },
             },
-            { loader: 'sass-loader', options: { sourceMap: false } },
+            {loader: 'sass-loader', options: {sourceMap: false}},
           ],
         },
       ],
@@ -60,7 +60,7 @@ module.exports = merge(
 
     plugins: [
       new webpack.DefinePlugin({
-        'process.env': { NODE_ENV: '"development"' },
+        'process.env': {NODE_ENV: '"development"'},
       }),
 
       new webpack.HotModuleReplacementPlugin(),

@@ -1,4 +1,5 @@
 module.exports = {
+  id: 'testSchema',
   items: [
     {
       id: 'test-item',

@@ -14,11 +14,9 @@ describe('.generate()', () => {
 
     test('with slaterc overrides', () => {
       const mockSlateRc = require('./fixtures/slate.config.js');
+      const config = slateConfig.generate(schema, mockSlateRc);
 
-      expect(slateConfig.generate(schema, mockSlateRc)).toHaveProperty(
-        schema.items[0].id,
-        'override-value',
-      );
+      expect(config).toHaveProperty(schema.items[0].id, 'override-value');
     });
 
     test('with the schema used to generate the config', () => {
@@ -26,6 +24,6 @@ describe('.generate()', () => {
 
       expect(config).toHaveProperty('__schema');
       expect(config.__schema).toEqual(schema);
-    })
+    });
   });
 });

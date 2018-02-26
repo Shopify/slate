@@ -3,6 +3,7 @@ const path = require('path');
 const os = require('os');
 
 module.exports = slateConfig.generate({
+  id: 'slateRc',
   items: [
     {
       id: 'slateRcPath',
