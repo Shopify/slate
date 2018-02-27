@@ -3,8 +3,7 @@ const chalk = require('chalk');
 const inquirer = require('inquirer');
 const https = require('https');
 const slateEnv = require('@shopify/slate-env');
-const { event } = require('@shopify/slate-analytics');
-const config = require('../config');
+const {event} = require('@shopify/slate-analytics');
 const figures = require('figures');
 
 /**

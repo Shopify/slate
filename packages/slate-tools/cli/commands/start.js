@@ -21,13 +21,12 @@ const openBrowser = require('react-dev-utils/openBrowser');
 const clearConsole = require('react-dev-utils/clearConsole');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const {event} = require('@shopify/slate-analytics');
-const {sync} = require('@shopify/slate-sync');
+const {sync, promptIfPublishedTheme} = require('@shopify/slate-sync');
 const slateEnv = require('@shopify/slate-env');
 
 const config = require('../../slate-tools.config');
-const webpackConfig = require('../tools/webpack/config/dev');
-const setEnvironment = require('../lib/set-slate-env');
-const promptIfPublishedTheme = require('../lib/prompt-if-published-theme');
+const webpackConfig = require('../../tools/webpack/config/dev');
+const setEnvironment = require('../../tools/webpack/set-slate-env');
 const packageJson = require('../../package.json');
 
 event('slate-tools:start:start', {version: packageJson.version, webpackConfig});

@@ -41,7 +41,10 @@ function _generateConfig(items, overrides) {
 
   items.forEach(item => {
     if (Array.isArray(item.items)) {
-      config[item.id] = _generateConfig(item.items, overrides[item.id]);
+      config[item.id] = _generateConfig(
+        item.items,
+        overrides && overrides[item.id],
+      );
     } else if (overrides && typeof overrides[item.id] !== undefined) {
       config[item.id] = overrides[item.id];
     } else if (item.default !== undefined) {
@@ -58,7 +61,7 @@ function resolveTheme(relativePath) {
 }
 
 function resolveSelf(relativePath) {
-  return path.resolve(__dirname, '../', relativePath);
+  return path.resolve(__dirname, relativePath);
 }
 
 module.exports = {

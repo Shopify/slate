@@ -37,67 +37,70 @@ module.exports = generate({
         },
         {
           id: 'dist',
-          default: resolveApp('dist'),
+          default: resolveTheme('dist'),
         },
         {
           id: 'src',
-          default: resolveApp('src'),
+          default: resolveTheme('src'),
         },
         {
           id: 'vendors',
-          default: resolveApp('src/assets/vendors'),
+          default: resolveTheme('src/assets/vendors'),
         },
         {
           id: 'svgs',
-          default: resolveApp('src/assets/svg'),
+          default: resolveTheme('src/assets/svg'),
         },
         {
           id: 'webpack',
-          default: resolveSelf('tools/webpack'),
+          default: path.resolve(__dirname, 'tools/webpack'),
         },
         {
           id: 'layouts',
-          default: resolveApp('src/layout'),
+          default: resolveTheme('src/layout'),
         },
         {
           id: 'entrypoints',
           items: [
             {
               id: 'scripts',
-              default: resolveApp('src/assets/scripts/theme.js'),
+              default: resolveTheme('src/assets/scripts/theme.js'),
             },
             {
               id: 'static',
-              default: resolveSelf('tools/webpack/static-files-glob.js'),
+              default: path.resolve(
+                __dirname,
+                'tools/webpack/static-files-glob.js',
+              ),
             },
           ],
         },
         {
           id: 'assetsOutput',
-          default: resolveApp('dist/assets'),
+          default: resolveTheme('dist/assets'),
         },
         {
           id: 'snippetsOutput',
-          default: resolveApp('dist/snippets'),
+          default: resolveTheme('dist/snippets'),
         },
         {
           id: 'userShopifyConfig',
-          default: resolveApp('config/shopify.yml'),
+          default: resolveTheme('config/shopify.yml'),
         },
         {
           id: 'eslint',
           items: [
             {
               id: 'rc',
-              default: resolveApp('.eslintrc'),
+              default: resolveTheme('.eslintrc'),
             },
             {
               id: 'bin',
-              default: resolveSelf('node_modules/.bin/eslint'),
+              default: path.resolve(__dirname, 'node_modules/.bin/eslint'),
             },
             {
               id: 'ignore',
-              default: resolveApp('.eslintignore'),
+              default: resolveTheme('.eslintignore'),
             },
           ],
         },
@@ -106,11 +109,11 @@ module.exports = generate({
           items: [
             {
               id: 'app',
-              default: resolveApp('node_modules'),
+              default: resolveTheme('node_modules'),
             },
             {
               id: 'self',
-              default: resolveSelf('node_modules'),
+              default: path.resolve(__dirname, 'node_modules'),
             },
           ],
         },
@@ -119,7 +122,7 @@ module.exports = generate({
           items: [
             {
               id: 'rc',
-              default: resolveApp('.babelrc'),
+              default: resolveTheme('.babelrc'),
             },
           ],
         },
@@ -128,11 +131,32 @@ module.exports = generate({
           items: [
             {
               id: 'rc',
-              default: resolveApp('.stylelintrc'),
+              default: resolveTheme('.stylelintrc'),
+            },
+            {
+              id: 'bin',
+              default: path.resolve(__dirname, 'node_modules/.bin/stylelint'),
             },
             {
               id: 'ignore',
-              default: resolveApp('.stylelintignore'),
+              default: resolveTheme('.stylelintignore'),
+            },
+          ],
+        },
+        {
+          id: 'prettier',
+          items: [
+            {
+              id: 'rc',
+              default: resolveTheme('.prettierrc'),
+            },
+            {
+              id: 'bin',
+              default: path.resolve(__dirname, 'node_modules/.bin/prettier'),
+            },
+            {
+              id: 'ignore',
+              default: resolveTheme('.prettierignore'),
             },
           ],
         },
@@ -151,7 +175,11 @@ module.exports = generate({
         },
         {
           id: 'packageJson',
-          default: resolveApp('package.json'),
+          default: resolveTheme('package.json'),
+        },
+        {
+          id: 'cache',
+          default: resolveTheme('.cache'),
         },
       ],
     },
