@@ -30,4 +30,6 @@ webpack(webpackConfig, (err, stats) => {
       chunkModules: false,
     })}`,
   );
+
+  if (stats.compilation.errors.length) process.exit(1);
 });
