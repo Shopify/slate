@@ -1,3 +1,8 @@
 module.exports = {
-  'test-item': 'override-value',
+  testSchema: {
+    'test-item': 'override-value',
+  },
+  otherSchema: {
+    'other-item': 'other-value',
+  },
 };

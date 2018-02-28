@@ -1,6 +1,7 @@
 const slateConfig = require('@shopify/slate-config');
 
 module.exports = slateConfig.generate({
+  id: 'slateCommonExcludes',
   items: [
     {
       id: 'webpackCommonExcludes',

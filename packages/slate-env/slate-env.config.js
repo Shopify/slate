@@ -1,6 +1,7 @@
 const slateConfig = require('@shopify/slate-config');
 
 module.exports = slateConfig.generate({
+  id: 'slateEnv',
   items: [
     {
       id: 'envRootDir',
@@ -42,8 +43,7 @@ module.exports = slateConfig.generate({
     {
       id: 'envPasswordVar',
       default: 'SLATE_PASSWORD',
-      description:
-        'The API password generated from a Private App',
+      description: 'The API password generated from a Private App',
       type: 'string',
     },
     {
@@ -56,7 +56,7 @@ module.exports = slateConfig.generate({
       id: 'envIgnoreFilesVar',
       default: 'SLATE_IGNORE_FILES',
       description:
-        'A list of file patterns to ignore, with each list item seperated by \':\'',
+        "A list of file patterns to ignore, with each list item seperated by ':'",
       type: 'string',
     },
   ],

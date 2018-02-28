@@ -5,8 +5,8 @@
  */
 const webpack = require('webpack');
 const {event} = require('@shopify/slate-analytics');
-const webpackConfig = require('../config/webpack.prod.conf');
-const packageJson = require('../package.json');
+const webpackConfig = require('../../tools/webpack/config/prod');
+const packageJson = require('../../package.json');
 
 event('slate-tools:build:start', {
   webpackConfig,

@@ -2,7 +2,7 @@
 const prompt = require('react-dev-utils/prompt');
 const themekit = require('@shopify/themekit').command;
 const slateEnv = require('@shopify/slate-env');
-const config = require('../config');
+const config = require('./slate-sync.config');
 
 let deploying = false;
 let filesToDeploy = [];
@@ -138,3 +138,5 @@ module.exports = {
     });
   },
 };
+
+module.exports.promptIfPublishedTheme = require('./prompt-if-published-theme');

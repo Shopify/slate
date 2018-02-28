@@ -1,5 +1,5 @@
 const validate = require('../validate');
-const schema = require('./fixtures/schema');
+const schema = require('./fixtures/testSchema');
 const slaterc = require('./fixtures/slate.config.js');
 
 describe('validate()', () => {

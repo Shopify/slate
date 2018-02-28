@@ -1,5 +1,5 @@
 /* eslint-disable global-require, import/no-dynamic-require */
-const {getSlateConfig} = require('@shopify/slate-config');
+const config = require('../../slate-tools.config');
 
 /**
  * Find and return the user webpack config or an empty object if none is found.
@@ -8,12 +8,6 @@ const {getSlateConfig} = require('@shopify/slate-config');
  * @return        Object
  */
 module.exports = env => {
-  if (!['dev', 'prod'].includes(env)) {
-    return {};
-  }
-
-  const config = getSlateConfig();
-
   if (config.extends && config.extends[env]) {
     return config.extends[env];
   }

@@ -5,22 +5,22 @@ const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const commonExcludes = require('@shopify/slate-common-excludes');
-const webpackConfig = require('./webpack.base.conf');
-const userWebpackConfig = require('../lib/get-user-webpack-config')('dev');
-const config = require('./index');
+const webpackCoreConfig = require('./core');
+const userWebpackConfig = require('../get-user-webpack-config')('dev');
+const config = require('../../../slate-tools.config');
 
 // so that everything is absolute
-webpackConfig.output.publicPath = `${config.domain}:${config.port}/`;
+webpackCoreConfig.output.publicPath = `${config.domain}:${config.port}/`;
 
 // add hot-reload related code to entry chunks
-Object.keys(webpackConfig.entry).forEach(name => {
-  webpackConfig.entry[name] = [
-    path.join(__dirname, '../lib/hot-client.js'),
-  ].concat(webpackConfig.entry[name]);
+Object.keys(webpackCoreConfig.entry).forEach(name => {
+  webpackCoreConfig.entry[name] = [
+    path.join(__dirname, '../hot-client.js'),
+  ].concat(webpackCoreConfig.entry[name]);
 });
 
 module.exports = merge(
-  webpackConfig,
+  webpackCoreConfig,
   {
     devtool: '#eval-source-map',
 

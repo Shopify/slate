@@ -5,10 +5,11 @@ const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const commonExcludes = require('@shopify/slate-common-excludes');
 const babelLoader = require('@shopify/slate-babel');
-const config = require('../config');
-const paths = require('../config/paths');
+const config = require('../../../slate-tools.config');
 
-const isDevServer = process.argv.find(command => command.includes('start'));
+const paths = config.paths;
+
+const isDevServer = process.argv[3] === 'start';
 
 /**
  * Return an array of ContextReplacementPlugin to use.
@@ -32,13 +33,30 @@ function contextReplacementPlugins() {
   ];
 
   if (fs.existsSync(paths.vendors)) {
-    return [
-      ...plugins,
+    plugins.push(
       new webpack.ContextReplacementPlugin(
         /__appvendors__/,
         replaceCtxRequest(paths.vendors),
       ),
-    ];
+    );
+  }
+
+  if (fs.existsSync(paths.images)) {
+    plugins.push(
+      new webpack.ContextReplacementPlugin(
+        /__appimages__/,
+        replaceCtxRequest(paths.images),
+      ),
+    );
+  }
+
+  if (fs.existsSync(paths.fonts)) {
+    plugins.push(
+      new webpack.ContextReplacementPlugin(
+        /__appfonts__/,
+        replaceCtxRequest(paths.fonts),
+      ),
+    );
   }
 
   return plugins;
@@ -58,7 +76,7 @@ module.exports = {
     modules: [
       config.paths.nodeModules.app,
       config.paths.nodeModules.self,
-      config.paths.lib,
+      config.paths.webpack,
     ],
   },
 
@@ -131,14 +149,12 @@ module.exports = {
     ]),
 
     new WriteFileWebpackPlugin({
-      test: /\.(png|svg|jpg|gif|scss)/,
-      useHashIndex: true,
+      test: /\.(png|jpg|gif|scss|jpeg)/,
       log: false,
     }),
 
     new WriteFileWebpackPlugin({
       test: /^(?:(?!hot-update.json$).)*\.(liquid|json)$/,
-      useHashIndex: true,
       log: false,
     }),
   ],

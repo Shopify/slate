@@ -3,7 +3,7 @@ const path = require('path');
 const archiver = require('archiver');
 const chalk = require('chalk');
 const {event} = require('@shopify/slate-analytics');
-const config = require('../config');
+const config = require('../../slate-tools.config');
 
 /**
  * Builds a zip based on an array of directories and files. This
