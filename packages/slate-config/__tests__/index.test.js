@@ -29,7 +29,6 @@ describe('.generate()', () => {
         testSchema.items[0].id,
         mockSlateRc[testSchema.id][testSchema.items[0].id],
       );
-      console.log(config1);
       expect(config2).toHaveProperty(
         otherSchema.items[0].id,
         mockSlateRc[otherSchema.id][otherSchema.items[0].id],

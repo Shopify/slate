@@ -7,6 +7,19 @@ module.exports = generate({
   id: 'slateTools',
   items: [
     {
+      id: 'extends',
+      items: [
+        {
+          id: 'dev',
+          default: {},
+        },
+        {
+          id: 'prod',
+          default: {},
+        },
+      ],
+    },
+    {
       id: 'domain',
       default: 'https://localhost',
     },
