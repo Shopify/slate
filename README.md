@@ -93,7 +93,29 @@ When local SASS compilation is combined with Slate's Local Development Assets Se
 
 To support legacy browsers, Slate includes a transpiler that replaces CSS Variables with matching Liquid Variables as a last step in the production `build` script.
 
-For an example, take a look at `Shopify/starter-theme`.
+For an example, take a look at `Shopify/starter-theme` or contine reading below:
+
+- We define all of our CSS Variables in a snippet called `css-variables.liquid` which is included in the `<head>` of the `theme.liquid file`.
+
+- We create each variable like so, using CSS Custom Properties as described above:
+
+```html
+<style>
+  :root {
+    --color-primary: {{ settings.color_primary }};
+    --color-body-text: {{ settings.color_body_text }}
+    --color-main-background: {{ settings.color_main_bg }};
+  }
+</style>
+```
+- What we did here is create a CSS Custom Variable which is tied to the value from the theme editor (that the client can change). This way we can access these variables in our .scss files:
+
+```scss
+$color-primary: var(--color-primary);
+$color-body: var(--color-main-background);
+```
+
+- In doing so, we successfully linked up the values from the shopify theme editor to our .scss files without the need of using the `.scss.liquid` files which are currently not supported by Slate v1.x
 
 > ⓘ Slate v1.0 currently only supports .scss and .css files. We are working on getting legacy support for `.scss.liquid` and `.css.liquid` files, however they will not be able to take advantage of the features noted above and will rely on Shopify servers for compilation.
 
