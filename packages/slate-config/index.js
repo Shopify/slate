@@ -4,8 +4,8 @@ const validate = require('./validate');
 
 const themeDirectory = fs.realpathSync(process.cwd());
 
-let errors = [];
-let warnings = [];
+const errors = [];
+const warnings = [];
 
 function getSlateConfig() {
   try {
@@ -17,18 +17,6 @@ function getSlateConfig() {
 }
 
 function generate(schema, slaterc = getSlateConfig()) {
-  // Use the schema to validate .slaterc file
-  if (Object.keys(slaterc).length !== 0) {
-    const results = validate(schema, slaterc);
-
-    errors = errors.concat(results.errors);
-    warnings = warnings.concat(results.warnings);
-
-    if (!results.isValid) {
-      throw new Error();
-    }
-  }
-
   // Creates a config object of default or slaterc values
   const config = _generateConfig([schema], slaterc)[schema.id];
   config.__schema = schema;
