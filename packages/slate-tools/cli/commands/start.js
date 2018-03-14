@@ -208,10 +208,6 @@ compiler.plugin('done', async stats => {
       isFirstDeploy = false;
     }
 
-    console.log(
-      chalk.magenta(`\n${figures.arrowUp}  Uploading to Shopify...\n`),
-    );
-
     event('slate-tools:start:sync-start', {version: packageJson.version});
 
     sync(files)

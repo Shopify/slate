@@ -15,10 +15,13 @@
     "@shopify/slate-config": "^1.0.0-alpha.24",
     "@shopify/slate-env": "^1.0.0-alpha.24",
     "@shopify/themekit": "0.6.11",
+    "array-flatten": "^2.1.1",
     "chalk": "1.1.3",
     "figures": "^2.0.0",
     "inquirer": "^5.0.1",
     "jest": "20.0.3",
-    "react-dev-utils": "0.5.2"
+    "minimatch": "^3.0.4",
+    "react-dev-utils": "0.5.2",
+    "word-wrap": "^1.2.3"
   }
 }
