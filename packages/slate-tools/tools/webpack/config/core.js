@@ -74,8 +74,9 @@ module.exports = {
 
   resolveLoader: {
     modules: [
-      config.paths.nodeModules.app,
       config.paths.nodeModules.self,
+      config.paths.nodeModules.repo,
+      config.paths.nodeModules.app,
       config.paths.webpack,
     ],
   },
@@ -131,7 +132,7 @@ module.exports = {
       {
         test: /\.liquid$/,
         exclude: commonExcludes(),
-        loader: `extract-loader!@shopify/slate-liquid-asset-loader?dev-server=${
+        loader: `@shopify/slate-liquid-asset-loader?dev-server=${
           isDevServer ? 'true' : 'false'
         }`,
       },

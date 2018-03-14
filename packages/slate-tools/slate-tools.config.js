@@ -121,6 +121,10 @@ module.exports = generate({
           id: 'nodeModules',
           items: [
             {
+              id: 'repo',
+              default: path.resolve(__dirname, '../../node_modules'),
+            },
+            {
               id: 'app',
               default: resolveTheme('node_modules'),
             },

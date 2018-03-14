@@ -64,12 +64,11 @@ function stylelintLoader() {
 module.exports = merge(
   webpackCoreConfig,
   {
+    mode: 'production',
     devtool: 'hidden-source-map',
 
     module: {
       rules: [
-        ...eslintLoader(),
-
         {
           test: /\.s[ac]ss$/,
           exclude: commonExcludes(),
@@ -97,8 +96,6 @@ module.exports = merge(
     },
 
     plugins: [
-      ...stylelintLoader(),
-
       new CleanWebpackPlugin(['dist'], {
         root: config.paths.root,
       }),
@@ -139,27 +136,8 @@ module.exports = merge(
       }),
 
       new SlateLiquidAssetsPlugin(),
-      // This Plugin is currently breaking settings_schema.json validation.
-      // Commenting out until its fixed.
+
       new SlateTagPlugin(packageJson.version),
-
-      // split node_modules/vendors into their own file
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks: (module) =>
-          module.resource &&
-          /\.js$/.test(module.resource) &&
-          module.resource.indexOf(
-            path.join(config.paths.root, 'node_modules'),
-          ) === 0,
-      }),
-
-      // extract webpack runtime and module manifest to its own file in order to
-      // prevent vendor hash from being updated whenever app bundle is updated
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'manifest',
-        chunks: ['vendor'],
-      }),
     ],
   },
   userWebpackConfig,
