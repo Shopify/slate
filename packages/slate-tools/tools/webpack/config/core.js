@@ -6,6 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const commonExcludes = require('@shopify/slate-common-excludes');
 const babelLoader = require('@shopify/slate-babel');
 const config = require('../../../slate-tools.config');
+const {entrypointFiles} = require('../entrypoints');
 
 const paths = config.paths;
 
@@ -65,7 +66,7 @@ function contextReplacementPlugins() {
 module.exports = {
   context: paths.src,
 
-  entry: config.paths.entrypoints,
+  entry: Object.assign(entrypointFiles(), config.paths.entrypoints),
 
   output: {
     filename: '[name].js',
@@ -105,12 +106,7 @@ module.exports = {
       },
       {
         test: config.regex.static,
-        // excluding layout/*.liquid files as they are also being emitted by the HtmlWebpackPlugin
-        exclude: commonExcludes(
-          ...fs
-            .readdirSync(config.paths.layouts)
-            .map(filename => `layout/${filename}`),
-        ),
+        exclude: commonExcludes(),
         loader: 'file-loader',
         options: {
           name: '../[path][name].[ext]',
@@ -123,11 +119,6 @@ module.exports = {
         options: {
           name: '[name].[ext]',
         },
-      },
-      {
-        test: /layout\/.*?\.liquid$/,
-        exclude: commonExcludes(),
-        loader: 'raw-loader',
       },
       {
         test: /\.liquid$/,

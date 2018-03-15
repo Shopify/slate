@@ -1,0 +1,7 @@
+<% if (!htmlWebpackPlugin.options.isDevServer) { %>
+  <% for (var css in htmlWebpackPlugin.files.css) { %>
+    <% var basename = htmlWebpackPlugin.files.css[css].split('/').reverse()[0]; %>
+    <% var src = `{{ '${basename}' | asset_url }}` %>
+    <link href="<%= src %>" rel="stylesheet">
+  <% } %>
+<% } %>

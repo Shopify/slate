@@ -1,0 +1,23 @@
+<% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+  <% if (htmlWebpackPlugin.options.isDevServer === true) { %>
+    <% var src = htmlWebpackPlugin.files.chunks[chunk].entry %>
+  <% } else { %>
+    <% var basename = htmlWebpackPlugin.files.chunks[chunk].entry.split('/').reverse()[0]; %>
+    <% var src = `{{ '${basename}' | asset_url }}` %>
+  <% } %>
+
+  <% if (typeof htmlWebpackPlugin.options.liquidTemplates[chunk] !== 'undefined') { %>
+    {%- if template.name == '<%= chunk.split('.')[1] %>' -%}
+      <!--[if (gt IE 9)|!(IE)]><!--><script type="text/javascript" src="<%= src %>" defer></script><!--<![endif]-->
+      <!--[if lte IE 9]><script type="text/javascript" src="<%= src %>"></script><![endif]-->
+    {%- endif -%}
+  <% } else if (typeof htmlWebpackPlugin.options.liquidLayouts[chunk] !== 'undefined') { %>
+    {%- if layout == '<%= chunk.split('.')[1] %>' -%}
+      <!--[if (gt IE 9)|!(IE)]><!--><script type="text/javascript" src="<%= src %>" defer></script><!--<![endif]-->
+      <!--[if lte IE 9]><script type="text/javascript" src="<%= src %>"></script><![endif]-->
+    {%- endif -%}
+  <% } else { %>
+    <!--[if (gt IE 9)|!(IE)]><!--><script type="text/javascript" src="<%= src %>" defer></script><!--<![endif]-->
+    <!--[if lte IE 9]><script type="text/javascript" src="<%= src %>"></script><![endif]-->
+  <% } %>
+<% } %>

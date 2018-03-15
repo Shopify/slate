@@ -61,6 +61,10 @@ module.exports = generate({
           default: resolveTheme('src/assets/vendors'),
         },
         {
+          id: 'scripts',
+          default: resolveTheme('src/assets/scripts'),
+        },
+        {
           id: 'svgs',
           default: resolveTheme('src/assets/svg'),
         },
@@ -73,12 +77,16 @@ module.exports = generate({
           default: resolveTheme('src/layout'),
         },
         {
+          id: 'templates',
+          default: resolveTheme('src/templates'),
+        },
+        {
+          id: 'customersTemplates',
+          default: resolveTheme('src/templates/customers'),
+        },
+        {
           id: 'entrypoints',
           items: [
-            {
-              id: 'scripts',
-              default: resolveTheme('src/assets/scripts/theme.js'),
-            },
             {
               id: 'static',
               default: path.resolve(
