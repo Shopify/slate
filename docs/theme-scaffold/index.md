@@ -43,7 +43,7 @@ Also included is a **Styles** template (`page.styles.liquid`). This is available
 
 ## Sections
 
-Sections are a way of letting merchants control their own layout and appearance in their themes. Read more about [their introduction here](https://www.shopify.com/partners/blog/introducing-sections-for-shopify-themes) and the [full docs here](https://help.shopify.com/themes/development/theme-editor/sections). Slate includes two types of sections.
+Sections are a way of letting merchants control their own layout and appearance in their themes. Read more about [their introduction here](https://www.shopify.com/partners/blog/introducing-sections-for-shopify-themes) and the [full docs here](https://help.shopify.com/themes/development/sections). Slate includes two types of sections.
 
 ### Static sections
 
