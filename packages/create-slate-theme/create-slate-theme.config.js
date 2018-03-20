@@ -8,6 +8,7 @@ module.exports = {
   },
   defaultOptions: {
     skipInstall: false,
+    ssh: false,
   },
   validFiles: [
     '.DS_Store',

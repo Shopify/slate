@@ -29,6 +29,7 @@ program
   .usage(`${chalk.green('<theme-directory>')} [starter-theme] [options]`)
   .arguments('<name> [repo]')
   .option('--skipInstall', 'skip installing theme dependencies')
+  .option('--ssh', 'uses SSH to clone git repo')
   .option('--verbose', 'print additional logs')
   .action((name, starter = config.defaultStarter) => {
     themeName = name;
@@ -59,6 +60,7 @@ function assignOption(key) {
 
 const options = {
   skipInstall: assignOption('skipInstall'),
+  ssh: assignOption('ssh'),
 };
 
 createSlateTheme(themeName, themeStarter, options);

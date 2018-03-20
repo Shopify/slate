@@ -8,6 +8,9 @@ const TEST_INFO = {
   ssh() {
     return 'git@github.com:shopify/test-repo.git';
   },
+  https() {
+    return 'https://github.com/shopify/test-repo';
+  },
 };
 
 function fromUrl(repo) {

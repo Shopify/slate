@@ -47,6 +47,21 @@ test('Calls createSlateTheme with the default repo if process.argv[3] is undefin
   process.argv = args;
 });
 
+test('Registers an --ssh flag and passes it to Create Slate Theme', () => {
+  const config = Object.assign({}, require('../create-slate-theme.config'));
+  const mockArgs = ['node', 'index.js', 'test-project', '--ssh'];
+
+  config.defaultOptions = Object.assign({}, config.defaultOptions, {ssh: true});
+  process.argv = mockArgs;
+
+  require('./../index.js');
+  expect(require('../create-slate-theme')).toHaveBeenCalledWith(
+    mockArgs[2],
+    config.defaultStarter,
+    config.defaultOptions,
+  );
+});
+
 test('Exits if Node version is lower than 8.9.4', () => {
   Object.defineProperty(process.versions, 'node', {
     value: '8.9.3',
