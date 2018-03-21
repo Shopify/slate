@@ -1,5 +1,6 @@
-# Slate v1.0
+![image](https://user-images.githubusercontent.com/4837696/37715098-84a21cb4-2cf1-11e8-8d06-f60055955786.png)
 
+# Slate v1
 [![CircleCI](https://circleci.com/gh/Shopify/slate.svg?style=svg&circle-token=f18ea06638792678e7dbfa1b8413570cd2896dff)](https://circleci.com/gh/Shopify/slate)
 
 > ⚠️ Slate v1.0 is currently an Alpha release. You should expect breaking changes between updates and more bugs than a finalized release. We believe that by getting Slate in the hands of developer communtiy as soon as possible, we can gather more feedback to make it an even bigger success. Slate v1.0 has not yet been tested on Windows.
