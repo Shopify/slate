@@ -174,6 +174,15 @@ module.exports = generate({
           ],
         },
         {
+          id: 'themelint',
+          items: [
+            {
+              id: 'bin',
+              default: path.resolve(__dirname, 'node_modules/.bin/theme-lint'),
+            },
+          ],
+        },
+        {
           id: 'ssl',
           items: [
             {

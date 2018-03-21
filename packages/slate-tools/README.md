@@ -47,6 +47,20 @@ Here are the available API commands for Slate:
 
 * Zips the contents of `dist` to a archive in the root folder.
 
+`lint [--scripts] [--styles] [--locales]`
+
+* Lint script, styles, and locales files for errors. [ESLint](https://eslint.org/) is used for JS files and can be configured via an `.eslintrc` file in the root folder of your theme. [Stylelint](https://stylelint.io/) is used for SCSS, SASS, and CSS files and can be configured via `.stylelintrc` file in the root folder of your theme. [Theme Lint](https://github.com/Shopify/theme-lint) is used for linting locales files.
+* (Optional) You can pass it a `--scripts` flag to only lint script files.
+* (Optional) You can pass it a `--styles` flag to only lint styles files.
+* (Optional) You can pass it a `--locales` flag to only lint locales files.
+
+`format [--scripts] [--styles] [--json]`
+
+* Formats your theme code according to the rules declared in your `.eslintrc` and `.stylelintrc` files. Uses [ESLint Fix](https://eslint.org/docs/user-guide/command-line-interface#--fix) to format JS files. Uses [Stylelint Fix](https://stylelint.io/user-guide/faq/#how-do-i-automatically-fix-stylistic-violations) to format SCSS, SASS, and CSS files. Uses [Prettier](https://github.com/prettier/prettier) to format JSON files.
+* (Optional) You can pass it a `--scripts` flag to only format script files.
+* (Optional) You can pass it a `--styles` flag to only format styles files.
+* (Optional) You can pass it a `--json` flag to only format json files.
+
 ## Caveats
 
 ### How to prevent Webpack from parsing some liquid methods and filters

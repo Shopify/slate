@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const spawn = require('cross-spawn');
 const analytics = require('@shopify/slate-analytics');
-const { getSlateConfig } = require('@shopify/slate-config');
+const {getSlateConfig} = require('@shopify/slate-config');
 const packageJson = require('../package.json');
 
 const script = process.argv[2];
@@ -22,10 +22,12 @@ async function init() {
     case 'deploy':
     case 'start':
     case 'zip':
+    case 'lint':
+    case 'format':
       result = spawn.sync(
         'node',
         [require.resolve(`./commands/${script}`)].concat(args),
-        { stdio: 'inherit' },
+        {stdio: 'inherit'},
       );
       process.exit(result.status);
       break;
