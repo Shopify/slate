@@ -11,7 +11,7 @@ const packageJson = require('./package.json');
 
 module.exports = async function createSlateTheme(name, starter, flags) {
   const root = path.resolve(name);
-  const options = Object.assign(config.defaultOptions, flags);
+  const options = Object.assign({}, config.defaultOptions, flags);
 
   checkAppName(name);
   fs.ensureDirSync(root);
@@ -22,12 +22,12 @@ module.exports = async function createSlateTheme(name, starter, flags) {
     version: packageJson,
     starter,
     skipInstall: options.skipInstall,
-    verbose: options.verbose,
+    ssh: options.ssh,
   });
 
   console.log(`\nCreating a new Slate theme in: ${chalk.green(root)}.`);
 
-  await getStarterTheme(root, starter, options.verbose);
+  await getStarterTheme(root, starter, options.ssh);
   await env.create({root});
   await installThemeDeps(root, options);
 
@@ -123,19 +123,22 @@ function copyFromDir(starter, root) {
 }
 
 // Clones starter from URI.
-function cloneFromGit(hostInfo, root, verbose) {
-  const url = hostInfo.ssh({noCommittish: true});
+function cloneFromGit(hostInfo, root, ssh) {
   const branch = hostInfo.committish ? `-b ${hostInfo.committish}` : '';
-  const options = {stdio: 'pipe'};
+  let url;
 
-  if (verbose) {
-    options.stdio = 'inherit';
+  if (ssh) {
+    url = hostInfo.ssh({noCommittish: true});
+  } else {
+    url = hostInfo.https({noCommittish: true, noGitPlus: true});
   }
 
   console.log(`Cloning theme from a git repo: ${chalk.green(url)}`);
 
   return utils
-    .spawn(`git clone ${branch} ${url} ${root} --single-branch`, options)
+    .spawn(`git clone ${branch} ${url} ${root} --single-branch`, {
+      stdio: 'pipe',
+    })
     .then(() => {
       return fs.remove(path.join(root, '.git'));
     })
@@ -149,11 +152,11 @@ function cloneFromGit(hostInfo, root, verbose) {
     });
 }
 
-function getStarterTheme(root, starter, verbose) {
+function getStarterTheme(root, starter, ssh) {
   const hostedInfo = hostedGitInfo.fromUrl(starter);
 
   if (hostedInfo) {
-    return cloneFromGit(hostedInfo, root, verbose);
+    return cloneFromGit(hostedInfo, root, ssh);
   } else {
     return copyFromDir(starter, root);
   }

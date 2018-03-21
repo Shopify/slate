@@ -7,13 +7,17 @@ const config = require('../create-slate-theme.config');
 const TEST_PROJECT = 'test-project';
 const TEST_STARTER = 'test-repo';
 const TEST_COMMITTISH = '123456';
-const CLONE_COMMAND = `git clone
+const CLONE_HTTPS_COMMAND = `git clone
+  https://github.com/shopify/${TEST_STARTER}
+  ${path.resolve(TEST_PROJECT)}
+  --single-branch`;
+const CLONE_SSH_COMMAND = `git clone
   git@github.com:shopify/${TEST_STARTER}.git
   ${path.resolve(TEST_PROJECT)}
   --single-branch`;
 const CLONE_BRANCH_COMMAND = `git clone
   -b ${TEST_COMMITTISH}
-  git@github.com:shopify/${TEST_STARTER}.git
+  https://github.com/shopify/${TEST_STARTER}
   ${path.resolve(TEST_PROJECT)}
   --single-branch`;
 
@@ -33,10 +37,19 @@ beforeEach(() => {
   execa().mockClear();
 });
 
-test('can clone a theme from a Github repo', async () => {
-  const [file, ...args] = CLONE_COMMAND.split(/\s+/);
+test('can clone a theme from a Git repo using HTTPS', async () => {
+  const [file, ...args] = CLONE_HTTPS_COMMAND.split(/\s+/);
 
   await createSlateTheme('test-project', 'shopify/test-repo');
+
+  expect(fs.existsSync('test-project/package.json')).toBeTruthy();
+  expect(execa()).toHaveBeenCalledWith(file, args, {stdio: 'pipe'});
+});
+
+test('can clone a theme from a Git repo using SSH', async () => {
+  const [file, ...args] = CLONE_SSH_COMMAND.split(/\s+/);
+
+  await createSlateTheme('test-project', 'shopify/test-repo', {ssh: true});
 
   expect(fs.existsSync('test-project/package.json')).toBeTruthy();
   expect(execa()).toHaveBeenCalledWith(file, args, {stdio: 'pipe'});
