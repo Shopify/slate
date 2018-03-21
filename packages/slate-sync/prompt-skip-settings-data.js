@@ -5,7 +5,6 @@ const {event} = require('@shopify/slate-analytics');
 const figures = require('figures');
 const flatten = require('array-flatten');
 const minimatch = require('minimatch');
-const wrap = require('word-wrap');
 
 const config = require('./slate-sync.config');
 
@@ -22,7 +21,7 @@ module.exports = async function(files) {
   if (
     _includesSettingsData(ignoredFiles) ||
     !_includesSettingsData(files) ||
-    !config.promptSkipSettings
+    !config.promptSettings
   ) {
     return Promise.resolve(false);
   }
@@ -33,7 +32,7 @@ module.exports = async function(files) {
     )}  It looks like you are about to upload the ${chalk.bold(
       'settings_data.json',
     )} file.\n` +
-      `   This can reset any theme setting customizations you've done in the\n` +
+      `   This can reset any theme setting customizations you have done in the\n` +
       `   Theme Editor. To always ignore uploading ${chalk.bold(
         'settings_data.json',
       )}, add the\n` +
@@ -46,7 +45,7 @@ module.exports = async function(files) {
     `   Or to disable this prompt, add the following to your slate.config.js file:\n`,
   );
   console.log(
-    `      ${chalk.cyan(`'slate-sync': { promptSkipSettings: false }`)}\n`,
+    `      ${chalk.cyan(`'slate-sync': { promptSettings: false }`)}\n`,
   );
 
   const answer = await inquirer.prompt([question]);

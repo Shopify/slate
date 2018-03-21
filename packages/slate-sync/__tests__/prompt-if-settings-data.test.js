@@ -57,9 +57,9 @@ describe('promptIfSettingsData()', () => {
     expect(inquirer.prompt).toHaveBeenCalledTimes(0);
   });
 
-  test('does not prompt if promptSkipSettings config is set to false', () => {
+  test('does not prompt if promptSettings config is set to false', () => {
     const config = require('../slate-sync.config');
-    config.promptSkipSettings = false;
+    config.promptSettings = false;
 
     const promptIfSettingsData = require('../prompt-skip-settings-data');
     promptIfSettingsData(FILES);

@@ -83,7 +83,7 @@ async function deploy(cmd = '', files = []) {
   return maybeDeploy;
 }
 
-function promiseThemekitConfig(files) {
+function promiseThemekitConfig() {
   return new Promise((resolve, reject) => {
     themekit(
       {
