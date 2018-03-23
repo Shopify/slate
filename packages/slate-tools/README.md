@@ -28,20 +28,22 @@ To have access to Slate's CLI commands, you then have three options:
 
 Here are the available API commands for Slate:
 
-`start [--env=my-custom-env-name]`
+`start [--env=my-custom-env-name] [--skipPrompts]`
 
 * Starts the webpack-dev-server, deploys a first build to Shopify and launches the theme preview site
 * Will serve assets on `https://localhost:8080`
 * (Optional) You can pass it an environment as a flag; e.g. `--env=my-custom-env-name` would look for `.env.my-custom-env-name` file
+* (Optional) You can skip all prompts using the `--skipPrompts` flag. This is especially useful when using Slate Tools in CI.
 
 `build`
 
 * Builds a production-ready version of the theme and outputs it to the `dist` folder
 
-`deploy [--env=my-custom-env-name]`
+`deploy [--env=my-custom-env-name] [--skipPrompts]`
 
 * Push the compiled theme from the `dist` folder to Shopify
 * (Optional) You can pass it an environment as a flag; e.g. `--env=my-custom-env-name` would look for `.env.my-custom-env-name` file
+* (Optional) You can skip all prompts using the `--skipPrompts` flag. This is especially useful when using Slate Tools in CI.
 
 `zip`
 
