@@ -5,6 +5,7 @@ const {event} = require('@shopify/slate-analytics');
 const figures = require('figures');
 const flatten = require('array-flatten');
 const minimatch = require('minimatch');
+const {argv} = require('yargs');
 
 const config = require('./slate-sync.config');
 
@@ -12,8 +13,27 @@ const question = {
   type: 'confirm',
   name: 'ignoreSettingsData',
   message: ' Skip uploading settings_data.json?',
-  default: true,
+  default: false,
 };
+
+function _includesSettingsData(files) {
+  const settingsData = files.filter(file =>
+    file.endsWith('settings_data.json'),
+  );
+  return settingsData.length > 0;
+}
+
+function _filterIgnoredFiles(files) {
+  const envIgnoreGlobs = getIgnoreFilesValue().split(':');
+  return flatten(
+    envIgnoreGlobs.map(glob => {
+      if (glob[0] !== '/') {
+        glob = `/${glob}`;
+      }
+      return files.filter(minimatch.filter(glob));
+    }),
+  );
+}
 
 module.exports = async function(files) {
   const ignoredFiles = _filterIgnoredFiles(files);
@@ -21,9 +41,10 @@ module.exports = async function(files) {
   if (
     _includesSettingsData(ignoredFiles) ||
     !_includesSettingsData(files) ||
-    !config.promptSettings
+    !config.promptSettings ||
+    argv.skipPrompts
   ) {
-    return Promise.resolve(false);
+    return Promise.resolve(question.default);
   }
 
   console.log(
@@ -52,22 +73,3 @@ module.exports = async function(files) {
 
   return answer.ignoreSettingsData;
 };
-
-function _includesSettingsData(files) {
-  const settingsData = files.filter(file =>
-    file.endsWith('settings_data.json'),
-  );
-  return settingsData.length > 0;
-}
-
-function _filterIgnoredFiles(files) {
-  const envIgnoreGlobs = getIgnoreFilesValue().split(':');
-  return flatten(
-    envIgnoreGlobs.map(glob => {
-      if (glob[0] !== '/') {
-        glob = `/${glob}`;
-      }
-      return files.filter(minimatch.filter(glob));
-    }),
-  );
-}

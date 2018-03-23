@@ -21,7 +21,7 @@ const openBrowser = require('react-dev-utils/openBrowser');
 const clearConsole = require('react-dev-utils/clearConsole');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const {event} = require('@shopify/slate-analytics');
-const {sync, promptIfPublishedTheme} = require('@shopify/slate-sync');
+const {sync} = require('@shopify/slate-sync');
 const slateEnv = require('@shopify/slate-env');
 
 const config = require('../../slate-tools.config');
@@ -204,7 +204,6 @@ compiler.plugin('done', async stats => {
     console.log(chalk.magenta('\nWatching for changes...'));
   } else {
     if (isFirstDeploy) {
-      await promptIfPublishedTheme().catch(() => process.exit(0));
       isFirstDeploy = false;
     }
 
