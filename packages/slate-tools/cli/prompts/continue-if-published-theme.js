@@ -33,10 +33,10 @@ function fetchMainThemeId() {
           'X-Shopify-Access-Token': slateEnv.getPasswordValue(),
         },
       },
-      res => {
+      (res) => {
         let body = '';
 
-        res.on('data', datum => (body += datum));
+        res.on('data', (datum) => (body += datum));
 
         res.on('end', () => {
           const parsed = JSON.parse(body);
@@ -55,7 +55,7 @@ function fetchMainThemeId() {
             return;
           }
 
-          const mainTheme = parsed.themes.find(t => t.role === 'main');
+          const mainTheme = parsed.themes.find((t) => t.role === 'main');
 
           if (!mainTheme) {
             reject(`

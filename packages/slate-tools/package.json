@@ -2,8 +2,7 @@
   "name": "@shopify/slate-tools",
   "version": "1.0.0-alpha.26",
   "description": "A modern development toolkit for Shopify themes",
-  "repository":
-    "https://github.com/Shopify/slate/tree/1.x/packages/slate-tools",
+  "repository": "https://github.com/Shopify/slate/tree/1.x/packages/slate-tools",
   "license": "MIT",
   "author": "Shopify",
   "bugs": {
@@ -33,6 +32,7 @@
     "clean-webpack-plugin": "0.1.19",
     "console-control-strings": "^1.1.0",
     "copy-webpack-plugin": "^4.2.3",
+    "cors": "^2.8.4",
     "cross-spawn": "5.1.0",
     "css-loader": "0.28.10",
     "cssnano": "3.10.0",
@@ -64,6 +64,7 @@
     "style-loader": "0.20.3",
     "stylelint": "^9.1.2",
     "stylelint-webpack-plugin": "^0.10.1",
+    "tapable": "^1.0.0",
     "uglifyjs-webpack-plugin": "^1.0.1",
     "uuid": "^3.2.1",
     "webpack": "^4.1.1",

@@ -7,7 +7,7 @@ const flatten = require('array-flatten');
 const minimatch = require('minimatch');
 const {argv} = require('yargs');
 
-const config = require('./slate-sync.config');
+const config = require('../../slate-tools.config');
 
 const question = {
   type: 'confirm',
@@ -17,7 +17,7 @@ const question = {
 };
 
 function _includesSettingsData(files) {
-  const settingsData = files.filter(file =>
+  const settingsData = files.filter((file) =>
     file.endsWith('settings_data.json'),
   );
   return settingsData.length > 0;
@@ -26,7 +26,7 @@ function _includesSettingsData(files) {
 function _filterIgnoredFiles(files) {
   const envIgnoreGlobs = getIgnoreFilesValue().split(':');
   return flatten(
-    envIgnoreGlobs.map(glob => {
+    envIgnoreGlobs.map((glob) => {
       if (glob[0] !== '/') {
         glob = `/${glob}`;
       }

@@ -4,8 +4,6 @@ const figures = require('figures');
 const themekit = require('@shopify/themekit').command;
 const slateEnv = require('@shopify/slate-env');
 const config = require('./slate-sync.config');
-const skipSettingData = require('./skip-settings-data');
-const continueIfPublished = require('./continue-if-published');
 
 let deploying = false;
 let filesToDeploy = [];
@@ -63,14 +61,6 @@ async function deploy(cmd = '', files = []) {
   }
 
   deploying = true;
-
-  if (!await continueIfPublished()) {
-    process.exit(0);
-  }
-
-  if (await skipSettingData(files)) {
-    files = files.filter((file) => !file.endsWith('settings_data.json'));
-  }
 
   console.log(chalk.magenta(`\n${figures.arrowUp}  Uploading to Shopify...\n`));
 
