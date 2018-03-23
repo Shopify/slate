@@ -27,20 +27,31 @@ describe('promptIfSettingsData()', () => {
   });
 
   test('prompts user if setting_data.json is not ignored in .env file and included in files to be uploaded', () => {
-    const promptIfSettingsData = require('../prompt-skip-settings-data');
+    const promptIfSettingsData = require('../skip-settings-data');
     env.__setIgnoreValue('');
     promptIfSettingsData(FILES);
+    expect(inquirer.prompt).toHaveBeenCalledTimes(1);
+  });
+
+  test('does not prompt if --skipPrompts flag is used', () => {
+    const promptIfSettingsData = require('../skip-settings-data');
+    process.argv.push('--skipPrompts');
+
+    promptIfSettingsData([]);
+    expect(inquirer.prompt).toHaveBeenCalledTimes(0);
+
+    process.argv.splice(process.argv.indexOf('--skipPrompts'), 1);
   });
 
   test('does not prompt if settings_data.json is not in the file list', () => {
-    const promptIfSettingsData = require('../prompt-skip-settings-data');
+    const promptIfSettingsData = require('../skip-settings-data');
     env.__setIgnoreValue('');
     promptIfSettingsData([]);
     expect(inquirer.prompt).toHaveBeenCalledTimes(0);
   });
 
   test('does not prompt if setting_data.json is ignored in .env file', () => {
-    const promptIfSettingsData = require('../prompt-skip-settings-data');
+    const promptIfSettingsData = require('../skip-settings-data');
     const globs = [
       '/config/settings_data.json',
       'config/settings_data.json',
@@ -61,7 +72,7 @@ describe('promptIfSettingsData()', () => {
     const config = require('../slate-sync.config');
     config.promptSettings = false;
 
-    const promptIfSettingsData = require('../prompt-skip-settings-data');
+    const promptIfSettingsData = require('../skip-settings-data');
     promptIfSettingsData(FILES);
     expect(inquirer.prompt).toHaveBeenCalledTimes(0);
   });

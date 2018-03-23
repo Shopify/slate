@@ -4,7 +4,8 @@ const figures = require('figures');
 const themekit = require('@shopify/themekit').command;
 const slateEnv = require('@shopify/slate-env');
 const config = require('./slate-sync.config');
-const promptSkipSettingsData = require('./prompt-skip-settings-data');
+const skipSettingData = require('./skip-settings-data');
+const continueIfPublished = require('./continue-if-published');
 
 let deploying = false;
 let filesToDeploy = [];
@@ -63,9 +64,11 @@ async function deploy(cmd = '', files = []) {
 
   deploying = true;
 
-  const skipSettingsData = await promptSkipSettingsData(files);
+  if (!await continueIfPublished()) {
+    process.exit(0);
+  }
 
-  if (skipSettingsData) {
+  if (await skipSettingData(files)) {
     files = files.filter(file => !file.endsWith('settings_data.json'));
   }
 
@@ -129,36 +132,17 @@ function promiseThemekitDeploy(cmd, files) {
 }
 
 module.exports = {
-  sync(files = []) {
+  async sync(files = []) {
     if (!files.length) {
       return Promise.reject('No files to deploy.');
     }
 
-    return new Promise((resolve, reject) => {
-      // remove duplicate
-      filesToDeploy = [...new Set([...filesToDeploy, ...files])];
+    filesToDeploy = [...new Set([...filesToDeploy, ...files])];
 
-      maybeDeploy()
-        .then(resolve)
-        .catch(reject);
-    });
+    return maybeDeploy();
   },
 
-  overwrite(env) {
-    return new Promise((resolve, reject) => {
-      const message = `\nEnvironment is ${slateEnv.getEnvNameValue()}. Go ahead with "replace" ?`;
-
-      prompt(message, false).then(isYes => {
-        if (isYes) {
-          deploy('replace')
-            .then(resolve)
-            .catch(reject);
-        } else {
-          reject('Aborting. You aborted the deploy.');
-        }
-      });
-    });
+  async overwrite(env) {
+    return deploy('replace');
   },
 };
-
-module.exports.promptIfPublishedTheme = require('./prompt-if-published-theme');

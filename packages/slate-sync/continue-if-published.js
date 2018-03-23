@@ -5,6 +5,15 @@ const https = require('https');
 const slateEnv = require('@shopify/slate-env');
 const {event} = require('@shopify/slate-analytics');
 const figures = require('figures');
+const {argv} = require('yargs');
+
+const question = {
+  type: 'confirm',
+  name: 'continueWithDeploy',
+  message: 'You are about to deploy to the published theme. Continue?',
+  default: true,
+  prefix: chalk.yellow(`${figures.warning} `),
+};
 
 /**
  * Fetch the main theme ID from Shopify
@@ -70,42 +79,23 @@ function fetchMainThemeId() {
  * @param   env   String  The environment to check against
  * @return        Promise Reason for abort or empty resolve
  */
-function promptIfPublishedTheme(env) {
-  return new Promise((resolve, reject) => {
-    fetchMainThemeId()
-      .then(id => {
-        const themeId = slateEnv.getThemeIdValue();
-        // c.theme_id is live or equal to mainThemeId
-        if (themeId === 'live' || themeId === id.toString()) {
-          const question = {
-            type: 'confirm',
-            name: 'abortMainDeploy',
-            message:
-              'You are about to deploy to the published theme. Continue?',
-            default: false,
-            prefix: chalk.yellow(`${figures.warning} `),
-          };
+module.exports = async function continueIfPublishedTheme(env) {
+  if (argv.skipPrompts) {
+    return question.default;
+  }
 
-          console.log('');
-          inquirer.prompt([question]).then(answer => {
-            if (answer.abortMainDeploy) {
-              event('slate-tools:deploy:main-theme');
-              return resolve();
-            }
+  const publishedThemeId = await fetchMainThemeId();
+  const currentThemeId = slateEnv.getThemeIdValue();
 
-            console.log(
-              chalk.red(
-                `\n${figures.cross}  Aborting. You aborted the deploy.\n`
-              )
-            );
-            reject();
-          });
-        } else {
-          resolve();
-        }
-      })
-      .catch(reject);
-  });
-}
+  if (
+    currentThemeId !== 'live' &&
+    currentThemeId !== publishedThemeId.toString()
+  ) {
+    return question.default;
+  }
 
-module.exports = promptIfPublishedTheme;
+  console.log();
+  const answer = await inquirer.prompt([question]);
+
+  return answer.continueWithDeploy;
+};

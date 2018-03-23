@@ -1,8 +1,7 @@
 {
   "name": "@shopify/slate-sync",
   "version": "1.0.0-alpha.24",
-  "description":
-    "Slate's Shopify API client which handles all theme development requests",
+  "description": "Slate's Shopify API client which handles all theme development requests",
   "repository": "https://github.com/Shopify/slate/tree/1.x/packages/slate-sync",
   "license": "MIT",
   "main": "index.js",
@@ -22,6 +21,7 @@
     "inquirer": "^5.0.1",
     "jest": "20.0.3",
     "minimatch": "^3.0.4",
-    "react-dev-utils": "0.5.2"
+    "react-dev-utils": "0.5.2",
+    "yargs": "^11.0.0"
   }
 }
