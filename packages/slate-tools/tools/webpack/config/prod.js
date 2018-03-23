@@ -159,6 +159,12 @@ module.exports = merge(
 
       new SlateTagPlugin(packageJson.version),
     ],
+
+    optimization: {
+      splitChunks: {
+        chunks: 'initial',
+      },
+    },
   },
   userWebpackConfig,
 );

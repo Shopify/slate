@@ -20,7 +20,7 @@ const isDevServer = process.argv[3] === 'start';
  */
 
 function replaceCtxRequest(request) {
-  return context => Object.assign(context, {request});
+  return (context) => Object.assign(context, {request});
 }
 
 function contextReplacementPlugins() {
@@ -137,6 +137,20 @@ module.exports = {
       {
         from: config.paths.svgs,
         to: `${config.paths.snippetsOutput}/[name].liquid`,
+      },
+    ]),
+
+    new CopyWebpackPlugin([
+      {
+        from: config.paths.locales.src,
+        to: config.paths.locales.dist,
+      },
+    ]),
+
+    new CopyWebpackPlugin([
+      {
+        from: config.paths.settings.src,
+        to: config.paths.settings.dist,
       },
     ]),
 

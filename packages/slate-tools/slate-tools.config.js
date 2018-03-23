@@ -69,6 +69,32 @@ module.exports = generate({
           default: resolveTheme('src/assets/svg'),
         },
         {
+          id: 'locales',
+          items: [
+            {
+              id: 'src',
+              default: resolveTheme('src/locales'),
+            },
+            {
+              id: 'dist',
+              default: resolveTheme('dist/locales'),
+            },
+          ],
+        },
+        {
+          id: 'settings',
+          items: [
+            {
+              id: 'src',
+              default: resolveTheme('src/config'),
+            },
+            {
+              id: 'dist',
+              default: resolveTheme('dist/config'),
+            },
+          ],
+        },
+        {
           id: 'webpack',
           default: path.resolve(__dirname, 'tools/webpack'),
         },

@@ -16,6 +16,22 @@
       <!--[if (gt IE 9)|!(IE)]><!--><script type="text/javascript" src="<%= src %>" defer></script><!--<![endif]-->
       <!--[if lte IE 9]><script type="text/javascript" src="<%= src %>"></script><![endif]-->
     {%- endif -%}
+  <% } else if (chunk.split('~').length > 1) { %>
+    <% var pages = chunk.split('~').slice(1) %>
+    <% var conditions = [] %>
+
+    <% pages.forEach(function(page){ %>
+      <% if (typeof htmlWebpackPlugin.options.liquidTemplates[page] !== 'undefined') { %>
+        <% conditions.push("template.name == '" + page.split('.')[1] + "'") %>
+      <% } else if (typeof htmlWebpackPlugin.options.liquidLayouts[page] !== 'undefined') { %>
+        <% conditions.push("layout == '" + page.split('.')[1] + "'") %>
+      <% } %>
+    <% }); %>
+
+    {%- if <%= conditions.join(' or ') %> -%}
+      <!--[if (gt IE 9)|!(IE)]><!--><script type="text/javascript" src="<%= src %>" defer></script><!--<![endif]-->
+      <!--[if lte IE 9]><script type="text/javascript" src="<%= src %>"></script><![endif]-->
+    {%- endif -%}
   <% } else { %>
     <!--[if (gt IE 9)|!(IE)]><!--><script type="text/javascript" src="<%= src %>" defer></script><!--<![endif]-->
     <!--[if lte IE 9]><script type="text/javascript" src="<%= src %>"></script><![endif]-->

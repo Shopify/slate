@@ -14,7 +14,7 @@ const {templateFiles, layoutFiles} = require('../entrypoints');
 webpackCoreConfig.output.publicPath = `${config.domain}:${config.port}/`;
 
 // add hot-reload related code to entry chunks
-Object.keys(webpackCoreConfig.entry).forEach(name => {
+Object.keys(webpackCoreConfig.entry).forEach((name) => {
   webpackCoreConfig.entry[name] = [
     path.join(__dirname, '../hot-client.js'),
   ].concat(webpackCoreConfig.entry[name]);
@@ -23,6 +23,8 @@ Object.keys(webpackCoreConfig.entry).forEach(name => {
 module.exports = merge(
   webpackCoreConfig,
   {
+    mode: 'development',
+
     devtool: '#eval-source-map',
 
     module: {
@@ -60,18 +62,12 @@ module.exports = merge(
     },
 
     plugins: [
-      new webpack.DefinePlugin({
-        'process.env': {NODE_ENV: '"development"'},
-      }),
-
       new webpack.HotModuleReplacementPlugin(),
-
-      new webpack.NoEmitOnErrorsPlugin(),
 
       new HtmlWebpackPlugin({
         excludeChunks: ['static'],
         filename: `../snippets/script-tags.liquid`,
-        template: `./snippets/script-tags.html`,
+        template: path.resolve(__dirname, '../script-tags.html'),
         inject: false,
         minify: {
           removeComments: true,

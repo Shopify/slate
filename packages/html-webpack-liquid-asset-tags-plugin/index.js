@@ -31,7 +31,7 @@ AssetTagToShopifyLiquid.prototype.apply = compiler => {
       data.head = data.head.map(fixTag);
       data.body = data.body.map(fixTag);
 
-      cb(null, data);
+      return data;
     });
   });
 };
