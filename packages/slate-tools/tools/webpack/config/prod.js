@@ -115,7 +115,7 @@ module.exports = merge(
       new ExtractTextPlugin('styles.css.liquid'),
 
       // generate dist/layout/*.liquid for all layout files with correct paths to assets
-      ...fs.readdirSync(config.paths.layouts).map(filename => {
+      ...fs.readdirSync(config.paths.layouts).map((filename) => {
         return new HtmlWebpackPlugin({
           excludeChunks: ['static'],
           filename: `../layout/${filename}`,
@@ -141,12 +141,12 @@ module.exports = merge(
       new SlateLiquidAssetsPlugin(),
       // This Plugin is currently breaking settings_schema.json validation.
       // Commenting out until its fixed.
-      // new SlateTagPlugin(packageJson.version),
+      new SlateTagPlugin(packageJson.version),
 
       // split node_modules/vendors into their own file
       new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor',
-        minChunks: module =>
+        minChunks: (module) =>
           module.resource &&
           /\.js$/.test(module.resource) &&
           module.resource.indexOf(

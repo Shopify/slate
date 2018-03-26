@@ -10,7 +10,7 @@ FileListPlugin.prototype.apply = function(compiler) {
     const schema = JSON.parse(asset._value);
 
     if (Array.isArray(schema) && typeof schema[0] === 'object') {
-      schema[0]['slate-version'] = this.version;
+      schema[0]['theme_packaged_with'] = `@shopify/slate-tools@${this.version}`;
     }
 
     const jsonString = JSON.stringify(schema);
