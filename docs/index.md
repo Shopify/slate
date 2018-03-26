@@ -3,7 +3,7 @@ layout: default
 ---
 
 <blockquote>
-📢We're busy working on the next version of Slate which introduces a ton of cool new features to Shopify Theme development. Take a look in the [1.x branch](https://github.com/Shopify/slate/tree/1.x), give it a spin, and let us know what you think!
+📢We're busy working on the next version of Slate which introduces a ton of cool new features to Shopify Theme development. Take a look in the <a href="https://github.com/Shopify/slate/tree/1.x">1.x branch</a>, give it a spin, and let us know what you think!
 </blockquote>
 
 # Slate
