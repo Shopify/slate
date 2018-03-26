@@ -2,6 +2,10 @@
 layout: default
 ---
 
+<blockquote>
+📢We're busy working on the next version of Slate which introduces a ton of cool new features to Shopify Theme development. Take a look in the [1.x branch](https://github.com/Shopify/slate/tree/1.x), give it a spin, and let us know what you think!
+</blockquote>
+
 # Slate
 
 Slate is a theme scaffold and command line tool for developing Shopify themes. It is designed to assist your development workflow and speed up the process of developing, testing, and deploying themes to Shopify stores.
