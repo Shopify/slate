@@ -17,6 +17,8 @@ const webpackCoreConfig = require('./core');
 const userWebpackConfig = require('../get-user-webpack-config')('prod');
 const config = require('../../../slate-tools.config');
 const packageJson = require('../../../package.json');
+const getChunkName = require('../get-chunk-name');
+const {templateFiles, layoutFiles} = require('../entrypoints');
 
 function eslintLoader() {
   if (!fs.existsSync(config.paths.eslint.rc)) {
@@ -64,12 +66,11 @@ function stylelintLoader() {
 module.exports = merge(
   webpackCoreConfig,
   {
+    mode: 'production',
     devtool: 'hidden-source-map',
 
     module: {
       rules: [
-        ...eslintLoader(),
-
         {
           test: /\.s[ac]ss$/,
           exclude: commonExcludes(),
@@ -97,8 +98,6 @@ module.exports = merge(
     },
 
     plugins: [
-      ...stylelintLoader(),
-
       new CleanWebpackPlugin(['dist'], {
         root: config.paths.root,
       }),
@@ -115,22 +114,41 @@ module.exports = merge(
       new ExtractTextPlugin('styles.css.liquid'),
 
       // generate dist/layout/*.liquid for all layout files with correct paths to assets
-      ...fs.readdirSync(config.paths.layouts).map((filename) => {
-        return new HtmlWebpackPlugin({
-          excludeChunks: ['static'],
-          filename: `../layout/${filename}`,
-          template: `./layout/${filename}`,
-          inject: true,
-          minify: {
-            removeComments: true,
-            collapseWhitespace: true,
-            removeAttributeQuotes: true,
-            // more options:
-            // https://github.com/kangax/html-minifier#options-quick-reference
-          },
-          // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-          chunksSortMode: 'dependency',
-        });
+
+      new HtmlWebpackPlugin({
+        excludeChunks: ['static'],
+        filename: `../snippets/script-tags.liquid`,
+        template: path.resolve(__dirname, '../script-tags.html'),
+        inject: false,
+        minify: {
+          removeComments: true,
+          collapseWhitespace: true,
+          removeAttributeQuotes: false,
+          preserveLineBreaks: true,
+          // more options:
+          // https://github.com/kangax/html-minifier#options-quick-reference
+        },
+        // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+        chunksSortMode: 'dependency',
+        liquidTemplates: templateFiles(),
+        liquidLayouts: layoutFiles(),
+      }),
+
+      new HtmlWebpackPlugin({
+        excludeChunks: ['static'],
+        filename: `../snippets/style-tags.liquid`,
+        template: path.resolve(__dirname, '../style-tags.html'),
+        inject: false,
+        minify: {
+          removeComments: true,
+          collapseWhitespace: true,
+          removeAttributeQuotes: false,
+          preserveLineBreaks: true,
+          // more options:
+          // https://github.com/kangax/html-minifier#options-quick-reference
+        },
+        // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+        chunksSortMode: 'dependency',
       }),
 
       new HtmlWebpackIncludeAssetsPlugin({
@@ -139,28 +157,16 @@ module.exports = merge(
       }),
 
       new SlateLiquidAssetsPlugin(),
-      // This Plugin is currently breaking settings_schema.json validation.
-      // Commenting out until its fixed.
+
       new SlateTagPlugin(packageJson.version),
-
-      // split node_modules/vendors into their own file
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks: (module) =>
-          module.resource &&
-          /\.js$/.test(module.resource) &&
-          module.resource.indexOf(
-            path.join(config.paths.root, 'node_modules'),
-          ) === 0,
-      }),
-
-      // extract webpack runtime and module manifest to its own file in order to
-      // prevent vendor hash from being updated whenever app bundle is updated
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'manifest',
-        chunks: ['vendor'],
-      }),
     ],
+
+    optimization: {
+      splitChunks: {
+        chunks: 'initial',
+        name: getChunkName,
+      },
+    },
   },
   userWebpackConfig,
 );

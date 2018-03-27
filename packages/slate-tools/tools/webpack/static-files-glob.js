@@ -25,5 +25,5 @@
 //
 var dynamicCtx = 'salut';
 require('__appsrc__/' + dynamicCtx + '.liquid');
-require('__appsrc__/' + dynamicCtx + '.json');
+// require('__appsrc__/' + dynamicCtx + '.json');
 require('__appvendors__/' + dynamicCtx);

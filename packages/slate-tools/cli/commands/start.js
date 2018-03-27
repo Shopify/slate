@@ -7,7 +7,6 @@
 const argv = require('minimist')(process.argv.slice(2));
 const figures = require('figures');
 const chalk = require('chalk');
-const createHash = require('crypto').createHash;
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -27,6 +26,7 @@ const slateEnv = require('@shopify/slate-env');
 const config = require('../../slate-tools.config');
 const webpackConfig = require('../../tools/webpack/config/dev');
 const setEnvironment = require('../../tools/webpack/set-slate-env');
+const getChangedFiles = require('../../tools/webpack/get-changed-files');
 const packageJson = require('../../package.json');
 
 event('slate-tools:start:start', {version: packageJson.version, webpackConfig});
@@ -59,55 +59,6 @@ const previewUrl = `${shopifyUrl}?preview_theme_id=${slateEnv.getThemeIdValue()}
 let isFirstCompilation = true;
 let isFirstDeploy = true;
 
-const assetsHash = {};
-
-/**
- * Return an array of changed files that have been written to the file system.
- * Uses the same method as write-file-webpack-plugin to determine which files
- * have changed.
- * @see https://github.com/gajus/write-file-webpack-plugin/blob/master/src/index.js#L134-L145
- *
- * @param   assets  Object   Assets obejct from webpack stats.compilation object
- * @return          Array
- */
-function getFilesFromAssets(stats) {
-  const assets = stats.compilation.assets;
-  let files = [];
-
-  Object.keys(assets).forEach(key => {
-    if (key === 'static.js') {
-      return;
-    }
-
-    const asset = assets[key];
-
-    if (asset.emitted && fs.existsSync(asset.existsAt)) {
-      if (key === 'scripts.js') {
-        const assetHash = stats.compilation.chunks[0].hash;
-
-        if (!assetsHash[key] || assetsHash[key] !== assetHash) {
-          files = [...files, asset.existsAt.replace(config.paths.dist, '')];
-          assetsHash[key] = assetHash;
-        }
-      } else {
-        const source = asset.source();
-        const assetSource = Array.isArray(source) ? source.join('\n') : source;
-        const assetHash = createHash('sha256')
-          .update(assetSource)
-          .digest('hex');
-
-        // new file, or existing one that changed
-        if (!assetsHash[key] || assetsHash[key] !== assetHash) {
-          files = [...files, asset.existsAt.replace(config.paths.dist, '')];
-          assetsHash[key] = assetHash;
-        }
-      }
-    }
-  });
-
-  return files;
-}
-
 app.use((req, res, next) => {
   res.set('Access-Control-Allow-Origin', '*');
   next();
@@ -116,19 +67,19 @@ app.use((req, res, next) => {
 app.use(
   webpackDevMiddleware(compiler, {
     quiet: true,
-    reload: false,
+    reload: true,
   }),
 );
 
 const hotMiddleware = webpackHotMiddleware(compiler);
 app.use(hotMiddleware);
 
-compiler.plugin('compile', () => {
+compiler.hooks.compile.tap('Slate Tools Start', () => {
   clearConsole();
   spinner = ora(chalk.magenta(' Compiling...')).start();
 });
 
-compiler.plugin('done', async stats => {
+compiler.hooks.done.tap('Slate Tools Start', async (stats) => {
   spinner.stop();
   clearConsole();
 
@@ -144,7 +95,7 @@ compiler.plugin('done', async stats => {
     });
     console.log(chalk.red('Failed to compile.\n'));
     console.log(config.paths.lib);
-    messages.errors.forEach(message => {
+    messages.errors.forEach((message) => {
       console.log(`${message}\n`);
     });
     // If errors exist, only show errors.
@@ -158,7 +109,7 @@ compiler.plugin('done', async stats => {
       version: packageJson.version,
     });
     console.log(chalk.yellow('Compiled with warnings.\n'));
-    messages.warnings.forEach(message => {
+    messages.warnings.forEach((message) => {
       console.log(`${message}\n`);
     });
   }
@@ -174,18 +125,14 @@ compiler.plugin('done', async stats => {
   }
 
   // files we'll upload
-  const files = getFilesFromAssets(stats);
-
-  if (!files.length) {
-    return;
-  }
+  const files = getChangedFiles(stats);
 
   // files.forEach(file => {
   //   console.log(`\t${file}`);
   // });
   // console.log('\n');
 
-  const liquidFiles = files.filter(file => path.extname(file) === '.liquid');
+  const liquidFiles = files.filter((file) => path.extname(file) === '.liquid');
 
   if (isFirstCompilation && argv.skipFirstDeploy) {
     isFirstCompilation = false;
@@ -202,14 +149,24 @@ compiler.plugin('done', async stats => {
     );
 
     console.log(chalk.magenta('\nWatching for changes...'));
-  } else {
+  }
+
+  if (!liquidFiles.length) {
+    console.log(chalk.magenta('\nWatching for changes...'));
+
+    return hotMiddleware.publish({
+      action: 'shopify_upload_finished',
+    });
+  }
+
+  if (!argv.skipFirstDeploy && (!isFirstCompilation && argv.skipFirstDeploy)) {
     if (isFirstDeploy) {
       isFirstDeploy = false;
     }
 
     event('slate-tools:start:sync-start', {version: packageJson.version});
 
-    sync(files)
+    sync(liquidFiles)
       .then(() => {
         event('slate-tools:start:sync-end', {version: packageJson.version});
 
@@ -235,7 +192,7 @@ compiler.plugin('done', async stats => {
           force: liquidFiles.length > 0,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         event('slate-tools:start:sync-error', {
           error,
           version: packageJson.version,

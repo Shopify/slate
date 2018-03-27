@@ -6,6 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const commonExcludes = require('@shopify/slate-common-excludes');
 const babelLoader = require('@shopify/slate-babel');
 const config = require('../../../slate-tools.config');
+const {entrypointFiles} = require('../entrypoints');
 
 const paths = config.paths;
 
@@ -19,7 +20,7 @@ const isDevServer = process.argv[3] === 'start';
  */
 
 function replaceCtxRequest(request) {
-  return context => Object.assign(context, {request});
+  return (context) => Object.assign(context, {request});
 }
 
 function contextReplacementPlugins() {
@@ -65,7 +66,7 @@ function contextReplacementPlugins() {
 module.exports = {
   context: paths.src,
 
-  entry: config.paths.entrypoints,
+  entry: Object.assign(entrypointFiles(), config.paths.entrypoints),
 
   output: {
     filename: '[name].js',
@@ -74,8 +75,9 @@ module.exports = {
 
   resolveLoader: {
     modules: [
-      config.paths.nodeModules.app,
       config.paths.nodeModules.self,
+      config.paths.nodeModules.repo,
+      config.paths.nodeModules.app,
       config.paths.webpack,
     ],
   },
@@ -104,12 +106,7 @@ module.exports = {
       },
       {
         test: config.regex.static,
-        // excluding layout/*.liquid files as they are also being emitted by the HtmlWebpackPlugin
-        exclude: commonExcludes(
-          ...fs
-            .readdirSync(config.paths.layouts)
-            .map(filename => `layout/${filename}`),
-        ),
+        exclude: commonExcludes(),
         loader: 'file-loader',
         options: {
           name: '../[path][name].[ext]',
@@ -122,11 +119,6 @@ module.exports = {
         options: {
           name: '[name].[ext]',
         },
-      },
-      {
-        test: /layout\/.*?\.liquid$/,
-        exclude: commonExcludes(),
-        loader: 'raw-loader',
       },
       {
         test: /\.liquid$/,
@@ -145,6 +137,20 @@ module.exports = {
       {
         from: config.paths.svgs,
         to: `${config.paths.snippetsOutput}/[name].liquid`,
+      },
+    ]),
+
+    new CopyWebpackPlugin([
+      {
+        from: config.paths.locales.src,
+        to: config.paths.locales.dist,
+      },
+    ]),
+
+    new CopyWebpackPlugin([
+      {
+        from: config.paths.settings.src,
+        to: config.paths.settings.dist,
       },
     ]),
 
