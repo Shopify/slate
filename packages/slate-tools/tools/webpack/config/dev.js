@@ -8,12 +8,13 @@ const commonExcludes = require('@shopify/slate-common-excludes');
 const webpackCoreConfig = require('./core');
 const userWebpackConfig = require('../get-user-webpack-config')('dev');
 const config = require('../../../slate-tools.config');
+const {templateFiles, layoutFiles} = require('../entrypoints');
 
 // so that everything is absolute
 webpackCoreConfig.output.publicPath = `${config.domain}:${config.port}/`;
 
 // add hot-reload related code to entry chunks
-Object.keys(webpackCoreConfig.entry).forEach(name => {
+Object.keys(webpackCoreConfig.entry).forEach((name) => {
   webpackCoreConfig.entry[name] = [
     path.join(__dirname, '../hot-client.js'),
   ].concat(webpackCoreConfig.entry[name]);
@@ -22,6 +23,8 @@ Object.keys(webpackCoreConfig.entry).forEach(name => {
 module.exports = merge(
   webpackCoreConfig,
   {
+    mode: 'development',
+
     devtool: '#eval-source-map',
 
     module: {
@@ -59,21 +62,35 @@ module.exports = merge(
     },
 
     plugins: [
-      new webpack.DefinePlugin({
-        'process.env': {NODE_ENV: '"development"'},
-      }),
-
       new webpack.HotModuleReplacementPlugin(),
 
-      new webpack.NoEmitOnErrorsPlugin(),
+      new HtmlWebpackPlugin({
+        excludeChunks: ['static'],
+        filename: `../snippets/script-tags.liquid`,
+        template: path.resolve(__dirname, '../script-tags.html'),
+        inject: false,
+        minify: {
+          removeComments: true,
+          removeAttributeQuotes: false,
+        },
+        isDevServer: true,
+        liquidTemplates: templateFiles(),
+        liquidLayouts: layoutFiles(),
+      }),
 
-      ...fs.readdirSync(config.paths.layouts).map(filename => {
-        return new HtmlWebpackPlugin({
-          excludeChunks: ['static'],
-          filename: `../layout/${filename}`,
-          template: `./layout/${filename}`,
-          inject: true,
-        });
+      new HtmlWebpackPlugin({
+        excludeChunks: ['static'],
+        filename: `../snippets/style-tags.liquid`,
+        template: path.resolve(__dirname, '../style-tags.html'),
+        inject: false,
+        minify: {
+          removeComments: true,
+          removeAttributeQuotes: false,
+          // more options:
+          // https://github.com/kangax/html-minifier#options-quick-reference
+        },
+        // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+        chunksSortMode: 'dependency',
       }),
     ],
   },

@@ -5,12 +5,12 @@ function FileListPlugin(version) {
 }
 
 FileListPlugin.prototype.apply = function(compiler) {
-  compiler.plugin('emit', (compilation, callback) => {
-    const asset = compilation.assets[SETTINGS_SCHEMA_PATH];
-    const schema = JSON.parse(asset._value);
+  compiler.hooks.emit.tap('Slate Tag Plugin', (compilation, callback) => {
+    const asset = compilation.assets[SETTINGS_SCHEMA_PATH].source();
+    const schema = JSON.parse(asset);
 
     if (Array.isArray(schema) && typeof schema[0] === 'object') {
-      schema[0]['slate-version'] = this.version;
+      schema[0].theme_packaged_with = `@shopify/slate-tools@${this.version}`;
     }
 
     const jsonString = JSON.stringify(schema);
@@ -23,8 +23,6 @@ FileListPlugin.prototype.apply = function(compiler) {
         return jsonString.length;
       },
     };
-
-    callback();
   });
 };
 

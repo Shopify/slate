@@ -61,8 +61,38 @@ module.exports = generate({
           default: resolveTheme('src/assets/vendors'),
         },
         {
+          id: 'scripts',
+          default: resolveTheme('src/assets/scripts'),
+        },
+        {
           id: 'svgs',
           default: resolveTheme('src/assets/svg'),
+        },
+        {
+          id: 'locales',
+          items: [
+            {
+              id: 'src',
+              default: resolveTheme('src/locales'),
+            },
+            {
+              id: 'dist',
+              default: resolveTheme('dist/locales'),
+            },
+          ],
+        },
+        {
+          id: 'settings',
+          items: [
+            {
+              id: 'src',
+              default: resolveTheme('src/config'),
+            },
+            {
+              id: 'dist',
+              default: resolveTheme('dist/config'),
+            },
+          ],
         },
         {
           id: 'webpack',
@@ -73,12 +103,16 @@ module.exports = generate({
           default: resolveTheme('src/layout'),
         },
         {
+          id: 'templates',
+          default: resolveTheme('src/templates'),
+        },
+        {
+          id: 'customersTemplates',
+          default: resolveTheme('src/templates/customers'),
+        },
+        {
           id: 'entrypoints',
           items: [
-            {
-              id: 'scripts',
-              default: resolveTheme('src/assets/scripts/theme.js'),
-            },
             {
               id: 'static',
               default: path.resolve(
@@ -120,6 +154,10 @@ module.exports = generate({
         {
           id: 'nodeModules',
           items: [
+            {
+              id: 'repo',
+              default: path.resolve(__dirname, '../../node_modules'),
+            },
             {
               id: 'app',
               default: resolveTheme('node_modules'),
