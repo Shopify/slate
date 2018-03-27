@@ -123,7 +123,7 @@ module.exports = {
       {
         test: /\.liquid$/,
         exclude: commonExcludes(),
-        loader: `@shopify/slate-liquid-asset-loader?dev-server=${
+        loader: `extract-loader!@shopify/slate-liquid-asset-loader?dev-server=${
           isDevServer ? 'true' : 'false'
         }`,
       },

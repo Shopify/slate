@@ -17,6 +17,7 @@ const webpackCoreConfig = require('./core');
 const userWebpackConfig = require('../get-user-webpack-config')('prod');
 const config = require('../../../slate-tools.config');
 const packageJson = require('../../../package.json');
+const getChunkName = require('../get-chunk-name');
 const {templateFiles, layoutFiles} = require('../entrypoints');
 
 function eslintLoader() {
@@ -163,6 +164,7 @@ module.exports = merge(
     optimization: {
       splitChunks: {
         chunks: 'initial',
+        name: getChunkName,
       },
     },
   },

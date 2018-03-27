@@ -2,7 +2,8 @@
   "name": "@shopify/slate-tools",
   "version": "1.0.0-alpha.25",
   "description": "A modern development toolkit for Shopify themes",
-  "repository": "https://github.com/Shopify/slate/tree/1.x/packages/slate-tools",
+  "repository":
+    "https://github.com/Shopify/slate/tree/1.x/packages/slate-tools",
   "license": "MIT",
   "author": "Shopify",
   "bugs": {
@@ -42,7 +43,7 @@
     "eslint-loader": "2.0.0",
     "eslint-plugin-import": "2.9.0",
     "express": "4.16.3",
-    "extract-loader": "1.0.2",
+    "extract-loader": "^2.0.1",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "figures": "^2.0.0",
     "file-loader": "1.1.11",

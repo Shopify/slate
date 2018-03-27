@@ -8,13 +8,13 @@ const VALID_LIQUID_TEMPLATES = [
   'blog',
   'cart',
   'collection',
-  'customers-account',
-  'customers-activate_account',
-  'customers-addresses',
-  'customers-login',
-  'customers-order',
-  'customers-register',
-  'customers-reset_password',
+  'account',
+  'activate_account',
+  'addresses',
+  'login',
+  'order',
+  'register',
+  'reset_password',
   'gift_card',
   'index',
   'list-collections',
@@ -29,7 +29,7 @@ function templateFiles() {
 
   const templateEntrypoints = fs
     .readdirSync(config.paths.templates)
-    .forEach(file => {
+    .forEach((file) => {
       const name = path.parse(file).name;
       const jsFile = path.join(config.paths.scripts, 'templates', `${name}.js`);
       if (VALID_LIQUID_TEMPLATES.includes(name) && fs.existsSync(jsFile)) {
@@ -39,9 +39,14 @@ function templateFiles() {
 
   const customersEntrypoints = fs
     .readdirSync(config.paths.customersTemplates)
-    .forEach(file => {
-      const name = `customers-${path.parse(file).name}`;
-      const jsFile = path.join(config.paths.scripts, 'templates', `${name}.js`);
+    .forEach((file) => {
+      const name = `${path.parse(file).name}`;
+      const jsFile = path.join(
+        config.paths.scripts,
+        'templates',
+        'customers',
+        `${name}.js`,
+      );
       if (VALID_LIQUID_TEMPLATES.includes(name) && fs.existsSync(jsFile)) {
         entrypoints[`template.${name}`] = jsFile;
       }
@@ -52,7 +57,7 @@ function templateFiles() {
 
 function layoutFiles() {
   const entrypoints = {};
-  fs.readdirSync(config.paths.layouts).forEach(file => {
+  fs.readdirSync(config.paths.layouts).forEach((file) => {
     const name = path.parse(file).name;
     const jsFile = path.join(config.paths.scripts, 'layout', `${name}.js`);
     if (fs.existsSync(jsFile)) {
