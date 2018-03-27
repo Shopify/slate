@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate-common-excludes",
-  "version": "1.0.0-alpha.25",
+  "version": "1.0.0-alpha.26",
   "description": "Common file exclusions used accross the Webpack build config.",
   "main": "index.js",
   "repository": "https://github.com/Shopify/slate/tree/1.x/packages/slate-common-excludes",
@@ -11,6 +11,6 @@
   },
   "homepage": "https://github.com/shopify/slate#readme",
   "dependencies": {
-    "@shopify/slate-config": "^1.0.0-alpha.25"
+    "@shopify/slate-config": "^1.0.0-alpha.26"
   }
 }
