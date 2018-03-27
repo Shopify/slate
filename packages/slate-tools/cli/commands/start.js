@@ -74,7 +74,7 @@ function getFilesFromAssets(stats) {
   const assets = stats.compilation.assets;
   let files = [];
 
-  Object.keys(assets).forEach(key => {
+  Object.keys(assets).forEach((key) => {
     if (key === 'static.js') {
       return;
     }
@@ -123,12 +123,12 @@ app.use(
 const hotMiddleware = webpackHotMiddleware(compiler);
 app.use(hotMiddleware);
 
-compiler.plugin('compile', () => {
+compiler.hooks.compile.tap('Slate Tools Start', () => {
   clearConsole();
   spinner = ora(chalk.magenta(' Compiling...')).start();
 });
 
-compiler.plugin('done', async stats => {
+compiler.hooks.done.tap('Slate Tools Start', async (stats) => {
   spinner.stop();
   clearConsole();
 
@@ -144,7 +144,7 @@ compiler.plugin('done', async stats => {
     });
     console.log(chalk.red('Failed to compile.\n'));
     console.log(config.paths.lib);
-    messages.errors.forEach(message => {
+    messages.errors.forEach((message) => {
       console.log(`${message}\n`);
     });
     // If errors exist, only show errors.
@@ -158,7 +158,7 @@ compiler.plugin('done', async stats => {
       version: packageJson.version,
     });
     console.log(chalk.yellow('Compiled with warnings.\n'));
-    messages.warnings.forEach(message => {
+    messages.warnings.forEach((message) => {
       console.log(`${message}\n`);
     });
   }
@@ -185,7 +185,7 @@ compiler.plugin('done', async stats => {
   // });
   // console.log('\n');
 
-  const liquidFiles = files.filter(file => path.extname(file) === '.liquid');
+  const liquidFiles = files.filter((file) => path.extname(file) === '.liquid');
 
   if (isFirstCompilation && argv.skipFirstDeploy) {
     isFirstCompilation = false;
@@ -235,7 +235,7 @@ compiler.plugin('done', async stats => {
           force: liquidFiles.length > 0,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         event('slate-tools:start:sync-error', {
           error,
           version: packageJson.version,

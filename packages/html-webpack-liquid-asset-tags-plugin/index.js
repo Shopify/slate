@@ -8,8 +8,8 @@ const path = require('path');
 // eslint-disable-next-line no-empty-function
 function AssetTagToShopifyLiquid() {}
 
-AssetTagToShopifyLiquid.prototype.apply = compiler => {
-  compiler.plugin('compilation', compilation => {
+AssetTagToShopifyLiquid.prototype.apply = (compiler) => {
+  compiler.hooks.compilation.tap('Assets Tag Plugin', (compilation) => {
     // https://github.com/jantimon/html-webpack-plugin#events
     compilation.plugin('html-webpack-plugin-alter-asset-tags', (data, cb) => {
       function fixTag(tag) {
