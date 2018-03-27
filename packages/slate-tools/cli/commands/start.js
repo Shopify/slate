@@ -38,11 +38,11 @@ let spinner = ora(chalk.magenta(' Compiling...')).start();
 
 const sslCert = fs.existsSync(config.paths.ssl.cert)
   ? fs.readFileSync(config.paths.ssl.cert)
-  : fs.readFileSync(path.join(__dirname, '../ssl/server.pem'));
+  : fs.readFileSync(path.join(__dirname, '../../ssl/server.pem'));
 
 const sslKey = fs.existsSync(config.paths.ssl.key)
   ? fs.readFileSync(config.paths.ssl.key)
-  : fs.readFileSync(path.join(__dirname, '../ssl/server.pem'));
+  : fs.readFileSync(path.join(__dirname, '../../ssl/server.pem'));
 
 const sslOptions = {
   key: sslKey,

@@ -1,5 +1,16 @@
 # Change Log
 
+## v1.0.0-alpha.26 (2018-03-27)
+
+#### :bug: Bug Fix
+
+* `slate-tools`
+  * [#458](https://github.com/Shopify/slate/pull/448) Fix fake SSL certificate path in slate-tools start command. ([@t-kelly](https://github.com/t-kelly))
+
+#### Committers: 3
+
+* Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
 ## v1.0.0-alpha.25 (2018-03-23)
 
 #### :rocket: Enhancement
