@@ -19,6 +19,12 @@ const config = require('../../../slate-tools.config');
 const packageJson = require('../../../package.json');
 const getChunkName = require('../get-chunk-name');
 const {templateFiles, layoutFiles} = require('../entrypoints');
+const HtmlWebpackIncludeLiquidStylesPlugin = require('../html-webpack-include-chunks');
+
+const extractStyles = new ExtractTextPlugin({
+  filename: '[name].css.liquid',
+  allChunks: true,
+});
 
 function eslintLoader() {
   if (!fs.existsSync(config.paths.eslint.rc)) {
@@ -74,7 +80,7 @@ module.exports = merge(
         {
           test: /\.s[ac]ss$/,
           exclude: commonExcludes(),
-          use: ExtractTextPlugin.extract({
+          use: extractStyles.extract({
             fallback: 'style-loader',
             use: [
               {loader: '@shopify/slate-cssvar-loader'},
@@ -110,9 +116,6 @@ module.exports = merge(
         sourceMap: true,
       }),
 
-      // extract css into its own file
-      new ExtractTextPlugin('styles.css.liquid'),
-
       // generate dist/layout/*.liquid for all layout files with correct paths to assets
 
       new HtmlWebpackPlugin({
@@ -135,7 +138,6 @@ module.exports = merge(
       }),
 
       new HtmlWebpackPlugin({
-        excludeChunks: ['static'],
         filename: `../snippets/style-tags.liquid`,
         template: path.resolve(__dirname, '../style-tags.html'),
         inject: false,
@@ -151,14 +153,13 @@ module.exports = merge(
         chunksSortMode: 'dependency',
       }),
 
-      new HtmlWebpackIncludeAssetsPlugin({
-        assets: ['styles.css'],
-        append: true,
-      }),
+      new HtmlWebpackIncludeLiquidStylesPlugin(),
 
       new SlateLiquidAssetsPlugin(),
 
       new SlateTagPlugin(packageJson.version),
+
+      extractStyles,
     ],
 
     optimization: {

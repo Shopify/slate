@@ -5,12 +5,16 @@ const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const commonExcludes = require('../common-excludes');
 const babelLoader = require('../loaders/babel-loader');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const config = require('../../../slate-tools.config');
 const {entrypointFiles} = require('../entrypoints');
 
 const paths = config.paths;
 
 const isDevServer = process.argv[3] === 'start';
+const extractLiquidStyles = new ExtractTextPlugin(
+  '[name].styleLiquid.scss.liquid',
+);
 
 /**
  * Return an array of ContextReplacementPlugin to use.
@@ -106,7 +110,7 @@ module.exports = {
       },
       {
         test: config.regex.static,
-        exclude: commonExcludes(),
+        exclude: commonExcludes('assets/styles'),
         loader: 'file-loader',
         options: {
           name: '../[path][name].[ext]',
@@ -121,17 +125,24 @@ module.exports = {
         },
       },
       {
-        test: /\.liquid$/,
+        test: /^(?:(?!(css|scss|sass|js)).)*\.(liquid)$/,
         exclude: commonExcludes(),
         loader: `extract-loader!@shopify/slate-liquid-asset-loader?dev-server=${
           isDevServer ? 'true' : 'false'
         }`,
+      },
+      {
+        test: /(css|scss|sass)\.liquid$/,
+        exclude: commonExcludes(),
+        use: extractLiquidStyles.extract(['concat-style-loader']),
       },
     ],
   },
 
   plugins: [
     ...contextReplacementPlugins(),
+
+    extractLiquidStyles,
 
     new CopyWebpackPlugin([
       {

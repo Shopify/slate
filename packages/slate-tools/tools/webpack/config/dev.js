@@ -9,6 +9,7 @@ const webpackCoreConfig = require('./core');
 const userWebpackConfig = require('../get-user-webpack-config')('dev');
 const config = require('../../../slate-tools.config');
 const {templateFiles, layoutFiles} = require('../entrypoints');
+const HtmlWebpackIncludeLiquidStylesPlugin = require('../html-webpack-include-chunks');
 
 // so that everything is absolute
 webpackCoreConfig.output.publicPath = `${config.domain}:${config.port}/`;
@@ -92,6 +93,8 @@ module.exports = merge(
         // necessary to consistently work with multiple chunks via CommonsChunkPlugin
         chunksSortMode: 'dependency',
       }),
+
+      new HtmlWebpackIncludeLiquidStylesPlugin(),
     ],
   },
   userWebpackConfig,
