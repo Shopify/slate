@@ -40,7 +40,7 @@ function _generateIgnoreFlags() {
   const ignoreFiles = slateEnv.getIgnoreFilesValue().split(':');
   const flags = [];
 
-  ignoreFiles.forEach(pattern => {
+  ignoreFiles.forEach((pattern) => {
     flags.push('--ignored-file');
     flags.push(pattern);
   });
@@ -69,7 +69,7 @@ async function deploy(cmd = '', files = []) {
   }
 
   if (await skipSettingData(files)) {
-    files = files.filter(file => !file.endsWith('settings_data.json'));
+    files = files.filter((file) => !file.endsWith('settings_data.json'));
   }
 
   console.log(chalk.magenta(`\n${figures.arrowUp}  Uploading to Shopify...\n`));
@@ -97,7 +97,7 @@ function promiseThemekitConfig() {
         ],
         cwd: config.paths.dist,
       },
-      err => {
+      (err) => {
         if (err) {
           reject(err);
         } else {
@@ -120,7 +120,7 @@ function promiseThemekitDeploy(cmd, files) {
         ],
         cwd: config.paths.dist,
       },
-      err => {
+      (err) => {
         if (err) {
           reject(err);
         } else {
@@ -142,7 +142,11 @@ module.exports = {
     return maybeDeploy();
   },
 
-  async overwrite(env) {
+  async replace() {
     return deploy('replace');
+  },
+
+  async upload() {
+    return deploy('upload');
   },
 };
