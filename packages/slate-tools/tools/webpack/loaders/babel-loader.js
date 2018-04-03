@@ -1,6 +1,6 @@
 const fs = require('fs');
-const commonExcludes = require('@shopify/slate-common-excludes');
-const config = require('./slate-babel.config');
+const commonExcludes = require('../common-excludes');
+const config = require('../../../slate-tools.config');
 
 module.exports = () => {
   if (

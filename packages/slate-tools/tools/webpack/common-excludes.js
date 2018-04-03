@@ -1,4 +1,4 @@
-const config = require('./slate-common-excludes.config');
+const config = require('../../slate-tools.config');
 
 module.exports = (...params) =>
   new RegExp([...config.webpackCommonExcludes, ...params].join('|'));

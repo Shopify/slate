@@ -3,8 +3,8 @@ const path = require('path');
 const webpack = require('webpack');
 const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const commonExcludes = require('@shopify/slate-common-excludes');
-const babelLoader = require('@shopify/slate-babel');
+const commonExcludes = require('../common-excludes');
+const babelLoader = require('../loaders/babel-loader');
 const config = require('../../../slate-tools.config');
 const {entrypointFiles} = require('../entrypoints');
 
