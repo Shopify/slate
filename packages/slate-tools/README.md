@@ -39,11 +39,12 @@ Here are the available API commands for Slate:
 
 * Builds a production-ready version of the theme and outputs it to the `dist` folder
 
-`deploy [--env=my-custom-env-name] [--skipPrompts]`
+`deploy [--env=my-custom-env-name] [--skipPrompts] [--replace]`
 
 * Push the compiled theme from the `dist` folder to Shopify
 * (Optional) You can pass it an environment as a flag; e.g. `--env=my-custom-env-name` would look for `.env.my-custom-env-name` file
 * (Optional) You can skip all prompts using the `--skipPrompts` flag. This is especially useful when using Slate Tools in CI.
+* (Optional) By default, the deploy command updates any existing files, and adds any new files to your Shopify store's theme. Use this flag to replace all files on your theme with those of your Slate project. This will delete all files from your Shopify theme which are not in your Slate project.
 
 `zip`
 
