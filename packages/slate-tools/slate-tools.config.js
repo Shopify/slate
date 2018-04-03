@@ -7,6 +7,24 @@ module.exports = generate({
   id: 'slateTools',
   items: [
     {
+      id: 'webpackCommonExcludes',
+      default: ['node_modules', 'assets/vendors/'],
+      description: 'Paths to exclude for all webpack loaders',
+      type: 'array',
+    },
+    {
+      id: 'babelLoaderEnable',
+      default: true,
+      description: 'Enable/disable Babel for theme scripts',
+      type: 'boolean',
+    },
+    {
+      id: 'babelLoaderConfigPath',
+      default: resolveTheme('.babelrc'),
+      description: 'A path to a valid Babel configuration',
+      type: 'path',
+    },
+    {
       id: 'extends',
       items: [
         {

@@ -16,8 +16,6 @@
   "dependencies": {
     "@shopify/html-webpack-liquid-asset-tags-plugin": "^1.0.0-alpha.26",
     "@shopify/slate-analytics": "^1.0.0-alpha.26",
-    "@shopify/slate-babel": "^1.0.0-alpha.26",
-    "@shopify/slate-common-excludes": "^1.0.0-alpha.26",
     "@shopify/slate-config": "^1.0.0-alpha.26",
     "@shopify/slate-cssvar-loader": "^1.0.0-alpha.26",
     "@shopify/slate-env": "^1.0.0-alpha.26",
