@@ -24,6 +24,7 @@ async function init() {
     case 'zip':
     case 'lint':
     case 'format':
+    case 'env':
       result = spawn.sync(
         'node',
         [require.resolve(`./commands/${script}`)].concat(args),
