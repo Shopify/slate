@@ -68,9 +68,9 @@ Here are the available API commands for Slate:
 
 ### How to prevent Webpack from parsing some liquid methods and filters
 
-Webpack will loop through your liquid files and parse the liquid helpers to compile the relevant assets. For example, if it detects a `<img src="{{ 'lamp.png' | assert_url }}>"` in a file, it will grab that `lamp.png` image and pass it through the build process.
+Webpack will loop through your liquid files and parse the liquid helpers to compile the relevant assets. For example, if it detects a `<img src="{{ 'lamp.png' | asset_url }}>"` in a file, it will grab that `lamp.png` image and pass it through the build process.
 
-If, for some reason, one file should not be picked up by Webpack, you can escape this process by using double quotes inside of the liquid expression, like so `<img src='{{ "lamp.png" | assert_url }}>'`. When using this escape hatch, you should not include a relative link to your asset but instead simply write it's name.
+If, for some reason, one file should not be picked up by Webpack, you can escape this process by using double quotes inside of the liquid expression, like so `<img src='{{ "lamp.png" | asset_url }}>'`. When using this escape hatch, you should not include a relative link to your asset but instead simply write it's name.
 
 ### How to make HMR-compliant code
 
