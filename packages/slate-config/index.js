@@ -27,15 +27,15 @@ function generate(schema, slaterc = getSlateConfig()) {
 function _generateConfig(items, overrides) {
   const config = {};
 
-  items.forEach(item => {
+  items.forEach((item) => {
     if (Array.isArray(item.items)) {
       config[item.id] = _generateConfig(
         item.items,
         overrides && overrides[item.id],
       );
-    } else if (overrides && typeof overrides[item.id] !== undefined) {
+    } else if (overrides && typeof overrides[item.id] !== 'undefined') {
       config[item.id] = overrides[item.id];
-    } else if (item.default !== undefined) {
+    } else if (typeof item.default !== 'undefined') {
       config[item.id] = item.default;
     }
   });
