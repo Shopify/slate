@@ -44,9 +44,9 @@
     name="contact[body]"
     id="ContactFormMessage"
     placeholder="{{ 'contact.form.message' | t }}">
-    {% if form.body %}
-      {{ form.body }}
-    {% endif %}
+    {%- if form.body -%}
+      {{- form.body -}}
+    {%- endif -%}
   </textarea>
 
   <input type="submit" class="btn" value="{{ 'contact.form.send' | t }}">
