@@ -1,0 +1,21 @@
+{
+  "name": "concat-style-loader",
+  "version": "1.0.0-alpha.26",
+  "description": "Finds CSS custom properties (variables) in your stylesheets and replaces them with their corresponding liquid variable",
+  "main": "index.js",
+  "repository": "https://github.com/Shopify/slate/tree/1.x/packages/slate-cssvar-loader",
+  "author": "Shopify Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Shopify/slate/issues"
+  },
+  "homepage": "https://github.com/Shopify/slate#readme",
+  "devDependencies": {
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "memory-fs": "^0.4.1",
+    "webpack": "^4.4.1"
+  },
+  "dependencies": {
+    "loader-utils": "^1.1.0"
+  }
+}

@@ -1,0 +1,6 @@
+@import url('./other.css');
+@import url('./another.css');
+
+body {
+  background-color: blue;
+}
