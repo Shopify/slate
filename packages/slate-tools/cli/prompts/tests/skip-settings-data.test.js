@@ -11,7 +11,7 @@ jest.mock('inquirer', () => {
 jest.mock('@shopify/slate-env', () => {
   let __ignoreValue = '';
   return {
-    __setIgnoreValue: value => (__ignoreValue = value),
+    __setIgnoreValue: (value) => (__ignoreValue = value),
     __resetIgnoreValue: () => (__ignoreValue = ''),
     getIgnoreFilesValue: () => __ignoreValue,
   };
@@ -60,7 +60,7 @@ describe('promptIfSettingsData()', () => {
       '**/settings_data.json',
     ];
 
-    globs.forEach(glob => {
+    globs.forEach((glob) => {
       env.__setIgnoreValue(glob);
       promptIfSettingsData(FILES);
     });
@@ -69,7 +69,7 @@ describe('promptIfSettingsData()', () => {
   });
 
   test('does not prompt if promptSettings config is set to false', () => {
-    const config = require('../slate-sync.config');
+    const config = require('../../../slate-tools.config');
     config.promptSettings = false;
 
     const promptIfSettingsData = require('../skip-settings-data');

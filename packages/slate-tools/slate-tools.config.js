@@ -25,6 +25,12 @@ module.exports = generate({
       type: 'path',
     },
     {
+      id: 'promptSettings',
+      description:
+        'Enable/disable the prompt to skip uploading settings_data.json',
+      default: true,
+    },
+    {
       id: 'extends',
       items: [
         {
