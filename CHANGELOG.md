@@ -9,7 +9,7 @@
 
 Huge performance improvements for Themes on it's way with the introduction of Webpack 4 and its automatic bundle splitting. This allows Layouts and Templates to have their own independent JS and CSS bundles that are only loaded on the appropriate page(s). Say goodbye to JS and CSS bloat!
 
-You must now include the following in the `<head>` of any layout file you wish to have JS and CSS. For example, this is what you would put inside the `<head>` of your `layouts/theme.liquid` file:
+You must now include the following in the `<head>` of any layout file you wish to have JS and CSS. For example, this is what you would put inside the `<head>` of your `layout/theme.liquid` file:
 
 ```
 {% include 'script-tags', layout: 'theme' %}
@@ -18,7 +18,7 @@ You must now include the following in the `<head>` of any layout file you wish t
 
 These snippets are generated automatically by Slate Tools at build. Their contents include `<script>` and `<link>` tags for each JS and CSS bundles.
 
-You now must also have a `src/assets/scripts/layouts` folder and a `src/assets/scripts/templates`. Any file contained in these folders which have a name the same as their Liquid counterpart is considered an entrypoint. For example, if I create a `src/assets/scripts/templates/index.js` file, it's contents will only be downloaded and run when a user visits the Index page.
+You now must also have a `src/assets/scripts/layout` folder and a `src/assets/scripts/templates`. Any file contained in these folders which have a name the same as their Liquid counterpart is considered an entrypoint. For example, if I create a `src/assets/scripts/templates/index.js` file, it's contents will only be downloaded and run when a user visits the Index page.
 
 #### :rocket: Enhancement
 
