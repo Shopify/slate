@@ -1,5 +1,56 @@
 # Change Log
 
+## v1.0.0-alpha.27 (2018-04-17)
+
+### BREAKING CHANGES
+
+* [#450](https://github.com/Shopify/slate/pull/450) Webpack v4. Add template and layout specific JS entrypoints.
+* [#488](https://github.com/Shopify/slate/pull/488) Add concat-style-loader to handle Liquid Style files. ([@t-kelly](https://github.com/t-kelly))
+
+Huge performance improvements for Themes on it's way with the introduction of Webpack 4 and its automatic bundle splitting. This allows Layouts and Templates to have their own independent JS and CSS bundles that are only loaded on the appropriate page(s). Say goodbye to JS and CSS bloat!
+
+You must now include the following in the `<head>` of any layout file you wish to have JS and CSS. For example, this is what you would put inside the `<head>` of your `layouts/theme.liquid` file:
+
+```
+{% include 'script-tags', layout: 'theme' %}
+{% include 'style-tags' %}
+```
+
+These snippets are generated automatically by Slate Tools at build. Their contents include `<script>` and `<link>` tags for each JS and CSS bundles.
+
+You now must also have a `src/assets/scripts/layouts` folder and a `src/assets/scripts/templates`. Any file contained in these folders which have a name the same as their Liquid counterpart is considered an entrypoint. For example, if I create a `src/assets/scripts/templates/index.js` file, it's contents will only be downloaded and run when a user visits the Index page.
+
+#### :rocket: Enhancement
+
+* `concat-style-loader`, `slate-tools`
+  * [#488](https://github.com/Shopify/slate/pull/488) Add concat-style-loader to handle Liquid Style files. ([@t-kelly](https://github.com/t-kelly))
+* `slate-sync`, `slate-tools`
+  * [#474](https://github.com/Shopify/slate/pull/474) Add --replace flag to the deploy command. ([@t-kelly](https://github.com/t-kelly))
+* `create-slate-theme`, `html-webpack-liquid-asset-tags-plugin`, `slate-analytics`, `slate-sync`, `slate-tag-webpack-plugin`, `slate-tools`
+  * [#450](https://github.com/Shopify/slate/pull/450) Webpack v4. Add template and layout specific JS entrypoints.. ([@t-kelly](https://github.com/t-kelly))
+
+#### :bug: Bug Fix
+
+* `slate-config`
+  * [#482](https://github.com/Shopify/slate/pull/482) Incorrect type checking when building config objects. ([@t-kelly](https://github.com/t-kelly))
+
+#### :memo: Documentation
+
+* `slate-tools`
+  * [#478](https://github.com/Shopify/slate/pull/478) Fix typo at packages/slate-tools/README.md. ([@jbruni](https://github.com/jbruni))
+
+#### :house: Internal
+
+* `slate-sync`, `slate-tools`
+  * [#480](https://github.com/Shopify/slate/pull/480) Refactor slate-tools start command. ([@t-kelly](https://github.com/t-kelly))
+* `slate-babel`, `slate-common-excludes`, `slate-tools`
+  * [#473](https://github.com/Shopify/slate/pull/473) Remove slate-babel and slate-common-excludes. ([@t-kelly](https://github.com/t-kelly))
+
+#### Committers: 2
+
+* J Bruni ([jbruni](https://github.com/jbruni))
+* Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
 ## v1.0.0-alpha.26 (2018-03-27)
 
 #### :bug: Bug Fix
