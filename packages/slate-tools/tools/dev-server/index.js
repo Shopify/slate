@@ -14,7 +14,6 @@ const setEnvironment = require('../../tools/webpack/set-slate-env');
 
 module.exports = class DevServer {
   constructor(options) {
-    this.firstCompile = true;
     this.assetHashes = {};
     this.options = options;
     this.env = setEnvironment(options.env);
@@ -45,14 +44,7 @@ module.exports = class DevServer {
   }
 
   _onCompileDone(stats) {
-    let files;
-
-    if (this.firstCompile) {
-      this.firstCompile = false;
-      files = this._getAllChangedFiles(stats);
-    } else {
-      files = this._getChangedLiquidFiles(stats);
-    }
+    const files = this._getChangedLiquidFiles(stats);
 
     return this.client.sync(files);
   }
@@ -61,13 +53,6 @@ module.exports = class DevServer {
     this.app.webpackHotMiddleware.publish({
       action: 'shopify_upload_finished',
       force: files.length > 0,
-    });
-  }
-
-  _getAllChangedFiles(stats) {
-    return Object.entries(stats.compilation.assets).map(([key, asset]) => {
-      this._updateAssetHash(key, asset);
-      return asset.existsAt.replace(config.paths.dist, '');
     });
   }
 
@@ -81,7 +66,7 @@ module.exports = class DevServer {
 
         return (
           asset.emitted &&
-          /\.liquid$/.test(key) &&
+          (/\.liquid$/.test(key) || /\.json$/.test(key)) &&
           fs.existsSync(asset.existsAt) &&
           oldHash !== newHash
         );
