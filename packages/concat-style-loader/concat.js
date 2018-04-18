@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-function concatStyles(content, rootPath) {
-  const assets = parseImports(content, rootPath).reverse();
+function concatStyles(content, rootPath, loader) {
+  const assets = parseImports(content, rootPath, loader).reverse();
 
   assets.forEach((asset) => {
     asset.content = concatStyles(asset.content, asset.path);
@@ -19,24 +19,26 @@ function inlineAsset(content, asset) {
   return content.slice(0, startIndex) + asset.content + content.slice(endIndex);
 }
 
-function parseImports(content, rootPath) {
+function parseImports(content, rootPath, loader) {
   const matches = getImportStatements(content);
   return matches.map((match) => {
     const url = getImportURL(match[0]);
     const assetPath = path.resolve(path.dirname(rootPath), url);
 
-    const content = fetchAssetContent(assetPath);
+    const content = fetchAssetContent(assetPath, loader);
 
     return {path: assetPath, content, match};
   });
 }
 
-function fetchAssetContent(assetPath) {
+function fetchAssetContent(assetPath, loader) {
   if (!fs.existsSync(assetPath)) {
     throw new Error(
       `Concat Style Loader Error: Cannot find asset '${assetPath}'`,
     );
   }
+
+  loader && loader.addDependency(assetPath);
 
   return fs.readFileSync(assetPath, 'utf8');
 }

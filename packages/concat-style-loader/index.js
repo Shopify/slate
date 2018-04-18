@@ -8,7 +8,7 @@ module.exports = function(content) {
   const options = getOptions(this);
   const rootPath = this.resourcePath;
 
-  content = concatStyles(content, rootPath);
+  content = concatStyles(content, rootPath, this);
 
   return `module.exports = ${JSON.stringify(content)}`;
 };
