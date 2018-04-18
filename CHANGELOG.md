@@ -1,5 +1,23 @@
 # Change Log
 
+## v1.0.0-alpha.28 (2018-04-18)
+
+#### :bug: Bug Fix
+* `concat-style-loader`
+  * [#500](https://github.com/Shopify/slate/pull/500) Add @import file as dependencies in concat-css-loader. ([@t-kelly](https://github.com/t-kelly))
+* `slate-tools`
+  * [#498](https://github.com/Shopify/slate/pull/498) Fix files uploaded by the dev server. ([@t-kelly](https://github.com/t-kelly))
+  * [#495](https://github.com/Shopify/slate/pull/495) Add path module to dev-server/ssl module. ([@t-kelly](https://github.com/t-kelly))
+  * [#494](https://github.com/Shopify/slate/pull/494) Adds concat-style-loader to slate-tools package.json. ([@t-kelly](https://github.com/t-kelly))
+
+#### :memo: Documentation
+* `slate-tools`
+  * [#497](https://github.com/Shopify/slate/pull/497) Update prompt settings instructions. ([@chrisberthe](https://github.com/chrisberthe))
+
+#### Committers: 2
+- Chris Berthe ([chrisberthe](https://github.com/chrisberthe))
+- Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
 ## v1.0.0-alpha.27 (2018-04-17)
 
 ### BREAKING CHANGES
