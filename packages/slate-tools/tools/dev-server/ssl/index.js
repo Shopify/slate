@@ -1,4 +1,5 @@
 const {existsSync, readFileSync} = require('fs');
+const path = require('path');
 
 module.exports = function(config) {
   const cert = existsSync(config.paths.ssl.cert)
