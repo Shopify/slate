@@ -66,7 +66,7 @@ module.exports = async function(files) {
     `   Or to disable this prompt, add the following to your slate.config.js file:\n`,
   );
   console.log(
-    `      ${chalk.cyan(`'slate-sync': { promptSettings: false }`)}\n`,
+    `      ${chalk.cyan(`'slateTools': { promptSettings: false }`)}\n`,
   );
 
   const answer = await inquirer.prompt([question]);
