@@ -1,6 +1,6 @@
-const slateConfig = require('@shopify/slate-config');
+const {resolveTheme, generate} = require('@shopify/slate-config');
 
-module.exports = slateConfig.generate({
+module.exports = generate({
   id: 'slateCssVarLoader',
   items: [
     {
@@ -11,7 +11,7 @@ module.exports = slateConfig.generate({
     },
     {
       id: 'cssVarLoaderLiquidPath',
-      default: ['src/snippets/css-variables.liquid'],
+      default: [resolveTheme('src/snippets/css-variables.liquid')],
       description:
         'An array of string paths to liquid files that associate css variables to liquid variables',
       type: 'array',
