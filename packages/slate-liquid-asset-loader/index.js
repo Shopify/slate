@@ -45,7 +45,7 @@ module.exports = function liquidLoader(content) {
     const key = `__LIQUID_LOADER_${getUniqueKey()}__`;
 
     // We're on a dev server, replace the whole liquid expression
-    if (options['dev-server']) {
+    if (options.devServer) {
       replacements[key] = file;
       return key;
     }
@@ -53,7 +53,7 @@ module.exports = function liquidLoader(content) {
     const fileRegex = new RegExp(escapeStringRegexp(file));
 
     // Replace only the filename, keeping the liquid expression
-    return liquidExpr.replace(fileRegex, match => {
+    return liquidExpr.replace(fileRegex, (match) => {
       replacements[key] = match;
       return key;
     });
@@ -64,7 +64,7 @@ module.exports = function liquidLoader(content) {
   // Replace keys with a call to require(), correctly escaped
   return `module.exports = ${JSON.stringify(keyedContent).replace(
     llRegex,
-    match => {
+    (match) => {
       const request = utils.urlToRequest(replacements[match]);
       const path = utils.stringifyRequest(this, request);
 

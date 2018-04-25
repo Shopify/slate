@@ -125,13 +125,6 @@ module.exports = {
         },
       },
       {
-        test: /^(?:(?!(css|scss|sass|js)).)*\.(liquid)$/,
-        exclude: commonExcludes(),
-        loader: `extract-loader!@shopify/slate-liquid-asset-loader?dev-server=${
-          isDevServer ? 'true' : 'false'
-        }`,
-      },
-      {
         test: /(css|scss|sass)\.liquid$/,
         exclude: commonExcludes(),
         use: extractLiquidStyles.extract(['concat-style-loader']),
