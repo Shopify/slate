@@ -3,22 +3,23 @@ const path = require('path');
 const execa = require('execa');
 const createSlateTheme = require('../create-slate-theme');
 const config = require('../create-slate-theme.config');
+const {splitCommandString} = require('../utils');
 
 const TEST_PROJECT = 'test-project';
 const TEST_STARTER = 'test-repo';
 const TEST_COMMITTISH = '123456';
 const CLONE_HTTPS_COMMAND = `git clone
   https://github.com/shopify/${TEST_STARTER}
-  ${path.resolve(TEST_PROJECT)}
+  "${path.resolve(TEST_PROJECT)}"
   --single-branch`;
 const CLONE_SSH_COMMAND = `git clone
   git@github.com:shopify/${TEST_STARTER}.git
-  ${path.resolve(TEST_PROJECT)}
+  "${path.resolve(TEST_PROJECT)}"
   --single-branch`;
 const CLONE_BRANCH_COMMAND = `git clone
   -b ${TEST_COMMITTISH}
   https://github.com/shopify/${TEST_STARTER}
-  ${path.resolve(TEST_PROJECT)}
+  "${path.resolve(TEST_PROJECT)}"
   --single-branch`;
 
 jest.mock('@shopify/slate-env', () => {
@@ -27,7 +28,7 @@ jest.mock('@shopify/slate-env', () => {
 
 beforeAll(() => {
   // Mock process.exit since it terminates the test runner
-  process.exit = jest.fn(code => {
+  process.exit = jest.fn((code) => {
     throw new Error(`Process exit with code: ${code}`);
   });
 });
@@ -38,7 +39,7 @@ beforeEach(() => {
 });
 
 test('can clone a theme from a Git repo using HTTPS', async () => {
-  const [file, ...args] = CLONE_HTTPS_COMMAND.split(/\s+/);
+  const [file, ...args] = splitCommandString(CLONE_HTTPS_COMMAND);
 
   await createSlateTheme('test-project', 'shopify/test-repo');
 
@@ -47,7 +48,7 @@ test('can clone a theme from a Git repo using HTTPS', async () => {
 });
 
 test('can clone a theme from a Git repo using SSH', async () => {
-  const [file, ...args] = CLONE_SSH_COMMAND.split(/\s+/);
+  const [file, ...args] = splitCommandString(CLONE_SSH_COMMAND);
 
   await createSlateTheme('test-project', 'shopify/test-repo', {ssh: true});
 
@@ -56,7 +57,7 @@ test('can clone a theme from a Git repo using SSH', async () => {
 });
 
 test('can clone a theme from a Github repo with a specified commitish (branch)', async () => {
-  const [file, ...args] = CLONE_BRANCH_COMMAND.split(/\s+/);
+  const [file, ...args] = splitCommandString(CLONE_BRANCH_COMMAND);
 
   await createSlateTheme('test-project', 'shopify/test-repo#123456');
 
