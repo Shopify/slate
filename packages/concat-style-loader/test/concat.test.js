@@ -36,11 +36,22 @@ describe('getImportStatements()', () => {
     const {getImportStatements} = require('../concat');
     const contents = `
       @import url('./other.css.liquid');
-      /* @import url('./another.css.liquid'); */
+      /* @import url('./anotherOne.css.liquid'); */
+      // @import url('./something.css.liquid');
       @import url('./another.css.liquid');`;
     const imports = getImportStatements(contents);
 
     expect(imports.length).toBe(2);
+  });
+
+  test('ignores @import statements which are not followed by a url(...) statement', () => {
+    const {getImportStatements} = require('../concat');
+    const contents = `
+      @import './something.css.liquid';
+      @import url('./another.css.liquid');`;
+    const imports = getImportStatements(contents);
+
+    expect(imports.length).toBe(1);
   });
 
   test('can include @import statements inside comments', () => {
