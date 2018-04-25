@@ -51,6 +51,11 @@ function getImportStatements(content, ignoreComments = true) {
   const matches = [];
   let match;
   while ((match = regex.exec(content))) {
+    // If import statement is not followed by a `url(...)`
+    if (typeof match[1] === 'undefined') {
+      continue;
+    }
+
     match.endIndex = match.index + match[1].length;
 
     if (matchIsInComment(content, match) && ignoreComments) {
