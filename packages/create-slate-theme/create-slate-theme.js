@@ -53,7 +53,7 @@ function checkAppName(name) {
 
 function printValidationResults(results) {
   if (typeof results !== 'undefined') {
-    results.forEach(error => {
+    results.forEach((error) => {
       console.error(chalk.red(`  *  ${error}`));
     });
   }
@@ -64,7 +64,7 @@ function printValidationResults(results) {
 // https://github.com/facebookincubator/create-react-app/pull/368#issuecomment-243446094
 function checkDirForConflicts(root) {
   const files = fs.readdirSync(root);
-  const conflicts = files.filter(file => !config.validFiles.includes(file));
+  const conflicts = files.filter((file) => !config.validFiles.includes(file));
 
   if (conflicts.length > 0) {
     console.log();
@@ -116,7 +116,7 @@ function copyFromDir(starter, root) {
       `Creating new theme from local starter: ${chalk.green(starter)}`,
     );
     return fs.copy(starter, root, {
-      filter: file =>
+      filter: (file) =>
         !/^\.(git|hg)$/.test(path.basename(file)) && !/node_modules/.test(file),
     });
   });
@@ -136,13 +136,13 @@ function cloneFromGit(hostInfo, root, ssh) {
   console.log(`Cloning theme from a git repo: ${chalk.green(url)}`);
 
   return utils
-    .spawn(`git clone ${branch} ${url} ${root} --single-branch`, {
+    .spawn(`git clone ${branch} ${url} "${root}" --single-branch`, {
       stdio: 'pipe',
     })
     .then(() => {
       return fs.remove(path.join(root, '.git'));
     })
-    .catch(error => {
+    .catch((error) => {
       console.log();
       console.log(chalk.red('There was an error while cloning the git repo:'));
       console.log('');
