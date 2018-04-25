@@ -5,7 +5,6 @@ const ora = require('ora');
 const consoleControl = require('console-control-strings');
 const clearConsole = require('react-dev-utils/clearConsole');
 const openBrowser = require('react-dev-utils/openBrowser');
-const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const env = require('@shopify/slate-env');
 const {event} = require('@shopify/slate-analytics');
 
@@ -37,40 +36,39 @@ devServer.compiler.hooks.compile.tap('CLI', () => {
 
 devServer.compiler.hooks.done.tap('CLI', (stats) => {
   const statsJson = stats.toJson({}, true);
-  const messages = formatWebpackMessages(statsJson);
 
   spinner.stop();
   clearConsole();
 
-  if (messages.errors.length) {
+  if (statsJson.errors.length) {
     event('slate-tools:start:compile-errors', {
-      errors: messages.errors,
+      errors: statsJson.errors,
       version: packageJson.version,
     });
 
     console.log(chalk.red('Failed to compile.\n'));
     console.log(config.paths.lib);
 
-    messages.errors.forEach((message) => {
+    statsJson.errors.forEach((message) => {
       console.log(`${message}\n`);
     });
   }
 
-  if (messages.warnings.length) {
+  if (statsJson.warnings.length) {
     event('slate-tools:start:compile-warnings', {
       duration: statsJson.time,
-      warnings: messages.warnings,
+      warnings: statsJson.warnings,
       version: packageJson.version,
     });
 
     console.log(chalk.yellow('Compiled with warnings.\n'));
 
-    messages.warnings.forEach((message) => {
+    statsJson.warnings.forEach((message) => {
       console.log(`${message}\n`);
     });
   }
 
-  if (!messages.errors.length && !messages.warnings.length) {
+  if (!statsJson.errors.length && !statsJson.warnings.length) {
     event('slate-tools:start:compile-success', {
       duration: statsJson.time,
       version: packageJson.version,

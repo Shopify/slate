@@ -31,6 +31,17 @@ module.exports = merge(
     module: {
       rules: [
         {
+          test: /^(?:(?!(css|scss|sass)).)*\.(liquid)$/,
+          exclude: commonExcludes(),
+          use: [
+            {loader: 'extract-loader'},
+            {
+              loader: '@shopify/slate-liquid-asset-loader',
+              options: {devServer: true},
+            },
+          ],
+        },
+        {
           test: /\.s[ac]ss$/,
           exclude: commonExcludes(),
           use: [
