@@ -1,8 +1,30 @@
 # Change Log
 
+## v1.0.0-alpha.29 (2018-04-27)
+
+#### :rocket: Enhancement
+
+* `concat-style-loader`
+  * [#510](https://github.com/Shopify/slate/pull/510) Ignore `@import` statements which are not followed by `url(..)`. ([@t-kelly](https://github.com/t-kelly))
+
+#### :bug: Bug Fix
+
+* `create-slate-theme`
+  * [#513](https://github.com/Shopify/slate/pull/513) Make sure paths with spaces don't break Create Slate Theme. ([@t-kelly](https://github.com/t-kelly))
+* `slate-liquid-asset-loader`, `slate-tools`
+  * [#512](https://github.com/Shopify/slate/pull/512) Fix asset url generated in slate-tools start. ([@t-kelly](https://github.com/t-kelly))
+* `slate-cssvar-loader`
+  * [#506](https://github.com/Shopify/slate/pull/506) Fix default cssVarLoaderLiquidPath for the slate-cssvar-loader package. ([@mmorissette](https://github.com/mmorissette))
+
+#### Committers: 2
+
+* Martin Morissette ([mmorissette](https://github.com/mmorissette))
+* Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
 ## v1.0.0-alpha.28 (2018-04-18)
 
 #### :bug: Bug Fix
+
 * `concat-style-loader`
   * [#500](https://github.com/Shopify/slate/pull/500) Add @import file as dependencies in concat-css-loader. ([@t-kelly](https://github.com/t-kelly))
 * `slate-tools`
@@ -11,12 +33,14 @@
   * [#494](https://github.com/Shopify/slate/pull/494) Adds concat-style-loader to slate-tools package.json. ([@t-kelly](https://github.com/t-kelly))
 
 #### :memo: Documentation
+
 * `slate-tools`
   * [#497](https://github.com/Shopify/slate/pull/497) Update prompt settings instructions. ([@chrisberthe](https://github.com/chrisberthe))
 
 #### Committers: 2
-- Chris Berthe ([chrisberthe](https://github.com/chrisberthe))
-- Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
+* Chris Berthe ([chrisberthe](https://github.com/chrisberthe))
+* Thomas Kelly ([t-kelly](https://github.com/t-kelly))
 
 ## v1.0.0-alpha.27 (2018-04-17)
 

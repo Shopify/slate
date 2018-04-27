@@ -1,6 +1,6 @@
 {
   "name": "@shopify/html-webpack-liquid-asset-tags-plugin",
-  "version": "1.0.0-alpha.28",
+  "version": "1.0.0-alpha.29",
   "description": "Finds static asset references and turns them into liquid tags with the 'asset_url' filter",
   "main": "index.js",
   "author": "Shopify Inc.",
