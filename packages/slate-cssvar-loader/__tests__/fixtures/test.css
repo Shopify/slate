@@ -6,6 +6,7 @@
 
 .title {
   color: var(--headings_color);
+  font-weight: var(--font-body-bold-weight);
 }
 
 body {
