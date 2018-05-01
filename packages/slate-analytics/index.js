@@ -1,7 +1,6 @@
 /* eslint-disable no-process-env */
 
 const uuidGenerator = require('uuid/v4');
-const {performance} = require('perf_hooks');
 const clearConsole = require('react-dev-utils/clearConsole');
 const rc = require('@shopify/slate-rc');
 const axios = require('axios');
@@ -55,9 +54,6 @@ function event(name, payload = {}) {
     return Promise.resolve();
   }
 
-  performance.mark(name);
-  const mark = performance.getEntriesByName(name).pop();
-
   process.env.SLATE_PROCESS_ID =
     process.env.SLATE_PROCESS_ID || uuidGenerator();
 
@@ -66,7 +62,7 @@ function event(name, payload = {}) {
       event: name,
       id: process.env.SLATE_PROCESS_ID,
       uuid: config.uuid,
-      performance: mark,
+      performance: process.hrtime(),
     }),
   };
 
