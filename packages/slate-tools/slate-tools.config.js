@@ -8,7 +8,7 @@ module.exports = generate({
   items: [
     {
       id: 'webpackCommonExcludes',
-      default: ['node_modules', 'assets/vendors/'],
+      default: ['node_modules', 'assets/static/'],
       description: 'Paths to exclude for all webpack loaders',
       type: 'array',
     },
@@ -81,8 +81,8 @@ module.exports = generate({
           default: resolveTheme('src'),
         },
         {
-          id: 'vendors',
-          default: resolveTheme('src/assets/vendors'),
+          id: 'static',
+          default: resolveTheme('src/assets/static'),
         },
         {
           id: 'scripts',
