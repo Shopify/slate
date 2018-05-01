@@ -11,7 +11,7 @@ module.exports = generate({
     },
     {
       id: 'cssVarLoaderLiquidPath',
-      default: [resolveTheme('src/snippets/css-variables.liquid')],
+      default: [resolveTheme('src/layout/theme.liquid')],
       description:
         'An array of string paths to liquid files that associate css variables to liquid variables',
       type: 'array',
