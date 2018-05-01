@@ -3,9 +3,9 @@ const path = require('path');
 const webpack = require('webpack');
 const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const commonExcludes = require('../common-excludes');
 const babelLoader = require('../loaders/babel-loader');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const config = require('../../../slate-tools.config');
 const {entrypointFiles} = require('../entrypoints');
 
@@ -18,7 +18,7 @@ const extractLiquidStyles = new ExtractTextPlugin(
 
 /**
  * Return an array of ContextReplacementPlugin to use.
- * Omit the __appvendors__ replacement if the directory does not exists.
+ * Omit the __appstatic__ replacement if the directory does not exists.
  *
  * @see https://webpack.js.org/plugins/context-replacement-plugin/#newcontentcallback
  */
@@ -37,11 +37,11 @@ function contextReplacementPlugins() {
     ),
   ];
 
-  if (fs.existsSync(paths.vendors)) {
+  if (fs.existsSync(paths.static)) {
     plugins.push(
       new webpack.ContextReplacementPlugin(
-        /__appvendors__/,
-        replaceCtxRequest(paths.vendors),
+        /__appstatic__/,
+        replaceCtxRequest(paths.static),
       ),
     );
   }
@@ -117,7 +117,7 @@ module.exports = {
         },
       },
       {
-        test: /assets\/vendors\//,
+        test: /assets\/static\//,
         exclude: /node_modules/,
         loader: 'file-loader',
         options: {

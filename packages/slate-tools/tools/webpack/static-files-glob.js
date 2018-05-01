@@ -5,7 +5,7 @@
 //
 // This is used as an entry point in webpack.base.conf.js. It dynamically
 // require all liquid and json files from the user's directory (except theme.liquid)
-// as well as everything inside the src/assets/vendors directory.
+// as well as everything inside the src/assets/static directory.
 //
 // Why not use require.context() you ask ? This would work if we'd want to require
 // files from this tool's directory, but not from the user's directory, as you can't
@@ -21,11 +21,11 @@
 //
 // For the `ContextReplacementPlugin` to kick in, we need to make our require
 // dynamic, hence the use of a variable (`dynamicCtx`).
-// The context we look for, and replace, is the `__app[src|vendors]__` part.
+// The context we look for, and replace, is the `__app[src|static]__` part.
 //
 var dynamicCtx = 'salut';
 require('__appsrc__/layout' + dynamicCtx + '.liquid');
 require('__appsrc__/sections' + dynamicCtx + '.liquid');
 require('__appsrc__/snippets' + dynamicCtx + '.liquid');
 require('__appsrc__/templates' + dynamicCtx + '.liquid');
-require('__appvendors__/' + dynamicCtx);
+require('__appstatic__/' + dynamicCtx);
