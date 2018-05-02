@@ -147,5 +147,5 @@ devServer.client.hooks.afterSync.tap('CLI', () => {
   firstSync = false;
 });
 
-event('slate-tools:start:start', {version: packageJson.version, webpackConfig});
+event('slate-tools:start:start', {version: packageJson.version});
 devServer.start();
