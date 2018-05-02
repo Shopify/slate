@@ -11,28 +11,31 @@ function AssetTagToShopifyLiquid() {}
 AssetTagToShopifyLiquid.prototype.apply = (compiler) => {
   compiler.hooks.compilation.tap('Assets Tag Plugin', (compilation) => {
     // https://github.com/jantimon/html-webpack-plugin#events
-    compilation.plugin('html-webpack-plugin-alter-asset-tags', (data, cb) => {
-      function fixTag(tag) {
-        if (tag.tagName === 'script') {
-          tag.attributes.src = `{{ '${path.basename(
-            tag.attributes.src,
-          )}' | asset_url  }}`;
+    compilation.hooks.htmlWebpackPluginAlterAssetTags.tap(
+      'AssetTagToShopifyLiquid',
+      (data, cb) => {
+        function fixTag(tag) {
+          if (tag.tagName === 'script') {
+            tag.attributes.src = `{{ '${path.basename(
+              tag.attributes.src,
+            )}' | asset_url  }}`;
+          }
+
+          if (tag.tagName === 'link') {
+            tag.attributes.href = `{{ '${path.basename(
+              tag.attributes.href,
+            )}' | asset_url  }}`;
+          }
+
+          return tag;
         }
 
-        if (tag.tagName === 'link') {
-          tag.attributes.href = `{{ '${path.basename(
-            tag.attributes.href,
-          )}' | asset_url  }}`;
-        }
+        data.head = data.head.map(fixTag);
+        data.body = data.body.map(fixTag);
 
-        return tag;
-      }
-
-      data.head = data.head.map(fixTag);
-      data.body = data.body.map(fixTag);
-
-      return data;
-    });
+        return data;
+      },
+    );
   });
 };
 
