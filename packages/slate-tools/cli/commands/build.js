@@ -9,7 +9,6 @@ const webpackConfig = require('../../tools/webpack/config/prod');
 const packageJson = require('../../package.json');
 
 event('slate-tools:build:start', {
-  webpackConfig,
   version: packageJson.version,
 });
 
@@ -17,7 +16,6 @@ webpack(webpackConfig, (err, stats) => {
   if (err) throw err;
 
   event('slate-tools:build:end', {
-    webpackConfig,
     version: packageJson.version,
   });
 
