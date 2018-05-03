@@ -1,30 +1,17 @@
-# Slate
-[![CircleCI](https://circleci.com/gh/Shopify/slate.svg?style=svg&circle-token=f18ea06638792678e7dbfa1b8413570cd2896dff)](https://circleci.com/gh/Shopify/slate)
+# Slate Docs
 
-> ⓘ We're busy working on the next version of Slate which introduces a ton of cool new features to Shopify Theme development. Take a look in the [1.x branch](https://github.com/Shopify/slate/tree/1.x), give it a spin, and let us know what you think!
+## Local Setup
 
-Slate is a theme scaffold and command line tool for developing Shopify themes. It is designed to assist your development workflow and speed up the process of developing, testing, and deploying themes to Shopify stores.
+### Install Jekyll via Gemfile
+- `bundle install`
 
-It allows you to sync local files with your live shop, deploy to multiple environments at the same time, and organize stylesheets and scripts in a flexible way.
+*If you are having troubles setting up jekyll, see https://jekyllrb.com/docs/installation/*
 
-----------
+### Serve the documentation
+- `jekyll serve -s docs`
+If you get a permission error, try `bundle exec jekyll serve -s docs`
 
-## Documentation
+View locally at [http://127.0.0.1:4000/slate/](http://127.0.0.1:4000/slate/).
 
-For full API documentation, go check out the [API docs](https://shopify.github.io/slate/).
-
-## Contributing
-
-For help on setting up the repo locally, building, testing, and contributing
-please see [CONTRIBUTING.md](https://github.com/Shopify/slate/blob/master/CONTRIBUTING.md).
-
-## Code of Conduct
-
-All developers who wish to contribute through code or issues, take a look at the
-[Code of Conduct](https://github.com/Shopify/slate/blob/master/CODE_OF_CONDUCT.md).
-
-## License
-
-MIT, see [LICENSE](http://github.com/Shopify/slate/blob/master/LICENSE) for details.
-
-<img src="https://cdn.shopify.com/shopify-marketing_assets/builds/19.0.0/shopify-full-color-black.svg" width="200" />
+## Deployment
+Changes to the `docs` directory will automatically be deployed to https://shopify.github.io/slate/ when added to `master` (remote).

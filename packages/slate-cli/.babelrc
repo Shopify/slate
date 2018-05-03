@@ -1,8 +1,0 @@
-{
-  "presets": [
-    ["shopify"]
-  ],
-  "plugins": [
-    ["transform-async-to-generator"]
-  ]
-}
