@@ -5,7 +5,7 @@
 
 ### Checklist
 For contributors:
-- [ ] I have [updated the docs](https://github.com/Shopify/slate/blob/master/CONTRIBUTING.md#documentation) to reflect these changes, if applicable.
+- [ ] I have [updated the docs](https://github.com/Shopify/slate/blob/0.x/CONTRIBUTING.md#documentation) to reflect these changes, if applicable.
 
 For maintainers:
 - [ ] I have :tophat:'d these changes.
