@@ -1,5 +1,42 @@
 # Change Log
 
+## v1.0.0-beta.1 (2018-05-03)
+
+#### :rocket: Enhancement
+
+* `html-webpack-liquid-asset-tags-plugin`
+
+  * [#521](https://github.com/Shopify/slate/pull/521) Update liquid-asset-plugin to use tapable.hooks. ([@t-kelly](https://github.com/t-kelly))
+
+* `slate-cssvar-loader`
+
+  * [#520](https://github.com/Shopify/slate/pull/520) Change the the default CSS var declaration file to theme.liquid ([@t-kelly](https://github.com/t-kelly))
+
+* `slate-tools`
+  * [#519](https://github.com/Shopify/slate/pull/519) Breaking: assets/vendors to assets/static. ([@t-kelly](https://github.com/t-kelly))
+
+#### :bug: Bug Fix
+
+* [#517](https://github.com/Shopify/slate/pull/517) Fix CircleCI running with Node 10. ([@t-kelly](https://github.com/t-kelly))
+
+* `slate-analytics`
+
+  * [#522](https://github.com/Shopify/slate/pull/522) Remove circular reference in Slate Analytics event ([@t-kelly](https://github.com/t-kelly))
+
+* `slate-cssvar-loader`
+  * [#515](https://github.com/Shopify/slate/pull/515) [slate-cssvar-loader] Escape double quotes from liquid variable. ([@mmorissette](https://github.com/mmorissette))
+
+#### :memo: Documentation
+
+* `slate-tools`
+  * [#516](https://github.com/Shopify/slate/pull/516) Make instructions for prompt settings more obvious. ([@chrisberthe](https://github.com/chrisberthe))
+
+#### Committers: 1
+
+* Chris Berthe ([chrisberthe](https://github.com/chrisberthe))
+* Martin Morissette ([mmorissette](https://github.com/mmorissette))
+* Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
 ## v1.0.0-alpha.29 (2018-04-27)
 
 #### :rocket: Enhancement

@@ -1,8 +1,11 @@
-[![CircleCI](https://circleci.com/gh/Shopify/slate.svg?style=svg&circle-token=f18ea06638792678e7dbfa1b8413570cd2896dff)](https://circleci.com/gh/Shopify/slate)
+[![CircleCI](https://circleci.com/gh/Shopify/slate/tree/master.svg?style=shield)](https://circleci.com/gh/Shopify/slate/tree/master)
+[![npm version](https://badge.fury.io/js/%40shopify%2Fslate-tools.svg)](https://badge.fury.io/js/%40shopify%2Fslate-tools)
 
-![image](https://user-images.githubusercontent.com/4837696/39584295-1481b80e-4ec0-11e8-9fae-f57a442ede7f.jpg)
+![image](https://user-images.githubusercontent.com/4837696/39598459-9f60d0ba-4ee6-11e8-8f23-0fd25be37343.jpg)
 
-> ⚠️ Slate v1.0 is currently an Alpha release. You should expect breaking changes between updates and more bugs than a finalized release. Slate v1.0 has not yet been tested on Windows.
+> **Slate v1.0 is currently in beta.** You should expect breaking changes between updates and more bugs than a finalized release. Slate v1.0 has not yet been tested on Windows.
+>
+> To view the previous version of Slate, visit the [0.x branch](https://github.com/Shopify/slate/tree/0.x)
 
 Slate empowers developers of all skill levels to build quality Shopify themes. Slate guides developers by providing a tested workflow and opinionated development toolkit, while also accommodating more established developers through advanced configuration.
 
@@ -24,9 +27,7 @@ All developers who wish to contribute through code or issues, take a look at the
 
 ## License
 
-MIT, see [LICENSE](http://github.com/Shopify/slate/blob/master/LICENSE) for details.
-
-<img src="https://cdn.shopify.com/shopify-marketing_assets/builds/19.0.0/shopify-full-color-black.svg" width="200" />
+Copyright (c) 2018 Shopify. See LICENSE.md for further details.
 
 ## Thanks
 
