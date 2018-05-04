@@ -25,7 +25,7 @@ function forNewConsent() {
   );
   console.log(
     chalk.cyan(
-      '\n  https://github.com/Shopify/slate/tree/1.x/packages/slate-analytics',
+      '\n  https://github.com/Shopify/slate/wiki/Slate-Analytics',
     ),
   );
   console.log();
