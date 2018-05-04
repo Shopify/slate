@@ -9,7 +9,7 @@
 
 Slate empowers developers of all skill levels to build quality Shopify themes. Slate guides developers by providing a tested workflow and opinionated development toolkit, while also accommodating more established developers through advanced configuration.
 
-### 🚀 [Get started with a new Slate project](https://github.com/Shopify/slate/wiki/Getting-Started)
+🚀 [Get started with a new Slate project](https://github.com/Shopify/slate/wiki/Getting-Started)
 
 ## Documentation
 
