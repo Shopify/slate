@@ -35,7 +35,7 @@ output.on('close', () => {
   console.log(`${path.basename(zipPath)}: ${archive.pointer()} total bytes`);
 });
 
-archive.on('warning', err => {
+archive.on('warning', (err) => {
   if (err.code === 'ENOENT') {
     console.log(err);
   } else {
@@ -43,7 +43,7 @@ archive.on('warning', err => {
   }
 });
 
-archive.on('error', err => {
+archive.on('error', (err) => {
   throw err;
 });
 

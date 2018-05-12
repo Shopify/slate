@@ -6,7 +6,7 @@ const slateEnv = require('@shopify/slate-env');
  *
  * @return String|void
  */
-module.exports = envName => {
+module.exports = (envName) => {
   try {
     slateEnv.assign(envName);
   } catch (error) {
@@ -22,7 +22,7 @@ module.exports = envName => {
         `Some values in environment '${slateEnv.getEnvNameValue()}' are invalid:`,
       ),
     );
-    result.errors.forEach(error => {
+    result.errors.forEach((error) => {
       console.log(chalk.red(`- ${error}`));
     });
 

@@ -1,9 +1,6 @@
-const path = require('path');
 const fs = require('fs');
-const env = require('@shopify/slate-env');
 const webpack = require('webpack');
 const {createServer} = require('https');
-const {SyncHook} = require('tapable');
 const createHash = require('crypto').createHash;
 
 const App = require('./app');
@@ -59,21 +56,24 @@ module.exports = class DevServer {
   _getChangedLiquidFiles(stats) {
     const assets = Object.entries(stats.compilation.assets);
 
-    return assets
-      .filter(([key, asset]) => {
-        const oldHash = this.assetHashes[key];
-        const newHash = this._updateAssetHash(key, asset);
+    return (
+      assets
+        .filter(([key, asset]) => {
+          const oldHash = this.assetHashes[key];
+          const newHash = this._updateAssetHash(key, asset);
 
-        return (
-          asset.emitted &&
-          (/\.liquid$/.test(key) || /\.json$/.test(key)) &&
-          fs.existsSync(asset.existsAt) &&
-          oldHash !== newHash
-        );
-      })
-      .map(([key, asset]) => {
-        return asset.existsAt.replace(config.paths.dist, '');
-      });
+          return (
+            asset.emitted &&
+            (/\.liquid$/.test(key) || /\.json$/.test(key)) &&
+            fs.existsSync(asset.existsAt) &&
+            oldHash !== newHash
+          );
+        })
+        /* eslint-disable-next-line no-unused-vars */
+        .map(([key, asset]) => {
+          return asset.existsAt.replace(config.paths.dist, '');
+        })
+    );
   }
 
   _updateAssetHash(key, asset) {

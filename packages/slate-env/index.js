@@ -13,17 +13,8 @@ const SLATE_ENV_VARS = [
   config.envIgnoreFilesVar,
 ];
 
-const SLATE_ENV_VARS_DESCRIPTIONS = {
-  [config.envStoreVar]: "The myshopify.com URL to your Shopify store",
-  [config.envPasswordVar]: "The API password generated from a Private App",
-  [config.envThemeIdVar]: "The ID of the theme you wish to upload files too",
-  [config.envIgnoreFilesVar]: "A list of file patterns to ignore, with each list item seperated by ':'"
-}
-
-
-
 // Creates a new env file with optional name and values
-function create({ values, name, root } = {}) {
+function create({values, name, root} = {}) {
   const envName = _getFileName(name);
   const envPath = path.resolve(root || config.envRootDir, envName);
   const envContents = _getFileContents(values);
@@ -53,8 +44,7 @@ function _getFileContents(values) {
   }
 
   return Object.entries(env)
-    .map(keyValues => {
-      let descriptionKey = '';
+    .map((keyValues) => {
       const envVar = keyValues[0];
 
       // Search through config for the key which has a value of the env variable
@@ -64,10 +54,14 @@ function _getFileContents(values) {
           // Once we find the key, we can search the config.__schema for the
           // schema item. We need to schema item so we can print the description
           // comment.
-          const schemaItem = config.__schema.items.find(item => item.id === key);
+          const schemaItem = config.__schema.items.find(
+            (item) => item.id === key,
+          );
           return `# ${schemaItem.description || ''} \r\n${keyValues.join('=')}`;
         }
       }
+
+      return true;
     })
     .join('\r\n\r\n');
 }
@@ -76,7 +70,7 @@ function _getFileContents(values) {
 function assign(name) {
   const envFileName = _getFileName(name);
   const envPath = path.resolve(config.envRootDir, envFileName);
-  const result = dotenv.config({ path: envPath });
+  const result = dotenv.config({path: envPath});
 
   if (typeof name !== 'undefined' && result.error) {
     throw result.error;
@@ -160,7 +154,7 @@ function _validateThemeId() {
     errors.push(
       new Error(
         `${
-        config.envThemeIdVar
+          config.envThemeIdVar
         } can be set to 'live' or a valid theme ID containing only numbers`,
       ),
     );
@@ -171,15 +165,14 @@ function _validateThemeId() {
 
 // Clears the values of environment variables used by Slate
 function clear() {
-  const env = getEmptySlateEnv();
-  SLATE_ENV_VARS.forEach(key => process.env[key] = '');
+  SLATE_ENV_VARS.forEach((key) => (process.env[key] = ''));
 }
 
 // Get the values of Slate's required environment variables
 function getSlateEnv() {
   const env = {};
 
-  SLATE_ENV_VARS.forEach(key => {
+  SLATE_ENV_VARS.forEach((key) => {
     env[key] = process.env[key];
   });
 
@@ -190,7 +183,7 @@ function getSlateEnv() {
 function getEmptySlateEnv() {
   const env = {};
 
-  SLATE_ENV_VARS.forEach(key => {
+  SLATE_ENV_VARS.forEach((key) => {
     env[key] = '';
   });
 

@@ -3,7 +3,7 @@ function validate(schema, slaterc) {
   let errors = [];
   let warnings = [];
 
-  tests.forEach(test => {
+  tests.forEach((test) => {
     const results = test(schema, slaterc);
     errors = errors.concat(results.errors);
     warnings = warnings.concat(results.warnings);
@@ -28,7 +28,7 @@ function isValidType(schema, slaterc) {
   const errors = [];
   const warnings = [];
 
-  schema.items.forEach(item => {
+  schema.items.forEach((item) => {
     const key = item.id;
     const value = slaterc[key];
     const type = extractType(item, value);

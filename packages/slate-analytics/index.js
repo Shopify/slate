@@ -68,8 +68,8 @@ function event(name, payload = {}) {
 
   // eslint-disable-next-line no-process-env
   if (process.env.NODE_ENV === 'test') {
-    axiosConfig.adaptor = settings => {
-      return new Promise(resolve => {
+    axiosConfig.adaptor = (settings) => {
+      return new Promise((resolve) => {
         return resolve({
           data: {},
           status: 200,

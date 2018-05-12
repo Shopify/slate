@@ -34,7 +34,7 @@ function clearVars(vars) {
 
 afterEach(() => {
   clearVars(TEST_ENV);
-  glob.sync(`${envPath}*`).forEach(file => fs.unlinkSync(file));
+  glob.sync(`${envPath}*`).forEach((file) => fs.unlinkSync(file));
 });
 
 describe('Slate Env', () => {
@@ -66,15 +66,15 @@ describe('Slate Env', () => {
 
   describe('getEmptySlateEnv()', () => {
     test('returns object containing all env file variables with empty values', () => {
-      const EMPTY_TEST_VARS = Object.assign({}, TEST_ENV);
+      const emptyTestVars = Object.assign({}, TEST_ENV);
 
-      for (const key in EMPTY_TEST_VARS) {
-        if (EMPTY_TEST_VARS.hasOwnProperty(key)) {
-          EMPTY_TEST_VARS[key] = '';
+      for (const key in emptyTestVars) {
+        if (emptyTestVars.hasOwnProperty(key)) {
+          emptyTestVars[key] = '';
         }
       }
 
-      expect(slateEnv.getEmptySlateEnv()).toEqual(EMPTY_TEST_VARS);
+      expect(slateEnv.getEmptySlateEnv()).toEqual(emptyTestVars);
     });
   });
 
@@ -285,7 +285,7 @@ describe('Slate Env', () => {
 
       test('the store URL environment variable is not a .myshopify.com or myshopify.io URL', () => {
         ['shop1.myshopify.com', 'shop1.myshopify.io', 'shop1'].forEach(
-          value => {
+          (value) => {
             setVars(
               Object.assign({}, TEST_ENV, {
                 [config.envStoreVar]: value,

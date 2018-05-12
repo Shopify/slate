@@ -3,13 +3,14 @@ const path = require('path');
 
 function concatStyles(content, rootPath, loader) {
   const assets = parseImports(content, rootPath, loader).reverse();
+  let inlinedAssets;
 
   assets.forEach((asset) => {
     asset.content = concatStyles(asset.content, asset.path);
-    content = inlineAsset(content, asset);
+    inlinedAssets = inlineAsset(content, asset);
   });
 
-  return content;
+  return inlinedAssets;
 }
 
 function inlineAsset(content, asset) {
@@ -21,13 +22,14 @@ function inlineAsset(content, asset) {
 
 function parseImports(content, rootPath, loader) {
   const matches = getImportStatements(content);
+
   return matches.map((match) => {
     const url = getImportURL(match[0]);
     const assetPath = path.resolve(path.dirname(rootPath), url);
 
-    const content = fetchAssetContent(assetPath, loader);
+    const modifiedContent = fetchAssetContent(assetPath, loader);
 
-    return {path: assetPath, content, match};
+    return {path: assetPath, modifiedContent, match};
   });
 }
 
@@ -38,7 +40,9 @@ function fetchAssetContent(assetPath, loader) {
     );
   }
 
-  loader && loader.addDependency(assetPath);
+  if (loader) {
+    loader.addDependency(assetPath);
+  }
 
   return fs.readFileSync(assetPath, 'utf8');
 }
@@ -85,10 +89,7 @@ function matchIsInComment(content, match) {
 function getImportURL(statement) {
   const regex = new RegExp(/@import\s+(?:url\()?(.+(?=['")]))(?:\))?.*/gi);
   const match = regex.exec(statement);
-  return match[1]
-    .replace(/\'/g, '')
-    .replace(/\"/g, '')
-    .trim();
+  return match[1].replace(/["']/g, '').trim();
 }
 
 module.exports = {

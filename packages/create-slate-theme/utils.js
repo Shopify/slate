@@ -12,12 +12,14 @@ function splitCommandString(cmd) {
 
   do {
     // Each call to exec returns the next regex match as an array
-    var match = regexp.exec(cmd);
+    const match = regexp.exec(cmd);
+
     if (match != null) {
       // Index 1 in the array is the captured group if it exists
       // Index 0 is the matched text, which we use if no captured group exists
       parts.push(match[1] ? match[1] : match[0]);
     }
+    /* eslint-disable-next-line no-undef */
   } while (match != null);
 
   return parts;

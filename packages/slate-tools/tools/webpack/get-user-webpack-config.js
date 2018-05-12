@@ -7,7 +7,7 @@ const config = require('../../slate-tools.config');
  * @param   env   String  The environment
  * @return        Object
  */
-module.exports = env => {
+module.exports = (env) => {
   if (config.extends && config.extends[env]) {
     return config.extends[env];
   }

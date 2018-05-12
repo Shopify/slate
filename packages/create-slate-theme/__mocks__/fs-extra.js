@@ -68,7 +68,7 @@ function chdir(dir) {
 }
 
 function mkdirp(dir) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     __mockFiles[path.resolve(dir)] = __mockFiles[path.resolve(dir)] || [];
     resolve();
   });

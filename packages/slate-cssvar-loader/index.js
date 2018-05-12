@@ -17,7 +17,7 @@ class SlateException {
 function parseCSSVariables(cssVariablesPaths) {
   const variables = {};
   let styleBlock;
-  cssVariablesPaths.forEach(cssVariablesPath => {
+  cssVariablesPaths.forEach((cssVariablesPath) => {
     const themeFilePath = slateConfig.resolveTheme(cssVariablesPath);
     const content = fs.readFileSync(themeFilePath, 'utf8');
     while ((styleBlock = STYLE_BLOCK_REGEX.exec(content)) != null) {
@@ -42,7 +42,7 @@ function SlateCSSLoader(source) {
 
   const cssVariablesPaths = config.cssVarLoaderLiquidPath;
 
-  cssVariablesPaths.forEach(filePath => this.addDependency(filePath));
+  cssVariablesPaths.forEach((filePath) => this.addDependency(filePath));
   const variables = parseCSSVariables(cssVariablesPaths);
 
   const result = source.replace(CSS_VAR_FUNC_REGEX, (match, cssVariable) => {
