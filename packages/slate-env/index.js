@@ -17,7 +17,7 @@ const SLATE_ENV_VARS_DESCRIPTIONS = {
   [config.envStoreVar]: "The myshopify.com URL to your Shopify store",
   [config.envPasswordVar]: "The API password generated from a Private App",
   [config.envThemeIdVar]: "The ID of the theme you wish to upload files too",
-  [config.envIgnoreFilesVar]: "A list of file patterns to ignore, with each list item seperated by ':'"
+  [config.envIgnoreFilesVar]: "A list of file patterns to ignore, with each list item separated by ':'"
 }
 
 
