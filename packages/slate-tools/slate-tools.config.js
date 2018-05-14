@@ -25,6 +25,12 @@ module.exports = generate({
       type: 'path',
     },
     {
+      id: 'cssnanoSettings',
+      default: {zindex: false},
+      description: 'Optimization settings for the cssnano plugin',
+      type: 'object',
+    },
+    {
       id: 'promptSettings',
       description:
         'Enable/disable the prompt to skip uploading settings_data.json',
