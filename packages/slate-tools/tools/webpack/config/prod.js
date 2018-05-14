@@ -1,4 +1,3 @@
-const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
@@ -8,8 +7,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
 const SlateLiquidAssetsPlugin = require('@shopify/html-webpack-liquid-asset-tags-plugin');
 const SlateTagPlugin = require('@shopify/slate-tag-webpack-plugin');
 const commonExcludes = require('../common-excludes');
@@ -25,49 +22,6 @@ const extractStyles = new ExtractTextPlugin({
   filename: '[name].css.liquid',
   allChunks: true,
 });
-
-function eslintLoader() {
-  if (!fs.existsSync(config.paths.eslint.rc)) {
-    return [];
-  }
-
-  const ignorePath = fs.existsSync(config.paths.eslint.ignore)
-    ? config.paths.eslint.ignore
-    : null;
-
-  return [
-    {
-      enforce: 'pre',
-      test: /\.js$/,
-      exclude: commonExcludes(),
-      loader: 'eslint-loader',
-      options: {
-        ignorePath,
-        eslintPath: config.paths.eslint.bin,
-        configFile: config.paths.eslint.rc,
-        emitWarning: true,
-      },
-    },
-  ];
-}
-
-function stylelintLoader() {
-  if (!fs.existsSync(config.paths.stylelint.rc)) {
-    return [];
-  }
-
-  const ignorePath = fs.existsSync(config.paths.stylelint.ignore)
-    ? config.paths.stylelint.ignore
-    : null;
-
-  return [
-    new StyleLintPlugin({
-      configFile: config.paths.stylelint.rc,
-      emitErrors: true,
-      ignorePath,
-    }),
-  ];
-}
 
 module.exports = merge(
   webpackCoreConfig,

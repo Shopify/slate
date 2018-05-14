@@ -7,7 +7,7 @@ beforeAll(() => {
   });
 
   // Mock process.exit since it terminates the test runner
-  process.exit = jest.fn(code => {
+  process.exit = jest.fn((code) => {
     throw new Error(`Process exit with code: ${code}`);
   });
 });

@@ -1,9 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
-const memoryfs = require('memory-fs');
+const MemoryFileSystem = require('memory-fs');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-module.exports = (fixture, options = {}) => {
+module.exports = (fixture) => {
   const compiler = webpack({
     context: __dirname,
     entry: fixture,
@@ -26,7 +26,7 @@ module.exports = (fixture, options = {}) => {
     plugins: [new ExtractTextPlugin('styles.css')],
   });
 
-  compiler.outputFileSystem = new memoryfs();
+  compiler.outputFileSystem = new MemoryFileSystem();
 
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {

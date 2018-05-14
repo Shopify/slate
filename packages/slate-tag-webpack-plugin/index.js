@@ -5,11 +5,12 @@ function FileListPlugin(version) {
 }
 
 FileListPlugin.prototype.apply = function(compiler) {
-  compiler.hooks.emit.tap('Slate Tag Plugin', (compilation, callback) => {
+  compiler.hooks.emit.tap('Slate Tag Plugin', (compilation) => {
     const asset = compilation.assets[SETTINGS_SCHEMA_PATH].source();
     const schema = JSON.parse(asset);
 
     if (Array.isArray(schema) && typeof schema[0] === 'object') {
+      /* eslint-disable-next-line camelcase */
       schema[0].theme_packaged_with = `@shopify/slate-tools@${this.version}`;
     }
 

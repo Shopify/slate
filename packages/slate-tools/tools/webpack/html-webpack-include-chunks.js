@@ -1,5 +1,3 @@
-const minimatch = require('minimatch');
-
 class HtmlWebpackIncludeLiquidStylesPlugin {
   constructor(options) {
     this.options = options;
@@ -27,17 +25,16 @@ class HtmlWebpackIncludeLiquidStylesPlugin {
     );
   }
 
-  onAlterChunks(chunks, cb) {
+  onAlterChunks(chunks) {
     this.chunks = chunks;
   }
 
-  onBeforeHtmlGeneration(htmlPluginData, cb) {
+  onBeforeHtmlGeneration(htmlPluginData) {
     const assets = htmlPluginData.assets;
     const publicPath = assets.publicPath;
 
     this.chunks.forEach((chunk) => {
       const name = chunk.names[0];
-      const files = [].concat;
       const chunkFiles = []
         .concat(chunk.files)
         .map((chunkFile) => publicPath + chunkFile);

@@ -20,7 +20,6 @@ describe('stylelint()', () => {
 
   test('executes ESLint with the --fix flag', () => {
     const {stylelint} = require('../index');
-    const config = require('../../../slate-tools.config');
     stylelint({fix: true});
     expect(execSync).toHaveBeenCalledWith(
       expect.stringContaining('--fix'),

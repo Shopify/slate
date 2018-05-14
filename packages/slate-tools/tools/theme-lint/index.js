@@ -1,5 +1,4 @@
 const execSync = require('child_process').execSync;
-const path = require('path');
 
 const config = require('../../slate-tools.config');
 
@@ -16,5 +15,10 @@ module.exports.themelint = themelint;
 
 module.exports.runThemelint = async function runThemelint() {
   console.log('Linting locales...');
-  return await themelint();
+
+  try {
+    return await themelint();
+  } catch (error) {
+    throw error;
+  }
 };

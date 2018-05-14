@@ -13,7 +13,7 @@ AssetTagToShopifyLiquid.prototype.apply = (compiler) => {
     // https://github.com/jantimon/html-webpack-plugin#events
     compilation.hooks.htmlWebpackPluginAlterAssetTags.tap(
       'AssetTagToShopifyLiquid',
-      (data, cb) => {
+      (data) => {
         function fixTag(tag) {
           if (tag.tagName === 'script') {
             tag.attributes.src = `{{ '${path.basename(

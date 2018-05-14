@@ -1,4 +1,3 @@
-const prompt = require('react-dev-utils/prompt');
 const chalk = require('chalk');
 const figures = require('figures');
 const themekit = require('@shopify/themekit').command;
@@ -10,7 +9,7 @@ let filesToDeploy = [];
 
 function maybeDeploy() {
   if (deploying) {
-    return Promise.reject('Deploy already in progress.');
+    return Promise.reject(new Error('Deploy already in progress.'));
   }
 
   if (filesToDeploy.length) {
@@ -23,7 +22,6 @@ function maybeDeploy() {
 }
 
 function _generateConfigFlags() {
-  const ignoreFiles = slateEnv.getIgnoreFilesValue();
   const flags = {
     '--password': slateEnv.getPasswordValue(),
     '--themeid': slateEnv.getThemeIdValue(),
@@ -122,9 +120,9 @@ function promiseThemekitDeploy(cmd, files) {
 }
 
 module.exports = {
-  async sync(files = []) {
+  sync(files = []) {
     if (!files.length) {
-      return Promise.reject('No files to deploy.');
+      return Promise.reject(new Error('No files to deploy.'));
     }
 
     filesToDeploy = [...new Set([...filesToDeploy, ...files])];
@@ -132,11 +130,11 @@ module.exports = {
     return maybeDeploy();
   },
 
-  async replace() {
+  replace() {
     return deploy('replace');
   },
 
-  async upload() {
+  upload() {
     return deploy('upload');
   },
 };
