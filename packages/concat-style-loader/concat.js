@@ -3,11 +3,11 @@ const path = require('path');
 
 function concatStyles(content, rootPath, loader) {
   const assets = parseImports(content, rootPath, loader).reverse();
-  let inlinedAssets;
+  let inlinedAssets = content;
 
   assets.forEach((asset) => {
     asset.content = concatStyles(asset.content, asset.path);
-    inlinedAssets = inlineAsset(content, asset);
+    inlinedAssets = inlineAsset(inlinedAssets, asset);
   });
 
   return inlinedAssets;
@@ -27,9 +27,9 @@ function parseImports(content, rootPath, loader) {
     const url = getImportURL(match[0]);
     const assetPath = path.resolve(path.dirname(rootPath), url);
 
-    const modifiedContent = fetchAssetContent(assetPath, loader);
+    const importedContent = fetchAssetContent(assetPath, loader);
 
-    return {path: assetPath, modifiedContent, match};
+    return {path: assetPath, content: importedContent, match};
   });
 }
 

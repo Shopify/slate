@@ -1,3 +1,5 @@
+const crypto = require('crypto');
+
 module.exports = function(module, chunks, cacheGroup) {
   let containsLayout = false;
   const names = chunks
@@ -24,20 +26,17 @@ module.exports = function(module, chunks, cacheGroup) {
   // been set to 100 to prevent `[name].[chunkhash].[ext]` from
   // generating a 256+ character string.
   if (name.length > 256) {
-    name = `${name.slice(0, 240)}~${hashString(name)}`;
+    name = `${name.slice(0, 240)}~${hashFilename(name)}`;
   }
 
   /* eslint-disable-next-line consistent-return */
   return name;
 };
 
-function hashString(text) {
-  let hash = 5381;
-  let index = text.length;
-
-  while (index) {
-    hash = (hash * 33) ^ text.charCodeAt(--index);
-  }
-
-  return hash >>> 0;
+function hashFilename(name) {
+  return crypto
+    .createHash('md4')
+    .update(name)
+    .digest('hex')
+    .slice(0, 8);
 }

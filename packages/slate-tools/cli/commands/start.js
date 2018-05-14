@@ -82,7 +82,8 @@ devServer.compiler.hooks.done.tap('CLI', (stats) => {
 
 devServer.client.hooks.beforeSync.tapPromise('CLI', async (files) => {
   if (firstSync && argv.skipFirstDeploy) {
-    return (devServer.skipDeploy = true);
+    devServer.skipDeploy = true;
+    return;
   }
 
   if (continueIfPublishedTheme === null) {
@@ -102,8 +103,6 @@ devServer.client.hooks.beforeSync.tapPromise('CLI', async (files) => {
       (file) => !file.endsWith('settings_data.json'),
     );
   }
-
-  return true;
 });
 
 devServer.client.hooks.syncSkipped.tap('CLI', () => {
