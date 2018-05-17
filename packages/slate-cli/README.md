@@ -113,7 +113,7 @@ slate migrate [--options]
 
 Converts an existing theme to work with Slate. Run this command from your project root to install dependencies and restructure your theme files into a `src/` directory. Empty `icons/`, `styles/` and `scripts/` folders will also be created.
 
-Create `config.yml` in your root using [this sample file](https://github.com/Shopify/slate/blob//master/packages/slate-theme/config-sample.yml), then use [theme commands](#theme-commands) to start developing.
+Create `config.yml` in your root using [this sample file](https://raw.githubusercontent.com/Shopify/slate/0.x/packages/slate-theme/config-sample.yml), then use [theme commands](#theme-commands) to start developing.
 
 #### options
 
