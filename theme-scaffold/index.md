@@ -43,7 +43,7 @@ Also included is a **Styles** template (`page.styles.liquid`). This is available
 
 ## Sections
 
-Sections are a way of letting merchants control their own layout and appearance in their themes. Read more about [their introduction here](https://www.shopify.com/partners/blog/introducing-sections-for-shopify-themes) and the [full docs here](https://help.shopify.com/themes/development/theme-editor/sections). Slate includes two types of sections.
+Sections are a way of letting merchants control their own layout and appearance in their themes. Read more about [their introduction here](https://www.shopify.com/partners/blog/introducing-sections-for-shopify-themes) and the [full docs here](https://help.shopify.com/themes/development/sections). Slate includes two types of sections.
 
 ### Static sections
 
@@ -60,7 +60,7 @@ sections/
 
 ### Dynamic sections
 
-Dynamic sections allow merchants to add, edit, and reorder content on their home page. It is highly recommended to read the [sections development documentation](https://help.shopify.com/themes/development/theme-editor/sections) to understand how limitless the possibilities are. Slate provides three common dynamic sections to act as a starting reference.
+Dynamic sections allow merchants to add, edit, and reorder content on their home page. It is highly recommended to read the [sections development documentation](https://help.shopify.com/themes/development/sections) to understand how limitless the possibilities are. Slate provides three common dynamic sections to act as a starting reference.
 
 ```
 sections/
@@ -101,24 +101,23 @@ A blank starting point is included with [Normalize.css](https://necolas.github.i
 
 Starting a fresh project should not include reinventing the wheel. Slate offers some starting structure to your project that you can choose to use or not.
 
-- Map shop settings to Sass variables
-- CSS grid. [Example]({{ '/css-examples/#grid' | prepend: site.baseurl }})
-  - There are no grid classes in the templates so you can easily switch to your preferred grid
-- SVG icon style helpers. [Example]({{ '/css-examples/#svg-icons' | prepend: site.baseurl }})
-- Responsive tables. [Example]({{ '/css-examples/#responsive-tables' | prepend: site.baseurl }})
-- `.btn` class with smart defaults. [Source](https://github.com/Shopify/slate/blob/master/packages/slate-theme/src/styles/global/links-buttons.scss)
-- Form elements with default, disabled, error, and focus states ready to be styled. [Source](https://github.com/Shopify/slate/blob/master/packages/slate-theme/src/styles/global/forms.scss)
-- Blank state SVG styles [Example]({{ '/css-examples/#blank-states' | prepend: site.baseurl }})
+* Map shop settings to Sass variables
+* CSS grid. [Example]({{ '/css-examples/#grid' | prepend: site.baseurl }})
+  * There are no grid classes in the templates so you can easily switch to your preferred grid
+* SVG icon style helpers. [Example]({{ '/css-examples/#svg-icons' | prepend: site.baseurl }})
+* Responsive tables. [Example]({{ '/css-examples/#responsive-tables' | prepend: site.baseurl }})
+* `.btn` class with smart defaults. [Source](https://github.com/Shopify/slate/blob/master/packages/slate-theme/src/styles/global/links-buttons.scss)
+* Form elements with default, disabled, error, and focus states ready to be styled. [Source](https://github.com/Shopify/slate/blob/master/packages/slate-theme/src/styles/global/forms.scss)
+* Blank state SVG styles [Example]({{ '/css-examples/#blank-states' | prepend: site.baseurl }})
 
 ### Sass mixins
 
 A few helpful Sass mixins are included in Slate to make responsive, cross-browser, and accessibility development easier.
 
-- Media query mixin for consistent breakpoint styles. [Example]({{ '/css-examples/#media-query-mixin' | prepend: site.baseurl }})
-- Responsive helpers to show/hide content and align text based on breakpoint names. [Example]({{ '/css-examples/#visibility-per-breakpoint' | prepend: site.baseurl }})
-- Prefixes. [Example]({{ '/css-examples/#prefix' | prepend: site.baseurl }})
-- Visually hide or show content for screen reader accessibility. [Example]({{ '/css-examples/#visually-hide' | prepend: site.baseurl }})
-
+* Media query mixin for consistent breakpoint styles. [Example]({{ '/css-examples/#media-query-mixin' | prepend: site.baseurl }})
+* Responsive helpers to show/hide content and align text based on breakpoint names. [Example]({{ '/css-examples/#visibility-per-breakpoint' | prepend: site.baseurl }})
+* Prefixes. [Example]({{ '/css-examples/#prefix' | prepend: site.baseurl }})
+* Visually hide or show content for screen reader accessibility. [Example]({{ '/css-examples/#visually-hide' | prepend: site.baseurl }})
 
 ## JavaScript helpers
 
@@ -138,30 +137,32 @@ More information about the <code>require</code> directive can be found in the <a
 
 ### Slate scripts
 
-Slate provides helper scripts to promote accessibility and make working with theme images, currencies, and product variants easier.  See [JS examples]({{ '/js-examples/' | prepend: site.baseurl }}) for more details on how to use these scripts.
+Slate provides helper scripts to promote accessibility and make working with theme images, currencies, and product variants easier. See [JS examples]({{ '/js-examples/' | prepend: site.baseurl }}) for more details on how to use these scripts.
 
-- Accessibility helpers. [Example]({{ '/js-examples/#trap-focus' | prepend: site.baseurl }}). [Source](https://github.com/Shopify/slate/blob/master/packages/slate-theme/src/scripts/slate/a11y.js).
-- Force tables and videos to be responsive. [Example]({{ '/js-examples/#responsive-tables-and-videos' | prepend: site.baseurl }})
-- Easy handling of theme editor events. [Example]({{ '/js-examples/#section-events' | prepend: site.baseurl }})
-- Format currency in JS the same as Liquid allows. [Example]({{ '/js-examples/#format-currency' | prepend: site.baseurl }})
-- Helpers for handling images in JS, including getting size based on URL and preloading sets of images. [Examples]({{ '/js-examples/#image-helpers' | prepend: site.baseurl }})
-- Listen for product variant option changes and setup scaffolding for handling result. [Example]({{ '/js-examples/#product-variants' | prepend: site.baseurl }})
-- Detect browser support for cookies. [Example]({{ '/js-examples/#cart-helpers' | prepend: site.baseurl }})
+* Accessibility helpers. [Example]({{ '/js-examples/#trap-focus' | prepend: site.baseurl }}). [Source](https://github.com/Shopify/slate/blob/master/packages/slate-theme/src/scripts/slate/a11y.js).
+* Force tables and videos to be responsive. [Example]({{ '/js-examples/#responsive-tables-and-videos' | prepend: site.baseurl }})
+* Easy handling of theme editor events. [Example]({{ '/js-examples/#section-events' | prepend: site.baseurl }})
+* Format currency in JS the same as Liquid allows. [Example]({{ '/js-examples/#format-currency' | prepend: site.baseurl }})
+* Helpers for handling images in JS, including getting size based on URL and preloading sets of images. [Examples]({{ '/js-examples/#image-helpers' | prepend: site.baseurl }})
+* Listen for product variant option changes and setup scaffolding for handling result. [Example]({{ '/js-examples/#product-variants' | prepend: site.baseurl }})
+* Detect browser support for cookies. [Example]({{ '/js-examples/#cart-helpers' | prepend: site.baseurl }})
 
 ### Vendor scripts
 
-Slate projects include a `vendor` folder where theme developers are encouraged to place third-party libraries.  Versions of jQuery and [Modernizr](https://modernizr.com/) are included in a new project, but you are welcome to change these as you see fit.  Be sure to update the `require` statement in `vendor.js` as you add and remove libraries.
+Slate projects include a `vendor` folder where theme developers are encouraged to place third-party libraries. Versions of jQuery and [Modernizr](https://modernizr.com/) are included in a new project, but you are welcome to change these as you see fit. Be sure to update the `require` statement in `vendor.js` as you add and remove libraries.
 
 ## Translation keys
 
-Slate ships with eight languages — English, French (Canadian), Spanish, German, Dutch, Danish, and two dialects of Portuguese (Brazilian and European).  Translation keys for these languages can be found in the `locales` folder.  In your theme files, translated strings can be retrieved with the Liquid translation filter `t`.
+Slate ships with eight languages — English, French (Canadian), Spanish, German, Dutch, Danish, and two dialects of Portuguese (Brazilian and European). Translation keys for these languages can be found in the `locales` folder. In your theme files, translated strings can be retrieved with the Liquid translation filter `t`.
 
 {% raw %}
+
 ```
 {{ 'products.product.add_to_cart' | t }}
 ```
+
 {% endraw %}
 
 You can learn more about using [translation keys and strings in our theme development documentation](https://help.shopify.com/themes/development/internationalizing/translation-filter).
 
-These translation keys allow merchants to control their store's language settings from the admin.  Merchants can set the language of their storefront as well as change the value of individual translation keys. You can learn more about [translating your storefront in our theme documentation ](https://help.shopify.com/manual/sell-online/online-store/translate-theme).
+These translation keys allow merchants to control their store's language settings from the admin. Merchants can set the language of their storefront as well as change the value of individual translation keys. You can learn more about [translating your storefront in our theme documentation ](https://help.shopify.com/manual/sell-online/online-store/translate-theme).
