@@ -142,7 +142,7 @@ export default function(program) {
 
         if (!existsSync(configYml)) {
           const configUrl =
-            'https://raw.githubusercontent.com/Shopify/slate//master/packages/slate-theme/config-sample.yml';
+            'https://raw.githubusercontent.com/Shopify/slate/0.x/packages/slate-theme/config-sample.yml';
 
           await utils.downloadFromUrl(
             configUrl,
