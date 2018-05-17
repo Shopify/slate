@@ -16,7 +16,8 @@ export default function(program) {
       const answers = await prompt({
         type: 'confirm',
         name: 'confirmation',
-        message: 'Warning! This will change your theme\'s folder structure. Are you sure you want to proceed?',
+        message:
+          "Warning! This will change your theme's folder structure. Are you sure you want to proceed?",
       });
 
       if (!answers.confirmation) {
@@ -25,7 +26,11 @@ export default function(program) {
 
       if (!utils.isShopifyTheme(workingDirectory)) {
         console.log('');
-        console.error(yellow('  The current directory doesn\'t have /layout/theme.liquid. We have to assume this isn\'t a Shopify theme'));
+        console.error(
+          yellow(
+            "  The current directory doesn't have /layout/theme.liquid. We have to assume this isn't a Shopify theme",
+          ),
+        );
         console.log('');
         console.error(red(`  ${figures.cross} Migration failed`));
         console.log('');
@@ -41,12 +46,20 @@ export default function(program) {
       const scriptsDir = join(srcDir, 'scripts');
 
       console.log('');
-      console.log(`  ${green(figures.tick)} Your theme is a valid Shopify theme`);
+      console.log(
+        `  ${green(figures.tick)} Your theme is a valid Shopify theme`,
+      );
       console.log('');
 
       if (existsSync(srcDir)) {
-        console.error(yellow('  Migrate task could not create a new src directory since your theme already has one'));
-        console.error(yellow('  Please remove or rename your current src directory'));
+        console.error(
+          yellow(
+            '  Migrate task could not create a new src directory since your theme already has one',
+          ),
+        );
+        console.error(
+          yellow('  Please remove or rename your current src directory'),
+        );
         console.log('');
         console.error(red(`  ${figures.cross} Migration failed`));
         console.log('');
@@ -81,8 +94,12 @@ export default function(program) {
       }
 
       const configDirFiles = readdirSync(configDir);
-      const themeSettingsFiles = configDirFiles.filter(utils.isShopifyThemeSettingsFile);
-      const unminifyPromises = themeSettingsFiles.map(unminifyJsonPromiseFactory);
+      const themeSettingsFiles = configDirFiles.filter(
+        utils.isShopifyThemeSettingsFile,
+      );
+      const unminifyPromises = themeSettingsFiles.map(
+        unminifyJsonPromiseFactory,
+      );
 
       try {
         await Promise.all(movePromises);
@@ -97,13 +114,26 @@ export default function(program) {
         console.log('');
 
         if (options.yarn) {
-          await utils.startProcess('yarn', ['add', '@shopify/slate-tools', '--dev', '--exact'], {
-            cwd: workingDirectory,
-          });
+          await utils.startProcess(
+            'yarn',
+            ['add', '@shopify/slate-tools@slate-v0', '--dev', '--exact'],
+            {
+              cwd: workingDirectory,
+            },
+          );
         } else {
-          await utils.startProcess('npm', ['install', '@shopify/slate-tools', '--save-dev', '--save-exact'], {
-            cwd: workingDirectory,
-          });
+          await utils.startProcess(
+            'npm',
+            [
+              'install',
+              '@shopify/slate-tools@slate-v0',
+              '--save-dev',
+              '--save-exact',
+            ],
+            {
+              cwd: workingDirectory,
+            },
+          );
         }
 
         console.log('');
@@ -111,12 +141,22 @@ export default function(program) {
         console.log('');
 
         if (!existsSync(configYml)) {
-          const configUrl = 'https://raw.githubusercontent.com/Shopify/slate//master/packages/slate-theme/config-sample.yml';
+          const configUrl =
+            'https://raw.githubusercontent.com/Shopify/slate//master/packages/slate-theme/config-sample.yml';
 
-          await utils.downloadFromUrl(configUrl, join(workingDirectory, 'config.yml'));
+          await utils.downloadFromUrl(
+            configUrl,
+            join(workingDirectory, 'config.yml'),
+          );
 
-          console.error(`  ${green(figures.tick)} Configuration file generated`);
-          console.error(yellow('  Your theme was missing config.yml in the root directory. Please open and edit it before using Slate commands'));
+          console.error(
+            `  ${green(figures.tick)} Configuration file generated`,
+          );
+          console.error(
+            yellow(
+              '  Your theme was missing config.yml in the root directory. Please open and edit it before using Slate commands',
+            ),
+          );
           console.log('');
         }
 
@@ -125,7 +165,11 @@ export default function(program) {
       } catch (err) {
         console.error(red(`  ${err}`));
         console.log('');
-        console.error(red(`  ${figures.cross} Migration failed. Please check src/ directory`));
+        console.error(
+          red(
+            `  ${figures.cross} Migration failed. Please check src/ directory`,
+          ),
+        );
         console.log('');
       }
     });
