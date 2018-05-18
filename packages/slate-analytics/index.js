@@ -5,7 +5,7 @@ const clearConsole = require('react-dev-utils/clearConsole');
 const rc = require('@shopify/slate-rc');
 const axios = require('axios');
 const prompt = require('./prompt');
-const packageJson = require("./package.json");
+const packageJson = require('./package.json');
 
 async function init() {
   let config = rc.get() || rc.generate();
