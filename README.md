@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/Shopify/slate/tree/master.svg?style=shield)](https://circleci.com/gh/Shopify/slate/tree/master)
+[!
 [![npm version](https://badge.fury.io/js/%40shopify%2Fslate-tools.svg)](https://badge.fury.io/js/%40shopify%2Fslate-tools)
 
 ![image](https://user-images.githubusercontent.com/4837696/39598459-9f60d0ba-4ee6-11e8-8f23-0fd25be37343.jpg)
