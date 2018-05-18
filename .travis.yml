@@ -7,5 +7,4 @@ cache:
   - node_modules
 script:
 - yarn bootstrap
-- yarn build
 - yarn lint
