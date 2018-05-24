@@ -11,6 +11,14 @@ const SLATE_ENV_VARS = [
   config.envPasswordVar,
   config.envThemeIdVar,
   config.envIgnoreFilesVar,
+  config.envUserEmail,
+];
+
+const DEFAULT_ENV_VARS = [
+  config.envStoreVar,
+  config.envPasswordVar,
+  config.envThemeIdVar,
+  config.envIgnoreFilesVar,
 ];
 
 // Creates a new env file with optional name and values
@@ -33,9 +41,7 @@ function _getFileName(name) {
 
 // Return default list of env variables with their assigned value, if any.
 function _getFileContents(values) {
-  const env = getEmptySlateEnv();
-
-  delete env[config.envNameVar];
+  const env = getDefaultSlateEnv();
 
   for (const key in values) {
     if (values.hasOwnProperty(key) && env.hasOwnProperty(key)) {
@@ -190,6 +196,16 @@ function getEmptySlateEnv() {
   return env;
 }
 
+function getDefaultSlateEnv() {
+  const env = {};
+
+  DEFAULT_ENV_VARS.forEach((key) => {
+    env[key] = '';
+  });
+
+  return env;
+}
+
 function getEnvNameValue() {
   return process.env[config.envNameVar];
 }
@@ -215,16 +231,23 @@ function getIgnoreFilesValue() {
   return typeof value === 'undefined' ? '' : value;
 }
 
+function getUserEmail() {
+  const value = process.env[config.envUserEmail];
+  return typeof value === 'undefined' ? '' : value;
+}
+
 module.exports = {
   create,
   assign,
   validate,
   clear,
   getSlateEnv,
+  getDefaultSlateEnv,
   getEmptySlateEnv,
   getEnvNameValue,
   getStoreValue,
   getPasswordValue,
   getThemeIdValue,
   getIgnoreFilesValue,
+  getUserEmail,
 };

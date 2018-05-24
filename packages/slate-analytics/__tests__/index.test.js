@@ -1,3 +1,5 @@
+/* eslint-disable no-process-env */
+
 jest.mock('../prompt');
 jest.mock('axios');
 
@@ -98,6 +100,24 @@ describe('init()', () => {
       expect(config.tracking).toBe(true);
       expect(rc.get().tracking).toBe(true);
       expect(config.trackingVersion).toBe(packageJson.trackingVersion);
+    });
+  });
+
+  describe('skips prompting new user for tracking consent', () => {
+    test('if SLATE_USER_EMAIL environment variable is set to a valid email', async () => {
+      const analytics = require('../index');
+      const prompt = require('../prompt');
+      const mock = require('mock-fs');
+
+      process.env.SLATE_USER_EMAIL = 'test@email.com';
+
+      mock();
+
+      await analytics.init();
+
+      expect(prompt.forNewConsent).not.toHaveBeenCalled();
+
+      delete process.env.SLATE_USER_EMAIL;
     });
   });
 });

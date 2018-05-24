@@ -14,6 +14,7 @@ const TEST_ENV = {
   [config.envPasswordVar]: '123456789',
   [config.envThemeIdVar]: '987654321',
   [config.envIgnoreFilesVar]: 'config/settings_data.json',
+  [config.envUserEmail]: 'test@email.com',
 };
 
 function setVars(vars) {
@@ -61,6 +62,19 @@ describe('Slate Env', () => {
 
     test('returns object containing all env variables without current values', () => {
       expect(slateEnv.getSlateEnv()).toEqual(TEST_ENV);
+    });
+  });
+
+  describe('getDefaultSlateEnv', () => {
+    test('returns an object which contains the default variables and values of an env file', () => {
+      const emptyTestVars = {
+        [config.envStoreVar]: '',
+        [config.envPasswordVar]: '',
+        [config.envThemeIdVar]: '',
+        [config.envIgnoreFilesVar]: '',
+      };
+
+      expect(slateEnv.getDefaultSlateEnv()).toEqual(emptyTestVars);
     });
   });
 
