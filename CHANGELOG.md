@@ -1,5 +1,29 @@
 # Change Log
 
+## v0.14.0 (2018-05-24)
+
+#### :rocket: Enhancement
+* `slate-theme`
+  * [#567](https://github.com/Shopify/slate/pull/567) Upgrade jQuery to v3. ([@t-kelly](https://github.com/t-kelly))
+  * [#354](https://github.com/Shopify/slate/pull/354) Updated Apple Pay icon. ([@jonathanmoore](https://github.com/jonathanmoore))
+* `slate-tools`
+  * [#366](https://github.com/Shopify/slate/pull/366) Make sure we log errors on watch command. ([@t-kelly](https://github.com/t-kelly))
+
+#### :bug: Bug Fix
+* `slate-theme`
+  * [#591](https://github.com/Shopify/slate/pull/591) Fix currency JS formatting names to match Shopify core. ([@t-kelly](https://github.com/t-kelly))
+  * [#566](https://github.com/Shopify/slate/pull/566) Remove extra whitespace from form element. ([@t-kelly](https://github.com/t-kelly))
+  * [#565](https://github.com/Shopify/slate/pull/565) Fix reference to form.phone in contact form. ([@t-kelly](https://github.com/t-kelly))
+* `slate-cli`
+  * [#569](https://github.com/Shopify/slate/pull/569) Update config-sample.yml URL to 0.x branch. ([@t-kelly](https://github.com/t-kelly))
+* `slate-cli`, `slate-theme`
+  * [#568](https://github.com/Shopify/slate/pull/568) Fix the version of slate and slate-tools used by slate-theme. ([@t-kelly](https://github.com/t-kelly))
+
+#### Committers: 3
+- Hugues Tennier ([huguestennier](https://github.com/huguestennier))
+- Jonathan Moore ([jonathanmoore](https://github.com/jonathanmoore))
+- Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
 ## v0.13.0 (2017-10-30)
 
 #### :rocket: Enhancement
