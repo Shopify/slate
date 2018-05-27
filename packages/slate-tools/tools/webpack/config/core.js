@@ -133,7 +133,7 @@ module.exports = {
   plugins: [
     ...contextReplacementPlugins(),
 
-    new webpack.ProvidePlugin(config.providerPlugin),
+    new webpack.ProvidePlugin(config.providePlugin),
 
     extractLiquidStyles,
 

@@ -36,7 +36,7 @@ module.exports = generate({
       default: true,
     },
     {
-      id: 'providerPlugin',
+      id: 'providePlugin',
       default: {},
       description:
         'Automatically load modules instead of having to import or require them everywhere',
