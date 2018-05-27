@@ -7,7 +7,7 @@ function eslint({fix} = {}) {
   const executable = config.paths.eslint.bin;
   const cachePath = path.join(config.paths.cache, 'eslint-scripts');
   const extensions = ['.js'];
-  const ignorePatterns = ['dist', 'node_modules'].reduce(
+  const ignorePatterns = ['dist', 'node_modules', 'src/assets/static'].reduce(
     (buffer, pattern) => `${buffer} --ignore-pattern ${pattern}`,
     '',
   );
