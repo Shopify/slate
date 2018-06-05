@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate-rc",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "Slate's global configuration manager. Generates, reads, and applies values to a global .slaterc file",
   "main": "index.js",
   "repository": "https://github.com/Shopify/slate/tree/1.x/packages/slate-rc",
@@ -11,8 +11,8 @@
   },
   "homepage": "https://github.com/shopify/slate",
   "dependencies": {
-    "@shopify/slate-config": "^1.0.0-beta.1",
-    "@shopify/slate-error": "^1.0.0-beta.1",
+    "@shopify/slate-config": "1.0.0-beta.2",
+    "@shopify/slate-error": "1.0.0-beta.2",
     "fs-extra": "^5.0.0",
     "mock-fs": "^4.4.2",
     "semver": "^5.5.0",

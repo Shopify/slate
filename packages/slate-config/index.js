@@ -1,11 +1,7 @@
 const path = require('path');
 const fs = require('fs');
-const validate = require('./validate');
 
 const themeDirectory = fs.realpathSync(process.cwd());
-
-const errors = [];
-const warnings = [];
 
 function getSlateConfig() {
   try {
@@ -44,7 +40,6 @@ function _generateConfig(items, overrides) {
 }
 
 function resolveTheme(relativePath) {
-  const appDirectory = fs.realpathSync(process.cwd());
   return path.resolve(themeDirectory, relativePath);
 }
 

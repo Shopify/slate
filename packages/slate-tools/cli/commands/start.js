@@ -21,7 +21,6 @@ const options = {
   webpackConfig,
 };
 const spinner = ora(chalk.magenta(' Compiling...'));
-const firstCompile = true;
 let firstSync = true;
 let skipSettingsData = null;
 let continueIfPublishedTheme = null;
@@ -83,7 +82,8 @@ devServer.compiler.hooks.done.tap('CLI', (stats) => {
 
 devServer.client.hooks.beforeSync.tapPromise('CLI', async (files) => {
   if (firstSync && argv.skipFirstDeploy) {
-    return (devServer.skipDeploy = true);
+    devServer.skipDeploy = true;
+    return;
   }
 
   if (continueIfPublishedTheme === null) {
@@ -106,17 +106,17 @@ devServer.client.hooks.beforeSync.tapPromise('CLI', async (files) => {
 });
 
 devServer.client.hooks.syncSkipped.tap('CLI', () => {
-  if (firstSync && argv.skipFirstDeploy) {
-    event('slate-tools:start:skip-first-deploy', {
-      version: packageJson.version,
-    });
+  if (!(firstSync && argv.skipFirstDeploy)) return;
 
-    console.log(
-      `\n${chalk.blue(
-        figures.info,
-      )}  Skipping first deployment because --skipFirstDeploy flag`,
-    );
-  }
+  event('slate-tools:start:skip-first-deploy', {
+    version: packageJson.version,
+  });
+
+  console.log(
+    `\n${chalk.blue(
+      figures.info,
+    )}  Skipping first deployment because --skipFirstDeploy flag`,
+  );
 });
 
 devServer.client.hooks.sync.tap('CLI', () => {

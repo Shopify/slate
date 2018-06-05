@@ -20,8 +20,8 @@
     "lint:fix": "eslint ./ --fix && prettier-stylelint **/*.scss",
     "lint:fix-js": "eslint ./ --fix",
     "lint:fix-styles": "prettier-stylelint --write",
-    "bootstrap": "npm install && node_modules/.bin/lerna bootstrap",
-    "publish": "node_modules/.bin/lerna publish",
+    "bootstrap": "yarn install && node_modules/.bin/lerna bootstrap",
+    "publish": "node_modules/.bin/lerna publish --exact",
     "changelog": "node_modules/.bin/lerna-changelog",
     "clean": "node_modules/.bin/lerna clean"
   },

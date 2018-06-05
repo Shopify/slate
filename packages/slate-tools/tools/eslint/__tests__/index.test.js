@@ -20,7 +20,6 @@ describe('eslint()', () => {
 
   test('caches test results for quicker repeated executiong', () => {
     const {eslint} = require('../index');
-    const config = require('../../../slate-tools.config');
     eslint();
     expect(execSync).toHaveBeenCalledWith(
       expect.stringContaining('--cache true --cache-location'),
@@ -30,7 +29,6 @@ describe('eslint()', () => {
 
   test('executes ESLint with no warnings', () => {
     const {eslint} = require('../index');
-    const config = require('../../../slate-tools.config');
     eslint();
     expect(execSync).toHaveBeenCalledWith(
       expect.stringContaining('--max-warnings 0'),
@@ -40,7 +38,6 @@ describe('eslint()', () => {
 
   test('executes ESLint with the --fix flag', () => {
     const {eslint} = require('../index');
-    const config = require('../../../slate-tools.config');
     eslint({fix: true});
     expect(execSync).toHaveBeenCalledWith(
       expect.stringContaining('--fix'),

@@ -27,9 +27,7 @@ module.exports = function liquidLoader(content) {
   // an input X, it will always produce the same result.
   this.cacheable();
 
-  const replacements = {
-    /* key: path */
-  };
+  const replacements = {};
 
   const defaultOptions = {'dev-server': false};
   const userOptions = utils.getOptions(this) || {};

@@ -1,5 +1,4 @@
 const execSync = require('child_process').execSync;
-const path = require('path');
 
 const config = require('../../slate-tools.config');
 
@@ -22,11 +21,11 @@ function stylelint({fix} = {}) {
 
 module.exports.stylelint = stylelint;
 
-module.exports.runStylelint = async function runStylelint() {
+module.exports.runStylelint = function runStylelint() {
   console.log('Linting style files...\n');
   stylelint();
 };
 
-module.exports.runStylelintFix = async function runStylelintFix() {
+module.exports.runStylelintFix = function runStylelintFix() {
   stylelint({fix: true});
 };

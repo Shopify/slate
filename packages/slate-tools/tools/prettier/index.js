@@ -1,7 +1,5 @@
-const {execSync, exec} = require('child_process');
+const {exec} = require('child_process');
 const {promisify} = require('util');
-const path = require('path');
-const fs = require('fs');
 
 const config = require('../../slate-tools.config');
 
@@ -29,5 +27,9 @@ async function prettier({scripts, styles, json} = {}) {
 module.exports.prettier = prettier;
 
 module.exports.runPrettierJson = async function runPrettierJson() {
-  return await prettier({json: true});
+  try {
+    return await prettier({json: true});
+  } catch (error) {
+    throw error;
+  }
 };

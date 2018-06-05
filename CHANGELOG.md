@@ -1,5 +1,26 @@
 # Change Log
 
+## v1.0.0-beta.2 (2018-05-25)
+
+#### :rocket: Enhancement
+* `slate-analytics`, `slate-env`
+  * [#592](https://github.com/Shopify/slate/pull/592) Add SLATE_USER_EMAIL env variable for slate-analytics. ([@t-kelly](https://github.com/t-kelly))
+* `slate-tools`
+  * [#546](https://github.com/Shopify/slate/pull/546) Set CSSNano z-index to false in production config. ([@chrisberthe](https://github.com/chrisberthe))
+
+#### :bug: Bug Fix
+* `slate-analytics`
+  * [#529](https://github.com/Shopify/slate/pull/529) Update the URL for analytics docs. ([@t-kelly](https://github.com/t-kelly))
+
+#### :house: Internal
+* [#573](https://github.com/Shopify/slate/pull/573) Goodbye CircleCI :wave:. ([@shopify-admins](https://github.com/shopify-admins))
+
+#### Committers: 4
+- Chris Berthe ([chrisberthe](https://github.com/chrisberthe))
+- R. V. d. Mijnsbrugge ([rvdmijnsbrugge](https://github.com/rvdmijnsbrugge))
+- Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+- [shopify-admins](https://github.com/shopify-admins)
+
 ## v1.0.0-beta.1 (2018-05-03)
 
 #### :rocket: Enhancement

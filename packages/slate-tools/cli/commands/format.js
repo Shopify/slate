@@ -1,10 +1,8 @@
-const fs = require('fs');
 const argv = require('yargs').argv;
 
 const {runEslintFix} = require('../../tools/eslint');
 const {runStylelintFix} = require('../../tools/stylelint');
 const {runPrettierJson} = require('../../tools/prettier');
-const config = require('../../slate-tools.config');
 
 const {scripts, styles, json} = argv;
 const runAll =

@@ -1,7 +1,6 @@
-const fs = require('fs');
 const path = require('path');
 const os = require('os');
-const {resolveTheme, resolveSelf, generate} = require('@shopify/slate-config');
+const {resolveTheme, generate} = require('@shopify/slate-config');
 
 module.exports = generate({
   id: 'slateTools',
@@ -23,6 +22,12 @@ module.exports = generate({
       default: resolveTheme('.babelrc'),
       description: 'A path to a valid Babel configuration',
       type: 'path',
+    },
+    {
+      id: 'cssnanoSettings',
+      default: {zindex: false},
+      description: 'Optimization settings for the cssnano plugin',
+      type: 'object',
     },
     {
       id: 'promptSettings',

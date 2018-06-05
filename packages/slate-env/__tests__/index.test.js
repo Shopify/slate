@@ -14,6 +14,7 @@ const TEST_ENV = {
   [config.envPasswordVar]: '123456789',
   [config.envThemeIdVar]: '987654321',
   [config.envIgnoreFilesVar]: 'config/settings_data.json',
+  [config.envUserEmail]: 'test@email.com',
 };
 
 function setVars(vars) {
@@ -34,7 +35,7 @@ function clearVars(vars) {
 
 afterEach(() => {
   clearVars(TEST_ENV);
-  glob.sync(`${envPath}*`).forEach(file => fs.unlinkSync(file));
+  glob.sync(`${envPath}*`).forEach((file) => fs.unlinkSync(file));
 });
 
 describe('Slate Env', () => {
@@ -64,17 +65,30 @@ describe('Slate Env', () => {
     });
   });
 
+  describe('getDefaultSlateEnv', () => {
+    test('returns an object which contains the default variables and values of an env file', () => {
+      const emptyTestVars = {
+        [config.envStoreVar]: '',
+        [config.envPasswordVar]: '',
+        [config.envThemeIdVar]: '',
+        [config.envIgnoreFilesVar]: '',
+      };
+
+      expect(slateEnv.getDefaultSlateEnv()).toEqual(emptyTestVars);
+    });
+  });
+
   describe('getEmptySlateEnv()', () => {
     test('returns object containing all env file variables with empty values', () => {
-      const EMPTY_TEST_VARS = Object.assign({}, TEST_ENV);
+      const emptyTestVars = Object.assign({}, TEST_ENV);
 
-      for (const key in EMPTY_TEST_VARS) {
-        if (EMPTY_TEST_VARS.hasOwnProperty(key)) {
-          EMPTY_TEST_VARS[key] = '';
+      for (const key in emptyTestVars) {
+        if (emptyTestVars.hasOwnProperty(key)) {
+          emptyTestVars[key] = '';
         }
       }
 
-      expect(slateEnv.getEmptySlateEnv()).toEqual(EMPTY_TEST_VARS);
+      expect(slateEnv.getEmptySlateEnv()).toEqual(emptyTestVars);
     });
   });
 
@@ -285,7 +299,7 @@ describe('Slate Env', () => {
 
       test('the store URL environment variable is not a .myshopify.com or myshopify.io URL', () => {
         ['shop1.myshopify.com', 'shop1.myshopify.io', 'shop1'].forEach(
-          value => {
+          (value) => {
             setVars(
               Object.assign({}, TEST_ENV, {
                 [config.envStoreVar]: value,

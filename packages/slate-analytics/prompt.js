@@ -2,16 +2,14 @@ const inquirer = require('inquirer');
 const clearConsole = require('react-dev-utils/clearConsole');
 const wrap = require('word-wrap');
 const chalk = require('chalk');
+const {validateEmail} = require('./utils');
 
 const question = {
   type: 'input',
   name: 'email',
   message: 'To continue, please enter your email address:',
-  validate: input => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(input).toLowerCase())
-      ? true
-      : 'Email not valid. Please try again.';
+  validate: (input) => {
+    return validateEmail(input) || 'Email not valid. Please try again.';
   },
 };
 
@@ -24,9 +22,7 @@ function forNewConsent() {
     ),
   );
   console.log(
-    chalk.cyan(
-      '\n  https://github.com/Shopify/slate/wiki/Slate-Analytics',
-    ),
+    chalk.cyan('\n  https://github.com/Shopify/slate/wiki/Slate-Analytics'),
   );
   console.log();
 

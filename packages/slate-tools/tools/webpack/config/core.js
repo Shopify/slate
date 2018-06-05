@@ -1,5 +1,4 @@
 const fs = require('fs');
-const path = require('path');
 const webpack = require('webpack');
 const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -11,7 +10,6 @@ const {entrypointFiles} = require('../entrypoints');
 
 const paths = config.paths;
 
-const isDevServer = process.argv[3] === 'start';
 const extractLiquidStyles = new ExtractTextPlugin(
   '[name].styleLiquid.scss.liquid',
 );

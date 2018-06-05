@@ -2,10 +2,10 @@ let newConsentAnswer = {};
 let updatedConsentAnswer = {};
 
 module.exports = {
-  __setNewConsentAnswer: newAnswer =>
+  __setNewConsentAnswer: (newAnswer) =>
     (newConsentAnswer = Object.assign({}, newConsentAnswer, newAnswer)),
 
-  __setUpdatedConsentAnswer: newAnswer =>
+  __setUpdatedConsentAnswer: (newAnswer) =>
     (updatedConsentAnswer = Object.assign({}, updatedConsentAnswer, newAnswer)),
 
   forNewConsent: jest.fn(() => {

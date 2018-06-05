@@ -3,8 +3,10 @@
 const uuidGenerator = require('uuid/v4');
 const clearConsole = require('react-dev-utils/clearConsole');
 const rc = require('@shopify/slate-rc');
+const {getUserEmail} = require('@shopify/slate-env');
 const axios = require('axios');
 const prompt = require('./prompt');
+const {validateEmail} = require('./utils');
 const packageJson = require('./package.json');
 
 async function init() {
@@ -21,8 +23,15 @@ async function init() {
   ) {
     if (typeof config.tracking === 'undefined') {
       // If new user
-      const answers = await prompt.forNewConsent();
-      config = Object.assign({}, config, answers, {
+      let email = getUserEmail();
+
+      if (!validateEmail(email)) {
+        const answer = await prompt.forNewConsent();
+        email = answer.email;
+      }
+
+      config = Object.assign({}, config, {
+        email,
         tracking: true,
         trackingVersion: packageJson.trackingVersion,
       });
@@ -68,8 +77,8 @@ function event(name, payload = {}) {
 
   // eslint-disable-next-line no-process-env
   if (process.env.NODE_ENV === 'test') {
-    axiosConfig.adaptor = settings => {
-      return new Promise(resolve => {
+    axiosConfig.adaptor = (settings) => {
+      return new Promise((resolve) => {
         return resolve({
           data: {},
           status: 200,

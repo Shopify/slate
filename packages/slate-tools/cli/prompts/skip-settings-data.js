@@ -1,7 +1,6 @@
 const chalk = require('chalk');
 const inquirer = require('inquirer');
 const {getIgnoreFilesValue} = require('@shopify/slate-env');
-const {event} = require('@shopify/slate-analytics');
 const figures = require('figures');
 const flatten = require('array-flatten');
 const minimatch = require('minimatch');
@@ -28,8 +27,10 @@ function _filterIgnoredFiles(files) {
   return flatten(
     envIgnoreGlobs.map((glob) => {
       if (glob[0] !== '/') {
+        /* eslint-disable-next-line no-param-reassign */
         glob = `/${glob}`;
       }
+
       return files.filter(minimatch.filter(glob));
     }),
   );
@@ -65,9 +66,7 @@ module.exports = async function(files) {
   console.log(
     `   Or to disable this prompt, add the following to your slate.config.js file:\n`,
   );
-  console.log(
-    `      ${chalk.cyan(`slateTools: { promptSettings: false }`)}\n`,
-  );
+  console.log(`      ${chalk.cyan(`slateTools: { promptSettings: false }`)}\n`);
 
   const answer = await inquirer.prompt([question]);
 

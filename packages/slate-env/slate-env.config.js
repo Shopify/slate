@@ -56,7 +56,13 @@ module.exports = slateConfig.generate({
       id: 'envIgnoreFilesVar',
       default: 'SLATE_IGNORE_FILES',
       description:
-        "A list of file patterns to ignore, with each list item seperated by ':'",
+        "A list of file patterns to ignore, with each list item separated by ':'",
+      type: 'string',
+    },
+    {
+      id: 'envUserEmail',
+      default: 'SLATE_USER_EMAIL',
+      description: 'The email of the user to register for Slate analytics',
       type: 'string',
     },
   ],
