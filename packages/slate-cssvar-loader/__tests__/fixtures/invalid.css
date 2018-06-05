@@ -6,7 +6,3 @@
 .title {
   color: var(--headings_color);
 }
-
-body {
-  background-color: var(--INVALID);
-}
