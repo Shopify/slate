@@ -9,3 +9,5 @@ script:
 - yarn bootstrap
 - yarn test
 - yarn lint
+env:
+  - TAVIS_TEST=true
