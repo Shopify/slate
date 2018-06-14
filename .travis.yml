@@ -10,4 +10,4 @@ script:
 - yarn test
 - yarn lint
 env:
-  - TAVIS_TEST=true
+  - NODE_ENV=test
