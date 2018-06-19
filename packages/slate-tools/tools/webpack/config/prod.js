@@ -116,6 +116,8 @@ module.exports = merge(
         },
         // necessary to consistently work with multiple chunks via CommonsChunkPlugin
         chunksSortMode: 'dependency',
+        liquidTemplates: templateFiles(),
+        liquidLayouts: layoutFiles(),
       }),
 
       new HtmlWebpackIncludeLiquidStylesPlugin(),
