@@ -19,16 +19,6 @@ describe('slate-cssvar-loader ', () => {
     expect(output).toBe(expected);
   });
 
-  test('missing liquid variable', async () => {
-    jest.mock('../slate-cssvar-loader.config');
-    const stats = await compiler('../fixtures/invalid.css');
-    const output = stats.toJson().modules[0].source;
-
-    expect(output).toBe(
-      'throw new Error("Module build failed: Liquid variable not found for CSS variable INVALID");',
-    );
-  });
-
   test('loader does not run when disabled', async () => {
     jest.mock('../slate-cssvar-loader.config', () => {
       return {

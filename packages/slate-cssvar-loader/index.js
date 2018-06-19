@@ -7,13 +7,6 @@ const STYLE_BLOCK_REGEX = /(?:<style>|\{% style %\})([\S\s]*?)(?:<\/style>|\{% e
 const CSS_VAR_FUNC_REGEX = /var\(--(.*?)\)/g;
 const CSS_VAR_DECL_REGEX = /--(.*?):\s*(\{\{\s*.*?\s*\}\}.*?);/g;
 
-class SlateException {
-  constructor(message) {
-    this.message = message;
-    this.name = 'SlateException';
-  }
-}
-
 function parseCSSVariables(cssVariablesPaths) {
   const variables = {};
   let styleBlock;
@@ -45,16 +38,17 @@ function SlateCSSLoader(source) {
   cssVariablesPaths.forEach((filePath) => this.addDependency(filePath));
   const variables = parseCSSVariables(cssVariablesPaths);
 
-  const result = source.replace(CSS_VAR_FUNC_REGEX, (match, cssVariable) => {
+  return source.replace(CSS_VAR_FUNC_REGEX, (match, cssVariable) => {
     if (!variables[cssVariable]) {
-      throw new SlateException(
-        `Liquid variable not found for CSS variable ${cssVariable}`,
+      console.warn(
+        `Liquid variable not found for CSS variable "${cssVariable}"`,
       );
+
+      return match;
     }
+
     return variables[cssVariable];
   });
-
-  return result;
 }
 
 module.exports = SlateCSSLoader;
