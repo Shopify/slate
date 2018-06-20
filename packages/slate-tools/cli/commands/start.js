@@ -87,7 +87,15 @@ devServer.client.hooks.beforeSync.tapPromise('CLI', async (files) => {
   }
 
   if (continueIfPublishedTheme === null) {
-    continueIfPublishedTheme = await promptContinueIfPublishedTheme();
+    try {
+      continueIfPublishedTheme = await promptContinueIfPublishedTheme();
+    } catch (error) {
+      event('slate-tools:start:error', {
+        version: packageJson.version,
+        error,
+      });
+      console.log(`\n${chalk.red(error)}\n`);
+    }
   }
 
   if (!continueIfPublishedTheme) {
