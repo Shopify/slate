@@ -1,5 +1,37 @@
 # Change Log
 
+## v1.0.0-beta.5 (2018-06-26)
+
+#### :bug: Bug Fix
+
+* `slate-tools`
+  * [#654](https://github.com/Shopify/slate/pull/654) Fix build break when missing fonts directory. ([@t-kelly](https://github.com/t-kelly))
+
+#### Committers: 1
+
+* Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
+## v1.0.0-beta.4 (2018-06-26)
+
+#### :broken_heart: Breaking
+
+* `slate-tools`
+  * [#642](https://github.com/Shopify/slate/pull/642) BREAKING: Add load logic and preload future styles and scripts. ([@t-kelly](https://github.com/t-kelly))
+
+#### :rocket: Enhancement
+
+* `slate-tools`
+  * [#647](https://github.com/Shopify/slate/pull/647) Copy the contents of src/assets/images and src/assets/fonts. ([@t-kelly](https://github.com/t-kelly))
+
+#### :bug: Bug Fix
+
+* `slate-sync`, `slate-tools`
+  * [#643](https://github.com/Shopify/slate/pull/643) Throw an error if we fail to access Theme API. ([@t-kelly](https://github.com/t-kelly))
+
+#### Committers: 1
+
+* Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
 ## v1.0.0-beta.3 (2018-06-19)
 
 #### :rocket: Enhancement
