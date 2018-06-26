@@ -8,13 +8,15 @@
 
   <% if (typeof htmlWebpackPlugin.options.liquidTemplates[chunk] !== 'undefined') { %>
     {%- if template.name == '<%= chunk.split('.')[1] %>' -%}
-      <!--[if (gt IE 9)|!(IE)]><!--><script type="text/javascript" src="<%= src %>" defer></script><!--<![endif]-->
-      <!--[if lte IE 9]><script type="text/javascript" src="<%= src %>"></script><![endif]-->
+      <script type="text/javascript" src="<%= src %>" defer></script>
+    {%- else -%}
+      <link rel="prefetch" href="<%= src %>" as="script">
     {%- endif -%}
   <% } else if (typeof htmlWebpackPlugin.options.liquidLayouts[chunk] !== 'undefined') { %>
     {%- if layout == '<%= chunk.split('.')[1] %>' -%}
-      <!--[if (gt IE 9)|!(IE)]><!--><script type="text/javascript" src="<%= src %>" defer></script><!--<![endif]-->
-      <!--[if lte IE 9]><script type="text/javascript" src="<%= src %>"></script><![endif]-->
+      <script type="text/javascript" src="<%= src %>" defer></script>
+    {%- else -%}
+      <link rel="prefetch" href="<%= src %>" as="script">
     {%- endif -%}
   <% } else if (chunk.split('@').length > 1) { %>
     <% var pages = chunk.split('@').slice(1) %>
@@ -29,11 +31,11 @@
     <% }); %>
 
     {%- if <%= conditions.join(' or ') %> -%}
-      <!--[if (gt IE 9)|!(IE)]><!--><script type="text/javascript" src="<%= src %>" defer></script><!--<![endif]-->
-      <!--[if lte IE 9]><script type="text/javascript" src="<%= src %>"></script><![endif]-->
+      <script type="text/javascript" src="<%= src %>" defer></script>
+    {%- else -%}
+      <link rel="prefetch" href="<%= src %>" as="script">
     {%- endif -%}
   <% } else { %>
-    <!--[if (gt IE 9)|!(IE)]><!--><script type="text/javascript" src="<%= src %>" defer></script><!--<![endif]-->
-    <!--[if lte IE 9]><script type="text/javascript" src="<%= src %>"></script><![endif]-->
+    <script type="text/javascript" src="<%= src %>" defer></script>
   <% } %>
 <% } %>
