@@ -133,32 +133,34 @@ module.exports = {
 
     extractLiquidStyles,
 
-    new CopyWebpackPlugin([
-      {
-        from: paths.svgs,
-        to: `${paths.snippets.dist}/[name].liquid`,
-      },
-      {
-        from: paths.static.src,
-        to: paths.static.dist,
-      },
-      {
-        from: paths.images.src,
-        to: paths.images.dist,
-      },
-      {
-        from: paths.fonts.src,
-        to: paths.fonts.dist,
-      },
-      {
-        from: paths.locales.src,
-        to: paths.locales.dist,
-      },
-      {
-        from: paths.settings.src,
-        to: paths.settings.dist,
-      },
-    ]),
+    new CopyWebpackPlugin(
+      [
+        {
+          from: paths.svgs,
+          to: `${paths.snippets.dist}/[name].liquid`,
+        },
+        {
+          from: paths.static.src,
+          to: paths.static.dist,
+        },
+        {
+          from: paths.images.src,
+          to: paths.images.dist,
+        },
+        {
+          from: paths.fonts.src,
+          to: paths.fonts.dist,
+        },
+        {
+          from: paths.locales.src,
+          to: paths.locales.dist,
+        },
+        {
+          from: paths.settings.src,
+          to: paths.settings.dist,
+        },
+      ].filter((directory) => fs.existsSync(directory.from)),
+    ),
 
     new WriteFileWebpackPlugin({
       test: /^(?:(?!hot-update.json$).)*\.(liquid|json)$/,
