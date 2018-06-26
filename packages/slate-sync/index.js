@@ -1,5 +1,6 @@
 const chalk = require('chalk');
 const figures = require('figures');
+const https = require('https');
 const themekit = require('@shopify/themekit').command;
 const slateEnv = require('@shopify/slate-env');
 const config = require('./slate-sync.config');
@@ -66,7 +67,7 @@ async function deploy(cmd = '', files = []) {
     await promiseThemekitConfig();
     await promiseThemekitDeploy(cmd, files);
   } catch (error) {
-    console.error(error);
+    console.error('My Error', error);
   }
 
   deploying = false;
@@ -119,6 +120,80 @@ function promiseThemekitDeploy(cmd, files) {
   });
 }
 
+/**
+ * Fetch the main theme ID from Shopify
+ *
+ * @param   env   String  The environment to check against
+ * @return        Promise Reason for abort or the main theme ID
+ */
+function fetchMainThemeId() {
+  return new Promise((resolve, reject) => {
+    https.get(
+      {
+        hostname: slateEnv.getStoreValue(),
+        path: '/admin/themes.json',
+        auth: `:${slateEnv.getPasswordValue}`,
+        agent: false,
+        headers: {
+          'X-Shopify-Access-Token': slateEnv.getPasswordValue(),
+        },
+      },
+      (res) => {
+        let body = '';
+
+        res.on('data', (datum) => (body += datum));
+
+        res.on('end', () => {
+          const parsed = JSON.parse(body);
+
+          if (parsed.errors) {
+            reject(
+              new Error(
+                `API request to fetch main theme ID failed: \n${JSON.stringify(
+                  parsed.errors,
+                  null,
+                  '\t',
+                )}`,
+              ),
+            );
+            return;
+          }
+
+          if (!Array.isArray(parsed.themes)) {
+            reject(
+              new Error(
+                `Shopify response for /admin/themes.json is not an array. ${JSON.stringify(
+                  parsed,
+                  null,
+                  '\t',
+                )}`,
+              ),
+            );
+            return;
+          }
+
+          const mainTheme = parsed.themes.find((t) => t.role === 'main');
+
+          if (!mainTheme) {
+            reject(
+              new Error(
+                `No main theme in response. ${JSON.stringify(
+                  parsed.themes,
+                  null,
+                  '\t',
+                )}`,
+              ),
+            );
+            return;
+          }
+
+          resolve(mainTheme.id);
+        });
+      },
+    );
+  });
+}
+
 module.exports = {
   sync(files = []) {
     if (!files.length) {
@@ -137,4 +212,6 @@ module.exports = {
   upload() {
     return deploy('upload');
   },
+
+  fetchMainThemeId,
 };
