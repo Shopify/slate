@@ -87,7 +87,16 @@ module.exports = generate({
         },
         {
           id: 'static',
-          default: resolveTheme('src/assets/static'),
+          items: [
+            {
+              id: 'src',
+              default: resolveTheme('src/assets/static'),
+            },
+            {
+              id: 'dist',
+              default: resolveTheme('dist/assets'),
+            },
+          ],
         },
         {
           id: 'scripts',
@@ -96,6 +105,32 @@ module.exports = generate({
         {
           id: 'svgs',
           default: resolveTheme('src/assets/svg'),
+        },
+        {
+          id: 'fonts',
+          items: [
+            {
+              id: 'src',
+              default: resolveTheme('src/assets/fonts'),
+            },
+            {
+              id: 'dist',
+              default: resolveTheme('dist/assets'),
+            },
+          ],
+        },
+        {
+          id: 'images',
+          items: [
+            {
+              id: 'src',
+              default: resolveTheme('src/assets/images'),
+            },
+            {
+              id: 'dist',
+              default: resolveTheme('dist/assets'),
+            },
+          ],
         },
         {
           id: 'locales',
@@ -156,8 +191,17 @@ module.exports = generate({
           default: resolveTheme('dist/assets'),
         },
         {
-          id: 'snippetsOutput',
-          default: resolveTheme('dist/snippets'),
+          id: 'snippets',
+          items: [
+            {
+              id: 'src',
+              default: resolveTheme('src/snippets'),
+            },
+            {
+              id: 'dist',
+              default: resolveTheme('dist/snippets'),
+            },
+          ],
         },
         {
           id: 'userShopifyConfig',

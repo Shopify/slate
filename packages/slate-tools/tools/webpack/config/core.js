@@ -5,10 +5,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const commonExcludes = require('../common-excludes');
 const babelLoader = require('../loaders/babel-loader');
-const config = require('../../../slate-tools.config');
+const {paths, regex} = require('../../../slate-tools.config');
 const {entrypointFiles} = require('../entrypoints');
-
-const paths = config.paths;
 
 const extractLiquidStyles = new ExtractTextPlugin(
   '[name].styleLiquid.scss.liquid',
@@ -35,29 +33,29 @@ function contextReplacementPlugins() {
     ),
   ];
 
-  if (fs.existsSync(paths.static)) {
+  if (fs.existsSync(paths.static.src)) {
     plugins.push(
       new webpack.ContextReplacementPlugin(
         /__appstatic__/,
-        replaceCtxRequest(paths.static),
+        replaceCtxRequest(paths.static.src),
       ),
     );
   }
 
-  if (fs.existsSync(paths.images)) {
+  if (fs.existsSync(paths.images.src)) {
     plugins.push(
       new webpack.ContextReplacementPlugin(
         /__appimages__/,
-        replaceCtxRequest(paths.images),
+        replaceCtxRequest(paths.images.src),
       ),
     );
   }
 
-  if (fs.existsSync(paths.fonts)) {
+  if (fs.existsSync(paths.fonts.src)) {
     plugins.push(
       new webpack.ContextReplacementPlugin(
         /__appfonts__/,
-        replaceCtxRequest(paths.fonts),
+        replaceCtxRequest(paths.fonts.src),
       ),
     );
   }
@@ -68,19 +66,19 @@ function contextReplacementPlugins() {
 module.exports = {
   context: paths.src,
 
-  entry: Object.assign(entrypointFiles(), config.paths.entrypoints),
+  entry: Object.assign(entrypointFiles(), paths.entrypoints),
 
   output: {
     filename: '[name].js',
-    path: config.paths.assetsOutput,
+    path: paths.assetsOutput,
   },
 
   resolveLoader: {
     modules: [
-      config.paths.nodeModules.self,
-      config.paths.nodeModules.repo,
-      config.paths.nodeModules.app,
-      config.paths.webpack,
+      paths.nodeModules.self,
+      paths.nodeModules.repo,
+      paths.nodeModules.app,
+      paths.webpack,
     ],
   },
 
@@ -99,7 +97,7 @@ module.exports = {
         loader: 'file-loader',
       },
       {
-        test: config.regex.images,
+        test: regex.images,
         exclude: commonExcludes(),
         use: [
           {loader: 'file-loader', options: {name: '[name].[ext]'}},
@@ -107,7 +105,7 @@ module.exports = {
         ],
       },
       {
-        test: config.regex.static,
+        test: regex.static,
         exclude: commonExcludes('assets/styles'),
         loader: 'file-loader',
         options: {
@@ -137,29 +135,30 @@ module.exports = {
 
     new CopyWebpackPlugin([
       {
-        from: config.paths.svgs,
-        to: `${config.paths.snippetsOutput}/[name].liquid`,
+        from: paths.svgs,
+        to: `${paths.snippets.dist}/[name].liquid`,
       },
-    ]),
-
-    new CopyWebpackPlugin([
       {
-        from: config.paths.locales.src,
-        to: config.paths.locales.dist,
+        from: paths.static.src,
+        to: paths.static.dist,
       },
-    ]),
-
-    new CopyWebpackPlugin([
       {
-        from: config.paths.settings.src,
-        to: config.paths.settings.dist,
+        from: paths.images.src,
+        to: paths.images.dist,
+      },
+      {
+        from: paths.fonts.src,
+        to: paths.fonts.dist,
+      },
+      {
+        from: paths.locales.src,
+        to: paths.locales.dist,
+      },
+      {
+        from: paths.settings.src,
+        to: paths.settings.dist,
       },
     ]),
-
-    new WriteFileWebpackPlugin({
-      test: /\.(png|jpg|gif|scss|jpeg)/,
-      log: false,
-    }),
 
     new WriteFileWebpackPlugin({
       test: /^(?:(?!hot-update.json$).)*\.(liquid|json)$/,
