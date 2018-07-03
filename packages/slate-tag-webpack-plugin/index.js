@@ -1,4 +1,5 @@
 const SETTINGS_SCHEMA_PATH = '../config/settings_schema.json';
+const THEME_INFO_PANEL = 'theme_info';
 
 function FileListPlugin(version) {
   this.version = version;
@@ -9,9 +10,11 @@ FileListPlugin.prototype.apply = function(compiler) {
     const asset = compilation.assets[SETTINGS_SCHEMA_PATH].source();
     const schema = JSON.parse(asset);
 
-    if (Array.isArray(schema) && typeof schema[0] === 'object') {
+    const themeInfo = findThemeInfoPanel(schema);
+
+    if (themeInfo) {
       /* eslint-disable-next-line camelcase */
-      schema[0].theme_packaged_with = `@shopify/slate-tools@${this.version}`;
+      themeInfo.theme_packaged_with = `@shopify/slate-tools@${this.version}`;
     }
 
     const jsonString = JSON.stringify(schema);
@@ -26,5 +29,15 @@ FileListPlugin.prototype.apply = function(compiler) {
     };
   });
 };
+
+function findThemeInfoPanel(schema) {
+  if (!Array.isArray(schema)) {
+    return null;
+  }
+
+  return schema.find((panel) => {
+    return typeof panel === 'object' && panel.name === THEME_INFO_PANEL;
+  });
+}
 
 module.exports = FileListPlugin;
