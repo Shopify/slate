@@ -49,7 +49,7 @@ module.exports = slateConfig.generate({
     {
       id: 'envThemeIdVar',
       default: 'SLATE_THEME_ID',
-      description: 'The ID of the theme you wish to upload files too',
+      description: 'The ID of the theme you wish to upload files to',
       type: 'string',
     },
     {
