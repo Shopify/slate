@@ -21,7 +21,7 @@ SLATE_STORE=
 # The API password generated from a Private App
 SLATE_PASSWORD=
 
-# The ID of the theme you wish to upload files too
+# The ID of the theme you wish to upload files to
 SLATE_THEME_ID=
 
 # A list of file patterns to ignore, with each list item separated by ':'
