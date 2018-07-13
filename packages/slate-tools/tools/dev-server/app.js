@@ -10,7 +10,7 @@ module.exports = class App {
     app.webpackDevMiddleware = webpackDevMiddleware(compiler, {
       quiet: true,
       reload: true,
-      watchOptions: compiler.options.watchOptions || {}
+      watchOptions: compiler.options.watchOptions || {},
     });
     app.webpackHotMiddleware = webpackHotMiddleware(compiler, {
       log: false,
