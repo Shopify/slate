@@ -1,6 +1,7 @@
 const fs = require('fs');
 const webpack = require('webpack');
-const {createServer} = require('https');
+const {createServer: createHttpServer} = require('http');
+const {createServer: createHttpsServer} = require('https');
 const createHash = require('crypto').createHash;
 
 const App = require('./app');
@@ -28,7 +29,11 @@ module.exports = class DevServer {
       'DevServer',
       this._onCompileDone.bind(this),
     );
-    this.server = createServer(ssl(config), this.app);
+    if (config.ssl) {
+      this.server = createHttpsServer(ssl(config), this.app);
+    } else {
+      this.server = createHttpServer(this.app);
+    }
     this.server.listen(config.port);
   }
 
