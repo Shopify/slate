@@ -63,7 +63,7 @@ module.exports = merge(
               options: {
                 ident: 'postcss',
                 sourceMap: false,
-                plugins: () => [autoprefixer],
+                plugins: () => [...config.postcssPlugins.dev, autoprefixer],
               },
             },
             {loader: 'sass-loader', options: {sourceMap: false}},
