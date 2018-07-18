@@ -43,6 +43,16 @@ module.exports = merge(
           ],
         },
         {
+          test: /\.css$/,
+          exclude: commonExcludes(),
+          use: extractStyles.extract({
+            fallbacl: 'style-loader',
+            use: [
+              {loader: 'css-loader'}
+            ]
+          })
+        },
+        {
           test: /\.s[ac]ss$/,
           exclude: commonExcludes(),
           use: extractStyles.extract({
