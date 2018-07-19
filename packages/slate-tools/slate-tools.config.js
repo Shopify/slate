@@ -28,13 +28,13 @@ module.exports = generate({
       items: [
         {
           id: 'dev',
-          default: []
+          default: [],
         },
         {
           id: 'prod',
-          default: []
-        }
-      ]
+          default: [],
+        },
+      ],
     },
     {
       id: 'cssnanoSettings',
