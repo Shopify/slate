@@ -92,7 +92,7 @@ module.exports = {
         loader: 'hmr-alamo-loader',
       },
       {
-        test: /fonts\/.*\.(eot|svg|ttf|woff|woff2)$/,
+        test: /fonts\/.*\.(eot|svg|ttf|woff|woff2|otf)$/,
         exclude: /node_modules/,
         loader: 'file-loader',
       },
