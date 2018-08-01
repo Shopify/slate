@@ -1,5 +1,25 @@
 # Change Log
 
+## v1.0.0-beta.6 (2018-08-01)
+
+#### :bug: Bug Fix
+
+* `slate-tools`
+  * [#695](https://github.com/Shopify/slate/pull/695) Rename jsonP function. ([@t-kelly](https://github.com/t-kelly))
+* `slate-tag-webpack-plugin`
+  * [#662](https://github.com/Shopify/slate/pull/662) Only set theme_packaged_with if the first settings panel is theme_info. ([@davidcornu](https://github.com/davidcornu))
+
+#### :memo: Documentation
+
+* `slate-env`
+  * [#664](https://github.com/Shopify/slate/pull/664) Fix typo in .env config comment. ([@myabc](https://github.com/myabc))
+
+#### Committers: 3
+
+* Alex Coles ([myabc](https://github.com/myabc))
+* David Cornu ([davidcornu](https://github.com/davidcornu))
+* Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
 ## v1.0.0-beta.5 (2018-06-26)
 
 #### :bug: Bug Fix
