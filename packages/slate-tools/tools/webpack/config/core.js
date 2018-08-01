@@ -71,6 +71,7 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: paths.assetsOutput,
+    jsonpFunction: 'shopifySlateJsonp',
   },
 
   resolveLoader: {
