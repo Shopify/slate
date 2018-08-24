@@ -54,7 +54,7 @@ module.exports = generate({
     },
     {
       id: 'port',
-      default: 8080,
+      default: 3001,
     },
     {
       id: 'regex',

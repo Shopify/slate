@@ -4,12 +4,12 @@ const chalk = require('chalk');
 const ora = require('ora');
 const consoleControl = require('console-control-strings');
 const clearConsole = require('react-dev-utils/clearConsole');
-const openBrowser = require('react-dev-utils/openBrowser');
 const env = require('@shopify/slate-env');
 const {event} = require('@shopify/slate-analytics');
 
 const promptContinueIfPublishedTheme = require('../prompts/continue-if-published-theme');
 const promptSkipSettingsData = require('../prompts/skip-settings-data');
+const AssetServer = require('../../tools/asset-server');
 const DevServer = require('../../tools/dev-server');
 const webpackConfig = require('../../tools/webpack/config/dev');
 const config = require('../../slate-tools.config');
@@ -25,15 +25,16 @@ let firstSync = true;
 let skipSettingsData = null;
 let continueIfPublishedTheme = null;
 
-const devServer = new DevServer(options);
+const assetServer = new AssetServer(options);
+const devServer = new DevServer();
 const previewUrl = `https://${env.getStoreValue()}?preview_theme_id=${env.getThemeIdValue()}`;
 
-devServer.compiler.hooks.compile.tap('CLI', () => {
+assetServer.compiler.hooks.compile.tap('CLI', () => {
   clearConsole();
   spinner.start();
 });
 
-devServer.compiler.hooks.done.tap('CLI', (stats) => {
+assetServer.compiler.hooks.done.tap('CLI', (stats) => {
   const statsJson = stats.toJson({}, true);
 
   spinner.stop();
@@ -80,9 +81,10 @@ devServer.compiler.hooks.done.tap('CLI', (stats) => {
   }
 });
 
-devServer.client.hooks.beforeSync.tapPromise('CLI', async (files) => {
+assetServer.client.hooks.beforeSync.tapPromise('CLI', async (files) => {
   if (firstSync && argv.skipFirstDeploy) {
-    devServer.skipDeploy = true;
+    assetServer.skipDeploy = true;
+
     return;
   }
 
@@ -107,13 +109,13 @@ devServer.client.hooks.beforeSync.tapPromise('CLI', async (files) => {
   }
 
   if (skipSettingsData) {
-    devServer.files = files.filter(
+    assetServer.files = files.filter(
       (file) => !file.endsWith('settings_data.json'),
     );
   }
 });
 
-devServer.client.hooks.syncSkipped.tap('CLI', () => {
+assetServer.client.hooks.syncSkipped.tap('CLI', () => {
   if (!(firstSync && argv.skipFirstDeploy)) return;
 
   event('slate-tools:start:skip-first-deploy', {
@@ -127,33 +129,63 @@ devServer.client.hooks.syncSkipped.tap('CLI', () => {
   );
 });
 
-devServer.client.hooks.sync.tap('CLI', () => {
+assetServer.client.hooks.sync.tap('CLI', () => {
   event('slate-tools:start:sync-start', {version: packageJson.version});
 });
 
-devServer.client.hooks.syncDone.tap('CLI', () => {
+assetServer.client.hooks.syncDone.tap('CLI', () => {
   event('slate-tools:start:sync-end', {version: packageJson.version});
 
   process.stdout.write(consoleControl.previousLine(4));
   process.stdout.write(consoleControl.eraseData());
 
-  console.log(
-    `\n${chalk.green(
-      figures.tick,
-    )}  Files uploaded successfully! Your theme is running at:\n`,
-  );
-  console.log(`      ${chalk.cyan(previewUrl)}`);
+  console.log(`\n${chalk.green(figures.tick)}  Files uploaded successfully!`);
 });
 
-devServer.client.hooks.afterSync.tap('CLI', () => {
-  console.log(chalk.magenta('\nWatching for changes...'));
-
+assetServer.client.hooks.afterSync.tap('CLI', async () => {
   if (firstSync) {
-    openBrowser(previewUrl);
+    firstSync = false;
+    await devServer.start();
   }
 
-  firstSync = false;
+  const urls = devServer.server.options.get('urls');
+
+  console.log();
+  console.log(
+    `${chalk.yellow(
+      figures.star,
+    )}  You are editing files in theme ${chalk.green(
+      env.getThemeIdValue(),
+    )} on the following store:\n`,
+  );
+
+  console.log(`      ${chalk.cyan(previewUrl)}`);
+
+  console.log();
+  console.log(`   Your theme can be previewed at:\n`);
+  console.log(
+    `      ${chalk.cyan(urls.get('local'))} ${chalk.grey('(Local)')}`,
+  );
+  console.log(
+    `      ${chalk.cyan(urls.get('external'))} ${chalk.grey('(External)')}`,
+  );
+  console.log();
+  console.log(`   Local assets are being served from:\n`);
+
+  console.log(`      ${chalk.cyan(`https://localhost:${assetServer.port}`)}`);
+
+  console.log();
+  console.log(`   The Browsersync control panel is available at:\n`);
+  console.log(`      ${chalk.cyan(urls.get('ui'))} ${chalk.grey('(Local)')}`);
+  console.log(
+    `      ${chalk.cyan(urls.get('ui-external'))} ${chalk.grey('(External)')}`,
+  );
+
+  console.log(chalk.magenta('\nWatching for changes...'));
 });
 
 event('slate-tools:start:start', {version: packageJson.version});
-devServer.start();
+
+assetServer.start().catch((error) => {
+  console.error(error);
+});

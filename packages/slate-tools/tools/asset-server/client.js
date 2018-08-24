@@ -10,7 +10,7 @@ module.exports = class Client {
       beforeSync: new AsyncSeriesHook(['files']),
       sync: new SyncHook(['files']),
       syncDone: new SyncHook(['files']),
-      afterSync: new SyncHook(['files']),
+      afterSync: new AsyncSeriesHook(['files']),
       syncSkipped: new SyncHook(['files']),
     };
   }
@@ -32,7 +32,7 @@ module.exports = class Client {
       this.hooks.syncDone.call(this.files);
     }
 
-    this.hooks.afterSync.call(this.files);
+    this.hooks.afterSync.promise(this.files);
 
     this.skipNextSync = false;
   }
