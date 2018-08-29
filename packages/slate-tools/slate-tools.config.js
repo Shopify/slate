@@ -49,6 +49,10 @@ module.exports = generate({
       ],
     },
     {
+      id: 'ssl',
+      default: true,
+    },
+    {
       id: 'domain',
       default: 'https://localhost',
     },
