@@ -1,10 +1,11 @@
 const {exec} = require('child_process');
 const {promisify} = require('util');
+const SlateConfig = require('@shopify/slate-config');
 
-const config = require('../../slate-tools.config');
+const config = new SlateConfig(require('../../slate-tools.schema'));
 
 async function prettier({scripts, styles, json} = {}) {
-  const executable = config.paths.prettier.bin;
+  const executable = config.get('prettier.bin');
   const extensions = [
     ...(scripts ? ['js'] : []),
     ...(styles ? ['css', 'scss', 'sass'] : []),

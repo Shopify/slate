@@ -1,55 +1,56 @@
 const path = require('path');
-const fs = require('fs');
 
-const themeDirectory = fs.realpathSync(process.cwd());
+// Fetch the contents of Slate's user config once, and only once
+global.slateUserConfig = global.slateUserConfig || getSlateUserConfig();
 
-function getSlateConfig() {
+module.exports = class SlateConfig {
+  constructor(schema, userConfigOverride) {
+    if (typeof schema === 'undefined') {
+      throw new TypeError(
+        '[slate-config]: A schema object must be provided as the first argument',
+      );
+    }
+
+    this.userConfigOverride = userConfigOverride;
+    this.schema = Object.assign({}, schema, this.userConfig);
+  }
+
+  get userConfig() {
+    return typeof this.userConfigOverride === 'object'
+      ? this.userConfigOverride
+      : global.slateUserConfig;
+  }
+
+  set(key, value, override = false) {
+    if (typeof this.schema[key] !== 'undefined' && !override) {
+      throw new Error(
+        `[slate-config]: A value for '${key}' has already been set. A value can only be set once.`,
+      );
+    }
+
+    this.schema[key] = value;
+  }
+
+  get(key) {
+    const value = this.schema[key];
+
+    if (typeof value === 'function') {
+      // Set the computed value so we don't need to recompute this value multiple times
+      return (this.schema[key] = value(this));
+    } else if (typeof value === 'undefined') {
+      throw new Error(
+        `[slate-config]: A value has not been defined for the key '${key}'`,
+      );
+    } else {
+      return value;
+    }
+  }
+};
+
+function getSlateUserConfig() {
   try {
-    const slateRcPath = resolveTheme('slate.config.js');
-    return require(slateRcPath);
+    return require(path.join(process.cwd(), 'slate.config.js'));
   } catch (error) {
     return {};
   }
 }
-
-function generate(schema, slaterc = getSlateConfig()) {
-  // Creates a config object of default or slaterc values
-  const config = _generateConfig([schema], slaterc)[schema.id];
-  config.__schema = schema;
-
-  return config;
-}
-
-function _generateConfig(items, overrides) {
-  const config = {};
-
-  items.forEach((item) => {
-    if (Array.isArray(item.items)) {
-      config[item.id] = _generateConfig(
-        item.items,
-        overrides && overrides[item.id],
-      );
-    } else if (overrides && typeof overrides[item.id] !== 'undefined') {
-      config[item.id] = overrides[item.id];
-    } else if (typeof item.default !== 'undefined') {
-      config[item.id] = item.default;
-    }
-  });
-
-  return config;
-}
-
-function resolveTheme(relativePath) {
-  return path.resolve(themeDirectory, relativePath);
-}
-
-function resolveSelf(relativePath) {
-  return path.resolve(__dirname, relativePath);
-}
-
-module.exports = {
-  generate,
-  resolveTheme,
-  resolveSelf,
-  getSlateConfig,
-};

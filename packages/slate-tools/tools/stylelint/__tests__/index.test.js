@@ -9,11 +9,12 @@ describe('stylelint()', () => {
 
   test('executes the stylelint bin from slate-tools/node-modules directory', () => {
     const {stylelint} = require('../index');
-    const config = require('../../../slate-tools.config');
+    const SlateConfig = require('@shopify/slate-config');
+    const config = new SlateConfig(require('../../../slate-tools.schema'));
     stylelint();
     expect(execSync).toHaveBeenCalledTimes(1);
     expect(execSync).toHaveBeenCalledWith(
-      expect.stringContaining(config.paths.stylelint.bin),
+      expect.stringContaining(config.get('stylelint.bin')),
       expect.anything(),
     );
   });

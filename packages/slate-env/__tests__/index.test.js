@@ -3,18 +3,23 @@ const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
 const dotenv = require('dotenv');
-const slateEnv = require('../index');
-const config = require('../slate-env.config');
+const SlateConfig = require('@shopify/slate-config');
 
-const envPath = path.resolve(config.envRootDir, config.envDefaultFileName);
+const slateEnv = require('../index');
+const config = new SlateConfig(require('../slate-env.schema'));
+
+const envPath = path.resolve(
+  config.get('env.rootDirectory'),
+  config.get('env.basename'),
+);
 
 const TEST_ENV = {
-  [config.envNameVar]: 'production',
-  [config.envStoreVar]: 'test-shop.myshopify.com',
-  [config.envPasswordVar]: '123456789',
-  [config.envThemeIdVar]: '987654321',
-  [config.envIgnoreFilesVar]: 'config/settings_data.json',
-  [config.envUserEmail]: 'test@email.com',
+  [config.get('env.keys.name')]: 'production',
+  [config.get('env.keys.store')]: 'test-shop.myshopify.com',
+  [config.get('env.keys.password')]: '123456789',
+  [config.get('env.keys.themeId')]: '987654321',
+  [config.get('env.keys.ignoreFiles')]: 'config/settings_data.json',
+  [config.get('env.keys.userEmail')]: 'test@email.com',
 };
 
 function setVars(vars) {
@@ -68,10 +73,10 @@ describe('Slate Env', () => {
   describe('getDefaultSlateEnv', () => {
     test('returns an object which contains the default variables and values of an env file', () => {
       const emptyTestVars = {
-        [config.envStoreVar]: '',
-        [config.envPasswordVar]: '',
-        [config.envThemeIdVar]: '',
-        [config.envIgnoreFilesVar]: '',
+        [config.get('env.keys.store')]: '',
+        [config.get('env.keys.password')]: '',
+        [config.get('env.keys.themeId')]: '',
+        [config.get('env.keys.ignoreFiles')]: '',
       };
 
       expect(slateEnv.getDefaultSlateEnv()).toEqual(emptyTestVars);
@@ -100,10 +105,10 @@ describe('Slate Env', () => {
         const envParsed = dotenv.parse(fs.readFileSync(envPath, 'utf8'));
 
         expect(envParsed).toEqual({
-          [config.envStoreVar]: '',
-          [config.envPasswordVar]: '',
-          [config.envThemeIdVar]: '',
-          [config.envIgnoreFilesVar]: '',
+          [config.get('env.keys.store')]: '',
+          [config.get('env.keys.password')]: '',
+          [config.get('env.keys.themeId')]: '',
+          [config.get('env.keys.ignoreFiles')]: '',
         });
       });
 
@@ -111,12 +116,12 @@ describe('Slate Env', () => {
         const env = slateEnv.getEmptySlateEnv();
         const store = 'test-shop.myshopify.com';
 
-        env[config.envStoreVar] = store;
+        env[config.get('env.keys.store')] = store;
         slateEnv.create({values: env});
 
         const envParsed = dotenv.parse(fs.readFileSync(envPath, 'utf8'));
 
-        expect(envParsed).toHaveProperty(config.envStoreVar, store);
+        expect(envParsed).toHaveProperty(config.get('env.keys.store'), store);
       });
 
       test('with invalid config values ommited', () => {
@@ -125,13 +130,13 @@ describe('Slate Env', () => {
         const invalidKey = 'INVALID_VARIABLE';
         const invalidValue = 'some value';
 
-        env[config.envStoreVar] = store;
+        env[config.get('env.keys.store')] = store;
         env[invalidKey] = invalidValue;
         slateEnv.create({values: env});
 
         const envParsed = dotenv.parse(fs.readFileSync(envPath, 'utf8'));
 
-        expect(envParsed).toHaveProperty(config.envStoreVar, store);
+        expect(envParsed).toHaveProperty(config.get('env.keys.store'), store);
         expect(envParsed).not.toHaveProperty(invalidKey, invalidValue);
       });
 
@@ -168,24 +173,24 @@ describe('Slate Env', () => {
 
     test('reads default env file and assigns values to environment variables', () => {
       slateEnv.assign();
-      expect(process.env[config.envStoreVar]).toBe(
-        TEST_ENV[config.envStoreVar],
+      expect(process.env[config.get('env.keys.store')]).toBe(
+        TEST_ENV[config.get('env.keys.store')],
       );
     });
 
     test('reads named env file and assigns values to environment variables', () => {
       slateEnv.assign('production');
-      expect(process.env[config.envStoreVar]).toBe(
-        TEST_ENV[config.envStoreVar],
+      expect(process.env[config.get('env.keys.store')]).toBe(
+        TEST_ENV[config.get('env.keys.store')],
       );
     });
 
     test('does not overwrite an environment variable if it already has a value', () => {
       const store = 'other-value.myshopify.com';
-      process.env[config.envStoreVar] = store;
+      process.env[config.get('env.keys.store')] = store;
       slateEnv.assign();
 
-      expect(process.env[config.envStoreVar]).toBe(store);
+      expect(process.env[config.get('env.keys.store')]).toBe(store);
     });
 
     test("throw an error if a name is provided and the env file doesn't exist", () => {
@@ -206,26 +211,33 @@ describe('Slate Env', () => {
     });
 
     describe('if a env name is not specified', () => {
-      test(`returns the name '${
-        config.envDefaultEnvName
-      }' if the default env file is present`, () => {
+      test(`returns the name '${config.get(
+        'env.defaultEnvName',
+      )}' if the default env file is present`, () => {
         slateEnv.create(TEST_ENV);
         slateEnv.assign();
-        expect(slateEnv.getEnvNameValue()).toBe(config.envDefaultEnvName);
+        expect(slateEnv.getEnvNameValue()).toBe(
+          config.get('env.defaultEnvName'),
+        );
       });
-      test(`returns the name '${
-        config.envExternalEnvName
-      }' if the default env file is not present`, () => {
+      test(`returns the name '${config.get(
+        'env.externalEnvName',
+      )}' if the default env file is not present`, () => {
         slateEnv.assign();
-        expect(slateEnv.getEnvNameValue()).toBe(config.envExternalEnvName);
+        expect(slateEnv.getEnvNameValue()).toBe(
+          config.get('env.externalEnvName'),
+        );
       });
     });
   });
 
   describe('getStoreValue()', () => {
     test('returns the value of the environment variable that references the store URL', () => {
-      process.env[config.envStoreVar] = TEST_ENV[config.envStoreVar];
-      expect(slateEnv.getStoreValue()).toBe(TEST_ENV[config.envStoreVar]);
+      process.env[config.get('env.keys.store')] =
+        TEST_ENV[config.get('env.keys.store')];
+      expect(slateEnv.getStoreValue()).toBe(
+        TEST_ENV[config.get('env.keys.store')],
+      );
     });
 
     test('returns an empty string if the value is undefined', () => {
@@ -235,8 +247,11 @@ describe('Slate Env', () => {
 
   describe('getPasswordValue()', () => {
     test('returns the value of the environment variable that references the store API password', () => {
-      process.env[config.envPasswordVar] = TEST_ENV[config.envPasswordVar];
-      expect(slateEnv.getPasswordValue()).toBe(TEST_ENV[config.envPasswordVar]);
+      process.env[config.get('env.keys.password')] =
+        TEST_ENV[config.get('env.keys.password')];
+      expect(slateEnv.getPasswordValue()).toBe(
+        TEST_ENV[config.get('env.keys.password')],
+      );
     });
 
     test('returns an empty string if the value is undefined', () => {
@@ -246,8 +261,11 @@ describe('Slate Env', () => {
 
   describe('getThemeIdValue()', () => {
     test('returns the value of the environment variable that references the store theme ID', () => {
-      process.env[config.envThemeIdVar] = TEST_ENV[config.envThemeIdVar];
-      expect(slateEnv.getThemeIdValue()).toBe(TEST_ENV[config.envThemeIdVar]);
+      process.env[config.get('env.keys.themeId')] =
+        TEST_ENV[config.get('env.keys.themeId')];
+      expect(slateEnv.getThemeIdValue()).toBe(
+        TEST_ENV[config.get('env.keys.themeId')],
+      );
     });
 
     test('returns an empty string if the value is undefined', () => {
@@ -257,10 +275,10 @@ describe('Slate Env', () => {
 
   describe('getIgnoreFilesValue()', () => {
     test('returns the value of the environment variable that references a list of files to ignore', () => {
-      process.env[config.envIgnoreFilesVar] =
-        TEST_ENV[config.envIgnoreFilesVar];
+      process.env[config.get('env.keys.ignoreFiles')] =
+        TEST_ENV[config.get('env.keys.ignoreFiles')];
       expect(slateEnv.getIgnoreFilesValue()).toBe(
-        TEST_ENV[config.envIgnoreFilesVar],
+        TEST_ENV[config.get('env.keys.ignoreFiles')],
       );
     });
 
@@ -290,7 +308,7 @@ describe('Slate Env', () => {
       test('the store URL environment variable is empty', () => {
         setVars(
           Object.assign({}, TEST_ENV, {
-            [config.envStoreVar]: '',
+            [config.get('env.keys.store')]: '',
           }),
         );
         const result = slateEnv.validate();
@@ -302,7 +320,7 @@ describe('Slate Env', () => {
           (value) => {
             setVars(
               Object.assign({}, TEST_ENV, {
-                [config.envStoreVar]: value,
+                [config.get('env.keys.store')]: value,
               }),
             );
             const result = slateEnv.validate();
@@ -314,7 +332,7 @@ describe('Slate Env', () => {
       test('the store API password environment variable is empty', () => {
         setVars(
           Object.assign({}, TEST_ENV, {
-            [config.envPasswordVar]: '',
+            [config.get('env.keys.password')]: '',
           }),
         );
         const result = slateEnv.validate();
@@ -324,7 +342,7 @@ describe('Slate Env', () => {
       test('the store API password environment variable has invalid characters', () => {
         setVars(
           Object.assign({}, TEST_ENV, {
-            [config.envPasswordVar]: '8h1j-dnjn8',
+            [config.get('env.keys.password')]: '8h1j-dnjn8',
           }),
         );
         const result = slateEnv.validate();
@@ -334,7 +352,7 @@ describe('Slate Env', () => {
       test('the store Theme ID environment variable is empty', () => {
         setVars(
           Object.assign({}, TEST_ENV, {
-            [config.envThemeIdVar]: '',
+            [config.get('env.keys.themeId')]: '',
           }),
         );
         const result = slateEnv.validate();
@@ -344,7 +362,7 @@ describe('Slate Env', () => {
       test("the store Theme ID environment variable is not 'live' or a string of numbers", () => {
         setVars(
           Object.assign({}, TEST_ENV, {
-            [config.envThemeIdVar]: 'ds7dsh8d',
+            [config.get('env.keys.themeId')]: 'ds7dsh8d',
           }),
         );
         const result = slateEnv.validate();

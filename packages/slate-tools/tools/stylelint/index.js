@@ -1,9 +1,10 @@
 const execSync = require('child_process').execSync;
+const SlateConfig = require('@shopify/slate-config');
 
-const config = require('../../slate-tools.config');
+const config = new SlateConfig(require('../../slate-tools.schema'));
 
 function stylelint({fix} = {}) {
-  const executable = config.paths.stylelint.bin;
+  const executable = config.get('stylelint.bin');
   const fixFlag = fix ? '--fix' : '';
   const glob = `./**/*.{${['css', 'scss', 'sass'].join(',')}}`;
   const ignorePatterns = ['dist', 'node_modules'].reduce(

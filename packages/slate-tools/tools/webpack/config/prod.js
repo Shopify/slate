@@ -7,16 +7,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const SlateConfig = require('@shopify/slate-config');
 const SlateLiquidAssetsPlugin = require('@shopify/html-webpack-liquid-asset-tags-plugin');
 const SlateTagPlugin = require('@shopify/slate-tag-webpack-plugin');
+
 const commonExcludes = require('../common-excludes');
 const webpackCoreConfig = require('./core');
-const userWebpackConfig = require('../get-user-webpack-config')('prod');
-const config = require('../../../slate-tools.config');
 const packageJson = require('../../../package.json');
 const getChunkName = require('../get-chunk-name');
 const {templateFiles, layoutFiles} = require('../entrypoints');
 const HtmlWebpackIncludeLiquidStylesPlugin = require('../html-webpack-include-chunks');
+const config = new SlateConfig(require('../../slate-tools.schema'));
 
 const extractStyles = new ExtractTextPlugin({
   filename: '[name].css.liquid',
@@ -58,7 +59,10 @@ module.exports = merge(
                 options: {
                   ident: 'postcss',
                   sourceMap: true,
-                  plugins: [autoprefixer, cssnano(config.cssnanoSettings)],
+                  plugins: [
+                    autoprefixer,
+                    cssnano(config.get('cssnano.settings')),
+                  ],
                 },
               },
               {loader: 'sass-loader', options: {sourceMap: true}},
@@ -70,7 +74,7 @@ module.exports = merge(
 
     plugins: [
       new CleanWebpackPlugin(['dist'], {
-        root: config.paths.root,
+        root: config.get('paths.theme'),
       }),
 
       new webpack.DefinePlugin({
@@ -136,5 +140,5 @@ module.exports = merge(
       },
     },
   },
-  userWebpackConfig,
+  config.get('webpack.config.extend.prod'),
 );

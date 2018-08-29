@@ -3,28 +3,32 @@
 const fs = require('fs');
 const path = require('path');
 const dotenv = require('dotenv');
-const config = require('./slate-env.config');
+const SlateConfig = require('@shopify/slate-config');
+const config = new SlateConfig(require('./slate-env.schema'));
 
 const SLATE_ENV_VARS = [
-  config.envNameVar,
-  config.envStoreVar,
-  config.envPasswordVar,
-  config.envThemeIdVar,
-  config.envIgnoreFilesVar,
-  config.envUserEmail,
+  config.get('env.keys.name'),
+  config.get('env.keys.store'),
+  config.get('env.keys.password'),
+  config.get('env.keys.themeId'),
+  config.get('env.keys.ignoreFiles'),
+  config.get('env.keys.userEmail'),
 ];
 
 const DEFAULT_ENV_VARS = [
-  config.envStoreVar,
-  config.envPasswordVar,
-  config.envThemeIdVar,
-  config.envIgnoreFilesVar,
+  config.get('env.keys.store'),
+  config.get('env.keys.password'),
+  config.get('env.keys.themeId'),
+  config.get('env.keys.ignoreFiles'),
 ];
 
 // Creates a new env file with optional name and values
 function create({values, name, root} = {}) {
   const envName = _getFileName(name);
-  const envPath = path.resolve(root || config.envRootDir, envName);
+  const envPath = path.resolve(
+    root || config.get('env.rootDirectory'),
+    envName,
+  );
   const envContents = _getFileContents(values);
 
   fs.writeFileSync(envPath, envContents);
@@ -33,10 +37,10 @@ function create({values, name, root} = {}) {
 // Return the default env file name, with optional name appended
 function _getFileName(name) {
   if (typeof name === 'undefined' || name.trim() === '') {
-    return config.envDefaultFileName;
+    return config.get('env.basename');
   }
 
-  return `${config.envDefaultFileName}.${name}`;
+  return `${config.get('env.basename')}.${name}`;
 }
 
 // Return default list of env variables with their assigned value, if any.
@@ -51,23 +55,7 @@ function _getFileContents(values) {
 
   return Object.entries(env)
     .map((keyValues) => {
-      const envVar = keyValues[0];
-
-      // Search through config for the key which has a value of the env variable
-      // e.g. find the key which has the value of 'SLATE_STORE'
-      for (const key in config) {
-        if (config.hasOwnProperty(key) && config[key] === envVar) {
-          // Once we find the key, we can search the config.__schema for the
-          // schema item. We need to schema item so we can print the description
-          // comment.
-          const schemaItem = config.__schema.items.find(
-            (item) => item.id === key,
-          );
-          return `# ${schemaItem.description || ''} \r\n${keyValues.join('=')}`;
-        }
-      }
-
-      return true;
+      return `${keyValues.join('=')}\r\n`;
     })
     .join('\r\n\r\n');
 }
@@ -75,7 +63,7 @@ function _getFileContents(values) {
 // Reads an .env file and assigns their values to environment variables
 function assign(name) {
   const envFileName = _getFileName(name);
-  const envPath = path.resolve(config.envRootDir, envFileName);
+  const envPath = path.resolve(config.get('env.rootDirectory'), envFileName);
   const result = dotenv.config({path: envPath});
 
   if (typeof name !== 'undefined' && result.error) {
@@ -88,17 +76,17 @@ function assign(name) {
 function _setEnvName(name) {
   let envName = name;
   const envFileName = _getFileName(name);
-  const envPath = path.resolve(config.envRootDir, envFileName);
+  const envPath = path.resolve(config.get('env.rootDirectory'), envFileName);
 
   if (typeof name === 'undefined') {
     if (fs.existsSync(envPath)) {
-      envName = config.envDefaultEnvName;
+      envName = config.get('env.defaultEnvName');
     } else {
-      envName = config.envExternalEnvName;
+      envName = config.get('env.externalEnvName');
     }
   }
 
-  process.env[config.envNameVar] = envName;
+  process.env[config.get('env.keys.name')] = envName;
 }
 
 // Checks if Slate env variables are the required value types and format
@@ -120,13 +108,15 @@ function _validateStore() {
   const store = getStoreValue();
 
   if (store.length === 0) {
-    errors.push(new Error(`${config.envStoreVar} must not be empty`));
+    errors.push(new Error(`${config.get('env.keys.store')} must not be empty`));
   } else if (
     store.indexOf('.myshopify.com') < 1 &&
     store.indexOf('.myshopify.io') < 1
   ) {
     errors.push(
-      new Error(`${config.envStoreVar} must be a valid .myshopify.com URL`),
+      new Error(
+        `${config.get('env.keys.store')} must be a valid .myshopify.com URL`,
+      ),
     );
   }
 
@@ -138,11 +128,15 @@ function _validatePassword() {
   const password = getPasswordValue();
 
   if (password.length === 0) {
-    errors.push(new Error(`${config.envPasswordVar} must not be empty`));
+    errors.push(
+      new Error(`${config.get('env.keys.password')} must not be empty`),
+    );
   } else if (!/^\w+$/.test(password)) {
     errors.push(
       new Error(
-        `${config.envPasswordVar} can only contain numbers and letters`,
+        `${config.get(
+          'env.keys.password',
+        )} can only contain numbers and letters`,
       ),
     );
   }
@@ -155,13 +149,15 @@ function _validateThemeId() {
   const themeId = getThemeIdValue();
 
   if (themeId.length === 0) {
-    errors.push(new Error(`${config.envThemeIdVar} must not be empty`));
+    errors.push(
+      new Error(`${config.get('env.keys.themeId')} must not be empty`),
+    );
   } else if (themeId !== 'live' && !/^\d+$/.test(themeId)) {
     errors.push(
       new Error(
-        `${
-          config.envThemeIdVar
-        } can be set to 'live' or a valid theme ID containing only numbers`,
+        `${config.get(
+          'env.keys.themeId',
+        )} can be set to 'live' or a valid theme ID containing only numbers`,
       ),
     );
   }
@@ -207,32 +203,32 @@ function getDefaultSlateEnv() {
 }
 
 function getEnvNameValue() {
-  return process.env[config.envNameVar];
+  return process.env[config.get('env.keys.name')];
 }
 
 // Returns the configurable environment varible that reference the store URL
 function getStoreValue() {
-  const value = process.env[config.envStoreVar];
+  const value = process.env[config.get('env.keys.store')];
   return typeof value === 'undefined' ? '' : value;
 }
 
 function getPasswordValue() {
-  const value = process.env[config.envPasswordVar];
+  const value = process.env[config.get('env.keys.password')];
   return typeof value === 'undefined' ? '' : value;
 }
 
 function getThemeIdValue() {
-  const value = process.env[config.envThemeIdVar];
+  const value = process.env[config.get('env.keys.themeId')];
   return typeof value === 'undefined' ? '' : value;
 }
 
 function getIgnoreFilesValue() {
-  const value = process.env[config.envIgnoreFilesVar];
+  const value = process.env[config.get('env.keys.ignoreFiles')];
   return typeof value === 'undefined' ? '' : value;
 }
 
 function getUserEmail() {
-  const value = process.env[config.envUserEmail];
+  const value = process.env[config.get('env.keys.userEmail')];
   return typeof value === 'undefined' ? '' : value;
 }
 

@@ -6,6 +6,7 @@ const consoleControl = require('console-control-strings');
 const clearConsole = require('react-dev-utils/clearConsole');
 const env = require('@shopify/slate-env');
 const {event} = require('@shopify/slate-analytics');
+const SlateConfig = require('@shopify/slate-config');
 
 const promptContinueIfPublishedTheme = require('../prompts/continue-if-published-theme');
 const promptSkipSettingsData = require('../prompts/skip-settings-data');
@@ -14,9 +15,10 @@ const promptDisableExternalTesting = require('../prompts/disable-external-testin
 const AssetServer = require('../../tools/asset-server');
 const DevServer = require('../../tools/dev-server');
 const webpackConfig = require('../../tools/webpack/config/dev');
-const config = require('../../slate-tools.config');
 const packageJson = require('../../package.json');
 const {getAvailablePortSeries} = require('../../tools/utilities');
+
+const config = new SlateConfig(require('../../slate-tools.schema'));
 
 const spinner = ora(chalk.magenta(' Compiling...'));
 
@@ -28,7 +30,7 @@ let devServer;
 let previewUrl;
 
 Promise.all([
-  getAvailablePortSeries(config.port, 3),
+  getAvailablePortSeries(config.get('network.startPort'), 3),
   promptDisableExternalTesting(),
 ])
   .then(([ports, domain]) => {
@@ -81,7 +83,6 @@ function onCompilerDone(stats) {
     });
 
     console.log(chalk.red('Failed to compile.\n'));
-    console.log(config.paths.lib);
 
     statsJson.errors.forEach((message) => {
       console.log(`${message}\n`);
