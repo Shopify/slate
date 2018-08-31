@@ -49,12 +49,8 @@ module.exports = generate({
       ],
     },
     {
-      id: 'domain',
-      default: 'https://localhost',
-    },
-    {
       id: 'port',
-      default: 3001,
+      default: 3000,
     },
     {
       id: 'regex',

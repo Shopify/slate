@@ -9,32 +9,65 @@ const {event} = require('@shopify/slate-analytics');
 
 const promptContinueIfPublishedTheme = require('../prompts/continue-if-published-theme');
 const promptSkipSettingsData = require('../prompts/skip-settings-data');
+const promptDisableExternalTesting = require('../prompts/confim-private-ip');
+
 const AssetServer = require('../../tools/asset-server');
 const DevServer = require('../../tools/dev-server');
 const webpackConfig = require('../../tools/webpack/config/dev');
 const config = require('../../slate-tools.config');
 const packageJson = require('../../package.json');
+const {getAvailablePortSeries} = require('../../tools/utilities');
 
-const options = {
-  env: argv.env,
-  skipFirstDeploy: argv.skipFirstDeploy,
-  webpackConfig,
-};
 const spinner = ora(chalk.magenta(' Compiling...'));
+
 let firstSync = true;
 let skipSettingsData = null;
 let continueIfPublishedTheme = null;
+let assetServer;
+let devServer;
+let previewUrl;
 
-const assetServer = new AssetServer(options);
-const devServer = new DevServer();
-const previewUrl = `https://${env.getStoreValue()}?preview_theme_id=${env.getThemeIdValue()}`;
+Promise.all([
+  getAvailablePortSeries(config.port, 3),
+  promptDisableExternalTesting(),
+])
+  .then(([ports, domain]) => {
+    assetServer = new AssetServer({
+      env: argv.env,
+      skipFirstDeploy: argv.skipFirstDeploy,
+      webpackConfig,
+      port: ports[1],
+      domain,
+    });
 
-assetServer.compiler.hooks.compile.tap('CLI', () => {
+    devServer = new DevServer({
+      port: ports[0],
+      uiPort: ports[2],
+      domain,
+    });
+
+    previewUrl = `https://${env.getStoreValue()}?preview_theme_id=${env.getThemeIdValue()}`;
+
+    assetServer.compiler.hooks.compile.tap('CLI', onCompilerCompile);
+    assetServer.compiler.hooks.done.tap('CLI', onCompilerDone);
+    assetServer.client.hooks.beforeSync.tapPromise('CLI', onClientBeforeSync);
+    assetServer.client.hooks.syncSkipped.tap('CLI', onClientSyncSkipped);
+    assetServer.client.hooks.sync.tap('CLI', onClientSync);
+    assetServer.client.hooks.syncDone.tap('CLI', onClientSyncDone);
+    assetServer.client.hooks.afterSync.tap('CLI', onClientAfterSync);
+
+    return assetServer.start();
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+function onCompilerCompile() {
   clearConsole();
   spinner.start();
-});
+}
 
-assetServer.compiler.hooks.done.tap('CLI', (stats) => {
+function onCompilerDone(stats) {
   const statsJson = stats.toJson({}, true);
 
   spinner.stop();
@@ -79,9 +112,9 @@ assetServer.compiler.hooks.done.tap('CLI', (stats) => {
         1000}s!`,
     );
   }
-});
+}
 
-assetServer.client.hooks.beforeSync.tapPromise('CLI', async (files) => {
+async function onClientBeforeSync(files) {
   if (firstSync && argv.skipFirstDeploy) {
     assetServer.skipDeploy = true;
 
@@ -113,9 +146,9 @@ assetServer.client.hooks.beforeSync.tapPromise('CLI', async (files) => {
       (file) => !file.endsWith('settings_data.json'),
     );
   }
-});
+}
 
-assetServer.client.hooks.syncSkipped.tap('CLI', () => {
+function onClientSyncSkipped() {
   if (!(firstSync && argv.skipFirstDeploy)) return;
 
   event('slate-tools:start:skip-first-deploy', {
@@ -127,22 +160,22 @@ assetServer.client.hooks.syncSkipped.tap('CLI', () => {
       figures.info,
     )}  Skipping first deployment because --skipFirstDeploy flag`,
   );
-});
+}
 
-assetServer.client.hooks.sync.tap('CLI', () => {
+function onClientSync() {
   event('slate-tools:start:sync-start', {version: packageJson.version});
-});
+}
 
-assetServer.client.hooks.syncDone.tap('CLI', () => {
+function onClientSyncDone() {
   event('slate-tools:start:sync-end', {version: packageJson.version});
 
   process.stdout.write(consoleControl.previousLine(4));
   process.stdout.write(consoleControl.eraseData());
 
   console.log(`\n${chalk.green(figures.tick)}  Files uploaded successfully!`);
-});
+}
 
-assetServer.client.hooks.afterSync.tap('CLI', async () => {
+async function onClientAfterSync() {
   if (firstSync) {
     firstSync = false;
     await devServer.start();
@@ -166,26 +199,40 @@ assetServer.client.hooks.afterSync.tap('CLI', async () => {
   console.log(
     `      ${chalk.cyan(urls.get('local'))} ${chalk.grey('(Local)')}`,
   );
-  console.log(
-    `      ${chalk.cyan(urls.get('external'))} ${chalk.grey('(External)')}`,
-  );
-  console.log();
-  console.log(`   Local assets are being served from:\n`);
 
-  console.log(`      ${chalk.cyan(`https://localhost:${assetServer.port}`)}`);
+  if (devServer.domain !== 'localhost') {
+    console.log(
+      `      ${chalk.cyan(urls.get('external'))} ${chalk.grey('(External)')}`,
+    );
+  }
+  console.log();
+  console.log(`   Assets are being served from:\n`);
+
+  console.log(
+    `      ${chalk.cyan(`https://localhost:${assetServer.port}`)} ${chalk.grey(
+      '(Local)',
+    )}`,
+  );
+
+  if (assetServer.domain !== 'localhost') {
+    console.log(
+      `      ${chalk.cyan(
+        `https://${assetServer.domain}:${assetServer.port}`,
+      )} ${chalk.grey('(External)')}`,
+    );
+  }
 
   console.log();
   console.log(`   The Browsersync control panel is available at:\n`);
   console.log(`      ${chalk.cyan(urls.get('ui'))} ${chalk.grey('(Local)')}`);
-  console.log(
-    `      ${chalk.cyan(urls.get('ui-external'))} ${chalk.grey('(External)')}`,
-  );
+
+  if (devServer.domain !== 'localhost') {
+    console.log(
+      `      ${chalk.cyan(urls.get('ui-external'))} ${chalk.grey(
+        '(External)',
+      )}`,
+    );
+  }
 
   console.log(chalk.magenta('\nWatching for changes...'));
-});
-
-event('slate-tools:start:start', {version: packageJson.version});
-
-assetServer.start().catch((error) => {
-  console.error(error);
-});
+}

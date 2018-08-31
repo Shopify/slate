@@ -1,5 +1,4 @@
 const fs = require('fs');
-const portfinder = require('portfinder');
 const webpack = require('webpack');
 const {createServer} = require('https');
 const createHash = require('crypto').createHash;
@@ -10,12 +9,16 @@ const {sslKeyCert} = require('../utilities');
 const config = require('../../slate-tools.config');
 const setEnvironment = require('../../tools/webpack/set-slate-env');
 
-portfinder.basePort = config.port;
-
 module.exports = class DevServer {
   constructor(options) {
+    options.webpackConfig.output.publicPath = `https://${options.domain}:${
+      options.port
+    }/`;
+
     this.assetHashes = {};
+    this.domain = options.domain;
     this.options = options;
+    this.port = options.port;
     this.env = setEnvironment(options.env);
     this.compiler = webpack(options.webpackConfig);
     this.app = new App(this.compiler);
@@ -33,7 +36,6 @@ module.exports = class DevServer {
     );
     this.ssl = sslKeyCert();
     this.server = createServer(this.ssl, this.app);
-    this.port = await portfinder.getPortPromise();
 
     this.server.listen(this.port);
   }
