@@ -1,7 +1,6 @@
 const browserSync = require('browser-sync');
 const {getStoreValue, getThemeIdValue} = require('@shopify/slate-env');
 const {getSSLKeyPath, getSSLCertPath} = require('../utilities');
-const config = require('../../slate-tools.config');
 
 class DevServer {
   constructor(options) {

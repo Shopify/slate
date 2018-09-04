@@ -29,7 +29,7 @@ module.exports = class DevServer {
     );
   }
 
-  async start() {
+  start() {
     this.compiler.hooks.done.tapPromise(
       'DevServer',
       this._onCompileDone.bind(this),

@@ -9,7 +9,7 @@ const {event} = require('@shopify/slate-analytics');
 
 const promptContinueIfPublishedTheme = require('../prompts/continue-if-published-theme');
 const promptSkipSettingsData = require('../prompts/skip-settings-data');
-const promptDisableExternalTesting = require('../prompts/confim-private-ip');
+const promptDisableExternalTesting = require('../prompts/disable-external-testing');
 
 const AssetServer = require('../../tools/asset-server');
 const DevServer = require('../../tools/dev-server');
@@ -60,6 +60,7 @@ Promise.all([
   })
   .catch((error) => {
     console.error(error);
+    process.exit(1);
   });
 
 function onCompilerCompile() {

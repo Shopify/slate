@@ -6,7 +6,6 @@ const autoprefixer = require('autoprefixer');
 const commonExcludes = require('../common-excludes');
 const webpackCoreConfig = require('./core');
 const userWebpackConfig = require('../get-user-webpack-config')('dev');
-const config = require('../../../slate-tools.config');
 const {templateFiles, layoutFiles} = require('../entrypoints');
 const HtmlWebpackIncludeLiquidStylesPlugin = require('../html-webpack-include-chunks');
 

@@ -33,7 +33,7 @@ function getAvailablePortSeries(start, quantity, increment = 1) {
 
   return findAPortInUse(startPort, endPort, '127.0.0.1').then((port) => {
     if (typeof port === 'number') {
-      return getAvailablePortSeries(port++, quantity);
+      return getAvailablePortSeries(port + increment, quantity);
     }
 
     const ports = [];
