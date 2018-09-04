@@ -6,20 +6,14 @@
     <% var src = `{{ '${basename}' | asset_url }}` %>
   <% } %>
 
-  <% if (typeof htmlWebpackPlugin.options.liquidTemplates[chunk] !== 'undefined') { %>
-    {%- if template.name == '<%= chunk.split('.')[1] %>' -%}
-      <script type="text/javascript" src="<%= src %>" defer></script>
-    {%- else -%}
-      <link rel="prefetch" href="<%= src %>" as="script">
-    {%- endif -%}
-  <% } else if (typeof htmlWebpackPlugin.options.liquidLayouts[chunk] !== 'undefined') { %>
+  <% if (typeof htmlWebpackPlugin.options.liquidLayouts[chunk] !== 'undefined') { %>
     {%- if layout == '<%= chunk.split('.')[1] %>' -%}
       <script type="text/javascript" src="<%= src %>" defer></script>
     {%- else -%}
       <link rel="prefetch" href="<%= src %>" as="script">
     {%- endif -%}
   <% } else if (chunk.split('@').length > 1) { %>
-    <% var pages = chunk.split('@').slice(1) %>
+    <% var pages = chunk.split('@') %>
     <% var conditions = [] %>
 
     <% pages.forEach(function(page){ %>
@@ -31,6 +25,12 @@
     <% }); %>
 
     {%- if <%= conditions.join(' or ') %> -%}
+      <script type="text/javascript" src="<%= src %>" defer></script>
+    {%- else -%}
+      <link rel="prefetch" href="<%= src %>" as="script">
+    {%- endif -%}
+  <% } else if (typeof htmlWebpackPlugin.options.liquidTemplates[chunk] !== 'undefined') { %>
+    {%- if template.name == '<%= chunk.split('.')[1] %>' -%}
       <script type="text/javascript" src="<%= src %>" defer></script>
     {%- else -%}
       <link rel="prefetch" href="<%= src %>" as="script">
