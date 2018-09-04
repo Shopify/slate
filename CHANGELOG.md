@@ -1,5 +1,23 @@
 # Change Log
 
+## v1.0.0-beta.7 (2018-09-04)
+
+#### :rocket: Enhancement
+
+* `slate-tools`
+  * [#712](https://github.com/Shopify/slate/pull/712) Add Browsersync for mobile development testing. ([@t-kelly](https://github.com/t-kelly))
+  * [#685](https://github.com/Shopify/slate/pull/685) Add .otf font support in webpack config. ([@chrisbujok](https://github.com/chrisbujok))
+
+#### :bug: Bug Fix
+
+* `slate-tools`
+  * [#721](https://github.com/Shopify/slate/pull/721) Fix conditions for generating script tags. ([@t-kelly](https://github.com/t-kelly))
+
+#### Committers: 2
+
+* Chris Bujok ([chrisbujok](https://github.com/chrisbujok))
+* Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
 ## v1.0.0-beta.6 (2018-08-01)
 
 #### :bug: Bug Fix
