@@ -6,12 +6,8 @@ const autoprefixer = require('autoprefixer');
 const commonExcludes = require('../common-excludes');
 const webpackCoreConfig = require('./core');
 const userWebpackConfig = require('../get-user-webpack-config')('dev');
-const config = require('../../../slate-tools.config');
 const {templateFiles, layoutFiles} = require('../entrypoints');
 const HtmlWebpackIncludeLiquidStylesPlugin = require('../html-webpack-include-chunks');
-
-// so that everything is absolute
-webpackCoreConfig.output.publicPath = `${config.domain}:${config.port}/`;
 
 // add hot-reload related code to entry chunks
 Object.keys(webpackCoreConfig.entry).forEach((name) => {
