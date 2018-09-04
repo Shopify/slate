@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate-error",
-  "version": "1.0.0-beta.6",
+  "version": "1.0.0-beta.7",
   "description": "Slate's global error class",
   "main": "index.js",
   "repository": "https://github.com/Shopify/slate/tree/1.x/packages/slate-error",
