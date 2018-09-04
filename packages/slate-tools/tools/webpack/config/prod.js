@@ -58,7 +58,11 @@ module.exports = merge(
                 options: {
                   ident: 'postcss',
                   sourceMap: true,
-                  plugins: [autoprefixer, cssnano(config.cssnanoSettings)],
+                  plugins: [
+                    ...config.postcssPlugins.prod,
+                    autoprefixer,
+                    cssnano(config.cssnanoSettings),
+                  ],
                 },
               },
               {loader: 'sass-loader', options: {sourceMap: true}},

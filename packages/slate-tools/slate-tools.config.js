@@ -24,6 +24,19 @@ module.exports = generate({
       type: 'path',
     },
     {
+      id: 'postcssPlugins',
+      items: [
+        {
+          id: 'dev',
+          default: [],
+        },
+        {
+          id: 'prod',
+          default: [],
+        },
+      ],
+    },
+    {
       id: 'cssnanoSettings',
       default: {zindex: false},
       description: 'Optimization settings for the cssnano plugin',
