@@ -5,10 +5,14 @@ import compiler from './helpers/compiler';
 describe('slate-cssvar-loader ', () => {
   beforeEach(() => {
     jest.resetModules();
+    global.slateUserConfig = {};
   });
 
   test('replaces CSS custom properties with liquid variables', async () => {
-    jest.mock('../slate-cssvar-loader.schema');
+    global.slateUserConfig['cssVarLoader.liquidPath'] = [
+      path.resolve(__dirname, './fixtures/css-variables.liquid'),
+    ];
+
     const stats = await compiler('../fixtures/test.css');
     const output = stats.toJson().modules[0].source;
 
@@ -20,11 +24,8 @@ describe('slate-cssvar-loader ', () => {
   });
 
   test('loader does not run when disabled', async () => {
-    jest.mock('../slate-cssvar-loader.schema', () => {
-      return {
-        'cssVarLoader.enable': false,
-      };
-    });
+    global.slateUserConfig['cssVarLoader.enable'] = false;
+
     const stats = await compiler('../fixtures/test.css');
     const output = stats.toJson().modules[0].source;
 
@@ -36,18 +37,10 @@ describe('slate-cssvar-loader ', () => {
   });
 
   test('loads from multiple css variable liquid files', async () => {
-    jest.mock('../slate-cssvar-loader.schema', () => {
-      const _path = require('path');
-      const currentDir = _path.dirname(require.resolve('./index.test.js'));
-      return {
-        'paths.theme': process.cwd(),
-        'cssVarLoader.enable': true,
-        'cssVarLoader.liquidPath': [
-          _path.resolve(currentDir, 'fixtures/css-variables.liquid'),
-          _path.resolve(currentDir, 'fixtures/morevars.liquid'),
-        ],
-      };
-    });
+    global.slateUserConfig['cssVarLoader.liquidPath'] = [
+      path.resolve(__dirname, 'fixtures/css-variables.liquid'),
+      path.resolve(__dirname, 'fixtures/morevars.liquid'),
+    ];
     const stats = await compiler('../fixtures/morevars.css');
     const output = stats.toJson().modules[0].source;
 

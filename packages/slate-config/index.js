@@ -12,13 +12,11 @@ module.exports = class SlateConfig {
     }
 
     this.userConfigOverride = userConfigOverride;
-    this.schema = Object.assign({}, schema, this.userConfig);
+    this.schema = Object.assign({}, schema);
   }
 
   get userConfig() {
-    return typeof this.userConfigOverride === 'object'
-      ? this.userConfigOverride
-      : global.slateUserConfig;
+    return global.slateUserConfig;
   }
 
   set(key, value, override = false) {
@@ -32,11 +30,14 @@ module.exports = class SlateConfig {
   }
 
   get(key) {
-    const value = this.schema[key];
+    const userConfig = this.userConfig;
+    const value =
+      typeof userConfig[key] === 'undefined'
+        ? this.schema[key]
+        : userConfig[key];
 
     if (typeof value === 'function') {
-      // Set the computed value so we don't need to recompute this value multiple times
-      return (this.schema[key] = value(this));
+      return value(this);
     } else if (typeof value === 'undefined') {
       throw new Error(
         `[slate-config]: A value has not been defined for the key '${key}'`,
