@@ -66,7 +66,10 @@ Promise.all([
   });
 
 function onCompilerCompile() {
-  clearConsole();
+  // eslint-disable-next-line no-process-env
+  if (process.env.NODE_ENV !== 'test') {
+    clearConsole();
+  }
   spinner.start();
 }
 
@@ -74,7 +77,11 @@ function onCompilerDone(stats) {
   const statsJson = stats.toJson({}, true);
 
   spinner.stop();
-  clearConsole();
+
+  // eslint-disable-next-line no-process-env
+  if (process.env.NODE_ENV !== 'test') {
+    clearConsole();
+  }
 
   if (statsJson.errors.length) {
     event('slate-tools:start:compile-errors', {

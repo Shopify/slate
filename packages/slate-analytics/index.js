@@ -49,7 +49,12 @@ async function init() {
       event('slate-analytics:renew-consent-true', config);
     }
 
-    clearConsole();
+    if (
+      process.env.NODE_ENV !== 'test' && // eslint-disable-line no-process-env
+      process.env.NODE_ENV !== 'test-slate-analytics' // eslint-disable-line no-process-env
+    ) {
+      clearConsole();
+    }
     console.log(`Thanks for helping improve the Slate development experience!`);
   }
 
