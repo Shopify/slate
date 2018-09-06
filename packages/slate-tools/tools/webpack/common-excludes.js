@@ -1,4 +1,5 @@
-const config = require('../../slate-tools.config');
+const SlateConfig = require('@shopify/slate-config');
+const config = new SlateConfig(require('../../slate-tools.schema'));
 
 module.exports = (...params) =>
-  new RegExp([...config.webpackCommonExcludes, ...params].join('|'));
+  new RegExp([...config.get('webpack.commonExcludes'), ...params].join('|'));

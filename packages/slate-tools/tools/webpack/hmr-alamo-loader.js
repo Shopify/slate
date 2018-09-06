@@ -1,13 +1,19 @@
 /* eslint-disable no-underscore-dangle */
-const config = require('../../slate-tools.config');
+const SlateConfig = require('@shopify/slate-config');
+const config = new SlateConfig(require('../../slate-tools.schema'));
 
-const jsEntries = Object.keys(config.paths.entrypoints).reduce((carry, key) => {
-  const entry = config.paths.entrypoints[key];
-  const entryArray = Array.isArray(entry) ? entry : [entry];
-  const jsEntryArray = entryArray.filter((version) => version.endsWith('.js'));
+const jsEntries = Object.keys(config.get('webpack.entrypoints')).reduce(
+  (carry, key) => {
+    const entry = config.get('webpack.entrypoints')[key];
+    const entryArray = Array.isArray(entry) ? entry : [entry];
+    const jsEntryArray = entryArray.filter((version) =>
+      version.endsWith('.js'),
+    );
 
-  return [...carry, ...jsEntryArray];
-}, []);
+    return [...carry, ...jsEntryArray];
+  },
+  [],
+);
 
 /**
  * Adds a small script to flag unhandled HMR events.

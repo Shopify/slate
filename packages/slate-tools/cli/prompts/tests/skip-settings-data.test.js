@@ -21,15 +21,16 @@ const inquirer = require.requireMock('inquirer');
 const env = require.requireMock('@shopify/slate-env');
 
 describe('promptIfSettingsData()', () => {
-  beforeEach(() => {
-    inquirer.prompt.mockClear();
+  afterEach(() => {
+    jest.clearAllMocks();
+    jest.resetModules();
     env.__resetIgnoreValue();
   });
 
-  test('prompts user if setting_data.json is not ignored in .env file and included in files to be uploaded', () => {
+  test('prompts user if setting_data.json is not ignored in .env file and included in files to be uploaded', async () => {
     const promptIfSettingsData = require('../skip-settings-data');
     env.__setIgnoreValue('');
-    promptIfSettingsData(FILES);
+    await promptIfSettingsData(FILES);
     expect(inquirer.prompt).toHaveBeenCalledTimes(1);
   });
 
@@ -43,14 +44,16 @@ describe('promptIfSettingsData()', () => {
     process.argv.splice(process.argv.indexOf('--skipPrompts'), 1);
   });
 
-  test('does not prompt if settings_data.json is not in the file list', () => {
+  test('does not prompt if settings_data.json is not in the file list', async () => {
     const promptIfSettingsData = require('../skip-settings-data');
     env.__setIgnoreValue('');
-    promptIfSettingsData([]);
+
+    await promptIfSettingsData([]);
+
     expect(inquirer.prompt).toHaveBeenCalledTimes(0);
   });
 
-  test('does not prompt if setting_data.json is ignored in .env file', () => {
+  test('does not prompt if setting_data.json is ignored in .env file', async () => {
     const promptIfSettingsData = require('../skip-settings-data');
     const globs = [
       '/config/settings_data.json',
@@ -60,20 +63,27 @@ describe('promptIfSettingsData()', () => {
       '**/settings_data.json',
     ];
 
-    globs.forEach((glob) => {
-      env.__setIgnoreValue(glob);
-      promptIfSettingsData(FILES);
-    });
+    await Promise.all(
+      globs.map((glob) => {
+        env.__setIgnoreValue(glob);
+        return promptIfSettingsData(FILES);
+      }),
+    );
 
     expect(inquirer.prompt).toHaveBeenCalledTimes(0);
   });
 
-  test('does not prompt if promptSettings config is set to false', () => {
-    const config = require('../../../slate-tools.config');
-    config.promptSettings = false;
+  test(`does not prompt if 'cli.promptSettings' config is set to false`, async () => {
+    jest.mock('../../../slate-tools.schema', () => {
+      const schema = require.requireActual('../../../slate-tools.schema');
+      schema['cli.promptSettings'] = false;
+      return schema;
+    });
 
     const promptIfSettingsData = require('../skip-settings-data');
-    promptIfSettingsData(FILES);
+
+    await promptIfSettingsData(FILES);
+
     expect(inquirer.prompt).toHaveBeenCalledTimes(0);
   });
 });

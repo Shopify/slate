@@ -1,12 +1,13 @@
 const chalk = require('chalk');
 const inquirer = require('inquirer');
-const {getIgnoreFilesValue} = require('@shopify/slate-env');
 const figures = require('figures');
 const flatten = require('array-flatten');
 const minimatch = require('minimatch');
 const {argv} = require('yargs');
+const {getIgnoreFilesValue} = require('@shopify/slate-env');
+const SlateConfig = require('@shopify/slate-config');
 
-const config = require('../../slate-tools.config');
+const config = new SlateConfig(require('../../slate-tools.schema'));
 
 const question = {
   type: 'confirm',
@@ -42,7 +43,7 @@ module.exports = async function(files) {
   if (
     _includesSettingsData(ignoredFiles) ||
     !_includesSettingsData(files) ||
-    !config.promptSettings ||
+    !config.get('cli.promptSettings') ||
     argv.skipPrompts
   ) {
     return Promise.resolve(question.default);
@@ -66,7 +67,7 @@ module.exports = async function(files) {
   console.log(
     `   Or to disable this prompt, add the following to your slate.config.js file:\n`,
   );
-  console.log(`      ${chalk.cyan(`slateTools: { promptSettings: false }`)}\n`);
+  console.log(`      ${chalk.cyan(`'cli.promptSettings': false }`)}\n`);
 
   const answer = await inquirer.prompt([question]);
 

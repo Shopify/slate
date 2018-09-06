@@ -2,7 +2,9 @@ const path = require('path');
 const {promisify} = require('util');
 const {existsSync, readFileSync} = require('fs');
 const portscanner = require('portscanner');
-const config = require('../../slate-tools.config');
+const SlateConfig = require('@shopify/slate-config');
+
+const config = new SlateConfig(require('../../slate-tools.schema'));
 
 const findAPortInUse = promisify(portscanner.findAPortInUse);
 
@@ -14,14 +16,14 @@ function sslKeyCert() {
 }
 
 function getSSLKeyPath() {
-  return existsSync(config.paths.ssl.key)
-    ? config.paths.ssl.key
+  return existsSync(config.get('ssl.key'))
+    ? config.get('ssl.key')
     : path.join(__dirname, './server.pem');
 }
 
 function getSSLCertPath() {
-  return existsSync(config.paths.ssl.cert)
-    ? config.paths.ssl.cert
+  return existsSync(config.get('ssl.cert'))
+    ? config.get('ssl.cert')
     : path.join(__dirname, './server.pem');
 }
 

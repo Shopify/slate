@@ -3,11 +3,13 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
-const commonExcludes = require('../common-excludes');
+const SlateConfig = require('@shopify/slate-config');
+
 const webpackCoreConfig = require('./core');
-const userWebpackConfig = require('../get-user-webpack-config')('dev');
+const commonExcludes = require('../common-excludes');
 const {templateFiles, layoutFiles} = require('../entrypoints');
 const HtmlWebpackIncludeLiquidStylesPlugin = require('../html-webpack-include-chunks');
+const config = new SlateConfig(require('../../../slate-tools.schema'));
 
 // add hot-reload related code to entry chunks
 Object.keys(webpackCoreConfig.entry).forEach((name) => {
@@ -105,5 +107,5 @@ module.exports = merge(
       new HtmlWebpackIncludeLiquidStylesPlugin(),
     ],
   },
-  userWebpackConfig,
+  config.get('webpack.config.extend.dev'),
 );

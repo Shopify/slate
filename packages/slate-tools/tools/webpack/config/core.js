@@ -1,12 +1,15 @@
 const fs = require('fs');
+const path = require('path');
 const webpack = require('webpack');
 const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const SlateConfig = require('@shopify/slate-config');
+
 const commonExcludes = require('../common-excludes');
 const babelLoader = require('../loaders/babel-loader');
-const {paths, regex} = require('../../../slate-tools.config');
 const {entrypointFiles} = require('../entrypoints');
+const config = new SlateConfig(require('../../../slate-tools.schema'));
 
 const extractLiquidStyles = new ExtractTextPlugin(
   '[name].styleLiquid.scss.liquid',
@@ -29,33 +32,33 @@ function contextReplacementPlugins() {
   const plugins = [
     new webpack.ContextReplacementPlugin(
       /__appsrc__/,
-      replaceCtxRequest(paths.src),
+      replaceCtxRequest(config.get('paths.theme.src')),
     ),
   ];
 
-  if (fs.existsSync(paths.static.src)) {
+  if (fs.existsSync(config.get('paths.theme.src.static'))) {
     plugins.push(
       new webpack.ContextReplacementPlugin(
         /__appstatic__/,
-        replaceCtxRequest(paths.static.src),
+        replaceCtxRequest(config.get('paths.theme.src.static')),
       ),
     );
   }
 
-  if (fs.existsSync(paths.images.src)) {
+  if (fs.existsSync(config.get('paths.theme.src.images'))) {
     plugins.push(
       new webpack.ContextReplacementPlugin(
         /__appimages__/,
-        replaceCtxRequest(paths.images.src),
+        replaceCtxRequest(config.get('paths.theme.src.images')),
       ),
     );
   }
 
-  if (fs.existsSync(paths.fonts.src)) {
+  if (fs.existsSync(config.get('paths.theme.src.fonts'))) {
     plugins.push(
       new webpack.ContextReplacementPlugin(
         /__appfonts__/,
-        replaceCtxRequest(paths.fonts.src),
+        replaceCtxRequest(config.get('paths.theme.src.fonts')),
       ),
     );
   }
@@ -64,22 +67,22 @@ function contextReplacementPlugins() {
 }
 
 module.exports = {
-  context: paths.src,
+  context: config.get('paths.theme.src'),
 
-  entry: Object.assign(entrypointFiles(), paths.entrypoints),
+  entry: Object.assign(entrypointFiles(), config.get('webpack.entrypoints')),
 
   output: {
     filename: '[name].js',
-    path: paths.assetsOutput,
+    path: config.get('paths.theme.dist.assets'),
     jsonpFunction: 'shopifySlateJsonp',
   },
 
   resolveLoader: {
     modules: [
-      paths.nodeModules.self,
-      paths.nodeModules.repo,
-      paths.nodeModules.app,
-      paths.webpack,
+      path.resolve(__dirname, '../../../node_modules'),
+      path.resolve(__dirname, '../../../../../node_modules'),
+      path.resolve(__dirname, '../'),
+      path.join(config.get('paths.theme'), 'node_modules'),
     ],
   },
 
@@ -98,7 +101,7 @@ module.exports = {
         loader: 'file-loader',
       },
       {
-        test: regex.images,
+        test: /\.(png|svg|jpg|gif)$/,
         exclude: commonExcludes(),
         use: [
           {loader: 'file-loader', options: {name: '[name].[ext]'}},
@@ -106,7 +109,7 @@ module.exports = {
         ],
       },
       {
-        test: regex.static,
+        test: /\.(liquid|json)$/,
         exclude: commonExcludes('assets/styles'),
         loader: 'file-loader',
         options: {
@@ -137,28 +140,28 @@ module.exports = {
     new CopyWebpackPlugin(
       [
         {
-          from: paths.svgs,
-          to: `${paths.snippets.dist}/[name].liquid`,
+          from: config.get('paths.theme.src.svgs'),
+          to: `${config.get('paths.theme.dist.snippets')}/[name].liquid`,
         },
         {
-          from: paths.static.src,
-          to: paths.static.dist,
+          from: config.get('paths.theme.src.static'),
+          to: config.get('paths.theme.dist.assets'),
         },
         {
-          from: paths.images.src,
-          to: paths.images.dist,
+          from: config.get('paths.theme.src.images'),
+          to: config.get('paths.theme.dist.assets'),
         },
         {
-          from: paths.fonts.src,
-          to: paths.fonts.dist,
+          from: config.get('paths.theme.src.fonts'),
+          to: config.get('paths.theme.dist.assets'),
         },
         {
-          from: paths.locales.src,
-          to: paths.locales.dist,
+          from: config.get('paths.theme.src.locales'),
+          to: config.get('paths.theme.dist.locales'),
         },
         {
-          from: paths.settings.src,
-          to: paths.settings.dist,
+          from: config.get('paths.theme.src.config'),
+          to: config.get('paths.theme.dist.config'),
         },
       ].filter((directory) => fs.existsSync(directory.from)),
     ),

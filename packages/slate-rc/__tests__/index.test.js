@@ -1,4 +1,6 @@
-jest.mock('../slate-rc.config');
+const SlateConfig = require('@shopify/slate-config');
+
+jest.mock('../slate-rc.schema');
 
 const MOCK_VALID_SLATE_RC = {
   uuid: '9a983jf94jk42',
@@ -13,9 +15,11 @@ describe('get()', () => {
     test('returns its parsed JSON contents', () => {
       const slateRc = require('../index');
       const mock = require('mock-fs');
-      const config = require('../slate-rc.config');
+      const config = new SlateConfig(require('../slate-rc.schema'));
 
-      mock({[config.slateRcPath]: JSON.stringify(MOCK_VALID_SLATE_RC)});
+      mock({
+        [config.get('paths.slateRc')]: JSON.stringify(MOCK_VALID_SLATE_RC),
+      });
 
       expect(slateRc.get()).toMatchObject(MOCK_VALID_SLATE_RC);
     });
@@ -23,10 +27,10 @@ describe('get()', () => {
     test('throws an error if the JSON file is invalid', () => {
       const slateRc = require('../index');
       const SlateRcError = require('../slate-rc-error');
-      const config = require('../slate-rc.config');
+      const config = new SlateConfig(require('../slate-rc.schema'));
       const mock = require('mock-fs');
 
-      mock({[config.slateRcPath]: 'some invalid JSON'});
+      mock({[config.get('paths.slateRc')]: 'some invalid JSON'});
 
       expect(() => {
         slateRc.get();
@@ -35,10 +39,10 @@ describe('get()', () => {
 
     test('returns null if file is empty', () => {
       const slateRc = require('../index');
-      const config = require('../slate-rc.config');
+      const config = new SlateConfig(require('../slate-rc.schema'));
       const mock = require('mock-fs');
 
-      mock({[config.slateRcPath]: ''});
+      mock({[config.get('paths.slateRc')]: ''});
 
       expect(slateRc.get()).toBe(null);
     });
@@ -57,7 +61,7 @@ describe('get()', () => {
 describe('generate()', () => {
   test('creates a .slaterc file in the `~/` directory and returns its contents', () => {
     const slateRc = require('../index');
-    const config = require('../slate-rc.config');
+    const config = new SlateConfig(require('../slate-rc.schema'));
     const mock = require('mock-fs');
     const fs = require('fs');
 
@@ -65,7 +69,7 @@ describe('generate()', () => {
 
     const content = slateRc.generate();
 
-    expect(fs.existsSync(config.slateRcPath)).toBeTruthy();
+    expect(fs.existsSync(config.get('paths.slateRc'))).toBeTruthy();
     expect(content.uuid).toBeDefined();
   });
 
@@ -90,9 +94,9 @@ describe('update()', () => {
   test('applies any changes to the .slaterc file', () => {
     const rc = require('../index');
     const mock = require('mock-fs');
-    const config = require('../slate-rc.config');
+    const config = new SlateConfig(require('../slate-rc.schema'));
 
-    mock({[config.slateRcPath]: JSON.stringify(MOCK_VALID_SLATE_RC)});
+    mock({[config.get('paths.slateRc')]: JSON.stringify(MOCK_VALID_SLATE_RC)});
 
     rc.update({someChange: 'value'});
 

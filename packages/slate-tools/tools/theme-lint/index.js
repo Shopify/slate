@@ -1,10 +1,11 @@
 const execSync = require('child_process').execSync;
+const SlateConfig = require('@shopify/slate-config');
 
-const config = require('../../slate-tools.config');
+const config = new SlateConfig(require('../../slate-tools.schema'));
 
 function themelint() {
-  const executable = config.paths.themelint.bin;
-  const dir = config.paths.src;
+  const executable = config.get('themelint.bin');
+  const dir = config.get('paths.theme.src');
 
   execSync(`${JSON.stringify(executable)} ${dir}`, {
     stdio: 'inherit',

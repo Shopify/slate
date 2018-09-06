@@ -9,11 +9,12 @@ describe('eslint()', () => {
 
   test('executes the ESLint bin found in slate-tools/node_modules', () => {
     const {eslint} = require('../index');
-    const config = require('../../../slate-tools.config');
+    const SlateConfig = require('@shopify/slate-config');
+    const config = new SlateConfig(require('../../../slate-tools.schema'));
     eslint();
     expect(execSync).toHaveBeenCalledTimes(1);
     expect(execSync).toHaveBeenCalledWith(
-      expect.stringContaining(config.paths.eslint.bin),
+      expect.stringContaining(config.get('eslint.bin')),
       expect.anything(),
     );
   });

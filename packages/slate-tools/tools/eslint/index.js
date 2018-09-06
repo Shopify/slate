@@ -1,11 +1,15 @@
 const execSync = require('child_process').execSync;
 const path = require('path');
+const SlateConfig = require('@shopify/slate-config');
 
-const config = require('../../slate-tools.config');
+const config = new SlateConfig(require('../../slate-tools.schema'));
 
 function eslint({fix} = {}) {
-  const executable = config.paths.eslint.bin;
-  const cachePath = path.join(config.paths.cache, 'eslint-scripts');
+  const executable = config.get('eslint.bin');
+  const cachePath = path.join(
+    config.get('paths.theme.cache'),
+    'eslint-scripts',
+  );
   const extensions = ['.js'];
   const ignorePatterns = ['dist', 'node_modules', 'src/assets/static'].reduce(
     (buffer, pattern) => `${buffer} --ignore-pattern ${pattern}`,

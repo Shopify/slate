@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const spawn = require('cross-spawn');
 const analytics = require('@shopify/slate-analytics');
-const {getSlateConfig} = require('@shopify/slate-config');
+const SlateConfig = require('@shopify/slate-config');
 const packageJson = require('../package.json');
 
 const script = process.argv[2];
@@ -13,7 +13,7 @@ async function init() {
   await analytics.init();
 
   analytics.event('slate-tools:cli:start', {
-    slateConfig: getSlateConfig(),
+    slateConfig: SlateConfig.userConfig,
     version: packageJson.version,
   });
 

@@ -3,7 +3,9 @@ const figures = require('figures');
 const https = require('https');
 const themekit = require('@shopify/themekit').command;
 const slateEnv = require('@shopify/slate-env');
-const config = require('./slate-sync.config');
+const SlateConfig = require('@shopify/slate-config');
+
+const config = new SlateConfig(require('./slate-sync.schema'));
 
 let deploying = false;
 let filesToDeploy = [];
@@ -84,7 +86,7 @@ function promiseThemekitConfig() {
           ..._generateConfigFlags(),
           ..._generateIgnoreFlags(),
         ],
-        cwd: config.paths.dist,
+        cwd: config.get('paths.theme.dist'),
       },
       (err) => {
         if (err) {
@@ -107,7 +109,7 @@ function promiseThemekitDeploy(cmd, files) {
           ..._generateConfigFlags(),
           ...files,
         ],
-        cwd: config.paths.dist,
+        cwd: config.get('paths.theme.dist'),
       },
       (err) => {
         if (err) {

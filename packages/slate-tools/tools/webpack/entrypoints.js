@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
-const config = require('../../slate-tools.config');
+const SlateConfig = require('@shopify/slate-config');
+
+const config = new SlateConfig(require('../../slate-tools.schema'));
 
 const VALID_LIQUID_TEMPLATES = [
   '404',
@@ -27,20 +29,11 @@ const VALID_LIQUID_TEMPLATES = [
 function templateFiles() {
   const entrypoints = {};
 
-  fs.readdirSync(config.paths.templates).forEach((file) => {
+  fs.readdirSync(config.get('paths.theme.src.templates')).forEach((file) => {
     const name = path.parse(file).name;
-    const jsFile = path.join(config.paths.scripts, 'templates', `${name}.js`);
-    if (VALID_LIQUID_TEMPLATES.includes(name) && fs.existsSync(jsFile)) {
-      entrypoints[`template.${name}`] = jsFile;
-    }
-  });
-
-  fs.readdirSync(config.paths.customersTemplates).forEach((file) => {
-    const name = `${path.parse(file).name}`;
     const jsFile = path.join(
-      config.paths.scripts,
+      config.get('paths.theme.src.scripts'),
       'templates',
-      'customers',
       `${name}.js`,
     );
     if (VALID_LIQUID_TEMPLATES.includes(name) && fs.existsSync(jsFile)) {
@@ -48,14 +41,33 @@ function templateFiles() {
     }
   });
 
+  fs
+    .readdirSync(config.get('paths.theme.src.templates.customers'))
+    .forEach((file) => {
+      const name = `${path.parse(file).name}`;
+      const jsFile = path.join(
+        config.get('paths.theme.src.scripts'),
+        'templates',
+        'customers',
+        `${name}.js`,
+      );
+      if (VALID_LIQUID_TEMPLATES.includes(name) && fs.existsSync(jsFile)) {
+        entrypoints[`template.${name}`] = jsFile;
+      }
+    });
+
   return entrypoints;
 }
 
 function layoutFiles() {
   const entrypoints = {};
-  fs.readdirSync(config.paths.layouts).forEach((file) => {
+  fs.readdirSync(config.get('paths.theme.src.layouts')).forEach((file) => {
     const name = path.parse(file).name;
-    const jsFile = path.join(config.paths.scripts, 'layout', `${name}.js`);
+    const jsFile = path.join(
+      config.get('paths.theme.src.scripts'),
+      'layout',
+      `${name}.js`,
+    );
     if (fs.existsSync(jsFile)) {
       entrypoints[`layout.${name}`] = jsFile;
     }

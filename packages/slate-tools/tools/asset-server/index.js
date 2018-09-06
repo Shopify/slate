@@ -2,12 +2,13 @@ const fs = require('fs');
 const webpack = require('webpack');
 const {createServer} = require('https');
 const createHash = require('crypto').createHash;
+const SlateConfig = require('@shopify/slate-config');
 
 const App = require('./app');
 const Client = require('./client');
 const {sslKeyCert} = require('../utilities');
-const config = require('../../slate-tools.config');
 const setEnvironment = require('../../tools/webpack/set-slate-env');
+const config = new SlateConfig(require('../../slate-tools.schema'));
 
 module.exports = class DevServer {
   constructor(options) {
@@ -79,7 +80,7 @@ module.exports = class DevServer {
         })
         /* eslint-disable-next-line no-unused-vars */
         .map(([key, asset]) => {
-          return asset.existsAt.replace(config.paths.dist, '');
+          return asset.existsAt.replace(config.get('paths.theme.dist'), '');
         })
     );
   }
