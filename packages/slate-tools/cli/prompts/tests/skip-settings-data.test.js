@@ -25,6 +25,7 @@ describe('promptIfSettingsData()', () => {
     jest.clearAllMocks();
     jest.resetModules();
     env.__resetIgnoreValue();
+    global.slateUserConfig = {};
   });
 
   test('prompts user if setting_data.json is not ignored in .env file and included in files to be uploaded', async () => {
@@ -74,13 +75,9 @@ describe('promptIfSettingsData()', () => {
   });
 
   test(`does not prompt if 'cli.promptSettings' config is set to false`, async () => {
-    jest.mock('../../../slate-tools.schema', () => {
-      const schema = require.requireActual('../../../slate-tools.schema');
-      schema['cli.promptSettings'] = false;
-      return schema;
-    });
-
     const promptIfSettingsData = require('../skip-settings-data');
+
+    global.slateUserConfig['cli.promptSettings'] = false;
 
     await promptIfSettingsData(FILES);
 

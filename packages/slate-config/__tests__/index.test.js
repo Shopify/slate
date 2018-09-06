@@ -7,13 +7,25 @@ const schema = {
   'some.function': jest.fn((config) => config.get('some.other.key')),
 };
 
-describe('SlateConfig()', () => {
-  beforeEach(() => {
-    process.chdir(originalCwd);
-    jest.resetModules();
-    global.slateUserConfig = null;
-  });
+beforeEach(() => {
+  process.chdir(originalCwd);
+  global.slateUserConfig = null;
+  jest.resetModules();
+});
 
+describe('when the file first is executed it', () => {
+  test('looks for slate.config.js in process.cwd and assigns its contents to a global variable global.slateUserConfig', () => {
+    process.chdir(path.resolve(__dirname, './fixtures'));
+
+    const userConfig = require('./fixtures/slate.config');
+
+    require('../index');
+
+    expect(global.slateUserConfig).toMatchObject(userConfig);
+  });
+});
+
+describe('SlateConfig()', () => {
   test('requires a first argument which is assigned to this.schema', () => {
     const SlateConfig = require('../index');
     const config = new SlateConfig(schema);
@@ -22,34 +34,22 @@ describe('SlateConfig()', () => {
     expect(() => new SlateConfig()).toThrowError();
   });
 
-  test('has an optional second argument which is assigned to this.userConfig', () => {
-    const SlateConfig = require('../index');
-    const userConfig = {
-      'some.key': 'someNewValue',
-    };
-    const config = new SlateConfig(schema, userConfig);
-
-    expect(config.userConfig).toBe(userConfig);
-  });
-
-  test('if a second argument is undefined, assigns the contents of a the slate.config.js file in the cwd to this.userConfig', () => {
+  test('SlateConfig.prototype.userConfig is a shortcut to global.slateUserConfig', () => {
     process.chdir(path.resolve(__dirname, './fixtures'));
 
     const SlateConfig = require('../index');
-    const userConfig = require('./fixtures/slate.config');
     const config = new SlateConfig(schema);
 
-    expect(config.userConfig).toMatchObject(userConfig);
+    expect(config.userConfig).toMatchObject(global.slateUserConfig);
   });
 
-  test('copies the values of this.userConfig into this.schema, replacing any exisiting values', () => {
+  test('does not modify the original schema object', () => {
     const SlateConfig = require('../index');
-    const userConfig = {
-      'some.key': 'someNewValue',
-    };
-    const config = new SlateConfig(schema, userConfig);
+    const config = new SlateConfig(schema);
 
-    expect(config.schema).toMatchObject(config.userConfig);
+    config.get('some.function');
+
+    expect(config.schema).not.toBe(schema);
   });
 });
 
@@ -68,14 +68,6 @@ describe('SlateConfig.get()', () => {
 
     expect(schema['some.function']).toBeCalledWith(config);
     expect(value).toBe(schema['some.other.key']);
-  });
-
-  test('if the value is a function, it is replaced with the returned value of that function after .get() has been called', () => {
-    const SlateConfig = require('../index');
-    const config = new SlateConfig(schema);
-    const value = config.get('some.function');
-
-    expect(config.schema['some.function']).toBe(value);
   });
 });
 
