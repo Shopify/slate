@@ -7,7 +7,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SlateConfig = require('@shopify/slate-config');
 
 const commonExcludes = require('../common-excludes');
-const babelLoader = require('../loaders/babel-loader');
 const {entrypointFiles} = require('../entrypoints');
 const config = new SlateConfig(require('../../../slate-tools.schema'));
 
@@ -88,8 +87,6 @@ module.exports = {
 
   module: {
     rules: [
-      ...babelLoader(),
-
       {
         test: /\.js$/,
         exclude: commonExcludes(),

@@ -11,6 +11,7 @@ const SlateConfig = require('@shopify/slate-config');
 const SlateLiquidAssetsPlugin = require('@shopify/html-webpack-liquid-asset-tags-plugin');
 const SlateTagPlugin = require('@shopify/slate-tag-webpack-plugin');
 
+const babel = require('./parts/babel');
 const commonExcludes = require('../common-excludes');
 const webpackCoreConfig = require('./core');
 const packageJson = require('../../../package.json');
@@ -26,6 +27,7 @@ const extractStyles = new ExtractTextPlugin({
 
 module.exports = merge(
   webpackCoreConfig,
+  babel,
   {
     mode: 'production',
     devtool: 'hidden-source-map',
@@ -61,7 +63,7 @@ module.exports = merge(
                   sourceMap: true,
                   plugins: [
                     autoprefixer,
-                    cssnano(config.get('cssnano.settings')),
+                    cssnano(config.get('webpack.cssnano.settings')),
                   ],
                 },
               },

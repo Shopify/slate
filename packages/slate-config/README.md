@@ -17,7 +17,7 @@ module.exports = {
   ...commonPaths
 
   // Configuration values can be set directly
-  'babel.enable': true,
+  'webpack.babel.enable': true,
 
   // Or computed when the schema file is require()'d by another file
   'paths.theme': process.cwd(),

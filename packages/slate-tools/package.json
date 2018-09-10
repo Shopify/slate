@@ -80,5 +80,8 @@
     "write-file-webpack-plugin": "4.2.0",
     "yamljs": "0.2.10",
     "yargs": "^11.0.0"
+  },
+  "devDependencies": {
+    "mock-fs": "^4.6.0"
   }
 }
