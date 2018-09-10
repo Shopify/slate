@@ -14,7 +14,11 @@ const question = {
 };
 
 function forNewConsent() {
-  clearConsole();
+  // eslint-disable-next-line no-process-env
+  if (process.env.NODE_ENV !== 'test') {
+    clearConsole();
+  }
+
   console.log(
     wrap(
       '👋  Welcome to Slate! During the alpha, we would like to gather usage analytics, such as interactions with Slate commands, performance reports, and error occurances. The data does not include any sensitive information. The detailed list of data we gather can be found at:',
