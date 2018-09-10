@@ -2,16 +2,15 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const autoprefixer = require('autoprefixer');
-const cssnano = require('cssnano');
+
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const SlateConfig = require('@shopify/slate-config');
 const SlateLiquidAssetsPlugin = require('@shopify/html-webpack-liquid-asset-tags-plugin');
 const SlateTagPlugin = require('@shopify/slate-tag-webpack-plugin');
 
 const babel = require('./parts/babel');
+const sass = require('./parts/sass.prod');
 const commonExcludes = require('../common-excludes');
 const webpackCoreConfig = require('./core');
 const packageJson = require('../../../package.json');
@@ -20,14 +19,10 @@ const {templateFiles, layoutFiles} = require('../entrypoints');
 const HtmlWebpackIncludeLiquidStylesPlugin = require('../html-webpack-include-chunks');
 const config = new SlateConfig(require('../../../slate-tools.schema'));
 
-const extractStyles = new ExtractTextPlugin({
-  filename: '[name].css.liquid',
-  allChunks: true,
-});
-
 module.exports = merge(
   webpackCoreConfig,
   babel,
+  sass,
   {
     mode: 'production',
     devtool: 'hidden-source-map',
@@ -44,32 +39,6 @@ module.exports = merge(
               options: {devServer: false},
             },
           ],
-        },
-        {
-          test: /\.s[ac]ss$/,
-          exclude: commonExcludes(),
-          use: extractStyles.extract({
-            fallback: 'style-loader',
-            use: [
-              {loader: '@shopify/slate-cssvar-loader'},
-              {
-                loader: 'css-loader',
-                options: {importLoaders: 2, sourceMap: true},
-              },
-              {
-                loader: 'postcss-loader',
-                options: {
-                  ident: 'postcss',
-                  sourceMap: true,
-                  plugins: [
-                    autoprefixer,
-                    cssnano(config.get('webpack.cssnano.settings')),
-                  ],
-                },
-              },
-              {loader: 'sass-loader', options: {sourceMap: true}},
-            ],
-          }),
         },
       ],
     },
@@ -131,8 +100,6 @@ module.exports = merge(
       new SlateLiquidAssetsPlugin(),
 
       new SlateTagPlugin(packageJson.version),
-
-      extractStyles,
     ],
 
     optimization: {
