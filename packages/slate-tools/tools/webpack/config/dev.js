@@ -39,6 +39,10 @@ module.exports = merge(
           ],
         },
         {
+          test: /\.css$/,
+          use: [{loader: 'style-loader'}, {loader: 'css-loader'}],
+        },
+        {
           test: /\.s[ac]ss$/,
           exclude: commonExcludes(),
           use: [
