@@ -6,6 +6,7 @@ const autoprefixer = require('autoprefixer');
 const SlateConfig = require('@shopify/slate-config');
 
 const webpackCoreConfig = require('./core');
+const babel = require('./parts/babel');
 const commonExcludes = require('../common-excludes');
 const {templateFiles, layoutFiles} = require('../entrypoints');
 const HtmlWebpackIncludeLiquidStylesPlugin = require('../html-webpack-include-chunks');
@@ -20,6 +21,7 @@ Object.keys(webpackCoreConfig.entry).forEach((name) => {
 
 module.exports = merge(
   webpackCoreConfig,
+  babel,
   {
     mode: 'development',
 
