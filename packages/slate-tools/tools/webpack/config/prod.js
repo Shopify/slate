@@ -17,7 +17,7 @@ const packageJson = require('../../../package.json');
 const getChunkName = require('../get-chunk-name');
 const {templateFiles, layoutFiles} = require('../entrypoints');
 const HtmlWebpackIncludeLiquidStylesPlugin = require('../html-webpack-include-chunks');
-const config = new SlateConfig(require('../../slate-tools.schema'));
+const config = new SlateConfig(require('../../../slate-tools.schema'));
 
 const extractStyles = new ExtractTextPlugin({
   filename: '[name].css.liquid',
