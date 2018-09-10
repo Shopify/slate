@@ -19,7 +19,7 @@ const {templateFiles, layoutFiles} = require('../entrypoints');
 const HtmlWebpackIncludeLiquidStylesPlugin = require('../html-webpack-include-chunks');
 const config = new SlateConfig(require('../../../slate-tools.schema'));
 
-module.exports = merge(
+module.exports = merge([
   webpackCoreConfig,
   babel,
   sass,
@@ -110,4 +110,4 @@ module.exports = merge(
     },
   },
   config.get('webpack.config.extend.prod'),
-);
+]);
