@@ -1,7 +1,7 @@
 const fs = require('fs');
 const SlateConfig = require('@shopify/slate-config');
 
-const commonExcludes = require('../../common-excludes');
+const commonExcludes = require('../utilities/common-excludes');
 const config = new SlateConfig(require('../../../../slate-tools.schema'));
 
 module.exports = () => {

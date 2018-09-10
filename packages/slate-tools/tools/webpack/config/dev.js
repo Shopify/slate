@@ -7,7 +7,7 @@ const SlateConfig = require('@shopify/slate-config');
 
 const webpackCoreConfig = require('./core');
 const babel = require('./parts/babel');
-const commonExcludes = require('../common-excludes');
+const commonExcludes = require('./utilities/common-excludes');
 const {templateFiles, layoutFiles} = require('../entrypoints');
 const HtmlWebpackIncludeLiquidStylesPlugin = require('../html-webpack-include-chunks');
 const config = new SlateConfig(require('../../../slate-tools.schema'));

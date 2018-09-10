@@ -6,7 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SlateConfig = require('@shopify/slate-config');
 
-const commonExcludes = require('../common-excludes');
+const commonExcludes = require('./utilities/common-excludes');
 const {entrypointFiles} = require('../entrypoints');
 const config = new SlateConfig(require('../../../slate-tools.schema'));
 

@@ -11,7 +11,7 @@ const SlateTagPlugin = require('@shopify/slate-tag-webpack-plugin');
 
 const babel = require('./parts/babel');
 const sass = require('./parts/sass.prod');
-const commonExcludes = require('../common-excludes');
+const commonExcludes = require('./utilities/common-excludes');
 const webpackCoreConfig = require('./core');
 const packageJson = require('../../../package.json');
 const getChunkName = require('../get-chunk-name');

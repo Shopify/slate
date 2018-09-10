@@ -3,7 +3,7 @@ const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const SlateConfig = require('@shopify/slate-config');
 
-const commonExcludes = require('../../common-excludes');
+const commonExcludes = require('../utilities/common-excludes');
 const config = new SlateConfig(require('../../../../slate-tools.schema'));
 
 const extractStyles = new ExtractTextPlugin({
