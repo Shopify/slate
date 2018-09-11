@@ -1,3 +1,4 @@
+const fs = require('fs');
 const execSync = require('child_process').execSync;
 const SlateConfig = require('@shopify/slate-config');
 
@@ -7,13 +8,15 @@ function stylelint({fix} = {}) {
   const executable = config.get('stylelint.bin');
   const fixFlag = fix ? '--fix' : '';
   const glob = `./**/*.{${['css', 'scss', 'sass'].join(',')}}`;
-  const ignorePatterns = ['dist', 'node_modules'].reduce(
-    (buffer, pattern) => `${buffer} --ignore-pattern ${pattern}`,
-    '',
-  );
+  const stylelintConfig = `--config ${config.get('stylelint.config')}`;
+  const ignorePath = fs.existsSync(config.get('stylelint.ignorePath'))
+    ? `--ignore-path ${config.get('stylelint.ignorePath')}`
+    : '';
 
   execSync(
-    `${JSON.stringify(executable)} "${glob}" ${ignorePatterns} ${fixFlag}`,
+    `${JSON.stringify(
+      executable,
+    )} "${glob}" ${stylelintConfig} ${fixFlag} ${ignorePath}`,
     {
       stdio: 'inherit',
     },
