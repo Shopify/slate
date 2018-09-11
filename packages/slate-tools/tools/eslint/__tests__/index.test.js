@@ -7,14 +7,44 @@ describe('eslint()', () => {
     execSync.mockClear();
   });
 
-  test('executes the ESLint bin found in slate-tools/node_modules', () => {
+  test(`executes the Eslint bin from the path specified in the 'eslint.bin' config`, () => {
     const {eslint} = require('../index');
     const SlateConfig = require('@shopify/slate-config');
     const config = new SlateConfig(require('../../../slate-tools.schema'));
+
     eslint();
+
     expect(execSync).toHaveBeenCalledTimes(1);
     expect(execSync).toHaveBeenCalledWith(
       expect.stringContaining(config.get('eslint.bin')),
+      expect.anything(),
+    );
+  });
+
+  test(`executes Prettier with the --config flag set to 'eslint.config' config`, () => {
+    const {eslint} = require('../index');
+    const SlateConfig = require('@shopify/slate-config');
+    const config = new SlateConfig(require('../../../slate-tools.schema'));
+
+    eslint();
+
+    expect(execSync).toHaveBeenCalledWith(
+      expect.stringContaining(`--config ${config.get('eslint.config')}`),
+      expect.anything(),
+    );
+  });
+
+  test(`executes Prettier with the --ignore-path flag set to 'eslint.ignorePath' config`, () => {
+    const {eslint} = require('../index');
+    const SlateConfig = require('@shopify/slate-config');
+    const config = new SlateConfig(require('../../../slate-tools.schema'));
+
+    eslint();
+
+    expect(execSync).toHaveBeenCalledWith(
+      expect.stringContaining(
+        `--ignore-path ${config.get('eslint.ignorePath')}`,
+      ),
       expect.anything(),
     );
   });

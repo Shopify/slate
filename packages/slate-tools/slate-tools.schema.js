@@ -12,11 +12,12 @@ module.exports = {
   'eslint.bin': path.resolve(__dirname, 'node_modules/.bin/eslint'),
 
   // Path to .eslintignore file
-  'eslint.ignore': (config) =>
+  'eslint.ignorePath': (config) =>
     path.resolve(config.get('paths.theme'), '.eslintignore'),
 
   // Path to .eslintrc file
-  'eslint.rc': (config) => path.resolve(config.get('paths.theme'), '.eslintrc'),
+  'eslint.config': (config) =>
+    path.resolve(config.get('paths.theme'), '.eslintrc'),
 
   // Default port used for asset server. If it is not available, the next port
   // that is available is used.
