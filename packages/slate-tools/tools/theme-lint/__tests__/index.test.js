@@ -7,7 +7,7 @@ describe('themelint()', () => {
     execSync.mockClear();
   });
 
-  test('executes the themelint bin from slate-tools/node-modules directory', () => {
+  test(`executes the themelint bin specified in 'themelint.bin' config`, () => {
     const {themelint} = require('../index');
     const SlateConfig = require('@shopify/slate-config');
     const config = new SlateConfig(require('../../../slate-tools.schema'));
