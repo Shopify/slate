@@ -7,7 +7,7 @@ describe('stylelint()', () => {
     execSync.mockClear();
   });
 
-  test('executes the stylelint bin from slate-tools/node-modules directory', () => {
+  test(`executes the stylelint bin from the path specified in the 'stylelint.bin' config`, () => {
     const {stylelint} = require('../index');
     const SlateConfig = require('@shopify/slate-config');
     const config = new SlateConfig(require('../../../slate-tools.schema'));
@@ -19,7 +19,31 @@ describe('stylelint()', () => {
     );
   });
 
-  test('executes ESLint with the --fix flag', () => {
+  test(`executes stylelint with the --config flag set to 'stylelint.config' config`, () => {
+    const {stylelint} = require('../index');
+    const SlateConfig = require('@shopify/slate-config');
+    const config = new SlateConfig(require('../../../slate-tools.schema'));
+    stylelint();
+    expect(execSync).toHaveBeenCalledWith(
+      expect.stringContaining(`--config ${config.get('stylelint.config')}`),
+      expect.anything(),
+    );
+  });
+
+  test(`executes stylelint with the --ignore-path flag set to 'stylelint.ignorePath' config`, () => {
+    const {stylelint} = require('../index');
+    const SlateConfig = require('@shopify/slate-config');
+    const config = new SlateConfig(require('../../../slate-tools.schema'));
+    stylelint();
+    expect(execSync).toHaveBeenCalledWith(
+      expect.stringContaining(
+        `--ignore-path ${config.get('stylelint.ignorePath')}`,
+      ),
+      expect.anything(),
+    );
+  });
+
+  test('executes stylelint with the --fix flag', () => {
     const {stylelint} = require('../index');
     stylelint({fix: true});
     expect(execSync).toHaveBeenCalledWith(
