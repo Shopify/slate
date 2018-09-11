@@ -6,9 +6,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SlateConfig = require('@shopify/slate-config');
 
-const commonExcludes = require('./utilities/common-excludes');
-const {entrypointFiles} = require('../entrypoints');
-const config = new SlateConfig(require('../../../slate-tools.schema'));
+const commonExcludes = require('../utilities/common-excludes');
+const config = new SlateConfig(require('../../../../slate-tools.schema'));
 
 const extractLiquidStyles = new ExtractTextPlugin(
   '[name].styleLiquid.scss.liquid',
@@ -67,8 +66,6 @@ function contextReplacementPlugins() {
 
 module.exports = {
   context: config.get('paths.theme.src'),
-
-  entry: Object.assign(entrypointFiles(), config.get('webpack.entrypoints')),
 
   output: {
     filename: '[name].js',

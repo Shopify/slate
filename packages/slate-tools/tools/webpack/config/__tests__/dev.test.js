@@ -3,18 +3,18 @@ test(`merges contents of 'webpack.config.extend.dev' into webpack config`, () =>
     'webpack.config.extend.dev': {some: 'value'},
   };
 
-  jest.mock('../core', () => {
+  jest.mock('../parts/core', () => {
     return {entry: {}};
   });
-  jest.mock('webpack-merge');
-  jest.mock('../../entrypoints', () => {
-    return {
-      templateFiles: jest.fn(),
-      layoutFiles: jest.fn(),
-    };
+  jest.mock('../parts/entry', () => {
+    return {entry: {}};
   });
+  jest.mock('../utilities/get-layout-entrypoints');
+  jest.mock('../utilities/get-template-entrypoints');
+  jest.mock('webpack-merge');
 
   const merge = require('webpack-merge');
+
   require('../dev');
 
   expect(merge).toBeCalledWith(
