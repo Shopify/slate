@@ -3,16 +3,13 @@ test(`merges contents of 'webpack.config.extend.prod' into webpack config`, () =
     'webpack.config.extend.prod': {some: 'value'},
   };
 
-  jest.mock('../core', () => {
-    return {entry: {}};
+  jest.mock('../parts/core');
+  jest.mock('../parts/entry', () => {
+    return {};
   });
+  jest.mock('../utilities/get-layout-entrypoints');
+  jest.mock('../utilities/get-template-entrypoints');
   jest.mock('webpack-merge');
-  jest.mock('../../entrypoints', () => {
-    return {
-      templateFiles: jest.fn(),
-      layoutFiles: jest.fn(),
-    };
-  });
 
   const merge = require('webpack-merge');
 

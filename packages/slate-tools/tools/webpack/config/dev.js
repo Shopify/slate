@@ -5,22 +5,26 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const SlateConfig = require('@shopify/slate-config');
 
-const webpackCoreConfig = require('./core');
+const core = require('./parts/core');
 const babel = require('./parts/babel');
+const entry = require('./parts/entry');
+
 const commonExcludes = require('./utilities/common-excludes');
-const {templateFiles, layoutFiles} = require('../entrypoints');
+const getLayoutEntrypoints = require('./utilities/get-layout-entrypoints');
+const getTemplateEntrypoints = require('./utilities/get-template-entrypoints');
 const HtmlWebpackIncludeLiquidStylesPlugin = require('../html-webpack-include-chunks');
 const config = new SlateConfig(require('../../../slate-tools.schema'));
 
 // add hot-reload related code to entry chunks
-Object.keys(webpackCoreConfig.entry).forEach((name) => {
-  webpackCoreConfig.entry[name] = [
-    path.join(__dirname, '../hot-client.js'),
-  ].concat(webpackCoreConfig.entry[name]);
+Object.keys(entry.entry).forEach((name) => {
+  entry.entry[name] = [path.join(__dirname, '../hot-client.js')].concat(
+    entry.entry[name],
+  );
 });
 
 module.exports = merge([
-  webpackCoreConfig,
+  core,
+  entry,
   babel,
   {
     mode: 'development',
@@ -85,8 +89,8 @@ module.exports = merge([
           removeAttributeQuotes: false,
         },
         isDevServer: true,
-        liquidTemplates: templateFiles(),
-        liquidLayouts: layoutFiles(),
+        liquidTemplates: getTemplateEntrypoints(),
+        liquidLayouts: getLayoutEntrypoints(),
       }),
 
       new HtmlWebpackPlugin({
@@ -102,8 +106,8 @@ module.exports = merge([
         },
         // necessary to consistently work with multiple chunks via CommonsChunkPlugin
         chunksSortMode: 'dependency',
-        liquidTemplates: templateFiles(),
-        liquidLayouts: layoutFiles(),
+        liquidTemplates: getTemplateEntrypoints(),
+        liquidLayouts: getLayoutEntrypoints(),
       }),
 
       new HtmlWebpackIncludeLiquidStylesPlugin(),
