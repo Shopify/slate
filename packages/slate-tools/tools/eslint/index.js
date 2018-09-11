@@ -1,3 +1,4 @@
+const fs = require('fs');
 const execSync = require('child_process').execSync;
 const path = require('path');
 const SlateConfig = require('@shopify/slate-config');
@@ -11,15 +12,15 @@ function eslint({fix} = {}) {
     'eslint-scripts',
   );
   const extensions = ['.js'];
-  const ignorePatterns = ['dist', 'node_modules', 'src/assets/static'].reduce(
-    (buffer, pattern) => `${buffer} --ignore-pattern ${pattern}`,
-    '',
-  );
   const fixFlag = fix ? '--fix' : '';
+  const eslintConfig = `--config ${config.get('eslint.config')}`;
+  const ignorePath = fs.existsSync(config.get('eslint.ignorePath'))
+    ? `--ignore-path ${config.get('eslint.ignorePath')}`
+    : '';
 
   execSync(
     // prettier-ignore
-    `${JSON.stringify(executable)} . ${extensions} ${ignorePatterns} ` +
+    `${JSON.stringify(executable)} . ${extensions} ${ignorePath} ${eslintConfig}` +
     `${fixFlag} --max-warnings 0 ` +
     `--cache true --cache-location ${JSON.stringify(`${cachePath}${path.sep}`)}`,
     {stdio: 'inherit'},
