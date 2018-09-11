@@ -26,11 +26,11 @@ module.exports = {
   'prettier.bin': path.resolve(__dirname, 'node_modules/.bin/prettier'),
 
   // Path to .prettierrc file
-  'prettier.rc': (config) =>
+  'prettier.config': (config) =>
     path.resolve(config.get('paths.theme'), '.prettierrc'),
 
   // Path to .prettierignore file
-  'prettier.ignore': (config) =>
+  'prettier.ignorePath': (config) =>
     path.resolve(config.get('paths.theme'), '.prettierignore'),
 
   // Path to self-signed SSL certificate which is used when developing
