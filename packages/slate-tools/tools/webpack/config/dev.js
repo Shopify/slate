@@ -19,7 +19,7 @@ Object.keys(webpackCoreConfig.entry).forEach((name) => {
   ].concat(webpackCoreConfig.entry[name]);
 });
 
-module.exports = merge(
+module.exports = merge([
   webpackCoreConfig,
   babel,
   {
@@ -110,4 +110,4 @@ module.exports = merge(
     ],
   },
   config.get('webpack.config.extend.dev'),
-);
+]);
