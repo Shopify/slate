@@ -75,9 +75,9 @@ module.exports = {
 
   resolveLoader: {
     modules: [
-      path.resolve(__dirname, '../../../node_modules'),
-      path.resolve(__dirname, '../../../../../node_modules'),
-      path.resolve(__dirname, '../'),
+      path.resolve(__dirname, '../../../../node_modules'),
+      path.resolve(__dirname, '../../../../../../node_modules'),
+      path.resolve(__dirname, '../../'),
       path.join(config.get('paths.theme'), 'node_modules'),
     ],
   },
