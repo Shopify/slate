@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 
 // Fetch the contents of Slate's user config once, and only once
 global.slateUserConfig = global.slateUserConfig || getSlateUserConfig();
@@ -49,9 +50,11 @@ module.exports = class SlateConfig {
 };
 
 function getSlateUserConfig() {
-  try {
-    return require(path.join(process.cwd(), 'slate.config.js'));
-  } catch (error) {
+  const slateConfigPath =
+    global.slateConfigPath || path.join(process.cwd(), 'slate.config.js');
+  if (fs.existsSync(slateConfigPath)) {
+    return require(slateConfigPath);
+  } else {
     return {};
   }
 }
