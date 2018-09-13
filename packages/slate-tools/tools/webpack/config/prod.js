@@ -14,7 +14,6 @@ const sass = require('./parts/sass');
 const entry = require('./parts/entry');
 const core = require('./parts/core');
 
-const commonExcludes = require('./utilities/common-excludes');
 const packageJson = require('../../../package.json');
 const getChunkName = require('../get-chunk-name');
 const getLayoutEntrypoints = require('./utilities/get-layout-entrypoints');
@@ -35,7 +34,7 @@ module.exports = merge([
       rules: [
         {
           test: /^(?:(?!(css|scss|sass|js)).)*\.(liquid)$/,
-          exclude: commonExcludes(),
+          exclude: config.get('webpack.commonExcludes'),
           use: [
             {loader: 'extract-loader'},
             {
