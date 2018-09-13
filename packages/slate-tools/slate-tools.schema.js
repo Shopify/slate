@@ -77,7 +77,7 @@ module.exports = {
   'webpack.config.extend.prod': {},
 
   // Optimization settings for the cssnano plugin
-  'webpack.cssnano.settings': {zindex: false},
+  'webpack.cssnano.settings': {zindex: false, reduceIdents: false},
 
   // Object which contains entrypoints used in webpack's config.entry key
   'webpack.entrypoints': {
