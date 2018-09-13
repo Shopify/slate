@@ -14,7 +14,6 @@ const question = {
 };
 
 function forNewConsent() {
-  // eslint-disable-next-line no-process-env
   if (process.env.NODE_ENV !== 'test') {
     clearConsole();
   }

@@ -1,16 +1,12 @@
-/* eslint-disable no-process-env */
-
 jest.mock('../prompt');
 jest.mock('axios');
 
 beforeEach(() => {
-  // eslint-disable-next-line no-process-env
   process.env.NODE_ENV = 'test-slate-analytics';
   jest.resetModules();
 });
 
 afterEach(() => {
-  // eslint-disable-next-line no-process-env
   process.env.NODE_ENV = 'test';
   require('mock-fs').restore();
 });

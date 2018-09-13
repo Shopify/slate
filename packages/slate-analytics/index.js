@@ -1,5 +1,3 @@
-/* eslint-disable no-process-env */
-
 const uuidGenerator = require('uuid/v4');
 const clearConsole = require('react-dev-utils/clearConsole');
 const rc = require('@shopify/slate-rc');
@@ -50,8 +48,8 @@ async function init() {
     }
 
     if (
-      process.env.NODE_ENV !== 'test' && // eslint-disable-line no-process-env
-      process.env.NODE_ENV !== 'test-slate-analytics' // eslint-disable-line no-process-env
+      process.env.NODE_ENV !== 'test' &&
+      process.env.NODE_ENV !== 'test-slate-analytics'
     ) {
       clearConsole();
     }
@@ -80,7 +78,6 @@ function event(name, payload = {}) {
     }),
   };
 
-  // eslint-disable-next-line no-process-env
   if (process.env.NODE_ENV === 'test') {
     axiosConfig.adaptor = (settings) => {
       return new Promise((resolve) => {

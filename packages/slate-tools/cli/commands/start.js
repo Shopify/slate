@@ -66,7 +66,6 @@ Promise.all([
   });
 
 function onCompilerCompile() {
-  // eslint-disable-next-line no-process-env
   if (process.env.NODE_ENV !== 'test') {
     clearConsole();
   }
@@ -78,7 +77,6 @@ function onCompilerDone(stats) {
 
   spinner.stop();
 
-  // eslint-disable-next-line no-process-env
   if (process.env.NODE_ENV !== 'test') {
     clearConsole();
   }

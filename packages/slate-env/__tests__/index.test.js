@@ -1,4 +1,3 @@
-/* eslint-disable no-process-env */
 const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
