@@ -77,9 +77,9 @@ module.exports = {
   'webpack.postcss.plugins': (config) => [
     autoprefixer,
 
-    process.env.NODE_ENV === 'production'
-      ? cssnano(config.get('webpack.cssnano.settings'))
-      : null,
+    ...(process.env.NODE_ENV === 'production'
+      ? [cssnano(config.get('webpack.cssnano.settings'))]
+      : []),
   ],
 
   // Optimization settings for the cssnano plugin
