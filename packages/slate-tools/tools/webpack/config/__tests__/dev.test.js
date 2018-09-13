@@ -1,6 +1,6 @@
-test(`merges contents of 'webpack.config.extend.dev' into webpack config`, () => {
+test(`merges contents of 'webpack.extend' into webpack config`, () => {
   global.slateUserConfig = {
-    'webpack.config.extend.dev': {some: 'value'},
+    'webpack.extend': {some: 'value'},
   };
 
   jest.mock('../parts/core', () => {
@@ -18,8 +18,6 @@ test(`merges contents of 'webpack.config.extend.dev' into webpack config`, () =>
   require('../dev');
 
   expect(merge).toBeCalledWith(
-    expect.arrayContaining([
-      global.slateUserConfig['webpack.config.extend.dev'],
-    ]),
+    expect.arrayContaining([global.slateUserConfig['webpack.extend']]),
   );
 });

@@ -1,3 +1,7 @@
+// Set NODE_ENV so slate.config.js can return different values for
+// production vs development builds
+process.env.NODE_ENV = 'production';
+
 /*
  * Run Webpack with the webpack.prod.conf.js configuration file. Write files to disk.
  *

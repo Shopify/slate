@@ -2,12 +2,13 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const autoprefixer = require('autoprefixer');
+
 const SlateConfig = require('@shopify/slate-config');
 
 const core = require('./parts/core');
 const babel = require('./parts/babel');
 const entry = require('./parts/entry');
+const sass = require('./parts/sass');
 
 const commonExcludes = require('./utilities/common-excludes');
 const getLayoutEntrypoints = require('./utilities/get-layout-entrypoints');
@@ -26,6 +27,7 @@ module.exports = merge([
   core,
   entry,
   babel,
+  sass,
   {
     mode: 'development',
 
@@ -42,35 +44,6 @@ module.exports = merge([
               loader: '@shopify/slate-liquid-asset-loader',
               options: {devServer: true},
             },
-          ],
-        },
-        {
-          test: /\.s[ac]ss$/,
-          exclude: commonExcludes(),
-          use: [
-            {
-              loader: 'style-loader',
-              options: {
-                hmr: true,
-              },
-            },
-            {
-              loader: 'css-loader',
-              // Enabling sourcemaps in styles causes style-loader to inject
-              // styles using a <link> tag instead of <style> tag. This causes
-              // a FOUC content, which can cause issues with JS that is reading
-              // the DOM for styles (width, height, visibility) on page load.
-              options: {importLoaders: 2, sourceMap: false},
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss',
-                sourceMap: false,
-                plugins: () => [autoprefixer],
-              },
-            },
-            {loader: 'sass-loader', options: {sourceMap: false}},
           ],
         },
       ],
@@ -113,5 +86,5 @@ module.exports = merge([
       new HtmlWebpackIncludeLiquidStylesPlugin(),
     ],
   },
-  config.get('webpack.config.extend.dev'),
+  config.get('webpack.extend'),
 ]);
