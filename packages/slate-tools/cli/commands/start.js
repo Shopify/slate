@@ -1,3 +1,7 @@
+// Set NODE_ENV so slate.config.js can return different values for
+// production vs development builds
+process.env.NODE_ENV = 'development';
+
 const argv = require('minimist')(process.argv.slice(2));
 const figures = require('figures');
 const chalk = require('chalk');

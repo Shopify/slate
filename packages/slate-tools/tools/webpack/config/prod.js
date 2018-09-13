@@ -10,7 +10,7 @@ const SlateLiquidAssetsPlugin = require('@shopify/html-webpack-liquid-asset-tags
 const SlateTagPlugin = require('@shopify/slate-tag-webpack-plugin');
 
 const babel = require('./parts/babel');
-const sass = require('./parts/sass.prod');
+const sass = require('./parts/sass');
 const entry = require('./parts/entry');
 const core = require('./parts/core');
 
@@ -113,5 +113,5 @@ module.exports = merge([
       },
     },
   },
-  config.get('webpack.config.extend.prod'),
+  config.get('webpack.extend'),
 ]);

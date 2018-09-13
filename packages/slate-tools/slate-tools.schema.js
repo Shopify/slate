@@ -1,5 +1,7 @@
 const path = require('path');
 const os = require('os');
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
 const commonPaths = require('@shopify/slate-config/common/paths.schema');
 
 module.exports = {
@@ -70,11 +72,15 @@ module.exports = {
 
   // Extends webpack development config using 'webpack-merge'
   // https://www.npmjs.com/package/webpack-merge
-  'webpack.config.extend.dev': {},
+  'webpack.extend': {},
 
-  // Extends webpack production config using 'webpack-merge'
-  // https://www.npmjs.com/package/webpack-merge
-  'webpack.config.extend.prod': {},
+  'webpack.postcss.plugins': (config) => [
+    autoprefixer,
+
+    process.env.NODE_ENV === 'production'
+      ? cssnano(config.get('webpack.cssnano.settings'))
+      : null,
+  ],
 
   // Optimization settings for the cssnano plugin
   'webpack.cssnano.settings': {zindex: false, reduceIdents: false},
