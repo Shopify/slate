@@ -10,6 +10,7 @@ const schema = {
 beforeEach(() => {
   process.chdir(originalCwd);
   global.slateUserConfig = null;
+  global.slateConfigPath = null;
   jest.resetModules();
 });
 
@@ -21,7 +22,40 @@ describe('when the file first is executed it', () => {
 
     require('../index');
 
+    expect(global.slateUserConfig).toBeDefined();
     expect(global.slateUserConfig).toMatchObject(userConfig);
+  });
+
+  test('looks for a slate.config.js file if global.slateConfigPath is defined', () => {
+    global.slateConfigPath = path.resolve(
+      __dirname,
+      'fixtures/slate.config.js',
+    );
+
+    const userConfig = require('./fixtures/slate.config');
+
+    require('../index');
+
+    expect(global.slateUserConfig).toBeDefined();
+    expect(global.slateUserConfig).toMatchObject(userConfig);
+  });
+
+  test('if slate.config.js does not exist at process.cwd or the value specified by global.slateConfigPath, an empty object is returned', () => {
+    require('../index');
+
+    expect(global.slateUserConfig).toBeDefined();
+    expect(global.slateUserConfig).toMatchObject({});
+  });
+
+  test('throws error if there is an error in the slate.config.js file', () => {
+    global.slateConfigPath = path.resolve(
+      __dirname,
+      'fixtures/slateWithError.config.js',
+    );
+
+    expect(() => {
+      require('../index');
+    }).toThrowError(ReferenceError);
   });
 });
 
