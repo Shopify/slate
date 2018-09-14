@@ -31,20 +31,31 @@ module.exports = class SlateConfig {
   }
 
   get(key) {
-    const userConfig = this.userConfig;
-    const value =
-      typeof userConfig[key] === 'undefined'
-        ? this.schema[key]
-        : userConfig[key];
+    const defaultValue = this.schema[key];
+    const userConfigValue = this.userConfig[key];
+    let computedDefaultValue;
 
-    if (typeof value === 'function') {
-      return value(this);
-    } else if (typeof value === 'undefined') {
+    if (
+      typeof defaultValue === 'undefined' &&
+      typeof userConfigValue === 'undefined'
+    ) {
       throw new Error(
         `[slate-config]: A value has not been defined for the key '${key}'`,
       );
+    }
+
+    if (typeof defaultValue === 'function') {
+      computedDefaultValue = defaultValue(this);
     } else {
-      return value;
+      computedDefaultValue = defaultValue;
+    }
+
+    if (typeof userConfigValue === 'undefined') {
+      return computedDefaultValue;
+    } else if (typeof userConfigValue === 'function') {
+      return userConfigValue(this, computedDefaultValue);
+    } else {
+      return userConfigValue;
     }
   }
 };

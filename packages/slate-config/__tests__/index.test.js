@@ -95,13 +95,34 @@ describe('SlateConfig.get()', () => {
     expect(config.get('some.other.key')).toBe(schema['some.other.key']);
   });
 
-  test('if the value is a function, the function is executed with the config instance as the only argument', () => {
+  test('if the value is a function and not specified in this.userConfig, the function is executed with the config instance as the only argument', () => {
     const SlateConfig = require('../index');
     const config = new SlateConfig(schema);
     const value = config.get('some.function');
 
     expect(schema['some.function']).toBeCalledWith(config);
     expect(value).toBe(schema['some.other.key']);
+  });
+
+  test('if the value is specified in this.userConfig and is a function, it is executed with the config instance and the computed default value as arguments', () => {
+    const userConfigValue = 'someNewValue';
+    const userConfigFunction = jest.fn(() => userConfigValue);
+
+    const SlateConfig = require('../index');
+    const config = new SlateConfig(schema);
+    const defaultValue = config.get('some.function');
+
+    global.slateUserConfig = {
+      'some.function': userConfigFunction,
+    };
+
+    const value = config.get('some.function');
+
+    expect(global.slateUserConfig['some.function']).toBeCalledWith(
+      config,
+      defaultValue,
+    );
+    expect(value).toBe(userConfigValue);
   });
 });
 
