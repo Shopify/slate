@@ -10,7 +10,6 @@ const babel = require('./parts/babel');
 const entry = require('./parts/entry');
 const sass = require('./parts/sass');
 
-const commonExcludes = require('./utilities/common-excludes');
 const getLayoutEntrypoints = require('./utilities/get-layout-entrypoints');
 const getTemplateEntrypoints = require('./utilities/get-template-entrypoints');
 const HtmlWebpackIncludeLiquidStylesPlugin = require('../html-webpack-include-chunks');
@@ -37,7 +36,7 @@ module.exports = merge([
       rules: [
         {
           test: /^(?:(?!(css|scss|sass)).)*\.(liquid)$/,
-          exclude: commonExcludes(),
+          exclude: config.get('webpack.commonExcludes'),
           use: [
             {loader: 'extract-loader'},
             {

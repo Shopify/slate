@@ -1,7 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SlateConfig = require('@shopify/slate-config');
-
-const commonExcludes = require('../utilities/common-excludes');
 const config = new SlateConfig(require('../../../../slate-tools.schema'));
 
 const isDevelopment = process.env.NODE_ENV === 'development';
@@ -15,7 +13,7 @@ const part = {
 
 const sassRule = {
   test: /\.s[ac]ss$/,
-  exclude: commonExcludes(),
+  exclude: config.get('webpack.commonExcludes'),
 };
 
 const styleLoader = {

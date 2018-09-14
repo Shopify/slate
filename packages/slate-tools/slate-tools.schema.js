@@ -67,8 +67,16 @@ module.exports = {
   'webpack.babel.configPath': (config) =>
     path.join(config.get('paths.theme'), '.babelrc'),
 
+  // Sometimes packages in node_modules need to be transpiled by Babel. To
+  // allow this, change this config option so that it includes the following pattern:
+  //
+  // /node_modules\/(?!(MY-MODULE|ANOTHER-ONE)\/).*/
+  //
+  // See https://github.com/webpack/webpack/issues/2031 for more details
+  'webpack.babel.exclude': (config) => config.get('webpack.commonExcludes'),
+
   // Paths to exclude for all webpack loaders
-  'webpack.commonExcludes': ['node_modules', 'assets/static/'],
+  'webpack.commonExcludes': [/node_modules/, /assets\/static/],
 
   // Extends webpack development config using 'webpack-merge'
   // https://www.npmjs.com/package/webpack-merge

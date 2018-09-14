@@ -5,8 +5,6 @@ const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SlateConfig = require('@shopify/slate-config');
-
-const commonExcludes = require('../utilities/common-excludes');
 const config = new SlateConfig(require('../../../../slate-tools.schema'));
 
 const extractLiquidStyles = new ExtractTextPlugin(
@@ -86,7 +84,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: commonExcludes(),
+        exclude: config.get('webpack.commonExcludes'),
         loader: 'hmr-alamo-loader',
       },
       {
@@ -96,7 +94,7 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        exclude: commonExcludes(),
+        exclude: config.get('webpack.commonExcludes'),
         use: [
           {loader: 'file-loader', options: {name: '[name].[ext]'}},
           {loader: 'img-loader'},
@@ -104,7 +102,10 @@ module.exports = {
       },
       {
         test: /\.(liquid|json)$/,
-        exclude: commonExcludes('assets/styles'),
+        exclude: [
+          new RegExp('assets/styles'),
+          ...config.get('webpack.commonExcludes'),
+        ],
         loader: 'file-loader',
         options: {
           name: '../[path][name].[ext]',
@@ -120,7 +121,7 @@ module.exports = {
       },
       {
         test: /(css|scss|sass)\.liquid$/,
-        exclude: commonExcludes(),
+        exclude: config.get('webpack.commonExcludes'),
         use: extractLiquidStyles.extract(['concat-style-loader']),
       },
     ],
