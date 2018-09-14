@@ -82,6 +82,7 @@ module.exports = {
   // https://www.npmjs.com/package/webpack-merge
   'webpack.extend': {},
 
+  // Array of PostCSS plugins which is passed to the Webpack PostCSS Loader
   'webpack.postcss.plugins': (config) => [
     autoprefixer,
 
