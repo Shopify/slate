@@ -1,5 +1,56 @@
 # Change Log
 
+## v1.0.0-beta.8 (2018-09-14)
+
+#### :broken_heart: Breaking
+
+You will need to update your `slate.config.js` to the new, simplified, more powerful format. For more information see the new [Slate Configuration](https://github.com/Shopify/slate/wiki/Slate-Configuration) wiki page.
+
+There is no longer seperate development or production configurations. A configuration can return different values for prod or dev by checking if `process.env.NODE_ENV === 'production'` or `process.env.NODE_ENV === 'development'`.
+
+#### :rocket: Enhancement
+
+* `slate-config`, `slate-cssvar-loader`, `slate-env`, `slate-rc`, `slate-sync`, `slate-tools`
+  * [#725](https://github.com/Shopify/slate/pull/725) Simplify @shopify/slate-config and refactor where it's used. ([@t-kelly](https://github.com/t-kelly))
+
+#### :bug: Bug Fix
+
+* `slate-config`
+  * [#750](https://github.com/Shopify/slate/pull/750) Throw any errors that occur in slate.config.js. ([@t-kelly](https://github.com/t-kelly))
+
+#### :memo: Documentation
+
+* `slate-config`
+  * [#729](https://github.com/Shopify/slate/pull/729) Update @shopify/slate-config README. ([@t-kelly](https://github.com/t-kelly))
+
+#### :house: Internal
+
+* `slate-config`
+  * [#756](https://github.com/Shopify/slate/pull/756) Pass computed default value to slate.config.js functions. ([@t-kelly](https://github.com/t-kelly))
+* `slate-tools`
+  * [#755](https://github.com/Shopify/slate/pull/755) Add 'webpack.babel.exclude' config. ([@t-kelly](https://github.com/t-kelly))
+  * [#753](https://github.com/Shopify/slate/pull/753) Add 'webpack.postcss.plugins' config to set plugins for PostCSS. ([@t-kelly](https://github.com/t-kelly))
+  * [#746](https://github.com/Shopify/slate/pull/746) Add tests to Eslint config items. ([@t-kelly](https://github.com/t-kelly))
+  * [#745](https://github.com/Shopify/slate/pull/745) Add tests to prettier config items. ([@t-kelly](https://github.com/t-kelly))
+  * [#744](https://github.com/Shopify/slate/pull/744) Add config tests for stylelint. ([@t-kelly](https://github.com/t-kelly))
+  * [#743](https://github.com/Shopify/slate/pull/743) Themelint config test. ([@t-kelly](https://github.com/t-kelly))
+  * [#742](https://github.com/Shopify/slate/pull/742) Add test for 'webpack.entrypoints' config. ([@t-kelly](https://github.com/t-kelly))
+  * [#740](https://github.com/Shopify/slate/pull/740) Add tests for 'webpack.config.extend.prod' and 'webpack.config.extend.dev'. ([@t-kelly](https://github.com/t-kelly))
+  * [#739](https://github.com/Shopify/slate/pull/739) Add test for 'webpack.commonExcludes' config. ([@t-kelly](https://github.com/t-kelly))
+  * [#738](https://github.com/Shopify/slate/pull/738) Add tests for cssnano config item. ([@t-kelly](https://github.com/t-kelly))
+* `slate-analytics`, `slate-env`, `slate-tools`
+  * [#752](https://github.com/Shopify/slate/pull/752) Turn off no-process-env eslint rule. ([@t-kelly](https://github.com/t-kelly))
+* `slate-config`, `slate-tools`
+  * [#737](https://github.com/Shopify/slate/pull/737) Add tests to babel config items. ([@t-kelly](https://github.com/t-kelly))
+* `slate-analytics`, `slate-tools`
+  * [#731](https://github.com/Shopify/slate/pull/731) Stop clearing console when testing. ([@t-kelly](https://github.com/t-kelly))
+* `slate-config`, `slate-cssvar-loader`, `slate-tools`
+  * [#730](https://github.com/Shopify/slate/pull/730) Correct tests to use global.slateUserConfig. ([@t-kelly](https://github.com/t-kelly))
+
+#### Committers: 1
+
+* Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
 ## v1.0.0-beta.7 (2018-09-04)
 
 #### :rocket: Enhancement
