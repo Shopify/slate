@@ -136,6 +136,7 @@ module.exports = {
       [
         {
           from: config.get('paths.theme.src.svgs'),
+          ignore: ['.DS_Store'],
           to: `${config.get('paths.theme.dist.snippets')}/[name].liquid`,
         },
         {
