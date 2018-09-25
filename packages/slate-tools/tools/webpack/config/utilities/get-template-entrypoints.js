@@ -25,6 +25,13 @@ const VALID_LIQUID_TEMPLATES = [
   'search',
 ];
 
+function isValidTemplate(filename) {
+  const name = VALID_LIQUID_TEMPLATES.filter((template) =>
+    filename.startsWith(`${template}.`),
+  );
+  return Boolean(name);
+}
+
 module.exports = function() {
   const entrypoints = {};
 
@@ -35,7 +42,8 @@ module.exports = function() {
       'templates',
       `${name}.js`,
     );
-    if (VALID_LIQUID_TEMPLATES.includes(name) && fs.existsSync(jsFile)) {
+
+    if (isValidTemplate(name) && fs.existsSync(jsFile)) {
       entrypoints[`template.${name}`] = jsFile;
     }
   });
