@@ -2,11 +2,10 @@
 const chalk = require('chalk');
 const ip = require('ip');
 const inquirer = require('inquirer');
-const slateEnv = require('@shopify/slate-env');
-const {event} = require('@shopify/slate-analytics');
-const {fetchMainThemeId} = require('@shopify/slate-sync');
 const figures = require('figures');
-const {argv} = require('yargs');
+const SlateConfig = require('@shopify/slate-config');
+
+const config = new SlateConfig(require('../../slate-tools.schema'));
 
 const question = {
   type: 'confirm',
@@ -18,7 +17,9 @@ const question = {
 module.exports = async function promptDisableExternalTesting() {
   let address = ip.address();
 
-  if (!ip.isPrivate(address)) {
+  if (!config.get('network.externalTesting')) {
+    address = 'localhost';
+  } else if (!ip.isPrivate(address)) {
     console.log(
       `\n${chalk.yellow(
         figures.warning

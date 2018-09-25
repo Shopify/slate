@@ -21,6 +21,12 @@ module.exports = {
   'eslint.config': (config) =>
     path.resolve(config.get('paths.theme'), '.eslintrc'),
 
+  // Slate will reference files using your local IP address instead of localhost.
+  // This is mostly to get around SSL complications when trying to preview
+  // your development store from an external device like your phone. Use this
+  // config if you want to disable using your local IP and external testing.
+  'network.externalTesting': true,
+
   // Default port used for asset server. If it is not available, the next port
   // that is available is used.
   'network.startPort': 3000,
