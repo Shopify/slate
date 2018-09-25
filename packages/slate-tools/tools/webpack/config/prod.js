@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const SlateConfig = require('@shopify/slate-config');
@@ -13,6 +14,7 @@ const babel = require('./parts/babel');
 const sass = require('./parts/sass');
 const entry = require('./parts/entry');
 const core = require('./parts/core');
+const css = require('./parts/css');
 
 const packageJson = require('../../../package.json');
 const getChunkName = require('../get-chunk-name');
@@ -26,6 +28,7 @@ module.exports = merge([
   entry,
   babel,
   sass,
+  css,
   {
     mode: 'production',
     devtool: 'hidden-source-map',
@@ -47,6 +50,10 @@ module.exports = merge([
     },
 
     plugins: [
+      new MiniCssExtractPlugin({
+        filename: '[name].css.liquid',
+      }),
+
       new CleanWebpackPlugin(['dist'], {
         root: config.get('paths.theme'),
       }),

@@ -11,8 +11,8 @@ const part = {
   plugins: [],
 };
 
-const sassRule = {
-  test: /\.s[ac]ss$/,
+const cssRule = {
+  test: /\.css$/,
 };
 
 const styleLoader = {
@@ -24,36 +24,30 @@ const styleLoader = {
 
 const cssLoader = {
   loader: 'css-loader',
-  options: {
-    importLoaders: 2,
-    sourceMap: config.get('webpack.sourceMap.styles'),
-  },
+  // Enabling sourcemaps in styles when using HMR causes style-loader to inject
+  // styles using a <link> tag instead of <style> tag. This causes
+  // a FOUC content, which can cause issues with JS that is reading
+  // the DOM for styles (width, height, visibility) on page load.
+  options: {sourceMap: !isDev},
 };
 
 const postcssLoader = {
   loader: 'postcss-loader',
   options: {
     ident: 'postcss',
-    sourceMap: config.get('webpack.sourceMap.styles'),
+    sourceMap: !isDev,
     plugins: config.get('webpack.postcss.plugins'),
   },
 };
 
 const cssVarLoader = {loader: '@shopify/slate-cssvar-loader'};
 
-const sassLoader = {
-  loader: 'sass-loader',
-  options: {sourceMap: config.get('webpack.sourceMap.styles')},
-};
-
-sassRule.use = [
+cssRule.use = [
   isDev ? styleLoader : MiniCssExtractPlugin.loader,
   cssVarLoader,
   cssLoader,
   postcssLoader,
-  sassLoader,
 ];
-
-part.module.rules.push(sassRule);
+part.module.rules.push(cssRule);
 
 module.exports = part;
