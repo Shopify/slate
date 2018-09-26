@@ -88,6 +88,14 @@ module.exports = {
   // https://www.npmjs.com/package/webpack-merge
   'webpack.extend': {},
 
+  // Enabling sourcemaps in styles when using Hot Module Reloading causes
+  // style-loader to inject styles using a <link> tag instead of <style> tag.
+  // This causes a FOUC content, which can cause issues with JS that is reading
+  // the DOM for styles (width, height, visibility) on page load.
+  'webpack.sourceMap.styles': () => {
+    return process.env.NODE_ENV === 'production';
+  },
+
   // Array of PostCSS plugins which is passed to the Webpack PostCSS Loader
   'webpack.postcss.plugins': (config) => [
     autoprefixer,

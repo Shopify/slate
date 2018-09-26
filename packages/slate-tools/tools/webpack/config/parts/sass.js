@@ -25,25 +25,27 @@ const styleLoader = {
 
 const cssLoader = {
   loader: 'css-loader',
-  // Enabling sourcemaps in styles when using HMR causes style-loader to inject
-  // styles using a <link> tag instead of <style> tag. This causes
-  // a FOUC content, which can cause issues with JS that is reading
-  // the DOM for styles (width, height, visibility) on page load.
-  options: {importLoaders: 2, sourceMap: !isDevelopment},
+  options: {
+    importLoaders: 2,
+    sourceMap: config.get('webpack.sourceMap.styles'),
+  },
 };
 
 const postcssLoader = {
   loader: 'postcss-loader',
   options: {
     ident: 'postcss',
-    sourceMap: !isDevelopment,
+    sourceMap: config.get('webpack.sourceMap.styles'),
     plugins: config.get('webpack.postcss.plugins'),
   },
 };
 
 const cssVarLoader = {loader: '@shopify/slate-cssvar-loader'};
 
-const sassLoader = {loader: 'sass-loader', options: {sourceMap: false}};
+const sassLoader = {
+  loader: 'sass-loader',
+  options: {sourceMap: config.get('webpack.sourceMap.styles')},
+};
 
 const extractStyles = new ExtractTextPlugin({
   filename: '[name].css.liquid',
