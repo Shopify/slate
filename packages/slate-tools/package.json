@@ -2,7 +2,8 @@
   "name": "@shopify/slate-tools",
   "version": "1.0.0-beta.8",
   "description": "A modern development toolkit for Shopify themes",
-  "repository": "https://github.com/Shopify/slate/tree/1.x/packages/slate-tools",
+  "repository":
+    "https://github.com/Shopify/slate/tree/1.x/packages/slate-tools",
   "license": "MIT",
   "author": "Shopify",
   "bugs": {
@@ -74,10 +75,10 @@
     "uglifyjs-webpack-plugin": "^1.0.1",
     "uuid": "^3.2.1",
     "webpack": "^4.1.1",
-    "webpack-dev-middleware": "1.10.2",
+    "webpack-dev-middleware": "3.4.0",
     "webpack-hot-middleware": "2.21.2",
     "webpack-merge": "4.1.2",
-    "write-file-webpack-plugin": "4.2.0",
+    "write-file-webpack-plugin": "4.4.0",
     "yamljs": "0.2.10",
     "yargs": "^11.0.0"
   },

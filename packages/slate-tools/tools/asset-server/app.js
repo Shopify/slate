@@ -8,7 +8,7 @@ module.exports = class App {
     const app = express();
 
     app.webpackDevMiddleware = webpackDevMiddleware(compiler, {
-      quiet: true,
+      logLevel: 'silent',
       reload: true,
     });
     app.webpackHotMiddleware = webpackHotMiddleware(compiler, {
