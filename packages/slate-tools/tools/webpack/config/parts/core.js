@@ -106,7 +106,6 @@ module.exports = {
           new RegExp('assets/styles'),
           new RegExp('sections'),
           new RegExp('snippets'),
-
           ...config.get('webpack.commonExcludes'),
         ],
         loader: 'file-loader',
