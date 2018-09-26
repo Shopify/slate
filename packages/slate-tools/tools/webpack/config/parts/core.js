@@ -118,14 +118,14 @@ module.exports = {
         loader: 'file-loader',
         options: {
           name: `../snippets/[name].[ext]`,
-        }
+        },
       },
       {
         test: /sections\/.*\.liquid$/,
         loader: 'file-loader',
         options: {
           name: `../sections/[name].[ext]`,
-        }
+        },
       },
       {
         test: /assets\/static\//,
