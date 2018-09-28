@@ -1,5 +1,32 @@
 # Change Log
 
+## v1.0.0-beta.9 (2018-09-28)
+
+In addition to this beta release, we shipped v1 of [`theme-cart`](https://github.com/Shopify/theme-scripts/edit/master/packages/theme-cart), a tiny library (<1kb min+gzip that facilitates requests to [Shopify's Cart API](https://help.shopify.com/en/themes/development/getting-started/using-ajax-api) and makes it easier to manage cart state. Check out the other packages in the repo while you're there too!
+
+#### :rocket: Enhancement
+
+* `slate-tools`
+  * [#773](https://github.com/Shopify/slate/pull/773) Add configuration to disable external testing using local IP. ([@t-kelly](https://github.com/t-kelly))
+
+#### :bug: Bug Fix
+
+* `slate-tools`
+  * [#774](https://github.com/Shopify/slate/pull/774) Ignore copying .DS_Store on build. ([@t-kelly](https://github.com/t-kelly))
+  * [#771](https://github.com/Shopify/slate/pull/771) Fix alternative template bundles. ([@t-kelly](https://github.com/t-kelly))
+
+#### :house: Internal
+
+* Other
+  * [#786](https://github.com/Shopify/slate/pull/786) Add Travis CI notifications for Slack. ([@chrisberthe](https://github.com/chrisberthe))
+* `slate-tools`
+  * [#779](https://github.com/Shopify/slate/pull/779) Update dependencies to remove Tapable.plugin warning. ([@t-kelly](https://github.com/t-kelly))
+
+#### Committers: 2
+
+* Chris Berthe ([chrisberthe](https://github.com/chrisberthe))
+* Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
 ## v1.0.0-beta.8 (2018-09-14)
 
 #### :broken_heart: Breaking
