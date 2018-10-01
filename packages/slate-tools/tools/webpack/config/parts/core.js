@@ -88,6 +88,10 @@ module.exports = {
         loader: 'hmr-alamo-loader',
       },
       {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
+      },
+      {
         test: /fonts\/.*\.(eot|svg|ttf|woff|woff2|otf)$/,
         exclude: /node_modules/,
         loader: 'file-loader',
