@@ -3,10 +3,10 @@ const clearConsole = require('react-dev-utils/clearConsole');
 const rc = require('@shopify/slate-rc');
 const slateEnv = require('@shopify/slate-env');
 const axios = require('axios');
+const argv = require('yargs').argv;
 const prompt = require('./prompt');
 const {validateEmail} = require('./utils');
 const packageJson = require('./package.json');
-const argv = require('yargs').argv;
 
 async function init() {
   let config = rc.get() || rc.generate();
