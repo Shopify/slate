@@ -58,7 +58,8 @@ module.exports = function() {
         'customers',
         `${name}.js`,
       );
-      if (VALID_LIQUID_TEMPLATES.includes(name) && fs.existsSync(jsFile)) {
+
+      if (isValidTemplate(name) && fs.existsSync(jsFile)) {
         entrypoints[`template.${name}`] = jsFile;
       }
     });
