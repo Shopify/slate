@@ -29,6 +29,12 @@
     {%- else -%}
       <link rel="prefetch" href="<%= src %>" as="script">
     {%- endif -%}
+  <% } else if (typeof htmlWebpackPlugin.options.liquidTemplates[chunk].includes('customers/')) { %>
+    {%- if template == 'customers/<%= chunk.split('.').slice(1).join('.') %>' -%}
+      <script type="text/javascript" src="<%= src %>" defer></script>
+    {%- else -%}
+      <link rel="prefetch" href="<%= src %>" as="script">
+    {%- endif -%}
   <% } else if (typeof htmlWebpackPlugin.options.liquidTemplates[chunk] !== 'undefined') { %>
     {%- if template == '<%= chunk.split('.').slice(1).join('.') %>' -%}
       <script type="text/javascript" src="<%= src %>" defer></script>
