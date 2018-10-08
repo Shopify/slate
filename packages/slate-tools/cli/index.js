@@ -19,11 +19,23 @@ async function init() {
 
   switch (script) {
     case 'build':
-    case 'deploy':
     case 'start':
     case 'zip':
     case 'lint':
     case 'format':
+      result = spawn.sync(
+        'node',
+        [require.resolve(`./commands/${script}`)].concat(args),
+        {stdio: 'inherit'},
+      );
+      process.exit(result.status);
+      break;
+    case 'deploy':
+      result = spawn.sync(
+        'node',
+        [require.resolve(`./commands/build`)].concat(args),
+        {stdio: 'inherit'},
+      );
       result = spawn.sync(
         'node',
         [require.resolve(`./commands/${script}`)].concat(args),

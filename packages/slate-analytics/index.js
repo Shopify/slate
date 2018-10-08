@@ -1,11 +1,12 @@
 const uuidGenerator = require('uuid/v4');
 const clearConsole = require('react-dev-utils/clearConsole');
 const rc = require('@shopify/slate-rc');
-const {getUserEmail} = require('@shopify/slate-env');
+const slateEnv = require('@shopify/slate-env');
 const axios = require('axios');
 const prompt = require('./prompt');
 const {validateEmail} = require('./utils');
 const packageJson = require('./package.json');
+const argv = require('yargs').argv;
 
 async function init() {
   let config = rc.get() || rc.generate();
@@ -21,7 +22,10 @@ async function init() {
   ) {
     if (typeof config.tracking === 'undefined') {
       // If new user
-      let email = getUserEmail();
+      // Load environtment variables
+      slateEnv.assign(argv.env);
+      slateEnv.validate();
+      let email = slateEnv.getUserEmail();
 
       if (!validateEmail(email)) {
         const answer = await prompt.forNewConsent();
