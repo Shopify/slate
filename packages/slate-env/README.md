@@ -26,6 +26,9 @@ SLATE_THEME_ID=
 
 # A list of file patterns to ignore, with each list item separated by ':'
 SLATE_IGNORE_FILES=
+
+# The environment variable key which contains the email of the user to register for Slate analytics
+SLATE_USER_EMAIL=
 ```
 
 # Store / Environment Configuration Tips
