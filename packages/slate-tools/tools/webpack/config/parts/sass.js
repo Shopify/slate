@@ -1,8 +1,8 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const SlateConfig = require('@shopify/slate-config');
 const config = new SlateConfig(require('../../../../slate-tools.schema'));
 
-const isDevelopment = process.env.NODE_ENV === 'development';
+const isDev = process.env.NODE_ENV === 'development';
 
 const part = {
   module: {
@@ -19,7 +19,7 @@ const sassRule = {
 const styleLoader = {
   loader: 'style-loader',
   options: {
-    hmr: isDevelopment,
+    hmr: isDev,
   },
 };
 
@@ -47,21 +47,19 @@ const sassLoader = {
   options: {sourceMap: config.get('webpack.sourceMap.styles')},
 };
 
-const extractStyles = new ExtractTextPlugin({
+const extractStyles = new MiniCssExtractPlugin({
   filename: '[name].css.liquid',
-  allChunks: true,
 });
 
-if (isDevelopment) {
-  sassRule.use = [styleLoader, cssLoader, postcssLoader, sassLoader];
-  part.module.rules.push(sassRule);
-} else {
-  sassRule.use = extractStyles.extract({
-    fallback: styleLoader,
-    use: [cssVarLoader, cssLoader, postcssLoader, sassLoader],
-  });
-  part.module.rules.push(sassRule);
-  part.plugins.push(extractStyles);
-}
+sassRule.use = [
+  isDev ? styleLoader : MiniCssExtractPlugin.loader,
+  cssVarLoader,
+  cssLoader,
+  postcssLoader,
+  sassLoader,
+];
+
+part.module.rules.push(sassRule);
+part.plugins.push(extractStyles);
 
 module.exports = part;
