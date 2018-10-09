@@ -13,7 +13,6 @@ const part = {
 
 const sassRule = {
   test: /\.s[ac]ss$/,
-  exclude: config.get('webpack.commonExcludes'),
 };
 
 const styleLoader = {
