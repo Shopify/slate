@@ -1,4 +1,3 @@
-
 <% for (var css in htmlWebpackPlugin.files.css) { %>
   <% var basename = htmlWebpackPlugin.files.css[css].split('/').reverse()[0]; %>
   <% var chunkName = basename.replace('.scss', '').replace('.css', '').replace('.styleLiquid', ''); %>
@@ -8,11 +7,19 @@
     <% var src = `{{ '${basename}' | asset_url }}` %>
 
     <% if (typeof htmlWebpackPlugin.options.liquidTemplates[chunkName] !== 'undefined') { %>
-      {%- if template == '<%= chunkName.split('.').slice(1).join('.') %>' -%}
-        <link type="text/css" href="<%= src %>" rel="stylesheet">
-      {%- else -%}
-        <link rel="prefetch" href="<%= src %>" as="style">
-      {%- endif -%}
+      <% if (htmlWebpackPlugin.options.liquidTemplates[chunkName].includes('customers/')) { %>
+        {%- if template == 'customers/<%= chunkName.split('.').slice(1).join('.') %>' -%}
+          <link type="text/css" href="<%= src %>" rel="stylesheet">
+        {%- else -%}
+          <link rel="prefetch" href="<%= src %>" as="style">
+        {%- endif -%}
+      <% } else { %>
+        {%- if template == '<%= chunkName.split('.').slice(1).join('.') %>' -%}
+          <link type="text/css" href="<%= src %>" rel="stylesheet">
+        {%- else -%}
+          <link rel="prefetch" href="<%= src %>" as="style">
+        {%- endif -%}
+      <% } %>
     <% } else if (typeof htmlWebpackPlugin.options.liquidLayouts[chunkName] !== 'undefined') { %>
       {%- if layout == '<%= chunkName.split('.')[1] %>' -%}
         <link type="text/css" href="<%= src %>" rel="stylesheet">
@@ -25,7 +32,11 @@
 
       <% pages.forEach(function(page){ %>
         <% if (typeof htmlWebpackPlugin.options.liquidTemplates[page] !== 'undefined') { %>
-          <% conditions.push("template == '" + page.split('.').slice(1).join('.') + "'") %>
+          <% if (htmlWebpackPlugin.options.liquidTemplates[page].includes('customers/')) { %>
+            <% conditions.push("template == 'customers/" + page.split('.').slice(1).join('.') + "'") %>
+          <% } else { %>
+            <% conditions.push("template == '" + page.split('.').slice(1).join('.') + "'") %>
+          <% } %>
         <% } else if (typeof htmlWebpackPlugin.options.liquidLayouts[page] !== 'undefined') { %>
           <% conditions.push("layout == '" + page.split('.')[1] + "'") %>
         <% } %>

@@ -18,7 +18,11 @@
 
     <% pages.forEach(function(page){ %>
       <% if (typeof htmlWebpackPlugin.options.liquidTemplates[page] !== 'undefined') { %>
-        <% conditions.push("template == '" + page.split('.').slice(1).join('.') + "'") %>
+        <% if (htmlWebpackPlugin.options.liquidTemplates[page].includes('customers/')) { %>
+          <% conditions.push("template == 'customers/" + page.split('.').slice(1).join('.') + "'") %>
+        <% } else { %>
+          <% conditions.push("template == '" + page.split('.').slice(1).join('.') + "'") %>
+        <% } %>
       <% } else if (typeof htmlWebpackPlugin.options.liquidLayouts[page] !== 'undefined') { %>
         <% conditions.push("layout == '" + page.split('.')[1] + "'") %>
       <% } %>
@@ -29,18 +33,20 @@
     {%- else -%}
       <link rel="prefetch" href="<%= src %>" as="script">
     {%- endif -%}
-  <% } else if (typeof htmlWebpackPlugin.options.liquidTemplates[chunk].includes('customers/')) { %>
-    {%- if template == 'customers/<%= chunk.split('.').slice(1).join('.') %>' -%}
-      <script type="text/javascript" src="<%= src %>" defer></script>
-    {%- else -%}
-      <link rel="prefetch" href="<%= src %>" as="script">
-    {%- endif -%}
   <% } else if (typeof htmlWebpackPlugin.options.liquidTemplates[chunk] !== 'undefined') { %>
-    {%- if template == '<%= chunk.split('.').slice(1).join('.') %>' -%}
-      <script type="text/javascript" src="<%= src %>" defer></script>
-    {%- else -%}
-      <link rel="prefetch" href="<%= src %>" as="script">
-    {%- endif -%}
+    <% if (htmlWebpackPlugin.options.liquidTemplates[chunk].includes('customers/')) { %>
+      {%- if template == 'customers/<%= chunk.split('.').slice(1).join('.') %>' -%}
+        <script type="text/javascript" src="<%= src %>" defer></script>
+      {%- else -%}
+        <link rel="prefetch" href="<%= src %>" as="script">
+      {%- endif -%}
+    <% } else { %>
+      {%- if template == '<%= chunk.split('.').slice(1).join('.') %>' -%}
+        <script type="text/javascript" src="<%= src %>" defer></script>
+      {%- else -%}
+        <link rel="prefetch" href="<%= src %>" as="script">
+      {%- endif -%}
+    <% } %>
   <% } else { %>
     <script type="text/javascript" src="<%= src %>" defer></script>
   <% } %>
