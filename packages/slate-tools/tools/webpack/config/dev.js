@@ -9,6 +9,7 @@ const core = require('./parts/core');
 const babel = require('./parts/babel');
 const entry = require('./parts/entry');
 const sass = require('./parts/sass');
+const css = require('./parts/css');
 
 const getLayoutEntrypoints = require('./utilities/get-layout-entrypoints');
 const getTemplateEntrypoints = require('./utilities/get-template-entrypoints');
@@ -27,6 +28,7 @@ module.exports = merge([
   entry,
   babel,
   sass,
+  css,
   {
     mode: 'development',
 
