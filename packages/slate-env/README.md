@@ -25,6 +25,11 @@ SLATE_PASSWORD=
 SLATE_THEME_ID=
 
 # A list of file patterns to ignore, with each list item separated by ':'
+# These patterns are relative to the `dist/` directory of your project. Slate
+# performs a number of transformations to files in the `src/` before exporting
+# them to `dist/`, so the best way to make sure a file will be ignored is to run
+# `node node_modules/.bin/slate-tools build` or `yarn build` and inspect the
+# contents for the `dist/` directory for files you wish to ignore.
 SLATE_IGNORE_FILES=
 
 # The email of the user to register for Slate analytics. Skips prompt for email.
