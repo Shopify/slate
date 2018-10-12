@@ -1,5 +1,30 @@
 # Change Log
 
+## v1.0.0-beta.10 (2018-10-12)
+
+#### :bug: Bug Fix
+
+* `slate-tools`
+  * [#808](https://github.com/Shopify/slate/pull/808) Support customers level template bundles. ([@tshamz](https://github.com/tshamz))
+  * [#810](https://github.com/Shopify/slate/pull/810) Add rule to webpack config to handle .css files. ([@t-kelly](https://github.com/t-kelly))
+* `slate-env`, `slate-sync`, `slate-tools`
+  * [#812](https://github.com/Shopify/slate/pull/812) Fix SLATE_USER_EMAIL env variable not being set for all commands. ([@t-kelly](https://github.com/t-kelly))
+
+#### :memo: Documentation
+
+* `slate-env`
+  * [#814](https://github.com/Shopify/slate/pull/814) Clarify how the the SLATE_IGNORE_FILES env variable works. ([@t-kelly](https://github.com/t-kelly))
+
+#### :house: Internal
+
+* `slate-tools`
+  * [#815](https://github.com/Shopify/slate/pull/815) Remove extra } character in settings-data prompt. ([@t-kelly](https://github.com/t-kelly))
+
+#### Committers: 2
+
+* Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+* Tyler Shambora ([tshamz](https://github.com/tshamz))
+
 ## v1.0.0-beta.9 (2018-09-28)
 
 In addition to this beta release, we shipped v1 of [`theme-cart`](https://github.com/Shopify/theme-scripts/edit/master/packages/theme-cart), a tiny library (<1kb min+gzip that facilitates requests to [Shopify's Cart API](https://help.shopify.com/en/themes/development/getting-started/using-ajax-api) and makes it easier to manage cart state. Check out the other packages in the repo while you're there too!
