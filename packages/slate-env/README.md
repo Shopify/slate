@@ -26,6 +26,9 @@ SLATE_THEME_ID=
 
 # A list of file patterns to ignore, with each list item separated by ':'
 SLATE_IGNORE_FILES=
+
+# The email of the user to register for Slate analytics. Skips prompt for email.
+SLATE_USER_EMAIL=
 ```
 
 # Store / Environment Configuration Tips

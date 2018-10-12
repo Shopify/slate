@@ -24,7 +24,26 @@ function maybeDeploy() {
   return Promise.resolve();
 }
 
+function _validateEnvValues() {
+  const result = slateEnv.validate();
+
+  if (!result.isValid) {
+    console.log(
+      chalk.red(
+        `Some values in environment '${slateEnv.getEnvNameValue()}' are invalid:`,
+      ),
+    );
+    result.errors.forEach((error) => {
+      console.log(chalk.red(`- ${error}`));
+    });
+
+    process.exit(1);
+  }
+}
+
 function _generateConfigFlags() {
+  _validateEnvValues();
+
   const flags = {
     '--password': slateEnv.getPasswordValue(),
     '--themeid': slateEnv.getThemeIdValue(),
@@ -129,6 +148,8 @@ function promiseThemekitDeploy(cmd, files) {
  * @return        Promise Reason for abort or the main theme ID
  */
 function fetchMainThemeId() {
+  _validateEnvValues();
+
   return new Promise((resolve, reject) => {
     https.get(
       {

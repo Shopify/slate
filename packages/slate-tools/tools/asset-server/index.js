@@ -7,7 +7,6 @@ const SlateConfig = require('@shopify/slate-config');
 const App = require('./app');
 const Client = require('./client');
 const {sslKeyCert} = require('../utilities');
-const setEnvironment = require('../../tools/webpack/set-slate-env');
 const config = new SlateConfig(require('../../slate-tools.schema'));
 
 module.exports = class DevServer {
@@ -20,7 +19,6 @@ module.exports = class DevServer {
     this.domain = options.domain;
     this.options = options;
     this.port = options.port;
-    this.env = setEnvironment(options.env);
     this.compiler = webpack(options.webpackConfig);
     this.app = new App(this.compiler);
     this.client = new Client();
