@@ -32,7 +32,7 @@ class DevServer {
       https: {key: getSSLKeyPath(), cert: getSSLCertPath()},
       logLevel: 'silent',
       socket: {
-        domain: `${this.domain}:${this.port}`,
+        domain: `https://${this.domain}:${this.port}`,
       },
       ui: {
         port: this.uiPort,
