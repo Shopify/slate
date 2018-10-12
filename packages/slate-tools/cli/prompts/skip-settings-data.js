@@ -67,7 +67,7 @@ module.exports = async function(files) {
   console.log(
     `   Or to disable this prompt, add the following to your slate.config.js file:\n`,
   );
-  console.log(`      ${chalk.cyan(`'cli.promptSettings': false }`)}\n`);
+  console.log(`      ${chalk.cyan(`'cli.promptSettings': false`)}\n`);
 
   const answer = await inquirer.prompt([question]);
 
