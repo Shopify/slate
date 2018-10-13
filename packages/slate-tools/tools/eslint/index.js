@@ -21,7 +21,7 @@ function eslint({fix} = {}) {
   execSync(
     // prettier-ignore
     `${JSON.stringify(executable)} . ${extensions} ${ignorePath} ${eslintConfig}` +
-    `${fixFlag} --max-warnings 0 ` +
+    ` ${fixFlag} --max-warnings 0 ` +
     `--cache true --cache-location ${JSON.stringify(`${cachePath}${path.sep}`)}`,
     {stdio: 'inherit'},
   );
