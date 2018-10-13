@@ -116,6 +116,12 @@ function _validateStore() {
         `${config.get('env.keys.store')} must be a valid .myshopify.com URL`,
       ),
     );
+  } else if (store.slice(-1) === '/') {
+    errors.push(
+      new Error(
+        `${config.get('env.keys.store')} must not end with a trailing slash`,
+      ),
+    );
   }
 
   return errors;

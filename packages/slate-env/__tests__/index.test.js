@@ -328,6 +328,20 @@ describe('Slate Env', () => {
         );
       });
 
+      test('the store URL environment variable does not end with a trailing slash', () => {
+        ['shop1.myshopify.com', 'shop1.myshopify.com/'].forEach((value) => {
+          setVars(
+            Object.assign({}, TEST_ENV, {
+              [config.get('env.keys.store')]: value,
+            }),
+          );
+          const result = slateEnv.validate();
+          expect(result.errors).toHaveLength(
+            value === 'shop1.myshopify.com/' ? 1 : 0,
+          );
+        });
+      });
+
       test('the store API password environment variable is empty', () => {
         setVars(
           Object.assign({}, TEST_ENV, {
