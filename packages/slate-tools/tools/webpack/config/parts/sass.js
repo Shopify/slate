@@ -47,8 +47,7 @@ const sassLoader = {
 };
 
 sassRule.use = [
-  isDev ? styleLoader : MiniCssExtractPlugin.loader,
-  cssVarLoader,
+  ...(isDev ? [styleLoader] : [MiniCssExtractPlugin.loader, cssVarLoader]),
   cssLoader,
   postcssLoader,
   sassLoader,
