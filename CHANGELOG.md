@@ -1,5 +1,23 @@
 # Change Log
 
+## v1.0.0-beta.11 (2018-10-16)
+
+#### :bug: Bug Fix
+
+* `slate-tools`
+  * [#835](https://github.com/Shopify/slate/pull/835) Fix cssVarLoader running on development build. ([@t-kelly](https://github.com/t-kelly))
+  * [#820](https://github.com/Shopify/slate/pull/820) Fix browser sync ui-external. ([@huguestennier](https://github.com/huguestennier))
+
+#### :house: Internal
+
+* [#817](https://github.com/Shopify/slate/pull/817) Enable CLA bot. ([@tmlayton](https://github.com/tmlayton))
+
+#### Committers: 3
+
+* Hugues Tennier ([huguestennier](https://github.com/huguestennier))
+* Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+* Tim Layton ([tmlayton](https://github.com/tmlayton))
+
 ## v1.0.0-beta.10 (2018-10-12)
 
 #### :bug: Bug Fix
