@@ -235,7 +235,6 @@ async function onClientAfterSync() {
 
   console.log();
   console.log(`   The Browsersync control panel is available at:\n`);
-  console.log(`      ${chalk.cyan(urls.get('ui'))} ${chalk.grey('(Local)')}`);
 
   if (devServer.domain !== 'localhost') {
     console.log(
