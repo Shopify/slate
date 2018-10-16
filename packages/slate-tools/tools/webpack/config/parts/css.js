@@ -43,8 +43,7 @@ const postcssLoader = {
 const cssVarLoader = {loader: '@shopify/slate-cssvar-loader'};
 
 cssRule.use = [
-  isDev ? styleLoader : MiniCssExtractPlugin.loader,
-  cssVarLoader,
+  ...(isDev ? [styleLoader] : [MiniCssExtractPlugin.loader, cssVarLoader]),
   cssLoader,
   postcssLoader,
 ];
