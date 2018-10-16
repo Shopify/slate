@@ -23,7 +23,8 @@
     "bootstrap": "yarn install && node_modules/.bin/lerna bootstrap",
     "publish": "node_modules/.bin/lerna publish --exact",
     "changelog": "node_modules/.bin/lerna-changelog",
-    "clean": "node_modules/.bin/lerna clean"
+    "clean": "node_modules/.bin/lerna clean",
+    "dev": "bin/ssl-check && yarn start"
   },
   "devDependencies": {
     "babel-jest": "^22.0.4",
