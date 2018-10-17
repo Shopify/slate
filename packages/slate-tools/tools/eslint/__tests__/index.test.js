@@ -71,7 +71,7 @@ describe('eslint()', () => {
     const {eslint} = require('../index');
     eslint({fix: true});
     expect(execSync).toHaveBeenCalledWith(
-      expect.stringContaining('--fix'),
+      expect.stringContaining(' --fix '),
       expect.anything(),
     );
   });
