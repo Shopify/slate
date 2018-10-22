@@ -1,7 +1,5 @@
-const fs = require('fs');
 const path = require('path');
-const webpack = require('webpack');
-const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SlateConfig = require('@shopify/slate-config');
@@ -10,57 +8,6 @@ const config = new SlateConfig(require('../../../../slate-tools.schema'));
 const extractLiquidStyles = new ExtractTextPlugin(
   '[name].styleLiquid.scss.liquid',
 );
-
-/**
- * Return an array of ContextReplacementPlugin to use.
- * Omit the __appstatic__ replacement if the directory does not exists.
- *
- * @see https://webpack.js.org/plugins/context-replacement-plugin/#newcontentcallback
- */
-
-function replaceCtxRequest(request) {
-  return (context) => Object.assign(context, {request});
-}
-
-function contextReplacementPlugins() {
-  // Given a request path, return a function that accepts a context and modify it's request.
-
-  const plugins = [
-    new webpack.ContextReplacementPlugin(
-      /__appsrc__/,
-      replaceCtxRequest(config.get('paths.theme.src')),
-    ),
-  ];
-
-  if (fs.existsSync(config.get('paths.theme.src.static'))) {
-    plugins.push(
-      new webpack.ContextReplacementPlugin(
-        /__appstatic__/,
-        replaceCtxRequest(config.get('paths.theme.src.static')),
-      ),
-    );
-  }
-
-  if (fs.existsSync(config.get('paths.theme.src.images'))) {
-    plugins.push(
-      new webpack.ContextReplacementPlugin(
-        /__appimages__/,
-        replaceCtxRequest(config.get('paths.theme.src.images')),
-      ),
-    );
-  }
-
-  if (fs.existsSync(config.get('paths.theme.src.fonts'))) {
-    plugins.push(
-      new webpack.ContextReplacementPlugin(
-        /__appfonts__/,
-        replaceCtxRequest(config.get('paths.theme.src.fonts')),
-      ),
-    );
-  }
-
-  return plugins;
-}
 
 module.exports = {
   context: config.get('paths.theme.src'),
@@ -128,43 +75,42 @@ module.exports = {
   },
 
   plugins: [
-    ...contextReplacementPlugins(),
+    new CleanWebpackPlugin(['dist'], {
+      root: config.get('paths.theme'),
+    }),
 
     extractLiquidStyles,
 
-    new CopyWebpackPlugin(
-      [
-        {
-          from: config.get('paths.theme.src.svgs'),
-          ignore: ['.DS_Store'],
-          to: `${config.get('paths.theme.dist.snippets')}/[name].liquid`,
-        },
-        {
-          from: config.get('paths.theme.src.static'),
-          to: config.get('paths.theme.dist.assets'),
-        },
-        {
-          from: config.get('paths.theme.src.images'),
-          to: config.get('paths.theme.dist.assets'),
-        },
-        {
-          from: config.get('paths.theme.src.fonts'),
-          to: config.get('paths.theme.dist.assets'),
-        },
-        {
-          from: config.get('paths.theme.src.locales'),
-          to: config.get('paths.theme.dist.locales'),
-        },
-        {
-          from: config.get('paths.theme.src.config'),
-          to: config.get('paths.theme.dist.config'),
-        },
-      ].filter((directory) => fs.existsSync(directory.from)),
-    ),
-
-    new WriteFileWebpackPlugin({
-      test: /^(?:(?!hot-update.json$).)*\.(liquid|json)$/,
-      log: false,
-    }),
+    new CopyWebpackPlugin([
+      {
+        from: config.get('paths.theme.src.assets'),
+        to: config.get('paths.theme.dist.assets'),
+        flatten: true,
+      },
+      {
+        from: config.get('paths.theme.src.config'),
+        to: config.get('paths.theme.dist.config'),
+      },
+      {
+        from: config.get('paths.theme.src.layout'),
+        to: config.get('paths.theme.dist.layout'),
+      },
+      {
+        from: config.get('paths.theme.src.locales'),
+        to: config.get('paths.theme.dist.locales'),
+      },
+      {
+        from: config.get('paths.theme.src.sections'),
+        to: config.get('paths.theme.dist.sections'),
+      },
+      {
+        from: config.get('paths.theme.src.snippets'),
+        to: config.get('paths.theme.dist.snippets'),
+      },
+      {
+        from: config.get('paths.theme.src.templates'),
+        to: config.get('paths.theme.dist.templates'),
+      },
+    ]),
   ],
 };

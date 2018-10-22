@@ -7,32 +7,32 @@ module.exports = class Client {
     this.skipNextSync = false;
     this.files = [];
     this.hooks = {
-      beforeSync: new AsyncSeriesHook(['files']),
-      sync: new SyncHook(['files']),
-      syncDone: new SyncHook(['files']),
-      afterSync: new AsyncSeriesHook(['files']),
-      syncSkipped: new SyncHook(['files']),
+      beforeSync: new AsyncSeriesHook(['files', 'stats']),
+      sync: new SyncHook(['files', 'stats']),
+      syncDone: new SyncHook(['files', 'stats']),
+      afterSync: new AsyncSeriesHook(['files', 'stats']),
+      syncSkipped: new SyncHook(['files', 'stats']),
     };
   }
 
-  async sync(files) {
+  async sync(files, stats) {
     this.files = files;
 
-    await this.hooks.beforeSync.promise(this.files);
+    await this.hooks.beforeSync.promise(this.files, stats);
 
     if (this.files.length === 0) {
       this.skipNextSync = true;
     }
 
     if (this.skipNextSync) {
-      this.hooks.syncSkipped.call(this.files);
+      this.hooks.syncSkipped.call(this.files, stats);
     } else {
-      this.hooks.sync.call(this.files);
+      this.hooks.sync.call(this.files, stats);
       await sync(this.files);
-      this.hooks.syncDone.call(this.files);
+      this.hooks.syncDone.call(this.files, stats);
     }
 
-    this.hooks.afterSync.promise(this.files);
+    this.hooks.afterSync.promise(this.files, stats);
 
     this.skipNextSync = false;
   }

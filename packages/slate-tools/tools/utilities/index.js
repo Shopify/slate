@@ -8,6 +8,10 @@ const config = new SlateConfig(require('../../slate-tools.schema'));
 
 const findAPortInUse = promisify(portscanner.findAPortInUse);
 
+function isHotUpdateFile(key) {
+  return /\.hot-update\.json$/.test(key) || /\.hot-update\.js$/.test(key);
+}
+
 function sslKeyCert() {
   const key = readFileSync(getSSLKeyPath());
   const cert = readFileSync(getSSLCertPath());
@@ -53,4 +57,5 @@ module.exports = {
   getSSLKeyPath,
   getSSLCertPath,
   getAvailablePortSeries,
+  isHotUpdateFile,
 };
