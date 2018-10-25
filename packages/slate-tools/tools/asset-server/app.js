@@ -3,6 +3,8 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const corsMiddleware = require('cors');
 const express = require('express');
 
+const {isHotUpdateFile} = require('../utilities');
+
 module.exports = class App {
   constructor(compiler) {
     const app = express();
@@ -10,6 +12,9 @@ module.exports = class App {
     app.webpackDevMiddleware = webpackDevMiddleware(compiler, {
       logLevel: 'silent',
       reload: true,
+      writeToDisk: (filePath) => {
+        return !isHotUpdateFile(filePath);
+      },
     });
     app.webpackHotMiddleware = webpackHotMiddleware(compiler, {
       log: false,

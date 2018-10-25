@@ -15,20 +15,16 @@ module.exports = {
   // Source directory of theme
   'paths.theme.src': (config) => path.join(config.get('paths.theme'), 'src'),
 
+  // Source directory of assets folder
+  'paths.theme.src.assets': (config) =>
+    path.join(config.get('paths.theme.src'), 'assets'),
+
   // Source of theme configuration files
   'paths.theme.src.config': (config) =>
     path.join(config.get('paths.theme.src'), 'config'),
 
-  // Source font directory for theme
-  'paths.theme.src.fonts': (config) =>
-    path.join(config.get('paths.theme.src'), 'assets', 'fonts'),
-
-  // Source of images directory
-  'paths.theme.src.images': (config) =>
-    path.join(config.get('paths.theme.src'), 'assets', 'images'),
-
   // Source of theme liquid layout files
-  'paths.theme.src.layouts': (config) =>
+  'paths.theme.src.layout': (config) =>
     path.join(config.get('paths.theme.src'), 'layout'),
 
   // Source of translation locales
@@ -37,19 +33,15 @@ module.exports = {
 
   // Source scripts directory for theme
   'paths.theme.src.scripts': (config) =>
-    path.join(config.get('paths.theme.src'), 'assets', 'scripts'),
+    path.join(config.get('paths.theme.src'), 'scripts'),
 
   // Source snippets directory
   'paths.theme.src.snippets': (config) =>
     path.join(config.get('paths.theme.src'), 'snippets'),
 
   // Static asset directory for files that statically copied to paths.theme.dist.assets
-  'paths.theme.src.static': (config) =>
-    path.join(config.get('paths.theme.src'), 'assets', 'static'),
-
-  // Main SVG source directory for theme
-  'paths.theme.src.svgs': (config) =>
-    path.join(config.get('paths.theme.src'), 'assets', 'svg'),
+  'paths.theme.src.sections': (config) =>
+    path.join(config.get('paths.theme.src'), 'sections'),
 
   // Source liquid template directory
   'paths.theme.src.templates': (config) =>
@@ -70,6 +62,10 @@ module.exports = {
   'paths.theme.dist.config': (config) =>
     path.join(config.get('paths.theme.dist'), 'config'),
 
+  // Distribution of theme liquid layout files
+  'paths.theme.dist.layout': (config) =>
+    path.join(config.get('paths.theme.dist'), 'layout'),
+
   // Distribution snippets directory
   'paths.theme.dist.snippets': (config) =>
     path.join(config.get('paths.theme.dist'), 'snippets'),
@@ -77,6 +73,14 @@ module.exports = {
   // Distribution snippets directory
   'paths.theme.dist.locales': (config) =>
     path.join(config.get('paths.theme.dist'), 'locales'),
+
+  // Distribution sections directory
+  'paths.theme.dist.sections': (config) =>
+    path.join(config.get('paths.theme.dist'), 'sections'),
+
+  // Distribution templates directory
+  'paths.theme.dist.templates': (config) =>
+    path.join(config.get('paths.theme.dist'), 'templates'),
 
   // Directory for storing all temporary and/or cache files
   'paths.theme.cache': (config) =>

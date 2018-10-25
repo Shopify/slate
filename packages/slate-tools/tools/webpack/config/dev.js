@@ -34,22 +34,6 @@ module.exports = merge([
 
     devtool: '#eval-source-map',
 
-    module: {
-      rules: [
-        {
-          test: /^(?:(?!(css|scss|sass)).)*\.(liquid)$/,
-          exclude: config.get('webpack.commonExcludes'),
-          use: [
-            {loader: 'extract-loader'},
-            {
-              loader: '@shopify/slate-liquid-asset-loader',
-              options: {devServer: true},
-            },
-          ],
-        },
-      ],
-    },
-
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
 
@@ -80,6 +64,7 @@ module.exports = merge([
         },
         // necessary to consistently work with multiple chunks via CommonsChunkPlugin
         chunksSortMode: 'dependency',
+        isDevServer: true,
         liquidTemplates: getTemplateEntrypoints(),
         liquidLayouts: getLayoutEntrypoints(),
       }),

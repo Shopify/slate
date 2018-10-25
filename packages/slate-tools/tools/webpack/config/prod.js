@@ -1,13 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const SlateConfig = require('@shopify/slate-config');
-const SlateLiquidAssetsPlugin = require('@shopify/html-webpack-liquid-asset-tags-plugin');
 const SlateTagPlugin = require('@shopify/slate-tag-webpack-plugin');
 
 const babel = require('./parts/babel');
@@ -33,29 +30,9 @@ module.exports = merge([
     mode: 'production',
     devtool: 'hidden-source-map',
 
-    module: {
-      rules: [
-        {
-          test: /^(?:(?!(css|scss|sass|js)).)*\.(liquid)$/,
-          exclude: config.get('webpack.commonExcludes'),
-          use: [
-            {loader: 'extract-loader'},
-            {
-              loader: '@shopify/slate-liquid-asset-loader',
-              options: {devServer: false},
-            },
-          ],
-        },
-      ],
-    },
-
     plugins: [
       new MiniCssExtractPlugin({
         filename: '[name].css.liquid',
-      }),
-
-      new CleanWebpackPlugin(['dist'], {
-        root: config.get('paths.theme'),
       }),
 
       new webpack.DefinePlugin({
@@ -106,8 +83,6 @@ module.exports = merge([
       }),
 
       new HtmlWebpackIncludeLiquidStylesPlugin(),
-
-      new SlateLiquidAssetsPlugin(),
 
       new SlateTagPlugin(packageJson.version),
     ],
