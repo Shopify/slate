@@ -1,5 +1,39 @@
 # Change Log
 
+## v1.0.0-beta.12 (2018-10-25)
+
+#### :broken_heart: Breaking
+
+All pre-exisiting logic and operations that were performed to folders inside the the `src/assets` directory has been removed. All contents of the assets folder are now statically copied to the `dist/assets` folder.
+
+The `src/assets/scripts` directory has moved to `src/scripts`.
+
+The `src/assets/styles` directory has moved to `src/styles`.
+
+SVGs contained in the `src/assets/svgs` directory, which were copied to the `dist/snippets` directory and renamed to `.liquid` files, should now be moved into the `src/snippets` directory and manually renamed with a `.liquid` extension. This will allows these SVGs to continue to be inlined into your theme via the `{% include %}` tag.
+
+Referencing assets via relative paths, e.g. `<img src"{{ '../assets/images/my-image.jpg' | asset_url }} />`, has been replaced by native Shopify asset references, e.g. `<img src"{{ 'my-image.jpg' | asset_url }} />`.
+
+See [Pull Request #850](https://github.com/Shopify/slate/pull/850) for all the details.
+
+#### :rocket: Enhancement
+
+* `slate-env`
+  * [#821](https://github.com/Shopify/slate/pull/821) Prevent trailing slashes at the end of store URLs. ([@maximevaillancourt](https://github.com/maximevaillancourt))
+
+#### :bug: Bug Fix
+
+* `html-webpack-liquid-asset-tags-plugin`, `slate-config`, `slate-liquid-asset-loader`, `slate-tools`
+  * [#850](https://github.com/Shopify/slate/pull/850) (WIP) Simplify Slate assets. ([@t-kelly](https://github.com/t-kelly))
+* `slate-tools`
+  * [#824](https://github.com/Shopify/slate/pull/824) Fix typo in eslint spawn command. ([@kazazes](https://github.com/kazazes))
+
+#### Committers: 3
+
+* Maxime Vaillancourt ([maximevaillancourt](https://github.com/maximevaillancourt))
+* Peter Kazazes ([kazazes](https://github.com/kazazes))
+* Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
 ## v1.0.0-beta.11 (2018-10-16)
 
 #### :bug: Bug Fix

@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate-tag-webpack-plugin",
-  "version": "1.0.0-beta.11",
+  "version": "1.0.0-beta.12",
   "description": "A webpack plugin that tags a Slate theme settings_schema.json so it's easy to identify on Shopify servers",
   "main": "index.js",
   "scripts": {
