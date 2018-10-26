@@ -8,13 +8,14 @@ const chalk = require('chalk');
 const ora = require('ora');
 const consoleControl = require('console-control-strings');
 const clearConsole = require('react-dev-utils/clearConsole');
+const ip = require('ip');
 const env = require('@shopify/slate-env');
 const {event} = require('@shopify/slate-analytics');
 const SlateConfig = require('@shopify/slate-config');
 
 const promptContinueIfPublishedTheme = require('../prompts/continue-if-published-theme');
 const promptSkipSettingsData = require('../prompts/skip-settings-data');
-const promptDisableExternalTesting = require('../prompts/disable-external-testing');
+const promptExternalTesting = require('../prompts/external-testing');
 
 const AssetServer = require('../../tools/asset-server');
 const DevServer = require('../../tools/dev-server');
@@ -35,21 +36,25 @@ let previewUrl;
 
 Promise.all([
   getAvailablePortSeries(config.get('network.startPort'), 3),
-  promptDisableExternalTesting(),
+  promptExternalTesting(),
 ])
-  .then(([ports, domain]) => {
+  .then(([ports, external]) => {
+    const address = external
+      ? config.get('network.externalTesting.address') || ip.address()
+      : 'localhost';
+
     assetServer = new AssetServer({
       env: argv.env,
       skipFirstDeploy: argv.skipFirstDeploy,
       webpackConfig,
       port: ports[1],
-      domain,
+      address,
     });
 
     devServer = new DevServer({
       port: ports[0],
       uiPort: ports[2],
-      domain,
+      address,
     });
 
     previewUrl = `https://${env.getStoreValue()}?preview_theme_id=${env.getThemeIdValue()}`;
@@ -211,7 +216,7 @@ async function onClientAfterSync() {
     `      ${chalk.cyan(urls.get('local'))} ${chalk.grey('(Local)')}`,
   );
 
-  if (devServer.domain !== 'localhost') {
+  if (devServer.address !== 'localhost') {
     console.log(
       `      ${chalk.cyan(urls.get('external'))} ${chalk.grey('(External)')}`,
     );
@@ -225,10 +230,10 @@ async function onClientAfterSync() {
     )}`,
   );
 
-  if (assetServer.domain !== 'localhost') {
+  if (assetServer.address !== 'localhost') {
     console.log(
       `      ${chalk.cyan(
-        `https://${assetServer.domain}:${assetServer.port}`,
+        `https://${assetServer.address}:${assetServer.port}`,
       )} ${chalk.grey('(External)')}`,
     );
   }
@@ -236,7 +241,7 @@ async function onClientAfterSync() {
   console.log();
   console.log(`   The Browsersync control panel is available at:\n`);
 
-  if (devServer.domain !== 'localhost') {
+  if (devServer.address !== 'localhost') {
     console.log(
       `      ${chalk.cyan(urls.get('ui-external'))} ${chalk.grey(
         '(External)',

@@ -10,12 +10,12 @@ const config = new SlateConfig(require('../../slate-tools.schema'));
 
 module.exports = class DevServer {
   constructor(options) {
-    options.webpackConfig.output.publicPath = `https://${options.domain}:${
+    options.webpackConfig.output.publicPath = `https://${options.address}:${
       options.port
     }/`;
 
     this.assetHashes = {};
-    this.domain = options.domain;
+    this.address = options.address;
     this.options = options;
     this.port = options.port;
     this.compiler = webpack(options.webpackConfig);

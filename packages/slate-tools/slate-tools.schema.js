@@ -27,6 +27,11 @@ module.exports = {
   // config if you want to disable using your local IP and external testing.
   'network.externalTesting': true,
 
+  // If 'network.externalTesting' is true, the defaultaddress used to to
+  // reference local files will be your local IP address. Set this value
+  // if you wish to specify another network address.
+  'network.externalTesting.address': null,
+
   // Default port used for asset server. If it is not available, the next port
   // that is available is used.
   'network.startPort': 3000,
