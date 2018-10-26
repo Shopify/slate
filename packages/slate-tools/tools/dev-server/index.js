@@ -8,7 +8,7 @@ class DevServer {
     this.target = `https://${getStoreValue()}`;
     this.themeId = getThemeIdValue();
     this.port = options.port;
-    this.domain = options.domain;
+    this.address = options.address;
     this.uiPort = options.uiPort;
     this.proxyTarget =
       this.target +
@@ -32,7 +32,7 @@ class DevServer {
       https: {key: getSSLKeyPath(), cert: getSSLCertPath()},
       logLevel: 'silent',
       socket: {
-        domain: `https://${this.domain}:${this.port}`,
+        domain: `https://${this.address}:${this.port}`,
       },
       ui: {
         port: this.uiPort,
