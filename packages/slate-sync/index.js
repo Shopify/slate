@@ -82,7 +82,13 @@ async function deploy(cmd = '', files = []) {
 
   deploying = true;
 
-  console.log(chalk.magenta(`\n${figures.arrowUp}  Uploading to Shopify...\n`));
+  console.log(
+    chalk.magenta(
+      `\n${
+        figures.arrowUp
+      }  Uploading to Shopify on ${slateEnv.getEnvNameValue()} environment...\n`,
+    ),
+  );
 
   try {
     await promiseThemekitConfig();
