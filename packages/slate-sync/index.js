@@ -48,6 +48,7 @@ function _generateConfigFlags() {
     '--password': slateEnv.getPasswordValue(),
     '--themeid': slateEnv.getThemeIdValue(),
     '--store': slateEnv.getStoreValue(),
+    '--env': slateEnv.getEnvNameValue(),
   };
 
   // Convert object to key value pairs and flatten the array
@@ -82,13 +83,7 @@ async function deploy(cmd = '', files = []) {
 
   deploying = true;
 
-  console.log(
-    chalk.magenta(
-      `\n${
-        figures.arrowUp
-      }  Uploading to Shopify on ${slateEnv.getEnvNameValue()} environment...\n`,
-    ),
-  );
+  console.log(chalk.magenta(`\n${figures.arrowUp} Uploading to Shopify...\n`));
 
   try {
     await promiseThemekitConfig();
