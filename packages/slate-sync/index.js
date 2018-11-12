@@ -83,7 +83,7 @@ async function deploy(cmd = '', files = []) {
 
   deploying = true;
 
-  console.log(chalk.magenta(`\n${figures.arrowUp} Uploading to Shopify...\n`));
+  console.log(chalk.magenta(`\n${figures.arrowUp}  Uploading to Shopify...\n`));
 
   try {
     await promiseThemekitConfig();
