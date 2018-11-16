@@ -2,7 +2,7 @@
   <% var basename = htmlWebpackPlugin.files.css[css].split('/').reverse()[0]; %>
   <% var chunkName = basename.replace('.scss', '').replace('.css', '').replace('.styleLiquid', ''); %>
   <% var isLiquidStyle = /.liquidStyle.css$/.test(basename) %>
-  <% if (htmlWebpackPlugin.options.isDevServer === true) { %>
+  <% if (htmlWebpackPlugin.options.isDevServer === true && !basename.includes('.styleLiquid')) { %>
     <% var src = htmlWebpackPlugin.files.css[css] %>
   <% } else { %>
     <% var src = `{{ '${basename}' | asset_url }}` %>
