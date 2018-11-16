@@ -48,6 +48,7 @@ function _generateConfigFlags() {
     '--password': slateEnv.getPasswordValue(),
     '--themeid': slateEnv.getThemeIdValue(),
     '--store': slateEnv.getStoreValue(),
+    '--env': slateEnv.getEnvNameValue(),
   };
 
   // Convert object to key value pairs and flatten the array
