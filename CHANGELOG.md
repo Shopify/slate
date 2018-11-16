@@ -1,5 +1,22 @@
 # Change Log
 
+## v1.0.0-beta.13 (2018-11-16)
+
+#### :rocket: Enhancement
+
+* `slate-sync`
+  * [#866](https://github.com/Shopify/slate/pull/866) Add environment to deploy message. ([@huguestennier](https://github.com/huguestennier))
+
+#### :bug: Bug Fix
+
+* `slate-tools`
+  * [#877](https://github.com/Shopify/slate/pull/877) Fix style-tags.liquid so it points to correct styleLiquid path. ([@t-kelly](https://github.com/t-kelly))
+
+#### Committers: 2
+
+* Hugues Tennier ([huguestennier](https://github.com/huguestennier))
+* Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
 ## v1.0.0-beta.12 (2018-10-25)
 
 #### :broken_heart: Breaking
