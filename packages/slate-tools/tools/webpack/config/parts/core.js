@@ -51,11 +51,27 @@ module.exports = {
         test: /\.(liquid|json)$/,
         exclude: [
           new RegExp('assets/styles'),
+          new RegExp('sections'),
+          new RegExp('snippets'),
           ...config.get('webpack.commonExcludes'),
         ],
         loader: 'file-loader',
         options: {
           name: '../[path][name].[ext]',
+        },
+      },
+      {
+        test: /snippets\/.*\.liquid$/,
+        loader: 'file-loader',
+        options: {
+          name: `../snippets/[name].[ext]`,
+        },
+      },
+      {
+        test: /sections\/.*\.liquid$/,
+        loader: 'file-loader',
+        options: {
+          name: `../sections/[name].[ext]`,
         },
       },
       {
