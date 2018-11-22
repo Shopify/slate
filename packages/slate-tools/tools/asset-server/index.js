@@ -62,9 +62,13 @@ module.exports = class DevServer {
   _isChunk(key, chunks) {
     return (
       chunks.filter((chunk) => {
-        return key.indexOf(chunk.id) > -1;
+        return key.indexOf(chunk.id) > -1 && !this._isLiquidStyle(key);
       }).length > 0
     );
+  }
+
+  _isLiquidStyle(key) {
+    return key.indexOf('styleLiquid.scss.liquid') > -1;
   }
 
   _hasAssetChanged(key, asset) {

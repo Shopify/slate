@@ -50,20 +50,12 @@ module.exports = {
       {
         test: /\.(liquid|json)$/,
         exclude: [
-          new RegExp('assets/styles'),
+          /(css|scss|sass)\.liquid$/,
           ...config.get('webpack.commonExcludes'),
         ],
         loader: 'file-loader',
         options: {
           name: '../[path][name].[ext]',
-        },
-      },
-      {
-        test: /assets\/static\//,
-        exclude: /node_modules/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
         },
       },
       {
