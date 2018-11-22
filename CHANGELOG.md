@@ -1,5 +1,19 @@
 # Change Log
 
+## v1.0.0-beta.14 (2018-11-22)
+
+#### :bug: Bug Fix
+
+* `slate-tools`
+  * [#883](https://github.com/Shopify/slate/pull/883) Fix liquid styles not uploading to Shopify. ([@t-kelly](https://github.com/t-kelly))
+* `slate-cssvar-loader`
+  * [#878](https://github.com/Shopify/slate/pull/878) Add check for hyphens in Liquid style tag for CSS custom properties. ([@chrisberthe](https://github.com/chrisberthe))
+
+#### Committers: 2
+
+* Chris Berthe ([chrisberthe](https://github.com/chrisberthe))
+* Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
 ## v1.0.0-beta.13 (2018-11-16)
 
 #### :rocket: Enhancement
