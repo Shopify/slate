@@ -146,7 +146,9 @@ Each column — or `.grid__item` — should be a direct child of a `.grid` conta
 
 ### Grid push classes
 
-Add push classes by adding the breakpoint name to `$breakpoint-has-push` in `variables.scss.liquid`. For this example, push classes for `$medium-up` have been added. By default, no push classes are generated.
+Push classes are used for pushing an element to the right a specified percentage at different breakpoints. For example `medium-up--push-one-quarter` will apply `left: 25%` at all sizes medium and up, and `medium-up--push-three-eighths` will apply `left: 37.5%`.
+
+Add push classes by adding the breakpoint name to `$breakpoint-has-push` in `variables.scss.liquid`. For this example, push classes for `$medium-up` have been added. By default, no push classes are generated. To include multiple breakpoints, separate them with a comma.
 
 ```
 $breakpoint-has-push: ($medium-up);
