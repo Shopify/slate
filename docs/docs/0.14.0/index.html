@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Slate v0</title>
+  <meta name="description" content="Slate is a theme scaffold and command line tool for developing Shopify themes. It is designed to assist your development workflow and speed up the process of developing, testing, and deploying themes to Shopify stores.
+">
+
+  <link rel="stylesheet" href="https://cdn.shopify.com/shopify-marketing_assets/builds/13.0.2/marketing_assets_content.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="/slate/css/prettify.min.css">
+  <link rel="stylesheet" href="/slate/css/yuidoc.css">
+  <link rel="stylesheet" href="/slate/css/main.css">
+  <link rel="canonical" href="https://shopify.github.io/slate/">
+  <link rel="shortcut icon" type="image/x-icon" href="//cdn.shopify.com/shopify-marketing_assets/static/shopify-favicon.png" />
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+  <script src="/slate/js/demo.js"></script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-49178120-25', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+
+<body>
+  <main role="main" id="main">
+    <div class="docs-container">
+      <div class="docs-sidebar">
+        <div class="docs-title heading--1"><a class="site-title" href="/slate/">Slate</a></div>
+<ul class="docs-nav">
+  <li>
+    <a class="docs-nav__link " href="/slate/">Getting started</a>
+  </li>
+  <li>
+    <a class="docs-nav__link " href="/slate/theme">What's included</a>
+  </li>
+  <li>
+    <a class="docs-nav__link " href="/slate/commands">Commands</a>
+    <ul class="docs-sub-nav">
+      <li>
+        <a href="/slate/commands/#global-commands" class="docs-sub-nav__link">Global commands</a>
+      </li>
+      <li>
+        <a href="/slate/commands/#build-commands" class="docs-sub-nav__link">Build commands</a>
+      </li>
+      <li>
+        <a href="/slate/commands/#sync-commands" class="docs-sub-nav__link">Sync commands</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a class="docs-nav__link " href="/slate/theme-scaffold">Theme scaffold</a>
+    <ul class="docs-sub-nav">
+      <li>
+        <a href="/slate/theme-scaffold/#templates-and-configuration" class="docs-sub-nav__link">Templates and configuration</a>
+      </li>
+      <li>
+        <a href="/slate/theme-scaffold/#sections" class="docs-sub-nav__link">Sections</a>
+      </li>
+      <li>
+        <a href="/slate/theme-scaffold/#sass-helpers" class="docs-sub-nav__link">Sass helpers</a>
+      </li>
+      <li>
+        <a href="/slate/theme-scaffold/#javascript-helpers" class="docs-sub-nav__link">JavaScript helpers</a>
+      </li>
+      <li>
+        <a href="/slate/theme-scaffold/#translation-keys" class="docs-sub-nav__link">Translation keys</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a class="docs-nav__link " href="/slate/css-examples">CSS examples</a>
+    <ul class="docs-sub-nav">
+      <li>
+        <a href="/slate/css-examples/#breakpoints" class="docs-sub-nav__link">Breakpoints and media queries</a>
+      </li>
+      <li>
+        <a href="/slate/css-examples/#grid" class="docs-sub-nav__link">Grid</a>
+      </li>
+      <li>
+        <a href="/slate/css-examples/#svg-icons" class="docs-sub-nav__link">SVG icons</a>
+      </li>
+      <li>
+        <a href="/slate/css-examples/#responsive-tables" class="docs-sub-nav__link">Responsive tables</a>
+      </li>
+      <li>
+        <a href="/slate/css-examples/#blank-states" class="docs-sub-nav__link">Blank states</a>
+      </li>
+      <li>
+        <a href="/slate/css-examples/#sass-mixins" class="docs-sub-nav__link">Sass mixins</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a class="docs-nav__link " href="/slate/js-examples">JS examples</a>
+    <ul class="docs-sub-nav">
+      <li>
+        <a href="/slate/js-examples/#trap-focus" class="docs-sub-nav__link">Trap focus</a>
+      </li>
+      <li>
+        <a href="/slate/js-examples/#responsive-tables-and-videos" class="docs-sub-nav__link">Responsive tables and videos</a>
+      </li>
+      <li>
+        <a href="/slate/js-examples/#format-currency" class="docs-sub-nav__link">Format currency</a>
+      </li>
+      <li>
+        <a href="/slate/js-examples/#image-helpers" class="docs-sub-nav__link">Image helpers</a>
+      </li>
+      <li>
+        <a href="/slate/js-examples/#product-variants" class="docs-sub-nav__link">Product variants</a>
+      </li>
+      <li>
+        <a href="/slate/js-examples/#cart-helpers" class="docs-sub-nav__link">Cart helpers</a>
+      </li>
+      <li>
+        <a href="/slate/js-examples/#section-events" class="docs-sub-nav__link">Section events</a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<div class="docs-shopify-logo">
+  <a href="https://www.shopify.com">
+    <img src="/slate/assets/images/shopify-logo-large.png" alt="Shopify" />
+  </a>
+  <p><a href="mailto:slate@shopify.com">Provide feedback</a></p>
+</div>
+
+      </div>
+      <div class="docs-main">
+        <div class="docs-content">
+          <header class="docs-header">
+  <ul>
+    <li>
+      <a href="https://github.com/Shopify/slate">
+        <img class="github-logo" src="/slate/assets/images/github-logo.png" alt="View on github" />
+        <span class="link-text">View on Github</span></a>
+    </li>
+    <li>
+      <a href="https://www.npmjs.com/package/@shopify/slate">
+        <img class="npm-logo" src="/slate/assets/images/npm-logo.png" alt="View on npm" />
+        <span class="link-text">View on NPM</span></a>
+    </li>
+  </ul>
+</header>
+
+          <div class="marketing-markdown">
+            <h1 id="slate-v0">Slate v0</h1>
+
+<blockquote>
+  <p>⚠️ <strong>These docs are for Slate v0!</strong> To view the docs for the latest version of Slate, go to the <a href="https://github.com/Shopify/slate/wiki">Slate wiki</a>.</p>
+</blockquote>
+
+<p>Slate is a theme scaffold and command line tool for developing Shopify themes. It is designed to assist your development workflow and speed up the process of developing, testing, and deploying themes to Shopify stores.</p>
+
+<p>Slate allows you to sync local files with your live shop, deploy to multiple environments at the same time, and organize stylesheets and scripts in a flexible way.</p>
+
+<h2 id="getting-started">Getting started</h2>
+
+<blockquote>
+Slate works with <a href="https://nodejs.org/en/">Node version 6.x</a>, the current LTS (long-term support) release.  This version is recommended over older versions of Node.
+</blockquote>
+
+<p>The steps below walk through installing Slate globally and configuring your development theme to sync with your store. If you want the theme files without the build tools dependency, <a href="https://sdks.shopifycdn.com/slate/latest/slate-theme.zip" data-ga-track="slateZip">get the latest zip here</a>.</p>
+
+<h3 id="create-a-new-project">Create a new project</h3>
+
+<ol>
+  <li>Install Slate with <code class="highlighter-rouge">npm install -g @shopify/slate</code>.</li>
+  <li>Create a new theme with <code class="highlighter-rouge">slate theme theme-name</code>, where <code class="highlighter-rouge">theme-name</code> will be a newly created folder.</li>
+</ol>
+
+<ul>
+  <li>If you already have a theme locally, you can use the <code class="highlighter-rouge">slate migrate</code> command and <a href="/slate/commands/#migrate">follow these steps</a> instead.</li>
+</ul>
+
+<h3 id="connect-your-project-with-your-shopify-store">Connect your project with your Shopify store</h3>
+
+<ol>
+  <li>Edit the <code class="highlighter-rouge">config.yml</code> by adding your store’s URL to the <code class="highlighter-rouge">development</code> environment.</li>
+</ol>
+
+<ul>
+  <li><strong>store:</strong> the Shopify-specific URL for this store/environment (ie. my-store.myshopify.com)</li>
+  <li>Note: You can complete the rest of the configuration in later steps.</li>
+</ul>
+
+<ol>
+  <li>Run <code class="highlighter-rouge">slate deploy -m</code> to start a manual deploy to your Shopify store.</li>
+</ol>
+
+<ul>
+  <li>Slate will build a Shopify theme and open your store’s admin.</li>
+  <li>A zip of your project will be created in the project’s <code class="highlighter-rouge">upload</code> directory.</li>
+</ul>
+
+<ol>
+  <li>Upload the theme zip file at Shopify <a href="https://shopify.com/admin/themes">admin/themes</a>.</li>
+</ol>
+
+<ul>
+  <li>Not sure how to upload a theme zip? Learn how at <a href="https://help.shopify.com/manual/using-themes/install-themes#upload-a-theme-from-your-computer">Upload a theme from your computer</a>.</li>
+</ul>
+
+<ol>
+  <li>Edit the <code class="highlighter-rouge">config.yml</code> to include the theme id of your new theme.</li>
+</ol>
+
+<ul>
+  <li><strong>theme_id:</strong> the unique id for the theme you want to write to when deploying to this store. You can find this information in the URL of the theme’s online editor at Shopify <a href="https://shopify.com/admin/themes">admin/themes</a>. Alternatively, you can use <code class="highlighter-rouge">"live"</code> as shorthand for the published theme.
+<img src="/slate/assets/images/theme-id.png" alt="Private app credentials" class="demo-image demo-image--app" /></li>
+</ul>
+
+<ol>
+  <li>Create a private app from your Shopify admin.</li>
+</ol>
+
+<ul>
+  <li>Not sure how to create a private app? Learn how at <a href="https://help.shopify.com/api/getting-started/api-credentials#generate-credentials-in-the-shopify-admin">Generate credentials in the Shopify admin</a>.</li>
+  <li>Set the “Theme templates and theme assets” permission to “Read and write”.
+<img src="/slate/assets/images/app-permission.jpg" alt="Private app permission requirements" class="demo-image demo-image--app" /></li>
+</ul>
+
+<ol>
+  <li>Edit the <code class="highlighter-rouge">config.yml</code> to include the password of your new private app.</li>
+</ol>
+
+<ul>
+  <li><strong>password:</strong> the password generated via a private app on this store. Access this information on your Shopify <a href="https://shopify.com/admin/apps/private">admin/apps/private</a> page.
+<img src="/slate/assets/images/app-credentials.jpg" alt="Private app credentials" class="demo-image demo-image--app" /></li>
+  <li>Note: You can use the same private app password for any <code class="highlighter-rouge">config.yml</code> environment
+as long as it is for the same store.</li>
+</ul>
+
+<ol>
+  <li>From within your new project folder in your command line, use the <a href="#slate-commands">Slate commands</a> below to build, sync, and watch your local files.</li>
+</ol>
+
+<h2 id="slate-commands">Slate commands</h2>
+
+<h3 id="global">Global</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">slate theme [name]</code> - Generate a new blank theme</li>
+  <li><code class="highlighter-rouge">slate migrate</code> - Convert an existing theme to work with Slate</li>
+  <li><code class="highlighter-rouge">slate -h</code> - Options available in your current directory (differs if not in a theme)</li>
+  <li><code class="highlighter-rouge">slate -v</code> - See your currently installed version of Slate and dependencies</li>
+</ul>
+
+<h3 id="theme">Theme</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">slate build</code> — Concatenates JS and SCSS, optimizes SVG icons to be used as snippets, and copies over all other files and folders to a <code class="highlighter-rouge">dist</code> folder</li>
+  <li><code class="highlighter-rouge">slate deploy</code> — Builds your <code class="highlighter-rouge">dist</code> folder and replaces the theme set in config.yml</li>
+  <li><code class="highlighter-rouge">slate watch</code> — Listens for changes to your local source files and deploys them to your shop</li>
+  <li><code class="highlighter-rouge">slate start</code> — Runs build, deploy, then watch to get you developing on your shop quickly</li>
+  <li><code class="highlighter-rouge">slate zip</code> — Builds and compresses your <code class="highlighter-rouge">dist</code> to a zip file for easy manual upload</li>
+</ul>
+
+<blockquote>
+  <p>Learn more about <a href="/slate/commands/">all commands and descriptions</a> or how to <a href="/slate/commands/#sync-commands">deploy to multiple environments</a>.</p>
+</blockquote>
+
+<h2 id="working-with-git-repositories">Working with Git repositories</h2>
+
+<p>A new Slate project comes with a <code class="highlighter-rouge">.gitignore</code> file. This file is useful if you plan on using Git for version control as it contains a list of files and folders to be ignored when committing to a git repository. Ignored files are both Slate project specific files as well as commonly ignored files on any project.</p>
+
+<p>For more information on <code class="highlighter-rouge">.gitignore</code> files, see GitHub’s documentation: https://help.github.com/articles/ignoring-files/</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+<script src="/slate/js/tracking.js" async></script>
+</html>
