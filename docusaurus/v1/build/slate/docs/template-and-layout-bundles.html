@@ -1,0 +1,113 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Template and layout bundles · Slate</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Template and layout bundles are a build-time optimization which ensures that only the JS and CSS needed for the current page is downloaded and executed. This optimization results in improved page load speed, especially on mobile devices with limited computing power and network capacity."/><meta name="docsearch:version" content="1.0.0-beta.13"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Template and layout bundles · Slate"/><meta property="og:type" content="website"/><meta property="og:url" content="https://shopify.github.io/slate.shopify.com/index.html"/><meta property="og:description" content="Template and layout bundles are a build-time optimization which ensures that only the JS and CSS needed for the current page is downloaded and executed. This optimization results in improved page load speed, especially on mobile devices with limited computing power and network capacity."/><meta property="og:image" content="https://shopify.github.io/slate.shopify.com/img/facebook-image.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://shopify.github.io/slate.shopify.com/img/twitter-image.png"/><link rel="shortcut icon" href="/slate.shopify.com/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="/slate.shopify.com/js/custom.js"></script><link rel="stylesheet" href="/slate.shopify.com/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/slate.shopify.com/"><img class="logo" src="/slate.shopify.com/img/slate.svg" alt="Slate"/></a><a href="/slate.shopify.com/versions"><h3>1.0.0-beta.13</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="https://github.com/Shopify/slate" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Concepts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Slate</h3><ul><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/about">About</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting started</h3><ul><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/system-requirements">System requirements</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/create-a-new-slate-project">Create a new Slate project</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/connect-to-your-store">Connect to your store</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/create-a-self-signed-ssl-certificate">Create a self-signed SSL certificate</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/start-developing">Start developing</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/commands">Commands</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Concepts</h3><ul><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/slate-themes">Slate Themes</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/starter-themes">Starter Themes</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/local-development">Local development</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/styles-with-liquid">Styles with Liquid</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/slate.shopify.com/docs/template-and-layout-bundles">Template and layout bundles</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/asset-minification">Asset minification</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/deploy-environments">Deploy environments</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Guides</h3><ul><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/how-to-create-your-own-starter-theme">How to create your own Starter theme</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/how-to-create-a-development-store">How to create a development store</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/how-to-update-Slate-to-the-latest-version">How to update Slate to the latest version</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Reference</h3><ul><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/create-slate-theme">Create Slate Theme</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/slate-analytics">Slate analytics</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/slate-configuration">Slate Configuration</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/slate-cssvar-loader">Slate CSSVar Loader</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/Shopify/slate.shopify.com/tree/master/website/versioned_docs/version-1.0.0-beta.13/Template-and-layout-bundles.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Template and layout bundles</h1></header><article><div><span><p>Template and layout bundles are a build-time optimization which ensures that only the JS and CSS needed for the current page is downloaded and executed. This optimization results in improved page load speed, especially on mobile devices with limited computing power and network capacity.</p>
+<h2><a class="anchor" aria-hidden="true" id="project-file-structure"></a><a href="#project-file-structure" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Project file structure</h2>
+<p>In order to take advantage of template and layout bundles, your Slate project's <code>script/</code> folder must include the following folders:</p>
+<pre><code class="hljs css language-bash">└── src
+   └── scripts
+   │   ├── layout
+   │   └── templates
+   ├── layout
+   └── templates
+</code></pre>
+<p>On build, Slate will look for each file in the <code>scripts/layout</code> and <code>scripts/templates</code> folders and see if there is a matching file in the <code>src/layout</code> and <code>src/templates</code> folders. If there is a match, a template or layout bundle is created for that match.</p>
+<p>Let's take a look at an example file structure and explore how Slate matches files to create bundles:</p>
+<pre><code class="hljs css language-bash">└── src
+   └── scripts
+   │   ├── layout
+   │   │   ├── password.js
+   │   │   └── theme.js
+   │   └── templates
+   │       ├── index.js
+   │       └── product.js
+   ├── layout
+   │   └── theme.liquid
+   └── templates
+       ├── collection.liquid
+       ├── index.liquid
+       └── product.liquid
+</code></pre>
+<p>In the example above, we have a few standard files and folders you might expect to find in a Slate project. We have our main layout file (<code>theme.liquid</code>), three template files (<code>collection.liquid</code>, <code>index.liquid</code>, and <code>product.liquid</code>), and various JS files within our <code>scripts/</code> folder.</p>
+<p>Upon calling <code>slate-tools build</code>, Slate will look for matching template and layout files inside the <code>scripts/</code> folder and generate the following JS bundles:</p>
+<ul>
+<li><code>layout.theme.js</code>: Both <code>theme.liquid</code> and <code>theme.js</code> exist.</li>
+<li><code>template.index.js</code>: Both <code>index.liquid</code> and <code>index.js</code> exist.</li>
+<li><code>template.product.js</code>: Both <code>product.liquid</code> and <code>product.js</code> exist.</li>
+</ul>
+<p>Note that the following bundles <strong>are not</strong> generated:</p>
+<ul>
+<li><code>layout.password.js</code>: Slate cannot find a <code>layout/password.liquid</code> file.</li>
+<li><code>template.collection.js</code>: Slate cannot find a <code>scripts/templates/collection.js</code> file.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="shared-js-dependencies-chunking"></a><a href="#shared-js-dependencies-chunking" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Shared JS dependencies chunking</h2>
+<p>A critical optimization needed for template and layout bundles to be successful is to split shared dependencies between bundles into separate chunks. This reduces the amount of duplicate code included in each bundle and further improves page load performance.</p>
+<p>Let's continue with the file structure from the previous example, and see how shared dependencies are separated:</p>
+<p><em>index.js</em></p>
+<pre><code class="hljs css language-js">@<span class="hljs-keyword">import</span> depA <span class="hljs-keyword">from</span> <span class="hljs-string">'depA'</span>;
+@<span class="hljs-keyword">import</span> depB <span class="hljs-keyword">from</span> <span class="hljs-string">'depB'</span>;
+</code></pre>
+<p><em>product.js</em></p>
+<pre><code class="hljs css language-js">@<span class="hljs-keyword">import</span> depB <span class="hljs-keyword">from</span> <span class="hljs-string">'depB'</span>;
+@<span class="hljs-keyword">import</span> depC <span class="hljs-keyword">from</span> <span class="hljs-string">'depC'</span>;
+</code></pre>
+<p>In the example above, we have 2 files which each import 2 dependencies. Both files have a shared dependency, <code>depB</code>. Instead of bundling <code>depB</code> into <code>template.index.js</code> and again in <code>template.product.js</code>, Slate splits <code>depB</code> into its own bundle chunk. The resulting generated files are:</p>
+<ul>
+<li><code>template.index.js</code>: Code that is only used on the index template.</li>
+<li><code>template.product.js</code>: Code that is only used on the product template.</li>
+<li><code>template.index@template.product.js</code>: Code that is used on both index and product templates.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="template-and-layout-styles"></a><a href="#template-and-layout-styles" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Template and layout styles</h2>
+<p>It's also possible to structure your styles so that only those needed for the current page are loaded. This is made possible by the JS bundling mentioned above. Let's take a look at what a typical Slate project might look like and how it would take advantage of template and layout styles.</p>
+<p><em>layout/theme.js</em></p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> <span class="hljs-string">'../../styles/layout/theme.scss'</span>;
+</code></pre>
+<p><em>product.js</em></p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> <span class="hljs-string">'../../styles/templates/product.scss'</span>;
+</code></pre>
+<p>Looking at the above examples, we can see that we are importing two different SCSS files. We can expect that <code>theme.scss</code> contains global styles that are used through most of the theme's pages, such as header and navigation styles. <code>product.scss</code> might include styles that are specific to the product template, such as a product image gallery.</p>
+<p>The following imports would generate the following files:</p>
+<ul>
+<li>layout.theme.css.liquid</li>
+<li>template.product.css.liquid</li>
+</ul>
+<blockquote>
+<p>Unlike JS, we are unable to split shared dependencies between template and layout styles. If you're not careful, this could mean that your users will end up downloading the same styles more than once. Make sure to keep this in mind!</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="including-generated-bundles-in-your-theme"></a><a href="#including-generated-bundles-in-your-theme" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Including generated bundles in your theme</h2>
+<p>Now that you have template and layout bundles with shared dependency chunking, you'll notice that there are a lot of JS files in your compiled Slate project (found in the <code>dist</code> folder). It would be pretty tedious to code and manage all the <code>&lt;script&gt;</code> tags for each of these assets. So let's have Slate handle this!</p>
+<p>Slate generates <code>script-tags.liquid</code> and <code>styles-tags.liquid</code> snippets which include <code>&lt;script&gt;</code> and <code>&lt;link&gt;</code> tags needed for each bundle. These snippets also include all the liquid logic needed to selectively load these bundles based on the current template and layout. All you need to do is include these snippets in your layout files.</p>
+<p>For example, here is what you would include in your <code>layout/theme.liquid</code>:</p>
+<pre><code class="hljs css language-html">{% include 'style-tags' %} {% include 'script-tags', layout: 'theme' %}
+</code></pre>
+<p>where the <code>layout</code> option value is the name of the layout.</p>
+<h2><a class="anchor" aria-hidden="true" id="more-resources-and-examples"></a><a href="#more-resources-and-examples" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>More resources and examples</h2>
+<ul>
+<li><a href="https://github.com/Shopify/starter-theme">Shopify Starter Theme</a></li>
+<li><a href="https://webpack.js.org/plugins/split-chunks-plugin/">Webpack Split Chunks Plugin</a></li>
+</ul>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/slate.shopify.com/docs/styles-with-liquid"><span class="arrow-prev">← </span><span>Previous</span></a><a class="docs-next button" href="/slate.shopify.com/docs/asset-minification"><span>Next</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#project-file-structure">Project file structure</a></li><li><a href="#shared-js-dependencies-chunking">Shared JS dependencies chunking</a></li><li><a href="#template-and-layout-styles">Template and layout styles</a></li><li><a href="#including-generated-bundles-in-your-theme">Including generated bundles in your theme</a></li><li><a href="#more-resources-and-examples">More resources and examples</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2018 Shopify</section></footer></div></body></html>

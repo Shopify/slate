@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "examples": "docusaurus-examples",
+    "start": "docusaurus-start",
+    "build": "docusaurus-build",
+    "publish-gh-pages": "docusaurus-publish",
+    "write-translations": "docusaurus-write-translations",
+    "version": "docusaurus-version",
+    "rename-version": "docusaurus-rename-version",
+    "build:all": "cd .. && rm -rf docs && mkdir docs && cd website && docusaurus-build && cp -R build/slate/ ../docs/ && cd .. && cd v0 && bundle exec jekyll build && cd .. && cp -R v0/_site docs/docs/0.14.0"
+  },
+  "devDependencies": {
+    "docusaurus": "1.5.0"
+  }
+}

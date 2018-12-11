@@ -1,0 +1,68 @@
+body {
+  padding: 30px;
+}
+
+p:first-child {
+  margin-top: 0;
+}
+
+/*================ General helpers ================*/
+.list--inline {
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+}
+
+/*================ Grid demo styles ================*/
+.grid-demo {
+  background-color: $color-sky--light;
+  font-size: 0.75em;
+  padding: 10px;
+  text-align: center;
+}
+
+/*================ Blank state demos ================*/
+.blank-states-product-demo a {
+  display: inline-block;
+  width: 30%;
+  margin-right: 2%;
+}
+
+/*================ Icon demos ================*/
+.icon-demo .icon {
+  margin-right: 10px;
+}
+
+.icon-demo--color .icon-cart {
+  fill: blue;
+  width: 40px;
+  height: 40px;
+}
+
+// Put icon name below icon
+.icon-demo--full-set {
+  li {
+    position: relative;
+    margin-bottom: 30px;
+    margin-right: 20px;
+
+    &:before {
+      display: block;
+      content: attr(data-name);
+      font-size: 0.8em;
+      padding-top: 25px;
+    }
+  }
+
+  .icon {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

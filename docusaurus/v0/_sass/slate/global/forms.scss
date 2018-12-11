@@ -1,0 +1,63 @@
+/*============================================================================
+  Form scaffolding
+    - Selectors setup for you to style form elements how you want
+    - Focus, error, and disabled states are set to be extended
+==============================================================================*/
+input,
+textarea,
+select {
+  border: 1px solid $color-border;
+  border-radius: 0;
+  max-width: 100%;
+
+  &:focus {
+    // You should add some focus styles
+  }
+
+  &[disabled] {
+    cursor: default;
+    background-color: $color-disabled;
+    border-color: $color-disabled-border;
+  }
+}
+
+textarea {
+  min-height: 100px;
+}
+
+/*================ Custom select style ================*/
+select {
+  @include prefix(appearance, none, webkit moz spec);
+  background-position: right center;
+  background: {
+    image: url($svg-select-icon);
+    repeat: no-repeat;
+    position: right 10px center;
+    color: transparent;
+  }
+  padding-right: 28px;
+  text-indent: 0.01px;
+  text-overflow: '';
+  cursor: pointer;
+
+  /*================ Hide the svg arrow in IE9 ================*/
+  .ie9 & {
+    padding-right: 10px;
+    background-image: none;
+  }
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+/*================ Error styles ================*/
+input,
+select,
+textarea {
+  &.input-error {
+    border-color: $color-error;
+    background-color: $color-error-bg;
+    color: $color-error;
+  }
+}

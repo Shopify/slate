@@ -1,0 +1,36 @@
+/*================ Giftcard Template ================*/
+.giftcard-qr {
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.apple-wallet-image {
+  display: block;
+  margin: 0 auto;
+}
+
+/*================ Print Giftcard Styles ================*/
+@media print {
+  @page {
+    margin: 0.5cm;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  html,
+  body {
+    // sass-lint:disable no-color-literals
+    background-color: #fff;
+    color: #000;
+  }
+
+  .print-giftcard,
+  .apple-wallet {
+    display: none;
+  }
+}

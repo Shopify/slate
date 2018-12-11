@@ -1,0 +1,21 @@
+@media only screen and (min-width: 1024px) {
+  .fixedHeaderContainer {
+    padding: 15px 0;
+  }
+}
+
+.toc .toggleNav ul li.navListItemActive a {
+  font-weight: bold;
+}
+
+.toc-headings .is-visible > a {
+  font-weight: bold;
+}
+
+.post > article > div a {
+  text-decoration: underline;
+}
+
+article table td:first-child code {
+  white-space: nowrap;
+}

@@ -1,0 +1,33 @@
+{
+  "docs": {
+    "Slate": ["about"],
+    "Getting started": [
+      "system-requirements",
+      "create-a-new-slate-project",
+      "connect-to-your-store",
+      "create-a-self-signed-ssl-certificate",
+      "start-developing",
+      "commands"
+    ],
+    "Concepts": [
+      "slate-themes",
+      "starter-themes",
+      "local-development",
+      "styles-with-liquid",
+      "template-and-layout-bundles",
+      "asset-minification",
+      "deploy-environments"
+    ],
+    "Guides": [
+      "how-to-create-your-own-starter-theme",
+      "how-to-create-a-development-store",
+      "how-to-update-Slate-to-the-latest-version"
+    ],
+    "Reference": [
+      "create-slate-theme",
+      "slate-analytics",
+      "slate-configuration",
+      "slate-cssvar-loader"
+    ]
+  }
+}

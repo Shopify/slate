@@ -1,0 +1,35 @@
+{
+  "version-1.0.0-beta.13-docs": {
+    "Slate": [
+      "version-1.0.0-beta.13-about"
+    ],
+    "Getting started": [
+      "version-1.0.0-beta.13-system-requirements",
+      "version-1.0.0-beta.13-create-a-new-slate-project",
+      "version-1.0.0-beta.13-connect-to-your-store",
+      "version-1.0.0-beta.13-create-a-self-signed-ssl-certificate",
+      "version-1.0.0-beta.13-start-developing",
+      "version-1.0.0-beta.13-commands"
+    ],
+    "Concepts": [
+      "version-1.0.0-beta.13-slate-themes",
+      "version-1.0.0-beta.13-starter-themes",
+      "version-1.0.0-beta.13-local-development",
+      "version-1.0.0-beta.13-styles-with-liquid",
+      "version-1.0.0-beta.13-template-and-layout-bundles",
+      "version-1.0.0-beta.13-asset-minification",
+      "version-1.0.0-beta.13-deploy-environments"
+    ],
+    "Guides": [
+      "version-1.0.0-beta.13-how-to-create-your-own-starter-theme",
+      "version-1.0.0-beta.13-how-to-create-a-development-store",
+      "version-1.0.0-beta.13-how-to-update-Slate-to-the-latest-version"
+    ],
+    "Reference": [
+      "version-1.0.0-beta.13-create-slate-theme",
+      "version-1.0.0-beta.13-slate-analytics",
+      "version-1.0.0-beta.13-slate-configuration",
+      "version-1.0.0-beta.13-slate-cssvar-loader"
+    ]
+  }
+}

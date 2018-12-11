@@ -1,0 +1,58 @@
+/*================ Icons ================*/
+.icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  fill: currentColor;
+
+  .no-svg & {
+    display: none;
+  }
+}
+
+.icon--wide {
+  width: 40px;
+}
+
+svg,
+symbol {
+  &.icon:not(.icon--full-color) {
+    circle,
+    ellipse,
+    g,
+    line,
+    path,
+    polygon,
+    polyline,
+    rect {
+      fill: inherit;
+      stroke: inherit;
+    }
+  }
+
+}
+
+/*============================================================================
+  A generic way to visually hide content while
+  remaining accessible to screen readers (h5bp.com)
+==============================================================================*/
+.icon-fallback-text {
+  @include visually-hidden();
+
+  .no-svg & {
+    @include visually-shown(static);
+  }
+}
+
+/*================ Payment Icons ================*/
+.payment-icons {
+  @include prefix('user-select', 'none', moz ms webkit spec);
+  cursor: default;
+}
+
+/*================ Shopify icon on password page ================*/
+.icon-shopify-logo {
+  width: 1.5 * $font-size-base * 120 / 35;
+  height: 1.5 * $font-size-base;
+}
