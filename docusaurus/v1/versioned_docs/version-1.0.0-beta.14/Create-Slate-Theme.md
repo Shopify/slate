@@ -1,5 +1,5 @@
 ---
-id: version-1.0.0-beta.13-create-slate-theme
+id: version-1.0.0-beta.14-create-slate-theme
 title: Create Slate Theme
 original_id: create-slate-theme
 ---

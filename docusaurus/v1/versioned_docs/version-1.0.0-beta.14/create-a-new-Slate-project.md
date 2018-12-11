@@ -1,5 +1,5 @@
 ---
-id: version-1.0.0-beta.13-create-a-new-slate-project
+id: version-1.0.0-beta.14-create-a-new-slate-project
 title: Create a new Slate project
 original_id: create-a-new-slate-project
 ---

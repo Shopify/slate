@@ -1,5 +1,5 @@
 ---
-id: version-1.0.0-beta.13-how-to-update-Slate-to-the-latest-version
+id: version-1.0.0-beta.14-how-to-update-Slate-to-the-latest-version
 title: How to update Slate to the latest version
 original_id: how-to-update-Slate-to-the-latest-version
 ---

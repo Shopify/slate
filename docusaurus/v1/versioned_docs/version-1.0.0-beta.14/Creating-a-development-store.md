@@ -1,5 +1,5 @@
 ---
-id: version-1.0.0-beta.13-how-to-create-a-development-store
+id: version-1.0.0-beta.14-how-to-create-a-development-store
 title: How to create a development store
 original_id: how-to-create-a-development-store
 ---

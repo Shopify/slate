@@ -5,67 +5,67 @@
     "previous": "Previous",
     "tagline": "A toolkit for developing Shopify themes",
     "docs": {
-      "version-1.0.0-beta.13-about": {
+      "version-1.0.0-beta.14-about": {
         "title": "About"
       },
-      "version-1.0.0-beta.13-asset-minification": {
+      "version-1.0.0-beta.14-asset-minification": {
         "title": "Asset minification"
       },
-      "version-1.0.0-beta.13-commands": {
+      "version-1.0.0-beta.14-commands": {
         "title": "Commands"
       },
-      "version-1.0.0-beta.13-connect-to-your-store": {
+      "version-1.0.0-beta.14-connect-to-your-store": {
         "title": "Connect to your store"
       },
-      "version-1.0.0-beta.13-create-a-new-slate-project": {
+      "version-1.0.0-beta.14-create-a-new-slate-project": {
         "title": "Create a new Slate project"
       },
-      "version-1.0.0-beta.13-create-a-self-signed-ssl-certificate": {
+      "version-1.0.0-beta.14-create-a-self-signed-ssl-certificate": {
         "title": "Create a self-signed SSL certificate"
       },
-      "version-1.0.0-beta.13-create-slate-theme": {
+      "version-1.0.0-beta.14-create-slate-theme": {
         "title": "Create Slate Theme"
       },
-      "version-1.0.0-beta.13-how-to-create-a-development-store": {
+      "version-1.0.0-beta.14-how-to-create-a-development-store": {
         "title": "How to create a development store"
       },
-      "version-1.0.0-beta.13-deploy-environments": {
+      "version-1.0.0-beta.14-deploy-environments": {
         "title": "Deploy environments"
       },
-      "version-1.0.0-beta.13-how-to-create-your-own-starter-theme": {
+      "version-1.0.0-beta.14-how-to-create-your-own-starter-theme": {
         "title": "How to create your own Starter theme"
       },
-      "version-1.0.0-beta.13-how-to-update-Slate-to-the-latest-version": {
+      "version-1.0.0-beta.14-how-to-update-Slate-to-the-latest-version": {
         "title": "How to update Slate to the latest version"
       },
-      "version-1.0.0-beta.13-local-development": {
+      "version-1.0.0-beta.14-local-development": {
         "title": "Local development"
       },
-      "version-1.0.0-beta.13-slate-analytics": {
+      "version-1.0.0-beta.14-slate-analytics": {
         "title": "Slate analytics"
       },
-      "version-1.0.0-beta.13-slate-configuration": {
+      "version-1.0.0-beta.14-slate-configuration": {
         "title": "Slate Configuration"
       },
-      "version-1.0.0-beta.13-slate-cssvar-loader": {
+      "version-1.0.0-beta.14-slate-cssvar-loader": {
         "title": "Slate CSSVar Loader"
       },
-      "version-1.0.0-beta.13-slate-themes": {
+      "version-1.0.0-beta.14-slate-themes": {
         "title": "Slate Themes"
       },
-      "version-1.0.0-beta.13-start-developing": {
+      "version-1.0.0-beta.14-start-developing": {
         "title": "Start developing"
       },
-      "version-1.0.0-beta.13-starter-themes": {
+      "version-1.0.0-beta.14-starter-themes": {
         "title": "Starter Themes"
       },
-      "version-1.0.0-beta.13-styles-with-liquid": {
+      "version-1.0.0-beta.14-styles-with-liquid": {
         "title": "Styles with Liquid"
       },
-      "version-1.0.0-beta.13-system-requirements": {
+      "version-1.0.0-beta.14-system-requirements": {
         "title": "System requirements"
       },
-      "version-1.0.0-beta.13-template-and-layout-bundles": {
+      "version-1.0.0-beta.14-template-and-layout-bundles": {
         "title": "Template and layout bundles"
       }
     },

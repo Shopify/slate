@@ -1,5 +1,5 @@
 ---
-id: version-1.0.0-beta.13-slate-themes
+id: version-1.0.0-beta.14-slate-themes
 title: Slate Themes
 original_id: slate-themes
 ---

@@ -1,5 +1,5 @@
 ---
-id: version-1.0.0-beta.13-template-and-layout-bundles
+id: version-1.0.0-beta.14-template-and-layout-bundles
 title: Template and layout bundles
 original_id: template-and-layout-bundles
 ---

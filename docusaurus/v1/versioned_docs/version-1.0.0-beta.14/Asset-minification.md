@@ -1,5 +1,5 @@
 ---
-id: version-1.0.0-beta.13-asset-minification
+id: version-1.0.0-beta.14-asset-minification
 title: Asset minification
 original_id: asset-minification
 ---

@@ -1,5 +1,5 @@
 ---
-id: version-1.0.0-beta.13-slate-configuration
+id: version-1.0.0-beta.14-slate-configuration
 title: Slate Configuration
 original_id: slate-configuration
 ---

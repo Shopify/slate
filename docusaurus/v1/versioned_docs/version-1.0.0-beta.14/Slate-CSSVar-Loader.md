@@ -1,5 +1,5 @@
 ---
-id: version-1.0.0-beta.13-slate-cssvar-loader
+id: version-1.0.0-beta.14-slate-cssvar-loader
 title: Slate CSSVar Loader
 original_id: slate-cssvar-loader
 ---

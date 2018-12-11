@@ -1,5 +1,5 @@
 ---
-id: version-1.0.0-beta.13-styles-with-liquid
+id: version-1.0.0-beta.14-styles-with-liquid
 title: Styles with Liquid
 original_id: styles-with-liquid
 ---

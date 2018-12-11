@@ -1,5 +1,5 @@
 ---
-id: version-1.0.0-beta.13-start-developing
+id: version-1.0.0-beta.14-start-developing
 title: Start developing
 original_id: start-developing
 ---

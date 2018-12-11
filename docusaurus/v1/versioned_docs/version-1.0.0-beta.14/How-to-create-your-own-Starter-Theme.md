@@ -1,5 +1,5 @@
 ---
-id: version-1.0.0-beta.13-how-to-create-your-own-starter-theme
+id: version-1.0.0-beta.14-how-to-create-your-own-starter-theme
 title: How to create your own Starter theme
 original_id: how-to-create-your-own-starter-theme
 ---

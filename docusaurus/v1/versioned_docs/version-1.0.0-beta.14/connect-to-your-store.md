@@ -1,5 +1,5 @@
 ---
-id: version-1.0.0-beta.13-connect-to-your-store
+id: version-1.0.0-beta.14-connect-to-your-store
 title: Connect to your store
 original_id: connect-to-your-store
 ---

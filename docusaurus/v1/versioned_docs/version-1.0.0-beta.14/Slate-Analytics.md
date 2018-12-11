@@ -1,5 +1,5 @@
 ---
-id: version-1.0.0-beta.13-slate-analytics
+id: version-1.0.0-beta.14-slate-analytics
 title: Slate analytics
 original_id: slate-analytics
 ---
