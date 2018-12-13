@@ -79,7 +79,7 @@ To run your local version of `create-slate-theme`, do the following:
 
 In order to test changes you make to Slate Tools, you'll need to have a Slate theme project to test it with. To do this:
 
-1.  See the [Getting Started](https://github.com/Shopify/slate/wiki/Getting-Started) guide on how to get a Slate project up and running.
+1.  See the [Getting Started](https://shopify.github.io/slate.shopify.com/docs/system-requirements) guide on how to get a Slate project up and running.
 2.  In your terminal, go to `packages/slate-tools` directory in your forked version of the Slate repo (not in the node_modules folder of your theme project)
 
 ```
@@ -102,7 +102,7 @@ That's it! Now when you run any Slate Tools commands, they should be run using y
 
 ## Documentation
 
-If your change affects how people use the project (i.e. adding or removing functionality, changing the return value of a function, etc), please ensure [the wiki](https://github.com/Shopify/slate/wiki) is also updated to reflect this.
+If your change affects how people use the project (i.e. adding or removing functionality, changing the return value of a function, etc), please ensure [the documentation website](https://shopify.github.io/slate.shopify.com/docs/about) is also updated to reflect this.
 
 ## Changelog
 

@@ -2,17 +2,17 @@
 
 ![slate animated banner](https://user-images.githubusercontent.com/4837696/47506317-cbe22400-d83d-11e8-9867-1dc874943833.gif)
 
-> **Slate v1.0 is currently in beta.** Expect more bugs than a final release. If you are migrating from using the previous version of Slate, please review the [new documentation](https://github.com/Shopify/slate/wiki) as there are breaking changes. Slate v1.0 has not yet been tested on Windows.
+> **Slate v1.0 is currently in beta.** Expect more bugs than a final release. If you are migrating from using the previous version of Slate, please review the [new documentation](https://shopify.github.io/slate.shopify.com/docs/about) as there are breaking changes. Slate v1.0 has not yet been tested on Windows.
 >
 > To view the previous version of Slate, visit the [0.x branch](https://github.com/Shopify/slate/tree/0.x).
 
 Slate empowers developers of all skill levels to build quality Shopify themes. Slate guides developers by providing a tested workflow and opinionated development toolkit, while also accommodating more established developers through advanced configuration.
 
-🚀 [Get started with a new Slate project](https://github.com/Shopify/slate/wiki/Getting-Started)
+🚀 [Get started with a new Slate project](https://shopify.github.io/slate.shopify.com/docs/system-requirements)
 
 ## Documentation
 
-Visit the [official Slate Wiki](https://github.com/Shopify/slate/wiki) for complete documentation Slate's concepts and technical details, as well as helpful guides!
+Visit the [official Slate documentation website](https://shopify.github.io/slate.shopify.com/docs/about) for complete documentation Slate's concepts and technical details, as well as helpful guides!
 
 ## Contributing
 

@@ -8,7 +8,7 @@ We understand that not everyone shares the same taste in libraries and solutions
 
 ## Getting Started
 
-The easiest way to create your very own starter theme is by customizing an existing one. You can find a list of [community made starter themes](starter-themes#community-starter-themes) in the Slate Wiki, or you can use one of Shopify’s starter themes:
+The easiest way to create your very own starter theme is by customizing an existing one. You can find a list of [community made starter themes](starter-themes#community-starter-themes) in the Slate documentation website, or you can use one of Shopify’s starter themes:
 
 - [Shopify/starter-theme](https://github.com/Shopify/starter-theme)
 - [Shopify/skeleton-theme](https://github.com/Shopify/skeleton-theme)
@@ -67,4 +67,4 @@ Where `tobi/custom-starter-theme` would reference as {username}/{repository}
 
 ## Contributing to the community
 
-Don’t forget to add your new starter theme to the list of community themes on the [Starter Themes page](starter-themes#community-starter-themes) of the Slate Wiki!
+Don’t forget to add your new starter theme to the list of community themes on the [Starter Themes page](starter-themes#community-starter-themes) of the Slate documentation website!
