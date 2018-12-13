@@ -25,7 +25,9 @@ function forNewConsent() {
     ),
   );
   console.log(
-    chalk.cyan('\n  https://shopify.github.io/slate.shopify.com/docs/slate-analytics'),
+    chalk.cyan(
+      '\n  https://shopify.github.io/slate.shopify.com/docs/slate-analytics',
+    ),
   );
   console.log();
 
