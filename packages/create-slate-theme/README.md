@@ -4,4 +4,4 @@
 
 The `create-slate-theme` package enables users to create a new Slate project with a single command.
 
-For more information, visit [the documentation website](https://shopify.github.io/slate.shopify.com/docs/create-slate-theme).
+For more information, visit [the documentation website](https://shopify.github.io/slate/docs/create-slate-theme).

@@ -4,7 +4,7 @@ layout: default
 
 # Slate v0
 
-> ⚠️ **These docs are for Slate v0!** To view the docs for the latest version of Slate, go to the [Slate documentation website](https://shopify.github.io/slate.shopify.com/docs/about).
+> ⚠️ **These docs are for Slate v0!** To view the docs for the latest version of Slate, go to the [Slate documentation website](https://shopify.github.io/slate/docs/about).
 
 Slate is a theme scaffold and command line tool for developing Shopify themes. It is designed to assist your development workflow and speed up the process of developing, testing, and deploying themes to Shopify stores.
 
