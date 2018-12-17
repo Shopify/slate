@@ -148,4 +148,4 @@ You **must** include your style index file at the top of your `theme.js` file fo
 import '../styles/theme.scss';
 ```
 
-Liquid variables are accessible in `.css`, `.scss`, and `.sass` files via CSS custom properties that are declared in the `layout/theme.liquid`. Here's more information on [how to use Liquid with CSS custom properties](http://localhost:3000/slate.shopify.com/docs/styles-with-liquid#liquid-with-css-custom-properties)
+Liquid variables are accessible in `.css`, `.scss`, and `.sass` files via CSS custom properties that are declared in the `layout/theme.liquid`. Here's more information on [how to use Liquid with CSS custom properties](docs/styles-with-liquid#liquid-with-css-custom-properties)

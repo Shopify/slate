@@ -12,7 +12,7 @@ const siteConfig = {
   title: 'Slate', // Title for your website.
   tagline: 'A toolkit for developing Shopify themes',
   url: 'https://shopify.github.io', // Your website URL
-  baseUrl: '/slate.shopify.com/', // Base URL for your project */
+  baseUrl: '/slate/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/slate.shopify.com/',
@@ -25,7 +25,7 @@ const siteConfig = {
   //   organizationName: 'JoelMarcey'
 
   // For no header links in the top nav bar -> headerLinks: [],
-  headerLinks: [{ href: 'https://github.com/Shopify/slate', label: 'GitHub' }],
+  headerLinks: [{href: 'https://github.com/Shopify/slate', label: 'GitHub'}],
 
   /* path to images for header/footer */
   headerIcon: 'img/slate.svg',
@@ -36,7 +36,7 @@ const siteConfig = {
   /* Colors for website */
   colors: {
     primaryColor: '#231D1E',
-    secondaryColor: '#231D1E'
+    secondaryColor: '#231D1E',
   },
 
   // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
@@ -44,20 +44,18 @@ const siteConfig = {
 
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks.
-    theme: 'default'
+    theme: 'default',
   },
 
   // Add custom scripts here that would be placed in <script> tags.
-  scripts: [
-    '/slate.shopify.com/js/custom.js'
-  ],
+  scripts: ['/slate/js/custom.js'],
 
   // On page navigation for the current documentation page.
   onPageNav: 'separate',
   // No .html extensions for paths.
   cleanUrl: true,
   editUrl:
-    'https://github.com/Shopify/slate.shopify.com/tree/master/website/versioned_docs/version-1.0.0-beta.13/',
+    'https://github.com/Shopify/slate/tree/master/website/versioned_docs/version-1.0.0-beta.13/',
 
   // Open Graph and Twitter card images.
   ogImage: 'img/facebook-image.png',
@@ -65,7 +63,7 @@ const siteConfig = {
 
   // You may provide arbitrary config keys to be used as needed by your
   // template. For example, if you need your repo's URL...
-  repoUrl: 'https://github.com/Shopify/slate.shopify.com'
+  repoUrl: 'https://github.com/Shopify/slate',
 };
 
 module.exports = siteConfig;
