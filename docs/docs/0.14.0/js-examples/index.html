@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>JS examples</title>
+  <meta name="description" content="Slate is a theme scaffold and command line tool for developing Shopify themes. It is designed to assist your development workflow and speed up the process of developing, testing, and deploying themes to Shopify stores.
+">
+
+  <link rel="stylesheet" href="https://cdn.shopify.com/shopify-marketing_assets/builds/13.0.2/marketing_assets_content.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="/slate/css/prettify.min.css">
+  <link rel="stylesheet" href="/slate/css/yuidoc.css">
+  <link rel="stylesheet" href="/slate/css/main.css">
+  <link rel="canonical" href="https://shopify.github.io/slate/js-examples/">
+  <link rel="shortcut icon" type="image/x-icon" href="//cdn.shopify.com/shopify-marketing_assets/static/shopify-favicon.png" />
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+  <script src="/slate/js/demo.js"></script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-49178120-25', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+
+<body>
+  <main role="main" id="main">
+    <div class="docs-container">
+      <div class="docs-sidebar">
+        <div class="docs-title heading--1"><a class="site-title" href="/slate/">Slate</a></div>
+<ul class="docs-nav">
+  <li>
+    <a class="docs-nav__link " href="/slate/">Getting started</a>
+  </li>
+  <li>
+    <a class="docs-nav__link " href="/slate/theme">What's included</a>
+  </li>
+  <li>
+    <a class="docs-nav__link " href="/slate/commands">Commands</a>
+    <ul class="docs-sub-nav">
+      <li>
+        <a href="/slate/commands/#global-commands" class="docs-sub-nav__link">Global commands</a>
+      </li>
+      <li>
+        <a href="/slate/commands/#build-commands" class="docs-sub-nav__link">Build commands</a>
+      </li>
+      <li>
+        <a href="/slate/commands/#sync-commands" class="docs-sub-nav__link">Sync commands</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a class="docs-nav__link " href="/slate/theme-scaffold">Theme scaffold</a>
+    <ul class="docs-sub-nav">
+      <li>
+        <a href="/slate/theme-scaffold/#templates-and-configuration" class="docs-sub-nav__link">Templates and configuration</a>
+      </li>
+      <li>
+        <a href="/slate/theme-scaffold/#sections" class="docs-sub-nav__link">Sections</a>
+      </li>
+      <li>
+        <a href="/slate/theme-scaffold/#sass-helpers" class="docs-sub-nav__link">Sass helpers</a>
+      </li>
+      <li>
+        <a href="/slate/theme-scaffold/#javascript-helpers" class="docs-sub-nav__link">JavaScript helpers</a>
+      </li>
+      <li>
+        <a href="/slate/theme-scaffold/#translation-keys" class="docs-sub-nav__link">Translation keys</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a class="docs-nav__link " href="/slate/css-examples">CSS examples</a>
+    <ul class="docs-sub-nav">
+      <li>
+        <a href="/slate/css-examples/#breakpoints" class="docs-sub-nav__link">Breakpoints and media queries</a>
+      </li>
+      <li>
+        <a href="/slate/css-examples/#grid" class="docs-sub-nav__link">Grid</a>
+      </li>
+      <li>
+        <a href="/slate/css-examples/#svg-icons" class="docs-sub-nav__link">SVG icons</a>
+      </li>
+      <li>
+        <a href="/slate/css-examples/#responsive-tables" class="docs-sub-nav__link">Responsive tables</a>
+      </li>
+      <li>
+        <a href="/slate/css-examples/#blank-states" class="docs-sub-nav__link">Blank states</a>
+      </li>
+      <li>
+        <a href="/slate/css-examples/#sass-mixins" class="docs-sub-nav__link">Sass mixins</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a class="docs-nav__link active" href="/slate/js-examples">JS examples</a>
+    <ul class="docs-sub-nav">
+      <li>
+        <a href="/slate/js-examples/#trap-focus" class="docs-sub-nav__link">Trap focus</a>
+      </li>
+      <li>
+        <a href="/slate/js-examples/#responsive-tables-and-videos" class="docs-sub-nav__link">Responsive tables and videos</a>
+      </li>
+      <li>
+        <a href="/slate/js-examples/#format-currency" class="docs-sub-nav__link">Format currency</a>
+      </li>
+      <li>
+        <a href="/slate/js-examples/#image-helpers" class="docs-sub-nav__link">Image helpers</a>
+      </li>
+      <li>
+        <a href="/slate/js-examples/#product-variants" class="docs-sub-nav__link">Product variants</a>
+      </li>
+      <li>
+        <a href="/slate/js-examples/#cart-helpers" class="docs-sub-nav__link">Cart helpers</a>
+      </li>
+      <li>
+        <a href="/slate/js-examples/#section-events" class="docs-sub-nav__link">Section events</a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<div class="docs-shopify-logo">
+  <a href="https://www.shopify.com">
+    <img src="/slate/assets/images/shopify-logo-large.png" alt="Shopify" />
+  </a>
+  <p><a href="mailto:slate@shopify.com">Provide feedback</a></p>
+</div>
+
+      </div>
+      <div class="docs-main">
+        <div class="docs-content">
+          <header class="docs-header">
+  <ul>
+    <li>
+      <a href="https://github.com/Shopify/slate">
+        <img class="github-logo" src="/slate/assets/images/github-logo.png" alt="View on github" />
+        <span class="link-text">View on Github</span></a>
+    </li>
+    <li>
+      <a href="https://www.npmjs.com/package/@shopify/slate">
+        <img class="npm-logo" src="/slate/assets/images/npm-logo.png" alt="View on npm" />
+        <span class="link-text">View on NPM</span></a>
+    </li>
+  </ul>
+</header>
+
+          <div class="marketing-markdown">
+            <h1 id="js-examples">JS examples</h1>
+
+<h2 id="trap-focus">Trap focus</h2>
+
+<p>It’s important to consider keyboard users when using dynamic modules, such as a modal or popover. If they take over the full screen then it’s best to limit the user’s keyboard access to that module so they don’t end up tabbing through hidden elements on the page.</p>
+
+<p>Here’s an example of a modal that traps the keyboard focus inside the element when open, and removes the trap when closed.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>slate.a11y.trapFocus({ options });
+slate.a11y.removeTrapFocus({ options });
+</code></pre>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameters</th>
+      <th style="text-align: left">Type</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">$container</code></td>
+      <td style="text-align: left">jQuery object</td>
+      <td style="text-align: left">Container to trap focus within</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">namespace</code></td>
+      <td style="text-align: left">string</td>
+      <td style="text-align: left">Namespace used for new focus event handler</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">$elementToFocus</code></td>
+      <td style="text-align: left">jQuery object (optional)</td>
+      <td style="text-align: left">Set an element to be selected after the focus is trapped. Only used in <code class="highlighter-rouge">trapFocus</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var $modal = $('#Modal');
+
+$('#TriggerModal').on('click', function() {
+  $modal.addClass('is-active');
+
+  slate.a11y.trapFocus({
+    $container: $modal,
+    namespace: 'modal',
+    $elementToFocus: $modal.find('input[type="text"]')
+  });
+});
+
+$('#CloseModal').on('click', function() {
+  $modal.removeClass('is-active');
+
+  slate.a11y.removeTrapFocus({
+    $container: $modal,
+    namespace: 'modal'
+  });
+});
+</code></pre>
+</div>
+
+<div class="demo-iframe">
+  <div class="demo-iframe__toggles">
+  <button type="button" class="iframe-toggle" data-size="mobile">
+    <img src="/slate/assets/images/mobile.png" alt="View on github" />
+  </button>
+  <button type="button" class="iframe-toggle" data-size="desktop">
+    <img src="/slate/assets/images/desktop.png" alt="View on github" />
+  </button>
+</div>
+
+  <iframe width="100%" height="233" src="/slate/js-examples/trap-focus/" frameborder="0"></iframe>
+</div>
+
+<h2 id="responsive-tables-and-videos">Responsive tables and videos</h2>
+
+<p>Tables and video embeds do not natively scale well on smaller screens. Slate adds a wrapper class to tables and video embeds that are loaded in from a rich text editor.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameters</th>
+      <th style="text-align: left">Type</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">$tables</code></td>
+      <td style="text-align: left">jQuery object</td>
+      <td style="text-align: left"><code class="highlighter-rouge">&lt;table&gt;</code> elements to be made responsive</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">tableWrapperClass</code></td>
+      <td style="text-align: left">string</td>
+      <td style="text-align: left">CSS class to apply on the <code class="highlighter-rouge">&lt;div&gt;</code> that will wrap each targeted <code class="highlighter-rouge">&lt;table&gt;</code> element</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">$iframes</code></td>
+      <td style="text-align: left">jQuery object</td>
+      <td style="text-align: left"><code class="highlighter-rouge">&lt;iframe&gt;</code> elements to be made responsive</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">iframeWrapperClass</code></td>
+      <td style="text-align: left">string</td>
+      <td style="text-align: left">CSS class to apply on the <code class="highlighter-rouge">&lt;div&gt;</code> that will wrap each targeted <code class="highlighter-rouge">&lt;iframe&gt;</code> element</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// Wrap RTE tables to make them scrollable
+var tableSelectors = '.rte table';
+
+slate.rte.wrapTable({
+  $tables: $(tableSelectors),
+  tableWrapperClass: 'rte__table-wrapper',
+});
+
+// Wrap RTE videos to make them responsive
+var videoSelectors =
+  '.rte iframe[src*="youtube.com/embed"],' +
+  '.rte iframe[src*="player.vimeo"]';
+
+slate.rte.wrapIframe({
+  $iframes: $(videoSelectors),
+  iframeWrapperClass: 'rte__video-wrapper'
+});
+</code></pre>
+</div>
+
+<div class="demo-iframe">
+  <div class="demo-iframe__toggles">
+  <button type="button" class="iframe-toggle" data-size="mobile">
+    <img src="/slate/assets/images/mobile.png" alt="View on github" />
+  </button>
+  <button type="button" class="iframe-toggle" data-size="desktop">
+    <img src="/slate/assets/images/desktop.png" alt="View on github" />
+  </button>
+</div>
+
+  <iframe width="100%" height="815" src="/slate/js-examples/tables-videos/" frameborder="0"></iframe>
+</div>
+
+<h2 id="format-currency">Format currency</h2>
+
+<p>Slate ships JavaScript to mimic <a href="https://help.shopify.com/manual/payment-settings/currency-formatting#currency-formatting-options">Shopify money formats</a>. This makes handling product prices and cart items in JS simple. (<a href="https://github.com/Shopify/slate/blob/master/packages/slate-theme/src/scripts/slate/currency.js">View currency.js source</a>).</p>
+
+<p>Slate maps the shop’s money format — defined in Liquid — to a JavaScript variable in <code class="highlighter-rouge">layouts/theme.liquid</code> so it can be used regardless of file type.</p>
+
+<p>In layouts/theme.liquid:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>window.theme.moneyFormat: {{ shop.money_format | json }};
+</code></pre>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameters</th>
+      <th style="text-align: left">Type</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">cents</code></td>
+      <td style="text-align: left">string</td>
+      <td style="text-align: left">Price in cents</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">format</code></td>
+      <td style="text-align: left">string</td>
+      <td style="text-align: left">shop.money_format setting</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In this example, <code class="highlighter-rouge">shop.money_format</code> is <code class="highlighter-rouge">${{amount}}</code> so 1999 cents would be formatted as $19.99.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var itemPrice = 1999; // cents
+slate.Currency.formatMoney(itemPrice, theme.moneyFormat);
+
+// Returns string
+'$19.99'
+</code></pre>
+</div>
+
+<h2 id="image-helpers">Image helpers</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Command</th>
+      <th style="text-align: left">Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><a href="#preload">preload</a></td>
+      <td style="text-align: left"><code class="highlighter-rouge">slate.Images.preload(images, size)</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="#imagesize">imageSize</a></td>
+      <td style="text-align: left"><code class="highlighter-rouge">slate.Images.imageSize(src)</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="#getsizedimageurl">getSizedImageUrl</a></td>
+      <td style="text-align: left"><code class="highlighter-rouge">slate.Images.getSizedImageUrl(src, size)</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="#removeprotocol">removeProtocol</a></td>
+      <td style="text-align: left"><code class="highlighter-rouge">slate.Images.removeProtocol(path)</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="preload">preload</h3>
+
+<p>Preload a single image or an array of images at a given size. A common use for preloading is reducing the loading delay when enlarging a thumbnail.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameters</th>
+      <th style="text-align: left">Type</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">images</code></td>
+      <td style="text-align: left">array or string</td>
+      <td style="text-align: left">Single image URL or list of image URLs</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">size</code></td>
+      <td style="text-align: left">string</td>
+      <td style="text-align: left">Size of image to request</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>slate.Image.preload(['image-url-1.jpg', 'image-url-2.jpg'], '1024x1024');
+</code></pre>
+</div>
+
+<h3 id="imagesize">imageSize</h3>
+
+<p>Get the size of an image based on the URL.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameters</th>
+      <th style="text-align: left">Type</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">src</code></td>
+      <td style="text-align: left">string</td>
+      <td style="text-align: left">Image URL</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>slate.Image.imageSize('https://cdn.shopify.com/s/files/big-ol-image_480x480.jpeg');
+
+// Returns string
+'480x480'
+</code></pre>
+</div>
+
+<h3 id="getsizedimageurl">getSizedImageUrl</h3>
+
+<p>Adds a Shopify size attribute to a URL</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameters</th>
+      <th style="text-align: left">Type</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">src</code></td>
+      <td style="text-align: left">string</td>
+      <td style="text-align: left">Image URL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">size</code></td>
+      <td style="text-align: left">string</td>
+      <td style="text-align: left">Custom size</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>slate.Image.getSizedImageUrl('https://cdn.shopify.com/s/files/big-ol-image.jpeg', '250x250');
+
+// Returns string
+'https://cdn.shopify.com/s/files/big-ol-image_250x250.jpeg'
+</code></pre>
+</div>
+
+<h3 id="removeprotocol">removeProtocol</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameters</th>
+      <th style="text-align: left">Type</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">path</code></td>
+      <td style="text-align: left">string</td>
+      <td style="text-align: left">Image URL</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>slate.Image.removeProtocol('https://cdn.shopify.com/s/files/big-ol-image_480x480.jpeg')
+
+// Returns string
+'//cdn.shopify.com/s/files/big-ol-image_480x480.jpeg'
+</code></pre>
+</div>
+
+<h2 id="product-variants">Product variants</h2>
+
+<p>The Slate theme has two script files to manage the display of product variants:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Script</th>
+      <th style="text-align: left">Location</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><a href="#variantjs">variant.js</a></td>
+      <td style="text-align: left"><code class="highlighter-rouge">scripts/slate</code></td>
+      <td style="text-align: left">Handles variant change events in any forms that add to cart</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="#productjs">product.js</a></td>
+      <td style="text-align: left"><code class="highlighter-rouge">scripts/sections</code></td>
+      <td style="text-align: left">Behaviour coupled to the theme code of product-based sections</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="variantjs">variant.js</h3>
+
+<p>Slate separates product variant options into multiple <code class="highlighter-rouge">&lt;select&gt;</code> elements.  When a variant changes, <code class="highlighter-rouge">variant.js</code> updates the <em>master select</em>.  The master select is the default <code class="highlighter-rouge">&lt;select&gt;</code> element that contains all variant IDs needed to properly submit the form.</p>
+
+<p>Slate’s <code class="highlighter-rouge">variant.js</code> also triggers a number of custom events to handle various state changes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Events</th>
+      <th style="text-align: left">Trigger condition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">variantChange</code></td>
+      <td style="text-align: left">When a variant option’s <code class="highlighter-rouge">&lt;select&gt;</code> element is changed.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">variantImageChange</code></td>
+      <td style="text-align: left">When the selected variant has a featured image which is not currently displayed.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">variantPriceChange</code></td>
+      <td style="text-align: left">When the selected variant has a price or compare_at_price which is different than what is currently displayed.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="productjs">product.js</h3>
+
+<p>The theme-specific script of <code class="highlighter-rouge">product.js</code> has a number of methods that listen for the above custom events.  Each function has access to the newly selected variant object in <code class="highlighter-rouge">evt.variant</code>.  Customize these functions to fit your theme’s desired behaviour.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Methods</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">updateAddToCartState()</code></td>
+      <td style="text-align: left">Update the add to cart button text and enabled/disabled/sold out state</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">updateProductImage()</code></td>
+      <td style="text-align: left">Replace the main product image <code class="highlighter-rouge">src</code> with the associated variant image if it exists</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">updateProductPrices()</code></td>
+      <td style="text-align: left">Updates the product price and compare_at_price when necessary</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="cart-helpers">Cart helpers</h2>
+
+<p>In order for customers to build a cart, their browsers must support cookies.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Methods</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">cookiesEnabled()</code></td>
+      <td style="text-align: left">Returns <code class="highlighter-rouge">true</code> if the browser supports cookies.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In the theme scaffolding, classes for <code class="highlighter-rouge">supports-cookies</code> and <code class="highlighter-rouge">supports-no-cookies</code> are toggled on the <code class="highlighter-rouge">html</code> element so theme developers can show/hide different content based on browser support.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>if (slate.cart.cookiesEnabled()) {
+  document.documentElement.className = document.documentElement.className.replace('supports-no-cookies', 'supports-cookies');
+}
+</code></pre>
+</div>
+
+<h2 id="section-events">Section events</h2>
+
+<p>Slate comes with a <code class="highlighter-rouge">section.js</code> file to help Sections communicate with Shopify’s <a href="https://help.shopify.com/themes/development/theme-editor/sections#theme-editor-javascript-api">Theme editor JavaScript API</a>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Methods</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">onUnload()</code></td>
+      <td style="text-align: left">A section has been deleted or is being re-rendered.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">onSelect()</code></td>
+      <td style="text-align: left">User has selected the section in the editor’s sidebar.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">onDeselect()</code></td>
+      <td style="text-align: left">User has deselected the section in the editor’s sidebar.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">onReorder()</code></td>
+      <td style="text-align: left">User has changed the section’s order in the editor’s sidebar.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">onBlockSelect()</code></td>
+      <td style="text-align: left">User has selected the block in the editor’s sidebar.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">onBlockDeselect()</code></td>
+      <td style="text-align: left">User has deselected the block in the editor’s sidebar.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>As an example, <code class="highlighter-rouge">product.js</code> uses the <code class="highlighter-rouge">onUnload</code> method to remove all namespaced events when the section is deleted or re-rendered.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Product.prototype = $.extend({}, Product.prototype, {
+  onUnload: function() {
+    this.$container.off(this.settings.eventNamespace);
+  }
+});
+</code></pre>
+</div>
+
+<h3 id="register-sections">Register sections</h3>
+
+<p>Slate provides a <code class="highlighter-rouge">register</code> method to properly scope the various Sections used in a theme.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sections.register(type, constructor);
+</code></pre>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameters</th>
+      <th style="text-align: left">Type</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">type</code></td>
+      <td style="text-align: left">string</td>
+      <td style="text-align: left">Unique section type defined by theme developer</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">constructor</code></td>
+      <td style="text-align: left">function</td>
+      <td style="text-align: left">Section constructor run in Theme editor and on storefront</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Slate follows a convention of wrapping the content of a Section file in an element with a <code class="highlighter-rouge">data-section-type</code> attribute.  The <code class="highlighter-rouge">type</code> is taken from this attribute’s value.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// From sections/product.liquid
+&lt;div data-section-id="{{ section.id }}" data-section-type="product"&gt;
+  ...
+&lt;/div&gt;
+</code></pre>
+</div>
+
+<p>In the <code class="highlighter-rouge">theme.js</code> file, you must import the Section specific JavaScript with the <code class="highlighter-rouge">// =require</code> helper, <a href="https://www.npmjs.com/package/gulp-include">more information here</a>, as it will contain your <code class="highlighter-rouge">constructor</code>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// =require sections/product.js
+
+$(document).ready(function() {
+  var sections = new slate.Sections();
+  sections.register('product', theme.Product);
+});
+</code></pre>
+</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+<script src="/slate/js/tracking.js" async></script>
+</html>

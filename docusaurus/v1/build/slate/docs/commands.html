@@ -1,0 +1,114 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Commands · Slate</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The following is a list of all available API commands for Slate Tools:"/><meta name="docsearch:version" content="1.0.0-beta.14"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Commands · Slate"/><meta property="og:type" content="website"/><meta property="og:url" content="https://shopify.github.io/slate.shopify.com/index.html"/><meta property="og:description" content="The following is a list of all available API commands for Slate Tools:"/><meta property="og:image" content="https://shopify.github.io/slate.shopify.com/img/facebook-image.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://shopify.github.io/slate.shopify.com/img/twitter-image.png"/><link rel="shortcut icon" href="/slate.shopify.com/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="/slate.shopify.com/js/custom.js"></script><link rel="stylesheet" href="/slate.shopify.com/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/slate.shopify.com/"><img class="logo" src="/slate.shopify.com/img/slate.svg" alt="Slate"/></a><a href="/slate.shopify.com/versions"><h3>1.0.0-beta.14</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="https://github.com/Shopify/slate" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Getting started</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Slate</h3><ul><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/about">About</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting started</h3><ul><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/system-requirements">System requirements</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/create-a-new-slate-project">Create a new Slate project</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/connect-to-your-store">Connect to your store</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/create-a-self-signed-ssl-certificate">Create a self-signed SSL certificate</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/start-developing">Start developing</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/slate.shopify.com/docs/commands">Commands</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Concepts</h3><ul><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/slate-themes">Slate Themes</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/starter-themes">Starter Themes</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/local-development">Local development</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/styles-with-liquid">Styles with Liquid</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/template-and-layout-bundles">Template and layout bundles</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/asset-minification">Asset minification</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/deploy-environments">Deploy environments</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Guides</h3><ul><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/how-to-create-your-own-starter-theme">How to create your own Starter theme</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/how-to-create-a-development-store">How to create a development store</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/how-to-update-Slate-to-the-latest-version">How to update Slate to the latest version</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Reference</h3><ul><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/create-slate-theme">Create Slate Theme</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/slate-analytics">Slate analytics</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/slate-configuration">Slate Configuration</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/slate-cssvar-loader">Slate CSSVar Loader</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/Shopify/slate.shopify.com/tree/master/website/versioned_docs/version-1.0.0-beta.13/Commands.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Commands</h1></header><article><div><span><p>The following is a list of all available API commands for Slate Tools:</p>
+<ul>
+<li><a href="#build">build</a></li>
+<li><a href="#deploy">deploy</a></li>
+<li><a href="#format">format</a></li>
+<li><a href="#lint">lint</a></li>
+<li><a href="#start">start</a></li>
+<li><a href="#zip">zip</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="build"></a><a href="#build" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>build</h2>
+<p>Builds a production-ready version of the theme by compiling the files into the <code>dist</code> folder.</p>
+<pre><code class="hljs css language-bash">slate-tools build
+</code></pre>
+<p>Sets <code>process.env</code> to <code>’production’</code>, which can be used in Slate config to return production only values, e.g.:</p>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// Array of PostCSS plugins which is passed to the Webpack PostCSS Loader</span>
+<span class="hljs-string">'webpack.postcss.plugins'</span>: <span class="hljs-function">(<span class="hljs-params">config</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> plugins = [autoprefixer];
+
+  <span class="hljs-keyword">if</span> (process.env.NODE_ENV === <span class="hljs-string">'production'</span>) {
+    plugins.push(cssnano());
+  }
+  <span class="hljs-keyword">return</span> plugins;
+},
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="deploy"></a><a href="#deploy" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>deploy</h2>
+<p>Uploads the <code>dist</code> folder to the Shopify store.</p>
+<pre><code class="hljs css language-bash">slate-tools deploy [--env=my-custom-env-name] [--skipPrompts] [--replace]
+</code></pre>
+<table>
+<thead>
+<tr><th>Flag</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--env</code></td><td>Targets a custom environment file. Setting <code>--env=production</code> would use the <code>.env.production</code> file</td></tr>
+<tr><td><code>--skipPrompts</code></td><td>Skips all prompts. This is especially useful when using Slate Tools with continuous integration tools</td></tr>
+<tr><td><code>--replace</code></td><td>By default, the deploy command updates any existing files, and adds any new files to your Shopify store's theme. Use this flag to replace all files on your theme with those of your Slate project. This will delete all files from your Shopify theme which are not in your Slate project</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="format"></a><a href="#format" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>format</h2>
+<p>Formats the theme code according to the rules declared in the <code>.eslintrc</code> and <code>.stylelintrc</code> files. By default, it uses <a href="https://eslint.org/docs/user-guide/command-line-interface#--fix">ESLint Fix</a> to format JS files, <a href="https://stylelint.io/user-guide/faq/#how-do-i-automatically-fix-stylistic-violations">Stylelint Fix</a> to format CSS files and <a href="https://github.com/prettier/prettier">Prettier</a> to format JSON files.</p>
+<pre><code class="hljs css language-bash">slate-tools format [--scripts] [--styles] [--json]
+</code></pre>
+<table>
+<thead>
+<tr><th>Flag</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--scripts</code></td><td>Runs linting only on script files</td></tr>
+<tr><td><code>--styles</code></td><td>Runs linting only on style files</td></tr>
+<tr><td><code>--locales</code></td><td>Runs linting only on locales files</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="lint"></a><a href="#lint" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>lint</h2>
+<pre><code class="hljs css language-bash">slate-tools lint [--scripts] [--styles] [--locales]
+</code></pre>
+<table>
+<thead>
+<tr><th>Flag</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--scripts</code></td><td>Runs linting only on script files</td></tr>
+<tr><td><code>--styles</code></td><td>Runs linting only on style files</td></tr>
+<tr><td><code>--json</code></td><td>Runs linting only on json files</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="start"></a><a href="#start" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>start</h2>
+<p>Compiles your local theme files into a <code>dist</code> directory, uploads these files to your remote Shopify store and finally boots up a local Express server that will serve most of your CSS and JavaScript.</p>
+<pre><code class="hljs css language-bash">slate-tools start [--env=my-custom-env-name] [--skipPrompts] [--skipFirstDeploy]
+</code></pre>
+<table>
+<thead>
+<tr><th>Flag</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--env</code></td><td>Targets a custom environment file. Setting <code>--env=production</code> would use the <code>.env.production</code> file</td></tr>
+<tr><td><code>--skipPrompts</code></td><td>Skips all prompts. This is especially useful when using Slate Tools with continuous integration tools</td></tr>
+<tr><td><code>--skipFirstDeploy</code></td><td>Skips the file upload sequence and simply boots up the local Express server</td></tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ Because your CSS and JavaScript assets are being served locally, your theme won’t function on any device outside your network. You want to <a href="#deploy">deploy</a> your assets anytime your theme updates are finalized using <code>slate-tools build &amp;&amp; slate-tools deploy</code>.</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="zip"></a><a href="#zip" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>zip</h2>
+<p>Compiles the contents of the <code>dist</code> directory and creates a ZIP file in the root of the project.</p>
+<pre><code class="hljs css language-bash">slate-tools zip
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/slate.shopify.com/docs/start-developing"><span class="arrow-prev">← </span><span>Previous</span></a><a class="docs-next button" href="/slate.shopify.com/docs/slate-themes"><span>Next</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#build">build</a></li><li><a href="#deploy">deploy</a></li><li><a href="#format">format</a></li><li><a href="#lint">lint</a></li><li><a href="#start">start</a></li><li><a href="#zip">zip</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2018 Shopify</section></footer></div></body></html>

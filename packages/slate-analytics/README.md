@@ -4,4 +4,4 @@
 
 Slate Analytics enables Shopify to track Slate user events, performance data, and errors to Shopify's analytics platform.
 
-For more information, visit [the Wiki](https://github.com/Shopify/slate/wiki/Slate-Analytics).
+For more information, visit [the documentation website](https://shopify.github.io/slate/docs/slate-analytics).

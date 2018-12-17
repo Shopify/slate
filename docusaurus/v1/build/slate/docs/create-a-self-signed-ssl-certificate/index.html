@@ -1,0 +1,101 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Create a self-signed SSL certificate · Slate</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Slate uses a local Express server to serve your assets locally. It&#x27;s a good idea to create a trusted, self-signed SSL certificate on your device so the assets, served via `https`, are never blocked."/><meta name="docsearch:version" content="1.0.0-beta.14"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Create a self-signed SSL certificate · Slate"/><meta property="og:type" content="website"/><meta property="og:url" content="https://shopify.github.io/slate.shopify.com/index.html"/><meta property="og:description" content="Slate uses a local Express server to serve your assets locally. It&#x27;s a good idea to create a trusted, self-signed SSL certificate on your device so the assets, served via `https`, are never blocked."/><meta property="og:image" content="https://shopify.github.io/slate.shopify.com/img/facebook-image.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://shopify.github.io/slate.shopify.com/img/twitter-image.png"/><link rel="shortcut icon" href="/slate.shopify.com/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="/slate.shopify.com/js/custom.js"></script><link rel="stylesheet" href="/slate.shopify.com/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/slate.shopify.com/"><img class="logo" src="/slate.shopify.com/img/slate.svg" alt="Slate"/></a><a href="/slate.shopify.com/versions"><h3>1.0.0-beta.14</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="https://github.com/Shopify/slate" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Getting started</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Slate</h3><ul><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/about">About</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting started</h3><ul><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/system-requirements">System requirements</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/create-a-new-slate-project">Create a new Slate project</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/connect-to-your-store">Connect to your store</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/slate.shopify.com/docs/create-a-self-signed-ssl-certificate">Create a self-signed SSL certificate</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/start-developing">Start developing</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/commands">Commands</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Concepts</h3><ul><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/slate-themes">Slate Themes</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/starter-themes">Starter Themes</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/local-development">Local development</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/styles-with-liquid">Styles with Liquid</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/template-and-layout-bundles">Template and layout bundles</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/asset-minification">Asset minification</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/deploy-environments">Deploy environments</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Guides</h3><ul><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/how-to-create-your-own-starter-theme">How to create your own Starter theme</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/how-to-create-a-development-store">How to create a development store</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/how-to-update-Slate-to-the-latest-version">How to update Slate to the latest version</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Reference</h3><ul><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/create-slate-theme">Create Slate Theme</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/slate-analytics">Slate analytics</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/slate-configuration">Slate Configuration</a></li><li class="navListItem"><a class="navItem" href="/slate.shopify.com/docs/slate-cssvar-loader">Slate CSSVar Loader</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/Shopify/slate.shopify.com/tree/master/website/versioned_docs/version-1.0.0-beta.13/Create-a-self-signed-SSL-certificate.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Create a self-signed SSL certificate</h1></header><article><div><span><p>Slate uses a local Express server to serve your assets locally. It's a good idea to create a trusted, self-signed SSL certificate on your device so the assets, served via <code>https</code>, are never blocked.</p>
+<ol>
+<li>Run the following commands to install <a href="https://github.com/FiloSottile/mkcert">mkcert</a>. See the <a href="https://github.com/FiloSottile/mkcert#installation">installation docs</a> for more details.</li>
+</ol>
+<pre><code class="hljs css language-bash">brew install mkcert
+</code></pre>
+<ol start="2">
+<li>Copy and paste the bash function into your terminal (or into your <code>.bashrc</code> file if you want to have it available in the future):</li>
+</ol>
+<pre><code class="hljs css language-bash"><span class="hljs-keyword">function</span> ssl-<span class="hljs-function"><span class="hljs-title">check</span></span>() {
+    f=~/.localhost_ssl;
+    ssl_crt=<span class="hljs-variable">$f</span>/server.crt
+    ssl_key=<span class="hljs-variable">$f</span>/server.key
+    b=$(tput bold)
+    c=$(tput sgr0)
+
+    local_ip=$(ipconfig getifaddr $(route get default | grep interface | awk <span class="hljs-string">'{print $2}'</span>))
+    <span class="hljs-comment"># local_ip=999.999.999 # (uncomment for testing)</span>
+
+    domains=(
+        <span class="hljs-string">"localhost"</span>
+        <span class="hljs-string">"<span class="hljs-variable">$local_ip</span>"</span>
+    )
+
+    <span class="hljs-keyword">if</span> [[ ! -f <span class="hljs-variable">$ssl_crt</span> ]]; <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">echo</span> -e <span class="hljs-string">"\n🛑  <span class="hljs-variable">${b}</span>Couldn't find a Slate SSL certificate:<span class="hljs-variable">${c}</span>"</span>
+        make_key=<span class="hljs-literal">true</span>
+    <span class="hljs-keyword">elif</span> [[ ! $(openssl x509 -noout -text -<span class="hljs-keyword">in</span> <span class="hljs-variable">$ssl_crt</span> | grep <span class="hljs-variable">$local_ip</span>) ]]; <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">echo</span> -e <span class="hljs-string">"\n🛑  <span class="hljs-variable">${b}</span>Your IP Address has changed:<span class="hljs-variable">${c}</span>"</span>
+        make_key=<span class="hljs-literal">true</span>
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">echo</span> -e <span class="hljs-string">"\n✅  <span class="hljs-variable">${b}</span>Your IP address is still the same.<span class="hljs-variable">${c}</span>"</span>
+    <span class="hljs-keyword">fi</span>
+
+    <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$make_key</span> == <span class="hljs-literal">true</span> ]]; <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">echo</span> -e <span class="hljs-string">"Generating a new Slate SSL certificate...\n"</span>
+        count=$(( <span class="hljs-variable">${#domains[@]}</span> - 1))
+        mkcert <span class="hljs-variable">${domains[@]}</span>
+
+        <span class="hljs-comment"># Create Slate's default certificate directory, if it doesn't exist</span>
+        <span class="hljs-built_in">test</span> ! -d <span class="hljs-variable">$f</span> &amp;&amp; mkdir <span class="hljs-variable">$f</span>
+
+        <span class="hljs-comment"># It appears mkcert bases its filenames off the number of domains passed after the first one.</span>
+        <span class="hljs-comment"># This script predicts that filename, so it can copy it to Slate's default location.</span>
+        <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$count</span> = 0 ]]; <span class="hljs-keyword">then</span>
+            mv ./localhost.pem <span class="hljs-variable">$ssl_crt</span>
+            mv ./localhost-key.pem <span class="hljs-variable">$ssl_key</span>
+        <span class="hljs-keyword">else</span>
+            mv ./localhost+<span class="hljs-variable">$count</span>.pem <span class="hljs-variable">$ssl_crt</span>
+            mv ./localhost+<span class="hljs-variable">$count</span>-key.pem <span class="hljs-variable">$ssl_key</span>
+        <span class="hljs-keyword">fi</span>
+    <span class="hljs-keyword">fi</span>
+}
+</code></pre>
+<ol start="3">
+<li>Run the function you just declared in step 2:</li>
+</ol>
+<pre><code class="hljs css language-bash">ssl-check
+</code></pre>
+<ol start="4">
+<li>You now have successfully created a local, self-signed SSL certificate for developing with Slate!</li>
+</ol>
+<h2><a class="anchor" aria-hidden="true" id="common-mistakes"></a><a href="#common-mistakes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Common mistakes</h2>
+<p>Even after performing the above steps, you might encounter the following errors and warnings when developing with Slate:</p>
+<table class="image">
+<caption align="bottom"><em>An example of https requests to your local asset server being blocked</em></caption>
+<tr><td><img src="https://user-images.githubusercontent.com/4837696/46975905-d8c08400-d095-11e8-933e-d07af7212a49.png" alt="An example of https requests to your local asset server being blocked"/></td></tr>
+</table>
+<table class="image">
+<caption align="bottom"><em>An example of Chrome warning you of an untrusted https certificate</em></caption>
+<tr><td><img src="https://user-images.githubusercontent.com/4837696/46975769-81221880-d095-11e8-992d-ff0f0fe08bb9.png" alt="An example of Chrome warning you of an untrusted https certificate"/></td></tr>
+</table>
+<p>This is most likely because your local IP has changed and the self-signed SSL certificate you created is no longer valid. To remove these warnings and errors, simply repeat steps 2 and 3 above to regenerate a new self-signed certificate.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/slate.shopify.com/docs/connect-to-your-store"><span class="arrow-prev">← </span><span>Previous</span></a><a class="docs-next button" href="/slate.shopify.com/docs/start-developing"><span>Next</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#common-mistakes">Common mistakes</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2018 Shopify</section></footer></div></body></html>

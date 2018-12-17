@@ -139,7 +139,7 @@ In addition to this beta release, we shipped v1 of [`theme-cart`](https://github
 
 #### :broken_heart: Breaking
 
-You will need to update your `slate.config.js` to the new, simplified, more powerful format. For more information see the new [Slate Configuration](https://github.com/Shopify/slate/wiki/Slate-Configuration) wiki page.
+You will need to update your `slate.config.js` to the new, simplified, more powerful format. For more information see the new [Slate Configuration](https://shopify.github.io/slate/docs/slate-configuration)  page.
 
 There is no longer seperate development or production configurations. A configuration can return different values for prod or dev by checking if `process.env.NODE_ENV === 'production'` or `process.env.NODE_ENV === 'development'`.
 

@@ -4,4 +4,4 @@
 
 Finds CSS custom properties (variables) in your stylesheets and replaces them with their corresponding Liquid variable found in the provided `cssVariablesPath` option.
 
-For more information, visit [the Wiki](https://github.com/Shopify/slate/wiki/Slate-CSSVar-Loader).
+For more information, visit [the documentation website](https://shopify.github.io/slate/docs/slate-cssvar-loader).
