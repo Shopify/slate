@@ -55,7 +55,7 @@ const siteConfig = {
   // No .html extensions for paths.
   cleanUrl: true,
   editUrl:
-    'https://github.com/Shopify/slate/tree/master/docusaurus/v1/versioned_docs/version-1.0.0-beta.14',
+    'https://github.com/Shopify/slate/tree/master/docusaurus/v1/versioned_docs/version-1.0.0-beta.14/',
 
   // Open Graph and Twitter card images.
   ogImage: 'img/facebook-image.png',
