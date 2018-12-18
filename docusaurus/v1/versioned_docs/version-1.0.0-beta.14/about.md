@@ -1,6 +1,6 @@
 ---
 id: version-1.0.0-beta.14-about
-title: About
+title: About Slate v1
 original_id: about
 ---
 
