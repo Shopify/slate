@@ -34,6 +34,8 @@ let assetServer;
 let devServer;
 let previewUrl;
 
+event('slate-tools:start:start', {version: packageJson.version});
+
 Promise.all([
   getAvailablePortSeries(config.get('network.startPort'), 3),
   promptExternalTesting(),
