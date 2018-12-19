@@ -60,4 +60,4 @@ wallaby.js
 
 # Docs #
 ######################
-docusaurus/v1/build
+docusaurus/v1/build/**/*
