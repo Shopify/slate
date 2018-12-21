@@ -4,6 +4,37 @@
   }
 }
 
+@media only screen and (max-width: 480px) {
+  .fixedHeaderContainer a:last-of-type {
+    display: none;
+  }
+}
+
+.reactNavSearchWrapper input#search_input_react {
+  border: 1px rgba(255, 255, 255, 0.3) solid;
+  padding: 5px 5px 5px 30px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .reactNavSearchWrapper input#search_input_react {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  .navSearchWrapper {
+    top: 10px;
+  }
+}
+
+.navSearchWrapper:before {
+  left: 20px;
+}
+
+.navSearchWrapper:after {
+  left: 29px;
+}
+
 .toc .toggleNav ul li.navListItemActive a {
   font-weight: bold;
 }

@@ -65,6 +65,11 @@ const siteConfig = {
   // template. For example, if you need your repo's URL...
   repoUrl: 'https://github.com/Shopify/slate',
   gaTrackingId: 'UA-49178120-25',
+
+  algolia: {
+    apiKey: 'e32c27cf0092d5bad530cd77c781afe2',
+    indexName: 'shopify_slate',
+  },
 };
 
 module.exports = siteConfig;
