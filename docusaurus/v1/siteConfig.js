@@ -25,7 +25,10 @@ const siteConfig = {
   //   organizationName: 'JoelMarcey'
 
   // For no header links in the top nav bar -> headerLinks: [],
-  headerLinks: [{href: 'https://github.com/Shopify/slate', label: 'GitHub'}],
+  headerLinks: [
+    {href: '/slate/versions', label: 'Slate Versions'},
+    {href: 'https://github.com/Shopify/slate', label: 'GitHub'},
+  ],
 
   /* path to images for header/footer */
   headerIcon: 'img/slate.svg',
@@ -65,6 +68,11 @@ const siteConfig = {
   // template. For example, if you need your repo's URL...
   repoUrl: 'https://github.com/Shopify/slate',
   gaTrackingId: 'UA-49178120-25',
+
+  algolia: {
+    apiKey: 'e32c27cf0092d5bad530cd77c781afe2',
+    indexName: 'shopify_slate',
+  },
 };
 
 module.exports = siteConfig;
