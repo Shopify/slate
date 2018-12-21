@@ -35,7 +35,7 @@
   left: 29px;
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 480px) {
   .navigationSlider .slidingNav ul li:first-child {
     display: none;
   }
