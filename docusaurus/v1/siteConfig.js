@@ -25,7 +25,10 @@ const siteConfig = {
   //   organizationName: 'JoelMarcey'
 
   // For no header links in the top nav bar -> headerLinks: [],
-  headerLinks: [{href: 'https://github.com/Shopify/slate', label: 'GitHub'}],
+  headerLinks: [
+    {href: '/slate/versions', label: 'Slate Versions'},
+    {href: 'https://github.com/Shopify/slate', label: 'GitHub'},
+  ],
 
   /* path to images for header/footer */
   headerIcon: 'img/slate.svg',
