@@ -18,7 +18,7 @@ The following is a list of all available API commands for Slate Tools:
 Builds a production-ready version of the theme by compiling the files into the `dist` folder.
 
 ```bash
-slate-tools build
+yarn build
 ```
 
 Sets `process.env` to `’production’`, which can be used in Slate config to return production only values, e.g.:
