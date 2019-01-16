@@ -9,6 +9,10 @@ script:
 - yarn bootstrap
 - yarn test
 - yarn lint
+
+after_success:
+  - ./.travis/deploy_doc.sh
+
 notifications:
   email: false
   slack:
