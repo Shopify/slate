@@ -1,0 +1,608 @@
+/*============================================================================ Colors
+==============================================================================*/
+/*================ Text ================*/
+/*============================================================================ Backgrounds
+==============================================================================*/
+/*================ Forms ================*/
+/*================ Icon colours ================*/
+/*================ Nav colors ================*/
+/*============================================================================ Font Weights
+==============================================================================*/
+/*============================================================================ Font Families
+==============================================================================*/
+/*============================================================================ Headings
+==============================================================================*/
+/*============================================================================ Global Components - vars that are handy across the site
+==============================================================================*/
+/*================ Z Index ================*/
+/*================ Nav ================*/
+/*================ Forms ================*/
+/*================ Borders ================*/
+/*================ Shopify logo ================*/
+/*============================================================================ Grid Requirements: 8 column grid with 2 columns on either side as optional extended grid area only visible on larger screens Configurable (ie through something similar to this file) Different grid per breakpoint, ideally defined in isolation inside the breakpoint for minimal CSS undo-ing (ie. don't have to undo mobile styles once on desktop, vice versa) Supports a mobile-first dev approach, with fallback for IE8 Nestable Flexible for how containers react across breakpoints. Same container may collapse in different ways on different pages
+==============================================================================*/
+/*============================================================================ Grid Measurements
+==============================================================================*/
+/*============================================================================ Global Mixins used within page-specific and application stylesheets
+==============================================================================*/
+/*============================================================================
+-Background colours
+-==============================================================================*/
+/*============================================================================
+Borders
+==============================================================================*/
+/*============================================================================ Col Generators
+==============================================================================*/
+html { box-sizing: border-box; }
+
+*, *::after, *::before { box-sizing: inherit; }
+
+/*============================================================================ Breakpoints - Set in em to cover browser font-size adjustments
+==============================================================================*/
+body { padding: 30px; }
+
+p:first-child { margin-top: 0; }
+
+/*================ General helpers ================*/
+.list--inline { padding: 0; margin: 0; }
+.list--inline li { display: inline-block; margin-bottom: 0; vertical-align: middle; }
+
+/*================ Grid demo styles ================*/
+.grid-demo { background-color: #f9fafa; font-size: 0.75em; padding: 10px; text-align: center; }
+
+/*================ Blank state demos ================*/
+.blank-states-product-demo a { display: inline-block; width: 30%; margin-right: 2%; }
+
+/*================ Icon demos ================*/
+.icon-demo .icon { margin-right: 10px; }
+
+.icon-demo--color .icon-cart { fill: blue; width: 40px; height: 40px; }
+
+.icon-demo--full-set li { position: relative; margin-bottom: 30px; margin-right: 20px; }
+.icon-demo--full-set li:before { display: block; content: attr(data-name); font-size: 0.8em; padding-top: 25px; }
+.icon-demo--full-set .icon { position: absolute; top: 0; left: 50%; transform: translateX(-50%); }
+
+/*================ Color Variables ================*/
+/*================ Typography Variables ================*/
+/*============================================================================ Grid Breakpoints and Class Names - Do not change the variable names
+==============================================================================*/
+/*============================================================================ Generate breakpoint-specific column widths and push classes - Default column widths: $breakpoint-has-widths: ($small, $medium-up); - Default is no push classes - Will not work if `theme/grid.scss` is removed
+==============================================================================*/
+/*================ Sizing Variables ================*/
+/*================ Z-Index ================*/
+/* GitHub pages does not allow you to import scss files outside of the `docs/` folder (even though it works locally). This means we can't reference Slate's src/ folder with: "../../src/styles/tools/mixins.scss".
+ Instead, we can use the live URL. Since the repo is currently private this won't work either (yet). "https://raw.githubusercontent.com/Shopify/slate.shopify.com/master/src/styles/tools/mixins.scss"
+ Until that repo is made public, I've added the contents of `/src/styles/` to `/docs/_sass` in the `slate/` folder. We can switch to live URLs after that.
+*/
+/*================ Mixins ================*/
+/*============================================================================ Prefix mixin for generating vendor prefixes. Based on https://github.com/thoughtbot/bourbon/blob/v4-stable/app/assets/stylesheets/addons/_prefixer.scss
+ Usage: // Input: .element { @include prefix(transform, scale(1), ms webkit spec); }
+ // Output: .element { -ms-transform: scale(1); -webkit-transform: scale(1); transform: scale(1); }
+==============================================================================*/
+/*================ Media Query Mixin ================*/
+/*================ Responsive Show/Hide Helper ================*/
+/*================ Responsive Text Alignment Helper ================*/
+/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+/** 1. Set default font family to sans-serif. 2. Prevent iOS and IE text size adjust after device orientation change, without disabling user zoom. */
+html { font-family: sans-serif; /* 1 */ -ms-text-size-adjust: 100%; /* 2 */ -webkit-text-size-adjust: 100%; /* 2 */ }
+
+/** Remove default margin. */
+body { margin: 0; }
+
+/* HTML5 display definitions ========================================================================== */
+/** Correct `block` display not defined for any HTML5 element in IE 8/9. Correct `block` display not defined for `details` or `summary` in IE 10/11 and Firefox. Correct `block` display not defined for `main` in IE 11. */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary { display: block; }
+
+/** 1. Correct `inline-block` display not defined in IE 8/9. 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera. */
+audio, canvas, progress, video { display: inline-block; /* 1 */ vertical-align: baseline; /* 2 */ }
+
+/** Prevent modern browsers from displaying `audio` without controls. Remove excess height in iOS 5 devices. */
+audio:not([controls]) { display: none; height: 0; }
+
+/** Address `[hidden]` styling not present in IE 8/9/10. Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22. */
+[hidden], template { display: none; }
+
+/* Links ========================================================================== */
+/** Remove the gray background color from active links in IE 10. */
+a { background-color: transparent; }
+
+/** Improve readability of focused elements when they are also in an active/hover state. */
+a:active, a:hover { outline: 0; }
+
+/* Text-level semantics ========================================================================== */
+/** Address styling not present in IE 8/9/10/11, Safari, and Chrome. */
+abbr[title] { border-bottom: 1px dotted; }
+
+/** Address style set to `bolder` in Firefox 4+, Safari, and Chrome. */
+b, strong { font-weight: bold; }
+
+/** Address styling not present in Safari and Chrome. */
+dfn { font-style: italic; }
+
+/** Address variable `h1` font-size and margin within `section` and `article` contexts in Firefox 4+, Safari, and Chrome. */
+h1 { font-size: 2em; margin: 0.67em 0; }
+
+/** Address styling not present in IE 8/9. */
+mark { background: #ff0; color: #000; }
+
+/** Address inconsistent and variable font size in all browsers. */
+small { font-size: 80%; }
+
+/** Prevent `sub` and `sup` affecting `line-height` in all browsers. */
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+
+sup { top: -0.5em; }
+
+sub { bottom: -0.25em; }
+
+/* Embedded content ========================================================================== */
+/** Remove border when inside `a` element in IE 8/9/10. */
+img { border: 0; }
+
+/** Correct overflow not hidden in IE 9/10/11. */
+svg:not(:root) { overflow: hidden; }
+
+/* Grouping content ========================================================================== */
+/** Address margin not present in IE 8/9 and Safari. */
+figure { margin: 1em 40px; }
+
+/** Address differences between Firefox and other browsers. */
+hr { box-sizing: content-box; height: 0; }
+
+/** Contain overflow in all browsers. */
+pre { overflow: auto; }
+
+/** Address odd `em`-unit font size rendering in all browsers. */
+code, kbd, pre, samp { font-family: monospace, monospace; font-size: 1em; }
+
+/* Forms ========================================================================== */
+/** Known limitation: by default, Chrome and Safari on OS X allow very limited styling of `select`, unless a `border` property is set. */
+/** 1. Correct color not being inherited. Known issue: affects color of disabled elements. 2. Correct font properties not being inherited. 3. Address margins set differently in Firefox 4+, Safari, and Chrome. */
+button, input, optgroup, select, textarea { color: inherit; /* 1 */ font: inherit; /* 2 */ margin: 0; /* 3 */ }
+
+/** Address `overflow` set to `hidden` in IE 8/9/10/11. */
+button { overflow: visible; }
+
+/** Address inconsistent `text-transform` inheritance for `button` and `select`. All other form control elements do not inherit `text-transform` values. Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera. Correct `select` style inheritance in Firefox. */
+button, select { text-transform: none; }
+
+/** 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio` and `video` controls. 2. Correct inability to style clickable `input` types in iOS. 3. Improve usability and consistency of cursor style between image-type `input` and others. */
+button, html input[type='button'], input[type='reset'], input[type='submit'] { -webkit-appearance: button; /* 2 */ cursor: pointer; /* 3 */ }
+
+/** Re-set default cursor for disabled elements. */
+button[disabled], html input[disabled] { cursor: default; }
+
+/** Remove inner padding and border in Firefox 4+. */
+button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
+
+/** Address Firefox 4+ setting `line-height` on `input` using `!important` in the UA stylesheet. */
+input { line-height: normal; }
+
+/** It's recommended that you don't attempt to style these elements. Firefox's implementation doesn't respect box-sizing, padding, or width.  1. Address box sizing set to `content-box` in IE 8/9/10. 2. Remove excess padding in IE 8/9/10. */
+input[type='checkbox'], input[type='radio'] { box-sizing: border-box; /* 1 */ padding: 0; /* 2 */ }
+
+/** Fix the cursor style for Chrome's increment/decrement buttons. For certain `font-size` values of the `input`, it causes the cursor style of the decrement button to change from `default` to `text`. */
+input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-outer-spin-button { height: auto; }
+
+/** 1. Address `appearance` set to `searchfield` in Safari and Chrome. 2. Address `box-sizing` set to `border-box` in Safari and Chrome. */
+input[type='search'] { -webkit-appearance: textfield; /* 1 */ box-sizing: content-box; /* 2 */ }
+
+/** Remove inner padding and search cancel button in Safari and Chrome on OS X. Safari (but not Chrome) clips the cancel button when the search input has padding (and `textfield` appearance). */
+input[type='search']::-webkit-search-cancel-button, input[type='search']::-webkit-search-decoration { -webkit-appearance: none; }
+
+/** Define consistent border, margin, and padding. */
+fieldset { border: 1px solid #c0c0c0; margin: 0 2px; padding: 0.35em 0.625em 0.75em; }
+
+/** 1. Correct `color` not being inherited in IE 8/9/10/11. 2. Remove padding so people aren't caught out if they zero out fieldsets. */
+legend { border: 0; /* 1 */ padding: 0; /* 2 */ }
+
+/** Remove default vertical scrollbar in IE 8/9/10/11. */
+textarea { overflow: auto; }
+
+/** Don't inherit the `font-weight` (applied by a rule above). NOTE: the default cannot safely be changed in Chrome and Safari on OS X. */
+optgroup { font-weight: bold; }
+
+/* Tables ========================================================================== */
+/** Remove most spacing between table cells. */
+table { border-collapse: collapse; border-spacing: 0; }
+
+td, th { padding: 0; }
+
+/*================ Slate specific reset ================*/
+*, *::before, *::after { box-sizing: border-box; }
+
+body, input, textarea, button, select { -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%; }
+
+a:focus { color: inherit; }
+
+img { max-width: 100%; }
+
+/*================ Form element helpers ================*/
+form { margin: 0; }
+
+@media only screen and (max-width: 989px) { input, textarea, select { font-size: 16px; } }
+button, input[type="submit"], label[for] { cursor: pointer; }
+
+optgroup { font-weight: 700; }
+
+option { color: #4E5665; background-color: #fff; }
+
+[tabindex='-1']:focus { outline: none; }
+
+/*============================================================================ Fast Tap enables no-delay taps (FastClick-esque) on supporting browsers
+==============================================================================*/
+a, button, [role="button"], input, label, select, textarea { touch-action: manipulation; }
+
+/*================ Helper Classes ================*/
+.clearfix { *zoom: 1; }
+.clearfix::after { content: ''; display: table; clear: both; }
+
+.visually-hidden { position: absolute !important; overflow: hidden; clip: rect(0 0 0 0); height: 1px; width: 1px; margin: -1px; padding: 0; border: 0; }
+
+.js-focus-hidden:focus { outline: none; }
+
+.label-hidden { position: absolute !important; overflow: hidden; clip: rect(0 0 0 0); height: 1px; width: 1px; margin: -1px; padding: 0; border: 0; }
+.no-placeholder .label-hidden { position: inherit !important; overflow: auto; clip: auto; width: auto; height: auto; margin: 0; }
+
+.visually-shown { position: inherit !important; overflow: auto; clip: auto; width: auto; height: auto; margin: 0; }
+
+.no-js:not(html) { display: none; }
+.no-js .no-js:not(html) { display: block; }
+
+.no-js .js { display: none; }
+
+/*============================================================================ Skip to content button - Overrides .visually-hidden when focused
+==============================================================================*/
+.skip-link:focus { position: absolute !important; overflow: auto; clip: auto; width: auto; height: auto; margin: 0; color: #4E5665; background-color: #fff; padding: 15px; z-index: 10000; transition: none; }
+
+/*================ General layout styles ================*/
+body, html { background-color: #fff; }
+
+.page-width { *zoom: 1; max-width: 1180px; padding: 0 30px; margin: 0 auto; }
+.page-width::after { content: ''; display: table; clear: both; }
+
+/*============================================================================ Grid - Based on CSS Wizardry grid
+==============================================================================*/
+.grid { *zoom: 1; list-style: none; margin: 0; padding: 0; margin-left: -30px; }
+.grid::after { content: ''; display: table; clear: both; }
+
+.grid__item { float: left; padding-left: 30px; width: 100%; }
+.grid__item[class*='--push'] { position: relative; }
+
+/*============================================================================ Reversed grids allow you to structure your source in the opposite order to how your rendered layout will appear.
+==============================================================================*/
+.grid--rev { direction: rtl; text-align: left; }
+.grid--rev > .grid__item { direction: ltr; text-align: left; float: right; }
+
+/*============================================================================ Grid Columns - Create width classes, prepended by the breakpoint name.
+==============================================================================*/
+/*================ Grid push classes ================*/
+/*================ Clearfix helper on uniform grids ================*/
+/*================ Build Base Grid Classes ================*/
+/** Whole */
+.one-whole { width: 100%; }
+
+/* Halves */
+.one-half { width: 50%; }
+
+/* Thirds */
+.one-third { width: 33.33333%; }
+
+.two-thirds { width: 66.66667%; }
+
+/* Quarters */
+.one-quarter { width: 25%; }
+
+.two-quarters { width: 50%; }
+
+.three-quarters { width: 75%; }
+
+/* Fifths */
+.one-fifth { width: 20%; }
+
+.two-fifths { width: 40%; }
+
+.three-fifths { width: 60%; }
+
+.four-fifths { width: 80%; }
+
+/* Sixths */
+.one-sixth { width: 16.66667%; }
+
+.two-sixths { width: 33.33333%; }
+
+.three-sixths { width: 50%; }
+
+.four-sixths { width: 66.66667%; }
+
+.five-sixths { width: 83.33333%; }
+
+/* Eighths */
+.one-eighth { width: 12.5%; }
+
+.two-eighths { width: 25%; }
+
+.three-eighths { width: 37.5%; }
+
+.four-eighths { width: 50%; }
+
+.five-eighths { width: 62.5%; }
+
+.six-eighths { width: 75%; }
+
+.seven-eighths { width: 87.5%; }
+
+/* Tenths */
+.one-tenth { width: 10%; }
+
+.two-tenths { width: 20%; }
+
+.three-tenths { width: 30%; }
+
+.four-tenths { width: 40%; }
+
+.five-tenths { width: 50%; }
+
+.six-tenths { width: 60%; }
+
+.seven-tenths { width: 70%; }
+
+.eight-tenths { width: 80%; }
+
+.nine-tenths { width: 90%; }
+
+/* Twelfths */
+.one-twelfth { width: 8.33333%; }
+
+.two-twelfths { width: 16.66667%; }
+
+.three-twelfths { width: 25%; }
+
+.four-twelfths { width: 33.33333%; }
+
+.five-twelfths { width: 41.66667%; }
+
+.six-twelfths { width: 50%; }
+
+.seven-twelfths { width: 58.33333%; }
+
+.eight-twelfths { width: 66.66667%; }
+
+.nine-twelfths { width: 75%; }
+
+.ten-twelfths { width: 83.33333%; }
+
+.eleven-twelfths { width: 91.66667%; }
+
+.show { display: block !important; }
+
+.hide { display: none !important; }
+
+.text-left { text-align: left !important; }
+
+.text-right { text-align: right !important; }
+
+.text-center { text-align: center !important; }
+
+/*================ Build Responsive Grid Classes ================*/
+@media only screen and (max-width: 749px) { /** Whole */
+  .small--one-whole { width: 100%; }
+  /* Halves */
+  .small--one-half { width: 50%; }
+  /* Thirds */
+  .small--one-third { width: 33.33333%; }
+  .small--two-thirds { width: 66.66667%; }
+  /* Quarters */
+  .small--one-quarter { width: 25%; }
+  .small--two-quarters { width: 50%; }
+  .small--three-quarters { width: 75%; }
+  /* Fifths */
+  .small--one-fifth { width: 20%; }
+  .small--two-fifths { width: 40%; }
+  .small--three-fifths { width: 60%; }
+  .small--four-fifths { width: 80%; }
+  /* Sixths */
+  .small--one-sixth { width: 16.66667%; }
+  .small--two-sixths { width: 33.33333%; }
+  .small--three-sixths { width: 50%; }
+  .small--four-sixths { width: 66.66667%; }
+  .small--five-sixths { width: 83.33333%; }
+  /* Eighths */
+  .small--one-eighth { width: 12.5%; }
+  .small--two-eighths { width: 25%; }
+  .small--three-eighths { width: 37.5%; }
+  .small--four-eighths { width: 50%; }
+  .small--five-eighths { width: 62.5%; }
+  .small--six-eighths { width: 75%; }
+  .small--seven-eighths { width: 87.5%; }
+  /* Tenths */
+  .small--one-tenth { width: 10%; }
+  .small--two-tenths { width: 20%; }
+  .small--three-tenths { width: 30%; }
+  .small--four-tenths { width: 40%; }
+  .small--five-tenths { width: 50%; }
+  .small--six-tenths { width: 60%; }
+  .small--seven-tenths { width: 70%; }
+  .small--eight-tenths { width: 80%; }
+  .small--nine-tenths { width: 90%; }
+  /* Twelfths */
+  .small--one-twelfth { width: 8.33333%; }
+  .small--two-twelfths { width: 16.66667%; }
+  .small--three-twelfths { width: 25%; }
+  .small--four-twelfths { width: 33.33333%; }
+  .small--five-twelfths { width: 41.66667%; }
+  .small--six-twelfths { width: 50%; }
+  .small--seven-twelfths { width: 58.33333%; }
+  .small--eight-twelfths { width: 66.66667%; }
+  .small--nine-twelfths { width: 75%; }
+  .small--ten-twelfths { width: 83.33333%; }
+  .small--eleven-twelfths { width: 91.66667%; }
+  .grid--uniform .small--one-half:nth-child(2n+1), .grid--uniform .small--one-third:nth-child(3n+1), .grid--uniform .small--one-quarter:nth-child(4n+1), .grid--uniform .small--one-fifth:nth-child(5n+1), .grid--uniform .small--one-sixth:nth-child(6n+1), .grid--uniform .small--two-sixths:nth-child(3n+1), .grid--uniform .small--three-sixths:nth-child(2n+1), .grid--uniform .small--one-eighth:nth-child(8n+1), .grid--uniform .small--two-eighths:nth-child(4n+1), .grid--uniform .small--four-eighths:nth-child(2n+1), .grid--uniform .small--five-tenths:nth-child(2n+1), .grid--uniform .small--one-twelfth:nth-child(12n+1), .grid--uniform .small--two-twelfths:nth-child(6n+1), .grid--uniform .small--three-twelfths:nth-child(4n+1), .grid--uniform .small--four-twelfths:nth-child(3n+1), .grid--uniform .small--six-twelfths:nth-child(2n+1) { clear: both; }
+  .small--show { display: block !important; }
+  .small--hide { display: none !important; }
+  .small--text-left { text-align: left !important; }
+  .small--text-right { text-align: right !important; }
+  .small--text-center { text-align: center !important; } }
+@media only screen and (min-width: 750px) { /** Whole */
+  .medium-up--one-whole { width: 100%; }
+  /* Halves */
+  .medium-up--one-half { width: 50%; }
+  /* Thirds */
+  .medium-up--one-third { width: 33.33333%; }
+  .medium-up--two-thirds { width: 66.66667%; }
+  /* Quarters */
+  .medium-up--one-quarter { width: 25%; }
+  .medium-up--two-quarters { width: 50%; }
+  .medium-up--three-quarters { width: 75%; }
+  /* Fifths */
+  .medium-up--one-fifth { width: 20%; }
+  .medium-up--two-fifths { width: 40%; }
+  .medium-up--three-fifths { width: 60%; }
+  .medium-up--four-fifths { width: 80%; }
+  /* Sixths */
+  .medium-up--one-sixth { width: 16.66667%; }
+  .medium-up--two-sixths { width: 33.33333%; }
+  .medium-up--three-sixths { width: 50%; }
+  .medium-up--four-sixths { width: 66.66667%; }
+  .medium-up--five-sixths { width: 83.33333%; }
+  /* Eighths */
+  .medium-up--one-eighth { width: 12.5%; }
+  .medium-up--two-eighths { width: 25%; }
+  .medium-up--three-eighths { width: 37.5%; }
+  .medium-up--four-eighths { width: 50%; }
+  .medium-up--five-eighths { width: 62.5%; }
+  .medium-up--six-eighths { width: 75%; }
+  .medium-up--seven-eighths { width: 87.5%; }
+  /* Tenths */
+  .medium-up--one-tenth { width: 10%; }
+  .medium-up--two-tenths { width: 20%; }
+  .medium-up--three-tenths { width: 30%; }
+  .medium-up--four-tenths { width: 40%; }
+  .medium-up--five-tenths { width: 50%; }
+  .medium-up--six-tenths { width: 60%; }
+  .medium-up--seven-tenths { width: 70%; }
+  .medium-up--eight-tenths { width: 80%; }
+  .medium-up--nine-tenths { width: 90%; }
+  /* Twelfths */
+  .medium-up--one-twelfth { width: 8.33333%; }
+  .medium-up--two-twelfths { width: 16.66667%; }
+  .medium-up--three-twelfths { width: 25%; }
+  .medium-up--four-twelfths { width: 33.33333%; }
+  .medium-up--five-twelfths { width: 41.66667%; }
+  .medium-up--six-twelfths { width: 50%; }
+  .medium-up--seven-twelfths { width: 58.33333%; }
+  .medium-up--eight-twelfths { width: 66.66667%; }
+  .medium-up--nine-twelfths { width: 75%; }
+  .medium-up--ten-twelfths { width: 83.33333%; }
+  .medium-up--eleven-twelfths { width: 91.66667%; }
+  .grid--uniform .medium-up--one-half:nth-child(2n+1), .grid--uniform .medium-up--one-third:nth-child(3n+1), .grid--uniform .medium-up--one-quarter:nth-child(4n+1), .grid--uniform .medium-up--one-fifth:nth-child(5n+1), .grid--uniform .medium-up--one-sixth:nth-child(6n+1), .grid--uniform .medium-up--two-sixths:nth-child(3n+1), .grid--uniform .medium-up--three-sixths:nth-child(2n+1), .grid--uniform .medium-up--one-eighth:nth-child(8n+1), .grid--uniform .medium-up--two-eighths:nth-child(4n+1), .grid--uniform .medium-up--four-eighths:nth-child(2n+1), .grid--uniform .medium-up--five-tenths:nth-child(2n+1), .grid--uniform .medium-up--one-twelfth:nth-child(12n+1), .grid--uniform .medium-up--two-twelfths:nth-child(6n+1), .grid--uniform .medium-up--three-twelfths:nth-child(4n+1), .grid--uniform .medium-up--four-twelfths:nth-child(3n+1), .grid--uniform .medium-up--six-twelfths:nth-child(2n+1) { clear: both; }
+  .medium-up--show { display: block !important; }
+  .medium-up--hide { display: none !important; }
+  .medium-up--text-left { text-align: left !important; }
+  .medium-up--text-right { text-align: right !important; }
+  .medium-up--text-center { text-align: center !important; } }
+/*================ Build Grid Push Classes ================*/
+@media only screen and (min-width: 750px) { /* Halves */
+  .medium-up--push-one-half { left: 50%; }
+  /* Thirds */
+  .medium-up--push-one-third { left: 33.33333%; }
+  .medium-up--push-two-thirds { left: 66.66667%; }
+  /* Quarters */
+  .medium-up--push-one-quarter { left: 25%; }
+  .medium-up--push-two-quarters { left: 50%; }
+  .medium-up--push-three-quarters { left: 75%; }
+  /* Fifths */
+  .medium-up--push-one-fifth { left: 20%; }
+  .medium-up--push-two-fifths { left: 40%; }
+  .medium-up--push-three-fifths { left: 60%; }
+  .medium-up--push-four-fifths { left: 80%; }
+  /* Sixths */
+  .medium-up--push-one-sixth { left: 16.66667%; }
+  .medium-up--push-two-sixths { left: 33.33333%; }
+  .medium-up--push-three-sixths { left: 50%; }
+  .medium-up--push-four-sixths { left: 66.66667%; }
+  .medium-up--push-five-sixths { left: 83.33333%; }
+  /* Eighths */
+  .medium-up--push-one-eighth { left: 12.5%; }
+  .medium-up--push-two-eighths { left: 25%; }
+  .medium-up--push-three-eighths { left: 37.5%; }
+  .medium-up--push-four-eighths { left: 50%; }
+  .medium-up--push-five-eighths { left: 62.5%; }
+  .medium-up--push-six-eighths { left: 75%; }
+  .medium-up--push-seven-eighths { left: 87.5%; }
+  /* Tenths */
+  .medium-up--push-one-tenth { left: 10%; }
+  .medium-up--push-two-tenths { left: 20%; }
+  .medium-up--push-three-tenths { left: 30%; }
+  .medium-up--push-four-tenths { left: 40%; }
+  .medium-up--push-five-tenths { left: 50%; }
+  .medium-up--push-six-tenths { left: 60%; }
+  .medium-up--push-seven-tenths { left: 70%; }
+  .medium-up--push-eight-tenths { left: 80%; }
+  .medium-up--push-nine-tenths { left: 90%; }
+  /* Twelfths */
+  .medium-up--push-one-twelfth { left: 8.33333%; }
+  .medium-up--push-two-twelfths { left: 16.66667%; }
+  .medium-up--push-three-twelfths { left: 25%; }
+  .medium-up--push-four-twelfths { left: 33.33333%; }
+  .medium-up--push-five-twelfths { left: 41.66667%; }
+  .medium-up--push-six-twelfths { left: 50%; }
+  .medium-up--push-seven-twelfths { left: 58.33333%; }
+  .medium-up--push-eight-twelfths { left: 66.66667%; }
+  .medium-up--push-nine-twelfths { left: 75%; }
+  .medium-up--push-ten-twelfths { left: 83.33333%; }
+  .medium-up--push-eleven-twelfths { left: 91.66667%; } }
+/*================ Icons ================*/
+.icon { display: inline-block; width: 20px; height: 20px; vertical-align: middle; fill: currentColor; }
+.no-svg .icon { display: none; }
+
+.icon--wide { width: 40px; }
+
+svg.icon:not(.icon--full-color) circle, svg.icon:not(.icon--full-color) ellipse, svg.icon:not(.icon--full-color) g, svg.icon:not(.icon--full-color) line, svg.icon:not(.icon--full-color) path, svg.icon:not(.icon--full-color) polygon, svg.icon:not(.icon--full-color) polyline, svg.icon:not(.icon--full-color) rect, symbol.icon:not(.icon--full-color) circle, symbol.icon:not(.icon--full-color) ellipse, symbol.icon:not(.icon--full-color) g, symbol.icon:not(.icon--full-color) line, symbol.icon:not(.icon--full-color) path, symbol.icon:not(.icon--full-color) polygon, symbol.icon:not(.icon--full-color) polyline, symbol.icon:not(.icon--full-color) rect { fill: inherit; stroke: inherit; }
+
+/*============================================================================ A generic way to visually hide content while remaining accessible to screen readers (h5bp.com)
+==============================================================================*/
+.icon-fallback-text { position: absolute !important; overflow: hidden; clip: rect(0 0 0 0); height: 1px; width: 1px; margin: -1px; padding: 0; border: 0; }
+.no-svg .icon-fallback-text { position: static !important; overflow: auto; clip: auto; width: auto; height: auto; margin: 0; }
+
+/*================ Payment Icons ================*/
+.payment-icons { -moz-user-select: "none"; -ms-user-select: "none"; -webkit-user-select: "none"; user-select: "none"; cursor: default; }
+
+/*================ Shopify icon on password page ================*/
+.icon-shopify-logo { width: 82.28571px; height: 24px; }
+
+/*================ Rich Text Editor ================*/
+.rte img { height: auto; }
+.rte table { table-layout: fixed; }
+.rte ul, .rte ol { margin: 0 0 15px 30px; }
+.rte ul { list-style: disc outside; }
+.rte ul ul { list-style: circle outside; }
+.rte ul ul ul { list-style: square outside; }
+
+.text-center.rte ul, .text-center.rte ol, .text-center .rte ul, .text-center .rte ol { margin-left: 0; list-style-position: inside; }
+
+.rte-table { max-width: 100%; overflow: auto; -webkit-overflow-scrolling: touch; }
+
+.rte__video-wrapper { position: relative; overflow: hidden; max-width: 100%; padding-bottom: 56.25%; height: 0; height: auto; }
+.rte__video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+.rte__table-wrapper { max-width: 100%; overflow: auto; -webkit-overflow-scrolling: touch; }
+
+/*============================================================================ Responsive tables, defined with .responsive-table on table element.
+==============================================================================*/
+@media only screen and (max-width: 749px) { .responsive-table { width: 100%; }
+  .responsive-table thead { display: none; }
+  .responsive-table tr { display: block; }
+  .responsive-table tr, .responsive-table td { float: left; clear: both; width: 100%; }
+  .responsive-table th, .responsive-table td { display: block; text-align: right; padding: 15px; margin: 0; }
+  .responsive-table td::before { content: attr(data-label); float: left; text-align: center; padding-right: 10px; }
+  .responsive-table-row + .responsive-table-row, tfoot > .responsive-table-row:first-child { position: relative; margin-top: 10px; padding-top: 15px; }
+  .responsive-table-row + .responsive-table-row::after, tfoot > .responsive-table-row:first-child::after { content: ''; display: block; position: absolute; top: 0; left: 15px; right: 15px; border-bottom: 1px solid #f6f6f6; } }
+.placeholder-svg { display: block; fill: rgba(78, 86, 101, 0.35); background-color: rgba(78, 86, 101, 0.1); width: 100%; height: 100%; max-width: 100%; max-height: 100%; border: 1px solid rgba(78, 86, 101, 0.2); }
+
+.placeholder-svg--small { width: 480px; }
+
+.placeholder-noblocks { padding: 40px; text-align: center; }
+
+.placeholder-background { position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
+.placeholder-background .icon { border: 0; }

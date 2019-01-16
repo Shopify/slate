@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Commands</title>
+  <meta name="description" content="Slate is a theme scaffold and command line tool for developing Shopify themes. It is designed to assist your development workflow and speed up the process of developing, testing, and deploying themes to Shopify stores.
+">
+
+  <link rel="stylesheet" href="https://cdn.shopify.com/shopify-marketing_assets/builds/13.0.2/marketing_assets_content.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="/slate.shopify.com/docs/0.14.0/css/prettify.min.css">
+  <link rel="stylesheet" href="/slate.shopify.com/docs/0.14.0/css/yuidoc.css">
+  <link rel="stylesheet" href="/slate.shopify.com/docs/0.14.0/css/main.css">
+  <link rel="canonical" href="https://shopify.github.io/slate.shopify.com/docs/0.14.0/commands/">
+  <link rel="shortcut icon" type="image/x-icon" href="//cdn.shopify.com/shopify-marketing_assets/static/shopify-favicon.png" />
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+  <script src="/slate.shopify.com/docs/0.14.0/js/demo.js"></script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-49178120-25', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+
+<body>
+  <main role="main" id="main">
+    <div class="docs-container">
+      <div class="docs-sidebar">
+        <div class="docs-title heading--1"><a class="site-title" href="/slate.shopify.com/docs/0.14.0/">Slate</a></div>
+<ul class="docs-nav">
+  <li>
+    <a class="docs-nav__link " href="/slate.shopify.com/docs/0.14.0/">Getting started</a>
+  </li>
+  <li>
+    <a class="docs-nav__link " href="/slate.shopify.com/docs/0.14.0/theme">What's included</a>
+  </li>
+  <li>
+    <a class="docs-nav__link active" href="/slate.shopify.com/docs/0.14.0/commands">Commands</a>
+    <ul class="docs-sub-nav">
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/commands/#global-commands" class="docs-sub-nav__link">Global commands</a>
+      </li>
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/commands/#build-commands" class="docs-sub-nav__link">Build commands</a>
+      </li>
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/commands/#sync-commands" class="docs-sub-nav__link">Sync commands</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a class="docs-nav__link " href="/slate.shopify.com/docs/0.14.0/theme-scaffold">Theme scaffold</a>
+    <ul class="docs-sub-nav">
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/theme-scaffold/#templates-and-configuration" class="docs-sub-nav__link">Templates and configuration</a>
+      </li>
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/theme-scaffold/#sections" class="docs-sub-nav__link">Sections</a>
+      </li>
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/theme-scaffold/#sass-helpers" class="docs-sub-nav__link">Sass helpers</a>
+      </li>
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/theme-scaffold/#javascript-helpers" class="docs-sub-nav__link">JavaScript helpers</a>
+      </li>
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/theme-scaffold/#translation-keys" class="docs-sub-nav__link">Translation keys</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a class="docs-nav__link " href="/slate.shopify.com/docs/0.14.0/css-examples">CSS examples</a>
+    <ul class="docs-sub-nav">
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/css-examples/#breakpoints" class="docs-sub-nav__link">Breakpoints and media queries</a>
+      </li>
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/css-examples/#grid" class="docs-sub-nav__link">Grid</a>
+      </li>
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/css-examples/#svg-icons" class="docs-sub-nav__link">SVG icons</a>
+      </li>
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/css-examples/#responsive-tables" class="docs-sub-nav__link">Responsive tables</a>
+      </li>
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/css-examples/#blank-states" class="docs-sub-nav__link">Blank states</a>
+      </li>
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/css-examples/#sass-mixins" class="docs-sub-nav__link">Sass mixins</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a class="docs-nav__link " href="/slate.shopify.com/docs/0.14.0/js-examples">JS examples</a>
+    <ul class="docs-sub-nav">
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/js-examples/#trap-focus" class="docs-sub-nav__link">Trap focus</a>
+      </li>
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/js-examples/#responsive-tables-and-videos" class="docs-sub-nav__link">Responsive tables and videos</a>
+      </li>
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/js-examples/#format-currency" class="docs-sub-nav__link">Format currency</a>
+      </li>
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/js-examples/#image-helpers" class="docs-sub-nav__link">Image helpers</a>
+      </li>
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/js-examples/#product-variants" class="docs-sub-nav__link">Product variants</a>
+      </li>
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/js-examples/#cart-helpers" class="docs-sub-nav__link">Cart helpers</a>
+      </li>
+      <li>
+        <a href="/slate.shopify.com/docs/0.14.0/js-examples/#section-events" class="docs-sub-nav__link">Section events</a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<div class="docs-shopify-logo">
+  <a href="https://www.shopify.com">
+    <img src="/slate.shopify.com/docs/0.14.0/assets/images/shopify-logo-large.png" alt="Shopify" />
+  </a>
+  <p><a href="mailto:slate@shopify.com">Provide feedback</a></p>
+</div>
+
+      </div>
+      <div class="docs-main">
+        <div class="docs-content">
+          <header class="docs-header">
+  <ul>
+    <li>
+      <a href="https://github.com/Shopify/slate">
+        <img class="github-logo" src="/slate.shopify.com/docs/0.14.0/assets/images/github-logo.png" alt="View on github" />
+        <span class="link-text">View on Github</span></a>
+    </li>
+    <li>
+      <a href="https://www.npmjs.com/package/@shopify/slate">
+        <img class="npm-logo" src="/slate.shopify.com/docs/0.14.0/assets/images/npm-logo.png" alt="View on npm" />
+        <span class="link-text">View on NPM</span></a>
+    </li>
+  </ul>
+</header>
+
+          <div class="marketing-markdown">
+            <h1 id="commands">Commands</h1>
+
+<h2 id="global-commands">Global commands</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Command</th>
+      <th style="text-align: left">Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><a href="#theme">theme</a></td>
+      <td style="text-align: left"><code class="highlighter-rouge">slate theme [name] [--options]</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="#migrate">migrate</a></td>
+      <td style="text-align: left"><code class="highlighter-rouge">slate migrate [--options]</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="#help">help</a></td>
+      <td style="text-align: left"><code class="highlighter-rouge">slate -h</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="#version">version</a></td>
+      <td style="text-align: left"><code class="highlighter-rouge">slate -v</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="theme">theme</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>slate theme [name]
+</code></pre>
+</div>
+
+<p>Generate a new blank theme. The <code class="highlighter-rouge">name</code> argument is required for the new theme directory.</p>
+
+<h5 id="options">Options</h5>
+<div class="highlighter-rouge"><pre class="highlight"><code>--yarn  install theme dependencies with yarn instead of npm
+</code></pre>
+</div>
+
+<blockquote>
+  <p><strong>Note about Yarn:</strong> While Yarn is not the default installer for dependencies, it is worth noting that Yarn has significant performance improvements and we do recommend installing dependencies via <code class="highlighter-rouge">--yarn</code>. <a href="https://yarnpkg.com/en/docs/install">Read more about installing Yarn</a>.</p>
+</blockquote>
+
+<h3 id="migrate">migrate</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>slate migrate
+</code></pre>
+</div>
+
+<p>Converts an existing theme to work with Slate. Run this command from your project root to install dependencies and restructure your theme files into a <code class="highlighter-rouge">src/</code> directory. Empty <code class="highlighter-rouge">icons/</code>, <code class="highlighter-rouge">styles/</code>, and <code class="highlighter-rouge">scripts/</code> folders will also be created.</p>
+
+<p>A <code class="highlighter-rouge">config.yml</code> will also be created in your root directory which is required for <a href="#build-commands">build commands</a> and <a href="#sync-commands">sync commands</a>.</p>
+
+<h5 id="options-1">Options</h5>
+<div class="highlighter-rouge"><pre class="highlight"><code>--yarn  install theme dependencies with yarn instead of npm
+</code></pre>
+</div>
+
+<h3 id="help">help</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>slate [command] -h, slate [command] --help
+</code></pre>
+</div>
+
+<p>Outputs help information for Slate (<code class="highlighter-rouge">slate --help</code>) or a specific command (<code class="highlighter-rouge">slate deploy --help</code>).</p>
+
+<h3 id="version">version</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>slate -v, slate --version
+</code></pre>
+</div>
+
+<p>Outputs the current version of Slate and its dependencies installed on your system.</p>
+
+<h2 id="build-commands">Build commands</h2>
+
+<p>Slate’s source theme files are in the root <code class="highlighter-rouge">src</code> folder. These are the files you edit and will be compiled to a Shopify-compatible theme in the <code class="highlighter-rouge">dist</code> folder. You can do this a few different ways.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Command</th>
+      <th style="text-align: left">Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><a href="#build">build</a></td>
+      <td style="text-align: left"><code class="highlighter-rouge">slate build</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="#test">test</a></td>
+      <td style="text-align: left"><code class="highlighter-rouge">slate test</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="#zip">zip</a></td>
+      <td style="text-align: left"><code class="highlighter-rouge">slate zip</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="build">build</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>slate build
+</code></pre>
+</div>
+
+<p>Compile theme files and assets into a Shopify theme, found in the <code class="highlighter-rouge">dist</code> folder. No files will be uploaded to your shop.</p>
+
+<h3 id="test">test</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>slate test
+</code></pre>
+</div>
+
+<p>Uses the <a href="https://github.com/Shopify/theme-lint">@shopify/theme-lint</a> package to run translation tests on your locales found in the <code class="highlighter-rouge">/src/locales</code> folder. The package checks for untranslated keys inside of your Liquid templates, missing translation keys in specific locale files, and translation key HTML validity.</p>
+
+<h3 id="zip">zip</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>slate zip
+</code></pre>
+</div>
+
+<p>Performs a fresh build of your theme and zips it into a file that’s compatible with Shopify. The zip file can be found within an <code class="highlighter-rouge">upload</code> folder that is generated within your theme project root folder. The zip is overwritten each time you use this command and is not meant to be used for versioning.</p>
+
+<h2 id="sync-commands">Sync commands</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Command</th>
+      <th style="text-align: left">Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><a href="#deploy">deploy</a></td>
+      <td style="text-align: left"><code class="highlighter-rouge">slate deploy [--options]</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="#watch">watch</a></td>
+      <td style="text-align: left"><code class="highlighter-rouge">slate watch [--options]</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="#start">start</a></td>
+      <td style="text-align: left"><code class="highlighter-rouge">slate start [--options]</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="deploy">deploy</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>slate deploy [--options]
+</code></pre>
+</div>
+
+<p>Performs a fresh build followed by a full deploy; replacing existing files on the remote server and replacing them with the full set of build files, and removing remote files that are no longer in use.</p>
+
+<h5 id="options-2">Options</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>-e, --env  deploy to a comma-separated list of environments
+-m, --manual  disable auto-deployment of the theme files
+</code></pre>
+</div>
+
+<p>Deploy to a specific environment with the <code class="highlighter-rouge">-e</code> flag (short for <code class="highlighter-rouge">--env</code>) plus the environment name: <code class="highlighter-rouge">slate deploy -e staging</code>.  You can deploy to multiple environments at once with comma-separated values: <code class="highlighter-rouge">slate deploy -e development,staging,production</code>.</p>
+
+<p>Running <code class="highlighter-rouge">slate deploy --manual</code> will instead create a new zip file of your theme (see <a href="#zip">slate zip</a>) and open the admin themes page as defined by your environment where you can then manually install your theme from the zip file.</p>
+
+<h3 id="watch">watch</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>slate watch [--options]
+</code></pre>
+</div>
+
+<p>Sets up the watchers for all theme assets and deploys the compiled versions to your specified environment (default is <code class="highlighter-rouge">development</code>). Also opens a <a href="https://browsersync.io/">Browsersync</a> window with live reloading after changing and saving a file.</p>
+
+<h5 id="options-3">Options</h5>
+<div class="highlighter-rouge"><pre class="highlight"><code>-e, --env  deploy to a specific environment
+-n, --nosync  disable Browsersync
+</code></pre>
+</div>
+
+<blockquote>
+  <p><strong>Note about Browsersync on HTTPS:</strong> The first time you run <code class="highlighter-rouge">slate watch</code> or <code class="highlighter-rouge">start</code> you will get an unsafe connection browser notice. This is expected because all Shopify stores run on HTTPS but no certificate exists for your localhost. Proceed through this warning to view your store.</p>
+</blockquote>
+
+<h3 id="start">start</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>slate start [--options]
+</code></pre>
+</div>
+
+<p>Performs a full deploy of your theme (see <a href="#deploy">slate deploy</a>) and starts the watchers (see <a href="#watch">slate watch</a>).</p>
+
+<h5 id="options-4">Options</h5>
+<div class="highlighter-rouge"><pre class="highlight"><code>-e, --env  deploy to a comma-separated list of environments
+-n, --nosync  disable Browsersync
+</code></pre>
+</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+<script src="/slate.shopify.com/docs/0.14.0/js/tracking.js" async></script>
+</html>
