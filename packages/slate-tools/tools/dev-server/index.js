@@ -22,8 +22,9 @@ class DevServer {
         middleware: (req, res, next) => {
           // Shopify sites with redirection enabled for custom domains force redirection
           // to that domain. `?_fd=0` prevents that forwarding.
+          // ?pb=0 hides the Shopify preview bar
           const prefix = req.url.indexOf('?') > -1 ? '&' : '?';
-          const queryStringComponents = ['_fd=0'];
+          const queryStringComponents = ['_fd=0&pb=0'];
 
           req.url += prefix + queryStringComponents.join('&');
           next();
