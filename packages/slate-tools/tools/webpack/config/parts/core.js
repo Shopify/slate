@@ -4,6 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SlateConfig = require('@shopify/slate-config');
 const config = new SlateConfig(require('../../../../slate-tools.schema'));
+const injectSchemasToSections = require('../utilities/inject-schemas-to-sections');
 
 const extractLiquidStyles = new ExtractTextPlugin(
   '[name].styleLiquid.scss.liquid',
@@ -94,6 +95,10 @@ module.exports = {
       {
         from: config.get('paths.theme.src.sections'),
         to: config.get('paths.theme.dist.sections'),
+        ignore: [ '*.schema.json' ],
+        transform (content, path) {
+          return injectSchemasToSections(content,path);
+        }
       },
       {
         from: config.get('paths.theme.src.snippets'),
