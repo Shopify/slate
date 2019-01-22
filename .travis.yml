@@ -11,7 +11,7 @@ script:
 - yarn lint
 
 after_success:
-  - ./.travis/deploy_doc.sh
+  - ./.travis/deploy_docs.sh
 
 notifications:
   email: false
