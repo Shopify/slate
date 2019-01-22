@@ -104,6 +104,12 @@ That's it! Now when you run any Slate Tools commands, they should be run using y
 
 If your change affects how people use the project (i.e. adding or removing functionality, changing the return value of a function, etc), please ensure [the documentation website](https://shopify.github.io/slate/docs/about) is also updated to reflect this.
 
+The documentation website lives in the [docs folder](https://github.com/Shopify/slate/tree/master/docs) on the `master` branch and is hosted using GitHub Pages on the `gh-pages` branch.
+
+You only need to update the source files and Travis CI will take care of deploying the changes when your Pull Request is merged into the `master` branch.
+
+You can read both the README files in the [v0 folder](https://github.com/Shopify/slate/tree/master/docs/v0) and the [v1 folder](https://github.com/Shopify/slate/tree/master/docs/v0) to see how to run the documentation site locally. 
+
 ## Changelog
 
 The changelog is updated by the repo's maintainers since a [personal access token](https://github.com/settings/tokens) with repository access is needed to handle GitHub's API call limits.
