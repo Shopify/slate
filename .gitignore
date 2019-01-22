@@ -57,3 +57,7 @@ packages/slate-theme/config/shopify.yml
 .vscode/
 package-lock.json
 wallaby.js
+
+# Docs #
+######################
+docs/v1/build
