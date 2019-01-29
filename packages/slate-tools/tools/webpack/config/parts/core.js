@@ -95,10 +95,10 @@ module.exports = {
       {
         from: config.get('paths.theme.src.sections'),
         to: config.get('paths.theme.dist.sections'),
-        ignore: [ '*.schema.json' ],
-        transform (content, path) {
-          return injectSchemasToSections(content,path);
-        }
+        ignore: ['*.schema.json'],
+        transform (content, pathToFile) {
+          return injectSchemasToSections(content, pathToFile);
+        },
       },
       {
         from: config.get('paths.theme.src.snippets'),
