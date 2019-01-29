@@ -5,7 +5,7 @@ module.exports = function(content, path) {
     // naming convention is : section_name.schema.json for separate json schema files.
     const jsonShemaFilePath = path.replace('.liquid','.schema.json');
 
-    // lets check if shema file exists and 
+    // lets check if schema file exists and 
 
     if(fs.existsSync(jsonSchemaFilePath)){
     
