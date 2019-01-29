@@ -12,7 +12,7 @@ module.exports = function(content, path) {
     transformedContent = content.toString();
 
     // and check if we already have defined {% schema %} in content
-    if (!(content.match(/{%\s*schema\s*%}([\s\S]+){%\s*endschema\s*%}/gim))) {
+    if (!(transformedContent.match(/{%\s*schema\s*%}([\s\S]+){%\s*endschema\s*%}/gim))) {
       try {
         const jsonSchema = fs.readFileSync(jsonSchemaFilePath, 'utf8');
 
