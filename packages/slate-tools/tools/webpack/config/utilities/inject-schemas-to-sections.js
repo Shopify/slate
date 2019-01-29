@@ -36,7 +36,7 @@ module.exports = function(content, path) {
             }
       }else{
         console.warn(`!----------------------------------------------------------! `);
-        console.warn(` You have json shema file: ${jsonShemaFilePath} for ${path} `);
+        console.warn(` You have json schema file: ${jsonSchemaFilePath} for ${path} `);
         console.warn(` but it contains {% schema %}...{% endschema %} declaration`);
         console.warn(` please remove it from ${path} `);
         console.warn(` to allow me to inject schema from separate .schema.json file `);
