@@ -17,7 +17,7 @@ module.exports = function(content, path) {
         if(!content.match(/{\%\s*schema\s*\%}([\s\S]+){\%\s*endschema\s*\%}/gmi)){
 
             try{
-            const jsonSchema = fs.readFileSync(jsonShemaFilePath, 'utf8');
+            const jsonSchema = fs.readFileSync(jsonSchemaFilePath, 'utf8');
                             
             console.log(`Injecting JSON Shema ${jsonShemaFilePath}  to Section at ${path}`);
     
