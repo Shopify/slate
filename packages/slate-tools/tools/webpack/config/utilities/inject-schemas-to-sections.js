@@ -19,7 +19,7 @@ module.exports = function(content, path) {
             try{
             const jsonSchema = fs.readFileSync(jsonSchemaFilePath, 'utf8');
                             
-            console.log(`Injecting JSON Shema ${jsonShemaFilePath}  to Section at ${path}`);
+            console.log(`Injecting JSON Schema ${jsonSchemaFilePath}  to Section at ${path}`);
     
                 if(jsonSchema){
                     content = 
