@@ -32,7 +32,7 @@ module.exports = function(content, path) {
                     console.warn(` No Schema defined for Section at: ${path}`);  
                 }
             }catch(e){
-                console.warn(e,` Error reading  json shema file: ${jsonShemaFilePath} for ${path}`);
+                console.warn(e,` Error reading  json schema file: ${jsonSchemaFilePath} for ${path}`);
             }
       }else{
         console.warn(`!----------------------------------------------------------! `);
