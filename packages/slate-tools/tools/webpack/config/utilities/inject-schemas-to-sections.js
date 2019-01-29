@@ -7,7 +7,7 @@ module.exports = function(content, path) {
 
     // lets check if shema file exists and 
 
-    if(fs.existsSync(jsonShemaFilePath)){
+    if(fs.existsSync(jsonSchemaFilePath)){
     
         console.log(`Found separate section schema for: ${path}`);
 
