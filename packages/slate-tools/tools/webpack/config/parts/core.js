@@ -96,7 +96,7 @@ module.exports = {
         from: config.get('paths.theme.src.sections'),
         to: config.get('paths.theme.dist.sections'),
         ignore: ['*.schema.json'],
-        transform (content, pathToFile) {
+        transform(content, pathToFile) {
           return injectSchemasToSections(content, pathToFile);
         },
       },
