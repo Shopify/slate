@@ -27,8 +27,7 @@ module.exports = function(content, liquidFilePath) {
         );
 
         if (jsonSchema) {
-          transformedContent =
-`${transformedContent}
+          transformedContent = `${transformedContent}
 {% schema %}
   ${jsonSchema}
 {% endschema %}
@@ -75,7 +74,6 @@ module.exports = function(content, liquidFilePath) {
             injectorTagToReplace,
             injectedFileContent,
           );
-
         } else {
           console.warn(
             ` Inject command in ${liquidFilePath} can't find file to inject at ${fileToInjectPath}`,
@@ -84,7 +82,6 @@ module.exports = function(content, liquidFilePath) {
       }
     }
   }
-
 
   // return content untouched if schema is already defined in it. or we don't have separate json file, or there's no {% inject 'filename' %}
   return transformedContent;
