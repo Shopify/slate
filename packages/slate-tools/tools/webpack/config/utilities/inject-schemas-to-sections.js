@@ -2,21 +2,19 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = function(content, liquidFilePath) {
-
   let transformedContent = content.toString();
 
   // naming convention is : section_name.schema.json for separate json schema files.
   const jsonSchemaFilePath = liquidFilePath.replace('.liquid', '.schema.json');
 
   // to check if we already have defined {% schema %} in content
-  const schemaTagExistsInFileRegex = /{%\s*schema\s*%}([\s\S]+){%\s*endschema\s*%}/gmi;
+  const schemaTagExistsInFileRegex = /{%\s*schema\s*%}([\s\S]+){%\s*endschema\s*%}/gim;
   // check for {% inject 'file.schema.json' %}
-  const injectorRegex = /{%\s+inject\s+['"]([^'"]+)['"]\s*%}/gmi;
+  const injectorRegex = /{%\s+inject\s+['"]([^'"]+)['"]\s*%}/gim;
   const schemaTagExists = transformedContent.match(schemaTagExistsInFileRegex);
 
   // lets check if schema file exists and
   if (fs.existsSync(jsonSchemaFilePath)) {
-
     if (schemaTagExists) {
       // do nothing maybe warn about to inject it with {% inject 'file.json' %}
     } else {
@@ -62,7 +60,10 @@ module.exports = function(content, liquidFilePath) {
       const injectedFileName = injectorMatch[1];
 
       if (injectorTagToReplace && injectedFileName) {
-        const fileToInjectPath = path.resolve(path.dirname(liquidFilePath), injectedFileName);
+        const fileToInjectPath = path.resolve(
+          path.dirname(liquidFilePath),
+          injectedFileName,
+        );
 
         if (fs.existsSync(fileToInjectPath)) {
           const injectedFileContent = fs.readFileSync(fileToInjectPath, 'utf8');
@@ -70,7 +71,10 @@ module.exports = function(content, liquidFilePath) {
           console.log(
             `Injecting ${fileToInjectPath} to ${liquidFilePath} at ${injectorTagToReplace}`,
           );
-          transformedContent = transformedContent.replace(injectorTagToReplace, injectedFileContent);
+          transformedContent = transformedContent.replace(
+            injectorTagToReplace,
+            injectedFileContent,
+          );
 
         } else {
           console.warn(
@@ -79,11 +83,9 @@ module.exports = function(content, liquidFilePath) {
         }
       }
     }
-
   }
 
 
   // return content untouched if schema is already defined in it. or we don't have separate json file, or there's no {% inject 'filename' %}
   return transformedContent;
-
 };
