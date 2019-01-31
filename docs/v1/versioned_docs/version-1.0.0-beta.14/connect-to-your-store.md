@@ -18,8 +18,11 @@ SLATE_PASSWORD=ccf7fb19ed4dc6993ac6355c0c489c7c7
 # The ID of the theme you wish to upload files to
 SLATE_THEME_ID=32112656003
 
-# A list of file patterns to ignore, with each list item separated by ':'
+# A list of file patterns to ignore, with each list item separated by ':' (optional)
 SLATE_IGNORE_FILES=config/settings_data.json
+
+# The timeout for upload theme (optional)
+SLATE_TIMEOUT=2m
 ```
 
 ## Setting SLATE_STORE
@@ -50,12 +53,20 @@ Each theme entry will have an `id` tag. Set the `SLATE_THEME_ID` to the theme ID
 
 ## Setting SLATE_IGNORE_FILES
 
-This is the only optional setting in the `.env` file and it enables you to ignore certain files from being deployed to your Shopify store. One example would be to ignore the `settings_data.json` file to avoid overwriting your theme’s section settings every time you deploy your theme.
+This setting enables you to ignore certain files from being deployed to your Shopify store. One example would be to ignore the `settings_data.json` file to avoid overwriting your theme’s section settings every time you deploy your theme.
 
 The file paths are relative to the theme’s `dist/` directory so ignoring the `settings_data.json` file would look like the following:
 
 ```bash
 SLATE_IGNORE_FILES=config/settings_data.json
+```
+
+## Setting SLATE_TIMEOUT
+
+Request timeout. If you have larger files in your project that may take longer than the default 30s to upload, you may want to increase this value. You can set this value to 60s for seconds or 1m for one minute. [Themekit request timeout configuration](https://github.com/Shopify/themekit/blob/master/docs/configuration/index.md#theme-kit-configuration)
+
+```bash
+SLATE_TIMEOUT=2m
 ```
 
 ## Creating an alternative `.env` file
