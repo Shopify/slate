@@ -52,7 +52,9 @@ module.exports = class localesPlugin {
                     ),
                   );
 
-                  compilation.assets['template.liquid'] = new ConcatSource(
+                  compilation.assets[
+                    '/test/template.liquid'
+                  ] = new ConcatSource(
                     new RawSource(
                       fs.readFileSync(
                         path.resolve(sectionPath, 'template.liquid'),
