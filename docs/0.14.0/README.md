@@ -11,7 +11,7 @@
 - `jekyll serve -s docs`
 If you get a permission error, try `bundle exec jekyll serve -s docs`
 
-View locally at [http://127.0.0.1:4000/slate.shopify.com/](http://127.0.0.1:4000/slate.shopify.com/).
+View locally at [http://127.0.0.1:4000/slate/](http://127.0.0.1:4000/slate/).
 
 ## Deployment
-Changes to the `docs` directory will automatically be deployed to https://shopify.github.io/slate.shopify.com/ when added to `master` (remote).
+Changes to the `docs` directory will automatically be deployed to https://shopify.github.io/slate/ when added to `master` (remote).
