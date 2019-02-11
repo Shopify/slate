@@ -19,6 +19,7 @@ const TEST_ENV = {
   [config.get('env.keys.themeId')]: '987654321',
   [config.get('env.keys.ignoreFiles')]: 'config/settings_data.json',
   [config.get('env.keys.userEmail')]: 'test@email.com',
+  [config.get('env.keys.timeout')]: '60s',
 };
 
 function setVars(vars) {

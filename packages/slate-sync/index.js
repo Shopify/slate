@@ -50,6 +50,9 @@ function _generateConfigFlags() {
     '--store': slateEnv.getStoreValue(),
     '--env': slateEnv.getEnvNameValue(),
   };
+  if (slateEnv.getTimeoutValue()) {
+    flags['--timeout'] = slateEnv.getTimeoutValue();
+  }
 
   // Convert object to key value pairs and flatten the array
   return Array.prototype.concat(...Object.entries(flags));
