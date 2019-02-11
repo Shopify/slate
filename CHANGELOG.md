@@ -1,5 +1,39 @@
 # Change Log
 
+## v1.0.0-beta.15 (2019-02-11)
+
+#### :bug: Bug Fix
+
+* `slate-tools`
+  * [#967](https://github.com/Shopify/slate/pull/967) Resolve Windows Slashes for styles and script tags snippets.. ([@YourWishes](https://github.com/YourWishes))
+* `slate-analytics`
+  * [#925](https://github.com/Shopify/slate/pull/925) Update analytics to refer to betainstead of alpha. ([@t-kelly](https://github.com/t-kelly))
+
+#### :memo: Documentation
+
+* [#951](https://github.com/Shopify/slate/pull/951) Add travis task to deploy docs. ([@huguestennier](https://github.com/huguestennier))
+* [#950](https://github.com/Shopify/slate/pull/950) Update docs structure. ([@huguestennier](https://github.com/huguestennier))
+* [#928](https://github.com/Shopify/slate/pull/928) Add docs search. ([@huguestennier](https://github.com/huguestennier))
+* [#929](https://github.com/Shopify/slate/pull/929) Remove unused docs files. ([@huguestennier](https://github.com/huguestennier))
+* [#926](https://github.com/Shopify/slate/pull/926) Add Google Analytics. ([@huguestennier](https://github.com/huguestennier))
+
+#### :house: Internal
+
+* `slate-tools`
+  * [#923](https://github.com/Shopify/slate/pull/923) Fix cli:start and start:start analytics events. ([@t-kelly](https://github.com/t-kelly))
+
+#### :wrench Config
+
+* `slate-env`, `slate-sync`
+  * [#968](https://github.com/Shopify/slate/pull/968) Expose request timeout of themekit in .env. ([@Liroo](https://github.com/Liroo))
+
+#### Committers: 4
+
+* Dominic Masters ([YourWishes](https://github.com/YourWishes))
+* Hugues Tennier ([huguestennier](https://github.com/huguestennier))
+* Pierre Monge ᵈᵉᵛ ([Liroo](https://github.com/Liroo))
+* Thomas Kelly ([t-kelly](https://github.com/t-kelly))
+
 ## v1.0.0-beta.14 (2018-11-22)
 
 #### :bug: Bug Fix
@@ -139,7 +173,7 @@ In addition to this beta release, we shipped v1 of [`theme-cart`](https://github
 
 #### :broken_heart: Breaking
 
-You will need to update your `slate.config.js` to the new, simplified, more powerful format. For more information see the new [Slate Configuration](https://shopify.github.io/slate/docs/slate-configuration)  page.
+You will need to update your `slate.config.js` to the new, simplified, more powerful format. For more information see the new [Slate Configuration](https://shopify.github.io/slate/docs/slate-configuration) page.
 
 There is no longer seperate development or production configurations. A configuration can return different values for prod or dev by checking if `process.env.NODE_ENV === 'production'` or `process.env.NODE_ENV === 'development'`.
 
