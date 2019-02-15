@@ -7,77 +7,62 @@ module.exports = class localesPlugin {
     this.options = options;
   }
   apply(compiler) {
-    compiler.hooks.emit.tap('Slate Locales Plugin', this.addLocales);
+    compiler.hooks.compilation.tap('Slate Locales Plugin', this.addLocales);
   }
   addLocales(compilation) {
-    console.log(path.resolve(compilation.options.context, 'sections'));
     fs.readdir(
       path.resolve(compilation.options.context, 'sections'),
       {withFileTypes: true},
       (err, dirents) => {
         if (err) throw err;
-        dirents
-          .filter(
-            (dirent) =>
-              dirent.isDirectory() && dirent.name === 'article-template',
-          )
-          .map((dirent) => {
-            const sectionPath = path.resolve(
-              compilation.options.context,
-              'sections',
-              dirent.name,
-            );
-            fs.readdir(
-              path.resolve(sectionPath),
-              {withFileTypes: true},
-              (err, dirents) => {
-                if (err) throw err;
-                if (
-                  dirents.find(
-                    (obj) => obj.name === 'locales' && obj.isDirectory(),
-                  ) &&
-                  dirents.find(
-                    (obj) => obj.name === 'template.liquid' && obj.isFile(),
-                  ) &&
-                  dirents.find(
-                    (obj) => obj.name === 'schema.json' && obj.isFile(),
-                  )
-                ) {
-                  console.log(
-                    JSON.stringify(
+        dirents.filter((dirent) => dirent.isDirectory()).forEach((dirent) => {
+          const sectionPath = path.resolve(
+            compilation.options.context,
+            'sections',
+            dirent.name,
+          );
+          fs.readdir(
+            path.resolve(sectionPath),
+            {withFileTypes: true},
+            // eslint-disable-next-line
+            (err, dirents) => {
+              if (err) throw err;
+              if (
+                dirents.find(
+                  (obj) => obj.name === 'locales' && obj.isDirectory(),
+                ) &&
+                dirents.find(
+                  (obj) => obj.name === 'template.liquid' && obj.isFile(),
+                ) &&
+                dirents.find(
+                  (obj) => obj.name === 'schema.json' && obj.isFile(),
+                )
+              ) {
+                compilation.assets[
+                  `../sections/${dirent.name}.liquid`
+                ] = new ConcatSource(
+                  new RawSource(
+                    fs.readFileSync(
+                      path.resolve(sectionPath, 'template.liquid'),
+                    ),
+                  ),
+                  new RawSource(
+                    `{% schema %}${JSON.stringify(
                       createMainSchema(
                         combineLocales(path.resolve(sectionPath, 'locales')),
                         path.resolve(sectionPath, 'schema.json'),
                       ),
-                    ),
-                  );
-
-                  compilation.assets[
-                    '/test/template.liquid'
-                  ] = new ConcatSource(
-                    new RawSource(
-                      fs.readFileSync(
-                        path.resolve(sectionPath, 'template.liquid'),
-                      ),
-                    ),
-                    new RawSource(
-                      `{% schema %}${JSON.stringify(
-                        createMainSchema(
-                          combineLocales(path.resolve(sectionPath, 'locales')),
-                          path.resolve(sectionPath, 'schema.json'),
-                        ),
-                      )} {% endschema %} `,
-                    ),
-                  );
-                  // console.log(
-                  //   JSON.stringify(
-                  //     combineLocales(path.resolve(sectionPath, 'locales')),
-                  //   ),
-                  // );
-                }
-              },
-            );
-          });
+                      null,
+                      2,
+                    )} {% endschema %} `,
+                  ),
+                );
+              } else {
+                // Iterate all the liquid files, if json file with same name add it
+              }
+            },
+          );
+        });
       },
     );
   }
@@ -98,6 +83,7 @@ function getLocalizedValue(key, language, localizedSchema) {
 function getLocalizedValues(key, mainSchema, localizedSchema) {
   // eslint-disable-next-line
   let combinedTranslationsObject = {};
+  // eslint-disable-next-line
   for (const i in localizedSchema) {
     combinedTranslationsObject[i] = getLocalizedValue(key, i, localizedSchema);
   }
@@ -112,7 +98,6 @@ function createMainSchema(localizedSchema, mainSchemaPath) {
         obj[i] = getLocalizedValues(obj[i].t, obj, localizedSchema);
       } else if (typeof obj[i] === 'object') {
         traverse(obj[i]);
-        // obj[i] = 'dog';
       }
     }
   }
