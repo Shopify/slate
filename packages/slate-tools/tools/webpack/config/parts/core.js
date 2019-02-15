@@ -92,10 +92,6 @@ module.exports = {
         to: config.get('paths.theme.dist.locales'),
       },
       {
-        from: config.get('paths.theme.src.sections'),
-        to: config.get('paths.theme.dist.sections'),
-      },
-      {
         from: config.get('paths.theme.src.snippets'),
         to: config.get('paths.theme.dist.snippets'),
       },

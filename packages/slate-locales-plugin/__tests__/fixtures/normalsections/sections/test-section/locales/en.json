@@ -1,0 +1,19 @@
+{
+  "name": "Posts",
+  "settings": {
+    "image_parallax": {
+      "label": "Show image parallax animation",
+      "info": "Only shows on desktop"
+    },
+    "show_date": {
+      "label": "Show date"
+    },
+    "show_author": {
+      "label": "Show author"
+    },
+    "show_share_buttons": {
+      "label": "Enable sharing for blog articles",
+      "info": "Make sure you have enabled social sharing in general settings"
+    }
+  }
+}

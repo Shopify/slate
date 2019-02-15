@@ -1,0 +1,19 @@
+{
+  "name": "Posts",
+  "settings": {
+    "image_parallax": {
+      "label": "Parallax-Animation für Bild anzeigen",
+      "info": "Wird nur auf dem Desktop angezeigt"
+    },
+    "show_date": {
+      "label": "Datum anzeigen"
+    },
+    "show_author": {
+      "label": "Autor anzeigen"
+    },
+    "show_share_buttons": {
+      "label": "Teilen von Blog-Beiträgen aktivieren",
+      "info": "Vergewissern Sie sich, dass Sie in den allgemeinen Einstellungen das Teilen in sozialen Netzwerken aktiviert haben"
+    }
+  }
+}
