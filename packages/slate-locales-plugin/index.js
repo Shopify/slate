@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 const {ConcatSource, RawSource} = require('webpack-sources');
 
@@ -9,64 +9,135 @@ module.exports = class localesPlugin {
   apply(compiler) {
     compiler.hooks.compilation.tap('Slate Locales Plugin', this.addLocales);
   }
-  addLocales(compilation) {
-    fs.readdir(
+
+  async addLocales(compilation) {
+    const dirents = await fs.readdir(
       path.resolve(compilation.options.context, 'sections'),
       {withFileTypes: true},
-      (err, dirents) => {
-        if (err) throw err;
-        dirents.filter((dirent) => dirent.isDirectory()).forEach((dirent) => {
-          const sectionPath = path.resolve(
-            compilation.options.context,
-            'sections',
-            dirent.name,
-          );
-          fs.readdir(
-            path.resolve(sectionPath),
-            {withFileTypes: true},
-            // eslint-disable-next-line
-            (err, dirents) => {
-              if (err) throw err;
-              if (
-                dirents.find(
-                  (obj) => obj.name === 'locales' && obj.isDirectory(),
-                ) &&
-                dirents.find(
-                  (obj) => obj.name === 'template.liquid' && obj.isFile(),
-                ) &&
-                dirents.find(
-                  (obj) => obj.name === 'schema.json' && obj.isFile(),
-                )
-              ) {
-                compilation.assets[
-                  `../sections/${dirent.name}.liquid`
-                ] = new ConcatSource(
-                  new RawSource(
-                    fs.readFileSync(
-                      path.resolve(sectionPath, 'template.liquid'),
-                    ),
-                  ),
-                  new RawSource(
-                    `{% schema %}${JSON.stringify(
-                      createMainSchema(
-                        combineLocales(path.resolve(sectionPath, 'locales')),
-                        path.resolve(sectionPath, 'schema.json'),
-                      ),
-                      null,
-                      2,
-                    )} {% endschema %} `,
-                  ),
-                );
-              } else {
-                // Iterate all the liquid files, if json file with same name add it
-              }
-            },
-          );
-        });
-      },
     );
+    // eslint-disable-next-line prefer-arrow-callback
+    dirents.forEach((dirent) => {
+      if (dirent.isDirectory()) {
+        traverseDirectory(
+          dirent,
+          path.resolve(compilation.options.context, 'sections'),
+          compilation,
+          dirents,
+        );
+      } else if (dirent.isFile() && path.extname(dirent.name) === '.liquid') {
+        getSchema(
+          dirent,
+          path.resolve(compilation.options.context, 'sections'),
+          compilation,
+          dirents,
+        );
+      }
+    });
   }
 };
+
+async function getSchema(liquidDirent, directoryPath, compilation, dirents) {
+  if (liquidDirent.name === 'template.liquid') {
+    const outputKey = `../sections${
+      directoryPath.split('/sections')[1]
+    }.liquid`;
+
+    if (
+      dirents.find((obj) => obj.name === 'locales' && obj.isDirectory()) &&
+      dirents.find((obj) => obj.name === 'schema.json' && obj.isFile())
+    ) {
+      compilation.assets[outputKey] = new ConcatSource(
+        new RawSource(
+          fs.readFileSync(path.resolve(directoryPath, 'template.liquid')),
+        ),
+        new RawSource(
+          `{% schema %}${JSON.stringify(
+            createMainSchema(
+              combineLocales(path.resolve(directoryPath, 'locales')),
+              path.resolve(directoryPath, 'schema.json'),
+            ),
+            null,
+            2,
+          )} {% endschema %} `,
+        ),
+      );
+    } else if (
+      dirents.find((obj) => obj.name === 'schema.json' && obj.isFile())
+    ) {
+      compilation.assets[outputKey] = new ConcatSource(
+        new RawSource(
+          fs.readFileSync(path.resolve(directoryPath, 'template.liquid')),
+        ),
+        new RawSource(
+          `{% schema %}${JSON.stringify(
+            fs.readFileSync(path.resolve(directoryPath, 'schema.json')),
+            null,
+            2,
+          )} {% endschema %} `,
+        ),
+      );
+    } else {
+      compilation.assets[outputKey] = new RawSource(
+        fs.readFileSync(path.resolve(directoryPath, 'template.liquid')),
+      );
+    }
+  } else {
+    const liquidContent = await fs.readFile(
+      path.resolve(directoryPath, liquidDirent.name),
+      'utf8',
+    );
+    const outputKey = `../sections${
+      directoryPath.split('/sections')[1] === ''
+        ? `/${liquidDirent.name}`
+        : `${directoryPath.split('/sections')[1]}/${liquidDirent.name}`
+    }`;
+    if (
+      liquidContent.match(/{%\s*schema\s*%}([\s\S]+){%\s*endschema\s*%}/gim) ||
+      !dirents.find(
+        (obj) => obj.name === liquidDirent.name.replace('.liquid', '.json'),
+      )
+    ) {
+      compilation.assets[outputKey] = new RawSource(liquidContent);
+    } else {
+      compilation.assets[outputKey] = new ConcatSource(
+        new RawSource(liquidContent),
+        new RawSource(
+          fs.readFileSync(
+            path.resolve(
+              directoryPath,
+              liquidDirent.name.replace('.liquid', '.json'),
+            ),
+          ),
+        ),
+      );
+    }
+  }
+}
+
+async function traverseDirectory(dirent, directoryPath, compilation) {
+  const dirents = await fs.readdir(path.resolve(directoryPath, dirent.name), {
+    withFileTypes: true,
+  });
+  dirents.forEach((subdirent) => {
+    if (subdirent.isDirectory() && subdirent.name !== 'locales') {
+      traverseDirectory(
+        subdirent,
+        path.resolve(directoryPath, dirent.name),
+        compilation,
+      );
+    } else if (
+      subdirent.isFile() &&
+      path.extname(subdirent.name) === '.liquid'
+    ) {
+      getSchema(
+        subdirent,
+        path.resolve(directoryPath, dirent.name),
+        compilation,
+        dirents,
+      );
+    }
+  });
+}
 
 function getLocalizedValue(key, language, localizedSchema) {
   function getNestedValue(json, keys) {

@@ -1,10 +1,12 @@
 const compiler = require('./helpers/compiler');
 const path = require('path');
 
+jest.unmock('fs-extra');
 test('normal structure', async () => {
   const stats = await compiler('fixtures/normalsections/');
 
   // Check if file has been added to assets so webpack can output it
+  debugger;
   expect(
     stats.compilation.assets['../sections/test-section.liquid'],
   ).toMatchSnapshot();

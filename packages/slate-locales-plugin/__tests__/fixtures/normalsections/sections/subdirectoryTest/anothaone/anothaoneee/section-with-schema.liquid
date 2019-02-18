@@ -1,0 +1,88 @@
+test
+
+{% schema %}{
+  "name": {
+    "de": "Posts",
+    "en": "Posts",
+    "es": "Publicaciones",
+    "fr": "Articles",
+    "it": "Articoli",
+    "ja": "投稿",
+    "pt-BR": "posts"
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "image_parallax",
+      "label": {
+        "de": "Parallax-Animation für Bild anzeigen",
+        "en": "Show image parallax animation",
+        "es": "Mostrar animación de paralaje de imagen",
+        "fr": "Afficher l'animation en parallaxe",
+        "it": "Mostra animazione parallasse immagine",
+        "ja": "画像のパララックスアニメーションを表示する",
+        "pt-BR": "Exibir animação de paralaxe da imagem"
+      },
+      "info": {
+        "de": "Wird nur auf dem Desktop angezeigt",
+        "en": "Only shows on desktop",
+        "es": "Solo se muestra en el escritorio",
+        "fr": "Ne s'affiche que sur le bureau",
+        "it": "Appare solo su desktop",
+        "ja": "デスクトップにのみ表示する",
+        "pt-BR": "Aparece apenas na área de trabalho"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": {
+        "de": "Datum anzeigen",
+        "en": "Show date",
+        "es": "Mostrar fecha",
+        "fr": "Afficher la date",
+        "it": "Mostra data",
+        "ja": "日付を表示する",
+        "pt-BR": "Exibir data"
+      },
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": {
+        "de": "Autor anzeigen",
+        "en": "Show author",
+        "es": "Mostrar autor",
+        "fr": "Afficher l'auteur",
+        "it": "Mostra autore",
+        "ja": "執筆者を表示する",
+        "pt-BR": "Exibir autor(a)"
+      },
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_share_buttons",
+      "label": {
+        "de": "Teilen von Blog-Beiträgen aktivieren",
+        "en": "Enable sharing for blog articles",
+        "es": "Habilitar el uso compartido de artículos de blog",
+        "fr": "Activer le partage pour les articles de blog",
+        "it": "Abilita condivisione per gli articoli del blog",
+        "ja": "ブログ記事の共有を有効にする",
+        "pt-BR": "Ativar compartilhamento para artigos de blog"
+      },
+      "info": {
+        "de": "Vergewissern Sie sich, dass Sie in den allgemeinen Einstellungen das Teilen in sozialen Netzwerken aktiviert haben",
+        "en": "Make sure you have enabled social sharing in general settings",
+        "es": "Asegúrate de haber habilitado la opción para compartir en redes sociales en la configuración general.",
+        "fr": "Assurez-vous d'avoir activé le partage social dans les paramètres généraux",
+        "it": "Assicurati di aver abilitato la condivisione sui social nelle impostazioni generali",
+        "ja": "一般設定でソーシャル共有を有効にしていることを確認してください。",
+        "pt-BR": "Verifique se você habilitou o compartilhamento em redes sociais nas configurações gerais"
+      },
+      "default": true
+    }
+  ]
+} {% endschema %}

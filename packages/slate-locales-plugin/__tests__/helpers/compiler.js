@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const memoryfs = require('memory-fs');
 
-const SlateLocalesPlugin = require('../..');
+const SlateLocalesPlugin = require('../../');
 
 // eslint-disable-next-line
 const testCompiler = function(fixture, options = {}) {
