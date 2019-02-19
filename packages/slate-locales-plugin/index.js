@@ -1,6 +1,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 const {ConcatSource, RawSource} = require('webpack-sources');
+const _ = require('lodash');
 
 module.exports = class localesPlugin {
   constructor(options) {
@@ -137,24 +138,12 @@ async function traverseDirectory(dirent, directoryPath, compilation) {
   });
 }
 
-function getLocalizedValue(key, language, localizedSchema) {
-  function getNestedValue(json, keys) {
-    if (keys.length === 1) {
-      return json[keys[0]];
-    } else {
-      return getNestedValue(json[keys.splice(0, 1)], keys);
-    }
-  }
-
-  return getNestedValue(localizedSchema[language], key.split('.'));
-}
-
 function getLocalizedValues(key, mainSchema, localizedSchema) {
   // eslint-disable-next-line
   let combinedTranslationsObject = {};
   // eslint-disable-next-line
   for (const i in localizedSchema) {
-    combinedTranslationsObject[i] = getLocalizedValue(key, i, localizedSchema);
+    combinedTranslationsObject[i] = _.get(localizedSchema[i], key);
   }
 
   return combinedTranslationsObject;
