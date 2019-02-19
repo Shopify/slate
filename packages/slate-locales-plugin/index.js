@@ -51,14 +51,14 @@ async function getSchema(liquidDirent, directoryPath, compilation, dirents) {
           fs.readFileSync(path.resolve(directoryPath, 'template.liquid')),
         ),
         new RawSource(
-          `{% schema %}${JSON.stringify(
+          `{% schema %}\n ${JSON.stringify(
             createMainSchema(
               combineLocales(path.resolve(directoryPath, 'locales')),
               path.resolve(directoryPath, 'schema.json'),
             ),
             null,
             2,
-          )} {% endschema %} `,
+          )}{% endschema %}`,
         ),
       );
     } else if (
@@ -69,11 +69,9 @@ async function getSchema(liquidDirent, directoryPath, compilation, dirents) {
           fs.readFileSync(path.resolve(directoryPath, 'template.liquid')),
         ),
         new RawSource(
-          `{% schema %}${JSON.stringify(
-            fs.readFileSync(path.resolve(directoryPath, 'schema.json')),
-            null,
-            2,
-          )} {% endschema %} `,
+          `{% schema %}\n${fs.readFileSync(
+            path.resolve(directoryPath, 'schema.json'),
+          )}{% endschema %}`,
         ),
       );
     } else {
@@ -102,12 +100,12 @@ async function getSchema(liquidDirent, directoryPath, compilation, dirents) {
       compilation.assets[outputKey] = new ConcatSource(
         new RawSource(liquidContent),
         new RawSource(
-          fs.readFileSync(
+          `{% schema %}\n${fs.readFileSync(
             path.resolve(
               directoryPath,
               liquidDirent.name.replace('.liquid', '.json'),
             ),
-          ),
+          )}{% endschema %}`,
         ),
       );
     }

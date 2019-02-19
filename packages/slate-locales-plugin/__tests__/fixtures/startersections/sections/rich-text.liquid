@@ -1,0 +1,42 @@
+{%- comment -%}
+  This is a required section for the Shopify Theme Store.
+  It is available when you add "Rich text" section on the Theme Editor.
+
+  Theme Store required settings
+  - Heading: title of the rich text section
+  - Text: description of the rich text section
+{%- endcomment -%}
+<section>
+  {%- if section.settings.title != blank -%}
+    <h2>{{ section.settings.title | escape }}</h2>
+  {%- endif -%}
+  {%- if section.settings.text != blank -%}
+    <div class="rte">
+      {{ section.settings.text }}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+  {
+    "name": "Rich text",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Talk about your brand"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+      }
+    ],
+    "presets": [{
+        "name": "Rich text",
+        "category": "Text"
+    }]
+  }
+{% endschema %}
