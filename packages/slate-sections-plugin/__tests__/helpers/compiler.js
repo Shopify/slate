@@ -13,7 +13,12 @@ const testCompiler = function(fixture, options = {}) {
       filename: '[name].js',
       path: path.resolve(__dirname, '../dist/assets'),
     },
-    plugins: [new SlateLocalesPlugin()],
+    plugins: [
+      new SlateLocalesPlugin({
+        from: path.resolve(__dirname, '../', fixture, 'sections'),
+        to: path.resolve(__dirname, '../dist/sections'),
+      }),
+    ],
   });
 
   compiler.outputFileSystem = new memoryfs();

@@ -2,27 +2,30 @@ const fs = require('fs-extra');
 const path = require('path');
 const {ConcatSource, RawSource} = require('webpack-sources');
 const _ = require('lodash');
-const SlateConfig = require('@shopify/slate-config');
-const config = new SlateConfig(require('./slate-sections.schema'));
 
-const SECTIONS_DIRECTORY = config.get('paths.theme.src.sections');
 // If section liquid file is the GENERIC_TEMPLATE_NAME the output liquid will take the form of directoryName.liquid
 const GENERIC_TEMPLATE_NAME = 'template.liquid';
 
 module.exports = class sectionsPlugin {
+  constructor(options) {
+    this.options = options;
+  }
   apply(compiler) {
-    compiler.hooks.compilation.tap('Slate Sections Plugin', this.addLocales);
+    compiler.hooks.compilation.tap(
+      'Slate Sections Plugin',
+      this.addLocales.bind(this),
+    );
   }
 
   async addLocales(compilation) {
-    const files = await fs.readdir(SECTIONS_DIRECTORY);
+    const files = await fs.readdir(this.options.from);
     // eslint-disable-next-line prefer-arrow-callback
     files.forEach(async (file) => {
-      const fileStat = await fs.stat(path.resolve(SECTIONS_DIRECTORY, file));
+      const fileStat = await fs.stat(path.resolve(this.options.from, file));
       if (fileStat.isDirectory()) {
-        traverseDirectory(file, compilation);
+        traverseDirectory(compilation, path.resolve(this.options.from, file));
       } else if (fileStat.isFile() && path.extname(file) === '.liquid') {
-        getSchema(file, SECTIONS_DIRECTORY, compilation, files);
+        getSchema(file, this.options.from, compilation, files);
       }
     });
   }
@@ -83,17 +86,12 @@ function getOutputKey(fileName, directoryPath, compilation) {
   return `${relativePathToSections}/${outputFileName}`;
 }
 
-async function traverseDirectory(folderName, compilation, nestedUnder = '') {
-  const directoryPath = path.resolve(
-    SECTIONS_DIRECTORY,
-    nestedUnder,
-    folderName,
-  );
+async function traverseDirectory(compilation, directoryPath) {
   const files = await fs.readdir(directoryPath);
   files.forEach(async (file) => {
     const fileStat = await fs.stat(path.resolve(directoryPath, file));
     if (fileStat.isDirectory() && file !== 'locales') {
-      traverseDirectory(file, compilation, `${nestedUnder}/${folderName}`);
+      traverseDirectory(compilation, path.resolve(directoryPath, file));
     } else if (fileStat.isFile() && path.extname(file) === '.liquid') {
       getSchema(file, directoryPath, compilation, files);
     }

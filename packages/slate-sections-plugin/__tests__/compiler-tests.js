@@ -3,7 +3,7 @@ const compiler = require('./helpers/compiler');
 
 jest.unmock('fs-extra');
 
-test('starter theme structure', async () => {
+test('sections with no seperate schemas, with liquid files that just need to be copied over', async () => {
   const stats = await compiler('fixtures/startersections/');
   expect(stats.compilation.assets).toMatchSnapshot();
 
@@ -20,7 +20,7 @@ test('starter theme structure', async () => {
   });
 });
 
-test('seperate json files', async () => {
+test('sections with multiple liquid files with corresponding json files with the same name that require the json to be appended as a schema', async () => {
   const stats = await compiler('fixtures/seperatejsonsections/');
   expect(stats.compilation.assets).toMatchSnapshot();
 
@@ -37,7 +37,7 @@ test('seperate json files', async () => {
   });
 });
 
-test('normal structure', async () => {
+test('sections that have templates living in folders with a schema.json and potentially locales to go with aswell', async () => {
   const stats = await compiler('fixtures/normalsections/');
   // Check if file has been added to assets so webpack can output it
   expect(

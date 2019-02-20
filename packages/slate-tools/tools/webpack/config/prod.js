@@ -86,7 +86,10 @@ module.exports = merge([
       new HtmlWebpackIncludeLiquidStylesPlugin(),
 
       new SlateTagPlugin(packageJson.version),
-      new SlateLocalesPlugin(),
+      new SlateLocalesPlugin({
+        from: config.get('paths.theme.src.sections'),
+        to: config.get('paths.theme.dist.sections'),
+      }),
     ],
 
     optimization: {
