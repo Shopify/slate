@@ -13,7 +13,8 @@
     },
     "show_share_buttons": {
       "label": "Activer le partage pour les articles de blog",
-      "info": "Assurez-vous d'avoir activé le partage social dans les paramètres généraux"
+      "info":
+        "Assurez-vous d'avoir activé le partage social dans les paramètres généraux"
     }
   }
 }

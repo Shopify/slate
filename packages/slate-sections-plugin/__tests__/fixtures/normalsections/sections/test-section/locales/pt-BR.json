@@ -13,7 +13,8 @@
     },
     "show_share_buttons": {
       "label": "Ativar compartilhamento para artigos de blog",
-      "info": "Verifique se você habilitou o compartilhamento em redes sociais nas configurações gerais"
+      "info":
+        "Verifique se você habilitou o compartilhamento em redes sociais nas configurações gerais"
     }
   }
 }

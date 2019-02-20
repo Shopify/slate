@@ -13,7 +13,8 @@
     },
     "show_share_buttons": {
       "label": "Teilen von Blog-Beiträgen aktivieren",
-      "info": "Vergewissern Sie sich, dass Sie in den allgemeinen Einstellungen das Teilen in sozialen Netzwerken aktiviert haben"
+      "info":
+        "Vergewissern Sie sich, dass Sie in den allgemeinen Einstellungen das Teilen in sozialen Netzwerken aktiviert haben"
     }
   }
 }

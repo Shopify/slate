@@ -13,7 +13,8 @@
     },
     "show_share_buttons": {
       "label": "Habilitar el uso compartido de artículos de blog",
-      "info": "Asegúrate de haber habilitado la opción para compartir en redes sociales en la configuración general."
+      "info":
+        "Asegúrate de haber habilitado la opción para compartir en redes sociales en la configuración general."
     }
   }
 }

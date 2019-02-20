@@ -1,5 +1,5 @@
 {
-  "name": "slate-locales-plugin",
+  "name": "slate-sections-plugin",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -7,6 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@shopify/slate-config": "^1.0.0-beta.14",
     "fs-extra": "^7.0.1",
     "glob": "^7.1.3",
     "lodash": "^4.17.11",

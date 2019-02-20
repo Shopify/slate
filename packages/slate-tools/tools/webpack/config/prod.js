@@ -7,6 +7,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const SlateConfig = require('@shopify/slate-config');
 const SlateTagPlugin = require('@shopify/slate-tag-webpack-plugin');
 const SlateLocalesPlugin = require('slate-locales-plugin');
+
 const babel = require('./parts/babel');
 const sass = require('./parts/sass');
 const entry = require('./parts/entry');
@@ -85,7 +86,7 @@ module.exports = merge([
       new HtmlWebpackIncludeLiquidStylesPlugin(),
 
       new SlateTagPlugin(packageJson.version),
-      new SlateLocalesPlugin({}),
+      new SlateLocalesPlugin(),
     ],
 
     optimization: {

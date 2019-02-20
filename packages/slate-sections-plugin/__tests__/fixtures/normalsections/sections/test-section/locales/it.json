@@ -13,7 +13,8 @@
     },
     "show_share_buttons": {
       "label": "Abilita condivisione per gli articoli del blog",
-      "info": "Assicurati di aver abilitato la condivisione sui social nelle impostazioni generali"
+      "info":
+        "Assicurati di aver abilitato la condivisione sui social nelle impostazioni generali"
     }
   }
 }

@@ -2,7 +2,8 @@
   "name": "@shopify/slate-tools",
   "version": "1.0.0-beta.15",
   "description": "A modern development toolkit for Shopify themes",
-  "repository": "https://github.com/Shopify/slate/tree/1.x/packages/slate-tools",
+  "repository":
+    "https://github.com/Shopify/slate/tree/1.x/packages/slate-tools",
   "license": "MIT",
   "author": "Shopify",
   "bugs": {
@@ -68,7 +69,7 @@
     "raw-loader": "^0.5.1",
     "react-dev-utils": "0.5.2",
     "sass-loader": "6.0.7",
-    "slate-locales-plugin": "file:../slate-locales-plugin",
+    "slate-sections-plugin": "1.0.0",
     "style-loader": "0.20.3",
     "stylelint": "^9.1.2",
     "stylelint-webpack-plugin": "^0.10.1",
