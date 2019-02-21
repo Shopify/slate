@@ -80,6 +80,13 @@ module.exports = class sectionsPlugin {
     return `${relativeOutputPath}/${fileName}`;
   }
 
+  /**
+   * Adds the file to the webpack compilation assets so it can be emitted to the dist folder
+   *
+   * @param {*} sourcePath Path to liquid file
+   * @param {*} compilation Webpack Compilation object
+   * @param {*} [schemaSource=null] If there is a schema object to be appended it would be passed here as a RawSource
+   */
   async _addLiquidFileToAssets(sourcePath, compilation, schemaSource = null) {
     const liquidContent = await fs.readFile(sourcePath, 'utf-8');
     const liquidSource = new RawSource(liquidContent);
