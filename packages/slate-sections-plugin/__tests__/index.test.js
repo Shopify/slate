@@ -5,7 +5,9 @@ jest.unmock('fs-extra');
 
 test('sections with no seperate schemas, with liquid files that just need to be copied over', async () => {
   const stats = await compiler('fixtures/startersections/');
-  expect(stats.compilation.assets).toMatchSnapshot();
+  expect(
+    stats.compilation.assets['../sections/test-section.liquid'].__value,
+  ).toMatchSnapshot();
 
   const outputFiles = stats.compilation.compiler.outputFileSystem.readdirSync(
     path.resolve(__dirname, 'dist', 'sections'),
@@ -22,7 +24,14 @@ test('sections with no seperate schemas, with liquid files that just need to be 
 
 test('section that has template living in folders with schema.json and no locales', async () => {
   const stats = await compiler('fixtures/seperatejsonsections/');
-  expect(stats.compilation.assets).toMatchSnapshot();
+  expect(
+    stats.compilation.assets['../sections/test-section.liquid'].children[0]
+      .__value,
+  ).toMatchSnapshot();
+  expect(
+    stats.compilation.assets['../sections/test-section.liquid'].children[1]
+      .__value,
+  ).toMatchSnapshot();
 
   const outputFiles = stats.compilation.compiler.outputFileSystem.readdirSync(
     path.resolve(__dirname, 'dist', 'sections'),

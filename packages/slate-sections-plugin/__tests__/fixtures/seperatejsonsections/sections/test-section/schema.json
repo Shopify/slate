@@ -1,11 +1,3 @@
 {
-  "name": "Blog posts",
-  "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Heading",
-      "default": "Blog posts"
-    }
-  ]
+  "name": "Test"
 }
