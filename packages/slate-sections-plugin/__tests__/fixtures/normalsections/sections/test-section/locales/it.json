@@ -4,17 +4,6 @@
     "image_parallax": {
       "label": "Mostra animazione parallasse immagine",
       "info": "Appare solo su desktop"
-    },
-    "show_date": {
-      "label": "Mostra data"
-    },
-    "show_author": {
-      "label": "Mostra autore"
-    },
-    "show_share_buttons": {
-      "label": "Abilita condivisione per gli articoli del blog",
-      "info":
-        "Assicurati di aver abilitato la condivisione sui social nelle impostazioni generali"
     }
   }
 }

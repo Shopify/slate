@@ -4,17 +4,6 @@
     "image_parallax": {
       "label": "Exibir animação de paralaxe da imagem",
       "info": "Aparece apenas na área de trabalho"
-    },
-    "show_date": {
-      "label": "Exibir data"
-    },
-    "show_author": {
-      "label": "Exibir autor(a)"
-    },
-    "show_share_buttons": {
-      "label": "Ativar compartilhamento para artigos de blog",
-      "info":
-        "Verifique se você habilitou o compartilhamento em redes sociais nas configurações gerais"
     }
   }
 }
