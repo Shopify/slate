@@ -35,6 +35,14 @@ module.exports = class sectionsPlugin {
     });
   }
 
+  /**
+   * If the liquid file (template.liquid) exists in a subdirectory of the sections folder, the output
+   * liquid file takes on the directoryName.liquid, otherwise the output file has the same name of the
+   * liquid file in the sections directory
+   *
+   * @param {string} relativePathFromSections The relative path from the source sections directory
+   * @returns The output file name of the liquid file.
+   */
   _getOutputFileName(relativePathFromSections) {
     if (relativePathFromSections.includes(GENERIC_TEMPLATE_NAME)) {
       return relativePathFromSections.replace(
@@ -46,6 +54,15 @@ module.exports = class sectionsPlugin {
     }
   }
 
+  /**
+   * In order to output to the correct location in the dist folder based on their slate.config we must
+   * get a relative path from the webpack output path that is set
+   *
+   * @param {string} liquidSourcePath // Absolute path to the source liquid file
+   * @param {Compilation} compilation // Webpack Compilation object
+   * @returns The key thats needed to provide the Compilation object the correct location to output
+   * Sources
+   */
   _getOutputKey(liquidSourcePath, compilation) {
     const relativePathFromSections = liquidSourcePath.replace(
       `${this.options.from}/`,
@@ -54,7 +71,7 @@ module.exports = class sectionsPlugin {
 
     const fileName = this._getOutputFileName(relativePathFromSections);
 
-    // The relative path form the output set in webpack, to the specified output for sections in slate config
+    // The relative path from the output set in webpack, to the specified output for sections in slate config
     const relativeOutputPath = path.relative(
       compilation.compiler.outputPath,
       this.options.to,
@@ -78,6 +95,13 @@ module.exports = class sectionsPlugin {
     }
   }
 
+  /**
+   * Determines if external schema exists, and whether a locales folder exists that that needs to be
+   * added to the schema prior to adding the liquid file to assets
+   *
+   * @param {*} directoryPath Absolute directory path to the section source folder
+   * @param {*} compilation Webpack Compilation Object
+   */
   async _handleSectionDirectory(directoryPath, compilation) {
     const files = await fs.readdir(directoryPath);
 
@@ -102,7 +126,14 @@ module.exports = class sectionsPlugin {
     }
   }
 
-  _getLocalizedValues(key, mainSchema, localizedSchema) {
+  /**
+   * Gets all the translations for a translation key
+   *
+   * @param {*} key The key of the value to receive within the locales json object
+   * @param {*} localizedSchema Object containing all the translations in locales
+   * @returns Object with index for every language in the locales folder
+   */
+  _getLocalizedValues(key, localizedSchema) {
     const combinedTranslationsObject = {};
     Object.keys(localizedSchema).forEach((language) => {
       combinedTranslationsObject[language] = _.get(
@@ -113,6 +144,13 @@ module.exports = class sectionsPlugin {
     return combinedTranslationsObject;
   }
 
+  /**
+   * Goes through the main schema to get the translation keys and to fill the schema with translations
+   *
+   * @param {*} localizedSchema The schema with the combined locales
+   * @param {*} mainSchemaPath The path to the main schema (schema.json)
+   * @returns
+   */
   async _createSchemaContentWithLocales(localizedSchema, mainSchemaPath) {
     const traverse = (obj) => {
       for (const i in obj) {
@@ -128,6 +166,12 @@ module.exports = class sectionsPlugin {
     return traverse(mainSchema);
   }
 
+  /**
+   * Creates a single JSON object from all the languages in locales
+   *
+   * @param {*} localesPath Absolute path to the locales folder /sections/section-name/locales/
+   * @returns
+   */
   async _combineLocales(localesPath) {
     const localesFiles = await fs.readdir(localesPath);
     const jsonFiles = localesFiles.filter((fileName) =>
