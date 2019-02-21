@@ -19,7 +19,6 @@ module.exports = class sectionsPlugin {
 
   async addLocales(compilation) {
     const files = await fs.readdir(this.options.from);
-    // eslint-disable-next-line prefer-arrow-callback
     files.forEach(async (file) => {
       const fileStat = await fs.stat(path.resolve(this.options.from, file));
       if (fileStat.isDirectory()) {
@@ -104,13 +103,13 @@ module.exports = class sectionsPlugin {
   }
 
   _getLocalizedValues(key, mainSchema, localizedSchema) {
-    // eslint-disable-next-line
-    let combinedTranslationsObject = {};
-    // eslint-disable-next-line
-    for (const i in localizedSchema) {
-      combinedTranslationsObject[i] = _.get(localizedSchema[i], key);
-    }
-
+    const combinedTranslationsObject = {};
+    Object.keys(localizedSchema).forEach((language) => {
+      combinedTranslationsObject[language] = _.get(
+        localizedSchema[language],
+        key,
+      );
+    });
     return combinedTranslationsObject;
   }
 
@@ -125,8 +124,7 @@ module.exports = class sectionsPlugin {
       }
       return JSON.stringify(obj);
     };
-    // eslint-disable-next-line
-    let mainSchema = JSON.parse(await fs.readFile(mainSchemaPath, 'utf-8'));
+    const mainSchema = JSON.parse(await fs.readFile(mainSchemaPath, 'utf-8'));
     return traverse(mainSchema);
   }
 
@@ -136,8 +134,7 @@ module.exports = class sectionsPlugin {
       fileName.endsWith('.json'),
     );
 
-    // eslint-disable-next-line prefer-const
-    let accumulator = {};
+    const accumulator = {};
     await Promise.all(
       jsonFiles.map(async (file) => {
         const localeCode = path
