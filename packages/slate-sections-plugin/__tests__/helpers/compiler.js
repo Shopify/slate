@@ -17,6 +17,7 @@ const testCompiler = function(fixture, options = {}) {
       new SlateLocalesPlugin({
         from: path.resolve(__dirname, '../', fixture, 'sections'),
         to: path.resolve(__dirname, '../dist/sections'),
+        genericTemplateName: 'template.liquid',
       }),
     ],
   });

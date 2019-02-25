@@ -3,9 +3,6 @@ const path = require('path');
 const {ConcatSource, RawSource} = require('webpack-sources');
 const _ = require('lodash');
 
-// If section liquid file is the GENERIC_TEMPLATE_NAME the output liquid will take the form of directoryName.liquid
-const GENERIC_TEMPLATE_NAME = 'template.liquid';
-
 module.exports = class sectionsPlugin {
   constructor(options) {
     this.options = options;
@@ -44,11 +41,9 @@ module.exports = class sectionsPlugin {
    * @returns The output file name of the liquid file.
    */
   _getOutputFileName(relativePathFromSections) {
-    if (relativePathFromSections.includes(GENERIC_TEMPLATE_NAME)) {
-      return relativePathFromSections.replace(
-        `/${GENERIC_TEMPLATE_NAME}`,
-        '.liquid',
-      );
+    if (relativePathFromSections.includes(this.options.genericTemplateName)) {
+      const sectionName = relativePathFromSections.split(path.sep)[0];
+      return `${sectionName}.liquid`;
     } else {
       return relativePathFromSections;
     }
@@ -64,9 +59,9 @@ module.exports = class sectionsPlugin {
    * Sources
    */
   _getOutputKey(liquidSourcePath, compilation) {
-    const relativePathFromSections = liquidSourcePath.replace(
-      `${this.options.from}/`,
-      '',
+    const relativePathFromSections = path.relative(
+      this.options.from,
+      liquidSourcePath,
     );
 
     const fileName = this._getOutputFileName(relativePathFromSections);
@@ -77,7 +72,7 @@ module.exports = class sectionsPlugin {
       this.options.to,
     );
 
-    return `${relativeOutputPath}/${fileName}`;
+    return path.join(relativeOutputPath, fileName);
   }
 
   /**
@@ -112,7 +107,10 @@ module.exports = class sectionsPlugin {
   async _handleSectionDirectory(directoryPath, compilation) {
     const files = await fs.readdir(directoryPath);
 
-    const liquidSourcePath = path.resolve(directoryPath, GENERIC_TEMPLATE_NAME);
+    const liquidSourcePath = path.resolve(
+      directoryPath,
+      this.options.genericTemplateName,
+    );
     if (files.includes('schema.json')) {
       const combinedLocales = files.includes('locales')
         ? await this._combineLocales(path.resolve(directoryPath, 'locales'))
