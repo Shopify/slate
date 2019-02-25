@@ -6,7 +6,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const SlateConfig = require('@shopify/slate-config');
 const SlateTagPlugin = require('@shopify/slate-tag-webpack-plugin');
-const SlateLocalesPlugin = require('slate-locales-plugin');
 
 const babel = require('./parts/babel');
 const sass = require('./parts/sass');
@@ -86,11 +85,6 @@ module.exports = merge([
       new HtmlWebpackIncludeLiquidStylesPlugin(),
 
       new SlateTagPlugin(packageJson.version),
-      new SlateLocalesPlugin({
-        from: config.get('paths.theme.src.sections'),
-        to: config.get('paths.theme.dist.sections'),
-        genericTemplateName: 'template.liquid',
-      }),
     ],
 
     optimization: {
