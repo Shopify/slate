@@ -167,7 +167,7 @@ module.exports = class sectionsPlugin {
       }
       return JSON.stringify(obj);
     };
-    const mainSchema = JSON.parse(await fs.readFile(mainSchemaPath, 'utf-8'));
+    const mainSchema = await fs.readJSON(mainSchemaPath, 'utf-8');
     return traverse(mainSchema);
   }
 
