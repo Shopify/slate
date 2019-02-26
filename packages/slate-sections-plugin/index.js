@@ -8,28 +8,42 @@ module.exports = class sectionsPlugin {
     this.options = options;
   }
   apply(compiler) {
-    compiler.hooks.compilation.tap(
+    compiler.hooks.emit.tapAsync(
       'Slate Sections Plugin',
       this.addLocales.bind(this),
     );
   }
 
-  async addLocales(compilation) {
+  async addLocales(compilation, callback) {
     const files = await fs.readdir(this.options.from);
-    files.forEach(async (file) => {
-      const fileStat = await fs.stat(path.resolve(this.options.from, file));
-      if (fileStat.isDirectory()) {
-        this._handleSectionDirectory(
-          path.resolve(this.options.from, file),
-          compilation,
-        );
-      } else if (fileStat.isFile() && path.extname(file) === '.liquid') {
-        this._addLiquidFileToAssets(
-          path.resolve(this.options.from, file),
-          compilation,
-        );
-      }
-    });
+    await Promise.all(
+      files.map(async (file) => {
+        const fileStat = await fs.stat(path.resolve(this.options.from, file));
+        if (fileStat.isDirectory()) {
+          const pathToLiquidFile = path.resolve(
+            this.options.from,
+            file,
+            this.options.genericTemplateName,
+          );
+          const outputKey = this._getOutputKey(pathToLiquidFile, compilation);
+          compilation.assets[
+            outputKey
+          ] = await this._getWebpackSourceForDirectory(
+            path.resolve(this.options.from, file),
+            compilation,
+          );
+        } else if (fileStat.isFile() && path.extname(file) === '.liquid') {
+          const outputKey = this._getOutputKey(
+            path.resolve(this.options.from, file),
+            compilation,
+          );
+          compilation.assets[outputKey] = await this._getLiquidSource(
+            path.resolve(this.options.from, file),
+          );
+        }
+      }),
+    );
+    callback();
   }
 
   /**
@@ -76,25 +90,14 @@ module.exports = class sectionsPlugin {
   }
 
   /**
-   * Adds the file to the webpack compilation assets so it can be emitted to the dist folder
+   * Reads file and creates a source object
    *
-   * @param {*} sourcePath Path to liquid file
-   * @param {*} compilation Webpack Compilation object
-   * @param {*} [schemaSource=null] If there is a schema object to be appended it would be passed here as a RawSource
+   * @param {*} sourcePath Absolute path to liquid file
+   * @returns RawSource object with the contents of the file
    */
-  async _addLiquidFileToAssets(sourcePath, compilation, schemaSource = null) {
+  async _getLiquidSource(sourcePath) {
     const liquidContent = await fs.readFile(sourcePath, 'utf-8');
-    const liquidSource = new RawSource(liquidContent);
-    const outputKey = this._getOutputKey(sourcePath, compilation);
-
-    if (schemaSource) {
-      compilation.assets[outputKey] = new ConcatSource(
-        liquidSource,
-        schemaSource,
-      );
-    } else {
-      compilation.assets[outputKey] = liquidSource;
-    }
+    return new RawSource(liquidContent);
   }
 
   /**
@@ -102,15 +105,18 @@ module.exports = class sectionsPlugin {
    * added to the schema prior to adding the liquid file to assets
    *
    * @param {*} directoryPath Absolute directory path to the section source folder
-   * @param {*} compilation Webpack Compilation Object
+   * @returns Source object to be added to the compilation's assets
    */
-  async _handleSectionDirectory(directoryPath, compilation) {
+  async _getWebpackSourceForDirectory(directoryPath) {
     const files = await fs.readdir(directoryPath);
 
     const liquidSourcePath = path.resolve(
       directoryPath,
       this.options.genericTemplateName,
     );
+
+    const liquidSource = await this._getLiquidSource(liquidSourcePath);
+
     if (files.includes('schema.json')) {
       const combinedLocales = files.includes('locales')
         ? await this._combineLocales(path.resolve(directoryPath, 'locales'))
@@ -122,12 +128,14 @@ module.exports = class sectionsPlugin {
             path.resolve(directoryPath, 'schema.json'),
           )
         : await fs.readFile(path.resolve(directoryPath, 'schema.json'));
+
       const schemaSource = new RawSource(
         `{% schema %}\n${schemaContent}{% endschema %}`,
       );
-      this._addLiquidFileToAssets(liquidSourcePath, compilation, schemaSource);
+
+      return new ConcatSource(liquidSource, schemaSource);
     } else {
-      this._addLiquidFileToAssets(liquidSourcePath, compilation);
+      return liquidSource;
     }
   }
 
@@ -138,14 +146,18 @@ module.exports = class sectionsPlugin {
    * @param {*} localizedSchema Object containing all the translations in locales
    * @returns Object with index for every language in the locales folder
    */
-  _getLocalizedValues(key, localizedSchema) {
+  async _getLocalizedValues(key, localizedSchema) {
     const combinedTranslationsObject = {};
-    Object.keys(localizedSchema).forEach((language) => {
-      combinedTranslationsObject[language] = _.get(
-        localizedSchema[language],
-        key,
-      );
-    });
+
+    await Promise.all(
+      Object.keys(localizedSchema).map((language) => {
+        combinedTranslationsObject[language] = _.get(
+          localizedSchema[language],
+          key,
+        );
+      }),
+    );
+
     return combinedTranslationsObject;
   }
 
@@ -157,14 +169,21 @@ module.exports = class sectionsPlugin {
    * @returns
    */
   async _createSchemaContentWithLocales(localizedSchema, mainSchemaPath) {
-    const traverse = (obj) => {
-      for (const i in obj) {
-        if (typeof obj[i].t === 'string') {
-          obj[i] = this._getLocalizedValues(obj[i].t, obj, localizedSchema);
-        } else if (typeof obj[i] === 'object') {
-          traverse(obj[i]);
-        }
-      }
+    // eslint-disable-next-line func-style
+    const traverse = async (obj) => {
+      const objectKeys = Object.keys(obj);
+      await Promise.all(
+        objectKeys.map(async (key) => {
+          if (typeof obj[key].t === 'string') {
+            obj[key] = await this._getLocalizedValues(
+              obj[key].t,
+              localizedSchema,
+            );
+          } else if (typeof obj[key] === 'object') {
+            await traverse(obj[key]);
+          }
+        }),
+      );
       return JSON.stringify(obj);
     };
     const mainSchema = await fs.readJSON(mainSchemaPath, 'utf-8');
@@ -183,20 +202,19 @@ module.exports = class sectionsPlugin {
       fileName.endsWith('.json'),
     );
 
-    const accumulator = {};
-    await Promise.all(
-      jsonFiles.map(async (file) => {
-        const localeCode = path
-          .basename(file)
-          .split('.')
-          .shift();
-        const fileContents = JSON.parse(
-          await fs.readFile(path.resolve(localesPath, file), 'utf-8'),
-        );
-        accumulator[localeCode] = fileContents;
-      }),
-    );
+    const combinedLocales = await jsonFiles.reduce(async (promise, file) => {
+      const accumulator = await promise;
+      const localeCode = path
+        .basename(file)
+        .split('.')
+        .shift();
+      const fileContents = JSON.parse(
+        await fs.readFile(path.resolve(localesPath, file), 'utf-8'),
+      );
+      accumulator[localeCode] = fileContents;
+      return accumulator;
+    }, Promise.resolve({}));
 
-    return accumulator;
+    return combinedLocales;
   }
 };
