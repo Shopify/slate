@@ -5,7 +5,7 @@ const memoryfs = require('memory-fs');
 const SlateSectionsPlugin = require('../../');
 
 // eslint-disable-next-line
-const testCompiler = function(fixture, options = {}) {
+const testCompiler = function(fixture) {
   const compiler = webpack({
     context: path.resolve(__dirname, '../', fixture),
     entry: `./index.js`,
