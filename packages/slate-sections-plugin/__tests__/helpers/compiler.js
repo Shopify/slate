@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const memoryfs = require('memory-fs');
 
-const SlateLocalesPlugin = require('../../');
+const SlateSectionsPlugin = require('../../');
 
 // eslint-disable-next-line
 const testCompiler = function(fixture, options = {}) {
@@ -14,10 +14,9 @@ const testCompiler = function(fixture, options = {}) {
       path: path.resolve(__dirname, '../dist/assets'),
     },
     plugins: [
-      new SlateLocalesPlugin({
+      new SlateSectionsPlugin({
         from: path.resolve(__dirname, '../', fixture, 'sections'),
         to: path.resolve(__dirname, '../dist/sections'),
-        genericTemplateName: 'template.liquid',
       }),
     ],
   });

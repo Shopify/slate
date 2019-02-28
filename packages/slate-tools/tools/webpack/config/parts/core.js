@@ -104,7 +104,6 @@ module.exports = {
     new SlateLocalesPlugin({
       from: config.get('paths.theme.src.sections'),
       to: config.get('paths.theme.dist.sections'),
-      genericTemplateName: 'template.liquid',
     }),
   ],
 };

@@ -3,20 +3,30 @@ const path = require('path');
 const {ConcatSource, RawSource} = require('webpack-sources');
 const _ = require('lodash');
 
+const DEFAULT_GENERIC_TEMPLATE_NAME = 'template.liquid';
+
 module.exports = class sectionsPlugin {
   constructor(options) {
+    this._validateOptions(options);
     this.options = options;
+    this.options.genericTemplateName = this.options.hasOwnProperty(
+      'genericTemplateName',
+    )
+      ? this.options.genericTemplateName
+      : DEFAULT_GENERIC_TEMPLATE_NAME;
   }
+
   apply(compiler) {
-    compiler.hooks.emit.tapAsync(
+    compiler.hooks.emit.tapPromise(
       'Slate Sections Plugin',
       this.addLocales.bind(this),
     );
   }
 
-  async addLocales(compilation, callback) {
+  async addLocales(compilation) {
     const files = await fs.readdir(this.options.from);
-    await Promise.all(
+    const compilationOutput = compilation.compiler.outputPath;
+    return Promise.all(
       files.map(async (file) => {
         const fileStat = await fs.stat(path.resolve(this.options.from, file));
         if (fileStat.isDirectory()) {
@@ -25,7 +35,10 @@ module.exports = class sectionsPlugin {
             file,
             this.options.genericTemplateName,
           );
-          const outputKey = this._getOutputKey(pathToLiquidFile, compilation);
+          const outputKey = this._getOutputKey(
+            pathToLiquidFile,
+            compilationOutput,
+          );
           compilation.assets[
             outputKey
           ] = await this._getWebpackSourceForDirectory(
@@ -35,7 +48,7 @@ module.exports = class sectionsPlugin {
         } else if (fileStat.isFile() && path.extname(file) === '.liquid') {
           const outputKey = this._getOutputKey(
             path.resolve(this.options.from, file),
-            compilation,
+            compilationOutput,
           );
           compilation.assets[outputKey] = await this._getLiquidSource(
             path.resolve(this.options.from, file),
@@ -43,7 +56,15 @@ module.exports = class sectionsPlugin {
         }
       }),
     );
-    callback();
+  }
+
+  _validateOptions(options) {
+    if (!options.hasOwnProperty('from') || typeof options.from !== 'string') {
+      throw TypeError('Missing or Invalid From Option');
+    }
+    if (!options.hasOwnProperty('to') || typeof options.to !== 'string') {
+      throw TypeError('Missing or Invalid To Option');
+    }
   }
 
   /**
@@ -68,11 +89,11 @@ module.exports = class sectionsPlugin {
    * get a relative path from the webpack output path that is set
    *
    * @param {string} liquidSourcePath // Absolute path to the source liquid file
-   * @param {Compilation} compilation // Webpack Compilation object
+   * @param {Compilation} compilationOutput // Output path set for webpack
    * @returns The key thats needed to provide the Compilation object the correct location to output
    * Sources
    */
-  _getOutputKey(liquidSourcePath, compilation) {
+  _getOutputKey(liquidSourcePath, compilationOutput) {
     const relativePathFromSections = path.relative(
       this.options.from,
       liquidSourcePath,
@@ -82,7 +103,7 @@ module.exports = class sectionsPlugin {
 
     // The relative path from the output set in webpack, to the specified output for sections in slate config
     const relativeOutputPath = path.relative(
-      compilation.compiler.outputPath,
+      compilationOutput,
       this.options.to,
     );
 
@@ -202,7 +223,7 @@ module.exports = class sectionsPlugin {
       fileName.endsWith('.json'),
     );
 
-    const combinedLocales = await jsonFiles.reduce(async (promise, file) => {
+    return jsonFiles.reduce(async (promise, file) => {
       const accumulator = await promise;
       const localeCode = path
         .basename(file)
@@ -214,7 +235,5 @@ module.exports = class sectionsPlugin {
       accumulator[localeCode] = fileContents;
       return accumulator;
     }, Promise.resolve({}));
-
-    return combinedLocales;
   }
 };

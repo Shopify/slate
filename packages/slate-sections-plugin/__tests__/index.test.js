@@ -1,5 +1,6 @@
 const path = require('path');
 const compiler = require('./helpers/compiler');
+const SlateSectionsPlugin = require('./../');
 
 jest.unmock('fs-extra');
 
@@ -65,4 +66,46 @@ test('sections that have templates living in folders with a schema.json and loca
         .replace('{% endschema %}', ''),
     ),
   ).toMatchSnapshot();
+});
+
+test('throws type error if from missing from options', () => {
+  const options = {
+    to: path.resolve(__dirname, '../dist/sections'),
+  };
+  const errorToBeThrown = new TypeError('Missing or Invalid From Option');
+  expect(() => {
+    new SlateSectionsPlugin(options);
+  }).toThrowError(errorToBeThrown);
+});
+
+test('throws type error if from option is not string', () => {
+  const options = {
+    from: 10,
+    to: path.resolve(__dirname, '../dist/sections'),
+  };
+  const errorToBeThrown = new TypeError('Missing or Invalid From Option');
+  expect(() => {
+    new SlateSectionsPlugin(options);
+  }).toThrowError(errorToBeThrown);
+});
+
+test('throws type error if to missing from options', () => {
+  const options = {
+    from: path.resolve(__dirname, '../src/sections'),
+  };
+  const errorToBeThrown = new TypeError('Missing or Invalid To Option');
+  expect(() => {
+    new SlateSectionsPlugin(options);
+  }).toThrowError(errorToBeThrown);
+});
+
+test('throws type error if to option is not string', () => {
+  const options = {
+    from: path.resolve(__dirname, '../src/sections'),
+    to: 10,
+  };
+  const errorToBeThrown = new TypeError('Missing or Invalid To Option');
+  expect(() => {
+    new SlateSectionsPlugin(options);
+  }).toThrowError(errorToBeThrown);
 });
