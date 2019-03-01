@@ -68,7 +68,7 @@ test('sections that have templates living in folders with a schema.json and loca
   ).toMatchSnapshot();
 });
 
-test('throws type error if from missing from options', () => {
+test('throws type error if `from` key is missing from options', () => {
   const options = {
     to: path.resolve(__dirname, '../dist/sections'),
   };
@@ -78,7 +78,7 @@ test('throws type error if from missing from options', () => {
   }).toThrowError(errorToBeThrown);
 });
 
-test('throws type error if from option is not string', () => {
+test('throws type error if `from` key option is not string', () => {
   const options = {
     from: 10,
     to: path.resolve(__dirname, '../dist/sections'),
@@ -89,7 +89,7 @@ test('throws type error if from option is not string', () => {
   }).toThrowError(errorToBeThrown);
 });
 
-test('throws type error if to missing from options', () => {
+test('throws type error if `to` key missing from options', () => {
   const options = {
     from: path.resolve(__dirname, '../src/sections'),
   };
@@ -99,7 +99,7 @@ test('throws type error if to missing from options', () => {
   }).toThrowError(errorToBeThrown);
 });
 
-test('throws type error if to option is not string', () => {
+test('throws type error if `to` key option is not string', () => {
   const options = {
     from: path.resolve(__dirname, '../src/sections'),
     to: 10,

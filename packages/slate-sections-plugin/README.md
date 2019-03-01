@@ -1,10 +1,12 @@
 # @shopify/slate-sections-plugin
 
-This plugin handles exporting the source sections folder to the dist path. There are 3 supported sections folder structures. You may structure your sections folder such that it exists of simply liquid templates which will get copied into the build. You may separate your schema from your liquid by creating a folder for your section, and to build on this you may further separate your translations into a locales folder. The structures are explained in more depth further below.
+This plugin handles exporting the source sections folder to the dist path. There are 2 supported sections folder structures.
 
 The dist and source path for the plugin is determined by the slate config and can be overwritten by modifying the config values `paths.theme.src.sections` and `paths.theme.dist.sections`
 
 ## Basic Sections Structure
+
+You may structure your sections folder such that it exists of simply liquid templates which will get copied into the build.
 
 ```bash
 ./sections
@@ -24,6 +26,8 @@ The dist and source path for the plugin is determined by the slate config and ca
 This structure simply tells the plugin to copy the liquid files into the dist sections folder
 
 ## Separate Schema Files
+
+You may separate your schema from your liquid by creating a folder for your section
 
 In order to have separate schema files, you must create a folder for the section and within that folder you need a `template.liquid` which will take the name of the directory it is in, and you may optionally have a `schema.json` file with contents that will be appended to the liquid in `{% schema %}` tags.
 

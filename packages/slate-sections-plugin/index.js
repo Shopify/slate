@@ -7,13 +7,9 @@ const DEFAULT_GENERIC_TEMPLATE_NAME = 'template.liquid';
 
 module.exports = class sectionsPlugin {
   constructor(options) {
-    this._validateOptions(options);
-    this.options = options;
-    this.options.genericTemplateName = this.options.hasOwnProperty(
-      'genericTemplateName',
-    )
-      ? this.options.genericTemplateName
-      : DEFAULT_GENERIC_TEMPLATE_NAME;
+    this.options = this._validateOptions(options);
+    this.options.genericTemplateName =
+      this.options.genericTemplateName || DEFAULT_GENERIC_TEMPLATE_NAME;
   }
 
   apply(compiler) {
@@ -43,7 +39,6 @@ module.exports = class sectionsPlugin {
             outputKey
           ] = await this._getWebpackSourceForDirectory(
             path.resolve(this.options.from, file),
-            compilation,
           );
         } else if (fileStat.isFile() && path.extname(file) === '.liquid') {
           const outputKey = this._getOutputKey(
@@ -59,12 +54,17 @@ module.exports = class sectionsPlugin {
   }
 
   _validateOptions(options) {
+    if (!options) {
+      throw TypeError('Missing Options');
+    }
     if (!options.hasOwnProperty('from') || typeof options.from !== 'string') {
       throw TypeError('Missing or Invalid From Option');
     }
     if (!options.hasOwnProperty('to') || typeof options.to !== 'string') {
       throw TypeError('Missing or Invalid To Option');
     }
+
+    return options;
   }
 
   /**
