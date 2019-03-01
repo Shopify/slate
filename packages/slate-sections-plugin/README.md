@@ -1,6 +1,6 @@
 # @shopify/slate-sections-plugin
 
-Handles exporting the source sections folder to the dist path. There are 3 supported sections folder structures. You may structure your sections folder such that it exists of simply liquid templates which will get copied into the build. You may separate your schema from your liquid by creating a folder for your section, and to build on this you may further separate your translations into a locales folder. The structures are explained in more depth further below.
+This plugin handles exporting the source sections folder to the dist path. There are 3 supported sections folder structures. You may structure your sections folder such that it exists of simply liquid templates which will get copied into the build. You may separate your schema from your liquid by creating a folder for your section, and to build on this you may further separate your translations into a locales folder. The structures are explained in more depth further below.
 
 The dist and source path for the plugin is determined by the slate config and can be overwritten by modifying the config values `paths.theme.src.sections` and `paths.theme.dist.sections`
 
@@ -105,7 +105,7 @@ For every key with multiple translations you specify an object with a `t` key an
 }
 ```
 
-This allows you to have multiple languages to support, without having a single schema.json that gets ridiculously large. The plugin will take care of combining all the translations into an object such as the one displayed initially. To specify the locale code of your json file, you must name it as such [`localecode`].json
+This allows you to have multiple languages to support, without having a single schema.json that gets ridiculously large. The plugin will take care of combining all the translations into an object such as the one displayed initially. To specify the locale code of your json file, you must name it [`localecode`].json
 
 Below is an example of what your section's folder may look like.
 
