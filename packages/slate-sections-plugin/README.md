@@ -1,6 +1,6 @@
 # @shopify/slate-sections-plugin
 
-The plugin handles the taking your sections folder, and outputting files that will work in production. There are 2 supported sections folder structures.
+The plugin allows developers to create Shopify theme sections from a variety of files contained in a folder, and combines these files into a single liquid section file for use on Shopify servers. 
 
 ## How to use
 
