@@ -1,5 +1,5 @@
 {
-  "name": "@shopify/slate-sections-plugi",
+  "name": "@shopify/slate-sections-plugin",
   "version": "1.0.0-beta.15",
   "main": "index.js",
   "license": "MIT",
