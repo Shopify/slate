@@ -1,8 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`section that has template living in folders with schema.json and no locales 1`] = `undefined`;
+exports[`section that has template living in folders with schema.json and no locales 1`] = `
+"
+<section>
+    <h2>{{ section.name }}</h2>
+</section>
 
-exports[`section that has template living in folders with schema.json and no locales 2`] = `undefined`;
+"
+`;
+
+exports[`section that has template living in folders with schema.json and no locales 2`] = `
+"{% schema %}
+{
+  \\"name\\": \\"Test\\"
+}
+{% endschema %}"
+`;
 
 exports[`section that has template living in folders with schema.json and no locales 3`] = `
 "
@@ -62,7 +75,19 @@ Object {
 }
 `;
 
-exports[`sections with no seperate schemas, with liquid files that just need to be copied over 1`] = `undefined`;
+exports[`sections with no seperate schemas, with liquid files that just need to be copied over 1`] = `
+"
+<section>
+    <h2>{{ section.name }}</h2>
+</section>
+
+{% schema %}
+  {
+    \\"name\\": \\"Test\\",
+  }
+{% endschema %}
+"
+`;
 
 exports[`sections with no seperate schemas, with liquid files that just need to be copied over 2`] = `
 "

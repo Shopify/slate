@@ -148,10 +148,14 @@ module.exports = class sectionsPlugin {
             combinedLocales,
             path.resolve(directoryPath, 'schema.json'),
           )
-        : await fs.readFile(path.resolve(directoryPath, 'schema.json'));
+        : JSON.stringify(
+            await fs.readJSON(path.resolve(directoryPath, 'schema.json')),
+            null,
+            2,
+          );
 
       const schemaSource = new RawSource(
-        `{% schema %}\n${schemaContent}{% endschema %}`,
+        `{% schema %}\n${schemaContent}\n{% endschema %}`,
       );
 
       return new ConcatSource(liquidSource, schemaSource);
@@ -206,7 +210,7 @@ module.exports = class sectionsPlugin {
           }
         }),
       );
-      return JSON.stringify(obj);
+      return JSON.stringify(obj, null, 2);
     };
     const mainSchema = await fs.readJSON(mainSchemaPath, 'utf-8');
     return traverse(mainSchema);
