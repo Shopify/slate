@@ -28,7 +28,6 @@ test('sections with no seperate schemas, with liquid files that just need to be 
 
 test('section that has template living in folders with schema.json and no locales', async () => {
   const stats = await compiler('fixtures/seperatejsonsections/');
-  debugger;
   const expectedAssetOutputKey = '../sections/test-section.liquid';
   expect(
     stats.compilation.assets[expectedAssetOutputKey].children[0]._value,
@@ -36,8 +35,6 @@ test('section that has template living in folders with schema.json and no locale
   expect(
     stats.compilation.assets[expectedAssetOutputKey].children[1]._value,
   ).toMatchSnapshot();
-
-  debugger;
 
   const outputFiles = stats.compilation.compiler.outputFileSystem.readdirSync(
     path.resolve(__dirname, 'dist', 'sections'),
