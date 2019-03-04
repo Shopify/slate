@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const memoryfs = require('memory-fs');
+const MemoryFileSystem = require('memory-fs');
 
 const SlateSectionsPlugin = require('../../');
 
@@ -21,7 +21,7 @@ const testCompiler = function(fixture) {
     ],
   });
 
-  compiler.outputFileSystem = new memoryfs();
+  compiler.outputFileSystem = new MemoryFileSystem();
 
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {

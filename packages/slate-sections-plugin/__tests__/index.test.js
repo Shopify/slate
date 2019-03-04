@@ -1,3 +1,4 @@
+/* eslint-disable no-new */
 const path = require('path');
 const compiler = require('./helpers/compiler');
 const SlateSectionsPlugin = require('./../');

@@ -171,6 +171,7 @@ module.exports = class sectionsPlugin {
     const combinedTranslationsObject = {};
 
     await Promise.all(
+      // eslint-disable-next-line array-callback-return
       Object.keys(localizedSchema).map((language) => {
         combinedTranslationsObject[language] = _.get(
           localizedSchema[language],
