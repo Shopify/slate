@@ -1,6 +1,6 @@
 # @shopify/slate-sections-plugin
 
-The plugin allows developers to create Shopify theme sections from a variety of files contained in a folder, and combines these files into a single liquid section file for use on Shopify servers. 
+The plugin allows developers to create Shopify theme sections from a variety of files contained in a folder, and combines these files into a single liquid section file for use on Shopify servers.
 
 ## How to use
 
@@ -24,7 +24,6 @@ const SlateSectionsPlugin = require('@shopify/slate-sections-plugin');
 const slateSectionsOptions = {
   from: '/absolute/path/to/sections/source',
   to: '/absolute/path/to/sections/output',
-  genericTemplateName: 'template.liquid',
 };
 
 module.exports = {
