@@ -1,3 +1,5 @@
+### This repo is currently on low maintenance. See README for details
+
 ### What are you trying to accomplish with this PR?
 
 *Please provide a link to the associated GitHub issue.*
