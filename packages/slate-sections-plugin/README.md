@@ -143,7 +143,7 @@ For every key with multiple translations you specify an object with a `t` key an
 }
 ```
 
-The plugin will take care of combining all the translations into an object such as the one displayed initially. To specify the locale code of your json file, you must name it [`localecode`].json
+The plugin will take care of combining all the translations into an object such as the one displayed initially. To specify the locale code of your JSON file, you must name it [`localecode`].json
 
 Below is an example of what your section's folder may look like:
 
