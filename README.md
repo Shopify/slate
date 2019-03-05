@@ -3,7 +3,7 @@
 ![slate animated banner](https://user-images.githubusercontent.com/4837696/47506317-cbe22400-d83d-11e8-9867-1dc874943833.gif)
 
 ## Slate on Low Maintenance
-Due to project priority and resource constraints, this project is currently on low maintenance. We recognize that there are a lot of activities around this package, however, we unable to accommodate the maintenance this project requires.
+Due to project priority and resource constraints, this project is currently on low maintenance. We recognize that there are a lot of activities around this package. However, we are unable to accommodate the maintenance this project requires.
 
 ### What does this mean?
 Slate will not have new features or bug fixes during this period.
@@ -19,10 +19,10 @@ As a Shopify repository maintainer, there will be no activities around:
 - Will not address any community reported issues except ones that implicate Shopify security
 
 ### Should I continue using Slate?
-You may. As it is, Slate is still useful for themes development.
+You may. As it is, Slate is still useful for Shopify themes development.
 
 ### What happened? Why are you stopping? Will Shopify work on Slate in the future?
-Due to Shopify priorities and resource constraints, we have decided to put more emphasis on another project rather than Slate. We have plans to return back to Slate when our priorities shifts back to Slate. While evaluating the current state of Slate, there are two key developer workflows that we are not satisfied with:
+Due to Shopify priorities and resource constraints, we have decided to put more emphasis on other projects. We have plans to return to Slate once our priorities change. While evaluating the current state of Slate, there are two key developer workflows that we are not satisfied with:
 
 - **Local development** - Slate is not a true local development environment
 - **File integrity (GitFlow and code version control)** - Slate does not offer the ability to be the source of truth for theme files
