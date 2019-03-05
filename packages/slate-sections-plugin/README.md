@@ -110,7 +110,7 @@ If you need settings in your schema that require multiple translations, you can 
 
 However, as the number of theme languages add up over time, and when you have many settings that require translations, this can result in a very large JSON file which becomes difficult to maintain. This plugin allows you to separate the translations into separate locale files allowing for easier maintainability for your theme's translations.
 
-First you specify your main schema (`schema.json`) as such,
+First you specify the schema's structure in `schema.json`:
 
 ```json
 {
