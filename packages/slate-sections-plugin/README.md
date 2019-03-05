@@ -73,7 +73,7 @@ In order to have separate schema files, you must create a folder for the section
 └── template.liquid
 ```
 
-This will create an `article-template.liquid` with the contents of the `template.liquid` file and with json wrapped in `{% schema %}` tags, which will be outputted to the sections dist folder.
+This will create an `article-template.liquid` with the contents of the `template.liquid` file and with JSON wrapped in `{% schema %}` tags, which will be copied over to the `./dist` sections folder.
 
 ## Translations
 
