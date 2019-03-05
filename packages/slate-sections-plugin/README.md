@@ -161,4 +161,4 @@ Below is an example of what your section's folder may look like:
 └── template.liquid
 ```
 
-This will all get combined and outputted into a single `article-template.liquid`
+This will all get combined and outputted into a single `article-template.liquid`.
