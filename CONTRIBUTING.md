@@ -1,5 +1,7 @@
 # Contributing Guide
 
+### This repo is currently on low maintenance. See README for details
+
 Slate is an open-source project built for the Shopify Theme community and it needs contributions from the community to be truly successful. We encourage you to join us in our mission of enhancing the Shopify theme development experience!
 
 ## Scope
