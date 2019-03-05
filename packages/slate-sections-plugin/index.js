@@ -6,7 +6,7 @@ const _ = require('lodash');
 const DEFAULT_GENERIC_TEMPLATE_NAME = 'template.liquid';
 
 module.exports = class sectionsPlugin {
-  constructor(options) {
+  constructor(options = {}) {
     this.options = this._validateOptions(options);
     this.options.genericTemplateName =
       this.options.genericTemplateName || DEFAULT_GENERIC_TEMPLATE_NAME;
