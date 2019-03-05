@@ -129,7 +129,7 @@ First you specify the schema's structure in `schema.json`:
 }
 ```
 
-For every key with multiple translations you specify an object with a `t` key and its value is the key to retrieve the translation from a different json object as the one shown below. You would have a translation object such as the one below for every language you would like to support.
+For every key with multiple translations you specify an object with a `t` key and its value is the key to retrieve the translation from a different JSON object as the one shown below. You would have a translation object such as the one below for every language you would like to support:
 
 ```json
 {
