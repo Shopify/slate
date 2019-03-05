@@ -1,0 +1,9 @@
+{
+  "name": "Posts",
+  "settings": {
+    "image_parallax": {
+      "label": "Parallax-Animation für Bild anzeigen",
+      "info": "Wird nur auf dem Desktop angezeigt"
+    }
+  }
+}

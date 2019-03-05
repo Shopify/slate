@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`section that has template living in folders with schema.json and no locales 1`] = `
+"
+<section>
+    <h2>{{ section.name }}</h2>
+</section>
+
+"
+`;
+
+exports[`section that has template living in folders with schema.json and no locales 2`] = `
+"{% schema %}
+{
+  \\"name\\": \\"Test\\"
+}
+{% endschema %}"
+`;
+
+exports[`section that has template living in folders with schema.json and no locales 3`] = `
+"
+<section>
+    <h2>{{ section.name }}</h2>
+</section>
+
+{% schema %}
+{
+  \\"name\\": \\"Test\\"
+}
+{% endschema %}"
+`;
+
+exports[`sections that have templates living in folders with a schema.json and locales to go with aswell 1`] = `
+"<div class=\\"article\\" data-section-id=\\"{{ section.id }}\\" data-section-type=\\"article-template\\">
+  <h1 class=\\"article__title h2\\">{{ article.title }}</h1>
+</div>
+"
+`;
+
+exports[`sections that have templates living in folders with a schema.json and locales to go with aswell 2`] = `
+Object {
+  "name": Object {
+    "de": "Posts",
+    "en": "Posts",
+    "es": "Publicaciones",
+    "fr": "Articles",
+    "it": "Articoli",
+    "ja": "投稿",
+    "pt-BR": "posts",
+  },
+  "settings": Array [
+    Object {
+      "id": "image_parallax",
+      "info": Object {
+        "de": "Wird nur auf dem Desktop angezeigt",
+        "en": "Only shows on desktop",
+        "es": "Solo se muestra en el escritorio",
+        "fr": "Ne s'affiche que sur le bureau",
+        "it": "Appare solo su desktop",
+        "ja": "デスクトップにのみ表示する",
+        "pt-BR": "Aparece apenas na área de trabalho",
+      },
+      "label": Object {
+        "de": "Parallax-Animation für Bild anzeigen",
+        "en": "Show image parallax animation",
+        "es": "Mostrar animación de paralaje de imagen",
+        "fr": "Afficher l'animation en parallaxe",
+        "it": "Mostra animazione parallasse immagine",
+        "ja": "画像のパララックスアニメーションを表示する",
+        "pt-BR": "Exibir animação de paralaxe da imagem",
+      },
+      "type": "checkbox",
+    },
+  ],
+}
+`;
+
+exports[`sections with no seperate schemas, with liquid files that just need to be copied over 1`] = `
+"
+<section>
+    <h2>{{ section.name }}</h2>
+</section>
+
+{% schema %}
+  {
+    \\"name\\": \\"Test\\",
+  }
+{% endschema %}
+"
+`;
+
+exports[`sections with no seperate schemas, with liquid files that just need to be copied over 2`] = `
+"
+<section>
+    <h2>{{ section.name }}</h2>
+</section>
+
+{% schema %}
+  {
+    \\"name\\": \\"Test\\",
+  }
+{% endschema %}
+"
+`;

@@ -1,0 +1,22 @@
+{
+  "name": "@shopify/slate-sections-plugin",
+  "version": "1.0.0-beta.15",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "fs-extra": "^7.0.1",
+    "lodash": "^4.17.11",
+    "path": "^0.12.7",
+    "webpack-sources": "^1.3.0"
+  },
+  "devDependencies": {
+    "babel-jest": "^24.1.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^24.1.0",
+    "memory-fs": "^0.4.1",
+    "webpack": "^4.29.3"
+  }
+}

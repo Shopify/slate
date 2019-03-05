@@ -3,6 +3,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SlateConfig = require('@shopify/slate-config');
+const SlateSectionsPlugin = require('@shopify/slate-sections-plugin');
 const config = new SlateConfig(require('../../../../slate-tools.schema'));
 
 const extractLiquidStyles = new ExtractTextPlugin(
@@ -92,10 +93,6 @@ module.exports = {
         to: config.get('paths.theme.dist.locales'),
       },
       {
-        from: config.get('paths.theme.src.sections'),
-        to: config.get('paths.theme.dist.sections'),
-      },
-      {
         from: config.get('paths.theme.src.snippets'),
         to: config.get('paths.theme.dist.snippets'),
       },
@@ -104,5 +101,10 @@ module.exports = {
         to: config.get('paths.theme.dist.templates'),
       },
     ]),
+
+    new SlateSectionsPlugin({
+      from: config.get('paths.theme.src.sections'),
+      to: config.get('paths.theme.dist.sections'),
+    }),
   ],
 };
