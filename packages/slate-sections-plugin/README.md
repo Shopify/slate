@@ -41,7 +41,7 @@ module.exports = {
 
 ## Sections as Liquid Files
 
-You may structure your sections folder such that it exists of simply liquid templates which will get copied into the build.
+You may structure your sections folder by creating separate Liquid files for each section:
 
 ```bash
 ./sections
