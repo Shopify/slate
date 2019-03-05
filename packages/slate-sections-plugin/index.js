@@ -122,7 +122,7 @@ module.exports = class sectionsPlugin {
   }
 
   /**
-   * Determines if external schema exists, and whether a locales folder exists that that needs to be
+   * Determines if external schema exists, and whether a locales folder exists that needs to be
    * added to the schema prior to adding the liquid file to assets
    *
    * @param {*} directoryPath Absolute directory path to the section source folder
