@@ -54,9 +54,6 @@ module.exports = class sectionsPlugin {
   }
 
   _validateOptions(options) {
-    if (!options) {
-      throw TypeError('Missing Options');
-    }
     if (!options.hasOwnProperty('from') || typeof options.from !== 'string') {
       throw TypeError('Missing or Invalid From Option');
     }
@@ -79,9 +76,8 @@ module.exports = class sectionsPlugin {
     if (relativePathFromSections.includes(this.options.genericTemplateName)) {
       const sectionName = relativePathFromSections.split(path.sep)[0];
       return `${sectionName}.liquid`;
-    } else {
-      return relativePathFromSections;
     }
+    return relativePathFromSections;
   }
 
   /**
@@ -159,9 +155,9 @@ module.exports = class sectionsPlugin {
       );
 
       return new ConcatSource(liquidSource, schemaSource);
-    } else {
-      return liquidSource;
     }
+
+    return liquidSource;
   }
 
   /**
