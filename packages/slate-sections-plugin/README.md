@@ -2,7 +2,7 @@
 
 The plugin allows developers to create Shopify theme sections from a variety of files contained in a folder, and combines these files into a single Liquid section file for use on Shopify servers.
 
-## How to use
+## Getting Started
 
 First install the plugin
 
