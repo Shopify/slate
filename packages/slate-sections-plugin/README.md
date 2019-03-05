@@ -77,7 +77,7 @@ This will create an `article-template.liquid` with the contents of the `template
 
 ## Translations
 
-If you need settings in your schema that require multiple translations, you could specify that by doing as such
+If you need settings in your schema that require multiple translations, you can specify this by doing the following:
 
 ```json
 {
