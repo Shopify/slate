@@ -58,7 +58,7 @@ You may structure your sections folder such that it exists of simply liquid temp
 └── rich-text.liquid
 ```
 
-This structure simply tells the plugin to copy the liquid files into the dist sections folder
+This structure simply tells the plugin to copy the Liquid files into the `./dist` sections folder
 
 ## Sections as Folders
 
