@@ -63,7 +63,7 @@ This structure simply tells the plugin to copy the Liquid files into the `./dist
 
 You can separate a schema from your Liquid template by creating a folder for each section. This increases maintainability and provides syntax highlighting for your JSON schema objects.
 
-In order to have separate schema files, you must create a folder for the section and within that folder you need a `template.liquid` which will take the name of the directory it is in, and you may optionally have a `schema.json` file with contents that will be appended to the liquid in `{% schema %}` tags.
+In order to have separate schema files, you must create a folder for the section and within that folder create a `template.liquid` file which will take the same name as the directory it will live in. You may optionally create a `schema.json` file containing the section's settings, which will be appended to the Liquid template inside of `{% schema %}` tags.
 
 ### Example
 
