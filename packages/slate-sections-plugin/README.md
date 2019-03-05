@@ -49,7 +49,6 @@ You may structure your sections folder by creating separate Liquid files for eac
 ├── collection-list.liquid
 ├── featured-collection.liquid
 ├── featured-product.liquid
-├── footer.json
 ├── footer.liquid
 ├── header.liquid
 ├── image-with-text.liquid
