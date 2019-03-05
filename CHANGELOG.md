@@ -1,5 +1,25 @@
 # Change Log
 
+## v1.0.0-beta.16 (2019-03-05)
+
+#### :rocket: Enhancement
+
+* `slate-tools`
+  * [#953](https://github.com/Shopify/slate/pull/953) Hide Shopify preview bar. ([@huguestennier](https://github.com/huguestennier))
+* `slate-sections-plugin`, `slate-tools`
+  * [#982](https://github.com/Shopify/slate/pull/982) [WIP] Slate Sections Plugin. ([@harshal317](https://github.com/harshal317))
+
+#### :house: Internal
+
+* `slate-tools`
+  * [#996](https://github.com/Shopify/slate/pull/996) Upgrade to node-sass@4.11.0. ([@internationalhouseofdonald](https://github.com/internationalhouseofdonald))
+
+#### Committers: 3
+
+* Donald Moore ([internationalhouseofdonald](https://github.com/internationalhouseofdonald))
+* Harshal Brahmbhatt ([harshal317](https://github.com/harshal317))
+* Hugues Tennier ([huguestennier](https://github.com/huguestennier))
+
 ## v1.0.0-beta.15 (2019-02-11)
 
 #### :bug: Bug Fix
