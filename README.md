@@ -2,7 +2,7 @@
 
 ![slate animated banner](https://user-images.githubusercontent.com/4837696/47506317-cbe22400-d83d-11e8-9867-1dc874943833.gif)
 
-## Slate on Low Maintenance
+## ⚠ Slate on Low Maintenance
 Due to project priority and resource constraints, this project is currently on low maintenance. We recognize that there are a lot of activities around this package. However, we are unable to accommodate the maintenance this project requires.
 
 ### What does this mean?
@@ -31,6 +31,7 @@ We would like to address these two points above when we have our focus back on S
 
 **This low maintenance period is time-boxed to 6 months from March 2019. We will re-visit and re-evaluate the project priority and plans for next steps.**
 
+<hr />
 
 > **Slate v1.0 is currently in beta.** Expect more bugs than a final release. If you are migrating from using the previous version of Slate, please review the [new documentation](https://shopify.github.io/slate/docs/about) as there are breaking changes. Slate v1.0 has not yet been tested on Windows.
 >
