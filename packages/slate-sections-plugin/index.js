@@ -2,8 +2,6 @@ const fs = require('fs-extra');
 const path = require('path');
 const {ConcatSource, RawSource} = require('webpack-sources');
 const _ = require('lodash');
-const SlateConfig = require('@shopify/slate-config');
-const config = new SlateConfig(require('../slate-tools/slate-tools.schema'));
 
 const DEFAULT_GENERIC_TEMPLATE_NAME = 'template.liquid';
 const PLUGIN_NAME = 'Slate Sections Plugin';
@@ -16,10 +14,7 @@ module.exports = class sectionsPlugin {
   }
 
   apply(compiler) {
-    compiler.hooks.emit.tapPromise(
-      PLUGIN_NAME,
-      this.addLocales.bind(this),
-    );
+    compiler.hooks.emit.tapPromise(PLUGIN_NAME, this.addLocales.bind(this));
 
     compiler.hooks.afterEmit.tapPromise(
       PLUGIN_NAME,
@@ -61,8 +56,8 @@ module.exports = class sectionsPlugin {
     );
   }
 
-  addSectionsToContext (compilation) {
-    compilation.contextDependencies.add(config.get('paths.theme.src.sections'));
+  addSectionsToContext(compilation) {
+    compilation.contextDependencies.add(this.options.to);
 
     return Promise.resolve({});
   }
