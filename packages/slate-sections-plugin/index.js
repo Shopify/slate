@@ -2,8 +2,11 @@ const fs = require('fs-extra');
 const path = require('path');
 const {ConcatSource, RawSource} = require('webpack-sources');
 const _ = require('lodash');
+const SlateConfig = require('@shopify/slate-config');
+const config = new SlateConfig(require('../slate-tools/slate-tools.schema'));
 
 const DEFAULT_GENERIC_TEMPLATE_NAME = 'template.liquid';
+const PLUGIN_NAME = 'Slate Sections Plugin';
 
 module.exports = class sectionsPlugin {
   constructor(options = {}) {
@@ -14,8 +17,13 @@ module.exports = class sectionsPlugin {
 
   apply(compiler) {
     compiler.hooks.emit.tapPromise(
-      'Slate Sections Plugin',
+      PLUGIN_NAME,
       this.addLocales.bind(this),
+    );
+
+    compiler.hooks.afterEmit.tapPromise(
+      PLUGIN_NAME,
+      this.addSectionsToContext.bind(this),
     );
   }
 
@@ -53,6 +61,12 @@ module.exports = class sectionsPlugin {
     );
   }
 
+  addSectionsToContext (compilation) {
+    compilation.contextDependencies.add(config.get('paths.theme.src.sections'));
+
+    return Promise.resolve({});
+  }
+
   _validateOptions(options) {
     if (!options.hasOwnProperty('from') || typeof options.from !== 'string') {
       throw TypeError('Missing or Invalid From Option');
@@ -65,9 +79,9 @@ module.exports = class sectionsPlugin {
   }
 
   /**
-   * If the liquid file (template.liquid) exists in a subdirectory of the sections folder, the output
-   * liquid file takes on the directoryName.liquid, otherwise the output file has the same name of the
-   * liquid file in the sections directory
+   * If the liquid file (template.liquid) exists in a subdirectory of the sections folder, the
+   * output liquid file takes on the directoryName.liquid, otherwise the output file has the same
+   * name of the liquid file in the sections directory
    *
    * @param {string} relativePathFromSections The relative path from the source sections directory
    * @returns The output file name of the liquid file.
@@ -81,8 +95,8 @@ module.exports = class sectionsPlugin {
   }
 
   /**
-   * In order to output to the correct location in the dist folder based on their slate.config we must
-   * get a relative path from the webpack output path that is set
+   * In order to output to the correct location in the dist folder based on their slate.config we
+   * must get a relative path from the webpack output path that is set
    *
    * @param {string} liquidSourcePath // Absolute path to the source liquid file
    * @param {Compilation} compilationOutput // Output path set for webpack
@@ -184,7 +198,8 @@ module.exports = class sectionsPlugin {
   }
 
   /**
-   * Goes through the main schema to get the translation keys and to fill the schema with translations
+   * Goes through the main schema to get the translation keys and to fill the schema with
+   * translations
    *
    * @param {*} localizedSchema The schema with the combined locales
    * @param {*} mainSchemaPath The path to the main schema (schema.json)
