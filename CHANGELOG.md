@@ -1,5 +1,16 @@
 # Change Log
 
+## v1.0.0-beta.17 (2019-03-11)
+
+#### :bug: Bug Fix
+
+* `slate-sections-plugin`
+  * [#1005](https://github.com/Shopify/slate/pull/1005) Add the sections folder back to webpack context. ([@dan-gamble](https://github.com/dan-gamble))
+
+#### Committers: 1
+
+* Dan Gamble ([dan-gamble](https://github.com/dan-gamble))
+
 ## v1.0.0-beta.16 (2019-03-05)
 
 #### :rocket: Enhancement
