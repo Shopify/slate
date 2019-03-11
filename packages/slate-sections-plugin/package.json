@@ -7,8 +7,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "@shopify/slate-translations": "1.0.0-beta.16",
     "fs-extra": "^7.0.1",
-    "lodash": "^4.17.11",
     "path": "^0.12.7",
     "webpack-sources": "^1.3.0"
   },
