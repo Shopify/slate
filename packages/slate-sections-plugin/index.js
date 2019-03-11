@@ -4,6 +4,7 @@ const {ConcatSource, RawSource} = require('webpack-sources');
 const _ = require('lodash');
 
 const DEFAULT_GENERIC_TEMPLATE_NAME = 'template.liquid';
+const PLUGIN_NAME = 'Slate Sections Plugin';
 
 module.exports = class sectionsPlugin {
   constructor(options = {}) {
@@ -13,15 +14,16 @@ module.exports = class sectionsPlugin {
   }
 
   apply(compiler) {
-    compiler.hooks.emit.tapPromise(
-      'Slate Sections Plugin',
-      this.addLocales.bind(this),
-    );
+    compiler.hooks.emit.tapPromise(PLUGIN_NAME, this.addLocales.bind(this));
   }
 
   async addLocales(compilation) {
     const files = await fs.readdir(this.options.from);
     const compilationOutput = compilation.compiler.outputPath;
+
+    // Add sections folder to webpack context
+    compilation.contextDependencies.add(this.options.from);
+
     return Promise.all(
       files.map(async (file) => {
         const fileStat = await fs.stat(path.resolve(this.options.from, file));
@@ -65,9 +67,9 @@ module.exports = class sectionsPlugin {
   }
 
   /**
-   * If the liquid file (template.liquid) exists in a subdirectory of the sections folder, the output
-   * liquid file takes on the directoryName.liquid, otherwise the output file has the same name of the
-   * liquid file in the sections directory
+   * If the liquid file (template.liquid) exists in a subdirectory of the sections folder, the
+   * output liquid file takes on the directoryName.liquid, otherwise the output file has the same
+   * name of the liquid file in the sections directory
    *
    * @param {string} relativePathFromSections The relative path from the source sections directory
    * @returns The output file name of the liquid file.
@@ -81,8 +83,8 @@ module.exports = class sectionsPlugin {
   }
 
   /**
-   * In order to output to the correct location in the dist folder based on their slate.config we must
-   * get a relative path from the webpack output path that is set
+   * In order to output to the correct location in the dist folder based on their slate.config we
+   * must get a relative path from the webpack output path that is set
    *
    * @param {string} liquidSourcePath // Absolute path to the source liquid file
    * @param {Compilation} compilationOutput // Output path set for webpack
@@ -184,7 +186,8 @@ module.exports = class sectionsPlugin {
   }
 
   /**
-   * Goes through the main schema to get the translation keys and to fill the schema with translations
+   * Goes through the main schema to get the translation keys and to fill the schema with
+   * translations
    *
    * @param {*} localizedSchema The schema with the combined locales
    * @param {*} mainSchemaPath The path to the main schema (schema.json)

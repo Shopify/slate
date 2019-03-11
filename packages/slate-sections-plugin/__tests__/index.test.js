@@ -7,8 +7,15 @@ jest.unmock('fs-extra');
 
 test('sections with no seperate schemas, with liquid files that just need to be copied over', async () => {
   const stats = await compiler('fixtures/startersections/');
-
   const expectedAssetOutputKey = '../sections/test-section.liquid';
+
+  // Ensure sections is in context
+  expect(
+    stats.compilation.contextDependencies.has(
+      path.resolve(__dirname, 'fixtures/startersections/sections'),
+    ),
+  ).toBeTruthy();
+
   expect(
     stats.compilation.assets[expectedAssetOutputKey]._value,
   ).toMatchSnapshot();
@@ -29,6 +36,14 @@ test('sections with no seperate schemas, with liquid files that just need to be 
 test('section that has template living in folders with schema.json and no locales', async () => {
   const stats = await compiler('fixtures/seperatejsonsections/');
   const expectedAssetOutputKey = '../sections/test-section.liquid';
+
+  // Ensure sections is in context
+  expect(
+    stats.compilation.contextDependencies.has(
+      path.resolve(__dirname, 'fixtures/seperatejsonsections/sections'),
+    ),
+  ).toBeTruthy();
+
   expect(
     stats.compilation.assets[expectedAssetOutputKey].children[0]._value,
   ).toMatchSnapshot();
@@ -51,8 +66,15 @@ test('section that has template living in folders with schema.json and no locale
 
 test('sections that have templates living in folders with a schema.json and locales to go with aswell', async () => {
   const stats = await compiler('fixtures/normalsections/');
-  // Check if file has been added to assets so webpack can output it
 
+  // Ensure sections is in context
+  expect(
+    stats.compilation.contextDependencies.has(
+      path.resolve(__dirname, 'fixtures/normalsections/sections'),
+    ),
+  ).toBeTruthy();
+
+  // Check if file has been added to assets so webpack can output it
   const expectedAssetOutputKey = '../sections/test-section.liquid';
   expect(
     stats.compilation.assets[expectedAssetOutputKey].children[0]._value,
