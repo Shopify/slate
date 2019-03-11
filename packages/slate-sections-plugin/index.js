@@ -15,16 +15,15 @@ module.exports = class sectionsPlugin {
 
   apply(compiler) {
     compiler.hooks.emit.tapPromise(PLUGIN_NAME, this.addLocales.bind(this));
-
-    compiler.hooks.afterEmit.tapPromise(
-      PLUGIN_NAME,
-      this.addSectionsToContext.bind(this),
-    );
   }
 
   async addLocales(compilation) {
     const files = await fs.readdir(this.options.from);
     const compilationOutput = compilation.compiler.outputPath;
+
+    // Add sections folder to webpack context
+    compilation.contextDependencies.add(this.options.from);
+
     return Promise.all(
       files.map(async (file) => {
         const fileStat = await fs.stat(path.resolve(this.options.from, file));
@@ -54,12 +53,6 @@ module.exports = class sectionsPlugin {
         }
       }),
     );
-  }
-
-  addSectionsToContext(compilation) {
-    compilation.contextDependencies.add(this.options.to);
-
-    return Promise.resolve({});
   }
 
   _validateOptions(options) {
