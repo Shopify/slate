@@ -9,7 +9,6 @@ test('sections with no seperate schemas, with liquid files that just need to be 
   const stats = await compiler('fixtures/startersections/');
   const expectedAssetOutputKey = '../sections/test-section.liquid';
 
-  debugger;
   // Ensure sections is in context
   expect(
     stats.compilation.contextDependencies.has(
