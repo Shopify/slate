@@ -74,3 +74,9 @@ In order to have separate schema files, you must create a folder for the section
 ```
 
 This will create an `article-template.liquid` with the contents of the `template.liquid` file and with JSON wrapped in `{% schema %}` tags, which will be copied over to the `./dist` sections folder.
+
+## Translations
+
+This plugin uses the [`@shopify/slate-translations` package](https://github.com/Shopify/slate/tree/master/packages/slate-translations) which enables you to separate translations into individual locale files allowing for easier maintainability for your theme's merchant-facing translations.
+
+To learn more about structuring your translation files for your section's schema, [read the documentation](https://github.com/Shopify/slate/blob/master/packages/slate-translations/README.md).

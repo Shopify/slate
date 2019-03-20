@@ -1,6 +1,6 @@
 # @shopify/slate-translations
 
-This plugin allows you to separate the translations into separate locale files allowing for easier maintainability for your theme's merchant-facing translations.
+This plugin allows you to separate the translations into individual locale files allowing for easier maintainability for your theme's merchant-facing translations.
 
 ## Getting Started
 
