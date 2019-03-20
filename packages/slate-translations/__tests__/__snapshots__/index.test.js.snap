@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`combines JSON files contained inside a locales folder into a single JSON object 1`] = `
+Object {
+  "de": Object {
+    "name": "Posts",
+    "settings": Object {
+      "image_parallax": Object {
+        "info": "Wird nur auf dem Desktop angezeigt",
+        "label": "Parallax-Animation für Bild anzeigen",
+      },
+    },
+  },
+  "en": Object {
+    "name": "Posts",
+    "settings": Object {
+      "image_parallax": Object {
+        "info": "Only shows on desktop",
+        "label": "Show image parallax animation",
+      },
+    },
+  },
+  "es": Object {
+    "name": "Publicaciones",
+    "settings": Object {
+      "image_parallax": Object {
+        "info": "Solo se muestra en el escritorio",
+        "label": "Mostrar animación de paralaje de imagen",
+      },
+    },
+  },
+  "fr": Object {
+    "name": "Articles",
+    "settings": Object {
+      "image_parallax": Object {
+        "info": "Ne s'affiche que sur le bureau",
+        "label": "Afficher l'animation en parallaxe",
+      },
+    },
+  },
+  "it": Object {
+    "name": "Articoli",
+    "settings": Object {
+      "image_parallax": Object {
+        "info": "Appare solo su desktop",
+        "label": "Mostra animazione parallasse immagine",
+      },
+    },
+  },
+  "ja": Object {
+    "name": "投稿",
+    "settings": Object {
+      "image_parallax": Object {
+        "info": "デスクトップにのみ表示する",
+        "label": "画像のパララックスアニメーションを表示する",
+      },
+    },
+  },
+  "pt-BR": Object {
+    "name": "posts",
+    "settings": Object {
+      "image_parallax": Object {
+        "info": "Aparece apenas na área de trabalho",
+        "label": "Exibir animação de paralaxe da imagem",
+      },
+    },
+  },
+}
+`;
+
+exports[`combines JSON files contained inside a locales folder into a single JSON object 2`] = `
+"{
+  \\"name\\": {
+    \\"de\\": \\"Posts\\",
+    \\"en\\": \\"Posts\\",
+    \\"es\\": \\"Publicaciones\\",
+    \\"fr\\": \\"Articles\\",
+    \\"it\\": \\"Articoli\\",
+    \\"ja\\": \\"投稿\\",
+    \\"pt-BR\\": \\"posts\\"
+  },
+  \\"settings\\": [
+    {
+      \\"type\\": \\"checkbox\\",
+      \\"id\\": \\"image_parallax\\",
+      \\"label\\": {
+        \\"de\\": \\"Parallax-Animation für Bild anzeigen\\",
+        \\"en\\": \\"Show image parallax animation\\",
+        \\"es\\": \\"Mostrar animación de paralaje de imagen\\",
+        \\"fr\\": \\"Afficher l'animation en parallaxe\\",
+        \\"it\\": \\"Mostra animazione parallasse immagine\\",
+        \\"ja\\": \\"画像のパララックスアニメーションを表示する\\",
+        \\"pt-BR\\": \\"Exibir animação de paralaxe da imagem\\"
+      },
+      \\"info\\": {
+        \\"de\\": \\"Wird nur auf dem Desktop angezeigt\\",
+        \\"en\\": \\"Only shows on desktop\\",
+        \\"es\\": \\"Solo se muestra en el escritorio\\",
+        \\"fr\\": \\"Ne s'affiche que sur le bureau\\",
+        \\"it\\": \\"Appare solo su desktop\\",
+        \\"ja\\": \\"デスクトップにのみ表示する\\",
+        \\"pt-BR\\": \\"Aparece apenas na área de trabalho\\"
+      }
+    }
+  ]
+}"
+`;
