@@ -6,17 +6,15 @@
 Due to project priority and resource constraints, this project is currently on low maintenance. We recognize that there are a lot of activities around this package. However, we are unable to accommodate the maintenance this project requires.
 
 ### What does this mean?
-Slate will not have new features or bug fixes during this period.
 
-As a Shopify repository maintainer, there will be no activities around:
+Slate won't have any dedicated maintainers during this period. All future work will be evaluated based on **Shopify's own development needs**.
 
-- New feature implementation
-- Existing feature changes
-- Major bugs due to any tools version changes
-- Major bugs due to Shopify internal changes
-- Minor bugs
-- Will not evaluate and merge any community created PRs
-- Will not address any community reported issues except ones that implicate Shopify security
+For example:
+
+- PRs for bug fixes will be addressed by Shopify developers if their own work is blocked; either by bugs that have not yet been fixed or if their own work could benefit from new Slate features that do not currently exist.
+- Community PRs are always welcome! However, we cannot promise a quick turnaround time for reviewing, merging and publishing these updates. This is entirely up to the availability of Shopify developers and PR contributions will be addressed intermittently and when time permits.
+
+Since there is no dedicated maintainer, there won't be any expectations for Shopify developers to address others' requests and/or issues, other than the ones that are currently being worked on.
 
 ### Should I continue using Slate?
 You may. As it is, Slate is still useful for Shopify themes development.
