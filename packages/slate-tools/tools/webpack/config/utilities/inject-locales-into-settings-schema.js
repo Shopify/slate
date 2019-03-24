@@ -6,7 +6,7 @@ const {
 } = require('@shopify/slate-translations');
 
 module.exports = async function(content, filePath) {
-  if (!filePath.includes('settings_schema.json')) {
+  if (path.basename(filePath) !== 'settings_schema.json') {
     return content;
   }
 
