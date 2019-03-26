@@ -75,7 +75,10 @@ module.exports = class sectionsPlugin {
    * @returns The output file name of the liquid file.
    */
   _getOutputFileName(relativePathFromSections) {
-    if (relativePathFromSections.includes(this.options.genericTemplateName)) {
+    if (
+      path.basename(relativePathFromSections) ===
+      this.options.genericTemplateName
+    ) {
       const sectionName = relativePathFromSections.split(path.sep)[0];
       return `${sectionName}.liquid`;
     }
