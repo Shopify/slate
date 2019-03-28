@@ -2,5 +2,14 @@ ci:
   require:
     - continuous-integration/travis-ci/push
 dependencies:
+  override:
+    - assert-lerna-fixed-version-tag
+    - >-
+      node_modules/.bin/lerna publish from-git
+      --exact
+      --no-git-tag-version
+      --no-push
+      --npm-client=npm
+      --yes
   post:
     - yarn run build
