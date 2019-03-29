@@ -131,13 +131,12 @@ You can read both the README files in the [v0 folder](https://github.com/Shopify
    ```
    slate $ yarn lerna updated
    ...
-   lerna info version 2.11.0
-   lerna info Checking for updated packages...
-   lerna info Comparing with v2.0.4.
-   lerna info Checking for prereleased packages...
-   lerna info result
-   - @shopify/theme-a11y // This package was updated and can be published
-   ✨Done in 0.63s.
+lerna notice cli v3.11.0
+lerna info Looking for changed packages since v1.0.0-beta.17
+@shopify/slate-sections-plugin
+@shopify/slate-tools
+lerna success found 2 packages ready to publish
+✨  Done in 1.39s.
    ```
 
 4. Run the release step to choose the version bump desired
@@ -145,20 +144,18 @@ You can read both the README files in the [v0 folder](https://github.com/Shopify
    ```
    slate $ yarn release
    ...
-   lerna info version 2.11.0
-   lerna info current version 2.0.4
-   lerna info Checking for updated packages...
-   lerna info Comparing with v2.0.4.
-   lerna info Checking for prereleased packages...
-   ? Select a new version (currently 2.0.4) (Use arrow keys)
-   ❯ Patch (2.0.5)
-   Minor (2.1.0)
-   Major (3.0.0)
-   Prepatch (2.0.5-0)
-   Preminor (2.1.0-0)
-   Premajor (3.0.0-0)
-   Prerelease
-   Custom
+   lerna notice cli v3.11.0
+   lerna info current version 1.0.0-beta.17
+   lerna info Looking for changed packages since v1.0.0-beta.17
+   ? Select a new version (currently 1.0.0-beta.17) (Use arrow keys)
+   ❯ Patch (1.0.0)
+     Minor (1.0.0)
+     Major (1.0.0)
+     Prepatch (1.0.1-alpha.0)
+     Preminor (1.1.0-alpha.0)
+     Premajor (2.0.0-alpha.0)
+     Custom Prerelease
+     Custom Version
    ```
 
    This command will:
