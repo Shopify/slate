@@ -162,7 +162,7 @@ You can read both the README files in the [v0 folder](https://github.com/Shopify
     - @shopify/slate-sections-plugin: 1.0.0-beta.17 => 1.0.0-beta.18
     - @shopify/slate-tools: 1.0.0-beta.17 => 1.0.0-beta.18
 
-   ? Are you sure you want to publish these packages? (ynH)
+   ? Are you sure you want to create these versions? (ynH)
    ```
 
    This command will:
