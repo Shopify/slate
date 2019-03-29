@@ -131,12 +131,12 @@ You can read both the README files in the [v0 folder](https://github.com/Shopify
    ```
    slate $ yarn lerna updated
    ...
-lerna notice cli v3.11.0
-lerna info Looking for changed packages since v1.0.0-beta.17
-@shopify/slate-sections-plugin
-@shopify/slate-tools
-lerna success found 2 packages ready to publish
-✨  Done in 1.39s.
+   lerna notice cli v3.11.0
+   lerna info Looking for changed packages since v1.0.0-beta.17
+   @shopify/slate-sections-plugin
+   @shopify/slate-tools
+   lerna success found 2 packages ready to publish
+   ✨  Done in 1.39s.
    ```
 
 4. Run the release step to choose the version bump desired
@@ -148,14 +148,21 @@ lerna success found 2 packages ready to publish
    lerna info current version 1.0.0-beta.17
    lerna info Looking for changed packages since v1.0.0-beta.17
    ? Select a new version (currently 1.0.0-beta.17) (Use arrow keys)
-   ❯ Patch (1.0.0)
+     Patch (1.0.0)
      Minor (1.0.0)
      Major (1.0.0)
      Prepatch (1.0.1-alpha.0)
      Preminor (1.1.0-alpha.0)
      Premajor (2.0.0-alpha.0)
      Custom Prerelease
-     Custom Version
+   ❯ Custom Version
+   ? Enter a custom version 1.0.0-beta.18
+
+   Changes:
+    - @shopify/slate-sections-plugin: 1.0.0-beta.17 => 1.0.0-beta.18
+    - @shopify/slate-tools: 1.0.0-beta.17 => 1.0.0-beta.18
+
+   ? Are you sure you want to publish these packages? (ynH)
    ```
 
    This command will:
@@ -167,7 +174,7 @@ lerna success found 2 packages ready to publish
    5. Create a new git commit and tag for the new version.
    6. Git push to origin master with the newly created tag.
 
-   _Note: See the [lerna documentation](https://github.com/lerna/lerna/tree/2.x#publish) for more information_
+   _Note: See the [lerna documentation](https://github.com/lerna/lerna/releases?after=v3.1.3) for more information_
 
 5. Login to [Shipit](https://shipit.shopify.io/shopify/slate/production)
 6. In the Undeployed Commits list, identify the commit with the name of the version that was created in step #4, wait for CI to be 🍏, click the 'Deploy' button to publish to npm's public registry.
