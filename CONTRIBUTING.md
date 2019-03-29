@@ -172,5 +172,5 @@ You can read both the README files in the [v0 folder](https://github.com/Shopify
 
    _Note: See the [lerna documentation](https://github.com/lerna/lerna/tree/2.x#publish) for more information_
 
-5. Login to [Shipit](https://shipit.shopify.io/shopify/theme-scripts/production)
+5. Login to [Shipit](https://shipit.shopify.io/shopify/slate/production)
 6. In the Undeployed Commits list, identify the commit with the name of the version that was created in step #4, wait for CI to be 🍏, click the 'Deploy' button to publish to npm's public registry.
