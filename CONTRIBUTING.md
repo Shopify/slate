@@ -129,7 +129,7 @@ You can read both the README files in the [v0 folder](https://github.com/Shopify
 3. You can verify that there are indeed packages to be published (optional)
 
    ```
-   slate $ yarn lerna updated
+   slate $ yarn lerna changed
    ...
    lerna notice cli v3.11.0
    lerna info Looking for changed packages since v1.0.0-beta.17
