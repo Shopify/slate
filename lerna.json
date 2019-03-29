@@ -13,10 +13,5 @@
       "config": ":wrench Config"
     },
     "cacheDir": ".changelog"
-  },
-  "commands": {
-    "publish": {
-      "skipNpm": true
-    }
   }
 }
