@@ -22,6 +22,7 @@
     "@shopify/slate-sections-plugin": "1.0.0-beta.17",
     "@shopify/slate-sync": "1.0.0-beta.16",
     "@shopify/slate-tag-webpack-plugin": "1.0.0-beta.14",
+    "@shopify/slate-translations": "1.0.0-beta.17",
     "@shopify/theme-lint": "^2.0.0",
     "@shopify/themekit": "0.6.12",
     "archiver": "^2.1.0",
