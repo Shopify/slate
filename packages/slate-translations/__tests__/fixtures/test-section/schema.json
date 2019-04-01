@@ -1,0 +1,17 @@
+{
+  "name": {
+    "t": "name"
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "image_parallax",
+      "label": {
+        "t": "settings.image_parallax.label"
+      },
+      "info": {
+        "t": "settings.image_parallax.info"
+      }
+    }
+  ]
+}

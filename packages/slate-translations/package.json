@@ -1,0 +1,19 @@
+{
+  "name": "@shopify/slate-translations",
+  "version": "1.0.0-beta.17",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "fs-extra": "^7.0.1",
+    "lodash": "^4.17.11",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "babel-jest": "^24.5.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^24.5.0"
+  }
+}
