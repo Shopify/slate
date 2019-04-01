@@ -1,5 +1,22 @@
 # Change Log
 
+## v1.0.0-beta.18 (2019-04-01)
+
+#### :rocket: Enhancement
+* `slate-sections-plugin`, `slate-translations`
+  * [#1010](https://github.com/Shopify/slate/pull/1010) Add @shopify/slate-translations plugin. ([@chrisberthe](https://github.com/chrisberthe))
+* `slate-tools`
+  * [#1019](https://github.com/Shopify/slate/pull/1019) Add locales transformer for settings schema. ([@chrisberthe](https://github.com/chrisberthe))
+
+#### :bug: Bug Fix
+* `slate-sections-plugin`
+  * [#1008](https://github.com/Shopify/slate/pull/1008) Fix lax checking of filename against genericTemplateName in sections plugin. ([@andyexeter](https://github.com/andyexeter))
+
+#### Committers: 3
+- Andy Palmer ([andyexeter](https://github.com/andyexeter))
+- Chris Berthe ([chrisberthe](https://github.com/chrisberthe))
+- Helen Lin ([wizardlyhel](https://github.com/wizardlyhel))
+
 ## v1.0.0-beta.17 (2019-03-11)
 
 #### :bug: Bug Fix
