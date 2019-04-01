@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate-tools",
-  "version": "1.0.0-beta.17",
+  "version": "1.0.0",
   "description": "A modern development toolkit for Shopify themes",
   "repository": "https://github.com/Shopify/slate/tree/1.x/packages/slate-tools",
   "license": "MIT",
@@ -19,7 +19,7 @@
     "@shopify/slate-cssvar-loader": "1.0.0-beta.16",
     "@shopify/slate-env": "1.0.0-beta.16",
     "@shopify/slate-liquid-asset-loader": "1.0.0-beta.11",
-    "@shopify/slate-sections-plugin": "1.0.0-beta.17",
+    "@shopify/slate-sections-plugin": "1.0.0",
     "@shopify/slate-sync": "1.0.0-beta.16",
     "@shopify/slate-tag-webpack-plugin": "1.0.0-beta.14",
     "@shopify/theme-lint": "^2.0.0",

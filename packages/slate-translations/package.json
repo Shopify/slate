@@ -1,6 +1,6 @@
 {
   "name": "@shopify/slate-translations",
-  "version": "1.0.0-beta.17",
+  "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
