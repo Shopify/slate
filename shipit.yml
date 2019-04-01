@@ -2,6 +2,8 @@ ci:
   require:
     - continuous-integration/travis-ci/push
 dependencies:
+  pre:
+    - yarn bootstrap
   override:
     - assert-lerna-fixed-version-tag
     - >-
@@ -11,5 +13,3 @@ dependencies:
       --no-push
       --npm-client=npm
       --yes
-  post:
-    - yarn run build
