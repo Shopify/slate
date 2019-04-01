@@ -1,9 +1,15 @@
 ci:
   require:
     - continuous-integration/travis-ci/push
+
 dependencies:
+  override:
+    - yarn install --frozen-lockfile --no-progress
+    - yarn lerna -- bootstrap
+
+deplopy:
   pre:
-    - yarn bootstrap
+    - yarn build
   override:
     - assert-lerna-fixed-version-tag
     - >-
