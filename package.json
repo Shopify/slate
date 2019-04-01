@@ -18,16 +18,20 @@
     "url": "https://github.com/Shopify/slate.git"
   },
   "scripts": {
-    "test": "node_modules/.bin/jest --silent",
+    "test": "jest --silent",
     "lint": "eslint --max-warnings 10 ./ && stylelint './**/*.[s]css'",
     "lint:styles": "stylelint '**/*.[s]css'",
     "lint:fix": "eslint ./ --fix && prettier-stylelint **/*.scss",
     "lint:fix-js": "eslint ./ --fix",
     "lint:fix-styles": "prettier-stylelint --write",
-    "bootstrap": "yarn install && node_modules/.bin/lerna bootstrap",
-    "publish": "node_modules/.bin/lerna publish --exact",
+    "bootstrap": "yarn install && lerna bootstrap",
     "changelog": "node_modules/.bin/lerna-changelog",
-    "clean": "node_modules/.bin/lerna clean"
+    "clean": "lerna clean",
+
+    "prebuild": "lerna clean",
+    "build": "lerna run build",
+    "check": "lerna run check",
+    "release": "lerna version --exact && git push --follow-tags"
   },
   "devDependencies": {
     "babel-jest": "^22.0.4",
