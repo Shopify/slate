@@ -5,17 +5,17 @@ const {
   combineLocales,
 } = require('@shopify/slate-translations');
 
- module.exports = async function(content, filePath) {
+module.exports = async function(content, filePath) {
   if (path.basename(filePath) !== 'settings_schema.json') {
     return content;
   }
 
-   const localesFolder = path.resolve(path.dirname(filePath), 'locales');
+  const localesFolder = path.resolve(path.dirname(filePath), 'locales');
   const combinedLocales = (await fs.exists(localesFolder))
     ? await combineLocales(localesFolder)
     : null;
 
-   return combinedLocales
+  return combinedLocales
     ? createSchemaContentWithLocales(combinedLocales, filePath)
     : content;
 };
