@@ -1,13 +1,13 @@
 {
   "name": "@shopify/slate-sections-plugin",
-  "version": "1.0.0-beta.18",
+  "version": "1.0.0-beta.17",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "test": "jest"
   },
   "dependencies": {
-    "@shopify/slate-translations": "1.0.0-beta.18",
+    "@shopify/slate-translations": "1.0.0-beta.17",
     "fs-extra": "^7.0.1",
     "path": "^0.12.7",
     "webpack-sources": "^1.3.0"
