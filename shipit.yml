@@ -13,9 +13,10 @@ deplopy:
   override:
     - assert-lerna-fixed-version-tag
     - >-
-      node_modules/.bin/lerna publish from-git
+      node_modules/.bin/lerna publish from-package
       --exact
       --no-git-tag-version
+      --no-git-reset
       --no-push
       --npm-client=npm
       --yes
