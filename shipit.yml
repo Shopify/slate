@@ -7,7 +7,7 @@ dependencies:
     - yarn install --frozen-lockfile --no-progress
     - yarn lerna -- bootstrap
 
-deplopy:
+deploy:
   pre:
     - yarn build
   override:
