@@ -27,8 +27,6 @@
     "bootstrap": "yarn install && lerna bootstrap",
     "changelog": "node_modules/.bin/lerna-changelog",
     "clean": "lerna clean",
-
-    "prebuild": "lerna clean",
     "build": "lerna run build",
     "check": "lerna run check",
     "release": "lerna version --exact && git push --follow-tags"
