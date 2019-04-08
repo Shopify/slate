@@ -118,7 +118,7 @@ You can read both the README files in the [v0 folder](https://github.com/Shopify
 
 ⚠️ Note: If there is a new NPM package in the new release, you need to manually publish the new package first.
 
-1. Login into your NPM account (You must be an admin under Shopify Org)
+1. Login into your NPM account (Your account must be under Shopify Org)
    ```
    npm login
    ```
@@ -128,14 +128,18 @@ You can read both the README files in the [v0 folder](https://github.com/Shopify
       "name": "@shopify/<new-package-name>",
       ..
       "publishConfig": {
-         "access": "public",
-         "@shopify:registry": "https://packages.shopify.io/shopify/node/npm/"
+        "access": "public",
+        "@shopify:registry": "https://registry.npmjs.org"
       }
    }
    ```
 3. Run NPM publish (Make sure you are in the new package folder)
    ```
    slate/packages/<new-package-name> $ npm publish
+   ```
+   If you are getting permission errors, open `.npmrc` and comment out the following line:
+   ```
+   @shopify:registry=...
    ```
 
 ### Auto-Deploy setup

@@ -18,5 +18,9 @@
     "jest": "^24.1.0",
     "memory-fs": "^0.4.1",
     "webpack": "^4.29.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "@shopify:registry": "https://registry.npmjs.org"
   }
 }

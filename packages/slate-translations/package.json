@@ -17,6 +17,7 @@
     "jest": "^24.5.0"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "@shopify:registry": "https://registry.npmjs.org"
   }
 }
