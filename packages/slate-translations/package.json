@@ -15,5 +15,9 @@
     "babel-jest": "^24.5.0",
     "babel-preset-env": "^1.7.0",
     "jest": "^24.5.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "@shopify:registry": "https://packages.shopify.io/shopify/node/npm/"
   }
 }

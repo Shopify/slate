@@ -114,7 +114,33 @@ You can read both the README files in the [v0 folder](https://github.com/Shopify
 
 ## Publishing
 
-⚠️ Note: You must have a Shopify Okta account ir order to login to Shipit and publish.
+### New NPM package
+
+⚠️ Note: If there is a new NPM package in the new release, you need to manually publish the new package first.
+
+1. Login into your NPM account (You must be an admin under Shopify Org)
+   ```
+   npm login
+   ```
+2. Make sure the new package has Shopify org scope and publish config in `package.json`
+   ```
+   {
+      "name": "@shopify/<new-package-name>",
+      ..
+      "publishConfig": {
+         "access": "public",
+         "@shopify:registry": "https://packages.shopify.io/shopify/node/npm/"
+      }
+   }
+   ```
+3. Run NPM publish (Make sure you are in the new package folder)
+   ```
+   slate/packages/<new-package-name> $ npm publish
+   ```
+
+### Auto-Deploy setup
+
+⚠️ Note: You must have a Shopify Okta account in order to login to Shipit and publish.
 
 1. Merge any changes you want to include in your next release into `master`.
 
