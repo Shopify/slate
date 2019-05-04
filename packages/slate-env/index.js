@@ -208,7 +208,8 @@ function getDefaultSlateEnv() {
 }
 
 function getEnvNameValue() {
-  return process.env[config.get('env.keys.name')];
+  const value = process.env[config.get('env.keys.name')];
+  return typeof value === 'undefined' ? 'development' : value;
 }
 
 // Returns the configurable environment varible that reference the store URL
