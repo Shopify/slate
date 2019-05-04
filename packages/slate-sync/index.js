@@ -232,12 +232,12 @@ module.exports = {
     return maybeDeploy();
   },
 
-  replace() {
-    return deploy('replace');
+  replace(files) {
+    return deploy('replace', files);
   },
 
-  upload() {
-    return deploy('upload');
+  upload(files) {
+    return deploy('upload', files);
   },
 
   fetchMainThemeId,
