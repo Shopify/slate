@@ -18,6 +18,13 @@ module.exports = class DevServer {
     this.address = options.address;
     this.options = options;
     this.port = options.port;
+
+    if (!this.options.liveDeploy) {
+      options.webpackConfig.plugins.push(
+        new webpack.HotModuleReplacementPlugin()
+      )
+    }
+
     this.compiler = webpack(options.webpackConfig);
     this.app = new App(this.compiler);
     this.client = new Client();
@@ -67,6 +74,10 @@ module.exports = class DevServer {
     );
   }
 
+  _chunkFilter(...args) {
+    return this.options.liveDeploy || !this._isChunk(...args);
+  }
+
   _isLiquidStyle(key) {
     return key.indexOf('styleLiquid.scss.liquid') > -1;
   }
@@ -87,7 +98,7 @@ module.exports = class DevServer {
         .filter(([key, asset]) => {
           return (
             asset.emitted &&
-            !this._isChunk(key, chunks) &&
+            this._chunkFilter(key, chunks) &&
             !isHotUpdateFile(key) &&
             this._hasAssetChanged(key, asset)
           );
