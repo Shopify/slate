@@ -18,8 +18,7 @@ const HtmlWebpackIncludeLiquidStylesPlugin = require('../html-webpack-include-ch
 const config = new SlateConfig(require('../../../slate-tools.schema'));
 
 // add hot-reload related code to entry chunks if not liveDeploy
-const liveDeploy = require('minimist')(process.argv.slice(2)).liveDeploy
-if (!liveDeploy) {
+if (!argv.liveDeploy) {
   Object.keys(entry.entry).forEach((name) => {
     entry.entry[name] = [path.join(__dirname, '../hot-client.js')].concat(
       entry.entry[name],

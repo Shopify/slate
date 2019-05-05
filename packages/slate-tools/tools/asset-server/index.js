@@ -21,8 +21,8 @@ module.exports = class DevServer {
 
     if (!this.options.liveDeploy) {
       options.webpackConfig.plugins.push(
-        new webpack.HotModuleReplacementPlugin()
-      )
+        new webpack.HotModuleReplacementPlugin(),
+      );
     }
 
     this.compiler = webpack(options.webpackConfig);
