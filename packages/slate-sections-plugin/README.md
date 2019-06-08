@@ -27,7 +27,7 @@ const slateSectionsOptions = {
 };
 
 module.exports = {
-  plugins: [new SlateSectionsPlugin({slateSectionsOptions})],
+  plugins: [new SlateSectionsPlugin(slateSectionsOptions)],
 };
 ```
 
