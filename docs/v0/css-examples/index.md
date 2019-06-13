@@ -198,6 +198,10 @@ Below is a list of all available icons and their respective names.
 
 It is recommended to set descriptive text that also acts as a fallback for icons. See the [demo for visually hiding text and icon fallback text](#visually-hide).
 
+### Full color icons
+
+For icons with multiple colors, make sure the file name of the icon includes the text `-full-color`. This will add the class `icon--full-color` when the icon is compiled.
+
 ### Update icons manually
 
 If you need to add an icon to a live shop without Slate's build tools, follow these steps:
