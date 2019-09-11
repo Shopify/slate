@@ -42,7 +42,7 @@ class DevServer {
         rule: {
           match: /<head[^>]*>/i,
           fn(snippet, match) {
-            return match + snippet;
+            return match+snippet;
           },
         },
       },
