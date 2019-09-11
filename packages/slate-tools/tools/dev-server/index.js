@@ -38,6 +38,14 @@ class DevServer {
       ui: {
         port: this.uiPort,
       },
+      snippetOptions: {
+        rule: {
+          match: /<head[^>]*>/i,
+          fn(snippet, match) {
+            return match + snippet;
+          },
+        },
+      },
     };
 
     return new Promise((resolve) => {
