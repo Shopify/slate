@@ -24,7 +24,7 @@
     "@shopify/slate-tag-webpack-plugin": "1.0.0-beta.14",
     "@shopify/slate-translations": "1.0.0-beta.18",
     "@shopify/theme-lint": "^2.0.0",
-    "@shopify/themekit": "0.6.12",
+    "@shopify/themekit": "^1.0.1",
     "archiver": "^2.1.0",
     "array-flatten": "^2.1.1",
     "autoprefixer": "6.7.7",

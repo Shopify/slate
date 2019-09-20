@@ -18,7 +18,7 @@ function maybeDeploy() {
   if (filesToDeploy.length) {
     const files = [...filesToDeploy];
     filesToDeploy = [];
-    return deploy('upload', files);
+    return deploy('deploy', files);
   }
 
   return Promise.resolve();
@@ -78,9 +78,9 @@ function _generateIgnoreFlags() {
  * @return          Promise
  */
 async function deploy(cmd = '', files = []) {
-  if (!['upload', 'replace'].includes(cmd)) {
+  if (!['deploy', 'replace'].includes(cmd)) {
     throw new Error(
-      'shopify-deploy.deploy() first argument must be either "upload", "replace"',
+      'shopify-deploy.deploy() first argument must be either "deploy", "replace"',
     );
   }
 
@@ -237,7 +237,7 @@ module.exports = {
   },
 
   upload() {
-    return deploy('upload');
+    return deploy('deploy');
   },
 
   fetchMainThemeId,
