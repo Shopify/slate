@@ -45,28 +45,19 @@ function _generateConfigFlags() {
   _validateEnvValues();
 
   const flags = {
-    '--password': slateEnv.getPasswordValue(),
-    '--themeid': slateEnv.getThemeIdValue(),
-    '--store': slateEnv.getStoreValue(),
-    '--env': slateEnv.getEnvNameValue(),
+    'password': slateEnv.getPasswordValue(),
+    'themeid': slateEnv.getThemeIdValue(),
+    'store': slateEnv.getStoreValue(),
+    'env': slateEnv.getEnvNameValue(),
   };
   if (slateEnv.getTimeoutValue()) {
-    flags['--timeout'] = slateEnv.getTimeoutValue();
+    flags.timeout = slateEnv.getTimeoutValue();
+  }
+  if(slateEnv.getIgnoreFilesValue()){
+    flags.ignoredFiles = slateEnv.getIgnoreFilesValue().split(':');
   }
 
   // Convert object to key value pairs and flatten the array
-  return Array.prototype.concat(...Object.entries(flags));
-}
-
-function _generateIgnoreFlags() {
-  const ignoreFiles = slateEnv.getIgnoreFilesValue().split(':');
-  const flags = [];
-
-  ignoreFiles.forEach((pattern) => {
-    flags.push('--ignored-file');
-    flags.push(pattern);
-  });
-
   return flags;
 }
 
@@ -88,9 +79,17 @@ async function deploy(cmd = '', files = []) {
 
   console.log(chalk.magenta(`\n${figures.arrowUp}  Uploading to Shopify...\n`));
 
+
   try {
-    await promiseThemekitConfig();
-    await promiseThemekitDeploy(cmd, files);
+    await themekit.command('configure', _generateConfigFlags(), {
+      cwd: config.get('paths.theme.dist')
+    });
+    await themekit.command(cmd, {
+      ..._generateConfigFlags(),
+      files: files,
+    }, {
+      cwd: config.get('paths.theme.dist')
+    });
   } catch (error) {
     console.error('My Error', error);
   }
@@ -98,51 +97,6 @@ async function deploy(cmd = '', files = []) {
   deploying = false;
 
   return maybeDeploy;
-}
-
-function promiseThemekitConfig() {
-  return new Promise((resolve, reject) => {
-    themekit.command(
-      {
-        args: [
-          'configure',
-          ..._generateConfigFlags(),
-          ..._generateIgnoreFlags(),
-        ],
-        cwd: config.get('paths.theme.dist'),
-      },
-      (err) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve();
-        }
-      },
-    );
-  });
-}
-
-function promiseThemekitDeploy(cmd, files) {
-  return new Promise((resolve, reject) => {
-    themekit.command(
-      {
-        args: [
-          cmd,
-          '--no-update-notifier',
-          ..._generateConfigFlags(),
-          ...files,
-        ],
-        cwd: config.get('paths.theme.dist'),
-      },
-      (err) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve();
-        }
-      },
-    );
-  });
 }
 
 /**
