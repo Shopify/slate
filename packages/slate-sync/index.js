@@ -45,15 +45,15 @@ function _generateConfigFlags() {
   _validateEnvValues();
 
   const flags = {
-    'password': slateEnv.getPasswordValue(),
-    'themeid': slateEnv.getThemeIdValue(),
-    'store': slateEnv.getStoreValue(),
-    'env': slateEnv.getEnvNameValue(),
+    password: slateEnv.getPasswordValue(),
+    themeid: slateEnv.getThemeIdValue(),
+    store: slateEnv.getStoreValue(),
+    env: slateEnv.getEnvNameValue(),
   };
   if (slateEnv.getTimeoutValue()) {
     flags.timeout = slateEnv.getTimeoutValue();
   }
-  if(slateEnv.getIgnoreFilesValue()){
+  if (slateEnv.getIgnoreFilesValue()) {
     flags.ignoredFiles = slateEnv.getIgnoreFilesValue().split(':');
   }
 
@@ -79,17 +79,20 @@ async function deploy(cmd = '', files = []) {
 
   console.log(chalk.magenta(`\n${figures.arrowUp}  Uploading to Shopify...\n`));
 
-
   try {
     await themekit.command('configure', _generateConfigFlags(), {
-      cwd: config.get('paths.theme.dist')
+      cwd: config.get('paths.theme.dist'),
     });
-    await themekit.command(cmd, {
-      ..._generateConfigFlags(),
-      files: files,
-    }, {
-      cwd: config.get('paths.theme.dist')
-    });
+    await themekit.command(
+      cmd,
+      {
+        ..._generateConfigFlags(),
+        files,
+      },
+      {
+        cwd: config.get('paths.theme.dist'),
+      },
+    );
   } catch (error) {
     console.error('My Error', error);
   }
