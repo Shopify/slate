@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 const figures = require('figures');
 const https = require('https');
-const themekit = require('@shopify/themekit').command;
+const themekit = require('@shopify/themekit');
 const slateEnv = require('@shopify/slate-env');
 const SlateConfig = require('@shopify/slate-config');
 
@@ -102,7 +102,7 @@ async function deploy(cmd = '', files = []) {
 
 function promiseThemekitConfig() {
   return new Promise((resolve, reject) => {
-    themekit(
+    themekit.command(
       {
         args: [
           'configure',
@@ -124,7 +124,7 @@ function promiseThemekitConfig() {
 
 function promiseThemekitDeploy(cmd, files) {
   return new Promise((resolve, reject) => {
-    themekit(
+    themekit.command(
       {
         args: [
           cmd,
