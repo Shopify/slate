@@ -22,7 +22,8 @@ function ssl-check() {
     b=$(tput bold)
     c=$(tput sgr0)
 
-    local_ip=$(ipconfig getifaddr $(route get default | grep interface | awk '{print $2}'))
+    # local_ip=$(ip route get 8.8.4.4 | head -1 | awk '{print $7}') # Linux Version
+    local_ip=$(ipconfig getifaddr $(route get default | grep interface | awk '{print $2}')) # Mac Version
     # local_ip=999.999.999 # (uncomment for testing)
 
     domains=(
