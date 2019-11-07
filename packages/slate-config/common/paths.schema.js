@@ -39,6 +39,22 @@ module.exports = {
   'paths.theme.src.snippets': (config) =>
     path.join(config.get('paths.theme.src'), 'snippets'),
 
+  // Source snippets directory
+  'paths.theme.src.frame': (config) =>
+    path.join(config.get('paths.theme.src'), 'frame'),
+
+  // Source snippets directory
+  'paths.theme.src.content': (config) =>
+    path.join(config.get('paths.theme.src'), 'content'),
+
+  // Source snippets directory
+  'paths.theme.src.pages': (config) =>
+    path.join(config.get('paths.theme.src'), 'pages'),
+
+  // Source snippets directory
+  'paths.theme.src.pages.customers': (config) =>
+    path.join(config.get('paths.theme.src.pages'), 'customers'),
+
   // Static asset directory for files that statically copied to paths.theme.dist.assets
   'paths.theme.src.sections': (config) =>
     path.join(config.get('paths.theme.src'), 'sections'),
@@ -81,6 +97,18 @@ module.exports = {
   // Distribution templates directory
   'paths.theme.dist.templates': (config) =>
     path.join(config.get('paths.theme.dist'), 'templates'),
+
+    // Source snippets directory
+  'paths.theme.dist.frame': (config) =>
+      path.join(config.get('paths.theme.dist'), 'frame'),
+  
+    // Source snippets directory
+  'paths.theme.dist.content': (config) =>
+      path.join(config.get('paths.theme.dist'), 'content'),
+  
+    // Source snippets directory
+  'paths.theme.dist.pages': (config) =>
+      path.join(config.get('paths.theme.dist'), 'pages'),
 
   // Directory for storing all temporary and/or cache files
   'paths.theme.cache': (config) =>
