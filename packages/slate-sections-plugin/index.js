@@ -17,7 +17,9 @@ module.exports = class sectionsPlugin {
   }
 
   apply(compiler) {
-    compiler.hooks.emit.tapPromise(PLUGIN_NAME, this.addLocales.bind(this));
+    if (fs.existsSync(this.options.from)) {
+      compiler.hooks.emit.tapPromise(PLUGIN_NAME, this.addLocales.bind(this));
+    }
   }
 
   async addLocales(compilation) {
