@@ -1,7 +1,6 @@
 const hostedGitInfo = require('hosted-git-info');
 const validateProjectName = require('validate-npm-package-name');
 const env = require('@shopify/slate-env');
-const analytics = require('@shopify/slate-analytics');
 const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
@@ -17,23 +16,11 @@ module.exports = async function createSlateTheme(name, starter, flags) {
   fs.ensureDirSync(root);
   checkDirForConflicts(root);
 
-  await analytics.init();
-  analytics.event('create-slate-theme:start', {
-    version: packageJson,
-    starter,
-    skipInstall: options.skipInstall,
-    ssh: options.ssh,
-  });
-
   console.log(`\nCreating a new Slate theme in: ${chalk.green(root)}.`);
 
   await getStarterTheme(root, starter, options.ssh);
   await env.create({root});
   await installThemeDeps(root, options);
-
-  analytics.event('create-slate-theme:success', {
-    version: packageJson,
-  });
 };
 
 function checkAppName(name) {

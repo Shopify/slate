@@ -25,7 +25,6 @@
     ],
     "Reference": [
       "create-slate-theme",
-      "slate-analytics",
       "slate-configuration",
       "slate-cssvar-loader"
     ]
