@@ -29,7 +29,9 @@ if (!fs.existsSync(config.get('paths.theme.dist'))) {
   process.exit();
 }
 
-output.on('close', () => console.log(`${path.basename(zipPath)}: ${archive.pointer()} total bytes`));
+output.on('close', () => {
+  console.log(`${path.basename(zipPath)}: ${archive.pointer()} total bytes`);
+});
 
 archive.on('warning', (err) => {
   if (err.code === 'ENOENT') {

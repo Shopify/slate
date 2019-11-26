@@ -6,7 +6,6 @@ const path = require('path');
 const chalk = require('chalk');
 const utils = require('./utils');
 const config = require('./create-slate-theme.config');
-const packageJson = require('./package.json');
 
 module.exports = async function createSlateTheme(name, starter, flags) {
   const root = path.resolve(name);

@@ -9,7 +9,6 @@ process.env.NODE_ENV = 'production';
  */
 const webpack = require('webpack');
 const webpackConfig = require('../../tools/webpack/config/prod');
-const packageJson = require('../../package.json');
 
 webpack(webpackConfig, (err, stats) => {
   if (err) throw err;

@@ -2,13 +2,10 @@
 const spawn = require('cross-spawn');
 const chalk = require('chalk');
 const argv = require('minimist')(process.argv.slice(2));
-const SlateConfig = require('@shopify/slate-config');
 const slateEnv = require('@shopify/slate-env');
-const packageJson = require('../package.json');
 
 const script = process.argv[2];
 const args = process.argv.slice(3);
-const config = new SlateConfig(require('../slate-tools.schema'));
 
 try {
   slateEnv.assign(argv.env);
@@ -19,7 +16,7 @@ try {
 
 let result;
 
-async function init() {
+function init() {
   switch (script) {
     case 'build':
     case 'deploy':
