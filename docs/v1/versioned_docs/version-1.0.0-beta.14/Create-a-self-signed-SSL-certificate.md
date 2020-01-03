@@ -64,7 +64,7 @@ function ssl-check() {
 ```
 
 ### Linux/Ubuntu
-```
+```bash
 function ssl-check() {
          f=~/.localhost_ssl;
          ssl_crt=$f/server.crt
