@@ -71,7 +71,8 @@ function ssl-check() {
          ssl_key=$f/server.key
          b=$(tput bold)
          c=$(tput sgr0)
-
+         
+         # gets the first IP returned fro the hostname function
          local_ip=$(hostname -I | cut -d' ' -f1)
          # local_ip=999.999.999 # (uncomment for testing)
 
