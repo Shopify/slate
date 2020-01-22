@@ -72,13 +72,14 @@ function ssl-check() {
          b=$(tput bold)
          c=$(tput sgr0)
          
-         # gets the first IP returned fro the hostname function
-         local_ip=$(hostname -I | cut -d' ' -f1)
+         # gets all IPs returned by the hostname function
+         ips=$(hostname -I)
+         local_ips=($(echo $ips | tr " " "\n"))
          # local_ip=999.999.999 # (uncomment for testing)
 
          domains=(
              "localhost"
-             "$local_ip"
+             "${local_ips[@]}"
          )
 
          if [[ ! -f $ssl_crt ]]; then
