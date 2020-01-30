@@ -1,14 +1,1 @@
-### This repo is currently on low maintenance. See README for details
-
-### What are you trying to accomplish with this PR?
-
-*Please provide a link to the associated GitHub issue.*
-
-
-### Checklist
-For contributors:
-- [ ] I have [updated the docs](https://github.com/Shopify/slate/blob/master/CONTRIBUTING.md#documentation) to reflect these changes, if applicable.
-
-For maintainers:
-- [ ] I have :tophat:'d these changes.
-
+### This repo is no longer active. See README for details
