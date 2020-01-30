@@ -111,5 +111,20 @@ module.exports = {
       from: config.get('paths.theme.src.sections'),
       to: config.get('paths.theme.dist.sections'),
     }),
+
+    new SlateSectionsPlugin({
+      from: config.get('paths.theme.src.frame'),
+      to: config.get('paths.theme.dist.frame'),
+    }),
+
+    new SlateSectionsPlugin({
+      from: config.get('paths.theme.src.content'),
+      to: config.get('paths.theme.dist.content'),
+    }),
+
+    new SlateSectionsPlugin({
+      from: config.get('paths.theme.src.pages'),
+      to: config.get('paths.theme.dist.pages'),
+    }),
   ],
 };

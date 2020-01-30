@@ -18,7 +18,7 @@ function maybeDeploy() {
   if (filesToDeploy.length) {
     const files = [...filesToDeploy];
     filesToDeploy = [];
-    return deploy('upload', files);
+    return deploy('deploy', false, files);
   }
 
   return Promise.resolve();
@@ -45,17 +45,17 @@ function _generateConfigFlags() {
   _validateEnvValues();
 
   const flags = {
-    '--password': slateEnv.getPasswordValue(),
-    '--themeid': slateEnv.getThemeIdValue(),
-    '--store': slateEnv.getStoreValue(),
-    '--env': slateEnv.getEnvNameValue(),
+    password: slateEnv.getPasswordValue(),
+    themeId: slateEnv.getThemeIdValue(),
+    store: slateEnv.getStoreValue(),
+    env: slateEnv.getEnvNameValue(),
   };
   if (slateEnv.getTimeoutValue()) {
-    flags['--timeout'] = slateEnv.getTimeoutValue();
+    flags.timeout = slateEnv.getTimeoutValue();
   }
 
   // Convert object to key value pairs and flatten the array
-  return Array.prototype.concat(...Object.entries(flags));
+  return flags;
 }
 
 function _generateIgnoreFlags() {
@@ -63,8 +63,9 @@ function _generateIgnoreFlags() {
   const flags = [];
 
   ignoreFiles.forEach((pattern) => {
-    flags.push('--ignored-file');
-    flags.push(pattern);
+    if (pattern.length > 0) {
+      flags.push(pattern);
+    }
   });
 
   return flags;
@@ -77,11 +78,9 @@ function _generateIgnoreFlags() {
  * @param   files   Array     An array of files to deploy
  * @return          Promise
  */
-async function deploy(cmd = '', files = []) {
-  if (!['upload', 'replace'].includes(cmd)) {
-    throw new Error(
-      'shopify-deploy.deploy() first argument must be either "upload", "replace"',
-    );
+async function deploy(cmd = '', replace = false, files = []) {
+  if (!cmd === 'deploy') {
+    throw new Error(`shopify-deploy.deploy() first argument must be "deploy"`);
   }
 
   deploying = true;
@@ -90,7 +89,7 @@ async function deploy(cmd = '', files = []) {
 
   try {
     await promiseThemekitConfig();
-    await promiseThemekitDeploy(cmd, files);
+    await promiseThemekitDeploy(cmd, replace, files);
   } catch (error) {
     console.error('My Error', error);
   }
@@ -100,49 +99,34 @@ async function deploy(cmd = '', files = []) {
   return maybeDeploy;
 }
 
-function promiseThemekitConfig() {
-  return new Promise((resolve, reject) => {
-    themekit(
-      {
-        args: [
-          'configure',
-          ..._generateConfigFlags(),
-          ..._generateIgnoreFlags(),
-        ],
-        cwd: config.get('paths.theme.dist'),
-      },
-      (err) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve();
-        }
-      },
-    );
-  });
+async function promiseThemekitConfig() {
+  const configure = await themekit(
+    'configure',
+    {
+      ..._generateConfigFlags(),
+      ignoredFiles: _generateIgnoreFlags(),
+    },
+    {
+      cwd: config.get('paths.theme.dist'),
+    },
+  );
+  return configure;
 }
 
-function promiseThemekitDeploy(cmd, files) {
-  return new Promise((resolve, reject) => {
-    themekit(
-      {
-        args: [
-          cmd,
-          '--no-update-notifier',
-          ..._generateConfigFlags(),
-          ...files,
-        ],
-        cwd: config.get('paths.theme.dist'),
-      },
-      (err) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve();
-        }
-      },
-    );
-  });
+async function promiseThemekitDeploy(cmd, replace, files) {
+  const deployment = await themekit(
+    cmd,
+    {
+      noUpdateNotifier: true,
+      ..._generateConfigFlags(),
+      files: [...files],
+      noDelete: !replace,
+    },
+    {
+      cwd: config.get('paths.theme.dist'),
+    },
+  );
+  return deployment;
 }
 
 /**
@@ -233,11 +217,11 @@ module.exports = {
   },
 
   replace() {
-    return deploy('replace');
+    return deploy('deploy', true);
   },
 
   upload() {
-    return deploy('upload');
+    return deploy('deploy', false);
   },
 
   fetchMainThemeId,
