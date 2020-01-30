@@ -1,14 +1,2 @@
-### This repo is currently on low maintenance. See README for details
-
-### Problem
-
-*Succinct outline of the problem or request.*
-
-### Replication steps
-
-*How to replicate the problem. Screenshots or video?*
-
-### More Information
-
-*Any additional information which might be helpful.*
+### This repo is no longer active. See README for details
 

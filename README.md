@@ -2,32 +2,24 @@
 
 ![slate animated banner](https://user-images.githubusercontent.com/4837696/47506317-cbe22400-d83d-11e8-9867-1dc874943833.gif)
 
-## ⚠ Slate on Low Maintenance
-Due to project priority and resource constraints, this project is currently on low maintenance. We recognize that there are a lot of activities around this package. However, we are unable to accommodate the maintenance this project requires.
+## ⚠ Slate - End of Support (January 2020)
 
-### What does this mean?
+After re-evaluating Slate and its current state, Shopify has decided to officially end support for Slate.
 
-Slate won't have any dedicated maintainers during this period. All future work will be evaluated based on **Shopify's own development needs**.
+### Why?
 
-For example:
+With the launch of our new [section theme architecture](https://help.shopify.com/en/themes/development/sections-architecture) we're taking a step back to examine our current tooling and how we can deliver the best theming experience to our theme developers. 
 
-- PRs for bug fixes will be addressed by Shopify developers if their own work is blocked; either by bugs that have not yet been fixed or if their own work could benefit from new Slate features that do not currently exist.
-- Community PRs are always welcome! However, we cannot promise a quick turnaround time for reviewing, merging and publishing these updates. This is entirely up to the availability of Shopify developers and PR contributions will be addressed intermittently and when time permits.
+Slate is not in line with our vision for themes moving forward and it does not solve two of the larger asks our theme developers have made:
 
-Since there is no dedicated maintainer, there won't be any expectations for Shopify developers to address others' requests and/or issues, other than the ones that are currently being worked on.
+* Local development of a Shopify theme
+* Support for code versioning within themes
 
-### Should I continue using Slate?
-You may. As it is, Slate is still useful for Shopify themes development.
+### I’m a theme developer that is using Slate. What should I do now?
 
-### What happened? Why are you stopping? Will Shopify work on Slate in the future?
-Due to Shopify priorities and resource constraints, we have decided to put more emphasis on other projects. We have plans to return to Slate once our priorities change. While evaluating the current state of Slate, there are two key developer workflows that we are not satisfied with:
+Slate was built upon [Theme Kit](https://github.com/Shopify/themekit) as an opinionated way to setup up a Shopify theme build. Shopify will continue to actively maintain and support the growth of Theme Kit through the open-source community.
 
-- **Local development** - Slate is not a true local development environment
-- **File integrity (GitFlow and code version control)** - Slate does not offer the ability to be the source of truth for theme files
-
-We would like to address these two points above when we have our focus back on Slate.
-
-**This low maintenance period is time-boxed to 6 months from March 2019. We will re-visit and re-evaluate the project priority and plans for next steps.**
+You can continue using Slate the way you have been. While we will not be maintaining it any longer, you can still fork the repo to suit your own needs.
 
 <hr />
 
