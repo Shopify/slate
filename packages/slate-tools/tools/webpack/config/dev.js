@@ -1,3 +1,4 @@
+const argv = require('minimist')(process.argv.slice(2));
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
@@ -16,12 +17,14 @@ const getTemplateEntrypoints = require('./utilities/get-template-entrypoints');
 const HtmlWebpackIncludeLiquidStylesPlugin = require('../html-webpack-include-chunks');
 const config = new SlateConfig(require('../../../slate-tools.schema'));
 
-// add hot-reload related code to entry chunks
-Object.keys(entry.entry).forEach((name) => {
-  entry.entry[name] = [path.join(__dirname, '../hot-client.js')].concat(
-    entry.entry[name],
-  );
-});
+// add hot-reload related code to entry chunks if not liveDeploy
+if (!argv.liveDeploy) {
+  Object.keys(entry.entry).forEach((name) => {
+    entry.entry[name] = [path.join(__dirname, '../hot-client.js')].concat(
+      entry.entry[name],
+    );
+  });
+}
 
 module.exports = merge([
   core,
@@ -35,8 +38,6 @@ module.exports = merge([
     devtool: '#eval-source-map',
 
     plugins: [
-      new webpack.HotModuleReplacementPlugin(),
-
       new HtmlWebpackPlugin({
         excludeChunks: ['static'],
         filename: `../snippets/script-tags.liquid`,
@@ -46,7 +47,7 @@ module.exports = merge([
           removeComments: true,
           removeAttributeQuotes: false,
         },
-        isDevServer: true,
+        isDevServer: !argv.liveDeploy,
         liquidTemplates: getTemplateEntrypoints(),
         liquidLayouts: getLayoutEntrypoints(),
       }),
@@ -64,7 +65,7 @@ module.exports = merge([
         },
         // necessary to consistently work with multiple chunks via CommonsChunkPlugin
         chunksSortMode: 'dependency',
-        isDevServer: true,
+        isDevServer: !argv.liveDeploy,
         liquidTemplates: getTemplateEntrypoints(),
         liquidLayouts: getLayoutEntrypoints(),
       }),
