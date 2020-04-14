@@ -4,6 +4,10 @@ const config = new SlateConfig(require('../../../../slate-tools.schema'));
 
 const isDev = process.env.NODE_ENV === 'development';
 
+if (config.get('webpack.sourceMap.styles')) {
+  console.info("Enabling sourcemaps in styles when using HMR causes style-loader to inject styles using a <link> tag instead of <style> tag. This causes a FOUC content, which can cause issues with JS that is reading the DOM for styles (width, height, visibility) on page load.")
+}
+
 const part = {
   module: {
     rules: [],
@@ -28,14 +32,14 @@ const cssLoader = {
   // styles using a <link> tag instead of <style> tag. This causes
   // a FOUC content, which can cause issues with JS that is reading
   // the DOM for styles (width, height, visibility) on page load.
-  options: {sourceMap: !isDev},
+  options: {sourceMap: config.get('webpack.sourceMap.styles')},
 };
 
 const postcssLoader = {
   loader: 'postcss-loader',
   options: {
     ident: 'postcss',
-    sourceMap: !isDev,
+    sourceMap: config.get('webpack.sourceMap.styles'),
     plugins: config.get('webpack.postcss.plugins'),
   },
 };
