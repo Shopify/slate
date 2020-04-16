@@ -20,7 +20,7 @@ We will be continually iterating Slate Analytics to catch as many errors as poss
 | -------------------------------------- | --------------------------------------------------------------------------------------- |
 | `slate-analytics:new-user`             | Contents of `~/.slaterc` (Randomly generated user ID, Email, Tracking consent version)` |
 | `slate-analytics:renew-consent-prompt` | Contents of `~/.slaterc`                                                                |
-| `slate-analytics:renew-consent-tru`e   | Contents of `~/.slaterc`                                                                |
+| `slate-analytics:renew-consent-true`   | Contents of `~/.slaterc`                                                                |
 
 ### create-slate-theme
 
