@@ -124,7 +124,7 @@ describe('Slate Env', () => {
         expect(envParsed).toHaveProperty(config.get('env.keys.store'), store);
       });
 
-      test('with invalid config values ommited', () => {
+      test('with invalid config values omitted', () => {
         const env = slateEnv.getEmptySlateEnv();
         const store = 'test-shop.myshopify.com';
         const invalidKey = 'INVALID_VARIABLE';

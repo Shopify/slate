@@ -94,7 +94,7 @@ module.exports = class sectionsPlugin {
    *
    * @param {string} liquidSourcePath // Absolute path to the source liquid file
    * @param {Compilation} compilationOutput // Output path set for webpack
-   * @returns The key thats needed to provide the Compilation object the correct location to output
+   * @returns The key that's needed to provide the Compilation object the correct location to output
    * Sources
    */
   _getOutputKey(liquidSourcePath, compilationOutput) {

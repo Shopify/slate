@@ -28,6 +28,6 @@ SLATE_PASSWORD=
 # The ID of the theme you wish to upload files too
 SLATE_THEME_ID=
 
-# A list of file patterns to ignore, with each list item seperated by ':'
+# A list of file patterns to ignore, with each list item separated by ':'
 SLATE_IGNORE_FILES=
 ```

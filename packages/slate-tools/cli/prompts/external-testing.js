@@ -29,7 +29,7 @@ module.exports = async function promptExternalTesting() {
       )}  It looks like you are connected to the internet with the IP address,
    '${chalk.green(
      ip.address()
-   )}', which is publically accessible. This could result
+   )}', which is publicly accessible. This could result
    in security vulnerabilities to your development machine if you want to test
    your dev store from an external device, e.g. your phone. We recommend you
    proceed with external testing disabled until you are connected to the internet

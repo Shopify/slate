@@ -20,7 +20,7 @@ function forNewConsent() {
 
   console.log(
     wrap(
-      '👋  Welcome to Slate! During the beta, we would like to gather usage analytics, such as interactions with Slate commands, performance reports, and error occurances. The data does not include any sensitive information. The detailed list of data we gather can be found at:',
+      '👋  Welcome to Slate! During the beta, we would like to gather usage analytics, such as interactions with Slate commands, performance reports, and error occurrences. The data does not include any sensitive information. The detailed list of data we gather can be found at:',
       {width: 80, indent: ''},
     ),
   );
@@ -36,7 +36,7 @@ function forNewConsent() {
 
 function forUpdatedConsent(email) {
   console.log(
-    "It looks like you've recently upgraded Slate and this new version has some changes to tracking and we need to get your updated consent decision before proceed. During the beta, we would like to gather usage analytics, such as interactions with Slate commands, performance reports, and error occurances. The data does not include any sensitive information. The list of updates can be found at:",
+    "It looks like you've recently upgraded Slate and this new version has some changes to tracking and we need to get your updated consent decision before proceed. During the beta, we would like to gather usage analytics, such as interactions with Slate commands, performance reports, and error occurrences. The data does not include any sensitive information. The list of updates can be found at:",
   );
   console.log(
     chalk.cyan(
