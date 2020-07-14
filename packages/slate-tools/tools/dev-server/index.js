@@ -30,11 +30,20 @@ class DevServer {
           next();
         },
         proxyRes: [
-          function(proxyRes) {
+          function (proxyRes) {
             // disable HSTS. Slate might force us to use HTTPS but having HSTS on local dev makes it impossible to do other non-Slate dev.
             delete proxyRes.headers['strict-transport-security'];
           },
         ],
+      },
+      // Fix analytics injection bug
+      snippetOptions: {
+        rule: {
+          match: /<\/body>/i,
+          fn: function (snippet, match) {
+            return snippet + match;
+          },
+        },
       },
       https: {key: getSSLKeyPath(), cert: getSSLCertPath()},
       logLevel: 'silent',
