@@ -1173,10 +1173,10 @@
     htmllint "^0.6.0"
     lodash "^4.15.0"
 
-"@shopify/themekit@0.6.12":
-  version "0.6.12"
-  resolved "https://registry.yarnpkg.com/@shopify/themekit/-/themekit-0.6.12.tgz#7cf86175b3b62ef7f405f068fd6f7c0cc8fd30bc"
-  integrity sha512-8yzAoXACUvAJEZU7vpcIGZcMayHcvwMqEc2XKKSSqZN7HHD1VMbogepMb/8h6jZ0xFUHH0IQSpT0sKZfAKDMrw==
+"@shopify/themekit@^1.0.1":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@shopify/themekit/-/themekit-1.1.2.tgz#658a54a9b933ffb13015f5e4eae8a10b4d704bd7"
+  integrity sha512-+/iu/U4UHDM0VmPfx0dgj7mtjSD5QS09JOnS1Lz9iitxzKl/YdZ0GwnJK0plmt5TxqRpzFK5hYbM9DYBnto9Bg==
   dependencies:
     bin-wrapper "3.0.2"
     minimist "1.2.0"
