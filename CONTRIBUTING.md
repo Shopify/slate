@@ -1,6 +1,6 @@
 # Contributing Guide
 
-### This repo is currently on low maintenance. See README for details
+## This repo is no longer active. See README for details
 
 Slate is an open-source project built for the Shopify Theme community and it needs contributions from the community to be truly successful. We encourage you to join us in our mission of enhancing the Shopify theme development experience!
 
@@ -108,7 +108,12 @@ If your change affects how people use the project (i.e. adding or removing funct
 
 The documentation website lives in the [docs folder](https://github.com/Shopify/slate/tree/master/docs) on the `master` branch and is hosted using GitHub Pages on the `gh-pages` branch.
 
-You only need to update the source files and Travis CI will take care of deploying the changes when your Pull Request is merged into the `master` branch.
+To publish to `gh-pages` branch, in the `v1` docs folder run
+
+```
+GIT_USER=<GITHUB_USERNAME> CURRENT_BRANCH=master USE_SSH=true yarn run publish-gh-pages
+```
+
 
 You can read both the README files in the [v0 folder](https://github.com/Shopify/slate/tree/master/docs/v0) and the [v1 folder](https://github.com/Shopify/slate/tree/master/docs/v0) to see how to run the documentation site locally. 
 
