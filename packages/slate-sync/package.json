@@ -11,7 +11,6 @@
   },
   "engine": ">=8.9.4",
   "dependencies": {
-    "@shopify/slate-analytics": "1.0.0-beta.16",
     "@shopify/slate-config": "1.0.0-beta.14",
     "@shopify/slate-env": "1.0.0-beta.16",
     "@shopify/themekit": "0.6.12",

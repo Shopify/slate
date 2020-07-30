@@ -31,9 +31,6 @@ SLATE_THEME_ID=
 # `node node_modules/.bin/slate-tools build` or `yarn build` and inspect the
 # contents for the `dist/` directory for files you wish to ignore.
 SLATE_IGNORE_FILES=
-
-# The email of the user to register for Slate analytics. Skips prompt for email.
-SLATE_USER_EMAIL=
 ```
 
 # Store / Environment Configuration Tips

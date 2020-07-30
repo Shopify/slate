@@ -1,21 +1,13 @@
 {
   "name": "slate",
   "private": true,
-  "author": "Shopify Inc.",
-  "description": "A theme scaffold and command line tool for developing Shopify themes.",
-  "keywords": [
-    "slate",
-    "shopify",
-    "theme",
-    "CLI"
-  ],
-  "engine": ">=8.9.4",
-  "homepage": "https://shopify.github.io/slate/",
-  "bugs": "https://github.com/Shopify/slate/issues",
+  "engine": ">=12.18.3",
+  "homepage": "https://processcreative.com.au",
+  "bugs": "https://github.com/Process-Creative/slate/issues",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Shopify/slate.git"
+    "url": "https://github.com/Process-Creative/slate.git"
   },
   "scripts": {
     "test": "jest --silent",
