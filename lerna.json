@@ -1,0 +1,17 @@
+{
+  "lerna": "3.11.0",
+  "version": "1.0.0-beta.19",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "changelog": {
+    "repo": "process-creative/slate",
+    "labels": {
+      "enhancement": ":rocket: Enhancement",
+      "bug": ":bug: Bug Fix",
+      "documentation": ":memo: Documentation",
+      "internal": ":house: Internal",
+      "config": ":wrench Config"
+    },
+    "cacheDir": ".changelog"
+  }
+}

@@ -10,8 +10,7 @@ const SLATE_ENV_VARS = [
   config.get('env.keys.password'),
   config.get('env.keys.themeId'),
   config.get('env.keys.ignoreFiles'),
-  config.get('env.keys.timeout'),
-  config.get('env.keys.userEmail'),
+  config.get('env.keys.timeout')
 ];
 
 const DEFAULT_ENV_VARS = [
@@ -237,11 +236,6 @@ function getTimeoutValue() {
   return typeof value === 'undefined' ? '' : value;
 }
 
-function getUserEmail() {
-  const value = process.env[config.get('env.keys.userEmail')];
-  return typeof value === 'undefined' ? '' : value;
-}
-
 module.exports = {
   create,
   assign,
@@ -256,5 +250,4 @@ module.exports = {
   getThemeIdValue,
   getIgnoreFilesValue,
   getTimeoutValue,
-  getUserEmail,
 };
