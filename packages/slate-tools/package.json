@@ -22,7 +22,6 @@
     "@shopify/slate-sync": "1.0.0-beta.16",
     "@shopify/slate-tag-webpack-plugin": "1.0.0-beta.14",
     "@shopify/slate-translations": "1.0.0-beta.19",
-    "@shopify/theme-lint": "^2.0.0",
     "@shopify/themekit": "0.6.12",
     "archiver": "^2.1.0",
     "array-flatten": "^2.1.1",
@@ -53,7 +52,6 @@
     "img-loader": "2.0.1",
     "inquirer": "^5.0.1",
     "ip": "^1.1.5",
-    "jest": "^26.2.1",
     "lerna": "^3.22.1",
     "lerna-changelog": "^1.0.1",
     "mini-css-extract-plugin": "^0.4.3",
@@ -64,14 +62,10 @@
     "portscanner": "^2.2.0",
     "postcss-loader": "2.1.1",
     "postcss-reporter": "^5.0.0",
-    "prettier": "^2.0.5",
     "raw-loader": "^0.5.1",
     "react-dev-utils": "0.5.2",
     "sass-loader": "6.0.7",
     "style-loader": "0.20.3",
-    "stylelint": "^13.6.1",
-    "stylelint-config-shopify": "^7.4.0",
-    "stylelint-webpack-plugin": "^0.10.1",
     "tapable": "^1.0.0",
     "uglifyjs-webpack-plugin": "^1.0.1",
     "uuid": "^3.2.1",
@@ -82,9 +76,6 @@
     "write-file-webpack-plugin": "4.4.0",
     "yamljs": "0.2.10",
     "yargs": "^11.0.0"
-  },
-  "devDependencies": {
-    "mock-fs": "^4.6.0"
   },
   "publishConfig": {
     "access": "public",

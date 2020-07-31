@@ -12,9 +12,7 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
-    "babel-jest": "^24.5.0",
-    "babel-preset-env": "^1.7.0",
-    "jest": "^24.5.0"
+    "babel-preset-env": "^1.7.0"
   },
   "publishConfig": {
     "access": "public",

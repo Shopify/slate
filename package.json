@@ -10,12 +10,6 @@
     "url": "https://github.com/Process-Creative/slate.git"
   },
   "scripts": {
-    "test": "jest --silent",
-    "lint": "eslint --max-warnings 10 ./ && stylelint './**/*.[s]css'",
-    "lint:styles": "stylelint '**/*.[s]css'",
-    "lint:fix": "eslint ./ --fix && prettier-stylelint **/*.scss",
-    "lint:fix-js": "eslint ./ --fix",
-    "lint:fix-styles": "prettier-stylelint --write",
     "bootstrap": "yarn install && lerna bootstrap",
     "changelog": "node_modules/.bin/lerna-changelog",
     "clean": "lerna clean",
@@ -26,20 +20,8 @@
   "devDependencies": {
     "babel-jest": "^22.0.4",
     "babel-preset-shopify": "^16.2.0",
-    "eslint": "^4.10.0",
-    "eslint-plugin-shopify": "^19.0.1",
-    "jest": "^23.6.0",
     "lerna": "^3.11.0",
-    "lerna-changelog": "^0.7.0",
-    "prettier": "^1.7.4",
-    "prettier-stylelint": "^0.4.2",
-    "stylelint": "^9.1.2",
-    "stylelint-config-shopify": "^5.0.0"
-  },
-  "prettier": {
-    "singleQuote": true,
-    "trailingComma": "es5",
-    "bracketSpacing": false
+    "lerna-changelog": "^0.7.0"
   },
   "workspaces": [
     "packages/*"
