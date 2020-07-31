@@ -1,7 +1,6 @@
 {
   "name": "slate",
   "private": true,
-  "engine": ">=12.18.3",
   "homepage": "https://processcreative.com.au",
   "bugs": "https://github.com/Process-Creative/slate/issues",
   "license": "MIT",

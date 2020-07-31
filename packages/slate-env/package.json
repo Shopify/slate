@@ -1,15 +1,7 @@
 {
   "name": "@process-creative/slate-env",
   "version": "2.0.0",
-  "description": "Manages the environment variables which are needed by Slate to interact with Shopify servers.",
   "main": "index.js",
-  "repository": "https://github.com/Shopify/slate/tree/1.x/packages/slate-env",
-  "author": "Shopify Inc.",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/shopify/slate/issues"
-  },
-  "homepage": "https://github.com/shopify/slate#readme",
   "dependencies": {
     "@process-creative/slate-config": "2.0.0",
     "dotenv": "^4.0.0"

@@ -1,17 +1,9 @@
 {
   "name": "@process-creative/slate-tools",
   "version": "2.0.0",
-  "description": "A modern development toolkit for Shopify themes",
-  "repository": "https://github.com/Shopify/slate/tree/1.x/packages/slate-tools",
-  "license": "MIT",
-  "author": "Shopify",
-  "bugs": {
-    "url": "https://github.com/Shopify/slate/issues"
-  },
   "bin": {
     "slate-tools": "./cli/index.js"
   },
-  "engine": ">=8.9.4",
   "dependencies": {
     "@process-creative/concat-style-loader": "2.0.0",
     "@process-creative/slate-config": "2.0.0",
@@ -74,9 +66,5 @@
     "write-file-webpack-plugin": "4.4.0",
     "yamljs": "0.2.10",
     "yargs": "^11.0.0"
-  },
-  "publishConfig": {
-    "access": "public",
-    "@shopify:registry": "https://registry.npmjs.org"
   }
 }

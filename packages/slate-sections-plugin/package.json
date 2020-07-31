@@ -2,14 +2,9 @@
   "name": "@process-creative/slate-sections-plugin",
   "version": "2.0.0",
   "main": "index.js",
-  "license": "MIT",
   "dependencies": {
     "@process-creative/slate-translations": "2.0.0",
     "fs-extra": "^7.0.1",
     "webpack-sources": "^1.3.0"
-  },
-  "publishConfig": {
-    "access": "public",
-    "@shopify:registry": "https://registry.npmjs.org"
   }
 }

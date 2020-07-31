@@ -2,7 +2,6 @@
   "name": "@process-creative/slate-translations",
   "version": "2.0.0",
   "main": "index.js",
-  "license": "MIT",
   "dependencies": {
     "fs-extra": "^7.0.1",
     "lodash": "^4.17.11",
@@ -10,9 +9,5 @@
   },
   "devDependencies": {
     "babel-preset-env": "^1.7.0"
-  },
-  "publishConfig": {
-    "access": "public",
-    "@shopify:registry": "https://registry.npmjs.org"
   }
 }
