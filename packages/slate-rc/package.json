@@ -11,7 +11,7 @@
   },
   "homepage": "https://github.com/shopify/slate",
   "dependencies": {
-    "@process-creative/slate-config": "1.0.0-beta.14",
+    "@process-creative/slate-config": "2.0.0",
     "@process-creative/slate-error": "1.0.0-beta.14",
     "fs-extra": "^5.0.0",
     "mock-fs": "^4.4.2",

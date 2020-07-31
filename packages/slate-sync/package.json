@@ -11,7 +11,7 @@
   },
   "engine": ">=8.9.4",
   "dependencies": {
-    "@process-creative/slate-config": "1.0.0-beta.14",
+    "@process-creative/slate-config": "2.0.0",
     "@process-creative/slate-env": "1.0.0-beta.16",
     "@shopify/themekit": "0.6.12",
     "array-flatten": "^2.1.1",
