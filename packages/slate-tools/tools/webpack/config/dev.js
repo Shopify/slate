@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const SlateConfig = require('@shopify/slate-config');
+const SlateConfig = require('@process-creative/slate-config');
 
 const core = require('./parts/core');
 const babel = require('./parts/babel');

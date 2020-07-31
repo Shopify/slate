@@ -1,5 +1,5 @@
 {
-  "name": "@shopify/slate-error",
+  "name": "@process-creative/slate-error",
   "version": "1.0.0-beta.14",
   "description": "Slate's global error class",
   "main": "index.js",

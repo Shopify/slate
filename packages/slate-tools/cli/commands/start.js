@@ -9,8 +9,8 @@ const ora = require('ora');
 const consoleControl = require('console-control-strings');
 const clearConsole = require('react-dev-utils/clearConsole');
 const ip = require('ip');
-const env = require('@shopify/slate-env');
-const SlateConfig = require('@shopify/slate-config');
+const env = require('@process-creative/slate-env');
+const SlateConfig = require('@process-creative/slate-config');
 
 const promptContinueIfPublishedTheme = require('../prompts/continue-if-published-theme');
 const promptSkipSettingsData = require('../prompts/skip-settings-data');

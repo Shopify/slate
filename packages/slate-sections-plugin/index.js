@@ -4,7 +4,7 @@ const {ConcatSource, RawSource} = require('webpack-sources');
 const {
   createSchemaContentWithLocales,
   combineLocales,
-} = require('@shopify/slate-translations');
+} = require('@process-creative/slate-translations');
 
 const DEFAULT_GENERIC_TEMPLATE_NAME = 'template.liquid';
 const PLUGIN_NAME = 'Slate Sections Plugin';

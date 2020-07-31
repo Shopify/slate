@@ -1,6 +1,6 @@
 const argv = require('minimist')(process.argv.slice(2));
 const chalk = require('chalk');
-const {replace, upload} = require('@shopify/slate-sync');
+const {replace, upload} = require('@process-creative/slate-sync');
 
 const packageJson = require('../../package.json');
 const promptContinueIfPublishedTheme = require('../prompts/continue-if-published-theme');

@@ -1,6 +1,6 @@
 const fs = require('fs');
 const uuidGenerator = require('uuid/v4');
-const SlateConfig = require('@shopify/slate-config');
+const SlateConfig = require('@process-creative/slate-config');
 const config = new SlateConfig(require('./slate-rc.schema'));
 const SlateRcError = require('./slate-rc-error');
 

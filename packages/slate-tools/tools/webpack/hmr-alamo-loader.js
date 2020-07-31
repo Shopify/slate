@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-const SlateConfig = require('@shopify/slate-config');
+const SlateConfig = require('@process-creative/slate-config');
 const config = new SlateConfig(require('../../slate-tools.schema'));
 
 const jsEntries = Object.keys(config.get('webpack.entrypoints')).reduce(

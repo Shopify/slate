@@ -1,5 +1,5 @@
 const browserSync = require('browser-sync');
-const {getStoreValue, getThemeIdValue} = require('@shopify/slate-env');
+const {getStoreValue, getThemeIdValue} = require('@process-creative/slate-env');
 const {getSSLKeyPath, getSSLCertPath} = require('../utilities');
 
 class DevServer {

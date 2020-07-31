@@ -2,7 +2,7 @@ const path = require('path');
 const os = require('os');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
-const commonPaths = require('@shopify/slate-config/common/paths.schema');
+const commonPaths = require('@process-creative/slate-config/common/paths.schema');
 
 module.exports = {
   ...commonPaths,

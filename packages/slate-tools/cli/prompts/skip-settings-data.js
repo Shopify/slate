@@ -4,8 +4,8 @@ const figures = require('figures');
 const flatten = require('array-flatten');
 const minimatch = require('minimatch');
 const {argv} = require('yargs');
-const {getIgnoreFilesValue} = require('@shopify/slate-env');
-const SlateConfig = require('@shopify/slate-config');
+const {getIgnoreFilesValue} = require('@process-creative/slate-env');
+const SlateConfig = require('@process-creative/slate-config');
 
 const config = new SlateConfig(require('../../slate-tools.schema'));
 

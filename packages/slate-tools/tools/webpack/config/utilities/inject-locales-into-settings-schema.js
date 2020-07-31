@@ -3,7 +3,7 @@ const path = require('path');
 const {
   createSchemaContentWithLocales,
   combineLocales,
-} = require('@shopify/slate-translations');
+} = require('@process-creative/slate-translations');
 
 module.exports = async function(content, filePath) {
   if (path.basename(filePath) !== 'settings_schema.json') {

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const dotenv = require('dotenv');
-const SlateConfig = require('@shopify/slate-config');
+const SlateConfig = require('@process-creative/slate-config');
 const config = new SlateConfig(require('./slate-env.schema'));
 
 const SLATE_ENV_VARS = [

@@ -18,10 +18,9 @@
     "release": "lerna version --exact && git push --follow-tags"
   },
   "devDependencies": {
-    "babel-jest": "^22.0.4",
-    "babel-preset-shopify": "^16.2.0",
+    "babel-preset-shopify": "^21.0.0",
     "lerna": "^3.11.0",
-    "lerna-changelog": "^0.7.0"
+    "lerna-changelog": "^1.0.1"
   },
   "workspaces": [
     "packages/*"

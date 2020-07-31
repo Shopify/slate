@@ -4,8 +4,8 @@ const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const SlateConfig = require('@shopify/slate-config');
-const SlateTagPlugin = require('@shopify/slate-tag-webpack-plugin');
+const SlateConfig = require('@process-creative/slate-config');
+const SlateTagPlugin = require('@process-creative/slate-tag-webpack-plugin');
 
 const babel = require('./parts/babel');
 const sass = require('./parts/sass');

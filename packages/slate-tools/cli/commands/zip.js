@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const archiver = require('archiver');
 const chalk = require('chalk');
-const SlateConfig = require('@shopify/slate-config');
+const SlateConfig = require('@process-creative/slate-config');
 
 const config = new SlateConfig(require('../../slate-tools.schema'));
 

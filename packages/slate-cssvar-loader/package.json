@@ -1,5 +1,5 @@
 {
-  "name": "@shopify/slate-cssvar-loader",
+  "name": "@process-creative/slate-cssvar-loader",
   "version": "1.0.0-beta.16",
   "description": "Finds CSS custom properties (variables) in your stylesheets and replaces them with their corresponding liquid variable",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "homepage": "https://github.com/Shopify/slate#readme",
   "dependencies": {
-    "@shopify/slate-config": "1.0.0-beta.14",
+    "@process-creative/slate-config": "1.0.0-beta.14",
     "loader-utils": "^1.1.0"
   },
   "devDependencies": {

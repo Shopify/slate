@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const SlateConfig = require('@shopify/slate-config');
+const SlateConfig = require('@process-creative/slate-config');
 const config = new SlateConfig(require('./slate-cssvar-loader.schema'));
 
 const STYLE_BLOCK_REGEX = /(?:<style>|\{%-? style -?%\})([\S\s]*?)(?:<\/style>|\{%-? endstyle -?%\})/g;

@@ -2,7 +2,7 @@ const path = require('path');
 const {promisify} = require('util');
 const {existsSync, readFileSync} = require('fs');
 const portscanner = require('portscanner');
-const SlateConfig = require('@shopify/slate-config');
+const SlateConfig = require('@process-creative/slate-config');
 
 const config = new SlateConfig(require('../../slate-tools.schema'));
 

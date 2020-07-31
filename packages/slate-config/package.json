@@ -1,5 +1,5 @@
 {
-  "name": "@shopify/slate-config",
+  "name": "@process-creative/slate-config",
   "version": "1.0.0-beta.14",
   "description": "Generate configurations for Slate packages by applying values from slate.config.js to override default values",
   "main": "index.js",

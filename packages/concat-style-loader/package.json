@@ -9,13 +9,5 @@
   "bugs": {
     "url": "https://github.com/Shopify/slate/issues"
   },
-  "homepage": "https://github.com/Shopify/slate#readme",
-  "devDependencies": {
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "memory-fs": "^0.4.1",
-    "webpack": "^4.4.1"
-  },
-  "dependencies": {
-    "loader-utils": "^1.1.0"
-  }
+  "homepage": "https://github.com/Shopify/slate#readme"
 }

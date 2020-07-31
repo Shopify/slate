@@ -1,5 +1,5 @@
 const path = require('path');
-const commonPaths = require('@shopify/slate-config/common/paths.schema');
+const commonPaths = require('@process-creative/slate-config/common/paths.schema');
 
 module.exports = {
   ...commonPaths,

@@ -2,7 +2,7 @@
 const spawn = require('cross-spawn');
 const chalk = require('chalk');
 const argv = require('minimist')(process.argv.slice(2));
-const slateEnv = require('@shopify/slate-env');
+const slateEnv = require('@process-creative/slate-env');
 
 const script = process.argv[2];
 const args = process.argv.slice(3);
