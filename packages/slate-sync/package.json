@@ -1,6 +1,6 @@
 {
   "name": "@process-creative/slate-sync",
-  "version": "1.0.0-beta.16",
+  "version": "2.0.0",
   "description": "Slate's Shopify API client which handles all theme development requests",
   "repository": "https://github.com/Shopify/slate/tree/1.x/packages/slate-sync",
   "license": "MIT",
@@ -12,7 +12,7 @@
   "engine": ">=8.9.4",
   "dependencies": {
     "@process-creative/slate-config": "2.0.0",
-    "@process-creative/slate-env": "1.0.0-beta.16",
+    "@process-creative/slate-env": "2.0.0",
     "@shopify/themekit": "0.6.12",
     "array-flatten": "^2.1.1",
     "chalk": "2.3.2",

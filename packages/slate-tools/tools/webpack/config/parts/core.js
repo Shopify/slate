@@ -63,7 +63,7 @@ module.exports = {
       {
         test: /(css|scss|sass)\.liquid$/,
         exclude: config.get('webpack.commonExcludes'),
-        use: extractLiquidStyles.extract(['concat-style-loader']),
+        use: extractLiquidStyles.extract(['@process-creative/concat-style-loader']),
       },
     ],
   },
