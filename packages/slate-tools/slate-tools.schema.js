@@ -10,17 +10,6 @@ module.exports = {
   // Enable/disable the prompt to skip uploading settings_data.json
   'cli.promptSettings': true,
 
-  // Path to Eslint bin executable
-  'eslint.bin': path.resolve(__dirname, 'node_modules/.bin/eslint'),
-
-  // Path to .eslintignore file
-  'eslint.ignorePath': (config) =>
-    path.resolve(config.get('paths.theme'), '.eslintignore'),
-
-  // Path to .eslintrc file
-  'eslint.config': (config) =>
-    path.resolve(config.get('paths.theme'), '.eslintrc'),
-
   // Slate will reference files using your local IP address instead of localhost.
   // This is mostly to get around SSL complications when trying to preview
   // your development store from an external device like your phone. Use this
@@ -36,17 +25,6 @@ module.exports = {
   // that is available is used.
   'network.startPort': 3000,
 
-  // Path to Prettier bin executable
-  'prettier.bin': path.resolve(__dirname, 'node_modules/.bin/prettier'),
-
-  // Path to .prettierrc file
-  'prettier.config': (config) =>
-    path.resolve(config.get('paths.theme'), '.prettierrc'),
-
-  // Path to .prettierignore file
-  'prettier.ignorePath': (config) =>
-    path.resolve(config.get('paths.theme'), '.prettierignore'),
-
   // Path to self-signed SSL certificate which is used when developing
   // (browsersync, asset server) to avoid browsers rejecting requests based
   // on SSL
@@ -56,20 +34,6 @@ module.exports = {
   // (browsersync, asset server) to avoid browsers rejecting requests based
   // on SSL
   'ssl.key': path.resolve(os.homedir(), '.localhost_ssl/server.key'),
-
-  // Path to Eslint bin executable
-  'stylelint.bin': path.resolve(__dirname, 'node_modules/.bin/stylelint'),
-
-  // Path to .stylelintrc file
-  'stylelint.config': (config) =>
-    path.resolve(config.get('paths.theme'), '.stylelintrc'),
-
-  // Path to .stylelintignore file
-  'stylelint.ignorePath': (config) =>
-    path.resolve(config.get('paths.theme'), '.stylelintignore'),
-
-  // Path to Themelint bin executable
-  'themelint.bin': path.resolve(__dirname, 'node_modules/.bin/theme-lint'),
 
   // Include babel-loader in the webpack core config
   'webpack.babel.enable': true,

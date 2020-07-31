@@ -1,9 +1,0 @@
-{
-  "name": "posts",
-  "settings": {
-    "image_parallax": {
-      "label": "Exibir animação de paralaxe da imagem",
-      "info": "Aparece apenas na área de trabalho"
-    }
-  }
-}

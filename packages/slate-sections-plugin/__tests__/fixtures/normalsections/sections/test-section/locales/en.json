@@ -1,9 +1,0 @@
-{
-  "name": "Posts",
-  "settings": {
-    "image_parallax": {
-      "label": "Show image parallax animation",
-      "info": "Only shows on desktop"
-    }
-  }
-}

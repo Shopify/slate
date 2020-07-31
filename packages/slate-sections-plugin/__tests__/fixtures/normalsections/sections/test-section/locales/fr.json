@@ -1,9 +1,0 @@
-{
-  "name": "Articles",
-  "settings": {
-    "image_parallax": {
-      "label": "Afficher l'animation en parallaxe",
-      "info": "Ne s'affiche que sur le bureau"
-    }
-  }
-}

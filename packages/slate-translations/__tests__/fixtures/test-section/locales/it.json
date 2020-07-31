@@ -1,9 +1,0 @@
-{
-  "name": "Articoli",
-  "settings": {
-    "image_parallax": {
-      "label": "Mostra animazione parallasse immagine",
-      "info": "Appare solo su desktop"
-    }
-  }
-}
