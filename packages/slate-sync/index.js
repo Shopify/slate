@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 const figures = require('figures');
 const https = require('https');
-const themekit = require('@slate/themekit').command;
+const themekit = require('@shopify/themekit').command;
 const slateEnv = require('@process-creative/slate-env');
 const SlateConfig = require('@process-creative/slate-config');
 
