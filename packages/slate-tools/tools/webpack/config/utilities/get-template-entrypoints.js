@@ -32,6 +32,13 @@ function isValidTemplate(filename) {
   return Boolean(name);
 }
 
+function getTemplateBaseName(filename) {
+  const name = VALID_LIQUID_TEMPLATES.filter((template) =>
+    filename.startsWith(`${template}.`),
+  );
+  return name[0] || false;
+}
+
 module.exports = function() {
   const entrypoints = {};
 
@@ -43,15 +50,20 @@ module.exports = function() {
       `${name}.js`,
     );
 
-    if ((isValidTemplate(name) && fs.existsSync(jsFile) && !name.includes('product')) || (isValidTemplate(name) && fs.existsSync(jsFile) && name == 'product')) {
-      entrypoints[`template.${name}`] = jsFile;
-    } else if (isValidTemplate(name) && fs.existsSync(jsFile) && name.includes('product') && name !== 'product') {
-      entrypoints[`template.${name}`] = [jsFile, path.join(
-        config.get('paths.theme.src.scripts'),
-        'templates',
-        `product.js`,
-      )];
-    } 
+    //Allow unique templates to not inherit global scripts by using naming convention <template>.unique.<name>.liquid
+    //Allow custom templates to inherit global scripts by using naming convention <template>.<name>.liquid
+    if(isValidTemplate(name) && fs.existsSync(jsFile)) {
+      const baseTemplateName = getTemplateBaseName(name);
+      if (!name.includes(baseTemplateName) || name == baseTemplateName || name.startsWith(`${baseTemplateName}.unique`)) {
+        entrypoints[`template.${name}`] = jsFile;
+      } else if (name.includes(baseTemplateName)) {
+        entrypoints[`template.${name}`] = [jsFile, path.join(
+          config.get('paths.theme.src.scripts'),
+          'templates',
+          `${baseTemplateName}.js`,
+        )];
+      } 
+    }
   });
 
   fs
