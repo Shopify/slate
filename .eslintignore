@@ -1,7 +1,0 @@
-packages/slate-cssvar-loader/__tests__/fixtures
-packages/slate-theme/dist
-packages/slate-theme/src/scripts/**/*.js.liquid
-**/node_modules/
-docs/
-ci/
-docusaurus/

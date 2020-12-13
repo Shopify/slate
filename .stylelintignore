@@ -1,7 +1,0 @@
-packages/slate-theme/dist
-packages/slate-theme/src/scripts/**/*.js.liquid
-**/node_modules/
-docs/
-ci/
-git:/
-docusaurus/

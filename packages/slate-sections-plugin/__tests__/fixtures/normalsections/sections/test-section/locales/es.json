@@ -1,9 +1,0 @@
-{
-  "name": "Publicaciones",
-  "settings": {
-    "image_parallax": {
-      "label": "Mostrar animación de paralaje de imagen",
-      "info": "Solo se muestra en el escritorio"
-    }
-  }
-}

@@ -48,3 +48,8 @@ deploy.log
 ci/
 repodb.yml
 docs
+.env
+.env*
+**/cypress/videos/
+**/cypress/screenshots/
+**/slate-tester/cypress
