@@ -1,7 +1,10 @@
 {
   "name": "slate",
   "private": true,
-  "author": "Shopify Inc.",
+  "author": "Dominic Masters",
+  "contributors": [
+    "Shopify Inc."
+  ],
   "description": "A theme scaffold and command line tool for developing Shopify themes.",
   "keywords": [
     "slate",
@@ -11,11 +14,11 @@
   ],
   "engine": ">=8.9.4",
   "homepage": "https://shopify.github.io/slate/",
-  "bugs": "https://github.com/Shopify/slate/issues",
+  "bugs": "https://github.com/YourWishes/slate/issues",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Shopify/slate.git"
+    "url": "https://github.com/YourWishes/slate.git"
   },
   "scripts": {
     "test": "jest --silent",
