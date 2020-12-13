@@ -1,0 +1,12 @@
+{%- capture preftchUrls -%}
+  //monorail-edge.shopifysvc.com;
+  //cdn.shopify.com;
+  //cdnjs.cloudflare.com;
+{%- endcapture -%}
+{%- liquid
+  assign urls = preftchUrls | split: ';'
+  for url in urls
+    assign u = url | strip
+    echo '<link rel="dns-prefetch" href="' | append: u | append: '" />'
+  endfor
+-%}

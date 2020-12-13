@@ -16,17 +16,19 @@ module.exports = function(module, chunks, cacheGroup) {
   if (!names.every(Boolean)) return;
 
   names.sort();
-  let name =
-    (cacheGroup && cacheGroup !== 'default' ? `${cacheGroup}@` : '') +
-    names.join('@');
+
+  let name = (
+    (cacheGroup && cacheGroup !== 'default' ? `${cacheGroup}_` : '') +
+    names.join('_')
+  );
 
   // Filenames and paths can't be too long otherwise an
   // ENAMETOOLONG error is raised. If the generated name is too
   // long, it is truncated and a hash is appended. The limit has
   // been set to 100 to prevent `[name].[chunkhash].[ext]` from
   // generating a 256+ character string.
-  if (name.length > 256) {
-    name = `${name.slice(0, 240)}~${hashFilename(name)}`;
+  if (name.length > 150) {
+    name = `${name.slice(0, 140)}~${hashFilename(name)}`;
   }
 
   /* eslint-disable-next-line consistent-return */

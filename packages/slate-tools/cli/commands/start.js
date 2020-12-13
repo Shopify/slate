@@ -6,12 +6,11 @@ const argv = require('minimist')(process.argv.slice(2));
 const figures = require('figures');
 const chalk = require('chalk');
 const ora = require('ora');
-const consoleControl = require('console-control-strings');
 const clearConsole = require('react-dev-utils/clearConsole');
 const ip = require('ip');
-const env = require('@shopify/slate-env');
-const {event} = require('@shopify/slate-analytics');
-const SlateConfig = require('@shopify/slate-config');
+const env = require('@yourwishes/slate-env');
+const SlateConfig = require('@yourwishes/slate-config');
+const open = require('open');
 
 const promptContinueIfPublishedTheme = require('../prompts/continue-if-published-theme');
 const promptSkipSettingsData = require('../prompts/skip-settings-data');
@@ -33,8 +32,6 @@ let continueIfPublishedTheme = null;
 let assetServer;
 let devServer;
 let previewUrl;
-
-event('slate-tools:start:start', {version: packageJson.version});
 
 Promise.all([
   getAvailablePortSeries(config.get('network.startPort'), 3),
@@ -77,9 +74,6 @@ Promise.all([
   });
 
 function onCompilerCompile() {
-  if (process.env.NODE_ENV !== 'test') {
-    clearConsole();
-  }
   spinner.start();
 }
 
@@ -88,16 +82,7 @@ function onCompilerDone(stats) {
 
   spinner.stop();
 
-  if (process.env.NODE_ENV !== 'test') {
-    clearConsole();
-  }
-
   if (statsJson.errors.length) {
-    event('slate-tools:start:compile-errors', {
-      errors: statsJson.errors,
-      version: packageJson.version,
-    });
-
     console.log(chalk.red('Failed to compile.\n'));
 
     statsJson.errors.forEach((message) => {
@@ -106,12 +91,6 @@ function onCompilerDone(stats) {
   }
 
   if (statsJson.warnings.length) {
-    event('slate-tools:start:compile-warnings', {
-      duration: statsJson.time,
-      warnings: statsJson.warnings,
-      version: packageJson.version,
-    });
-
     console.log(chalk.yellow('Compiled with warnings.\n'));
 
     statsJson.warnings.forEach((message) => {
@@ -120,11 +99,6 @@ function onCompilerDone(stats) {
   }
 
   if (!statsJson.errors.length && !statsJson.warnings.length) {
-    event('slate-tools:start:compile-success', {
-      duration: statsJson.time,
-      version: packageJson.version,
-    });
-
     console.log(
       `${chalk.green(figures.tick)}  Compiled successfully in ${statsJson.time /
         1000}s!`,
@@ -132,10 +106,9 @@ function onCompilerDone(stats) {
   }
 }
 
-async function onClientBeforeSync(files) {
-  if (firstSync && argv.skipFirstDeploy) {
+const onClientBeforeSync = async files => {
+  if(firstSync && argv.skipFirstDeploy) {
     assetServer.skipDeploy = true;
-
     return;
   }
 
@@ -143,36 +116,24 @@ async function onClientBeforeSync(files) {
     try {
       continueIfPublishedTheme = await promptContinueIfPublishedTheme();
     } catch (error) {
-      event('slate-tools:start:error', {
-        version: packageJson.version,
-        error,
-      });
       console.log(`\n${chalk.red(error)}\n`);
     }
   }
 
-  if (!continueIfPublishedTheme) {
-    process.exit(0);
-  }
 
-  if (skipSettingsData === null) {
+  if(!continueIfPublishedTheme) process.exit(0);
+
+  if(skipSettingsData === null) {
     skipSettingsData = await promptSkipSettingsData(files);
   }
 
-  if (skipSettingsData) {
-    assetServer.files = files.filter(
-      (file) => !file.endsWith('settings_data.json'),
-    );
-  }
+  if (!skipSettingsData) return;
+  assetServer.files = files.filter(file => !file.endsWith('settings_data.json'));
 }
 
 function onClientSyncSkipped() {
   if (!(firstSync && argv.skipFirstDeploy)) return;
-
-  event('slate-tools:start:skip-first-deploy', {
-    version: packageJson.version,
-  });
-
+  
   console.log(
     `\n${chalk.blue(
       figures.info,
@@ -181,24 +142,15 @@ function onClientSyncSkipped() {
 }
 
 function onClientSync() {
-  event('slate-tools:start:sync-start', {version: packageJson.version});
 }
 
 function onClientSyncDone() {
-  event('slate-tools:start:sync-end', {version: packageJson.version});
-
-  process.stdout.write(consoleControl.previousLine(4));
-  process.stdout.write(consoleControl.eraseData());
-
-  console.log(`\n${chalk.green(figures.tick)}  Files uploaded successfully!`);
+  // process.stdout.write(consoleControl.previousLine(4));
+  // process.stdout.write(consoleControl.eraseData());
+  // console.log(`${chalk.green(figures.tick)}  Files uploaded successfully!`);
 }
 
-async function onClientAfterSync() {
-  if (firstSync) {
-    firstSync = false;
-    await devServer.start();
-  }
-
+const logPreviewInformation = (devServer) => {
   const urls = devServer.server.options.get('urls');
 
   console.log();
@@ -252,4 +204,12 @@ async function onClientAfterSync() {
   }
 
   console.log(chalk.magenta('\nWatching for changes...'));
+}
+
+async function onClientAfterSync() {
+  if(!firstSync) return;
+  firstSync = false;
+  await devServer.start();
+  await open(previewUrl);
+  logPreviewInformation(devServer);
 }

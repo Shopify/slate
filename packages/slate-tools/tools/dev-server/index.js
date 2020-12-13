@@ -1,5 +1,5 @@
 const browserSync = require('browser-sync');
-const {getStoreValue, getThemeIdValue} = require('@shopify/slate-env');
+const {getStoreValue, getThemeIdValue} = require('@yourwishes/slate-env');
 const {getSSLKeyPath, getSSLCertPath} = require('../utilities');
 
 class DevServer {
@@ -17,6 +17,9 @@ class DevServer {
   start() {
     const bsConfig = {
       port: this.port,
+      open: false,
+      notify: false,
+      reloadOnRestart: true,
       proxy: {
         target: this.proxyTarget,
         middleware: (req, res, next) => {

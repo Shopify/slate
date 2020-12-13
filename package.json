@@ -1,19 +1,7 @@
 {
   "name": "slate",
   "private": true,
-  "author": "Dominic Masters",
-  "contributors": [
-    "Shopify Inc."
-  ],
-  "description": "A theme scaffold and command line tool for developing Shopify themes.",
-  "keywords": [
-    "slate",
-    "shopify",
-    "theme",
-    "CLI"
-  ],
-  "engine": ">=8.9.4",
-  "homepage": "https://shopify.github.io/slate/",
+  "homepage": "https://domsplace.com",
   "bugs": "https://github.com/YourWishes/slate/issues",
   "license": "MIT",
   "repository": {
@@ -21,36 +9,18 @@
     "url": "https://github.com/YourWishes/slate.git"
   },
   "scripts": {
-    "test": "jest --silent",
-    "lint": "eslint --max-warnings 10 ./ && stylelint './**/*.[s]css'",
-    "lint:styles": "stylelint '**/*.[s]css'",
-    "lint:fix": "eslint ./ --fix && prettier-stylelint **/*.scss",
-    "lint:fix-js": "eslint ./ --fix",
-    "lint:fix-styles": "prettier-stylelint --write",
     "bootstrap": "yarn install && lerna bootstrap",
     "changelog": "node_modules/.bin/lerna-changelog",
     "clean": "lerna clean",
     "build": "lerna run build",
+    "sign": "lerna run sign",
+    "tsc": "lerna run tsc",
     "check": "lerna run check",
-    "release": "lerna version --exact && git push --follow-tags"
+    "test": "jest"
   },
   "devDependencies": {
-    "babel-jest": "^22.0.4",
-    "babel-preset-shopify": "^16.2.0",
-    "eslint": "^4.10.0",
-    "eslint-plugin-shopify": "^19.0.1",
-    "jest": "^23.6.0",
-    "lerna": "^3.11.0",
-    "lerna-changelog": "^0.7.0",
-    "prettier": "^1.7.4",
-    "prettier-stylelint": "^0.4.2",
-    "stylelint": "^9.1.2",
-    "stylelint-config-shopify": "^5.0.0"
-  },
-  "prettier": {
-    "singleQuote": true,
-    "trailingComma": "es5",
-    "bracketSpacing": false
+    "jest": "^26.6.3",
+    "lerna": "^3.22.1"
   },
   "workspaces": [
     "packages/*"

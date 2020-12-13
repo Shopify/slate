@@ -1,0 +1,21 @@
+{
+  "name": "@yourwishes/slate-theme",
+  "version": "2.0.0",
+  "scripts": {
+    "env": "slate-tools env",
+    "start": "slate-tools start",
+    "watch": "slate-tools start --skipFirstDeploy",
+    "build": "slate-tools build",
+    "deploy": "slate-tools build && slate-tools deploy",
+    "zip": "slate-tools build && slate-tools zip",
+    "open": "slate-tools open"
+  },
+  "dependencies": {
+    "@yourwishes/slate-tools": "2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/YourWishes/slate.git",
+    "directory": "packages/slate-theme"
+  }
+}

@@ -1,5 +1,5 @@
 const path = require('path');
-const commonPaths = require('@shopify/slate-config/common/paths.schema');
+const commonPaths = require('@yourwishes/slate-config/common/paths.schema');
 
 module.exports = {
   ...commonPaths,
@@ -39,10 +39,6 @@ module.exports = {
   // The environment variable key which contains a list of file patterns to
   // ignore, with each list item separated by ':'
   'env.keys.ignoreFiles': 'SLATE_IGNORE_FILES',
-
-  // The environment variable key which contains the email of the user to
-  // register for Slate analytics
-  'env.keys.userEmail': 'SLATE_USER_EMAIL',
 
   // The environment variable key which contains the timeout of themekit upload
   // Timeout upload is

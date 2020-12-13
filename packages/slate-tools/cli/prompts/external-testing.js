@@ -3,7 +3,7 @@ const chalk = require('chalk');
 const ip = require('ip');
 const inquirer = require('inquirer');
 const figures = require('figures');
-const SlateConfig = require('@shopify/slate-config');
+const SlateConfig = require('@yourwishes/slate-config');
 
 const config = new SlateConfig(require('../../slate-tools.schema'));
 

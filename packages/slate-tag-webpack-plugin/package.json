@@ -1,16 +1,9 @@
 {
-  "name": "@shopify/slate-tag-webpack-plugin",
-  "version": "1.0.0-beta.14",
-  "description": "A webpack plugin that tags a Slate theme settings_schema.json so it's easy to identify on Shopify servers",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest"
-  },
-  "repository": "https://github.com/Shopify/slate/tree/1.x/packages/slate-tag-webpack-plugin",
-  "author": "Shopify Inc.",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Shopify/slate/issues"
-  },
-  "homepage": "https://github.com/Shopify/slate#readme"
+  "name": "@yourwishes/slate-tag-webpack-plugin",
+  "version": "2.0.0",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/YourWishes/slate.git",
+    "directory": "packages/slate-tag-webpack-plugin"
+  }
 }

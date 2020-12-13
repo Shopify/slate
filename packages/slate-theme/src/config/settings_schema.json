@@ -1,0 +1,22 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Slate Theme",
+    "theme_version": "2.0.0",
+    "theme_author": "Slate",
+    "theme_documentation_url": "https://github.com/YourWishes/slate",
+    "theme_support_url": "https://github.com/YourWishes/slate"
+  },
+  
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "Will be scaled down to 32 x 32px"
+      }
+    ]
+  }
+]

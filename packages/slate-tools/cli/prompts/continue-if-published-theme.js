@@ -1,9 +1,8 @@
 /* eslint-disable */
 const chalk = require('chalk');
 const inquirer = require('inquirer');
-const slateEnv = require('@shopify/slate-env');
-const {event} = require('@shopify/slate-analytics');
-const {fetchMainThemeId} = require('@shopify/slate-sync');
+const slateEnv = require('@yourwishes/slate-env');
+const {fetchMainThemeId} = require('@yourwishes/slate-sync');
 const figures = require('figures');
 const {argv} = require('yargs');
 

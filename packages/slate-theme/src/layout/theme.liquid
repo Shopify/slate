@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html class="js-unavailable" lang="{{ shop.locale }}">
+  <head>
+    {%- render 'tool.head-tags' -%}
+    {{ content_for_header }}
+  </head>
+  
+  <body class="c-page c-page--{{ template.name | handle }}" data-domain={{shop.permanent_domain}}>
+    {%- comment -%} Accessibility skip link {%- endcomment -%}
+    <a class="u-visually-hidden" href="#MainContent">
+      {{- 'general.accessibility.skip_to_content' | t -}}
+    </a>
+
+    {%- comment -%} Entire Page Wrapper {%- endcomment -%}
+    <div class="c-page__wrapper">
+      <main role="main" class="o-main" id="MainContent">
+        <div class="o-main__wrapper">
+          {{ content_for_layout }}
+        </div>
+      </main>
+    </div>
+
+    {%- render 'tool.body-end-tags' -%}
+  </body>
+</html>

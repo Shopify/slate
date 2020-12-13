@@ -1,0 +1,1 @@
+require('@yourwishes/slate-tester/dist/cli/test');

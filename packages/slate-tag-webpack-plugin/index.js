@@ -14,7 +14,7 @@ FileListPlugin.prototype.apply = function(compiler) {
 
     if (themeInfo) {
       /* eslint-disable-next-line camelcase */
-      themeInfo.theme_packaged_with = `@shopify/slate-tools@${this.version}`;
+      themeInfo.theme_packaged_with = `@yourwishes/slate-tools@${this.version}`;
     }
 
     const jsonString = JSON.stringify(schema);

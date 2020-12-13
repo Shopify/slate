@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "CommonJS",
+    "lib": [
+      "ES5", "ScriptHost", "dom", "dom.iterable"
+    ],
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "strict": true,
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    "noEmit": true
+  },
+  "include": ["./src"],
+  "exclude": ["node_modules"]
+}

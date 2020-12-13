@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const {createServer} = require('https');
 const createHash = require('crypto').createHash;
-const SlateConfig = require('@shopify/slate-config');
+const SlateConfig = require('@yourwishes/slate-config');
 
 const App = require('./app');
 const Client = require('./client');

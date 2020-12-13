@@ -1,7 +1,6 @@
 const path = require('path');
 const fs = require('fs');
 
-// Fetch the contents of Slate's user config once, and only once
 global.slateUserConfig = global.slateUserConfig || getSlateUserConfig();
 
 module.exports = class SlateConfig {

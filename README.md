@@ -1,57 +1,45 @@
-[![Build Status](https://travis-ci.org/Shopify/slate.svg?branch=master)](https://travis-ci.org/Shopify/slate) [![npm version](https://badge.fury.io/js/%40shopify%2Fslate-tools.svg)](https://badge.fury.io/js/%40shopify%2Fslate-tools)
+# Slate
+Shopify Theme Building toolset. Forked from the now defunct [Shopify/slate](https://github.com/Shopify/slate)
 
-![slate animated banner](https://user-images.githubusercontent.com/4837696/47506317-cbe22400-d83d-11e8-9867-1dc874943833.gif)
+## Purpose
+Shopify's standard theme offerings are limited to what Shopify's platform can offer. Typically this includes;
+- Vanilla JS
+- Vanilla HTML
+- Shopify's Server Side Liquid Templating Language
+- Shopify's Storefront API
+- Shopify's JS API
+- Shopify's now deprecated SCSS/Liquid SCSS interpreter
 
-## ⚠ Slate - End of Support (January 2020)
+Slate's primary purpose is to do precompilation and bundling to facilitate some more modern tools, languages and features to be used, our main focus for continuing this package is to;
+- Allow for modern programming tools, languages and features (ESNext, SCSS, TypeScript, WebComponents, etc.)
+- Improve page load times and speed by minifying and compiling code prior to upload
+- Decrease dev time and speed up processes caused by slower theme changes
+- Standardize tools, styling and code bases in the Shopify space.
+- Help to strengthen the Shopify community as a whole
 
-After re-evaluating Slate and its current state, Shopify has decided to officially end support for Slate.
+## Improvements over Slate-v1x
+In the time I have been working on Slate since Slate v1 was deprecated the following features have been added or changed;
+- Native TypeScript support for the webpack
+- Updated dependencies to 2020
+- Updated ThemeKit to allow for new hash based syncing
+- Fixed some known bugs
+- Overall reduced the output to the terminal that wasn't necessary to allow you to focus on what's happening
+- Sections and Snippet Sub-Directories
 
-### Why?
+## Planned Features and Goals
+Currently this fork of slate is focused on *standardizing* and *improving* slate, prior to adding any new features. Some changes may seem counter intuitive but the overarching goal is to bring all code bases in line with each other.
 
-With the launch of our new [section theme architecture](https://help.shopify.com/en/themes/development/sections-architecture) we're taking a step back to examine our current tooling and how we can deliver the best theming experience to our theme developers. 
-
-Slate is not in line with our vision for themes moving forward and it does not solve two of the larger asks our theme developers have made:
-
-* Local development of a Shopify theme
-* Support for code versioning within themes
-
-### I’m a theme developer that is using Slate. What should I do now?
-
-Slate was built upon [Theme Kit](https://github.com/Shopify/themekit) as an opinionated way to setup up a Shopify theme build. Shopify will continue to actively maintain and support the growth of Theme Kit through the open-source community.
-
-You can continue using Slate the way you have been. While we will not be maintaining it any longer, you can still fork the repo to suit your own needs.
-
-<hr />
-
-> **Slate v1.0 is currently in beta.** Expect more bugs than a final release. If you are migrating from using the previous version of Slate, please review the [new documentation](https://shopify.github.io/slate/docs/about) as there are breaking changes. Slate v1.0 has not yet been tested on Windows.
->
-> To view the previous version of Slate, visit the [0.x branch](https://github.com/Shopify/slate/tree/0.x).
-
-Slate empowers developers of all skill levels to build quality Shopify themes. Slate guides developers by providing a tested workflow and opinionated development toolkit, while also accommodating more established developers through advanced configuration.
-
-🚀 [Get started with a new Slate project](https://shopify.github.io/slate/docs/system-requirements)
-
-## Documentation
-
-Visit the [official Slate documentation website](https://shopify.github.io/slate/docs/about) for complete documentation Slate's concepts and technical details, as well as helpful guides!
+- Fix known bugs 🔥
+- Built in skeleton theme to make a standard starting point
+- Updated slate-tools to TypeScript to make tool development easier
+- Improve the CI process for collaborators
+- Bring back the ability to customize the webpack configuration
+- Improve code minification
+- Remove dependencies to make node_module install time faster
+- Only update *.js, *.map and *.(s)css files when changes occur to decrease deploy time between production and development
+- Built in Storefront API client with dynamic TypeScript definitions
+- Better Unit testing
+- Slate Theme Unit Tester
 
 ## Contributing
-
-For help on setting up the repo locally, building, testing, and contributing
-please see [CONTRIBUTING.md](https://github.com/Shopify/slate/blob/master/CONTRIBUTING.md).
-
-## Code of Conduct
-
-All developers who wish to contribute through code or issues, take a look at the
-[Code of Conduct](https://github.com/Shopify/slate/blob/master/CODE_OF_CONDUCT.md).
-
-## License
-
-Copyright (c) 2018 Shopify. See [LICENSE](https://github.com/Shopify/slate/blob/master/LICENSE) for further details.
-
-## Thanks
-
-We would like to specifically thank the following projects, for the inspiration and help in regards to the creation of Slate:
-
-* [create-react-app](https://github.com/facebookincubator/create-react-app)
-* [Dynamo's Shopify Pipeline](https://github.com/DynamoMTL/shopify-pipeline)
+I have yet to formalize the contributing process, for the time being if you need a feature or a change then submit an issue and if you want to contribute then create a pull-request and I'll review manually for the time being.

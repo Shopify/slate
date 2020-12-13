@@ -1,13 +1,10 @@
 {
-  "name": "@shopify/slate-config",
-  "version": "1.0.0-beta.14",
-  "description": "Generate configurations for Slate packages by applying values from slate.config.js to override default values",
+  "name": "@yourwishes/slate-config",
+  "version": "2.0.0",
   "main": "index.js",
-  "repository": "https://github.com/Shopify/slate/tree/1.x/packages/slate-config",
-  "author": "Shopify Inc.",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/shopify/slate/issues"
-  },
-  "homepage": "https://github.com/shopify/slate"
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/YourWishes/slate.git",
+    "directory": "packages/slate-config"
+  }
 }

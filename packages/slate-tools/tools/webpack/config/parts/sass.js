@@ -1,5 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const SlateConfig = require('@shopify/slate-config');
+const SlateConfig = require('@yourwishes/slate-config');
 const config = new SlateConfig(require('../../../../slate-tools.schema'));
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -12,21 +12,20 @@ const part = {
 };
 
 const sassRule = {
-  test: /\.s[ac]ss$/,
+  test: /\.scss$/,
 };
 
 const styleLoader = {
-  loader: 'style-loader',
-  options: {
-    hmr: isDev,
-  },
+  loader: 'style-loader'
 };
 
 const cssLoader = {
   loader: 'css-loader',
   options: {
-    importLoaders: 2,
     sourceMap: config.get('webpack.sourceMap.styles'),
+    modules: {
+      compileType: 'icss',
+    }
   },
 };
 
@@ -39,15 +38,13 @@ const postcssLoader = {
   },
 };
 
-const cssVarLoader = {loader: '@shopify/slate-cssvar-loader'};
-
 const sassLoader = {
   loader: 'sass-loader',
   options: {sourceMap: config.get('webpack.sourceMap.styles')},
 };
 
 sassRule.use = [
-  ...(isDev ? [styleLoader] : [MiniCssExtractPlugin.loader, cssVarLoader]),
+  ...(isDev ? [styleLoader] : [MiniCssExtractPlugin.loader]),
   cssLoader,
   postcssLoader,
   sassLoader,
