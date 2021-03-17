@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const archiver = require('archiver');
 const chalk = require('chalk');
-const {event} = require('@shopify/slate-analytics');
 const SlateConfig = require('@shopify/slate-config');
 
 const config = new SlateConfig(require('../../slate-tools.schema'));
@@ -19,8 +18,6 @@ const zipPath = getZipPath(config.get('paths.theme'), zipName, 'zip');
 const output = fs.createWriteStream(zipPath);
 const archive = archiver('zip');
 
-event('slate-tools:zip:start');
-
 if (!fs.existsSync(config.get('paths.theme.dist'))) {
   console.log(
     chalk.red(
@@ -33,7 +30,6 @@ if (!fs.existsSync(config.get('paths.theme.dist'))) {
 }
 
 output.on('close', () => {
-  event('slate-tools:zip:end', {size: archive.pointer()});
   console.log(`${path.basename(zipPath)}: ${archive.pointer()} total bytes`);
 });
 
