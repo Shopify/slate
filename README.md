@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/Shopify/slate.svg?branch=master)](https://travis-ci.org/Shopify/slate) [![npm version](https://badge.fury.io/js/%40shopify%2Fslate-tools.svg)](https://badge.fury.io/js/%40shopify%2Fslate-tools)
 
-### This repo is archived in favor of the new Shopify developer tools announced in Unite 2021.
+### This repo is archived in favor of the Shopify developer tools announced in Unite 2021.
 
 * [Shopify CLI](https://shopify.dev/themes/tools/cli)
 * [Github Integration](https://shopify.dev/themes/tools/github)
