@@ -136,7 +136,7 @@ describe('SlateConfig.set()', () => {
     expect(config.schema['some.new.key']).toBe('someNewValue');
   });
 
-  test('throws an error if key has already been set, unless override boolean has been explicitely set', () => {
+  test('throws an error if key has already been set, unless override boolean has been explicitly set', () => {
     const SlateConfig = require('../index');
     const config = new SlateConfig(schema);
 

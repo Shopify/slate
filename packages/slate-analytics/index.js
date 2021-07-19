@@ -84,7 +84,7 @@ function event(name, payload = {}) {
         return resolve({
           data: {},
           status: 200,
-          statusText: 'Sucess',
+          statusText: 'Success',
           headers: {},
           settings,
         });

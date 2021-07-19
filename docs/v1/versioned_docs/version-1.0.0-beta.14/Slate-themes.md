@@ -43,7 +43,7 @@ Starter Theme comes with [Babel](https://babeljs.io/) preconfigured with [`shopi
 
 Slate will use the environment variables declared in this file to connect to deploy files to your Shopify store. For more information, visit the [`@shopify/slate-env` docs](deploy-environments).
 
-This file, along with any other `.env.{environment}` files, contain sensitive information and should not be commited to Github. These environment files are ignored by default in `.gitignore`.
+This file, along with any other `.env.{environment}` files, contain sensitive information and should not be committed to Github. These environment files are ignored by default in `.gitignore`.
 
 ### 3. ESLint config
 
@@ -126,7 +126,7 @@ The aforementioned [files and folders are required by Shopify](https://help.shop
 
 `src/scripts`
 
-This folder constains all your JS modules. See the [Template and Layout Bundles](template-and-layout-bundles) page for more details on the contents of `src/scripts`.
+This folder constrains all your JS modules. See the [Template and Layout Bundles](template-and-layout-bundles) page for more details on the contents of `src/scripts`.
 
 You can use ES6/ES2015's standard, which allows you to require your modules with the `import` syntax:
 
