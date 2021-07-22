@@ -48,6 +48,7 @@ Promise.all([
     assetServer = new AssetServer({
       env: argv.env,
       skipFirstDeploy: argv.skipFirstDeploy,
+      liveDeploy: argv.liveDeploy,
       webpackConfig,
       port: ports[1],
       address,

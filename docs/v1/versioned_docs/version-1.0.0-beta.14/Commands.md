@@ -80,16 +80,17 @@ slate-tools lint [--scripts] [--styles] [--locales]
 Compiles your local theme files into a `dist` directory, uploads these files to your remote Shopify store and finally boots up a local Express server that will serve most of your CSS and JavaScript.
 
 ```bash
-slate-tools start [--env=my-custom-env-name] [--skipPrompts] [--skipFirstDeploy]
+slate-tools start [--env=my-custom-env-name] [--skipPrompts] [--skipFirstDeploy] [--liveDeploy]
 ```
 
 | Flag                | Description                                                                                           |
 | ------------------- | ----------------------------------------------------------------------------------------------------- |
 | `--env`             | Targets a custom environment file. Setting `--env=production` would use the `.env.production` file    |
+| `--liveDeploy`             | Disables the local Express server (and hot reloading), serving all assets through the Shopify CDN |
 | `--skipPrompts`     | Skips all prompts. This is especially useful when using Slate Tools with continuous integration tools |
 | `--skipFirstDeploy` | Skips the file upload sequence and simply boots up the local Express server                           |
 
-> ⚠️ Because your CSS and JavaScript assets are being served locally, your theme won’t function on any device outside your network. You want to [deploy](#deploy) your assets anytime your theme updates are finalized using `slate-tools build && slate-tools deploy`.
+> ⚠️ Without the `--liveDeploy` flag set, your CSS and JavaScript assets are being served locally, and your theme won’t function on any device outside your network. Regardless, you should [deploy](#deploy) your assets anytime your theme updates are finalized using `slate-tools build && slate-tools deploy`.
 
 ## zip
 
