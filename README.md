@@ -1,5 +1,17 @@
 [![Build Status](https://travis-ci.org/Shopify/slate.svg?branch=master)](https://travis-ci.org/Shopify/slate) [![npm version](https://badge.fury.io/js/%40shopify%2Fslate-tools.svg)](https://badge.fury.io/js/%40shopify%2Fslate-tools)
 
+### This repo is archived in favor of the Shopify developer tools announced in Unite 2021.
+
+* [Shopify CLI](https://shopify.dev/themes/tools/cli)
+* [Github Integration](https://shopify.dev/themes/tools/github)
+* [Theme Check](https://shopify.dev/themes/tools/theme-check)
+* [Theme Inspector](https://shopify.dev/themes/tools/theme-inspector)
+* [Lighthouse CI github action](https://shopify.dev/themes/tools/lighthouse-ci)
+
+[Dawn](https://shopify.dev/themes/tools/dawn) is Shopify's reference theme.
+
+============================================
+
 ![slate animated banner](https://user-images.githubusercontent.com/4837696/47506317-cbe22400-d83d-11e8-9867-1dc874943833.gif)
 
 ## ⚠ Slate - End of Support (January 2020)
