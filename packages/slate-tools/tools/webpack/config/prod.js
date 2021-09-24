@@ -43,7 +43,6 @@ const getChunkNameNew = (module, chunks, cacheGroup) => {
     names.join('@');
   
   const hashName = `${hashFilename(name)}`;
-  console.log("Hashed name ", name, hashName);
   chunkNameHashes[hashName] = name;
 
   /* eslint-disable-next-line consistent-return */
@@ -65,7 +64,7 @@ module.exports = merge([
   css,
   {
     mode: 'production',
-    devtool: 'hidden-source-map',
+    devtool: 'source-map',
 
     plugins: [
       new MiniCssExtractPlugin({
