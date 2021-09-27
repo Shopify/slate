@@ -11,9 +11,7 @@
   "bugs": {
     "url": "https://github.com/shopify/slate/issues"
   },
-  "bin": {
-    "create-slate-theme": "./index.js"
-  },
+  "bin": "./index.js",
   "dependencies": {
     "@shopify/slate-analytics": "1.0.0-beta.16",
     "@shopify/slate-env": "1.0.0-beta.16",

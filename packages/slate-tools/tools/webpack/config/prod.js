@@ -1,4 +1,5 @@
 const path = require('path');
+const crypto = require('crypto');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -20,6 +21,41 @@ const getTemplateEntrypoints = require('./utilities/get-template-entrypoints');
 const HtmlWebpackIncludeLiquidStylesPlugin = require('../html-webpack-include-chunks');
 const config = new SlateConfig(require('../../../slate-tools.schema'));
 
+const chunkNameHashes = {};
+const getChunkNameNew = (module, chunks, cacheGroup) => {
+  let containsLayout = false;
+  const names = chunks
+    .map((chunk) => {
+      if (chunk.name.includes('layout.')) {
+        containsLayout = true;
+      }
+      return chunk.name;
+    })
+    .filter(
+      (name) => !containsLayout || (containsLayout && name.includes('layout.')),
+    );
+
+  if (!names.every(Boolean)) return;
+
+  names.sort();
+  let name =
+    (cacheGroup && cacheGroup !== 'default' ? `${cacheGroup}@` : '') +
+    names.join('@');
+  
+  const hashName = `${hashFilename(name)}`;
+  chunkNameHashes[hashName] = name;
+
+  /* eslint-disable-next-line consistent-return */
+  return hashName;
+};
+function hashFilename(name) {
+  return crypto
+    .createHash('md4')
+    .update(name)
+    .digest('hex')
+    .slice(0, 8);
+}
+
 module.exports = merge([
   core,
   entry,
@@ -28,7 +64,7 @@ module.exports = merge([
   css,
   {
     mode: 'production',
-    devtool: 'hidden-source-map',
+    devtool: 'source-map',
 
     plugins: [
       new MiniCssExtractPlugin({
@@ -62,6 +98,7 @@ module.exports = merge([
         chunksSortMode: 'dependency',
         liquidTemplates: getTemplateEntrypoints(),
         liquidLayouts: getLayoutEntrypoints(),
+        chunkNameHashes,
       }),
 
       new HtmlWebpackPlugin({
@@ -80,6 +117,7 @@ module.exports = merge([
         chunksSortMode: 'dependency',
         liquidTemplates: getTemplateEntrypoints(),
         liquidLayouts: getLayoutEntrypoints(),
+        chunkNameHashes,
       }),
 
       new HtmlWebpackIncludeLiquidStylesPlugin(),
@@ -90,7 +128,7 @@ module.exports = merge([
     optimization: {
       splitChunks: {
         chunks: 'initial',
-        name: getChunkName,
+        name: getChunkNameNew,
       },
     },
   },
