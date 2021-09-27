@@ -8,9 +8,7 @@
   "bugs": {
     "url": "https://github.com/Shopify/slate/issues"
   },
-  "bin": {
-    "slate-tools": "./cli/index.js"
-  },
+  "bin": "./cli/index.js",
   "engine": ">=8.9.4",
   "dependencies": {
     "@shopify/html-webpack-liquid-asset-tags-plugin": "1.0.0-beta.11",
